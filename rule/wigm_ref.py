@@ -30,7 +30,7 @@ class Rule:
             for c in C.hopefulOrElected:
                 c.vote = e.V(0)
             for b in [b for b in R.ballots if not b.exhausted]:
-                b.top.vote = b.top.vote._plus_(b.vote)
+                b.top.vote = b.top.vote + b.vote
 
             # elect new winners
             #
@@ -55,9 +55,9 @@ class Rule:
             if high_vote > R.quota:
                 # transfer surplus
                 high_candidate = Rule.breakTie(e, high_candidates, 'surplus')
-                surplus = high_vote._minus_(R.quota)
+                surplus = high_vote - R.quota
                 for b in [b for b in R.ballots if b.top == high_candidate]:
-                    b.weight = b.weight._times_(surplus, round='down')._over_(high_vote, round='down')
+                    b.weight = (b.weight * surplus) // high_vote
                 R.advance(high_candidate)
             #
             #  if no surplus to transfer, eliminate a candidate
@@ -99,8 +99,8 @@ class Rule:
         Round up if not using exact arithmetic.
         '''
         if e.V.exact:
-            return e.V(e.profile.nballots)._over_(e.profile.nseats+1, round=None)
-        return e.V(e.profile.nballots)._over_(e.profile.nseats+1, round='down')._plus_(e.V('epsilon'))
+            return e.V(e.profile.nballots) // e.V(e.profile.nseats+1)
+        return e.V(e.profile.nballots) // e.V(e.profile.nseats+1) + e.V('epsilon')
     
     #  election criterion
     #
