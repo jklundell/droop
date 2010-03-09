@@ -7,71 +7,110 @@ class Value(object):
     "a Value class that implements rationals"
 
     exact = None
+    NumberClass = None
+    arithmetic = None
+    precision = None
+    guard = None
 
     @staticmethod
-    def ArithmeticClass(arithmetic, precision, guard):
+    def ArithmeticClass(arithmetic, precision=None, guard=None):
         "initialize a value class and return it"
+        Value.arithmetic = arithmetic
+        Value.precision = precision
+        Value.guard = guard
         if arithmetic == 'rational':
-            import rational
-            V = rational.Value
-        elif arithmetic == 'qx':
-            import qx
-            V = qx.Value
-            V.init(precision, guard)  # set precision & guard in decimal digits
+            import fractions
+            Value.NumberClass = fractions.Fraction
+            Value.exact = True
         elif arithmetic == 'fixed':
-            import fixed
-            V = fixed.Value
-            V.init(precision)  # set precision in decimal digits
-        elif arithmetic == 'integer':
-            import integer
-            V = integer.Value
-            V.init()
+            Value.NumberClass = Fixed
+            Value.exact = bool(guard)
+            Fixed.init(precision, guard)
         else:
             raise ValueError('unknown arithmetic %s' % arithmetic)
-        return V
+        return Value.NumberClass
 
     @classmethod
     def info(cls):
         "return description of arithmetic method"
-        return "value.Value must be subclassed"
+        if cls.arithmetic == 'rational':
+            return "rational arithmetic"
+        if cls.arithmetic == 'fixed':
+            if not cls.precision:
+                return "integer arithmetic"
+            if not cls.guard:
+                return "fixed-point decimal arithmetic (%s places)" % str(cls.precision)
+            return "quasi-exact fixed-point decimal arithmetic (%s+%s places)" % (str(cls.precision), str(cls.guard))
+        return "unknown arithmetic (%s)" % cls.arithmetic
         
+class Fixed(object):
+    "fixed-point decimal arithmetic with optional guard digits"
+    
+    __scale = None
+    __scalep = None
+    __scaleg = None
+
     def __init__(self, arg):
-        "create a new Value object"
-        self._value = None
+        "create a new Fixed.Value object"
+        self._value = Fixed.__fix(arg)
+
+    def __fix(self, arg):
+        "return scaled int of value without creating an object"
+        if self.__scale is None:
+            raise TypeError('value.Fixed must be initialized')
+        if isinstance(arg, (int,long)):
+            return arg * self.__scale
+        if isinstance(arg, self):
+            return arg._value
+        raise TypeError("value.Fixed can't convert %s" % type(arg))
 
     #  Value.init(precision) must be called before using the class
     #
     @classmethod
-    def init(cls):
+    def init(cls, precision, guard=None):
         "initialize class variables"
-        pass
+        if int(precision) != precision:
+            raise ValueError('value.Fixed: precision must be an int')
+        if guard is None:
+            guard = precision
+        if int(guard) != guard:
+            raise ValueError('value.Fixed: guard must be an int')
+        cls.__precision = precision
+        cls.__guard = guard
+        cls.__scalep = 10 ** precision
+        cls.__scaleg = 10 ** guard
+        cls.__scale = 10 ** (precision+guard)
+        cls.__grnd = cls.__scaleg//2
+        cls.__geps = cls.__scaleg//10
+        cls.maxDiff = 0
+        cls.minDiff = cls.__scale * 100
+        cls.exact = bool(guard)
+        if not cls.exact:
+            cls.epsilon = cls(1) // cls(cls.__scalep)
 
     #  arithmetic operations
     #
-    #  Note that these ops do not alter self,
-    #  but rather return the result with no side effect.
-    #
     def __add__(self, other):
         "self + other"
-        v = self.__class__(other)
+        v = Fixed(other)
         v._value += self._value
         return v
 
     def __sub__(self, other):
         "subtract other from self"
-        v = self.__class__(other)
+        v = Fixed(other)
         v._value = self._value - v._value
         return v
         
     def __neg__(self):
         "return negated self"
-        v = self.__class__(self)
+        v = Fixed(self)
         v._value = -v._value
         return v
 
     def __pos__(self):
         "return +self"
-        return self.__class__(self)
+        return Fixed(self)
 
     def __nonzero__(self):
         "bool(self)"
@@ -79,46 +118,79 @@ class Value(object):
 
     def __mul__(self, other):
         "return self * other"
-        raise TypeError('value.Value must be subclassed')
+        v = Value(self)
+        if isinstance(other, (int,long)):
+            v._value *= other
+            return v  # no scaling needed
+        v._value *= other._value
+        v._value //= self.__scale
+        return v
         
     def __floordiv__(self, other):
-        "return self / other"
-        raise TypeError('value.Value must be subclassed')
+        "return self // other"
+        v = Value(self)
+        if isinstance(other, (int,long)):
+            v._value //= other
+            return v
+        v._value *= self.__scale
+        v._value //= other._value
+        return v
 
     __div__ = __floordiv__
     __truediv__ = __floordiv__
     
-#     def _plus_(self, other):
-#         "return self + other"
-#         v = self.__class__(other)
-#         v._value += self._value
-#         return v
-#         
-#     def _minus_(self, other):
-#         "subtract other from self"
-#         v = self.__class__(other)
-#         v._value = self._value - v._value
-#         return v
-#         
-#     def _negate_(self):
-#         "return negated self"
-#         v = self.__class__(self)
-#         v._value = -v._value
-#         return v
-
-    #  multiplication & division with rounding
-    #
-    def _times_(self, other, round=None):
-        "return self * other"
-        raise TypeError('value.Value must be subclassed')
+    @staticmethod
+    def mul(arg1, arg2, round=None):
+        '''
+        return arg1 * arg2
+        round is ignored if exact       
+        '''
+        v1 = Fixed(arg1)
+        v2 = Fixed(arg2)
+        if Fixed.exact:
+            v1._value = (v1._value * v2._value) // Fixed.__scale
+            return v1
+        if round not in ('down', 'up'):
+            raise ValueError('fixed.Value: must specify rounding: up or down')
+        v1._value, rem = divmod(v1._value * v2._value, Fixed.__scale)
+        if rem and round == 'up':
+            v1._value += 1
+        return v1
         
-    def _over_(self, other, round=None):
-        "return self / other"
-        raise TypeError('value.Value must be subclassed')
+    @staticmethod
+    def div(arg1, arg2, round=None):
+        '''
+        return arg1 / arg2
+        round is ignored if exact
+        '''
+        v1 = Fixed(arg1)
+        v2 = Fixed(arg2)
+        if Fixed.exact:
+            v1._value = (v1.__value * Fixed.__scale) // v2._value
+            return v1
+        if round not in ('down', 'up'):
+            raise ValueError('fixed.Value: must specify rounding: up or down')
+        v1._value, rem = divmod(v1._value * Fixed.__scale, v2._value)
+        if rem and round == 'up':
+            v1._value += 1
+        return v1
 
-    def _times_over_(self, mul, div, round=None):
-        "return (self*mul)/div"
-        raise TypeError('value.Value must be subclassed')
+    @staticmethod
+    def muldiv(arg1, arg2, arg3, round=None):
+        '''
+        return (arg1*arg2)/arg3
+        
+        a*b/c retains the full precision of a*b.
+        round is ignored if exact
+        '''
+        v1 = Fixed(arg1)
+        v2 = Fixed(arg2)
+        v3 = Fixed(arg3)
+        if Fixed.exact:
+            v1._value = (v1._value * v2._value) // v3._value
+            return v1
+        if round not in ('down', 'up'):
+            raise ValueError('fixed.Value: must specify rounding: up or down')
 
 
     #  comparison operators
