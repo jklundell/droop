@@ -7,26 +7,11 @@ class Value(object):
     "a Value class that implements rationals"
 
     @staticmethod
-    def ArithmeticClass(arithmetic, precision=None, guard=None):
+    def ArithmeticClass(precision=None, guard=None):
         "initialize a value class and return it"
-        #
-        #  temporary shim for old interface
-        #
-        if arithmetic == 'rational':
-            precision = guard = None
-        if arithmetic == 'integer':
-            arithmetic = 'fixed'
-            precision = guard = 0
-        elif arithmetic == 'fixed':
-            guard = 0
-        elif arithmetic == 'qx':
-            arithmetic = 'fixed'
-        #   end shim
-        
+
         if precision is None:
             return Rational
-        if guard is None:
-            guard = precision
         Fixed.init(precision, guard)
         return Fixed
 
@@ -41,6 +26,11 @@ class Rational(fractions.Fraction):
     def info(cls):
         return 'rational arithmetic'
 
+    @staticmethod
+    def report():
+        "Report arithmetic statistics"
+        return ''
+
 
 class Fixed(object):
     "fixed-point decimal arithmetic with optional guard digits"
@@ -53,7 +43,7 @@ class Fixed(object):
         "create a new Fixed object"
         if isinstance(arg, str) and arg == 'epsilon':
             if Fixed.exact:
-                raise ValueError('exact arithmetic has no epsilon')
+                raise TypeError('exact arithmetic has no epsilon')
             self._value = 1
         else:
             self._value = Fixed.__fix(arg)
@@ -84,11 +74,11 @@ class Fixed(object):
     def init(cls, precision, guard=None):
         "initialize class variables"
         if int(precision) != precision:
-            raise ValueError('value.Fixed: precision must be an int')
+            raise TypeError('value.Fixed: precision must be an int')
         if guard is None:
             guard = precision
         if int(guard) != guard:
-            raise ValueError('value.Fixed: guard must be an int')
+            raise TypeError('value.Fixed: guard must be an int')
         cls.__precision = precision
         cls.__guard = guard
         cls.__scalep = 10 ** precision
@@ -204,7 +194,6 @@ class Fixed(object):
         if round not in ('down', 'up'):
             raise ValueError('Fixed.muldiv: must specify rounding: up or down')
 
-
     #  comparison operators
     #
     def __eq__(self, other):
@@ -241,21 +230,24 @@ class Fixed(object):
         gv = (v + self.__grnd)//self.__scaleg
         return nfmt % (gv//self.__scalep, gv%self.__scalep)
 
-    def report(self):
-        "Report qx statistics"
+    @staticmethod
+    def report():
+        "Report arithmetic statistics"
 
+        if not Fixed.__guard:
+            return ''
         s = """\
-maxDiff: %d  (s/b << geps)
-geps:    %d
-minDiff: %d  (s/b >> geps)
-guard:   %d
-prec:    %d
+\tmaxDiff: %d  (s/b << geps)
+\tgeps:    %d
+\tminDiff: %d  (s/b >> geps)
+\tguard:   %d
+\tprec:    %d
 
 """ % (
-      self.maxDiff,
-      self.__geps,
-      self.minDiff,
-      self.__scaleg,
-      self.__scale
+      Fixed.maxDiff,
+      Fixed.__geps,
+      Fixed.minDiff,
+      Fixed.__scaleg,
+      Fixed.__scale
       )
         return s

@@ -12,7 +12,7 @@ from module.profile import Profile
 #
 #######################################################################
 
-rules = ['wigm_ref', 'wigm_tst']
+rules = ['wigm_ref']
 reportNames = None
 
 usage = """

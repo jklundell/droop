@@ -14,6 +14,32 @@ class Rule:
     '''
     
     @staticmethod
+    def init(arithmetic=None, precision=6, guard=None):
+        "initialize election parameters"
+        
+        #  set defaults
+        #
+        if arithmetic is None: arithmetic = 'fixed'
+        if arithmetic == 'rational':
+            precision = guard = None
+        elif arithmetic == 'qx':
+            if precision is None:
+                precision = 9
+                guard = None
+        elif precision == 'fixed':
+            if precision is None: precision = 6
+            guard = 0
+        elif arithmetic == 'integer':
+            precision = guard = 0
+        else:
+            raise TypeError('unrecognized arithmetic type (%s)' % arithmetic)
+
+        #  create an election
+        #
+        e = Election(Rule, precision, guard)
+        return e
+
+    @staticmethod
     def count(e):
         "count the election"
         
@@ -151,17 +177,3 @@ class Rule:
     def info(e):
         "return an info string for the election report"
         return "Model Weighted Inclusive Gregory Method (WIGM); quota=%s" % e.R0.quota
-        
-    @staticmethod
-    def init(arithmetic=None, precision=6, guard=None):
-        "initialize election parameters"
-        
-        #  set defaults
-        #
-        arithmetic = arithmetic or 'fixed'
-        if precision is None: precision = 6
-        #
-        #  create an election
-        #
-        e = Election(Rule, arithmetic=arithmetic, precision=precision, guard=guard)
-        return e

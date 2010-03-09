@@ -16,14 +16,14 @@ class Election(object):
     R0 = None        # round 0 (initial state)
     R = None         # current round
     
-    def __init__(self, rule, arithmetic=None, precision=None, guard=None):
+    def __init__(self, rule, precision=None, guard=None):
         "create an election"
 
         self.rule = rule
         #
         #  initialize arithmetic
         #
-        self.V = Value.ArithmeticClass(arithmetic, precision, guard)
+        self.V = Value.ArithmeticClass(precision, guard)
         self.rounds = [self.Round(self)]
         self.R0 = self.R = self.rounds[0]
 
@@ -38,6 +38,7 @@ class Election(object):
         s = "Election: %s\n\n" % self.profile.title
         s += "\tRule: %s\n" % self.rule.info(self)
         s += "\tArithmetic: %s\n\n" % self.V.info()
+        s += self.V.report()
         for round in self.rounds:
             s += "Round %d:\n" % round.n
             s += round.report(self)
