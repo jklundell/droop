@@ -22,7 +22,15 @@ class Ballot(object):
         if ranking:
             for nick in ranking:
                 self.addRank(nick)
-        
+
+    def copy(self):
+        "return a copy of this ballot"
+        b = Ballot(self.e, self.count, self.ranks)
+        b.weight = self.weight
+        b.index = self.index
+        b.nontransferable = self.nontransferable
+        return b
+
     def addRank(self, nick):
        "add a candidate to the ranking"
        assert nick not in self.ranks, 'duplicate ranking: %s' % nick

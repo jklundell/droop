@@ -2,7 +2,6 @@
 Generic Election Support
 '''
 
-import copy
 from candidate import CandidateState
 from value.value import Value
 
@@ -69,7 +68,7 @@ class Election(object):
                 self.n = previous.n + 1
                 self.C = previous.C.copy()
                 self.quota = previous.quota
-                self.ballots = copy.copy(previous.ballots)
+                self.ballots = [b.copy() for b in previous.ballots]
             self._log = [] # list of log messages
     
         def advance(self, c):

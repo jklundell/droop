@@ -6,43 +6,42 @@ Abstract base for other Value classes
 class Value(object):
     "a Value class that implements rationals"
 
-    exact = None
-    NumberClass = None
-    arithmetic = None
-    precision = None
-    guard = None
-
     @staticmethod
     def ArithmeticClass(arithmetic, precision=None, guard=None):
         "initialize a value class and return it"
-        Value.arithmetic = arithmetic
-        Value.precision = precision
-        Value.guard = guard
+        #
+        #  temporary shim for old interface
+        #
         if arithmetic == 'rational':
-            import fractions
-            Value.NumberClass = fractions.Fraction
-            Value.exact = True
+            precision = guard = None
+        if arithmetic == 'integer':
+            arithmetic = 'fixed'
+            precision = guard = 0
         elif arithmetic == 'fixed':
-            Value.NumberClass = Fixed
-            Value.exact = bool(guard)
-            Fixed.init(precision, guard)
-        else:
-            raise ValueError('unknown arithmetic %s' % arithmetic)
-        return Value.NumberClass
+            guard = 0
+        elif arithmetic == 'qx':
+            arithmetic = 'fixed'
+        #   end shim
+        
+        if precision is None:
+            return Rational
+        if guard is None:
+            guard = precision
+        Fixed.init(precision, guard)
+        return Fixed
 
+import fractions
+
+class Rational(fractions.Fraction):
+    "rational arithmetic with support functions"
+    
+    exact = True
+    
     @classmethod
     def info(cls):
-        "return description of arithmetic method"
-        if cls.arithmetic == 'rational':
-            return "rational arithmetic"
-        if cls.arithmetic == 'fixed':
-            if not cls.precision:
-                return "integer arithmetic"
-            if not cls.guard:
-                return "fixed-point decimal arithmetic (%s places)" % str(cls.precision)
-            return "quasi-exact fixed-point decimal arithmetic (%s+%s places)" % (str(cls.precision), str(cls.guard))
-        return "unknown arithmetic (%s)" % cls.arithmetic
-        
+        return 'rational arithmetic'
+
+
 class Fixed(object):
     "fixed-point decimal arithmetic with optional guard digits"
     
@@ -51,20 +50,35 @@ class Fixed(object):
     __scaleg = None
 
     def __init__(self, arg):
-        "create a new Fixed.Value object"
-        self._value = Fixed.__fix(arg)
+        "create a new Fixed object"
+        if isinstance(arg, str) and arg == 'epsilon':
+            if Fixed.exact:
+                raise ValueError('exact arithmetic has no epsilon')
+            self._value = 1
+        else:
+            self._value = Fixed.__fix(arg)
 
-    def __fix(self, arg):
+    @classmethod
+    def __fix(cls, arg):
         "return scaled int of value without creating an object"
-        if self.__scale is None:
+        if cls.__scale is None:
             raise TypeError('value.Fixed must be initialized')
         if isinstance(arg, (int,long)):
-            return arg * self.__scale
-        if isinstance(arg, self):
+            return arg * cls.__scale
+        if isinstance(arg, cls):
             return arg._value
         raise TypeError("value.Fixed can't convert %s" % type(arg))
 
-    #  Value.init(precision) must be called before using the class
+    @classmethod
+    def info(cls):
+        "return description of arithmetic method"
+        if not cls.__precision:
+            return "integer arithmetic"
+        if not cls.__guard:
+            return "fixed-point decimal arithmetic (%s places)" % str(cls.__precision)
+        return "quasi-exact fixed-point decimal arithmetic (%s+%s places)" % (str(cls.__precision), str(cls.__guard))
+        
+    #  Fixed.init(precision) must be called before using the class
     #
     @classmethod
     def init(cls, precision, guard=None):
@@ -85,8 +99,6 @@ class Fixed(object):
         cls.maxDiff = 0
         cls.minDiff = cls.__scale * 100
         cls.exact = bool(guard)
-        if not cls.exact:
-            cls.epsilon = cls(1) // cls(cls.__scalep)
 
     #  arithmetic operations
     #
@@ -118,7 +130,7 @@ class Fixed(object):
 
     def __mul__(self, other):
         "return self * other"
-        v = Value(self)
+        v = Fixed(self)
         if isinstance(other, (int,long)):
             v._value *= other
             return v  # no scaling needed
@@ -128,7 +140,7 @@ class Fixed(object):
         
     def __floordiv__(self, other):
         "return self // other"
-        v = Value(self)
+        v = Fixed(self)
         if isinstance(other, (int,long)):
             v._value //= other
             return v
@@ -151,7 +163,7 @@ class Fixed(object):
             v1._value = (v1._value * v2._value) // Fixed.__scale
             return v1
         if round not in ('down', 'up'):
-            raise ValueError('fixed.Value: must specify rounding: up or down')
+            raise ValueError('Fixed.mul: must specify rounding: up or down')
         v1._value, rem = divmod(v1._value * v2._value, Fixed.__scale)
         if rem and round == 'up':
             v1._value += 1
@@ -169,7 +181,7 @@ class Fixed(object):
             v1._value = (v1.__value * Fixed.__scale) // v2._value
             return v1
         if round not in ('down', 'up'):
-            raise ValueError('fixed.Value: must specify rounding: up or down')
+            raise ValueError('Fixed.div: must specify rounding: up or down')
         v1._value, rem = divmod(v1._value * Fixed.__scale, v2._value)
         if rem and round == 'up':
             v1._value += 1
@@ -190,7 +202,7 @@ class Fixed(object):
             v1._value = (v1._value * v2._value) // v3._value
             return v1
         if round not in ('down', 'up'):
-            raise ValueError('fixed.Value: must specify rounding: up or down')
+            raise ValueError('Fixed.muldiv: must specify rounding: up or down')
 
 
     #  comparison operators
@@ -215,9 +227,35 @@ class Fixed(object):
         return self._value >= other._value
 
     def __str__(self):
-        "stringify a value"
-        return str(self._value)
-        
+        '''
+        stringify a quasi-exact value
+        print as full precision
+        '''
+        v = self._value
+        if self.__guard == 0:       # fixed-point decimal arithmetic
+            if Fixed.__scale == 1:  # integer arithmetic
+                return str(v)
+            nfmt = "%d.%0" + str(Fixed.__precision) + "d" # %d.%0_d
+            return nfmt % (v//Fixed.__scale, v%Fixed.__scale)
+        nfmt = "%d.%0" + str(Fixed.__precision) + "d" # %d.%0_d
+        gv = (v + self.__grnd)//self.__scaleg
+        return nfmt % (gv//self.__scalep, gv%self.__scalep)
+
     def report(self):
-        "hook for post-election reporting"
-        return None
+        "Report qx statistics"
+
+        s = """\
+maxDiff: %d  (s/b << geps)
+geps:    %d
+minDiff: %d  (s/b >> geps)
+guard:   %d
+prec:    %d
+
+""" % (
+      self.maxDiff,
+      self.__geps,
+      self.minDiff,
+      self.__scaleg,
+      self.__scale
+      )
+        return s

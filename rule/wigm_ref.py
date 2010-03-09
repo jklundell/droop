@@ -57,7 +57,7 @@ class Rule:
                 high_candidate = Rule.breakTie(e, high_candidates, 'surplus')
                 surplus = high_vote - R.quota
                 for b in [b for b in R.ballots if b.top == high_candidate]:
-                    b.weight = (b.weight * surplus) // high_vote
+                    b.weight = (b.weight * surplus) / high_vote
                 R.advance(high_candidate)
             #
             #  if no surplus to transfer, eliminate a candidate
@@ -99,8 +99,8 @@ class Rule:
         Round up if not using exact arithmetic.
         '''
         if e.V.exact:
-            return e.V(e.profile.nballots) // e.V(e.profile.nseats+1)
-        return e.V(e.profile.nballots) // e.V(e.profile.nseats+1) + e.V('epsilon')
+            return e.V(e.profile.nballots) / e.V(e.profile.nseats+1)
+        return e.V(e.profile.nballots) / e.V(e.profile.nseats+1) + e.V('epsilon')
     
     #  election criterion
     #
