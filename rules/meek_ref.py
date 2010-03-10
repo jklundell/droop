@@ -26,7 +26,7 @@ class Rule:
             if precision is None:
                 precision = 9
                 guard = None
-        elif precision == 'fixed':
+        elif arithmetic == 'fixed':
             if precision is None: precision = 9
             guard = 0
         elif arithmetic == 'integer':
@@ -148,10 +148,11 @@ class Rule:
         #  Calculate initial quota
         #
         e.R0.quota = calcQuota(e)
+        V = e.V
         R = e.R0
         C = R.C   # candidate state
         for c in C.hopeful:
-            c.kf = e.V(1)  # initialize keep factors
+            c.kf = V(1)  # initialize keep factors
 
         while not countComplete():
 
@@ -160,64 +161,99 @@ class Rule:
             R = e.newRound()
             C = R.C   # candidate state
             elected = False # candidate elected in this round
+            batch = False
 
             #  C. iterate
             #
+            lastsurplus = V(0)
             while not countComplete():
+                #
+                #  distribute vote for each ballot
+                #  and add up vote for each candidate
+                #
                 for c in C.hopefulOrElected:
-                    c.vote = e.V(0)
+                    c.vote = V(0)
+                R.residual = V(0)
                 for b in R.ballots:
-                    b.weight = e.V(1)
-                    for c in [C.candidateByNick(nick) for nick in b.ranks]:
-                        keep = b.weight * c.kf
-                        c.vote += keep * b.count
-                        b.weight -= keep
-                votes = e.V(0)
+                    b.weight = V(1)
+                    b.residual = V(b.count)
+                    print "b.count=%s" % b.count
+                    for c in [e.candidateByCid(cid) for cid in b.ranks]:
+                        keep = V.mul(b.weight, c.kf, round='up')  # Hill variation
+                        print "keep=%s w=%s kf=%s" % (keep, b.weight, c.kf)
+                        b.weight -= keep  # Hill variation
+                        c.vote += keep * b.count  # always exact (b.count is an integer)
+                        b.residual -= keep * b.count  # residual value of ballot
+                        if b.weight <= V(0):
+                            break
+                    print "b.residual=%s" % b.residual
+                    R.residual += b.residual  # residual for round
+                print "R.residual=%s" % R.residual
+                votes = V(0)
                 for c in C.hopefulOrElected:
                     votes += c.vote            # find sum of all votes
                     
                 #  C.2. update quota
                 #
-                e.R.quota = calcQuota(e)
+                R.quota = calcQuota(e)
                 
                 #  C.3. find winners
                 #
                 for c in [c for c in C.hopeful if hasQuota(e, c)]:
-                    c.elect()
+                    C.elect(c)
                     elected = True
                     
                     #  C.4. test for election complete
                     #
                     if countComplete():
-                        continue
+                        break
     
                 #  C.5. calculate total surplus
                 #
-                surplus = e.V(0)
+                surplus = V(0)
                 for c in C.elected:
-                    surplus += c.vote - e.R.quota
+                    surplus += c.vote - R.quota
+                print "SURPLUS=%s" % surplus
                 
                 #  C.6. test iteration complete
                 #
-                batch = batchDefeat(surplus)
                 if surplus <= Rule.epsilon:
+                    break
+                if surplus == lastsurplus:
+                    R.log("Stable state detected")
+                    break;
+                lastsurplus = surplus
+                batch = not elected and batchDefeat(surplus)
+                if batch:
+                    print "R=%d ITER s=%s" % (R.n, surplus)
+                    if batch:
+                        c = batch[0]
+                        print "BATCH.0 %s v=%s" % (c.name, c.vote)
                     break
                     
                 #  C.7. update keep factors
                 #
+                #  variations:
+                #  Hill: full-precision multiply, round quotient up; transfer quota-keep
+                #  NZ Schedule 1A: full-precision multiply(?), round quotient up; transfer (1-kf) rounded up
+                #  OpenSTV MeekStV: full-precision multiply, round quotient down; transfer (1-kf) rounded down
+                #
                 for c in C.elected:
-                    c.kf = (c.kf * e.R.quota) / c.vote
+                    print "KF %s = %s" % (c.name, V.muldiv(c.kf, R.quota, c.vote, round='up'))
+                    c.kf = V.muldiv(c.kf, R.quota, c.vote, round='up')  # Hill (and NZ STV Calculator) variant
                 
             #  D. defeat candidate
             #
             #     next round if this round elected a candidate
             #
-            if elected or countComplete():
+            if countComplete():
+                break
+            if elected:
                 continue
             
             if batch:
                 for c in batch:
-                    c.defeat(msg='Batch defeat')
+                    C.defeat(c, msg='Batch defeat')
             else:
                 #  find and defeat candidate with lowest vote
                 #
@@ -234,12 +270,12 @@ class Rule:
                 #
                 if low_candidates:
                     low_candidate = breakTie(e, low_candidates, 'defeat')
-                    low_candidate.defeat()
+                    C.defeat(low_candidate)
         
         #  Elect or defeat remaining hopeful candidates
         #
-        for c in C.hopeful:
+        for c in C.hopeful.copy():
             if C.nElected < e.profile.nseats:
-                c.elect(msg='Elect remaining')
+                C.elect(c, msg='Elect remaining')
             else:
-                c.defeat(msg='Defeat remaining')
+                C.defeat(c, msg='Defeat remaining')

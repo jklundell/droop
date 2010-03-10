@@ -37,7 +37,32 @@ class Rational(fractions.Fraction):
     def init(cls):
         "return a reasonable epsilon"
         cls.epsilon = cls(1)/cls(1000000000)  # 10**-9
+    #  provide mul, div, muldiv for compatibility with non-exact arithmetic
+    #
+    @staticmethod
+    def mul(arg1, arg2, round=None):
+        '''
+        return arg1 * arg2
+        round is ignored       
+        '''
+        return Rational(arg1) * Rational(arg2)
         
+    @staticmethod
+    def div(arg1, arg2, round=None):
+        '''
+        return arg1 / arg2
+        round is ignored
+        '''
+        return Rational(arg1) / Rational(arg2)
+
+    @staticmethod
+    def muldiv(arg1, arg2, arg3, round=None):
+        '''
+        return (arg1*arg2)/arg3
+        round is ignored
+        '''
+        return Rational(arg1) * Rational(arg2) / Rational(arg3)
+
 
 class Fixed(object):
     "fixed-point decimal arithmetic with optional guard digits"
@@ -194,11 +219,13 @@ class Fixed(object):
         v1 = Fixed(arg1)
         v2 = Fixed(arg2)
         v3 = Fixed(arg3)
-        if Fixed.exact:
-            v1._value = (v1._value * v2._value) // v3._value
-            return v1
-        if round not in ('down', 'up'):
-            raise ValueError('Fixed.muldiv: must specify rounding: up or down')
+        v1._value, rem = divmod(v1._value * v2._value, v3._value)
+        if not Fixed.exact:
+            if round not in ('down', 'up'):
+                raise ValueError('Fixed.muldiv: must specify rounding: up or down')
+            if rem and round == 'up':
+                v1._value += 1
+        return v1
 
     #  comparison operators
     #

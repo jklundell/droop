@@ -2,7 +2,7 @@
 Generic Election Support
 '''
 
-from candidate import CandidateState
+from candidate import Candidate, CandidateState
 from value import Value
 
 class Election(object):
@@ -15,6 +15,9 @@ class Election(object):
     rounds = None    # election rounds
     R0 = None        # round 0 (initial state)
     R = None         # current round
+    cName = dict()   # candidate names
+    candidates = dict()
+    withdrawn = set()
     
     def __init__(self, rule, precision=None, guard=None):
         "create an election"
@@ -43,7 +46,26 @@ class Election(object):
         for round in self.rounds:
             s += "Round %d:\n" % round.n
             s += round.report(self)
+        
+        #  dump round-by-round details
+        #
+        s += "\nDump Rounds:\n"
+        for round in self.rounds:
+            s += round.dump(self)
         return s
+
+    def addCandidate(self, cid, cname, isWithdrawn):
+        "add a candidate to the election"
+        c = Candidate(self, cid)
+        assert cid not in self.candidates, 'duplicate candidate'
+        self.candidates[cid] = c
+        self.cName[cid] = cname
+        self.R0.C.addCandidate(c, msg=None, isWithdrawn=isWithdrawn)
+        return c
+
+    def candidateByCid(self, cid):
+        "look up candidate by cid"
+        return self.candidates[cid]
 
     class Round(object):
         "one election round"
@@ -56,7 +78,7 @@ class Election(object):
                 #  quota & ballots are filled in later
                 #
                 self.n = 0
-                self.C = CandidateState()
+                self.C = CandidateState(e)
                 self.quota = None
                 self.ballots = None
             else:
@@ -71,6 +93,7 @@ class Election(object):
                 self.C = previous.C.copy()
                 self.quota = previous.quota
                 self.ballots = [b.copy() for b in previous.ballots]
+            self.residual = e.V(0)
             self._log = [] # list of log messages
     
         def advance(self, c):
@@ -100,5 +123,39 @@ class Election(object):
                 s += '\tNontransferable votes: %s\n' % nontransferable
             if e.R.n == 0 or e.R.prior.quota != e.R.quota:
                 s += '\tQuota: %s\n' % e.R.quota
+            e.R = saveR
+            return s
+            
+        def dump(self, e):
+            "dump a round"
+
+            saveR, e.R = e.R, self # provide reporting context
+            s = ''
+            
+            candidates = [e.candidates[k] for k in e.candidates.keys()]
+            #  if round 0, include a header line
+            if self.n == 0:
+                h = ['R', 'Q']
+                for c in candidates:
+                    cid = c.cid
+                    h += ["'%s.name'" % cid]
+                    h += ["'%s.vote'" % cid]
+                    h += ["'%s.kf'" % cid]
+                h = [str(item) for item in h]
+                s += ','.join(h) + '\n'
+                
+            r = [self.n, self.quota]
+            for c in candidates:
+                cid = c.cid
+                r.append(c.name)
+                if self.n:
+                    r.append(c.vote)
+                    r.append(c.kf)
+                else:
+                    r.append('-')
+                    r.append('-')
+                
+            r = [str(item) for item in r]
+            s += ','.join(r) + '\n'
             e.R = saveR
             return s

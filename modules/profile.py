@@ -18,7 +18,7 @@ class Ballot(object):
         self.weight = self.e.V(1)     # initial weight
         self.ranks = []
         self.index = 0 # current ranking
-        self.nontransferable = self.e.V(0)
+        self.residual = self.e.V(0)
         if ranking:
             for nick in ranking:
                 self.addRank(nick)
@@ -28,7 +28,6 @@ class Ballot(object):
         b = Ballot(self.e, self.count, self.ranks)
         b.weight = self.weight
         b.index = self.index
-        b.nontransferable = self.nontransferable
         return b
 
     def addRank(self, nick):
@@ -45,7 +44,7 @@ class Ballot(object):
     @property
     def exhausted(self):
         "is ballot exhausted?"
-        return self.index >= len(self.ranks)
+        return self.index >= len(self.ranks)  # not meaningful for Meek
     
     @property
     def top(self):
@@ -135,10 +134,10 @@ class Profile(object):
 
         #  optional: withdrawn candidates, flagged with a minus sign
         #
-        withdrawn = []
+        withdrawn = set()
         wd = int(blt.next())
         while wd < 0:
-            withdrawn.append(wd)
+            withdrawn.add(str(-wd))
             wd = blt.next()
         
         #  ballots
@@ -181,10 +180,10 @@ class Profile(object):
         self.title.strip('"')
 
         #  create the ballot objects, using candidate numbers as nicknames
-        nick = 0
-        for candidate in candidates:
-            nick += 1
-            self.e.R0.C.add(self.e, nick=str(nick), name=candidate)
+        cid = 0
+        for cname in candidates:
+            cid += 1
+            self.e.addCandidate(cid=str(cid), cname=cname, isWithdrawn=(cid in withdrawn))
         return self.validate(self.e)
 
     def bltBlob(self, blob):
