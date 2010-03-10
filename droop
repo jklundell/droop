@@ -2,9 +2,9 @@
 "Count election using OpenDroop"
 
 import sys, os, getopt
-path = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.normpath(path))
-from module.profile import Profile
+path = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
+if path not in sys.path: sys.path.insert(0, path)
+from modules.profile import Profile
 
 #######################################################################
 #
@@ -109,11 +109,11 @@ else:
     bltPath = args[1]
 
 if ruleName == 'wigm_ref':
-    import rule.wigm_ref
-    Rule = rule.wigm_ref.Rule
-elif ruleName == 'wigm_tst':
-    import rule.wigm_tst
-    Rule = rule.wigm_tst.Rule
+    import rules.wigm_ref
+    Rule = rules.wigm_ref.Rule
+elif ruleName == 'meek_ref':
+    import rules.meek_ref
+    Rule = rules.meek_ref.Rule
 else:
     print "Unrecognized rule '%s'" % ruleName
     print usage

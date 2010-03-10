@@ -2,9 +2,9 @@
 "Count election using Reference WIGM"
 
 import sys, os
-path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-sys.path.insert(0, os.path.normpath(path))
-from module.election import Election
+path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
+from modules.election import Election
 
 class Rule:
     '''

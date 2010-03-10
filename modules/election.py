@@ -3,7 +3,7 @@ Generic Election Support
 '''
 
 from candidate import CandidateState
-from value.value import Value
+from value import Value
 
 class Election(object):
     '''
