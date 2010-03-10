@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"Count election using Reference WIGM"
+"Count election using Reference WIGM STV"
 
 import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
@@ -126,7 +126,7 @@ class Rule:
         '''
         if e.V.exact:
             return e.V(e.profile.nballots) / e.V(e.profile.nseats+1)
-        return e.V(e.profile.nballots) / e.V(e.profile.nseats+1) + e.V('epsilon')
+        return e.V(e.profile.nballots) / e.V(e.profile.nseats+1) + e.V.epsilon
     
     #  election criterion
     #
@@ -176,4 +176,4 @@ class Rule:
     @staticmethod
     def info(e):
         "return an info string for the election report"
-        return "Model Weighted Inclusive Gregory Method (WIGM); quota=%s" % e.R0.quota
+        return "Model Weighted Inclusive Gregory Method (WIGM)"

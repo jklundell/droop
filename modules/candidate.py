@@ -73,6 +73,16 @@ class Candidate(object):
         self.e.R.C._vote[self.nick] = newvote
     vote = property(getvote, setvote)
 
+    #  get/set keep factor of this candidate
+    #
+    def getkf(self):
+       "get current keep factor for candidate"
+       return self.e.R.C._kf[self.nick]
+    def setkf(self, newkf):
+        "set keep factor for candidate"
+        self.e.R.C._kf[self.nick] = newkf
+    kf = property(getkf, setkf)
+
     def __str__(self):
         "stringify"
         return self.nick
@@ -97,12 +107,14 @@ class CandidateState(object):
         #
         self._vote = dict()   # votes by candidate nick
         self._state = dict()  # states by candidate nick
+        self._kf = dict()     # keep factor by candidate nick
 
     def copy(self):
         "return a copy of ourself"
         C = CandidateState()
         C._vote = self._vote.copy()
         C._state = self._state.copy()
+        C._kf = self._kf.copy()
         return C
 
     def add(self, e, name, nick=None):

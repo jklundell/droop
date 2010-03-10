@@ -11,6 +11,7 @@ class Value(object):
         "initialize a value class and return it"
 
         if precision is None:
+            Rational.init()
             return Rational
         Fixed.init(precision, guard)
         return Fixed
@@ -21,6 +22,7 @@ class Rational(fractions.Fraction):
     "rational arithmetic with support functions"
     
     exact = True
+    epsilon = None
     
     @classmethod
     def info(cls):
@@ -31,6 +33,11 @@ class Rational(fractions.Fraction):
         "Report arithmetic statistics"
         return ''
 
+    @classmethod
+    def init(cls):
+        "return a reasonable epsilon"
+        cls.epsilon = cls(1)/cls(1000000000)  # 10**-9
+        
 
 class Fixed(object):
     "fixed-point decimal arithmetic with optional guard digits"
@@ -38,16 +45,12 @@ class Fixed(object):
     __scale = None
     __scalep = None
     __scaleg = None
+    epsilon = None
 
     def __init__(self, arg):
         "create a new Fixed object"
-        if isinstance(arg, str) and arg == 'epsilon':
-            if Fixed.exact:
-                raise TypeError('exact arithmetic has no epsilon')
-            self._value = 1
-        else:
-            self._value = Fixed.__fix(arg)
-
+        self._value = Fixed.__fix(arg)
+        
     @classmethod
     def __fix(cls, arg):
         "return scaled int of value without creating an object"
@@ -89,6 +92,9 @@ class Fixed(object):
         cls.maxDiff = 0
         cls.minDiff = cls.__scale * 100
         cls.exact = bool(guard)
+        cls.epsilon = cls(0)
+        if not cls.exact:
+            cls.epsilon._value = 1
 
     #  arithmetic operations
     #

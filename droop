@@ -12,7 +12,7 @@ from modules.profile import Profile
 #
 #######################################################################
 
-rules = ['wigm_ref']
+rules = ['wigm_ref', 'meek.ref']
 reportNames = None
 
 usage = """
@@ -95,7 +95,7 @@ for o, a in opts:
           sys.exit(0)
 
 if len(args) == 1:
-    ruleName = 'wigm_ref'  # handy default for testing
+    ruleName = 'meek_ref'  # handy default for testing
     bltPath = args[0]
 elif len(args) != 2:
     if len(args) < 2:

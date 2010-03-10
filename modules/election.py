@@ -31,6 +31,7 @@ class Election(object):
        "add a round"
        self.rounds.append(self.Round(self))
        self.R = self.rounds[-1]
+       self.R.prior = self.rounds[-2]
        return self.R
 
     def report(self):
@@ -95,6 +96,9 @@ class Election(object):
             nontransferable = e.V(0)
             for b in [b for b in self.ballots if b.exhausted]:
                 nontransferable = nontransferable + b.vote
-            s += '\tNontransferable votes: %s\n' % nontransferable
+            if nontransferable:
+                s += '\tNontransferable votes: %s\n' % nontransferable
+            if e.R.n == 0 or e.R.prior.quota != e.R.quota:
+                s += '\tQuota: %s\n' % e.R.quota
             e.R = saveR
             return s
