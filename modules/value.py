@@ -73,12 +73,12 @@ class Fixed(object):
     @classmethod
     def init(cls, precision, guard=None):
         "initialize class variables"
-        if int(precision) != precision:
-            raise TypeError('value.Fixed: precision must be an int')
+        if int(precision) != precision or precision < 0:
+            raise TypeError('value.Fixed: precision must be an int >= 0')
         if guard is None:
             guard = precision
-        if int(guard) != guard:
-            raise TypeError('value.Fixed: guard must be an int')
+        if int(guard) != guard or guard < 0:
+            raise TypeError('value.Fixed: guard must be an int >= 0')
         cls.__precision = precision
         cls.__guard = guard
         cls.__scalep = 10 ** precision
