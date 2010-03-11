@@ -255,16 +255,11 @@ class Rule:
                 low_vote = R.quota
                 low_candidates = []
                 for c in C.hopeful:
-                    if c.vote > V(33) and c.vote < V(34):
                     if c.vote == low_vote:
-                        if c.vote > V(33) and c.vote < V(34):
                         low_candidates.append(c)
                     elif c.vote < low_vote:
-                        if c.vote > V(33) and c.vote < V(34):
                         low_vote = c.vote
                         low_candidates = [c]
-                    else: # debug
-                        if c.vote > V(33) and c.vote < V(34):
     
                 #  defeat candidate with lowest vote
                 #
