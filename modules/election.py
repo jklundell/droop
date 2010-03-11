@@ -132,28 +132,31 @@ class Election(object):
             saveR, e.R = e.R, self # provide reporting context
             s = ''
             
-            candidates = [e.candidates[k] for k in e.candidates.keys()]
+            candidates = sorted([e.candidates[k] for k in e.candidates.keys()], key=lambda c:int(c.cid))
             #  if round 0, include a header line
             if self.n == 0:
-                h = ['R', 'Q']
+                h = ['R', 'Q', 'residual']
                 for c in candidates:
                     cid = c.cid
                     h += ["'%s.name'" % cid]
+                    h += ["'%s.state'" % cid]
                     h += ["'%s.vote'" % cid]
                     h += ["'%s.kf'" % cid]
                 h = [str(item) for item in h]
                 s += ','.join(h) + '\n'
                 
-            r = [self.n, self.quota]
+            r = [self.n, self.quota, self.residual]
             for c in candidates:
                 cid = c.cid
                 r.append(c.name)
                 if self.n:
+                    r.append('W' if c.isWithdrawn else 'H' if c.isHopeful else 'P' if c.isPending else 'E' if c.isElected else 'D' if c.isDefeated else '?') # state
                     r.append(c.vote)
-                    r.append(c.kf)
+                    r.append("'-'" if c.kf is None else c.kf)
                 else:
-                    r.append('-')
-                    r.append('-')
+                    r.append('W' if c.isWithdrawn else 'H') # state
+                    r.append(c.vote) # vote
+                    r.append("'-'") # kf
                 
             r = [str(item) for item in r]
             s += ','.join(r) + '\n'

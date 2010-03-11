@@ -20,6 +20,10 @@ class Candidate(object):
         "True iff hopeful candidate"
         return self in self.e.R.C.hopeful
     @property
+    def isPending(self):
+        "True iff transfer-pending candidate"
+        return self in self.e.R.C.pending
+    @property
     def isElected(self):
         "True iff elected candidate"
         return self in self.e.R.C.elected
@@ -51,6 +55,7 @@ class Candidate(object):
     #
     def getkf(self):
        "get current keep factor for candidate"
+       if not self.e.R.C._kf: return None
        return self.e.R.C._kf[self.cid]
     def setkf(self, newkf):
         "set keep factor for candidate"
@@ -81,6 +86,7 @@ class CandidateState(object):
         self._kf = dict()     # keep factor by candidate cid
         
         self.hopeful = set()
+        self.pending = set()
         self.elected = set()
         self.defeated = set()
 
@@ -92,6 +98,7 @@ class CandidateState(object):
         C._kf = self._kf.copy()
         
         C.hopeful = self.hopeful.copy()
+        C.pending = self.pending.copy()
         C.elected = self.elected.copy()
         C.defeated = self.defeated.copy()
         return C
@@ -109,11 +116,16 @@ class CandidateState(object):
             msg = msg or 'Add hopeful'
             self.e.R.log("%s: %s" % (msg, c.name))
 
-    def elect(self, c, msg='Elect'):
-        "elect a candidate"
+    def elect(self, c, msg='Elect', pending=False):
+        "elect a candidate; optionally transfer-pending"
         self.hopeful.remove(c)
         self.elected.add(c)
+        if pending:
+            self.pending.add(c)
         self.e.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
+    def unpend(self, c):
+        "unpend a candidate"
+        self.pending.remove(c)
     def defeat(self, c, msg='Defeat'):
         "defeat a candidate"
         self.hopeful.remove(c)
@@ -129,6 +141,11 @@ class CandidateState(object):
         "True iff candidate is hopeful in specifed round (default=current)"
         if r is None: return c in self.hopeful
         return c in self.e.rounds[r].C.hopeful
+
+    def isPending(self, c, r=None):
+        "True iff candidate is transfer-pending in specifed round (default=current)"
+        if r is None: return c in self.pending
+        return c in self.e.rounds[r].C.pending
 
     def isElected(self, c, r=None):
         "True iff candidate is elected in specifed round (default=current)"
@@ -149,12 +166,21 @@ class CandidateState(object):
         "return union of hopeful and elected candidates"
         return self.hopeful.union(self.elected)
 
+    @property
+    def hopefulOrPending(self):
+        "return union of hopeful and transfer-pending candidates"
+        return self.hopeful.union(self.pending)
+
     #  return count of candidates in requested state
     #
     @property
     def nHopeful(self):
         "return count of hopeful candidates"
         return len(self.hopeful)
+    @property
+    def nPending(self):
+        "return count of transfer-pending candidates"
+        return len(self.pending)
     @property
     def nElected(self):
         "return count of elected candidates"

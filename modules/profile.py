@@ -20,8 +20,8 @@ class Ballot(object):
         self.index = 0 # current ranking
         self.residual = self.e.V(0)
         if ranking:
-            for nick in ranking:
-                self.addRank(nick)
+            for cid in ranking:
+                self.addRank(cid)
 
     def copy(self):
         "return a copy of this ballot"
@@ -30,10 +30,10 @@ class Ballot(object):
         b.index = self.index
         return b
 
-    def addRank(self, nick):
+    def addRank(self, cid):
        "add a candidate to the ranking"
-       assert nick not in self.ranks, 'duplicate ranking: %s' % nick
-       self.ranks.append(nick)
+       assert cid not in self.ranks, 'duplicate ranking: %s' % cid
+       self.ranks.append(cid)
 
     def advance(self, hopeful):
         "advance index to next candidate on this ballot; return True if exists"
@@ -51,7 +51,7 @@ class Ballot(object):
         "return top candidate, or None if exhausted"
         if self.exhausted:
             return None
-        return self.e.R0.C.candidateByNick(self.ranks[self.index])
+        return self.e.candidateByCid(self.ranks[self.index])
     
     @property
     def vote(self):
@@ -88,11 +88,11 @@ class Profile(object):
         for ballot in self.ballots:
             n += 1
             d = dict()
-            for nick in ballot.ranks:
-                if nick in d:
-                    print 'candidate %s duplicated on ballot %d' % (nick, n)
+            for cid in ballot.ranks:
+                if cid in d:
+                    print 'candidate %s duplicated on ballot %d' % (cid, n)
                     return False
-                d[nick] = nick
+                d[cid] = cid
         return True
         
     def addBallot(self, ballot):
@@ -179,7 +179,7 @@ class Profile(object):
             pass
         self.title.strip('"')
 
-        #  create the ballot objects, using candidate numbers as nicknames
+        #  create the ballot objects, using candidate numbers as candidate IDs (cid)
         cid = 0
         for cname in candidates:
             cid += 1

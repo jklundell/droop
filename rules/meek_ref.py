@@ -85,8 +85,8 @@ class Rule:
             Round up if not using exact arithmetic.
             '''
             if e.V.exact:
-                return e.V(e.profile.nballots) / e.V(e.profile.nseats+1)
-            return e.V(e.profile.nballots) / e.V(e.profile.nseats+1) + e.V.epsilon
+                return (e.V(e.profile.nballots)-e.R.residual) / e.V(e.profile.nseats+1)
+            return (e.V(e.profile.nballots)-e.R.residual) / e.V(e.profile.nseats+1) + e.V.epsilon
     
         def breakTie(e, tied, purpose=None, strong=True):
             '''
@@ -152,7 +152,11 @@ class Rule:
         R = e.R0
         C = R.C   # candidate state
         for c in C.hopeful:
-            c.kf = V(1)  # initialize keep factors
+            c.kf = V(1)    # initialize keep factors
+            c.vote = V(0)  # initialize round-0 vote
+        for b in R.ballots:
+            if b.top:
+                b.top.vote += V(b.count)  # count first-place votes for round 0 reporting
 
         while not countComplete():
 
@@ -177,22 +181,18 @@ class Rule:
                 for b in R.ballots:
                     b.weight = V(1)
                     b.residual = V(b.count)
-                    print "b.count=%s" % b.count
                     for c in [e.candidateByCid(cid) for cid in b.ranks]:
                         keep = V.mul(b.weight, c.kf, round='up')  # Hill variation
-                        print "keep=%s w=%s kf=%s" % (keep, b.weight, c.kf)
                         b.weight -= keep  # Hill variation
                         c.vote += keep * b.count  # always exact (b.count is an integer)
                         b.residual -= keep * b.count  # residual value of ballot
                         if b.weight <= V(0):
                             break
-                    print "b.residual=%s" % b.residual
                     R.residual += b.residual  # residual for round
-                print "R.residual=%s" % R.residual
                 votes = V(0)
                 for c in C.hopefulOrElected:
                     votes += c.vote            # find sum of all votes
-                    
+
                 #  C.2. update quota
                 #
                 R.quota = calcQuota(e)
@@ -213,7 +213,6 @@ class Rule:
                 surplus = V(0)
                 for c in C.elected:
                     surplus += c.vote - R.quota
-                print "SURPLUS=%s" % surplus
                 
                 #  C.6. test iteration complete
                 #
@@ -224,11 +223,10 @@ class Rule:
                     break;
                 lastsurplus = surplus
                 batch = not elected and batchDefeat(surplus)
+                batch = False
                 if batch:
-                    print "R=%d ITER s=%s" % (R.n, surplus)
                     if batch:
                         c = batch[0]
-                        print "BATCH.0 %s v=%s" % (c.name, c.vote)
                     break
                     
                 #  C.7. update keep factors
@@ -239,7 +237,6 @@ class Rule:
                 #  OpenSTV MeekStV: full-precision multiply, round quotient down; transfer (1-kf) rounded down
                 #
                 for c in C.elected:
-                    print "KF %s = %s" % (c.name, V.muldiv(c.kf, R.quota, c.vote, round='up'))
                     c.kf = V.muldiv(c.kf, R.quota, c.vote, round='up')  # Hill (and NZ STV Calculator) variant
                 
             #  D. defeat candidate
