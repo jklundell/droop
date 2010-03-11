@@ -97,8 +97,9 @@ class Profile(object):
         
     def addBallot(self, ballot):
         "add a ballot to the list"
-        self.ballots.append(ballot)
-        self.nballots += ballot.count
+        if not ballot.exhausted:  # ignore empty ballots
+            self.ballots.append(ballot)
+            self.nballots += ballot.count
 
     def bltPath(self, path):
         "process a path to a blt file"

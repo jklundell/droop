@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 "Count election using Reference Meek STV"
 
-import sys, os, operator
+import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 from modules.election import Election
@@ -85,8 +85,8 @@ class Rule:
             Round up if not using exact arithmetic.
             '''
             if e.V.exact:
-                return (e.V(e.profile.nballots)-e.R.residual) / e.V(e.profile.nseats+1)
-            return (e.V(e.profile.nballots)-e.R.residual) / e.V(e.profile.nseats+1) + e.V.epsilon
+                return e.R.votes / e.V(e.profile.nseats+1)
+            return e.R.votes / e.V(e.profile.nseats+1) + e.V.epsilon
     
         def breakTie(e, tied, purpose=None, strong=True):
             '''
@@ -129,7 +129,7 @@ class Rule:
                 else:
                     if tiedCands:
                         tiedGroups.append(tiedCands)
-                    tiedcands = [c]
+                    tiedCands = [c]
                     vote = c.vote
             if tiedCands:
                 tiedGroups.append(tiedCands)
@@ -147,8 +147,9 @@ class Rule:
 
         #  Calculate initial quota
         #
-        e.R0.quota = calcQuota(e)
         V = e.V
+        e.R0.votes = V(e.profile.nballots)
+        e.R0.quota = calcQuota(e)
         R = e.R0
         C = R.C   # candidate state
         for c in C.hopeful:
@@ -189,9 +190,9 @@ class Rule:
                         if b.weight <= V(0):
                             break
                     R.residual += b.residual  # residual for round
-                votes = V(0)
+                R.votes = V(0)
                 for c in C.hopefulOrElected:
-                    votes += c.vote            # find sum of all votes
+                    R.votes += c.vote            # find sum of all votes
 
                 #  C.2. update quota
                 #
@@ -223,10 +224,7 @@ class Rule:
                     break;
                 lastsurplus = surplus
                 batch = not elected and batchDefeat(surplus)
-                batch = False
                 if batch:
-                    if batch:
-                        c = batch[0]
                     break
                     
                 #  C.7. update keep factors
@@ -257,11 +255,16 @@ class Rule:
                 low_vote = R.quota
                 low_candidates = []
                 for c in C.hopeful:
+                    if c.vote > V(33) and c.vote < V(34):
                     if c.vote == low_vote:
+                        if c.vote > V(33) and c.vote < V(34):
                         low_candidates.append(c)
                     elif c.vote < low_vote:
+                        if c.vote > V(33) and c.vote < V(34):
                         low_vote = c.vote
                         low_candidates = [c]
+                    else: # debug
+                        if c.vote > V(33) and c.vote < V(34):
     
                 #  defeat candidate with lowest vote
                 #

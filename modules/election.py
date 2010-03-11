@@ -94,6 +94,7 @@ class Election(object):
                 self.quota = previous.quota
                 self.ballots = [b.copy() for b in previous.ballots]
             self.residual = e.V(0)
+            self.vote = e.V(0)
             self._log = [] # list of log messages
     
         def advance(self, c):
@@ -113,9 +114,9 @@ class Election(object):
                 s += '\t%s\n' % line
             if self._log:
                 s += '\t...\n'
-            s += '\tHopeful: %s\n' % (" ".join([c.name for c in self.C.hopeful]) or 'None')
-            s += '\tElected: %s\n' % (" ".join([c.name for c in self.C.elected]) or 'None')
-            s += '\tDefeated: %s\n' % (" ".join([c.name for c in self.C.defeated]) or 'None')
+            s += '\tHopeful: %s\n' % (" ".join(sorted([c.name for c in self.C.hopeful])) or 'None')
+            s += '\tElected: %s\n' % (" ".join(sorted([c.name for c in self.C.elected])) or 'None')
+            s += '\tDefeated: %s\n' % (" ".join(sorted([c.name for c in self.C.defeated])) or 'None')
             nontransferable = e.V(0)
             for b in [b for b in self.ballots if b.exhausted]:
                 nontransferable = nontransferable + b.vote

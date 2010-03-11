@@ -231,22 +231,37 @@ class Fixed(object):
     #
     def __eq__(self, other):
         "return self == other"
-        return self._value == other._value
+        if not Fixed.exact:
+            return self._value == other._value
+        gdiff = abs(self._value - other._value)
+        if gdiff < Fixed.__geps and gdiff > Fixed.maxDiff:
+            Fixed.maxDiff = gdiff
+        if gdiff >= Fixed.__geps and gdiff < Fixed.minDiff:
+            Fixed.minDiff = gdiff
+        return gdiff < Fixed.__geps
     def __ne__(self, other):
         "return self != other"
-        return self._value != other._value 
+        return not self == other
     def __lt__(self, other):
         "return self < other"
-        return self._value < other._value
+        if not Fixed.exact:
+            return self._value < other._value
+        return self._value < other._value and not self == other
     def __le__(self, other):
         "return self <= other"
-        return self._value <= other._value
+        if not Fixed.exact:
+            return self._value <= other._value
+        return self._value <= other._value or self == other
     def __gt__(self, other):
         "return self > other"
-        return self._value > other._value
+        if not Fixed.exact:
+            return self._value > other._value
+        return self._value > other._value and not self == other
     def __ge__(self, other):
         "return self >= other"
-        return self._value >= other._value
+        if not Fixed.exact:
+            return self._value >= other._value
+        return self._value >= other._value or self == other
 
     def __str__(self):
         '''

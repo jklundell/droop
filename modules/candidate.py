@@ -109,6 +109,7 @@ class CandidateState(object):
         "add a candidate"
         if isWithdrawn:
             self.e.withdrawn.add(c)
+            self._kf[c.cid] = e.V(0)
             msg = msg or 'Add withdrawn'
             self.e.R.log("%s: %s" % (msg, c.name))
         else:
@@ -130,6 +131,7 @@ class CandidateState(object):
         "defeat a candidate"
         self.hopeful.remove(c)
         self.defeated.add(c)
+        self._kf[c.cid] = self.e.V(0)
         self.e.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
 
     def vote(self, c, r=None):
