@@ -164,6 +164,8 @@ class Rule:
             #  B. next round
             #
             R = e.newRound()
+            sys.stdout.write('%d' % R.n)
+            sys.stdout.flush()
             C = R.C   # candidate state
             elected = False # candidate elected in this round
             batch = False
@@ -172,6 +174,8 @@ class Rule:
             #
             lastsurplus = V(0)
             while not countComplete():
+                sys.stdout.write('.')
+                sys.stdout.flush()
                 #
                 #  distribute vote for each ballot
                 #  and add up vote for each candidate
