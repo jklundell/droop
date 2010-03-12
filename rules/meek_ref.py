@@ -119,63 +119,68 @@ class Rule:
         def batchDefeat(surplus):
             "find a batch of candidates that can be defeated at the current surplus"
             
+            #  sortedCands = candidates sorted by vote
+            #
             sortedCands = sorted(C.hopeful, key=lambda c: c.vote)
-            tiedGroups = []
-            tiedCands = []
-            vote = e.V(0)
+            
+            #   copy the sorted candidates list, 
+            #   making each entry a list
+            #   where each list has tied candidates, if any
+            #
+            group = []
+            sortedGroups = []
+            vote = V(0)
             for c in sortedCands:
                 if c.vote == vote:
-                    tiedCands.append(c)
+                    group.append(c)  # add candidate to tied group
                 else:
-                    if tiedCands:
-                        tiedGroups.append(tiedCands)
-                    tiedCands = [c]
+                    if group:
+                        sortedGroups.append(group)
+                    group = [c]      # start a new group
                     vote = c.vote
-            if tiedCands:
-                tiedGroups.append(tiedCands)
-            vote = e.V(0)
+            if group:
+                sortedGroups.append(group)
+
+            #   Scan the groups to find the biggest set of lowest-vote 
+            #   'sure-loser' candidates such that:
+            #     * we leave enough hopeful candidates to fill the remaining seats
+            #     * we don't break up tied groups of candidates
+            #     * the total of the surplus and the votes for the defeated batch
+            #       is less than the next-higher candidate
+            #
+            #   We never defeat the last group, because that would mean
+            #   defeating all the hopeful candidates, and if that's possible,
+            #   the election is already complete and we wouldn't be here.
+            #   
+            vote = V(0)
             batch = []
-            for tiedCands in tiedGroups:
-                if (len(batch) + len(tiedCands)) > seatsLeftToFill():
-                    break
-                for c in tiedCands:
-                    vote += c.vote
-                if vote >= surplus:
-                    break
-                batch += tiedCands
+            maxDefeat = C.nHopeful - seatsLeftToFill()
+            for g in range(len(sortedGroups) - 1):
+                group = sortedGroups[g]
+                if (len(batch) + len(group)) > maxDefeat:
+                    break  # too many defeats
+                vote += group[0].vote * len(group)
+                if (vote + surplus) >= sortedGroups[g+1][0].vote:
+                    break  # not sure losers
+                batch += group
             return batch
 
-        #  Calculate initial quota
+        #  iterateStatus constants
         #
-        V = e.V
-        e.R0.votes = V(e.profile.nballots)
-        e.R0.quota = calcQuota(e)
-        R = e.R0
-        C = R.C   # candidate state
-        for c in C.hopeful:
-            c.kf = V(1)    # initialize keep factors
-            c.vote = V(0)  # initialize round-0 vote
-        for b in R.ballots:
-            if b.top:
-                b.top.vote += V(b.count)  # count first-place votes for round 0 reporting
+        IS_none = None
+        IS_epsilon = 1
+        IS_batch = 2
+        IS_elected = 3
+        IS_stable = 4
 
-        while not countComplete():
-
-            #  B. next round
-            #
-            R = e.newRound()
-            sys.stdout.write('%d' % R.n)
-            sys.stdout.flush()
-            C = R.C   # candidate state
-            elected = False # candidate elected in this round
-            batch = False
-
-            #  C. iterate
-            #
+        def iterate():
+            "Iterate until surplus is sufficiently low"
+            iStatus = IS_none
             lastsurplus = V(0)
-            while not countComplete():
-                sys.stdout.write('.')
-                sys.stdout.flush()
+            while True:
+                if V.exact:
+                    sys.stdout.write('.')
+                    sys.stdout.flush()
                 #
                 #  distribute vote for each ballot
                 #  and add up vote for each candidate
@@ -198,40 +203,43 @@ class Rule:
                 for c in C.hopefulOrElected:
                     R.votes += c.vote            # find sum of all votes
 
-                #  C.2. update quota
+                #  D.3. update quota
                 #
                 R.quota = calcQuota(e)
                 
-                #  C.3. find winners
+                #  D.4. find winners
                 #
                 for c in [c for c in C.hopeful if hasQuota(e, c)]:
                     C.elect(c)
-                    elected = True
+                    iStatus = IS_elected
                     
-                    #  C.4. test for election complete
+                    #  D.5. test for election complete
                     #
-                    if countComplete():
-                        break
+                    #if countComplete():
+                    #    return IS_complete, None
+                
+                if iStatus == IS_elected:
+                    return IS_elected, None
     
-                #  C.5. calculate total surplus
+                #  D.6. calculate total surplus
                 #
                 surplus = V(0)
                 for c in C.elected:
                     surplus += c.vote - R.quota
                 
-                #  C.6. test iteration complete
+                #  D.7. test iteration complete
                 #
                 if surplus <= Rule.epsilon:
-                    break
+                    return IS_epsilon, None
                 if surplus == lastsurplus:
-                    R.log("Stable state detected")
-                    break;
+                    R.log("Stable state detected") # move to caller?
+                    return IS_stable, None
                 lastsurplus = surplus
-                batch = not elected and batchDefeat(surplus)
+                batch = batchDefeat(surplus)
                 if batch:
-                    break
+                    return IS_batch, batch
                     
-                #  C.7. update keep factors
+                #  D.8. update keep factors
                 #
                 #  variations:
                 #  Hill: full-precision multiply, round quotient up; transfer quota-keep
@@ -240,36 +248,74 @@ class Rule:
                 #
                 for c in C.elected:
                     c.kf = V.muldiv(c.kf, R.quota, c.vote, round='up')  # Hill (and NZ STV Calculator) variant
-                
-            #  D. defeat candidate
-            #
-            #     next round if this round elected a candidate
-            #
-            if countComplete():
-                break
-            if elected:
-                continue
             
-            if batch:
+        #########################
+        #
+        #   Initialize Count
+        #
+        #########################
+        V = e.V
+        e.R0.votes = V(e.profile.nballots)
+        e.R0.quota = calcQuota(e)
+        R = e.R0
+        C = R.C   # candidate state
+        for c in e.withdrawn:
+            c.kf = V(0)
+        for c in C.hopeful:
+            c.kf = V(1)    # initialize keep factors
+            c.vote = V(0)  # initialize round-0 vote
+        for b in R.ballots:
+            if b.top:
+                b.top.vote += V(b.count)  # count first-place votes for round 0 reporting
+
+        while not countComplete():
+
+            #  B. next round
+            #
+            R = e.newRound()
+            if V.exact:
+                sys.stdout.write('%d' % R.n)
+                sys.stdout.flush()
+                for c in C.elected:  # experimental: reset keep factors for exact methods
+                    c.kf = V(1)
+            C = R.C   # candidate state
+
+            #  C. iterate
+            #     next round if iteration elected a candidate
+            #
+            iterationStatus, batch = iterate()
+            if iterationStatus == IS_elected:
+                continue
+
+            #  D. defeat candidate(s)
+            #
+            #     defeat a batch if possible
+            #
+            if iterationStatus == IS_batch:
                 for c in batch:
-                    C.defeat(c, msg='Batch defeat')
-            else:
-                #  find and defeat candidate with lowest vote
-                #
-                low_vote = R.quota
-                low_candidates = []
-                for c in C.hopeful:
-                    if c.vote == low_vote:
-                        low_candidates.append(c)
-                    elif c.vote < low_vote:
-                        low_vote = c.vote
-                        low_candidates = [c]
-    
-                #  defeat candidate with lowest vote
-                #
-                if low_candidates:
-                    low_candidate = breakTie(e, low_candidates, 'defeat')
-                    C.defeat(low_candidate)
+                    C.defeat(c, msg='Defeat')
+                    c.kf = V(0)
+                    c.vote = V(0)
+                continue
+
+            #  Otherwise find and defeat candidate with lowest vote
+            #
+            low_vote = R.quota
+            low_candidates = []
+            for c in C.hopeful:
+                if c.vote == low_vote:
+                    low_candidates.append(c)
+                elif c.vote < low_vote:
+                    low_vote = c.vote
+                    low_candidates = [c]
+
+            #  defeat candidate with lowest vote
+            #
+            if low_candidates:
+                low_candidate = breakTie(e, low_candidates, 'defeat')
+                C.defeat(low_candidate, msg='Defeat (surplus<epsilon)')
+                low_candidate.kf = V(0)
+                low_candidate.vote = V(0)
         
         #  Elect or defeat remaining hopeful candidates
         #
@@ -278,3 +324,5 @@ class Rule:
                 C.elect(c, msg='Elect remaining')
             else:
                 C.defeat(c, msg='Defeat remaining')
+                c.kf = V(0)
+                c.vote = V(0)
