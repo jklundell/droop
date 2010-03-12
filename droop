@@ -23,7 +23,7 @@ Usage:
 
   -a: override default arithmetic: fixed, qx, rational, integer
   -p: override default precision (in digits)
-  -p: override guard precision (in digits, qx only)
+  -g: override guard precision (in digits, qx only)
   -r: report format: tbd
   -t: strong tie-break method: random
   -w: weak tie-break method: tbd
@@ -38,7 +38,7 @@ Usage:
 
 # Parse the command line.
 try:
-    (opts, args) = getopt.getopt(sys.argv[1:], "Pa:p:r:t:w:x:")
+    (opts, args) = getopt.getopt(sys.argv[1:], "Pa:p:g:r:t:w:x:")
 except getopt.GetoptError, err:
     print str(err) # will print something like "option -q not recognized"
     print usage
