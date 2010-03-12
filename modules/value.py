@@ -1,5 +1,7 @@
 '''
-Abstract base for other Value classes
+Value classes
+   Rational is essentially fractions.Fraction
+   Fixed supports integer, fixed-decimal and quasi-exact fixed-decimal
 
 '''
 
@@ -23,7 +25,27 @@ class Rational(fractions.Fraction):
     
     exact = True
     epsilon = None
+    name = 'rational'
     
+    @classmethod
+    def init(cls):
+        "return a reasonable epsilon"
+        cls.epsilon = cls(1,10**10)
+
+    def __eq__(self, other):
+        return abs(self-other) < self.epsilon
+    
+    def __add__(self, other):
+        return Rational(fractions.Fraction(self) + fractions.Fraction(other))
+    def __sub__(self, other):
+        return Rational(fractions.Fraction(self) - fractions.Fraction(other))
+    def __mul__(self, other):
+        return Rational(fractions.Fraction(self) * fractions.Fraction(other))
+    def __div__(self, other):
+        return Rational(fractions.Fraction(self) / fractions.Fraction(other))
+    def __neg__(self):
+        return Rational(-fractions.Fraction(self))
+        
     @classmethod
     def info(cls):
         return 'rational arithmetic'
@@ -33,10 +55,6 @@ class Rational(fractions.Fraction):
         "Report arithmetic statistics"
         return ''
 
-    @classmethod
-    def init(cls):
-        "return a reasonable epsilon"
-        cls.epsilon = cls(1)/cls(1000000000)  # 10**-9
     #  provide mul, div, muldiv for compatibility with non-exact arithmetic
     #
     @staticmethod
@@ -63,7 +81,6 @@ class Rational(fractions.Fraction):
         '''
         return Rational(arg1) * Rational(arg2) / Rational(arg3)
 
-
 class Fixed(object):
     "fixed-point decimal arithmetic with optional guard digits"
     
@@ -71,6 +88,7 @@ class Fixed(object):
     __scalep = None
     __scaleg = None
     epsilon = None
+    name = 'fixed'
 
     def __init__(self, arg):
         "create a new Fixed object"
