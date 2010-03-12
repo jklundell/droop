@@ -48,25 +48,15 @@ class ValueTestFixed6(unittest.TestCase):
         "initialize fixed point six places"
         V.ArithmeticClass(self.p, self.g)
         
-    def testExact(self):
-        "Not exact if there's a precision"
-        self.assertEqual(F.exact, False)
-
-    def testScalep(self):
-        "Scale 10^6 if precision is 6"
-        self.assertEqual(F._Fixed__scalep, 10**self.p)
-        
-    def testF0(self):
-        "create a 0"
-        self.assertEqual(F(0)._value, 0)
-
-    def testF1(self):
-        "create a 1"
-        self.assertEqual(F(1)._value, 10**self.p)
-
-    def testF_1(self):
-        "create a 0.1"
-        self.assertEqual((F(1)/F(10))._value, 10**(self.p-1))
+    def testFixed6(self):
+        "simple assertions"
+        self.assertEqual(F.exact, False)                # Fixed.exact
+        self.assertEqual(F._Fixed__precision, self.p)   # Fixed.__precision
+        self.assertEqual(F._Fixed__scalep, 10**self.p)  # Fixed.__scalep
+        self.assertEqual(F(0)._value, 0)                # 0
+        self.assertEqual(F(1)._value, 10**self.p)       # 1
+        self.assertEqual(F(100)._value, 100*10**self.p) # 100
+        self.assertEqual((F(1)/F(10))._value, 10**(self.p-1))  # 1/10
 
 class ValueTestRounding(unittest.TestCase):
     "test rounding of fixed values"
