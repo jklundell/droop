@@ -116,7 +116,7 @@ class Rule:
         for c in C.hopeful:
             c.vote = V(0)
         for b in [b for b in R.ballots if not b.exhausted]:
-            b.top.vote = b.top.vote + b.vote
+            b.topCand.vote = b.topCand.vote + b.vote
 
         while C.nHopefulOrElected > E.profile.nseats and \
                C.nElected < E.profile.nseats:
@@ -128,14 +128,14 @@ class Rule:
             for c in C.hopefulOrPending:
                 c.vote = V(0)
             for b in [b for b in R.ballots if not b.exhausted]:
-                b.top.vote = b.top.vote + b.vote
+                b.topCand.vote = b.topCand.vote + b.vote
 
             #  elect new winners
             #
             for c in [c for c in C.hopeful if hasQuota(E, c)]:
                 C.elect(c, pending=True)  # elect with transfer pending
                 if c.vote == R.quota:     # handle new winners with no surplus
-                    R.advance(c)
+                    R.transfer(c)
                     C.unpend(c)
         
             #  find highest surplus
@@ -155,9 +155,9 @@ class Rule:
                 # transfer surplus
                 high_candidate = breakTie(E, high_candidates, 'surplus')
                 surplus = high_vote - R.quota
-                for b in [b for b in R.ballots if b.top == high_candidate]:
+                for b in [b for b in R.ballots if b.topCand == high_candidate]:
                     b.weight = (b.weight * surplus) / high_vote
-                R.advance(high_candidate)
+                R.transfer(high_candidate)
                 C.unpend(high_candidate)
                 high_candidate.vote = R.quota
 
@@ -180,7 +180,7 @@ class Rule:
                 if low_candidates:
                     low_candidate = breakTie(E, low_candidates, 'defeat')
                     C.defeat(low_candidate)
-                    R.advance(low_candidate)
+                    R.transfer(low_candidate)
         
         #  Election over.
         #  Elect or defeat remaining hopeful candidates

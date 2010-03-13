@@ -6,6 +6,9 @@ Minneapolis Code of Ordinances, Title 8.5, Chapter 167
 http://library1.municode.com/default-test/DocView/11490/1/107/109
 as of 2009-10-02
 
+Ties are to be broken per Minneapolis Charter Chapter 2 Section 12
+http://library1.municode.com/default-test/home.htm?infobase=11490&doc_action=whatsnew
+
 Minneapolis STV is a variation on WIGM,
 using fixed-point decimal arithmetic with four digits of precision.
 '''
@@ -22,13 +25,15 @@ class Rule:
     '''
     
     @staticmethod
-    def init():
+    def init(arithmetic, precision, guard):
         "initialize election parameters"
         
         #  create an election
         #
-        #  arithmetic is fixed decimal, four digits of precision (167.20)
-        #  
+        #  arithmetic is fixed decimal, four digits of precision
+        #  [167.20(Surplus fraction of a vote, Transfer value)]
+        #
+        #  (ignore arithmetic parameters)
         #
         E = Election(Rule, precision=4, guard=0)
         return E
@@ -49,38 +54,139 @@ class Rule:
         
         #  local support functions
         #
-        def hasQuota(E, candidate):
+        def hasQuota(candidate):
             '''
-            Determine whether a candidate has a quota. [167.70]
+            Determine whether a candidate has a quota. [167.70(1(a,d))]
             '''
             return candidate.vote >= R.quota
     
         def calcQuota(E):
             '''
-            Calculate quota. [167.20]
+            Calculate quota. [167.20(Threshold)]
             '''
-            return V(E.profile.nballots) / V(E.profile.nseats+1) + V(1)
+            return V(E.profile.nballots) // V(E.profile.nseats+1) + V(1)
         
-        def breakTie(E, tied, purpose=None, strong=True):
+        def findCertainLosers(surplus):
             '''
-            break a tie by lot [167.70(1)(E)]
+            Find the group of candidates that cannot be elected per 167.20
+            '''
+            ## 167.20. Mathematically impossible to be elected means either: 
+            ##         (1) The candidate could never win because his or her current vote total 
+            ##             plus all votes that could possibly be transferred to him or her 
+            ##             in future rounds (from candidates with fewer votes, tied candidates, 
+            ##             and surplus votes) would not be enough to surpass the candidate 
+            ##             with the next higher current vote total; or
+            ##         (2) The candidate has a lower current vote total than a candidate 
+            ##             who is described by (1).
+            
+            #  sortedCands = candidates sorted by vote
+            #
+            sortedCands = sorted(C.hopeful, key=lambda c: c.vote)
+            
+            #   copy the sorted candidates list, 
+            #   making each entry a list
+            #   where each list has tied candidates, if any
+            #
+            group = []
+            sortedGroups = []
+            vote = V(0)
+            for c in sortedCands:
+                if c.vote == vote:
+                    group.append(c)  # add candidate to tied group
+                else:
+                    if group:
+                        sortedGroups.append(group)
+                    group = [c]      # start a new group
+                    vote = c.vote
+            if group:
+                sortedGroups.append(group)
+
+            #   Scan the groups to find the biggest set of lowest-vote 
+            #   'certain-loser' candidates such that:
+            #     * we leave enough hopeful candidates to fill the remaining seats
+            #     * we don't break up tied groups of candidates
+            #     * the total of the surplus and the votes for the defeated batch
+            #       is less than the next-higher candidate
+            #
+            #   We never defeat the last group, because that would mean
+            #   defeating all the hopeful candidates, and if that's possible,
+            #   the election is already complete and we wouldn't be here.
+            #   
+            vote = V(0)
+            losers = []
+            maxDefeat = C.nHopeful - E.seatsLeftToFill() # limit number of defeats
+            for g in range(len(sortedGroups) - 1):
+                group = sortedGroups[g]
+                #
+                #  stop if adding the next higher group would leave too few hopefuls
+                #
+                if (len(losers) + len(group)) > maxDefeat:
+                    break  # too many defeats
+                #
+                #  vote is all the votes a candidate in this group could get
+                #  from hopefuls tied or ranked lower
+                #
+                vote += group[0].vote * len(group)
+                #
+                #   stop if vote added to surplus surpasses the vote for
+                #   a candidate in the next-higher group
+                #
+                if (vote + surplus) > sortedGroups[g+1][0].vote:
+                    break  # not certain losers per 167.20
+                #
+                #   however, 167.20 has a mistaken definition of mathematical
+                #   impossibility, so log a complaint in the case where 
+                #   we're defeating a candidate who could tie a candidate
+                #   in the next-higher group
+                #
+                if (vote + surplus) == sortedGroups[g+1][0].vote:
+                    names = ", ".join([c.name for c in group])
+                    R.log("Defeating uncertain loser(s): %s" % names)
+                losers += group
+            return losers
+            
+        def breakTie(tied, reason=None):
+            '''
+            break a tie by lot [167.70(1)(e)]
             
             purpose must be 'surplus' or 'elect' or 'defeat', 
             indicating whether the tie is being broken for the purpose 
             of choosing a surplus to transfer, a winner, 
             or a candidate to eliminate. 
             '''
-            assert purpose in ('surplus', 'elect', 'defeat')
+            ##  167.70(f) ...In the case of a tie between two (2) continuing candidates, 
+            ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2, 
+            ##     Section 12, and the candidate chosen by lot must be defeated. 
+            ##     The result of the tie resolution must be recorded and reused in the event 
+            ##     of a recount.
+            ##
+            ##     Minneapolis Charter Chapter 2, Section 12. In Case of Tie Vote.
+            ##     When two or more candidates for any elective city office shall receive 
+            ##     an equal number of votes at the general city election or at a special election, 
+            ##     the election shall be determined as between those candidates by 
+            ##     the casting of lots in the presence of the City Council 
+            ##     at such time and in such manner as the City Council shall direct. 
+            ##     (As amended 83-Or-139, Sec 1, 6-10-83; Charter Amend. No. 161, Sec 6, ref. of 11-7-06)
+            
             if not tied:
                 return None
-            return random.choice(tied)
+            if len(tied) == 1:
+                return tied[0]
+            t = random.choice(tied)  # in the absence of the City Council...
+            s = 'Break tie (%s): [' % reason
+            s += ", ".join([c.name for c in tied])
+            s += '] -> %s' % t.name
+            R.log(s)
+            return t
+
+
+        R = E.R0  # current round
+        C = R.C   # candidate state
+        V = E.V   # arithmetic value class
 
         #  Calculate quota
         #
         E.R0.quota = calcQuota(E)
-        R = E.R0  # current round
-        C = R.C   # candidate state
-        V = E.V   # arithmetic value class
         
         #  Initialize the random number generator
         #
@@ -94,7 +200,7 @@ class Rule:
             ##
             for c in C.hopeful: c.vote = V(0)
             for b in [b for b in R.ballots if not b.exhausted]:
-                b.top.vote = b.top.vote + b.vote
+                b.topCand.vote = b.topCand.vote + b.vote
 
             ##     If the number of candidates whose vote total is equal to or greater than
             ##     the threshold is equal to the number of seats to be filled, 
@@ -102,7 +208,7 @@ class Rule:
             ##     and the tabulation is complete. 
             ##
 
-            if len([c for c in C.hopeful if hasQuota(E, c)]):
+            for c in [c for c in C.hopeful if hasQuota(c)]:
                 C.elect(c, pending=True)  # elect with transfer pending
             if C.nElected >= E.profile.nseats:
                 break
@@ -112,14 +218,13 @@ class Rule:
             ##     a new round begins and the tabulation must continue as described in clause b.
 
             R = E.newRound()
+            C = R.C   # candidate state
 
             ##  167.70(1)(b)
             ##  b. Surplus votes for any candidates whose vote total is equal to 
             ##     or greater than the threshold must be calculated.
 
-            surplus = V(0)
-            for c in C.elected:
-                surplus += c.vote
+            surplus = sum([c.surplus for c in C.elected], V(0))
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -128,15 +233,16 @@ class Rule:
             ##     Votes for the defeated candidates must be transferred to each ballot's 
             ##     next-ranked continuing candidate. 
 
-            sureLosers = findSureLosers()
-            for c in sureLosers:
-                C.defeat(c)
-                R.advance(c)
+            certainLosers = findCertainLosers(surplus)
+            for c in certainLosers:
+                C.defeat(c, 'Defeat certain loser')
+                R.transfer(c)
 
             ##     If no candidate can be defeated mathematically, the tabulation must continue
             ##     as described in clause d. 
             ##     Otherwise, the tabulation must continue as described in clause a.
-            if sureLosers:
+            
+            if certainLosers:
                 continue
 
             ##  d. The transfer value of each vote cast for an elected candidate 
@@ -151,100 +257,100 @@ class Rule:
             ##     The result of the tie resolution must be recorded and reused in the event 
             ##     of a recount. 
             ##     If no candidate has a surplus, the tabulation must continue 
-            ##     as described in clause E. 
+            ##     as described in clause e. 
             ##     Otherwise, the tabulation must continue as described in clause a.
 
-            ##  E. If there are no transferable surplus votes, the candidate with the fewest votes is defeated. Votes for a defeated candidate are transferred at their transfer value to each ballot's next-ranked continuing candidate. Ties between candidates with the fewest votes must be decided by lot, and the candidate chosen by lot must be defeated. The result of the tie resolution must be recorded and reused in the event of a recount.
-
-            ##  f. The procedures in clauses a. to E. must be repeated until the number of candidates whose vote total is equal to or greater than the threshold is equal to the number of seats to be filled, or until the number of continuing candidates is equal to the number of offices yet to be elected. If the number of continuing candidates is equal to the number of offices yet to be elected, any remaining continuing candidates must be declared elected. In the case of a tie between two (2) continuing candidates, the tie must be decided by lot as provided in Minneapolis Charter Chapter 2, Section 12, and the candidate chosen by lot must be defeated. The result of the tie resolution must be recorded and reused in the event of a recount.
-
-                if c.vote == R.quota:     # handle new winners with no surplus
-                    R.advance(c)
-                    C.unpend(c)
-
-
-
-            C.nHopefulOrElected > E.profile.nseats and \
-               C.nElected < E.profile.nseats:
-
-
-
-            C = R.C   # candidate state
-
-            #  count votes for hopeful candidates [167.70(1)(a)]
+            #  find largest surplus
             #
-            for c in C.hopefulOrPending:
-                c.vote = V(0)
-            for b in [b for b in R.ballots if not b.exhausted]:
-                b.top.vote = b.top.vote + b.vote
-
-            #  calculate surplus [167.70(1)(b)
-            
-            #  defeat sure losers [167.70(1)(c)]
-            #     and next round if any
-
-
-            #  elect new winners
-            #
-            for c in [c for c in C.hopeful if hasQuota(E, c)]:
-                C.elect(c, pending=True)  # elect with transfer pending
-                if c.vote == R.quota:     # handle new winners with no surplus
-                    R.advance(c)
-                    C.unpend(c)
-        
-            #  find highest surplus
-            #
-            high_vote = R.quota
+            high_surplus = V(0)
             high_candidates = []
-            for c in C.elected:
-                if c.vote == high_vote:
+            for c in C.pending:
+                if c.surplus == high_surplus:
                     high_candidates.append(c)
-                elif c.vote > high_vote:
-                    high_vote = c.vote
+                elif c.surplus > high_surplus:
+                    high_surplus = c.surplus
                     high_candidates = [c]
             
-            # transfer highest surplus
+            # transfer largest surplus
             #
-            if high_vote > R.quota:
-                # transfer surplus
-                high_candidate = breakTie(E, high_candidates, 'surplus')
-                surplus = high_vote - R.quota
-                for b in [b for b in R.ballots if b.top == high_candidate]:
-                    b.weight = (b.weight * surplus) / high_vote
-                R.advance(high_candidate)
+            ## 167.20(Surplus fraction of a vote)
+            ##     Surplus fraction of a vote = 
+            ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate), 
+            ##     calculated to four (4) decimal places, ignoring any remainder. 
+            
+            if high_candidates:
+                if len(high_candidates) > 1:
+                    high_candidate = breakTie(high_candidates, 'largest surplus')
+                else:
+                    high_candidate = high_candidates[0]
+                for b in [b for b in R.ballots if b.topCand == high_candidate]:
+                    b.weight = (b.weight * high_surplus) // high_candidate.vote
+                R.transfer(high_candidate)
                 C.unpend(high_candidate)
                 high_candidate.vote = R.quota
+                continue  ## continue as described in clause a.
 
-            #  if no surplus to transfer, eliminate a candidate
+            ##  e. If there are no transferable surplus votes, 
+            ##     the candidate with the fewest votes is defeated. 
+            ##     Votes for a defeated candidate are transferred at their transfer value 
+            ##     to each ballot's next-ranked continuing candidate. 
+            ##     Ties between candidates with the fewest votes must be decided by lot, 
+            ##     and the candidate chosen by lot must be defeated. 
+            ##     The result of the tie resolution must be recorded and reused 
+            ##     in the event of a recount.
+
+            #  find candidate(s) with lowest vote
             #
-            else:
-                #  find candidate(s) with lowest vote
-                #
-                low_vote = R.quota
-                low_candidates = []
-                for c in C.hopeful:
-                    if c.vote == low_vote:
-                        low_candidates.append(c)
-                    elif c.vote < low_vote:
-                        low_vote = c.vote
-                        low_candidates = [c]
+            low_vote = R.quota
+            low_candidates = []
+            for c in C.hopeful:
+                if c.vote == low_vote:
+                    low_candidates.append(c)
+                elif c.vote < low_vote:
+                    low_vote = c.vote
+                    low_candidates = [c]
 
-                #  defeat candidate with lowest vote
-                #
-                if low_candidates:
-                    low_candidate = breakTie(E, low_candidates, 'defeat')
-                    C.defeat(low_candidate)
-                    R.advance(low_candidate)
+            #  defeat candidate with lowest vote
+            #
+            if low_candidates:
+                low_candidate = breakTie(low_candidates, 'defeat low candidate')
+                C.defeat(low_candidate, 'Defeat low candidate')
+                R.transfer(low_candidate)
+
+            ##  f. The procedures in clauses a. to e. must be repeated 
+            ##     until the number of candidates whose vote total is equal to or greater than 
+            ##     the threshold is equal to the number of seats to be filled, 
+            ##     or until the number of continuing candidates is equal to the number of offices 
+            ##     yet to be elected. 
+            
+            if E.seatsLeftToFill() <= 0:
+                break
+
+            ##     If the number of continuing candidates is equal to the number of offices 
+            ##     yet to be elected, any remaining continuing candidates must be declared elected.
+
+            #  Note: implemented as "less than or equal to"
+            #
+            if C.nHopeful <= E.seatsLeftToFill():
+                for c in C.hopeful:
+                    C.elect(c, 'Elect remaining candidates')
+                break
+        
+            ##     In the case of a tie between two (2) continuing candidates, 
+            ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2, 
+            ##     Section 12, and the candidate chosen by lot must be defeated. 
+            ##     The result of the tie resolution must be recorded and reused in the event 
+            ##     of a recount.
+            
+            # Note: this will happen, if necessary, at the next defeat-lowest step above
+
         
         #  Election over.
-        #  Elect or defeat remaining hopeful candidates
+        #  Defeat remaining hopeful candidates
         #
-        for c in C.pending:
+        for c in C.pending.copy():
             C.unpend(c)
         for c in C.hopeful.copy():
-            if C.nElected < E.profile.nseats:
-                C.elect(c, msg='Elect remaining', pending=False)
-            else:
-                C.defeat(c, msg='Defeat remaining')
+            C.defeat(c, msg='Defeat remaining')
     
 

@@ -35,9 +35,9 @@ class Ballot(object):
        assert cid not in self.ranks, 'duplicate ranking: %s' % cid
        self.ranks.append(cid)
 
-    def advance(self, hopeful):
+    def transfer(self, hopeful):
         "advance index to next candidate on this ballot; return True if exists"
-        while self.top and self.top not in hopeful:
+        while self.topCand and self.topCand not in hopeful:
             self.index += 1
         return not self.exhausted
 
@@ -47,7 +47,7 @@ class Ballot(object):
         return self.index >= len(self.ranks)  # not meaningful for Meek
     
     @property
-    def top(self):
+    def topCand(self):
         "return top candidate, or None if exhausted"
         if self.exhausted:
             return None

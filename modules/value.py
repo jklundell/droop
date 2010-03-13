@@ -18,6 +18,25 @@ class Value(object):
         Fixed.init(precision, guard)
         return Fixed
 
+
+#  TODO (maybe)
+#  wrap the entire Fraction class in Rational per Patrick Maupin's idea:
+#  http://groups.google.com/group/comp.lang.python/browse_frm/thread/1253bbab7dfd4b/59289c16603fb374?hl=en&lnk=gst&q=pmaupin+userint#59289c16603fb374
+#
+# print """ 
+# \"""A more or less complete user-defined wrapper around integer objects.\""" 
+# class UserInt(object): 
+#     def __int__(self):  raise TypeError, "This is a virtual class" 
+# """ 
+# unwanted_methods = dir(object)+['__int__','__getnewargs__'] 
+# methods = [i for i in dir(int) if i not in unwanted_methods] 
+# methods.sort() 
+# for i in methods: 
+#     try: getattr(1,i)(1) 
+#     except TypeError: params = (i,'',i,'') 
+#     else: params = (i,',other',i,'int(other)') 
+#     print '    def %s(self%s): return int(self).%s(%s)' % params 
+
 import fractions
 
 class Rational(fractions.Fraction):

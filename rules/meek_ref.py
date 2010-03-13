@@ -109,7 +109,7 @@ class Rule:
                 s = 'Break tie (%s): [' % purpose
                 s += ", ".join([c.name for c in tied])
                 s += '] -> %s' % t.name
-                E.R.log(s)
+                R.log(s)
                 return t
 
         def batchDefeat(surplus):

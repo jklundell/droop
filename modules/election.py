@@ -56,11 +56,10 @@ class Election(object):
 
     def newCandidate(self, cid, cname, order, isWithdrawn):
         "add a candidate to the election"
-        c = Candidate(self, cid)
+        c = Candidate(self, cid, cid)
         assert cid not in self.candidates, 'duplicate candidate'
         self.candidates[cid] = c
         self.cName[cid] = cname
-        self.cOrder = order  # ballot order
         self.R0.C.addCandidate(c, msg=None, isWithdrawn=isWithdrawn)
         return c
 
@@ -68,9 +67,9 @@ class Election(object):
         "look up candidate by cid"
         return self.candidates[cid]
 
-    def seatsLeftToFill():
+    def seatsLeftToFill(self):
         "number of seats not yet filled"
-        return E.profile.nseats - self.R.C.nElected
+        return self.profile.nseats - self.R.C.nElected
 
     class Round(object):
         "one election round"
@@ -102,10 +101,10 @@ class Election(object):
             self.vote = E.V(0)
             self._log = [] # list of log messages
     
-        def advance(self, c):
-            "advance ballots with candidate c at top"
-            for b in [b for b in self.ballots if b.top == c]:
-                b.advance(self.C.hopeful)
+        def transfer(self, c):
+            "transfer ballots with candidate c at top"
+            for b in [b for b in self.ballots if b.topCand == c]:
+                b.transfer(self.C.hopeful)
     
         def log(self, msg):
             "log a message"

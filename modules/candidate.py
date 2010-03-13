@@ -8,10 +8,11 @@ CandidateState contains the per-round candidate state.
 class Candidate(object):
     "a candidate"
 
-    def __init__(self, E, cid):
+    def __init__(self, E, cid, order):
         "new candidate"
         self.E = E
-        self.cid = cid  # candidate id
+        self.cid = cid     # candidate id
+        self.order = order # ballot order
 
     #  test state of this candidate
     #
@@ -51,6 +52,12 @@ class Candidate(object):
         self.E.R.C._vote[self.cid] = newvote
     vote = property(getvote, setvote)
     
+    @property
+    def surplus(self):
+        "return candidate's current surplus vote"
+        s = self.vote - self.E.R.quota
+        return self.E.V(0) if s < self.E.V(0) else s
+        
     #  get/set keep factor of this candidate
     #
     def getkf(self):

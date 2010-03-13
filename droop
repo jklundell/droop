@@ -12,7 +12,7 @@ from modules.profile import Profile
 #
 #######################################################################
 
-rules = ['wigm_ref', 'meek.ref']
+rules = ['wigm_ref', 'meek.ref', 'mpls']
 reportNames = None
 
 usage = """
@@ -108,12 +108,15 @@ else:
     ruleName = args[0]
     bltPath = args[1]
 
+print ruleName
 if ruleName == 'wigm_ref':
     import rules.wigm_ref
     Rule = rules.wigm_ref.Rule
 elif ruleName == 'meek_ref':
     import rules.meek_ref
     Rule = rules.meek_ref.Rule
+elif ruleName == 'mpls':
+    from rules.mpls import Rule
 else:
     print "Unrecognized rule '%s'" % ruleName
     print usage
