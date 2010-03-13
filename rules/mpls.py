@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 '''
 Count election using Minneapolis MN STV rules
 
@@ -11,6 +10,27 @@ http://library1.municode.com/default-test/home.htm?infobase=11490&doc_action=wha
 
 Minneapolis STV is a variation on WIGM,
 using fixed-point decimal arithmetic with four digits of precision.
+
+Implementation notes:
+
+1. There is a specification error in 167.20(Mathematically impossible to be elected),
+where a candidate that could tie with the next highest candidate is erroneously deemed
+"impossible to be elected". The implementation uses actual mathematical certainty,
+rather than the erroneous specification, and logs a complaint if the condition arises. 
+This should be fixed in the ordinance.
+
+2. The tiebreaking rule requires the presence of the City Council. In their absence,
+the implementation uses the standard Python random number generator to break ties.
+Ideally, there would be a mechanism to accept external tiebreaking input, or the rule
+would be changed so that, for example, the City Council would predetermine a tiebreaking
+order.
+
+3. 167.70(1)(f) "number of continuing candidates is equal to the number of offices"
+should instead have "equal to or less than", and is so implemented.
+
+4. The language at the end of 167.70(1)(f) should be clarified. The "tie between two"
+should be "tie between two or more". But the language isn't needed at all, since any
+such tie will be broken when the candidates are defeated.
 '''
 
 import sys, os
@@ -69,7 +89,7 @@ class Rule:
             
             return V(E.profile.nballots // (E.profile.nseats + 1) + 1)
         
-        def findCertainLosers(surplus):
+        def findCertainLosers(surplus, fixSpec=True):
             '''
             Find the group of candidates that cannot be elected per 167.20
             '''
@@ -131,31 +151,29 @@ class Rule:
                 #
                 vote += group[0].vote * len(group)
                 #
-                #   stop if vote added to surplus surpasses the vote for
+                #   stop if vote added to surplus *equals or* surpasses the vote for
                 #   a candidate in the next-higher group
                 #
-                if (vote + surplus) > sortedGroups[g+1][0].vote:
-                    break  # not certain losers per 167.20
-                #
-                #   however, 167.20 has a mistaken definition of mathematical
+                #   167.20 has a mistaken definition of mathematical
                 #   impossibility, so log a complaint in the case where 
-                #   we're defeating a candidate who could tie a candidate
-                #   in the next-higher group
+                #   we deviate from the erroneous specification
                 #
                 if (vote + surplus) == sortedGroups[g+1][0].vote:
                     names = ", ".join([c.name for c in group])
-                    R.log("Defeating uncertain loser(s): %s" % names)
+                    if fixSpec:
+                        R.log("Not defeating uncertain loser(s): %s" % names)
+                    else:
+                        R.log("Defeating uncertain loser(s): %s" % names)
+                if (vote + surplus) > sortedGroups[g+1][0].vote:
+                    break
+                if fixSpec and (vote + surplus) == sortedGroups[g+1][0].vote:
+                    break
                 losers += group
             return losers
             
         def breakTie(tied, reason=None):
             '''
             break a tie by lot [167.70(1)(e)]
-            
-            purpose must be 'surplus' or 'elect' or 'defeat', 
-            indicating whether the tie is being broken for the purpose 
-            of choosing a surplus to transfer, a winner, 
-            or a candidate to eliminate. 
             '''
             ##  167.70(f) ...In the case of a tie between two (2) continuing candidates, 
             ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2, 
@@ -236,9 +254,13 @@ class Rule:
             ##     all candidates for whom it is mathematically impossible to be elected 
             ##     must be defeated simultaneously. 
             ##     Votes for the defeated candidates must be transferred to each ballot's 
-            ##     next-ranked continuing candidate. 
+            ##     next-ranked continuing candidate.
+            
+            #  fixSpec=True instructs the function to use the correct definition
+            #  of mathematical certainty of defeat instead of the erroneous definition
+            #  in 167.20.
 
-            certainLosers = findCertainLosers(surplus)
+            certainLosers = findCertainLosers(surplus, fixSpec=True)
             for c in certainLosers:
                 C.defeat(c, 'Defeat certain loser')
                 R.transfer(c)

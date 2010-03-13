@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 "Count election using Reference Meek STV"
 
 import sys, os

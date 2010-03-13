@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 "Count election using Reference WIGM STV"
 
 import sys, os
