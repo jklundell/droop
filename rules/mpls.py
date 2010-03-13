@@ -25,7 +25,7 @@ class Rule:
     '''
     
     @staticmethod
-    def init(arithmetic, precision, guard):
+    def initialize(arithmetic, precision, guard):
         "initialize election parameters"
         
         #  create an election
@@ -35,8 +35,7 @@ class Rule:
         #
         #  (ignore arithmetic parameters)
         #
-        E = Election(Rule, precision=4, guard=0)
-        return E
+        return Election(Rule, precision=4, guard=0)
 
     @staticmethod
     def info(E):
@@ -50,7 +49,7 @@ class Rule:
     #########################
     @staticmethod
     def count(E):
-        "count the election"
+        "count the election with Minneapolis STV rules"
         
         #  local support functions
         #
@@ -64,7 +63,11 @@ class Rule:
             '''
             Calculate quota. [167.20(Threshold)]
             '''
-            return V(E.profile.nballots) // V(E.profile.nseats+1) + V(1)
+            ##  167.20(Threshold) 
+            ##  Threshold = (Total votes cast)/(Seats to be elected + 1) +1, 
+            ##  with any fractions disregarded. 
+            
+            return V(E.profile.nballots // (E.profile.nseats + 1) + 1)
         
         def findCertainLosers(surplus):
             '''
@@ -85,19 +88,19 @@ class Rule:
             
             #   copy the sorted candidates list, 
             #   making each entry a list
-            #   where each list has tied candidates, if any
+            #   where each list one or more candidates with the same vote
             #
             group = []
             sortedGroups = []
-            vote = V(0)
+            groupvote = V(0)
             for c in sortedCands:
-                if c.vote == vote:
+                if c.vote == groupvote:
                     group.append(c)  # add candidate to tied group
                 else:
                     if group:
-                        sortedGroups.append(group)
+                        sortedGroups.append(group) # save the previous group
                     group = [c]      # start a new group
-                    vote = c.vote
+                    groupvote = c.vote
             if group:
                 sortedGroups.append(group)
 
@@ -172,25 +175,27 @@ class Rule:
                 return None
             if len(tied) == 1:
                 return tied[0]
+            tied = sorted(tied, key=lambda c: c.order) # start with ballot order
             t = random.choice(tied)  # in the absence of the City Council...
-            s = 'Break tie (%s): [' % reason
-            s += ", ".join([c.name for c in tied])
-            s += '] -> %s' % t.name
-            R.log(s)
+            names = ", ".join([c.name for c in tied])
+            R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
 
 
+        #########################
+        #
+        #   COUNT THE ELECTION
+        #
+        #########################
+        
         R = E.R0  # current round
         C = R.C   # candidate state
         V = E.V   # arithmetic value class
+        random.seed(E.profile.nballots + E.profile.nseats) # initialize PRNG
 
-        #  Calculate quota
+        #  Calculate quota per 167.20(Threshold)
         #
         E.R0.quota = calcQuota(E)
-        
-        #  Initialize the random number generator
-        #
-        random.seed(E.profile.nballots + E.profile.nseats)
         
         while True:
         
@@ -198,9 +203,9 @@ class Rule:
             ##  a. The number of votes cast for each candidate for the current round 
             ##     must be counted.
             ##
-            for c in C.hopeful: c.vote = V(0)
+            for c in C.hopefulOrElected: c.vote = V(0)
             for b in [b for b in R.ballots if not b.exhausted]:
-                b.topCand.vote = b.topCand.vote + b.vote
+                b.topCand.vote += b.vote
 
             ##     If the number of candidates whose vote total is equal to or greater than
             ##     the threshold is equal to the number of seats to be filled, 
@@ -209,7 +214,7 @@ class Rule:
             ##
 
             for c in [c for c in C.hopeful if hasQuota(c)]:
-                C.elect(c, pending=True)  # elect with transfer pending
+                C.elect(c)
             if C.nElected >= E.profile.nseats:
                 break
 
@@ -243,7 +248,7 @@ class Rule:
             ##     Otherwise, the tabulation must continue as described in clause a.
             
             if certainLosers:
-                continue
+                continue  ## continue as described in clause a.
 
             ##  d. The transfer value of each vote cast for an elected candidate 
             ##     must be transferred to the next continuing candidate on that ballot. 
@@ -260,7 +265,7 @@ class Rule:
             ##     as described in clause e. 
             ##     Otherwise, the tabulation must continue as described in clause a.
 
-            #  find largest surplus
+            #  find candidate(s) with largest surplus
             #
             high_surplus = V(0)
             high_candidates = []
@@ -279,14 +284,11 @@ class Rule:
             ##     calculated to four (4) decimal places, ignoring any remainder. 
             
             if high_candidates:
-                if len(high_candidates) > 1:
-                    high_candidate = breakTie(high_candidates, 'largest surplus')
-                else:
-                    high_candidate = high_candidates[0]
+                # break tie if required
+                high_candidate = breakTie(high_candidates, 'largest surplus')
                 for b in [b for b in R.ballots if b.topCand == high_candidate]:
                     b.weight = (b.weight * high_surplus) // high_candidate.vote
                 R.transfer(high_candidate)
-                C.unpend(high_candidate)
                 high_candidate.vote = R.quota
                 continue  ## continue as described in clause a.
 
@@ -342,14 +344,12 @@ class Rule:
             ##     The result of the tie resolution must be recorded and reused in the event 
             ##     of a recount.
             
-            # Note: this will happen, if necessary, at the next defeat-lowest step above
+            # Note: this will happen, if necessary, at the next defeat-lowest step e above
 
         
         #  Election over.
         #  Defeat remaining hopeful candidates
         #
-        for c in C.pending.copy():
-            C.unpend(c)
         for c in C.hopeful.copy():
             C.defeat(c, msg='Defeat remaining')
     

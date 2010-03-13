@@ -14,7 +14,7 @@ class Rule:
     '''
     
     @staticmethod
-    def init(arithmetic=None, precision=6, guard=None):
+    def initialize(arithmetic=None, precision=6, guard=None):
         "initialize election parameters"
         
         #  set defaults

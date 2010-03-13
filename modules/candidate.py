@@ -93,7 +93,6 @@ class CandidateState(object):
         self._kf = dict()     # keep factor by candidate cid
         
         self.hopeful = set()
-        self.pending = set()
         self.elected = set()
         self.defeated = set()
 
@@ -101,6 +100,14 @@ class CandidateState(object):
     def withdrawn(self):
         "interface to E.withdrawn for consistency"
         return self.E.withdrawn
+
+    @property
+    def pending(self):
+        "set of elected candidates with transfer pending"
+        _pending = set()
+        for c in [b.topCand for b in self.E.R.ballots if not b.exhausted and b.topCand in self.elected]:
+            _pending.add(c)
+        return _pending
 
     def copy(self):
         "return a copy of ourself"
@@ -110,7 +117,6 @@ class CandidateState(object):
         C._kf = self._kf.copy()
         
         C.hopeful = self.hopeful.copy()
-        C.pending = self.pending.copy()
         C.elected = self.elected.copy()
         C.defeated = self.defeated.copy()
         return C
@@ -128,16 +134,11 @@ class CandidateState(object):
             msg = msg or 'Add hopeful'
             self.E.R.log("%s: %s" % (msg, c.name))
 
-    def elect(self, c, msg='Elect', pending=False):
+    def elect(self, c, msg='Elect'):
         "elect a candidate; optionally transfer-pending"
         self.hopeful.remove(c)
         self.elected.add(c)
-        if pending:
-            self.pending.add(c)
         self.E.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
-    def unpend(self, c):
-        "unpend a candidate"
-        self.pending.remove(c)
     def defeat(self, c, msg='Defeat'):
         "defeat a candidate"
         self.hopeful.remove(c)

@@ -14,7 +14,7 @@ class Rule:
     '''
     
     @staticmethod
-    def init(arithmetic=None, precision=6, guard=None):
+    def initialize(arithmetic=None, precision=6, guard=None):
         "initialize election parameters"
         
         #  set defaults
@@ -36,8 +36,7 @@ class Rule:
 
         #  create an election
         #
-        E = Election(Rule, precision, guard)
-        return E
+        return Election(Rule, precision, guard)
 
     @staticmethod
     def info(E):
@@ -133,10 +132,9 @@ class Rule:
             #  elect new winners
             #
             for c in [c for c in C.hopeful if hasQuota(E, c)]:
-                C.elect(c, pending=True)  # elect with transfer pending
+                C.elect(c)                # elect; transfer pending
                 if c.vote == R.quota:     # handle new winners with no surplus
                     R.transfer(c)
-                    C.unpend(c)
         
             #  find highest surplus
             #
@@ -158,7 +156,6 @@ class Rule:
                 for b in [b for b in R.ballots if b.topCand == high_candidate]:
                     b.weight = (b.weight * surplus) / high_vote
                 R.transfer(high_candidate)
-                C.unpend(high_candidate)
                 high_candidate.vote = R.quota
 
             #  if no surplus to transfer, eliminate a candidate
@@ -185,11 +182,9 @@ class Rule:
         #  Election over.
         #  Elect or defeat remaining hopeful candidates
         #
-        for c in C.pending:
-            C.unpend(c)
         for c in C.hopeful.copy():
             if C.nElected < E.profile.nseats:
-                C.elect(c, msg='Elect remaining', pending=False)
+                C.elect(c, msg='Elect remaining')
             else:
                 C.defeat(c, msg='Defeat remaining')
     
