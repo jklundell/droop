@@ -1,48 +1,42 @@
 #!/usr/bin/env python
-"Count election using Reference WIGM STV"
+'''
+Count election using Minneapolis MN STV rules
+
+Minneapolis Code of Ordinances, Title 8.5, Chapter 167
+http://library1.municode.com/default-test/DocView/11490/1/107/109
+as of 2009-10-02
+
+Minneapolis STV is a variation on WIGM,
+using fixed-point decimal arithmetic with four digits of precision.
+'''
 
 import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 from modules.election import Election
+import random
 
 class Rule:
     '''
-    Rule for counting Model WIGM elections
-    
-    Parameter: arithmetic type
+    Rule for counting Minneapolis MN STV
     '''
     
     @staticmethod
-    def init(arithmetic=None, precision=6, guard=None):
+    def init():
         "initialize election parameters"
         
-        #  set defaults
-        #
-        if arithmetic is None: arithmetic = 'fixed'
-        if arithmetic == 'rational':
-            precision = guard = None
-        elif arithmetic == 'qx':
-            if precision is None:
-                precision = 9
-                guard = None
-        elif arithmetic == 'fixed':
-            if precision is None: precision = 6
-            guard = 0
-        elif arithmetic == 'integer':
-            precision = guard = 0
-        else:
-            raise TypeError('unrecognized arithmetic type (%s)' % arithmetic)
-
         #  create an election
         #
-        e = Election(Rule, precision, guard)
+        #  arithmetic is fixed decimal, four digits of precision (167.20)
+        #  
+        #
+        e = Election(Rule, precision=4, guard=0)
         return e
 
     @staticmethod
     def info(e):
         "return an info string for the election report"
-        return "Model Weighted Inclusive Gregory Method (WIGM)"
+        return "Minneapolis MN STV"
 
     #########################
     #
@@ -57,52 +51,29 @@ class Rule:
         #
         def hasQuota(e, candidate):
             '''
-            Determine whether a candidate has a quota.
-            
-            If using exact arithmetic, then: vote > quota
-            Otherwise: vote >= quota, since quota has been rounded up
+            Determine whether a candidate has a quota. [167.70]
             '''
-            if e.V.exact:
-                return candidate.vote > e.R.quota
-            return candidate.vote >= e.R.quota
+            return candidate.vote >= R.quota
     
         def calcQuota(e):
             '''
-            Calculate quota.
-            
-            Round up if not using exact arithmetic.
+            Calculate quota. [167.20]
             '''
-            if e.V.exact:
-                return e.V(e.profile.nballots) / e.V(e.profile.nseats+1)
-            return e.V(e.profile.nballots) / e.V(e.profile.nseats+1) + e.V.epsilon
+            return V(e.profile.nballots) / V(e.profile.nseats+1) + V(1)
         
         def breakTie(e, tied, purpose=None, strong=True):
             '''
-            break a tie
+            break a tie by lot [167.70(1)(e)]
             
             purpose must be 'surplus' or 'elect' or 'defeat', 
             indicating whether the tie is being broken for the purpose 
             of choosing a surplus to transfer, a winner, 
             or a candidate to eliminate. 
-            
-            Set strong to False to indicate that weak tiebreaking should be
-            attempted, if relevant. Otherwise the tie is treated as strong.
-            
-            Not all tiebreaking methods will care about 'purpose' or 'strength',
-            but the requirement is enforced for consistency of interface.
             '''
             assert purpose in ('surplus', 'elect', 'defeat')
             if not tied:
                 return None
-            if len(tied) == 1:
-                return tied[0]
-            if len(tied) > 1:
-                t = tied[0]  # TODO: real tiebreaker
-                s = 'Break tie (%s): [' % purpose
-                s += ", ".join([c.name for c in tied])
-                s += '] -> %s' % t.name
-                e.R.log(s)
-                return t
+            return random.choice(tied)
 
         #  Calculate quota
         #
@@ -111,7 +82,11 @@ class Rule:
         C = R.C   # candidate state
         V = e.V   # arithmetic value class
         
-        #  Count votes in round 0 for reporting purposes
+        #  Initialize the random number generator
+        #
+        random.seed(e.profile.nballots + e.profile.nseats)
+        
+        #  Count votes in round 0 for reporting purposes only
         #
         for c in C.hopeful:
             c.vote = V(0)
@@ -123,12 +98,18 @@ class Rule:
             R = e.newRound()
             C = R.C   # candidate state
 
-            #  count votes for hopeful or pending-transfer candidates
+            #  count votes for hopeful candidates [167.70(1)(a)]
             #
             for c in C.hopefulOrPending:
                 c.vote = V(0)
             for b in [b for b in R.ballots if not b.exhausted]:
                 b.top.vote = b.top.vote + b.vote
+
+            #  calculate surplus [167.70(1)(b)
+            
+            #  defeat sure losers [167.70(1)(c)]
+            #     and next round if any
+
 
             #  elect new winners
             #
