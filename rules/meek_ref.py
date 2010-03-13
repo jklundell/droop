@@ -36,15 +36,15 @@ class Rule:
 
         #  create an election
         #
-        e = Election(Rule, precision, guard)
+        E = Election(Rule, precision, guard)
 
         #  set epsilon
         #
-        Rule.epsilon = e.V.epsilon
-        return e
+        Rule.epsilon = E.V.epsilon
+        return E
 
     @staticmethod
-    def info(e):
+    def info(E):
         "return an info string for the election report"
         return "Model Meek"
 
@@ -54,41 +54,37 @@ class Rule:
     #
     #########################
     @staticmethod
-    def count(e):
+    def count(E):
         "count the election"
         
         #  local support functions
         #
-        def seatsLeftToFill():
-            "number of seats not yet filled"
-            return e.profile.nseats - C.nElected
-
         def countComplete():
             "test for end of count"
-            return C.nHopeful <= seatsLeftToFill() or seatsLeftToFill() <= 0
+            return C.nHopeful <= E.seatsLeftToFill() or E.seatsLeftToFill() <= 0
 
-        def hasQuota(e, candidate):
+        def hasQuota(E, candidate):
             '''
             Determine whether a candidate has a quota (ie, is elected).
             
             If using exact arithmetic, then: vote > quota
             Otherwise: vote >= quota, since quota has been rounded up
             '''
-            if e.V.exact:
-                return candidate.vote > e.R.quota
-            return candidate.vote >= e.R.quota
+            if E.V.exact:
+                return candidate.vote > E.R.quota
+            return candidate.vote >= E.R.quota
     
-        def calcQuota(e):
+        def calcQuota(E):
             '''
             Calculate quota.
             
             Round up if not using exact arithmetic.
             '''
-            if e.V.exact:
-                return e.R.votes / e.V(e.profile.nseats+1)
-            return e.R.votes / e.V(e.profile.nseats+1) + e.V.epsilon
+            if E.V.exact:
+                return E.R.votes / E.V(E.profile.nseats+1)
+            return E.R.votes / E.V(E.profile.nseats+1) + E.V.epsilon
     
-        def breakTie(e, tied, purpose=None, strong=True):
+        def breakTie(E, tied, purpose=None, strong=True):
             '''
             break a tie
             
@@ -113,7 +109,7 @@ class Rule:
                 s = 'Break tie (%s): [' % purpose
                 s += ", ".join([c.name for c in tied])
                 s += '] -> %s' % t.name
-                e.R.log(s)
+                E.R.log(s)
                 return t
 
         def batchDefeat(surplus):
@@ -154,7 +150,7 @@ class Rule:
             #   
             vote = V(0)
             batch = []
-            maxDefeat = C.nHopeful - seatsLeftToFill()
+            maxDefeat = C.nHopeful - E.seatsLeftToFill()
             for g in range(len(sortedGroups) - 1):
                 group = sortedGroups[g]
                 if (len(batch) + len(group)) > maxDefeat:
@@ -191,7 +187,7 @@ class Rule:
                 for b in R.ballots:
                     b.weight = V(1)
                     b.residual = V(b.count)
-                    for c in [e.candidateByCid(cid) for cid in b.ranks]:
+                    for c in [E.candidateByCid(cid) for cid in b.ranks]:
                         keep = V.mul(b.weight, c.kf, round='up')  # Hill variation
                         b.weight -= keep  # Hill variation
                         c.vote += keep * b.count  # always exact (b.count is an integer)
@@ -205,11 +201,11 @@ class Rule:
 
                 #  D.3. update quota
                 #
-                R.quota = calcQuota(e)
+                R.quota = calcQuota(E)
                 
                 #  D.4. find winners
                 #
-                for c in [c for c in C.hopeful if hasQuota(e, c)]:
+                for c in [c for c in C.hopeful if hasQuota(E, c)]:
                     C.elect(c)
                     iStatus = IS_elected
                     
@@ -254,12 +250,12 @@ class Rule:
         #   Initialize Count
         #
         #########################
-        V = e.V
-        e.R0.votes = V(e.profile.nballots)
-        e.R0.quota = calcQuota(e)
-        R = e.R0
+        V = E.V
+        E.R0.votes = V(E.profile.nballots)
+        E.R0.quota = calcQuota(E)
+        R = E.R0
         C = R.C   # candidate state
-        for c in e.withdrawn:
+        for c in E.withdrawn:
             c.kf = V(0)
         for c in C.hopeful:
             c.kf = V(1)    # initialize keep factors
@@ -272,7 +268,7 @@ class Rule:
 
             #  B. next round
             #
-            R = e.newRound()
+            R = E.newRound()
             if V.exact:
                 sys.stdout.write('%d' % R.n)
                 sys.stdout.flush()
@@ -312,7 +308,7 @@ class Rule:
             #  defeat candidate with lowest vote
             #
             if low_candidates:
-                low_candidate = breakTie(e, low_candidates, 'defeat')
+                low_candidate = breakTie(E, low_candidates, 'defeat')
                 C.defeat(low_candidate, msg='Defeat (surplus<epsilon)')
                 low_candidate.kf = V(0)
                 low_candidate.vote = V(0)
@@ -320,7 +316,7 @@ class Rule:
         #  Elect or defeat remaining hopeful candidates
         #
         for c in C.hopeful.copy():
-            if C.nElected < e.profile.nseats:
+            if C.nElected < E.profile.nseats:
                 C.elect(c, msg='Elect remaining')
             else:
                 C.defeat(c, msg='Defeat remaining')

@@ -54,12 +54,13 @@ class Election(object):
             s += round.dump(self)
         return s
 
-    def addCandidate(self, cid, cname, isWithdrawn):
+    def newCandidate(self, cid, cname, order, isWithdrawn):
         "add a candidate to the election"
         c = Candidate(self, cid)
         assert cid not in self.candidates, 'duplicate candidate'
         self.candidates[cid] = c
         self.cName[cid] = cname
+        self.cOrder = order  # ballot order
         self.R0.C.addCandidate(c, msg=None, isWithdrawn=isWithdrawn)
         return c
 
@@ -67,18 +68,22 @@ class Election(object):
         "look up candidate by cid"
         return self.candidates[cid]
 
+    def seatsLeftToFill():
+        "number of seats not yet filled"
+        return E.profile.nseats - self.R.C.nElected
+
     class Round(object):
         "one election round"
         
-        def __init__(self, e):
+        def __init__(self, E):
             "create a round"
-            if not e.R0:
+            if not E.R0:
                 #
                 #  create round 0: the initial state
                 #  quota & ballots are filled in later
                 #
                 self.n = 0
-                self.C = CandidateState(e)
+                self.C = CandidateState(E)
                 self.quota = None
                 self.ballots = None
             else:
@@ -86,15 +91,15 @@ class Election(object):
                 #  subsequent rounds are copies,
                 #  so we can look back at previous rounds
                 #
-                #  e.R and e.C are the current round and candidate states
+                #  E.R and E.C are the current round and candidate states
                 #
-                previous = e.R
+                previous = E.R
                 self.n = previous.n + 1
                 self.C = previous.C.copy()
                 self.quota = previous.quota
                 self.ballots = [b.copy() for b in previous.ballots]
-            self.residual = e.V(0)
-            self.vote = e.V(0)
+            self.residual = E.V(0)
+            self.vote = E.V(0)
             self._log = [] # list of log messages
     
         def advance(self, c):
@@ -106,9 +111,9 @@ class Election(object):
             "log a message"
             self._log.append(msg)
             
-        def report(self, e):
+        def report(self, E):
             "report a round"
-            saveR, e.R = e.R, self # provide reporting context
+            saveR, E.R = E.R, self # provide reporting context
             s = ''
             for line in self._log:
                 s += '\t%s\n' % line
@@ -117,23 +122,23 @@ class Election(object):
             s += '\tHopeful: %s\n' % (" ".join(sorted([c.name for c in self.C.hopeful])) or 'None')
             s += '\tElected: %s\n' % (" ".join(sorted([c.name for c in self.C.elected])) or 'None')
             s += '\tDefeated: %s\n' % (" ".join(sorted([c.name for c in self.C.defeated])) or 'None')
-            nontransferable = e.V(0)
+            nontransferable = E.V(0)
             for b in [b for b in self.ballots if b.exhausted]:
                 nontransferable = nontransferable + b.vote
             if nontransferable:
                 s += '\tNontransferable votes: %s\n' % nontransferable
-            if e.R.n == 0 or e.R.prior.quota != e.R.quota:
-                s += '\tQuota: %s\n' % e.R.quota
-            e.R = saveR
+            if E.R.n == 0 or E.R.prior.quota != E.R.quota:
+                s += '\tQuota: %s\n' % E.R.quota
+            E.R = saveR
             return s
             
-        def dump(self, e):
+        def dump(self, E):
             "dump a round"
 
-            saveR, e.R = e.R, self # provide reporting context
+            saveR, E.R = E.R, self # provide reporting context
             s = ''
             
-            candidates = sorted([e.candidates[k] for k in e.candidates.keys()], key=lambda c:int(c.cid))
+            candidates = sorted([E.candidates[k] for k in E.candidates.keys()], key=lambda c:int(c.cid))
             #  if round 0, include a header line
             if self.n == 0:
                 h = ['R', 'Q', 'residual']
@@ -161,5 +166,5 @@ class Election(object):
                 
             r = [str(item) for item in r]
             s += ','.join(r) + '\n'
-            e.R = saveR
+            E.R = saveR
             return s

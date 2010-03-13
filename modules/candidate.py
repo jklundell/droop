@@ -8,9 +8,9 @@ CandidateState contains the per-round candidate state.
 class Candidate(object):
     "a candidate"
 
-    def __init__(self, e, cid):
+    def __init__(self, E, cid):
         "new candidate"
-        self.e = e
+        self.E = E
         self.cid = cid  # candidate id
 
     #  test state of this candidate
@@ -18,48 +18,48 @@ class Candidate(object):
     @property
     def isHopeful(self):
         "True iff hopeful candidate"
-        return self in self.e.R.C.hopeful
+        return self in self.E.R.C.hopeful
     @property
     def isPending(self):
         "True iff transfer-pending candidate"
-        return self in self.e.R.C.pending
+        return self in self.E.R.C.pending
     @property
     def isElected(self):
         "True iff elected candidate"
-        return self in self.e.R.C.elected
+        return self in self.E.R.C.elected
     @property
     def isDefeated(self):
         "True iff defeated candidate"
-        return self in self.e.R.C.defeated
+        return self in self.E.R.C.defeated
     @property
     def isWithdrawn(self):
         "True iff withdrawn candidate"
-        return self in self.e.withdrawn
+        return self in self.E.withdrawn
         
     @property
     def name(self):
         "candidate name"
-        return self.e.cName[self.cid]
+        return self.E.cName[self.cid]
 
     #  get/set vote total of this candidate
     #
     def getvote(self):
        "get current vote for candidate"
-       return self.e.R.C._vote[self.cid]
+       return self.E.R.C._vote[self.cid]
     def setvote(self, newvote):
         "set vote for candidate"
-        self.e.R.C._vote[self.cid] = newvote
+        self.E.R.C._vote[self.cid] = newvote
     vote = property(getvote, setvote)
     
     #  get/set keep factor of this candidate
     #
     def getkf(self):
        "get current keep factor for candidate"
-       if not self.e.R.C._kf: return None
-       return self.e.R.C._kf[self.cid]
+       if not self.E.R.C._kf: return None
+       return self.E.R.C._kf[self.cid]
     def setkf(self, newkf):
         "set keep factor for candidate"
-        self.e.R.C._kf[self.cid] = newkf
+        self.E.R.C._kf[self.cid] = newkf
     kf = property(getkf, setkf)
 
     def __str__(self):
@@ -77,10 +77,10 @@ class Candidate(object):
 class CandidateState(object):
     "candidate state for one round"
 
-    def __init__(self, e):
+    def __init__(self, E):
         "create candidate-state object"
         
-        self.e = e
+        self.E = E
 
         self._vote = dict()   # votes by candidate cid
         self._kf = dict()     # keep factor by candidate cid
@@ -92,12 +92,12 @@ class CandidateState(object):
 
     @property
     def withdrawn(self):
-        "interface to e.withdrawn for consistency"
-        return self.e.withdrawn
+        "interface to E.withdrawn for consistency"
+        return self.E.withdrawn
 
     def copy(self):
         "return a copy of ourself"
-        C = CandidateState(self.e)
+        C = CandidateState(self.E)
         
         C._vote = self._vote.copy()
         C._kf = self._kf.copy()
@@ -108,18 +108,18 @@ class CandidateState(object):
         C.defeated = self.defeated.copy()
         return C
 
-    #  change state of single candidate
+    #  add a candidate to the election
     #
     def addCandidate(self, c, msg=None, isWithdrawn=False):
         "add a candidate"
         if isWithdrawn:
-            self.e.withdrawn.add(c)
+            self.E.withdrawn.add(c)
             msg = msg or 'Add withdrawn'
-            self.e.R.log("%s: %s" % (msg, c.name))
+            self.E.R.log("%s: %s" % (msg, c.name))
         else:
             self.hopeful.add(c)
             msg = msg or 'Add hopeful'
-            self.e.R.log("%s: %s" % (msg, c.name))
+            self.E.R.log("%s: %s" % (msg, c.name))
 
     def elect(self, c, msg='Elect', pending=False):
         "elect a candidate; optionally transfer-pending"
@@ -127,7 +127,7 @@ class CandidateState(object):
         self.elected.add(c)
         if pending:
             self.pending.add(c)
-        self.e.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
+        self.E.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
     def unpend(self, c):
         "unpend a candidate"
         self.pending.remove(c)
@@ -135,36 +135,36 @@ class CandidateState(object):
         "defeat a candidate"
         self.hopeful.remove(c)
         self.defeated.add(c)
-        self.e.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
+        self.E.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
 
     def vote(self, c, r=None):
         "return vote for candidate in round r (default=current)"
         if r is None: return self._vote[c.cid]
-        return self.e.rounds[r].C._vote[c.cid]
+        return self.E.rounds[r].C._vote[c.cid]
 
     def isHopeful(self, c, r=None):
         "True iff candidate is hopeful in specifed round (default=current)"
         if r is None: return c in self.hopeful
-        return c in self.e.rounds[r].C.hopeful
+        return c in self.E.rounds[r].C.hopeful
 
     def isPending(self, c, r=None):
         "True iff candidate is transfer-pending in specifed round (default=current)"
         if r is None: return c in self.pending
-        return c in self.e.rounds[r].C.pending
+        return c in self.E.rounds[r].C.pending
 
     def isElected(self, c, r=None):
         "True iff candidate is elected in specifed round (default=current)"
         if r is None: return c in self.elected
-        return c in self.e.rounds[r].C.elected
+        return c in self.E.rounds[r].C.elected
 
     def isDefeated(self, c, r=None):
         "True iff candidate is defeated in specifed round (default=current)"
         if r is None: return c in self.defeated
-        return c in self.e.rounds[r].C.defeated
+        return c in self.E.rounds[r].C.defeated
 
     def isWithdrawn(self, c):
         "True iff candidate is withdraw in specifed round (default=current)"
-        return c in self.e.withdrawn
+        return c in self.E.withdrawn
 
     @property
     def hopefulOrElected(self):
@@ -201,4 +201,4 @@ class CandidateState(object):
     @property
     def nWithdrawn(self):
         "return count of withdrawn candidates"
-        return len(self.e.withdrawn)
+        return len(self.E.withdrawn)

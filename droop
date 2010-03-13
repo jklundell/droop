@@ -121,20 +121,20 @@ else:
 
 def doElection(reps=1):
     "run election with repeat count for profiling"
-    e = Rule.init(arithmetic=arithmetic, precision=prec, guard=guard)
-    profile = Profile(e, None)
+    E = Rule.init(arithmetic=arithmetic, precision=prec, guard=guard)
+    profile = Profile(E, None)
     if not profile.bltPath(bltPath):
         sys.exit(1)  # bad ballot file
     for i in xrange(reps):
-        Rule.count(e)    # repeat for profiling
-    return e
+        Rule.count(E)    # repeat for profiling
+    return E
 
 if doProfile:
-    cProfile.run('e = doElection(reps)', profilefile)
+    cProfile.run('E = doElection(reps)', profilefile)
 else:
-    e = doElection()
+    E = doElection()
 
-print e.report()    # election report
+print E.report()    # election report
 
 if doProfile:
     p = pstats.Stats(profilefile)

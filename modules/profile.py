@@ -9,23 +9,23 @@ import sys
 class Ballot(object):
     "one ballot"
     
-    e = None
+    E = None
 
     def __init__(self, election, count=1, ranking=None):
         "create a ballot"
-        self.e = election
+        self.E = election
         self.count = count            # number of ballots like this
-        self.weight = self.e.V(1)     # initial weight
+        self.weight = self.E.V(1)     # initial weight
         self.ranks = []
         self.index = 0 # current ranking
-        self.residual = self.e.V(0)
+        self.residual = self.E.V(0)
         if ranking:
             for cid in ranking:
                 self.addRank(cid)
 
     def copy(self):
         "return a copy of this ballot"
-        b = Ballot(self.e, self.count, self.ranks)
+        b = Ballot(self.E, self.count, self.ranks)
         b.weight = self.weight
         b.index = self.index
         return b
@@ -51,7 +51,7 @@ class Ballot(object):
         "return top candidate, or None if exhausted"
         if self.exhausted:
             return None
-        return self.e.candidateByCid(self.ranks[self.index])
+        return self.E.candidateByCid(self.ranks[self.index])
     
     @property
     def vote(self):
@@ -63,26 +63,26 @@ class Profile(object):
     
     __init = False
     
-    def __init__(self, e, title, nseats=None):
+    def __init__(self, E, title, nseats=None):
         "initialize profile"
         assert not Profile.__init, 'profile already initialized'
         Profile.__init = True
         assert not nseats or nseats > 1, 'two or more seats are required'
-        self.e = e
-        e.profile = self
+        self.E = E
+        E.profile = self
         self.title = title
         self.nseats = nseats
         self.nballots = 0
         self.ballots = []
         
-    def validate(self, e):
+    def validate(self, E):
         "check for internal consistency"
-        e.R0.ballots = self.ballots
-        if not self.nseats or self.nseats > e.R0.C.nHopeful:
-            print 'too few candidates (%d seats; %d candidates)' % (self.nseats, e.R0.C.nHopeful)
+        E.R0.ballots = self.ballots
+        if not self.nseats or self.nseats > E.R0.C.nHopeful:
+            print 'too few candidates (%d seats; %d candidates)' % (self.nseats, E.R0.C.nHopeful)
             return False
-        if self.nballots < e.R0.C.nHopeful:
-            print 'too few ballots (%d ballots; %d candidates)' % (self.nballots, e.R0.C.nHopeful)
+        if self.nballots < E.R0.C.nHopeful:
+            print 'too few ballots (%d ballots; %d candidates)' % (self.nballots, E.R0.C.nHopeful)
             return False
         n = 0
         for ballot in self.ballots:
@@ -156,7 +156,7 @@ class Profile(object):
             while (rank):
                 ranking.append(str(rank))
                 rank = int(blt.next())
-            self.addBallot(Ballot(self.e, count=count, ranking=ranking))
+            self.addBallot(Ballot(self.E, count=count, ranking=ranking))
             count = int(blt.next())
             
         #  candidates
@@ -184,8 +184,8 @@ class Profile(object):
         cid = 0
         for cname in candidates:
             cid += 1
-            self.e.addCandidate(cid=str(cid), cname=cname, isWithdrawn=(cid in withdrawn))
-        return self.validate(self.e)
+            self.E.newCandidate(cid=str(cid), cname=cname, order=cid, isWithdrawn=(cid in withdrawn))
+        return self.validate(self.E)
 
     def bltBlob(self, blob):
         "parse a blt blob into tokens, skipping /* comments */"

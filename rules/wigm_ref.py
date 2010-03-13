@@ -36,11 +36,11 @@ class Rule:
 
         #  create an election
         #
-        e = Election(Rule, precision, guard)
-        return e
+        E = Election(Rule, precision, guard)
+        return E
 
     @staticmethod
-    def info(e):
+    def info(E):
         "return an info string for the election report"
         return "Model Weighted Inclusive Gregory Method (WIGM)"
 
@@ -50,33 +50,33 @@ class Rule:
     #
     #########################
     @staticmethod
-    def count(e):
+    def count(E):
         "count the election"
         
         #  local support functions
         #
-        def hasQuota(e, candidate):
+        def hasQuota(E, candidate):
             '''
             Determine whether a candidate has a quota.
             
             If using exact arithmetic, then: vote > quota
             Otherwise: vote >= quota, since quota has been rounded up
             '''
-            if e.V.exact:
-                return candidate.vote > e.R.quota
-            return candidate.vote >= e.R.quota
+            if E.V.exact:
+                return candidate.vote > E.R.quota
+            return candidate.vote >= E.R.quota
     
-        def calcQuota(e):
+        def calcQuota(E):
             '''
             Calculate quota.
             
             Round up if not using exact arithmetic.
             '''
-            if e.V.exact:
-                return e.V(e.profile.nballots) / e.V(e.profile.nseats+1)
-            return e.V(e.profile.nballots) / e.V(e.profile.nseats+1) + e.V.epsilon
+            if E.V.exact:
+                return E.V(E.profile.nballots) / E.V(E.profile.nseats+1)
+            return E.V(E.profile.nballots) / E.V(E.profile.nseats+1) + E.V.epsilon
         
-        def breakTie(e, tied, purpose=None, strong=True):
+        def breakTie(E, tied, purpose=None, strong=True):
             '''
             break a tie
             
@@ -101,15 +101,15 @@ class Rule:
                 s = 'Break tie (%s): [' % purpose
                 s += ", ".join([c.name for c in tied])
                 s += '] -> %s' % t.name
-                e.R.log(s)
+                E.R.log(s)
                 return t
 
         #  Calculate quota
         #
-        e.R0.quota = calcQuota(e)
-        R = e.R0  # current round
+        E.R0.quota = calcQuota(E)
+        R = E.R0  # current round
         C = R.C   # candidate state
-        V = e.V   # arithmetic value class
+        V = E.V   # arithmetic value class
         
         #  Count votes in round 0 for reporting purposes
         #
@@ -118,9 +118,9 @@ class Rule:
         for b in [b for b in R.ballots if not b.exhausted]:
             b.top.vote = b.top.vote + b.vote
 
-        while C.nHopefulOrElected > e.profile.nseats and \
-               C.nElected < e.profile.nseats:
-            R = e.newRound()
+        while C.nHopefulOrElected > E.profile.nseats and \
+               C.nElected < E.profile.nseats:
+            R = E.newRound()
             C = R.C   # candidate state
 
             #  count votes for hopeful or pending-transfer candidates
@@ -132,7 +132,7 @@ class Rule:
 
             #  elect new winners
             #
-            for c in [c for c in C.hopeful if hasQuota(e, c)]:
+            for c in [c for c in C.hopeful if hasQuota(E, c)]:
                 C.elect(c, pending=True)  # elect with transfer pending
                 if c.vote == R.quota:     # handle new winners with no surplus
                     R.advance(c)
@@ -153,7 +153,7 @@ class Rule:
             #
             if high_vote > R.quota:
                 # transfer surplus
-                high_candidate = breakTie(e, high_candidates, 'surplus')
+                high_candidate = breakTie(E, high_candidates, 'surplus')
                 surplus = high_vote - R.quota
                 for b in [b for b in R.ballots if b.top == high_candidate]:
                     b.weight = (b.weight * surplus) / high_vote
@@ -178,7 +178,7 @@ class Rule:
                 #  defeat candidate with lowest vote
                 #
                 if low_candidates:
-                    low_candidate = breakTie(e, low_candidates, 'defeat')
+                    low_candidate = breakTie(E, low_candidates, 'defeat')
                     C.defeat(low_candidate)
                     R.advance(low_candidate)
         
@@ -188,7 +188,7 @@ class Rule:
         for c in C.pending:
             C.unpend(c)
         for c in C.hopeful.copy():
-            if C.nElected < e.profile.nseats:
+            if C.nElected < E.profile.nseats:
                 C.elect(c, msg='Elect remaining', pending=False)
             else:
                 C.defeat(c, msg='Defeat remaining')
