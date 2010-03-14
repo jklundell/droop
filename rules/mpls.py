@@ -43,11 +43,11 @@ class Rule:
     '''
     Rule for counting Minneapolis MN STV
     '''
-    
+
     @staticmethod
     def initialize(options=dict()):
         "initialize election parameters"
-        
+
         #  create an election
         #
         #  arithmetic is fixed decimal, four digits of precision
@@ -73,7 +73,7 @@ class Rule:
     @staticmethod
     def count(E):
         "count the election with Minneapolis STV rules"
-        
+
         #  local support functions
         #
         def hasQuota(candidate):
@@ -81,7 +81,7 @@ class Rule:
             Determine whether a candidate has a quota. [167.70(1(a,d))]
             '''
             return candidate.vote >= R.quota
-    
+
         def calcQuota(E):
             '''
             Calculate quota. [167.20(Threshold)]
@@ -89,9 +89,9 @@ class Rule:
             ##  167.20(Threshold) 
             ##  Threshold = (Total votes cast)/(Seats to be elected + 1) +1, 
             ##  with any fractions disregarded. 
-            
+
             return V(E.profile.nballots // (E.profile.nseats + 1) + 1)
-        
+
         def findCertainLosers(surplus, fixSpec=True):
             '''
             Find the group of candidates that cannot be elected per 167.20
@@ -104,11 +104,11 @@ class Rule:
             ##             with the next higher current vote total; or
             ##         (2) The candidate has a lower current vote total than a candidate 
             ##             who is described by (1).
-            
+
             #  sortedCands = candidates sorted by vote
             #
             sortedCands = sorted(C.hopeful, key=lambda c: c.vote)
-            
+
             #   copy the sorted candidates list, 
             #   making each entry a list
             #   where each list one or more candidates with the same vote
@@ -173,7 +173,7 @@ class Rule:
                     break
                 losers += group
             return losers
-            
+
         def breakTie(tied, reason=None):
             '''
             break a tie by lot [167.70(1)(e)]
@@ -191,7 +191,7 @@ class Rule:
             ##     the casting of lots in the presence of the City Council 
             ##     at such time and in such manner as the City Council shall direct. 
             ##     (As amended 83-Or-139, Sec 1, 6-10-83; Charter Amend. No. 161, Sec 6, ref. of 11-7-06)
-            
+
             if not tied:
                 return None
             if len(tied) == 1:
@@ -208,7 +208,7 @@ class Rule:
         #   COUNT THE ELECTION
         #
         #########################
-        
+
         R = E.R0  # current round
         C = R.C   # candidate state
         V = E.V   # arithmetic value class
@@ -217,9 +217,9 @@ class Rule:
         #  Calculate quota per 167.20(Threshold)
         #
         E.R0.quota = calcQuota(E)
-        
+
         while True:
-        
+
             ##  167.70(1)(a)
             ##  a. The number of votes cast for each candidate for the current round 
             ##     must be counted.
@@ -258,7 +258,7 @@ class Rule:
             ##     must be defeated simultaneously. 
             ##     Votes for the defeated candidates must be transferred to each ballot's 
             ##     next-ranked continuing candidate.
-            
+
             #  fixSpec=True instructs the function to use the correct definition
             #  of mathematical certainty of defeat instead of the erroneous definition
             #  in 167.20.
@@ -271,7 +271,7 @@ class Rule:
             ##     If no candidate can be defeated mathematically, the tabulation must continue
             ##     as described in clause d. 
             ##     Otherwise, the tabulation must continue as described in clause a.
-            
+
             if certainLosers:
                 continue  ## continue as described in clause a.
 
@@ -300,14 +300,14 @@ class Rule:
                 elif c.surplus > high_surplus:
                     high_surplus = c.surplus
                     high_candidates = [c]
-            
+
             # transfer largest surplus
             #
             ## 167.20(Surplus fraction of a vote)
             ##     Surplus fraction of a vote = 
             ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate), 
             ##     calculated to four (4) decimal places, ignoring any remainder. 
-            
+
             if high_candidates:
                 # break tie if required
                 high_candidate = breakTie(high_candidates, 'largest surplus')
@@ -349,7 +349,7 @@ class Rule:
             ##     the threshold is equal to the number of seats to be filled, 
             ##     or until the number of continuing candidates is equal to the number of offices 
             ##     yet to be elected. 
-            
+
             if E.seatsLeftToFill() <= 0:
                 break
 
@@ -362,20 +362,20 @@ class Rule:
                 for c in C.hopeful:
                     C.elect(c, 'Elect remaining candidates')
                 break
-        
+
             ##     In the case of a tie between two (2) continuing candidates, 
             ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2, 
             ##     Section 12, and the candidate chosen by lot must be defeated. 
             ##     The result of the tie resolution must be recorded and reused in the event 
             ##     of a recount.
-            
+
             # Note: this will happen, if necessary, at the next defeat-lowest step e above
 
-        
+
         #  Election over.
         #  Defeat remaining hopeful candidates
         #
         for c in C.hopeful.copy():
             C.defeat(c, msg='Defeat remaining')
-    
+
 

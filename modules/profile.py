@@ -16,12 +16,20 @@ class Ballot(object):
         self.E = election
         self.count = count            # number of ballots like this
         self.weight = self.E.V(1)     # initial weight
-        self.ranks = []
-        self.index = 0 # current ranking
+        self.index = 0                # current ranking
         self.residual = self.E.V(0)
-        if ranking:
-            for cid in ranking:
-                self.addRank(cid)
+        #
+        #  fast copy of ranking -> self.ranks with duplicate detection
+        #  http://www.peterbe.com/plog/uniqifiers-benchmark (see f11)
+        #
+        def dedupe(cids):
+            seen = set()
+            for cid in cids:
+                if cid in seen:
+                    raise ValueError('duplicate ranking: %s' % cid)
+                seen.add(cid)
+                yield cid
+        self.ranks = list(dedupe(ranking)) if ranking else list()
 
     def copy(self):
         "return a copy of this ballot"
@@ -29,11 +37,6 @@ class Ballot(object):
         b.weight = self.weight
         b.index = self.index
         return b
-
-    def addRank(self, cid):
-       "add a candidate to the ranking"
-       assert cid not in self.ranks, 'duplicate ranking: %s' % cid
-       self.ranks.append(cid)
 
     def transfer(self, hopeful):
         "advance index to next candidate on this ballot; return True if exists"
