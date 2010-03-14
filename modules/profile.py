@@ -29,11 +29,12 @@ class Ballot(object):
                     raise ValueError('duplicate ranking: %s' % cid)
                 seen.add(cid)
                 yield cid
-        self.ranks = list(dedupe(ranking)) if ranking else list()
+        self.ranks = tuple(dedupe(ranking)) if ranking else list()
 
     def copy(self):
         "return a copy of this ballot"
-        b = Ballot(self.E, self.count, self.ranks)
+        b = Ballot(self.E, self.count, None)
+        b.ranks = self.ranks    # share the immutable tuple of ranks
         b.weight = self.weight
         b.index = self.index
         return b
