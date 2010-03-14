@@ -19,14 +19,14 @@ class Election(object):
     candidates = dict()
     withdrawn = set()
     
-    def __init__(self, rule, precision=None, guard=None):
+    def __init__(self, rule, options=dict()):
         "create an election"
 
         self.rule = rule
         #
         #  initialize arithmetic
         #
-        self.V = Value.ArithmeticClass(precision, guard)
+        self.V = Value.ArithmeticClass(options)
         self.rounds = [self.Round(self)]
         self.R0 = self.R = self.rounds[0]
 
@@ -40,8 +40,8 @@ class Election(object):
     def report(self):
         "report election by round"
         s = "Election: %s\n\n" % self.profile.title
-        s += "\tRule: %s\n" % self.rule.info(self)
-        s += "\tArithmetic: %s\n\n" % self.V.info()
+        s += "\tRule: %s\n" % self.rule.info
+        s += "\tArithmetic: %s\n\n" % self.V.info
         s += self.V.report()
         for round in self.rounds:
             s += "Round %d:\n" % round.n

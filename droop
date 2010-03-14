@@ -4,7 +4,6 @@
 import sys, os, getopt
 path = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
 if path not in sys.path: sys.path.insert(0, path)
-from modules.profile import Profile
 
 #######################################################################
 #
@@ -123,7 +122,7 @@ else:
 
 def doElection(reps=1):
     "run election with repeat count for profiling"
-    E = Rule.initialize(arithmetic=arithmetic, precision=prec, guard=guard)
+    E = Rule.initialize(options=dict(arithmetic=arithmetic, precision=prec, guard=guard))
     profile = Profile(E, None)
     if not profile.bltPath(bltPath):
         sys.exit(1)  # bad ballot file
@@ -132,6 +131,7 @@ def doElection(reps=1):
     return E
 
 if doProfile:
+    from modules.profile import Profile
     cProfile.run('E = doElection(reps)', profilefile)
 else:
     E = doElection()

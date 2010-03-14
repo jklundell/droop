@@ -45,7 +45,7 @@ class Rule:
     '''
     
     @staticmethod
-    def initialize(arithmetic, precision, guard):
+    def initialize(options=dict()):
         "initialize election parameters"
         
         #  create an election
@@ -53,9 +53,12 @@ class Rule:
         #  arithmetic is fixed decimal, four digits of precision
         #  [167.20(Surplus fraction of a vote, Transfer value)]
         #
-        #  (ignore arithmetic parameters)
+        #  (override arithmetic parameters)
         #
-        return Election(Rule, precision=4, guard=0)
+        options['arithmetic'] = 'fixed'
+        options['precision'] = 4
+        options['guard'] = 0
+        return Election(Rule, options)
 
     @staticmethod
     def info(E):

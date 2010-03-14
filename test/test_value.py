@@ -15,23 +15,19 @@ class ValueTest(unittest.TestCase):
     
     def testValueInitRational(self):
         "class Rational if precision & guard are None"
-        self.assertEqual(V.ArithmeticClass(None, None), R)
+        self.assertEqual(V.ArithmeticClass(dict(arithmetic='rational')), R)
 
     def testValueInitRationalDefault(self):
-        "default class Rational"
-        self.assertEqual(V.ArithmeticClass(), R)
-
-    def testValueInitFixed(self):
-        "Fixed if there's a precision"
-        self.assertEqual(V.ArithmeticClass(1), F)
+        "default class Fixed"
+        self.assertEqual(V.ArithmeticClass(), F)
 
     def testBadP1(self):
         "precision must be an int"
-        self.assertRaises(TypeError, V.ArithmeticClass, 5.5)
+        self.assertRaises(TypeError, V.ArithmeticClass, dict(precision=5.5))
 
     def testBadP2(self):
         "precision must be >= 0"
-        self.assertRaises(TypeError, V.ArithmeticClass, -1)
+        self.assertRaises(TypeError, V.ArithmeticClass, dict(precision=-1))
 
     def testBadG1(self):
         "guard must be an int"
@@ -46,10 +42,11 @@ class ValueTestFixed6(unittest.TestCase):
     g = 0
     def setUp(self):
         "initialize fixed point six places"
-        V.ArithmeticClass(self.p, self.g)
+        V.ArithmeticClass(options=dict(arithmetic='fixed', precision=self.p, guard=self.g))
         
     def testFixed6(self):
         "simple assertions"
+        self.assertEqual(F.name, 'fixed')               # Fixed.name
         self.assertEqual(F.exact, False)                # Fixed.exact
         self.assertEqual(F._Fixed__precision, self.p)   # Fixed.__precision
         self.assertEqual(F._Fixed__scalep, 10**self.p)  # Fixed.__scalep
@@ -64,7 +61,7 @@ class ValueTestRounding(unittest.TestCase):
     g = 0
     def setUp(self):
         "initialize fixed class"
-        V.ArithmeticClass(self.p, self.g)
+        V.ArithmeticClass(options=dict(arithmetic='fixed', precision=self.p, guard=self.g))
         
     def testRoundFloor(self):
         "default rounding is truncation/floor"
@@ -99,7 +96,7 @@ class ValueTestQX9(unittest.TestCase):
     g = p
     def setUp(self):
         "initialize quasi-exact 9.None s/b 9.9"
-        V.ArithmeticClass(self.p)
+        V.ArithmeticClass(options=dict(precision=self.p))
         
     def testExact(self):
         "quasi-exact is exact"

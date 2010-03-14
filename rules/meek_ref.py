@@ -13,29 +13,17 @@ class Rule:
     '''
     
     @staticmethod
-    def initialize(arithmetic=None, precision=6, guard=None):
+    def initialize(options=dict()):
         "initialize election parameters"
         
         #  set defaults
         #
-        if arithmetic is None: arithmetic = 'fixed'
-        if arithmetic == 'rational':
-            precision = guard = None
-        elif arithmetic == 'qx':
-            if precision is None:
-                precision = 9
-                guard = None
-        elif arithmetic == 'fixed':
-            if precision is None: precision = 9
-            guard = 0
-        elif arithmetic == 'integer':
-            precision = guard = 0
-        else:
-            raise TypeError('unrecognized arithmetic type (%s)' % arithmetic)
+        if not options.get('arithmetic'):
+            options['arithmetic'] = 'quasi-exact'
 
         #  create an election
         #
-        E = Election(Rule, precision, guard)
+        E = Election(Rule, options)
 
         #  set epsilon
         #
@@ -260,8 +248,8 @@ class Rule:
             c.kf = V(1)    # initialize keep factors
             c.vote = V(0)  # initialize round-0 vote
         for b in R.ballots:
-            if b.top:
-                b.top.vote += V(b.count)  # count first-place votes for round 0 reporting
+            if b.topCand:
+                b.topCand.vote += V(b.count)  # count first-place votes for round 0 reporting
 
         while not countComplete():
 

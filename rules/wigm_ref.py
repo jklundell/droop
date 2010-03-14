@@ -13,29 +13,17 @@ class Rule:
     '''
     
     @staticmethod
-    def initialize(arithmetic=None, precision=6, guard=None):
+    def initialize(options):
         "initialize election parameters"
         
         #  set defaults
         #
-        if arithmetic is None: arithmetic = 'fixed'
-        if arithmetic == 'rational':
-            precision = guard = None
-        elif arithmetic == 'qx':
-            if precision is None:
-                precision = 9
-                guard = None
-        elif arithmetic == 'fixed':
-            if precision is None: precision = 6
-            guard = 0
-        elif arithmetic == 'integer':
-            precision = guard = 0
-        else:
-            raise TypeError('unrecognized arithmetic type (%s)' % arithmetic)
+        if not options.get('arithmetic'):
+            options['arithmetic'] = 'quasi-exact'
 
         #  create an election
         #
-        return Election(Rule, precision, guard)
+        return Election(Rule, options)
 
     @staticmethod
     def info(E):
