@@ -1,9 +1,13 @@
-"Count election using Reference Meek STV"
+'''
+Count election using Reference Meek STV
+
+copyright 2010 by Jonathan Lundell
+'''
 
 import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
-from modules.election import Election
+from modules.value import Value
 
 class Rule:
     '''
@@ -13,7 +17,7 @@ class Rule:
     '''
     
     @staticmethod
-    def initialize(options=dict()):
+    def initialize(E, options=dict()):
         "initialize election parameters"
         
         #  set defaults
@@ -21,17 +25,14 @@ class Rule:
         if not options.get('arithmetic'):
             options['arithmetic'] = 'quasi-exact'
 
-        #  create an election
-        #
-        E = Election(Rule, options)
-
+        E.V = Value.ArithmeticClass(options) # initialize arithmetic
+        
         #  set epsilon
         #
         Rule.epsilon = E.V.epsilon
-        return E
 
     @staticmethod
-    def info(E):
+    def info():
         "return an info string for the election report"
         return "Model Meek"
 
@@ -68,8 +69,8 @@ class Rule:
             Round up if not using exact arithmetic.
             '''
             if E.V.exact:
-                return E.R.votes / E.V(E.profile.nseats+1)
-            return E.R.votes / E.V(E.profile.nseats+1) + E.V.epsilon
+                return E.R.votes / E.V(E.electionProfile.nSeats+1)
+            return E.R.votes / E.V(E.electionProfile.nSeats+1) + E.V.epsilon
     
         def breakTie(E, tied, purpose=None, strong=True):
             '''
@@ -173,12 +174,12 @@ class Rule:
                 R.residual = V(0)
                 for b in R.ballots:
                     b.weight = V(1)
-                    b.residual = V(b.count)
-                    for c in [E.candidateByCid(cid) for cid in b.ranks]:
+                    b.residual = V(b.multiplier)
+                    for c in b.ranking:
                         keep = V.mul(b.weight, c.kf, round='up')  # Hill variation
                         b.weight -= keep  # Hill variation
-                        c.vote += keep * b.count  # always exact (b.count is an integer)
-                        b.residual -= keep * b.count  # residual value of ballot
+                        c.vote += keep * b.multiplier  # always exact (b.multiplier is an integer)
+                        b.residual -= keep * b.multiplier  # residual value of ballot
                         if b.weight <= V(0):
                             break
                     R.residual += b.residual  # residual for round
@@ -238,7 +239,7 @@ class Rule:
         #
         #########################
         V = E.V
-        E.R0.votes = V(E.profile.nballots)
+        E.R0.votes = V(E.electionProfile.nBallots)
         E.R0.quota = calcQuota(E)
         R = E.R0
         C = R.C   # candidate state
@@ -249,7 +250,7 @@ class Rule:
             c.vote = V(0)  # initialize round-0 vote
         for b in R.ballots:
             if b.topCand:
-                b.topCand.vote += V(b.count)  # count first-place votes for round 0 reporting
+                b.topCand.vote += V(b.multiplier)  # count first-place votes for round 0 reporting
 
         while not countComplete():
 
@@ -303,7 +304,7 @@ class Rule:
         #  Elect or defeat remaining hopeful candidates
         #
         for c in C.hopeful.copy():
-            if C.nElected < E.profile.nseats:
+            if C.nElected < E.electionProfile.nSeats:
                 C.elect(c, msg='Elect remaining')
             else:
                 C.defeat(c, msg='Defeat remaining')

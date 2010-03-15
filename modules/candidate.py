@@ -3,16 +3,23 @@ Candidate and CandidateState classes
 
 Candidate holds a candidate ID and uses it to manage state in CandidateState.
 CandidateState contains the per-round candidate state.
+
+copyright 2010 by Jonathan Lundell
 '''
 
 class Candidate(object):
-    "a candidate"
+    '''
+    a candidate
+    
+    A Candidate object is immutable, and shared across Rounds.
+    '''
 
-    def __init__(self, E, cid, order):
+    def __init__(self, E, cid, order, cname):
         "new candidate"
         self.E = E
         self.cid = cid     # candidate id
         self.order = order # ballot order
+        self.name = cname  # candidate name
 
     #  test state of this candidate
     #
@@ -37,11 +44,6 @@ class Candidate(object):
         "True iff withdrawn candidate"
         return self in self.E.withdrawn
         
-    @property
-    def name(self):
-        "candidate name"
-        return self.E.cName[self.cid]
-
     #  get/set vote total of this candidate
     #
     def getvote(self):
@@ -123,16 +125,14 @@ class CandidateState(object):
 
     #  add a candidate to the election
     #
-    def addCandidate(self, c, msg=None, isWithdrawn=False):
+    def addCandidate(self, c, isWithdrawn=False):
         "add a candidate"
         if isWithdrawn:
             self.E.withdrawn.add(c)
-            msg = msg or 'Add withdrawn'
-            self.E.R.log("%s: %s" % (msg, c.name))
+            self.E.R.log("Add withdrawn: %s" % c.name)
         else:
             self.hopeful.add(c)
-            msg = msg or 'Add hopeful'
-            self.E.R.log("%s: %s" % (msg, c.name))
+            self.E.R.log("Add hopeful: %s" % c.name)
 
     def elect(self, c, msg='Elect'):
         "elect a candidate; optionally transfer-pending"

@@ -1,123 +1,105 @@
 '''
-droop: profile support
+droop: election profile support
 
 copyright 2010 by Jonathan Lundell
 '''
 
 import sys
 
-class Ballot(object):
-    "one ballot"
+class ElectionProfile(object):
+    '''
+    Election profile
     
-    E = None
-
-    def __init__(self, election, count=1, ranking=None):
-        "create a ballot"
-        self.E = election
-        self.count = count            # number of ballots like this
-        self.weight = self.E.V(1)     # initial weight
-        self.index = 0                # current ranking
-        self.residual = self.E.V(0)
-        #
-        #  fast copy of ranking -> self.ranks with duplicate detection
-        #  http://www.peterbe.com/plog/uniqifiers-benchmark (see f11)
-        #
-        def dedupe(cids):
-            seen = set()
-            for cid in cids:
-                if cid in seen:
-                    raise ValueError('duplicate ranking: %s' % cid)
-                seen.add(cid)
-                yield cid
-        self.ranks = tuple(dedupe(ranking)) if ranking else list()
-
-    def copy(self):
-        "return a copy of this ballot"
-        b = Ballot(self.E, self.count, None)
-        b.ranks = self.ranks    # share the immutable tuple of ranks
-        b.weight = self.weight
-        b.index = self.index
-        return b
-
-    def transfer(self, hopeful):
-        "advance index to next candidate on this ballot; return True if exists"
-        while self.topCand and self.topCand not in hopeful:
-            self.index += 1
-        return not self.exhausted
-
-    @property
-    def exhausted(self):
-        "is ballot exhausted?"
-        return self.index >= len(self.ranks)  # not meaningful for Meek
+    Given a path to a blt-format ballot file, or such a file's contents,
+    create and return an election profile instance.
     
-    @property
-    def topCand(self):
-        "return top candidate, or None if exhausted"
-        if self.exhausted:
-            return None
-        return self.E.candidateByCid(self.ranks[self.index])
+    The resulting election profile is passed to Election for counting.
     
-    @property
-    def vote(self):
-        "return total vote of this ballot"
-        return self.weight * self.count
-
-class Profile(object):
-    "Election profile"
+    The public interface of ElectionProfile:
     
-    __init = False
+    title: the title of the election from the ballot file
+    nSeats: the number of seats to be filled
+    nBallots: the number of ballots (possibly greater than len(rankings) because of 
+              ballot multipliers)
+    eligible: the set of non-withdrawn candidate IDs 
+    withdrawn: the set of withdrawn candidate IDs
+    candidateName(cid): maps candidate ID to candidate name
+    candidateOrder(cid): maps candidate ID to ballot order
+    ballotLines: a tuple of BallotLine objects, each with a:
+       multiplier: a repetition count >=1
+       ranking: a tuple of candidate IDs
     
-    def __init__(self, E, title, nseats=None):
+    candidates and withdrawn should be treated as frozenset; that is, unordered and immutable,
+       though they may be implemented as any iterable.
+       
+    All attributes should be treated as immutable.
+    '''
+    
+    def __init__(self, path=None, data=None):
         "initialize profile"
-        assert not Profile.__init, 'profile already initialized'
-        Profile.__init = True
-        assert not nseats or nseats > 1, 'two or more seats are required'
-        self.E = E
-        E.profile = self
-        self.title = title
-        self.nseats = nseats
-        self.nballots = 0
-        self.ballots = []
+        self.title = None
+        self.nSeats = None
+        self.nBallots = 0
+        self.eligible = set()
+        self.withdrawn = set()
+        self._candidateName = dict()  # cid => candidate name
+        self._candidateOrder = dict() # cid -> ballot order
+        self.ballotLines = tuple()
+
+        if path:
+            data = self.__bltPath(path)
+        self.__bltData(data)
+        if not self.__validate():
+            raise ValueError("invalid ballot file")
+
+    class BallotLine(object):
+        "one ballot line"
         
-    def validate(self, E):
+        def __init__(self, multiplier, ranking):
+            "create a ballot-line object"
+            self.multiplier = multiplier
+            self.ranking = tuple(ranking)
+            
+    def __validate(self):
         "check for internal consistency"
-        E.R0.ballots = self.ballots
-        if not self.nseats or self.nseats > E.R0.C.nHopeful:
-            print 'too few candidates (%d seats; %d candidates)' % (self.nseats, E.R0.C.nHopeful)
+        if not self.nSeats or self.nSeats > len(self.eligible):
+            print 'too few candidates (%d seats; %d candidates)' % (self.nSeats, len(self.eligible))
             return False
-        if self.nballots < E.R0.C.nHopeful:
-            print 'too few ballots (%d ballots; %d candidates)' % (self.nballots, E.R0.C.nHopeful)
+        if self.nBallots < len(self.eligible):
+            print 'too few ballots (%d ballots; %d candidates)' % (self.nBallots, len(self.eligible))
             return False
         n = 0
-        for ballot in self.ballots:
+        for ranking in [bl.ranking for bl in self.ballotLines]:
             n += 1
             d = dict()
-            for cid in ballot.ranks:
+            for cid in ranking:
                 if cid in d:
-                    print 'candidate %s duplicated on ballot %d' % (cid, n)
+                    print 'candidate ID %s duplicated on ballot line %d' % (cid, n)
                     return False
                 d[cid] = cid
         return True
+    
+    def candidateName(self, cid):
+        "get name of candidate"
+        return self._candidateName[cid]
         
-    def addBallot(self, ballot):
-        "add a ballot to the list"
-        if not ballot.exhausted:  # ignore empty ballots
-            self.ballots.append(ballot)
-            self.nballots += ballot.count
-
-    def bltPath(self, path):
-        "process a path to a blt file"
+    def candidateOrder(self, cid):
+        "get ballot order of candidate"
+        return self._candidateOrder[cid]
+    
+    def __bltPath(self, path):
+        "open a path to a blt file"
         try:
             f = open(path, 'r')
-        except IOError as emsg:
+            data = f.read()
+        except Exception as emsg:
             print "droop: can't open ballot file %s (%s)" % (path, emsg)
             sys.exit(1)
-        data = f.read()
         f.close()
-        return self.bltData(data)
+        return data
         
-    def bltData(self, data):
-        "process a blt blob"
+    def __bltData(self, data):
+        "process a blt file"
         
         # see http://code.google.com/p/stv/wiki/BLTFileFormat
         # (though we don't support the OpenSTV extensions,
@@ -126,53 +108,59 @@ class Profile(object):
         # we do allow /* comments */; the comment delimiters must appear
         # at the beginning and ending of their respective tokens
         #
-        candidates = []
-        blt = self.bltBlob(data)  # fetch a token at a time
+        blt = self.__bltBlob(data)  # fetch a token at a time
         
-        #  number of candidates
+        #  number of candidates, eligible or withdrawn
         #
         ncand = int(blt.next())
 
         #  number of seats
         #
-        self.nseats = int(blt.next())
+        self.nSeats = int(blt.next())
 
         #  optional: withdrawn candidates, flagged with a minus sign
         #
-        withdrawn = set()
+        self.withdrawn = set()
         wd = int(blt.next())
         while wd < 0:
-            withdrawn.add(str(-wd))
+            self.withdrawn.add(str(-wd))
             wd = blt.next()
         
         #  ballots
         #
-        #  each ballot begins with a repetition count
-        #  then a sequence of candidate numbers
+        #  each ballot begins with a multiplier
+        #  then a sequence of candidate IDs 1..n
         #  finally a 0 for EOL
         #
-        #  a count of 0 ends the ballot list
+        #  a multiplier of 0 ends the ballot list
         #
-        count = wd
-        while (count):
-            ranking = []
-            rank = int(blt.next())
-            while (rank):
-                ranking.append(str(rank))
-                rank = int(blt.next())
-            self.addBallot(Ballot(self.E, count=count, ranking=ranking))
-            count = int(blt.next())
+        ballotlines = list()
+        multiplier = wd
+        while (multiplier):
+            ranking = list()
+            cid = int(blt.next())
+            while (cid):
+                ranking.append(str(cid))
+                cid = int(blt.next())
+            if ranking:                         # ignore empty ballots
+                ballotlines.append(self.BallotLine(multiplier, tuple(ranking)))
+                self.nBallots += multiplier
+            multiplier = int(blt.next())
+        self.ballotLines = tuple(ballotlines)
             
-        #  candidates
+        #  candidate names
         #
         #  a list of candidate names, quoted
         #  we know in advance how many there should be
         #
-        for cand in xrange(ncand):
-            candidate = blt.next()
-            while not candidate.endswith('"'):
-                candidate += ' ' + blt.next()
-            candidates.append(candidate.strip('"'))
+        for cid in xrange(1, ncand+1):
+            name = blt.next()
+            while not name.endswith('"'):
+                name += ' ' + blt.next()
+            if str(cid) not in self.withdrawn:
+                self.eligible.add(str(cid))
+            self._candidateName[str(cid)] = name.strip('"')
+            self._candidateOrder[str(cid)] = int(cid)
             
         #  election title
         #
@@ -184,14 +172,7 @@ class Profile(object):
             pass
         self.title.strip('"')
 
-        #  create the ballot objects, using candidate numbers as candidate IDs (cid)
-        cid = 0
-        for cname in candidates:
-            cid += 1
-            self.E.newCandidate(cid=str(cid), cname=cname, order=cid, isWithdrawn=(cid in withdrawn))
-        return self.validate(self.E)
-
-    def bltBlob(self, blob):
+    def __bltBlob(self, blob):
         "parse a blt blob into tokens, skipping /* comments */"
 
         tokens = blob.split()
@@ -204,4 +185,3 @@ class Profile(object):
                     inComment -= 1
                 continue
             yield token
-        

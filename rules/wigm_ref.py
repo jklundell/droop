@@ -1,9 +1,13 @@
-"Count election using Reference WIGM STV"
+'''
+Count election using Reference WIGM STV
+
+copyright 2010 by Jonathan Lundell
+'''
 
 import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
-from modules.election import Election
+from modules.value import Value
 
 class Rule:
     '''
@@ -13,7 +17,7 @@ class Rule:
     '''
     
     @staticmethod
-    def initialize(options):
+    def initialize(E, options=dict()):
         "initialize election parameters"
         
         #  set defaults
@@ -21,12 +25,12 @@ class Rule:
         if not options.get('arithmetic'):
             options['arithmetic'] = 'quasi-exact'
 
-        #  create an election
+        #  initialize arithmetic
         #
-        return Election(Rule, options)
+        E.V = Value.ArithmeticClass(options)
 
     @staticmethod
-    def info(E):
+    def info():
         "return an info string for the election report"
         return "Model Weighted Inclusive Gregory Method (WIGM)"
 
@@ -59,8 +63,8 @@ class Rule:
             Round up if not using exact arithmetic.
             '''
             if E.V.exact:
-                return E.V(E.profile.nballots) / E.V(E.profile.nseats+1)
-            return E.V(E.profile.nballots) / E.V(E.profile.nseats+1) + E.V.epsilon
+                return E.V(E.nBallots) / E.V(E.nSeats+1)
+            return E.V(E.nBallots) / E.V(E.nSeats+1) + E.V.epsilon
         
         def breakTie(E, tied, purpose=None, strong=True):
             '''
@@ -104,8 +108,8 @@ class Rule:
         for b in [b for b in R.ballots if not b.exhausted]:
             b.topCand.vote = b.topCand.vote + b.vote
 
-        while C.nHopefulOrElected > E.profile.nseats and \
-               C.nElected < E.profile.nseats:
+        while C.nHopefulOrElected > E.nSeats and \
+               C.nElected < E.nSeats:
             R = E.newRound()
             C = R.C   # candidate state
 
@@ -170,7 +174,7 @@ class Rule:
         #  Elect or defeat remaining hopeful candidates
         #
         for c in C.hopeful.copy():
-            if C.nElected < E.profile.nseats:
+            if C.nElected < E.nSeats:
                 C.elect(c, msg='Elect remaining')
             else:
                 C.defeat(c, msg='Defeat remaining')

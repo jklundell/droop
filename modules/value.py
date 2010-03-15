@@ -1,8 +1,9 @@
 '''
 Value classes
-   Rational is essentially fractions.Fraction
+   Rational is essentially Fraction
    Fixed supports integer, fixed-decimal and quasi-exact fixed-decimal
 
+copyright 2010 by Jonathan Lundell
 '''
 
 class Value(object):
@@ -38,47 +39,88 @@ class Value(object):
 #     else: params = (i,',other',i,'int(other)') 
 #     print '    def %s(self%s): return int(self).%s(%s)' % params 
 
-import fractions
+from fractions import Fraction
 
-class Rational(fractions.Fraction):
-    "rational arithmetic with support functions"
+class Rational(Fraction):
+    '''
+    rational arithmetic with support functions and approximate equality
+    
+    Note that because of approximate equality, Rational numbers will not behave
+    quite normally. Equality is not transitive, and two "equal" Rationals do not 
+    necessarily hash to the same value.
+    
+    This is acceptable for our purposes, but may not be generally desirable.
+    '''
     
     exact = True
     epsilon = None
     name = 'rational'
+    info = 'rational arithmetic'
     
     @classmethod
     def initialize(cls, options=dict()):
         '''
-        initialize class Rational, a value class based on fractions.Fraction
+        initialize class Rational, a value class based on Fraction
         
         options:
             epsilon (default 10) sets the value used to determine equality to 1/10^epsilon
             
             a == b is defined as abs(a - b) < 1/10**epsilon
         '''
-        
         epsilon = options.get('epsilon', None) or 10
-        cls.epsilon = cls(1,10**epsilon)
+        cls.epsilon = Fraction(1,10**epsilon)
 
-    def __eq__(self, other):
-        return abs(self-other) < self.epsilon
+    #  define equality as approximate equality,
+    #  and define other relationships consistently
+    #
+    def __cmp__(self, other):
+        if abs(Fraction.__sub__(self, other)) < self.epsilon:
+            return 0
+        if Fraction.__gt__(self, other):
+            return 1
+        return -1
     
-    def __add__(self, other):
-        return Rational(fractions.Fraction(self) + fractions.Fraction(other))
-    def __sub__(self, other):
-        return Rational(fractions.Fraction(self) - fractions.Fraction(other))
-    def __mul__(self, other):
-        return Rational(fractions.Fraction(self) * fractions.Fraction(other))
-    def __div__(self, other):
-        return Rational(fractions.Fraction(self) / fractions.Fraction(other))
-    def __neg__(self):
-        return Rational(-fractions.Fraction(self))
-        
-    @classmethod
-    def info(cls):
-        return 'rational arithmetic'
+    def __eq__(self, other):
+        return self.__cmp__(other) == 0
+    def __ne__(self, other):
+        return self.__cmp__(other) != 0
+    def __lt__(self, other):
+        return self.__cmp__(other) < 0
+    def __le__(self, other):
+        return self.__cmp__(other) <= 0
+    def __ge__(self, other):
+        return self.__cmp__(other) >= 0
+    def __gt__(self, other):
+        return self.__cmp__(other) > 0
 
+    def __nonzero__(self):
+        return abs(self) >= self.epsilon  # consistent with self == 0
+
+    def __add__(self, other):
+        return Rational(Fraction.__add__(self, other))
+    def __sub__(self, other):
+        return Rational(Fraction.__sub__(self, other))
+    def __rsub__(self, other):
+        return Rational(Fraction.__rsub__(self, other))
+    def __mul__(self, other):
+        return Rational(Fraction.__mul__(self, other))
+    def __div__(self, other):
+        return Rational(Fraction.__div__(self, other))
+    def __rdiv__(self, other):
+        return Rational(Fraction.__rdiv__(self, other))
+    def __neg__(self):
+        return Rational(Fraction.__neg__(self))
+    def __pos__(self):
+        return self
+    __radd__ = __add__
+    __rmul__ = __mul__
+    __floordiv__ = __div__
+    __truediv__ = __div__
+
+    #  we can't have hash because a == b doesn't imply identical hashes
+    def __hash__(self):
+        raise NotImplementedError
+    
     @staticmethod
     def report():
         "Report arithmetic statistics"
@@ -111,7 +153,15 @@ class Rational(fractions.Fraction):
         return Rational(arg1) * Rational(arg2) / Rational(arg3)
 
 class Fixed(object):
-    "fixed-point decimal arithmetic with optional guard digits"
+    '''
+    fixed-point decimal arithmetic with optional guard digits
+    
+    Note that because of approximate equality, Fixed quasi-exact (ie, guard>0) numbers 
+    will not behave quite normally. Equality is not transitive, and two "equal" valules
+    do not necessarily hash to the same value.
+    
+    This is acceptable for our purposes, but may not be generally desirable.
+    '''
     
     __scale = None
     __scalep = None
@@ -229,7 +279,11 @@ class Fixed(object):
 
     __div__ = __floordiv__
     __truediv__ = __floordiv__
-    
+
+    #  we can't have hash because a == b doesn't imply identical hashes
+    def __hash__(self):
+        raise NotImplementedError
+
     @staticmethod
     def mul(arg1, arg2, round=None):
         '''
@@ -287,39 +341,32 @@ class Fixed(object):
 
     #  comparison operators
     #
-    def __eq__(self, other):
-        "return self == other"
+    def __cmp__(self, other):
         if not Fixed.exact:
-            return self._value == other._value
+            return self._value.__cmp__(other)
         gdiff = abs(self._value - other._value)
         if gdiff < Fixed.__geps and gdiff > Fixed.maxDiff:
             Fixed.maxDiff = gdiff
         if gdiff >= Fixed.__geps and gdiff < Fixed.minDiff:
             Fixed.minDiff = gdiff
-        return gdiff < Fixed.__geps
+        if gdiff < Fixed.__geps:
+            return 0
+        if self._value > other._value:
+            return 1
+        return -1
+
+    def __eq__(self, other):
+        return self.__cmp__(other) == 0
     def __ne__(self, other):
-        "return self != other"
-        return not self == other
+        return self.__cmp__(other) != 0
     def __lt__(self, other):
-        "return self < other"
-        if not Fixed.exact:
-            return self._value < other._value
-        return self._value < other._value and not self == other
+        return self.__cmp__(other) < 0
     def __le__(self, other):
-        "return self <= other"
-        if not Fixed.exact:
-            return self._value <= other._value
-        return self._value <= other._value or self == other
+        return self.__cmp__(other) <= 0
     def __gt__(self, other):
-        "return self > other"
-        if not Fixed.exact:
-            return self._value > other._value
-        return self._value > other._value and not self == other
+        return self.__cmp__(other) > 0
     def __ge__(self, other):
-        "return self >= other"
-        if not Fixed.exact:
-            return self._value >= other._value
-        return self._value >= other._value or self == other
+        return self.__cmp__(other) >= 0
 
     def __str__(self):
         '''

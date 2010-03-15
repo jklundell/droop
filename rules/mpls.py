@@ -1,6 +1,8 @@
 '''
 Count election using Minneapolis MN STV rules
 
+copyright 2010 by Jonathan Lundell
+
 Minneapolis Code of Ordinances, Title 8.5, Chapter 167
 http://library1.municode.com/default-test/DocView/11490/1/107/109
 as of 2009-10-02
@@ -36,7 +38,7 @@ such tie will be broken when the candidates are defeated.
 import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
-from modules.election import Election
+from modules.value import Value
 import random
 
 class Rule:
@@ -45,10 +47,10 @@ class Rule:
     '''
 
     @staticmethod
-    def initialize(options=dict()):
+    def initialize(E, options=dict()):
         "initialize election parameters"
 
-        #  create an election
+        #  initialize arithmetic
         #
         #  arithmetic is fixed decimal, four digits of precision
         #  [167.20(Surplus fraction of a vote, Transfer value)]
@@ -58,10 +60,10 @@ class Rule:
         options['arithmetic'] = 'fixed'
         options['precision'] = 4
         options['guard'] = 0
-        return Election(Rule, options)
+        E.V = Value.ArithmeticClass(options)
 
     @staticmethod
-    def info(E):
+    def info():
         "return an info string for the election report"
         return "Minneapolis MN STV"
 
@@ -90,7 +92,7 @@ class Rule:
             ##  Threshold = (Total votes cast)/(Seats to be elected + 1) +1, 
             ##  with any fractions disregarded. 
 
-            return V(E.profile.nballots // (E.profile.nseats + 1) + 1)
+            return V(E.nBallots // (E.nSeats + 1) + 1)
 
         def findCertainLosers(surplus, fixSpec=True):
             '''
@@ -212,7 +214,7 @@ class Rule:
         R = E.R0  # current round
         C = R.C   # candidate state
         V = E.V   # arithmetic value class
-        random.seed(E.profile.nballots + E.profile.nseats) # initialize PRNG
+        random.seed(E.nBallots + E.nSeats) # initialize PRNG
 
         #  Calculate quota per 167.20(Threshold)
         #
@@ -236,7 +238,7 @@ class Rule:
 
             for c in [c for c in C.hopeful if hasQuota(c)]:
                 C.elect(c)
-            if C.nElected >= E.profile.nseats:
+            if C.nElected >= E.nSeats:
                 break
 
             ##     If the number of candidates whose vote total is equal to or greater than

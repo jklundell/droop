@@ -1,9 +1,10 @@
 '''
 Generic Election Support
+
+copyright 2010 by Jonathan Lundell
 '''
 
 from candidate import Candidate, CandidateState
-from value import Value
 
 class Election(object):
     '''
@@ -11,25 +12,57 @@ class Election(object):
     '''
     rule = None      # election rule class
     V = None         # arithmetic method
-    profile = None   # election profile
     rounds = None    # election rounds
     R0 = None        # round 0 (initial state)
     R = None         # current round
-    cName = dict()   # candidate names
-    candidates = dict()
-    withdrawn = set()
+    eligible = set() # all the non-withdrawn candidates
+    withdrawn = set()  # all the withdrawn candidates
+    _candidates = dict() # candidates by candidate ID
     
-    def __init__(self, rule, options=dict()):
+    def __init__(self, rule, electionProfile, options=dict()):
         "create an election"
 
-        self.rule = rule
-        #
-        #  initialize arithmetic
-        #
-        self.V = Value.ArithmeticClass(options)
+        self.rule = rule # a class
+        self.rule.initialize(self, options)
+        self.electionProfile = electionProfile
+
         self.rounds = [self.Round(self)]
         self.R0 = self.R = self.rounds[0]
+        for cid in electionProfile.eligible | electionProfile.withdrawn:
+            c = Candidate(self, cid, electionProfile.candidateOrder(cid), electionProfile.candidateName(cid))
+            assert c.cid not in self._candidates.keys(), 'duplicate candiates (%s)' % c.cid
+            self._candidates[cid] = c
+            if cid in electionProfile.eligible:
+                self.eligible.add(c)
+            else:
+                self.withdrawn.add(c)
+            self.R0.C.addCandidate(c, isWithdrawn=cid in electionProfile.withdrawn)
+        for bl in electionProfile.ballotLines:
+            self.R0.ballots.append(self.Ballot(self, bl.multiplier, bl.ranking))
 
+    @property
+    def title(self):
+        "election title"
+        return self.electionProfile.title
+
+    @property
+    def nSeats(self):
+        "number of seats"
+        return self.electionProfile.nSeats
+        
+    @property
+    def nBallots(self):
+        "number of ballots"
+        return self.electionProfile.nBallots
+        
+    def candidate(self, cid):
+        "look up a candidate from a candidate ID"
+        return self._candidates[cid]
+        
+    def count(self):
+        "count the election"
+        self.rule.count(self)
+        
     def newRound(self):
        "add a round"
        self.rounds.append(self.Round(self))
@@ -39,8 +72,8 @@ class Election(object):
 
     def report(self):
         "report election by round"
-        s = "Election: %s\n\n" % self.profile.title
-        s += "\tRule: %s\n" % self.rule.info
+        s = "\nElection: %s\n\n" % self.title
+        s += "\tRule: %s\n" % self.rule.info()
         s += "\tArithmetic: %s\n\n" % self.V.info
         s += self.V.report()
         for round in self.rounds:
@@ -54,22 +87,9 @@ class Election(object):
             s += round.dump(self)
         return s
 
-    def newCandidate(self, cid, cname, order, isWithdrawn):
-        "add a candidate to the election"
-        c = Candidate(self, cid, cid)
-        assert cid not in self.candidates, 'duplicate candidate'
-        self.candidates[cid] = c
-        self.cName[cid] = cname
-        self.R0.C.addCandidate(c, msg=None, isWithdrawn=isWithdrawn)
-        return c
-
-    def candidateByCid(self, cid):
-        "look up candidate by cid"
-        return self.candidates[cid]
-
     def seatsLeftToFill(self):
         "number of seats not yet filled"
-        return self.profile.nseats - self.R.C.nElected
+        return self.nSeats - self.R.C.nElected
 
     class Round(object):
         "one election round"
@@ -84,7 +104,7 @@ class Election(object):
                 self.n = 0
                 self.C = CandidateState(E)
                 self.quota = None
-                self.ballots = None
+                self.ballots = list()
             else:
                 #
                 #  subsequent rounds are copies,
@@ -137,7 +157,7 @@ class Election(object):
             saveR, E.R = E.R, self # provide reporting context
             s = ''
             
-            candidates = sorted([E.candidates[k] for k in E.candidates.keys()], key=lambda c:int(c.cid))
+            candidates = sorted(E.eligible, key=lambda c:int(c.cid))
             #  if round 0, include a header line
             if self.n == 0:
                 h = ['R', 'Q', 'residual']
@@ -167,3 +187,70 @@ class Election(object):
             s += ','.join(r) + '\n'
             E.R = saveR
             return s
+
+    class Ballot(object):
+        "one ballot"
+        
+        def __init__(self, E, multiplier=1, ranking=None):
+            "create a ballot"
+            if E is not None:  # E=None signals a copy operation
+                self.multiplier = multiplier  # number of ballots like this
+                self.index = 0                # current ranking
+                self.weight = E.V(1)          # initial weight
+                self.residual = E.V(0)        # untransferable weight
+                #
+                #  fast copy of ranking -> self.ranking with duplicate detection
+                #  http://www.peterbe.com/plog/uniqifiers-benchmark (see f11)
+                #
+                #  Note that the speed is no longer necessary, since we're sharing
+                #  the ranking tuple across rounds, but it's here as an example
+                #  of an interesting technique that might be useful elsewhere.
+                #
+        #         def dedupe(cids):
+        #             seen = set()
+        #             for cid in cids:
+        #                 if cid in seen:
+        #                     raise ValueError('duplicate ranking: %s' % cid)
+        #                 seen.add(cid)
+        #                 yield cid
+        #         self.ranking = tuple(dedupe(ranking)) if ranking else tuple()
+        
+                #  self.ranking is a tuple of candidate IDs, with a None sentinel at the end
+                self.ranking = list()
+                for cid in ranking:
+                    c = E.candidate(cid)
+                    if c in E.eligible:
+                        self.ranking.append(c)
+                self.ranking = tuple(self.ranking)
+
+        def copy(self):
+            "return a copy of this ballot"
+            b = Election.Ballot(None)
+            b.multiplier = self.multiplier
+            b.index = self.index
+            b.weight = self.weight
+            b.residual = self.residual
+            b.ranking = self.ranking    # share the immutable tuple of ranking
+            return b
+    
+        def transfer(self, hopeful):
+            "advance index to next candidate on this ballot; return True if exists"
+            while self.index < len(self.ranking) and self.topCand not in hopeful:
+                self.index += 1
+            return not self.exhausted
+    
+        @property
+        def exhausted(self):
+            "is ballot exhausted?"
+            return self.index >= len(self.ranking)    # detect end-of-ranking
+        
+        @property
+        def topCand(self):
+            "return top candidate, or None if exhausted"
+            return self.ranking[self.index] if self.index < len(self.ranking) else None
+        
+        @property
+        def vote(self):
+            "return total vote of this ballot"
+            return self.weight * self.multiplier
+            

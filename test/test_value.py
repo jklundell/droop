@@ -1,4 +1,8 @@
-''' Unit test for value module'''
+''' 
+Unit test for value module
+
+copyright 2010 by Jonathan Lundell
+'''
 import unittest
 import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))

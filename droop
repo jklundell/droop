@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"Count election using OpenDroop"
+'''
+Count election using OpenDroop
+
+copyright 2010 by Jonathan Lundell
+'''
 
 import sys, os, getopt
 path = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
@@ -120,23 +124,26 @@ else:
     print usage
     sys.exit(1)
 
+#####################
+#
+#  Run the election
+#
+#####################
 def doElection(reps=1):
     "run election with repeat count for profiling"
-    E = Rule.initialize(options=dict(arithmetic=arithmetic, precision=prec, guard=guard))
-    profile = Profile(E, None)
-    if not profile.bltPath(bltPath):
-        sys.exit(1)  # bad ballot file
+    from modules.profile import ElectionProfile
+    from modules.election import Election
+    electionProfile = ElectionProfile(path=bltPath)
     for i in xrange(reps):
-        Rule.count(E)    # repeat for profiling
-    return E
+        E = Election(Rule, electionProfile, options=dict(arithmetic=arithmetic, precision=prec, guard=guard))
+        E.count()    # repeat for profiling
+    print E.report()    # election report
 
 if doProfile:
-    from modules.profile import Profile
     cProfile.run('E = doElection(reps)', profilefile)
 else:
     E = doElection()
 
-print E.report()    # election report
 
 if doProfile:
     p = pstats.Stats(profilefile)
