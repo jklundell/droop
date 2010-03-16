@@ -2,6 +2,18 @@
 Generic Election Support
 
 copyright 2010 by Jonathan Lundell
+
+
+Top-level structure:
+
+  A driver program (for example droop, the CLI) 
+    1. creates an ElectionProfile from a ballot file,
+    2. imports a Rule, 
+    3. creates an Election(Rule, ElectionProfile, options),
+    4. counts the election with Election.count(), and
+    5. generates a report with Election.report().
+  
+  The options are used to override default Rule parameters, such as arithmetic.
 '''
 
 class Election(object):
@@ -10,6 +22,8 @@ class Election(object):
     '''
     rule = None      # election rule class
     V = None         # arithmetic method
+    V0 = None        # constant zero
+    V1 = None        # constant one
     rounds = None    # election rounds
     R0 = None        # round 0 (initial state)
     R = None         # current round
@@ -21,7 +35,9 @@ class Election(object):
         "create an election"
 
         self.rule = rule # a class
-        self.rule.initialize(self, options)
+        self.V = self.rule.initialize(self, options) # set arithmetic class
+        self.V0 = self.V(0)  # constant zero for efficiency
+        self.V1 = self.V(1)  # constant one for efficiency
         self.electionProfile = electionProfile
 
         self.rounds = [self.Round(self)]
@@ -115,8 +131,8 @@ class Election(object):
                 self.C = previous.C.copy()
                 self.quota = previous.quota
                 self.ballots = [b.copy() for b in previous.ballots]
-            self.residual = E.V(0)
-            self.vote = E.V(0)
+            self.residual = E.V0
+            self.vote = E.V0
             self._log = [] # list of log messages
     
         def transfer(self, c):
@@ -139,7 +155,7 @@ class Election(object):
             s += '\tHopeful: %s\n' % (" ".join(sorted([c.name for c in self.C.hopeful])) or 'None')
             s += '\tElected: %s\n' % (" ".join(sorted([c.name for c in self.C.elected])) or 'None')
             s += '\tDefeated: %s\n' % (" ".join(sorted([c.name for c in self.C.defeated])) or 'None')
-            nontransferable = E.V(0)
+            nontransferable = E.V0
             for b in [b for b in self.ballots if b.exhausted]:
                 nontransferable = nontransferable + b.vote
             if nontransferable:
@@ -194,8 +210,8 @@ class Election(object):
             if E is not None:  # E=None signals a copy operation
                 self.multiplier = multiplier  # number of ballots like this
                 self.index = 0                # current ranking
-                self.weight = E.V(1)          # initial weight
-                self.residual = E.V(0)        # untransferable weight
+                self.weight = E.V1            # initial weight
+                self.residual = E.V0          # untransferable weight
                 #
                 #  fast copy of ranking -> self.ranking with duplicate detection
                 #  http://www.peterbe.com/plog/uniqifiers-benchmark (see f11)
@@ -312,7 +328,7 @@ class Candidate(object):
     def surplus(self):
         "return candidate's current surplus vote"
         s = self.vote - self.E.R.quota
-        return self.E.V(0) if s < self.E.V(0) else s
+        return self.E.V0 if s < self.E.V0 else s
         
     #  get/set keep factor of this candidate
     #

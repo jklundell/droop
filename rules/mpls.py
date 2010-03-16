@@ -50,7 +50,7 @@ class Rule:
     def initialize(E, options=dict()):
         "initialize election parameters"
 
-        #  initialize arithmetic
+        #  initialize and return arithmetic
         #
         #  arithmetic is fixed decimal, four digits of precision
         #  [167.20(Surplus fraction of a vote, Transfer value)]
@@ -60,7 +60,7 @@ class Rule:
         options['arithmetic'] = 'fixed'
         options['precision'] = 4
         options['guard'] = 0
-        E.V = Value.ArithmeticClass(options)
+        return Value.ArithmeticClass(options)
 
     @staticmethod
     def info():
@@ -117,7 +117,7 @@ class Rule:
             #
             group = []
             sortedGroups = []
-            groupvote = V(0)
+            groupvote = V0
             for c in sortedCands:
                 if c.vote == groupvote:
                     group.append(c)  # add candidate to tied group
@@ -140,7 +140,7 @@ class Rule:
             #   defeating all the hopeful candidates, and if that's possible,
             #   the election is already complete and we wouldn't be here.
             #   
-            vote = V(0)
+            vote = V0
             losers = []
             maxDefeat = C.nHopeful - E.seatsLeftToFill() # limit number of defeats
             for g in range(len(sortedGroups) - 1):
@@ -214,6 +214,7 @@ class Rule:
         R = E.R0  # current round
         C = R.C   # candidate state
         V = E.V   # arithmetic value class
+        V0 = E.V0 # constant zero
         random.seed(E.nBallots + E.nSeats) # initialize PRNG
 
         #  Calculate quota per 167.20(Threshold)
@@ -226,7 +227,7 @@ class Rule:
             ##  a. The number of votes cast for each candidate for the current round 
             ##     must be counted.
             ##
-            for c in C.hopefulOrElected: c.vote = V(0)
+            for c in C.hopefulOrElected: c.vote = V0
             for b in [b for b in R.ballots if not b.exhausted]:
                 b.topCand.vote += b.vote
 
@@ -252,7 +253,7 @@ class Rule:
             ##  b. Surplus votes for any candidates whose vote total is equal to 
             ##     or greater than the threshold must be calculated.
 
-            surplus = sum([c.surplus for c in C.elected], V(0))
+            surplus = sum([c.surplus for c in C.elected], V0)
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -294,7 +295,7 @@ class Rule:
 
             #  find candidate(s) with largest surplus
             #
-            high_surplus = V(0)
+            high_surplus = V0
             high_candidates = []
             for c in C.pending:
                 if c.surplus == high_surplus:

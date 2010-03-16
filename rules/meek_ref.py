@@ -25,11 +25,12 @@ class Rule:
         if not options.get('arithmetic'):
             options['arithmetic'] = 'quasi-exact'
 
-        E.V = Value.ArithmeticClass(options) # initialize arithmetic
+        V = Value.ArithmeticClass(options) # initialize arithmetic
         
         #  set epsilon
         #
-        Rule.epsilon = E.V.epsilon
+        Rule.epsilon = V.epsilon
+        return V
 
     @staticmethod
     def info():
@@ -113,7 +114,7 @@ class Rule:
             #
             group = []
             sortedGroups = []
-            vote = V(0)
+            vote = V0
             for c in sortedCands:
                 if c.vote == vote:
                     group.append(c)  # add candidate to tied group
@@ -136,7 +137,7 @@ class Rule:
             #   defeating all the hopeful candidates, and if that's possible,
             #   the election is already complete and we wouldn't be here.
             #   
-            vote = V(0)
+            vote = V0
             batch = []
             maxDefeat = C.nHopeful - E.seatsLeftToFill()
             for g in range(len(sortedGroups) - 1):
@@ -160,7 +161,7 @@ class Rule:
         def iterate():
             "Iterate until surplus is sufficiently low"
             iStatus = IS_none
-            lastsurplus = V(0)
+            lastsurplus = V0
             while True:
                 if V.exact:
                     sys.stdout.write('.')
@@ -170,20 +171,20 @@ class Rule:
                 #  and add up vote for each candidate
                 #
                 for c in C.hopefulOrElected:
-                    c.vote = V(0)
-                R.residual = V(0)
+                    c.vote = V0
+                R.residual = V0
                 for b in R.ballots:
-                    b.weight = V(1)
+                    b.weight = V1
                     b.residual = V(b.multiplier)
                     for c in b.ranking:
                         keep = V.mul(b.weight, c.kf, round='up')  # Hill variation
                         b.weight -= keep  # Hill variation
                         c.vote += keep * b.multiplier  # always exact (b.multiplier is an integer)
                         b.residual -= keep * b.multiplier  # residual value of ballot
-                        if b.weight <= V(0):
+                        if b.weight <= V0:
                             break
                     R.residual += b.residual  # residual for round
-                R.votes = V(0)
+                R.votes = V0
                 for c in C.hopefulOrElected:
                     R.votes += c.vote            # find sum of all votes
 
@@ -207,7 +208,7 @@ class Rule:
     
                 #  D.6. calculate total surplus
                 #
-                surplus = V(0)
+                surplus = V0
                 for c in C.elected:
                     surplus += c.vote - R.quota
                 
@@ -238,16 +239,18 @@ class Rule:
         #   Initialize Count
         #
         #########################
-        V = E.V
+        V = E.V    # arithmetic value class
+        V0 = E.V0  # constant zero
+        V1 = E.V1  # constant one
         E.R0.votes = V(E.electionProfile.nBallots)
         E.R0.quota = calcQuota(E)
         R = E.R0
         C = R.C   # candidate state
         for c in E.withdrawn:
-            c.kf = V(0)
+            c.kf = V0
         for c in C.hopeful:
-            c.kf = V(1)    # initialize keep factors
-            c.vote = V(0)  # initialize round-0 vote
+            c.kf = V1    # initialize keep factors
+            c.vote = V0  # initialize round-0 vote
         for b in R.ballots:
             if b.topCand:
                 b.topCand.vote += V(b.multiplier)  # count first-place votes for round 0 reporting
@@ -261,7 +264,7 @@ class Rule:
                 sys.stdout.write('%d' % R.n)
                 sys.stdout.flush()
                 for c in C.elected:  # experimental: reset keep factors for exact methods
-                    c.kf = V(1)
+                    c.kf = V1
             C = R.C   # candidate state
 
             #  C. iterate
@@ -278,8 +281,8 @@ class Rule:
             if iterationStatus == IS_batch:
                 for c in batch:
                     C.defeat(c, msg='Defeat')
-                    c.kf = V(0)
-                    c.vote = V(0)
+                    c.kf = V0
+                    c.vote = V0
                 continue
 
             #  Otherwise find and defeat candidate with lowest vote
@@ -298,8 +301,8 @@ class Rule:
             if low_candidates:
                 low_candidate = breakTie(E, low_candidates, 'defeat')
                 C.defeat(low_candidate, msg='Defeat (surplus<epsilon)')
-                low_candidate.kf = V(0)
-                low_candidate.vote = V(0)
+                low_candidate.kf = V0
+                low_candidate.vote = V0
         
         #  Elect or defeat remaining hopeful candidates
         #
@@ -308,5 +311,5 @@ class Rule:
                 C.elect(c, msg='Elect remaining')
             else:
                 C.defeat(c, msg='Defeat remaining')
-                c.kf = V(0)
-                c.vote = V(0)
+                c.kf = V0
+                c.vote = V0

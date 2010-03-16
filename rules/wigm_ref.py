@@ -25,9 +25,9 @@ class Rule:
         if not options.get('arithmetic'):
             options['arithmetic'] = 'quasi-exact'
 
-        #  initialize arithmetic
+        #  initialize and return arithmetic
         #
-        E.V = Value.ArithmeticClass(options)
+        return Value.ArithmeticClass(options)
 
     @staticmethod
     def info():
@@ -62,9 +62,9 @@ class Rule:
             
             Round up if not using exact arithmetic.
             '''
-            if E.V.exact:
-                return E.V(E.nBallots) / E.V(E.nSeats+1)
-            return E.V(E.nBallots) / E.V(E.nSeats+1) + E.V.epsilon
+            if V.exact:
+                return V(E.nBallots) / V(E.nSeats+1)
+            return V(E.nBallots) / V(E.nSeats+1) + V.epsilon
         
         def breakTie(E, tied, purpose=None, strong=True):
             '''
@@ -100,11 +100,12 @@ class Rule:
         R = E.R0  # current round
         C = R.C   # candidate state
         V = E.V   # arithmetic value class
+        V0 = E.V0 # constant zero
         
         #  Count votes in round 0 for reporting purposes
         #
         for c in C.hopeful:
-            c.vote = V(0)
+            c.vote = V0
         for b in [b for b in R.ballots if not b.exhausted]:
             b.topCand.vote = b.topCand.vote + b.vote
 
@@ -116,7 +117,7 @@ class Rule:
             #  count votes for hopeful or pending-transfer candidates
             #
             for c in C.hopefulOrPending:
-                c.vote = V(0)
+                c.vote = V0
             for b in [b for b in R.ballots if not b.exhausted]:
                 b.topCand.vote = b.topCand.vote + b.vote
 
