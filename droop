@@ -15,7 +15,7 @@ if path not in sys.path: sys.path.insert(0, path)
 #
 #######################################################################
 
-rules = ['wigm_ref', 'meek.ref', 'mpls']
+rules = ['wigm', 'meek', 'warren', 'mpls']
 reportNames = None
 
 usage = """
@@ -98,7 +98,7 @@ for o, a in opts:
           sys.exit(0)
 
 if len(args) == 1:
-    ruleName = 'meek_ref'  # handy default for testing
+    ruleName = 'meek'  # handy default for testing
     bltPath = args[0]
 elif len(args) != 2:
     if len(args) < 2:
@@ -111,18 +111,18 @@ else:
     ruleName = args[0]
     bltPath = args[1]
 
-if ruleName == 'wigm_ref':
-    import rules.wigm_ref
-    Rule = rules.wigm_ref.Rule
-elif ruleName == 'meek_ref':
-    import rules.meek_ref
-    Rule = rules.meek_ref.Rule
-elif ruleName == 'mpls':
-    from rules.mpls import Rule
+options=dict(arithmetic=arithmetic, precision=prec, guard=guard)
+if ruleName == 'warren':
+    rule = 'meek'
+    options['variant'] = 'warren'
+elif ruleName in rules:
+    rule = ruleName
 else:
     print "Unrecognized rule '%s'" % ruleName
     print usage
     sys.exit(1)
+_rule = __import__('rules.%s' % rule, globals(), locals(), ['Rule'], -1)
+Rule = _rule.Rule
 
 #####################
 #
@@ -135,7 +135,7 @@ def doElection(reps=1):
     from modules.election import Election
     electionProfile = ElectionProfile(path=bltPath)
     for i in xrange(reps):
-        E = Election(Rule, electionProfile, options=dict(arithmetic=arithmetic, precision=prec, guard=guard))
+        E = Election(Rule, electionProfile, options=options)
         E.count()    # repeat for profiling
     print E.report()    # election report
 

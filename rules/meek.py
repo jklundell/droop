@@ -1,5 +1,5 @@
 '''
-Count election using Reference Meek STV
+Count election using Reference Meek or Warren STV
 
 copyright 2010 by Jonathan Lundell
 '''
@@ -11,17 +11,21 @@ from modules.value import Value
 
 class Rule:
     '''
-    Rule for counting Model Meek elections
+    Rule for counting Model Meek or Warren elections
     
     Parameter: arithmetic type
     '''
     
-    @staticmethod
-    def initialize(E, options=dict()):
+    @classmethod
+    def initialize(cls, E, options=dict()):
         "initialize election parameters"
         
         #  set defaults
         #
+        variant = options.get('variant', 'meek').lower()
+        if variant not in ['meek', 'warren']:
+            raise ValueError('unknown  %s; use Meek or Warren' % variant)
+        cls.warren = (variant == 'warren')
         if not options.get('arithmetic'):
             options['arithmetic'] = 'quasi-exact'
 
@@ -32,18 +36,18 @@ class Rule:
         Rule.epsilon = V.epsilon
         return V
 
-    @staticmethod
-    def info():
+    @classmethod
+    def info(cls):
         "return an info string for the election report"
-        return "Model Meek"
+        return "Warren Reference" if cls.warren else "Meek Reference" 
 
     #########################
     #
     #   Main Election Counter
     #
     #########################
-    @staticmethod
-    def count(E):
+    @classmethod
+    def count(cls, E):
         "count the election"
         
         #  local support functions
@@ -176,13 +180,22 @@ class Rule:
                 for b in R.ballots:
                     b.weight = V1
                     b.residual = V(b.multiplier)
-                    for c in b.ranking:
-                        keep = V.mul(b.weight, c.kf, round='up')  # Hill variation
-                        b.weight -= keep  # Hill variation
-                        c.vote += keep * b.multiplier  # always exact (b.multiplier is an integer)
-                        b.residual -= keep * b.multiplier  # residual value of ballot
-                        if b.weight <= V0:
-                            break
+                    if cls.warren:
+                        for c in b.ranking:
+                            keep = c.kf if c.kf < b.residual else b.residual
+                            b.weight -= keep
+                            c.vote += keep * b.multiplier      # b.multiplier is an int
+                            b.residual -= keep * b.multiplier  # residual value of ballot
+                            if b.weight <= V0:
+                                break
+                    else: # meek
+                        for c in b.ranking:
+                            keep = V.mul(b.weight, c.kf, round='up')  # Hill variation
+                            b.weight -= keep  # Hill variation
+                            c.vote += keep * b.multiplier  # always exact (b.multiplier is an integer)
+                            b.residual -= keep * b.multiplier  # residual value of ballot
+                            if b.weight <= V0:
+                                break
                     R.residual += b.residual  # residual for round
                 R.votes = V0
                 for c in C.hopefulOrElected:

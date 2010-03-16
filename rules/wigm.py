@@ -16,8 +16,8 @@ class Rule:
     Parameter: arithmetic type
     '''
     
-    @staticmethod
-    def initialize(E, options=dict()):
+    @classmethod
+    def initialize(cls, E, options=dict()):
         "initialize election parameters"
         
         #  set defaults
@@ -29,8 +29,8 @@ class Rule:
         #
         return Value.ArithmeticClass(options)
 
-    @staticmethod
-    def info():
+    @classmethod
+    def info(cls):
         "return an info string for the election report"
         return "Model Weighted Inclusive Gregory Method (WIGM)"
 
@@ -39,8 +39,8 @@ class Rule:
     #   Main Election Counter
     #
     #########################
-    @staticmethod
-    def count(E):
+    @classmethod
+    def count(cls, E):
         "count the election"
         
         #  local support functions

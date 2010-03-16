@@ -46,8 +46,8 @@ class Rule:
     Rule for counting Minneapolis MN STV
     '''
 
-    @staticmethod
-    def initialize(E, options=dict()):
+    @classmethod
+    def initialize(cls, E, options=dict()):
         "initialize election parameters"
 
         #  initialize and return arithmetic
@@ -62,8 +62,8 @@ class Rule:
         options['guard'] = 0
         return Value.ArithmeticClass(options)
 
-    @staticmethod
-    def info():
+    @classmethod
+    def info(cls):
         "return an info string for the election report"
         return "Minneapolis MN STV"
 
@@ -72,8 +72,8 @@ class Rule:
     #   Main Election Counter
     #
     #########################
-    @staticmethod
-    def count(E):
+    @classmethod
+    def count(cls, E):
         "count the election with Minneapolis STV rules"
 
         #  local support functions
