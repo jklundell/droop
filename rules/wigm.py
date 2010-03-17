@@ -87,6 +87,7 @@ class Rule:
             if len(tied) == 1:
                 return tied[0]
             if len(tied) > 1:
+                tied = C.sortByOrder(tied) # sort by ballot order before making choice
                 t = tied[0]  # TODO: real tiebreaker
                 s = 'Break tie (%s): [' % purpose
                 s += ", ".join([c.name for c in tied])

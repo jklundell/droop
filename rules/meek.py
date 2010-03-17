@@ -110,7 +110,7 @@ class Rule:
             
             #  sortedCands = candidates sorted by vote
             #
-            sortedCands = sorted(C.hopeful, key=lambda c: c.vote)
+            sortedCands = C.sortByVote(C.hopeful)
             
             #   copy the sorted candidates list, 
             #   making each entry a list
@@ -224,6 +224,7 @@ class Rule:
                 surplus = V0
                 for c in C.elected:
                     surplus += c.vote - R.quota
+                R.surplus = surplus # for reporting
                 
                 #  D.7. test iteration complete
                 #
@@ -276,8 +277,6 @@ class Rule:
             if V.exact:
                 sys.stdout.write('%d' % R.n)
                 sys.stdout.flush()
-                for c in C.elected:  # experimental: reset keep factors for exact methods
-                    c.kf = V1
             C = R.C   # candidate state
 
             #  C. iterate

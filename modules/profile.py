@@ -4,8 +4,6 @@ droop: election profile support
 copyright 2010 by Jonathan Lundell
 '''
 
-import sys
-
 class ElectionProfile(object):
     '''
     Election profile
@@ -35,6 +33,9 @@ class ElectionProfile(object):
     All attributes should be treated as immutable.
     '''
     
+    class ElectionProfileError(Exception):
+        "error processing election profile"
+
     def __init__(self, path=None, data=None):
         "initialize profile"
         self.title = None
@@ -49,8 +50,6 @@ class ElectionProfile(object):
         if path:
             data = self.__bltPath(path)
         self.__bltData(data)
-        if not self.__validate():
-            raise ValueError("invalid ballot file")
 
     class BallotLine(object):
         "one ballot line"
@@ -63,21 +62,17 @@ class ElectionProfile(object):
     def __validate(self):
         "check for internal consistency"
         if not self.nSeats or self.nSeats > len(self.eligible):
-            print 'too few candidates (%d seats; %d candidates)' % (self.nSeats, len(self.eligible))
-            return False
+            raise self.ElectionProfileError('too few candidates (%d seats; %d candidates)' % (self.nSeats, len(self.eligible)))
         if self.nBallots < len(self.eligible):
-            print 'too few ballots (%d ballots; %d candidates)' % (self.nBallots, len(self.eligible))
-            return False
+            raise self.ElectionProfileError('too few ballots (%d ballots; %d candidates)' % (self.nBallots, len(self.eligible)))
         n = 0
         for ranking in [bl.ranking for bl in self.ballotLines]:
             n += 1
             d = dict()
             for cid in ranking:
                 if cid in d:
-                    print 'candidate ID %s duplicated on ballot line %d' % (cid, n)
-                    return False
+                    raise self.ElectionProfileError('candidate ID %s duplicated on ballot line %d' % (cid, n))
                 d[cid] = cid
-        return True
     
     def candidateName(self, cid):
         "get name of candidate"
@@ -93,8 +88,7 @@ class ElectionProfile(object):
             f = open(path, 'r')
             data = f.read()
         except Exception as emsg:
-            print "droop: can't open ballot file %s (%s)" % (path, emsg)
-            sys.exit(1)
+            raise self.ElectionProfileError("droop: can't open ballot file %s (%s)" % (path, emsg))
         f.close()
         return data
         

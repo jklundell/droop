@@ -109,7 +109,7 @@ class Rule:
 
             #  sortedCands = candidates sorted by vote
             #
-            sortedCands = sorted(C.hopeful, key=lambda c: c.vote)
+            sortedCands = C.sortByVote(C.hopeful)
 
             #   copy the sorted candidates list, 
             #   making each entry a list
@@ -198,6 +198,7 @@ class Rule:
                 return None
             if len(tied) == 1:
                 return tied[0]
+            tied = C.sortByOrder(tied) # sort by ballot order before making choice
             tied = sorted(tied, key=lambda c: c.order) # start with ballot order
             t = random.choice(tied)  # in the absence of the City Council...
             names = ", ".join([c.name for c in tied])

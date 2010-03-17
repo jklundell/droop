@@ -69,6 +69,7 @@ class Rational(Fraction):
         '''
         epsilon = options.get('epsilon', None) or 10
         cls.epsilon = Fraction(1,10**epsilon)
+        cls.info = 'rational arithmetic (epsilon=%d)' % epsilon
 
     #  define equality as approximate equality,
     #  and define other relationships consistently
@@ -343,7 +344,7 @@ class Fixed(object):
     #
     def __cmp__(self, other):
         if not Fixed.exact:
-            return self._value.__cmp__(other)
+            return self._value.__cmp__(other._value)
         gdiff = abs(self._value - other._value)
         if gdiff < Fixed.__geps and gdiff > Fixed.maxDiff:
             Fixed.maxDiff = gdiff

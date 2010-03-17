@@ -15,7 +15,6 @@ Top-level structure:
   
   The options are used to override default Rule parameters, such as arithmetic.
 '''
-
 class Election(object):
     '''
     container for an election
@@ -31,6 +30,9 @@ class Election(object):
     withdrawn = set()  # all the withdrawn candidates
     _candidates = dict() # candidates by candidate ID
     
+    class ElectionError(Exception):
+        "error counting election"
+
     def __init__(self, rule, electionProfile, options=dict()):
         "create an election"
 
@@ -44,7 +46,8 @@ class Election(object):
         self.R0 = self.R = self.rounds[0]
         for cid in electionProfile.eligible | electionProfile.withdrawn:
             c = Candidate(self, cid, electionProfile.candidateOrder(cid), electionProfile.candidateName(cid))
-            assert c.cid not in self._candidates.keys(), 'duplicate candiates (%s)' % c.cid
+            if c.cid in self._candidates.keys():
+                raise self.ElectionError('duplicate candiate id: %s (%s)' % (c.cid, c.name))
             self._candidates[cid] = c
             if cid in electionProfile.eligible:
                 self.eligible.add(c)
@@ -132,7 +135,8 @@ class Election(object):
                 self.quota = previous.quota
                 self.ballots = [b.copy() for b in previous.ballots]
             self.residual = E.V0
-            self.vote = E.V0
+            self.votes = E.V0
+            self.surplus = E.V0
             self._log = [] # list of log messages
     
         def transfer(self, c):
@@ -162,6 +166,14 @@ class Election(object):
                 s += '\tNontransferable votes: %s\n' % nontransferable
             if E.R.n == 0 or E.R.prior.quota != E.R.quota:
                 s += '\tQuota: %s\n' % E.R.quota
+            if E.R.votes:
+                s += '\tVotes: %s\n' % E.R.votes
+            if E.R.residual:
+                s += '\tResidual: %s\n' % E.R.residual
+            if E.R.votes or E.R.residual:
+                s += '\tTotal: %s\n' % (E.R.votes + E.R.residual)
+            if E.R.surplus:
+                s += '\tSurplus: %s\n' % E.R.surplus
             E.R = saveR
             return s
             
@@ -171,7 +183,7 @@ class Election(object):
             saveR, E.R = E.R, self # provide reporting context
             s = ''
             
-            candidates = sorted(E.eligible, key=lambda c:int(c.cid))
+            candidates = sorted(E.eligible, key=lambda c: c.order)
             #  if round 0, include a header line
             if self.n == 0:
                 h = ['R', 'Q', 'residual']
@@ -494,3 +506,12 @@ class CandidateState(object):
     def nWithdrawn(self):
         "return count of withdrawn candidates"
         return len(self.E.withdrawn)
+        
+    def sortByVote(self, collection):
+        "sort a collection of candidates by vote"
+        # keep the result stable by ballot order
+        return sorted(collection, key=lambda c: (c.vote, c.order))
+
+    def sortByOrder(self, collection):
+        "sort a collection of candidates by ballot order"
+        return sorted(collection, key=lambda c: c.order)
