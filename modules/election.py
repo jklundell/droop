@@ -100,7 +100,11 @@ class Election(object):
        self.R.prior = self.rounds[-2]
        return self.R
 
-    def report(self):
+    def log(self, msg):
+        "log a message to the current round"
+        self.R.log(msg)
+
+    def report(self, intr=False):
         "report election by round"
         s = "\nElection: %s\n\n" % self.title
         s += "\tRule: %s\n" % self.rule.info()
@@ -109,6 +113,9 @@ class Election(object):
         s += "\tBallots: %d\n" % self.nBallots
         s += "\tQuota: %s\n" % self.R0.quota
         s += '\n'
+        if intr:
+            s += "\t** Count terminated prematurely by user interrupt **\n\n"
+            self.R.log('** count interrupted; this round is incomplete **')
         s += self.V.report()
         reportMeek = self.rule.reportMode() == 'meek'
         for round in self.rounds:

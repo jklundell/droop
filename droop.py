@@ -132,13 +132,14 @@ Rule = _rule.Rule
 def doElection(reps=1):
     "run election with repeat count for profiling"
     electionProfile = ElectionProfile(path=bltPath)
+    intr = False
     for i in xrange(reps):
         E = Election(Rule, electionProfile, options=options)
         try:
             E.count()    # repeat for profiling
         except KeyboardInterrupt:
-            pass
-    print E.report()    # election report
+            intr = True
+    print E.report(intr)    # election report
     print "\nDump:\n"
     print E.dump()      # round-by-round dump
 

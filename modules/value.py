@@ -52,10 +52,13 @@ class Rational(Fraction):
     This is acceptable for our purposes, but may not be generally desirable.
     '''
     
-    exact = True
-    epsilon = None
     name = 'rational'
     info = 'rational arithmetic'
+    exact = True
+    epsilon = None
+    dp = None    # str() display precision
+    _dps = None  # display scale factor
+    _dfmt = None # display format string
     
     @classmethod
     def initialize(cls, options=dict()):
@@ -64,12 +67,19 @@ class Rational(Fraction):
         
         options:
             epsilon (default 10) sets the value used to determine equality to 1/10^epsilon
+            dp is the display precision (fixed-decimal with dp places); defaults to epsilon
             
             a == b is defined as abs(a - b) < 1/10**epsilon
         '''
         epsilon = options.get('epsilon', None) or 10
         cls.epsilon = Fraction(1,10**epsilon)
         cls.info = 'rational arithmetic (epsilon=%d)' % epsilon
+        #
+        #  initialize __str__ parameters
+        #
+        cls.dp = options.get('dp', None) or epsilon        # display precision
+        cls._dps = 10 ** cls.dp                            # display scaler
+        cls._dfmt = "%d.%0" + str(cls.dp) + "d" # %d.%0_d  # display format
 
     #  define equality as approximate equality,
     #  and define other relationships consistently
@@ -122,9 +132,19 @@ class Rational(Fraction):
     def __hash__(self):
         raise NotImplementedError
     
+    #  leave repr alone, but redefine str as decimal notation for readability
+    def __str__(self):
+        "represent Rational as fixed-decimal string"
+        if self._numerator == 0 or self._denominator == 1:
+            v = self._numerator * self._dps * 10
+        else:
+            v = self._numerator * self._dps * 10 / self._denominator
+        v = (v + 5) / 10  # round
+        return self._dfmt % (v//self._dps, v%self._dps)
+    
     @staticmethod
     def report():
-        "Report arithmetic statistics"
+        "Report Rational arithmetic statistics"
         return ''
 
     #  provide mul, div, muldiv for compatibility with non-exact arithmetic
