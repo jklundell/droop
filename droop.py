@@ -139,6 +139,8 @@ def doElection(reps=1):
         except KeyboardInterrupt:
             pass
     print E.report()    # election report
+    print "\nDump:\n"
+    print E.dump()      # round-by-round dump
 
 try:
     if doProfile:

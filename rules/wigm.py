@@ -34,6 +34,11 @@ class Rule:
         "return an info string for the election report"
         return "Model Weighted Inclusive Gregory Method (WIGM)"
 
+    @classmethod
+    def reportMode(cls):
+        "how should this election be reported? meek or wigm"
+        return 'wigm'
+
     #########################
     #
     #   Main Election Counter

@@ -66,6 +66,11 @@ class Rule:
     def info(cls):
         "return an info string for the election report"
         return "Minneapolis MN STV"
+        
+    @classmethod
+    def reportMode(cls):
+        "how should this election be reported? meek or wigm"
+        return 'wigm'
 
     #########################
     #
@@ -199,7 +204,6 @@ class Rule:
             if len(tied) == 1:
                 return tied[0]
             tied = C.sortByOrder(tied) # sort by ballot order before making choice
-            tied = sorted(tied, key=lambda c: c.order) # start with ballot order
             t = random.choice(tied)  # in the absence of the City Council...
             names = ", ".join([c.name for c in tied])
             R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
@@ -228,7 +232,10 @@ class Rule:
             ##  a. The number of votes cast for each candidate for the current round 
             ##     must be counted.
             ##
-            for c in C.hopefulOrElected: c.vote = V0
+            for c in C.elected:
+                c.vote = R.quota
+            for c in C.hopefulOrPending:
+                c.vote = V0
             for b in [b for b in R.ballots if not b.exhausted]:
                 b.topCand.vote += b.vote
 

@@ -34,7 +34,7 @@ class Election(object):
         "error counting election"
 
     def __init__(self, rule, electionProfile, options=dict()):
-        "create an election"
+        "create an election from the incoming election profile"
 
         self.rule = rule # a class
         self.V = self.rule.initialize(self, options) # set arithmetic class
@@ -44,16 +44,29 @@ class Election(object):
 
         self.rounds = [self.Round(self)]
         self.R0 = self.R = self.rounds[0]
+        #
+        #  create candidate objects for candidates in election profile
+        #
         for cid in electionProfile.eligible | electionProfile.withdrawn:
             c = Candidate(self, cid, electionProfile.candidateOrder(cid), electionProfile.candidateName(cid))
             if c.cid in self._candidates.keys():
-                raise self.ElectionError('duplicate candiate id: %s (%s)' % (c.cid, c.name))
+                raise self.ElectionError('duplicate candidate id: %s (%s)' % (c.cid, c.name))
             self._candidates[cid] = c
+            #
+            #  add each candidate to either the eligible or withdrawn set
+            #
             if cid in electionProfile.eligible:
                 self.eligible.add(c)
             else:
                 self.withdrawn.add(c)
+            #
+            #  and add the candidate to round 0
+            #
             self.R0.C.addCandidate(c, isWithdrawn=cid in electionProfile.withdrawn)
+        #
+        #  create a ballot object (ranking candidate objects) from the profile rankings of candidate IDs
+        #  only eligible (not withdrawn) will be added
+        #
         for bl in electionProfile.ballotLines:
             self.R0.ballots.append(self.Ballot(self, bl.multiplier, bl.ranking))
 
@@ -91,17 +104,24 @@ class Election(object):
         "report election by round"
         s = "\nElection: %s\n\n" % self.title
         s += "\tRule: %s\n" % self.rule.info()
-        s += "\tArithmetic: %s\n\n" % self.V.info
+        s += "\tArithmetic: %s\n" % self.V.info
+        s += "\tSeats: %d\n" % self.nSeats
+        s += "\tBallots: %d\n" % self.nBallots
+        s += "\tQuota: %s\n" % self.R0.quota
+        s += '\n'
         s += self.V.report()
+        reportMeek = self.rule.reportMode() == 'meek'
         for round in self.rounds:
             s += "Round %d:\n" % round.n
-            s += round.report(self)
-        
-        #  dump round-by-round details
-        #
-        s += "\nDump Rounds:\n"
+            s += round.report(self, reportMeek)
+        return s
+
+    def dump(self):
+        "dump election by round"
+        reportMeek = self.rule.reportMode() == 'meek'
+        s = ''
         for round in self.rounds:
-            s += round.dump(self)
+            s += round.dump(self, reportMeek)
         return s
 
     def seatsLeftToFill(self):
@@ -148,7 +168,7 @@ class Election(object):
             "log a message"
             self._log.append(msg)
             
-        def report(self, E):
+        def report(self, E, reportMeek):
             "report a round"
             saveR, E.R = E.R, self # provide reporting context
             s = ''
@@ -159,55 +179,75 @@ class Election(object):
             s += '\tHopeful: %s\n' % (" ".join(sorted([c.name for c in self.C.hopeful])) or 'None')
             s += '\tElected: %s\n' % (" ".join(sorted([c.name for c in self.C.elected])) or 'None')
             s += '\tDefeated: %s\n' % (" ".join(sorted([c.name for c in self.C.defeated])) or 'None')
-            nontransferable = E.V0
-            for b in [b for b in self.ballots if b.exhausted]:
-                nontransferable = nontransferable + b.vote
-            if nontransferable:
-                s += '\tNontransferable votes: %s\n' % nontransferable
-            if E.R.n == 0 or E.R.prior.quota != E.R.quota:
+            if reportMeek:
                 s += '\tQuota: %s\n' % E.R.quota
-            if E.R.votes:
                 s += '\tVotes: %s\n' % E.R.votes
-            if E.R.residual:
                 s += '\tResidual: %s\n' % E.R.residual
-            if E.R.votes or E.R.residual:
                 s += '\tTotal: %s\n' % (E.R.votes + E.R.residual)
-            if E.R.surplus:
                 s += '\tSurplus: %s\n' % E.R.surplus
+            else: # wigm
+                pvotes = E.V0  # elected pending transfer
+                hvotes = E.V0  # top-ranked hopeful
+                nontransferable = E.V0
+                for b in self.ballots:
+                    if b.exhausted:
+                        nontransferable += b.vote
+                    else:
+                        if b.topCand in self.C.elected:
+                            pvotes += b.vote
+                        else:
+                            hvotes += b.vote
+                evotes = E.V0
+                for c in self.C.elected:
+                    if not c in self.C.pending:
+                        evotes += E.R.quota
+                total = evotes + pvotes + hvotes + nontransferable
+                #  residual here (wigm) is votes lost due to rounding
+                residual = E.V(E.nBallots) - total
+                s += '\tElected votes (not pending) %s\n' % evotes
+                s += '\tTop-rank votes (elected): %s\n' % pvotes
+                s += '\tTop-rank votes (hopeful): %s\n' % hvotes
+                s += '\tNontransferable votes: %s\n' % nontransferable
+                s += '\tResidual: %s\n' % residual
+                s += '\tTotal: %s\n' % (evotes + pvotes + hvotes + nontransferable + residual)
+
             E.R = saveR
             return s
             
-        def dump(self, E):
+        def dump(self, E, reportMeek):
             "dump a round"
 
             saveR, E.R = E.R, self # provide reporting context
+            C = E.R.C
             s = ''
             
-            candidates = sorted(E.eligible, key=lambda c: c.order)
+            candidates = C.sortByOrder(E.eligible) # report in ballot order
             #  if round 0, include a header line
             if self.n == 0:
-                h = ['R', 'Q', 'residual']
+                h = ['R', 'Q']
+                if reportMeek: h += ['residual']
                 for c in candidates:
                     cid = c.cid
                     h += ["'%s.name'" % cid]
                     h += ["'%s.state'" % cid]
                     h += ["'%s.vote'" % cid]
-                    h += ["'%s.kf'" % cid]
+                    if reportMeek: h += ["'%s.kf'" % cid]
                 h = [str(item) for item in h]
                 s += ','.join(h) + '\n'
                 
-            r = [self.n, self.quota, self.residual]
+            r = [self.n, self.quota]
+            if reportMeek: r.append(self.residual)
             for c in candidates:
                 cid = c.cid
                 r.append(c.name)
                 if self.n:
-                    r.append('W' if c.isWithdrawn else 'H' if c.isHopeful else 'P' if c.isPending else 'E' if c.isElected else 'D' if c.isDefeated else '?') # state
+                    r.append('W' if c in C.withdrawn else 'H' if c in C.hopeful else 'P' if c in C.pending else 'E' if c in C.elected else 'D' if c in C.defeated else '?') # state
                     r.append(c.vote)
-                    r.append("'-'" if c.kf is None else c.kf)
+                    if reportMeek: r.append(c.kf)
                 else:
-                    r.append('W' if c.isWithdrawn else 'H') # state
+                    r.append('W' if c in C.withdrawn else 'H') # state
                     r.append(c.vote) # vote
-                    r.append("'-'") # kf
+                    if reportMeek: r.append("'-'") # kf
                 
             r = [str(item) for item in r]
             s += ','.join(r) + '\n'
@@ -303,29 +343,6 @@ class Candidate(object):
         self.order = order # ballot order
         self.name = cname  # candidate name
 
-    #  test state of this candidate
-    #
-    @property
-    def isHopeful(self):
-        "True iff hopeful candidate"
-        return self in self.E.R.C.hopeful
-    @property
-    def isPending(self):
-        "True iff transfer-pending candidate"
-        return self in self.E.R.C.pending
-    @property
-    def isElected(self):
-        "True iff elected candidate"
-        return self in self.E.R.C.elected
-    @property
-    def isDefeated(self):
-        "True iff defeated candidate"
-        return self in self.E.R.C.defeated
-    @property
-    def isWithdrawn(self):
-        "True iff withdrawn candidate"
-        return self in self.E.withdrawn
-        
     #  get/set vote total of this candidate
     #
     def getvote(self):
@@ -455,30 +472,6 @@ class CandidateState(object):
         "return vote for candidate in round r (default=current)"
         if r is None: return self._vote[c.cid]
         return self.E.rounds[r].C._vote[c.cid]
-
-    def isHopeful(self, c, r=None):
-        "True iff candidate is hopeful in specifed round (default=current)"
-        if r is None: return c in self.hopeful
-        return c in self.E.rounds[r].C.hopeful
-
-    def isPending(self, c, r=None):
-        "True iff candidate is transfer-pending in specifed round (default=current)"
-        if r is None: return c in self.pending
-        return c in self.E.rounds[r].C.pending
-
-    def isElected(self, c, r=None):
-        "True iff candidate is elected in specifed round (default=current)"
-        if r is None: return c in self.elected
-        return c in self.E.rounds[r].C.elected
-
-    def isDefeated(self, c, r=None):
-        "True iff candidate is defeated in specifed round (default=current)"
-        if r is None: return c in self.defeated
-        return c in self.E.rounds[r].C.defeated
-
-    def isWithdrawn(self, c):
-        "True iff candidate is withdraw in specifed round (default=current)"
-        return c in self.E.withdrawn
 
     #  return count of candidates in requested state
     #

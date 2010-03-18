@@ -41,6 +41,11 @@ class Rule:
         "return an info string for the election report"
         return "Warren Reference" if cls.warren else "Meek Reference" 
 
+    @classmethod
+    def reportMode(cls):
+        "how should this election be reported? meek or wigm"
+        return 'meek'
+
     #########################
     #
     #   Main Election Counter
@@ -190,10 +195,40 @@ class Rule:
                                 break
                     else: # meek
                         for c in b.ranking:
-                            keep = V.mul(b.weight, c.kf, round='up')  # Hill variation
-                            b.weight -= keep  # Hill variation
-                            c.vote += keep * b.multiplier  # always exact (b.multiplier is an integer)
-                            b.residual -= keep * b.multiplier  # residual value of ballot
+                            if True:
+                                #
+                                #  OpenSTV MeekSTV
+                                #
+                                #  kv = w*kf*m rounded down     keep vote
+                                #  w = w*(1-kf) rounded down    new weight
+                                #
+                                kv = V.mul(b.weight*b.multiplier, c.kf, round='down')
+                                c.vote += kv
+                                b.weight = V.mul(b.weight, V1-c.kf, round='down')
+                            if False:
+                                #
+                                #  Hill/NZ Calculator
+                                #
+                                #  kv = w*kf rounded up * m     keep vote
+                                #  w -= w*kf rounded up         new weight
+                                # 
+                                kw = V.mul(b.weight, c.kf, round='up')  # keep weight
+                                kv = kw * b.multiplier  # exact
+                                c.vote += kv
+                                b.weight -= kw
+                            if False:
+                                #
+                                #  NZ Schedule 1A
+                                #
+                                #  kv = w*kf rounded up * m     keep vote
+                                #  w = w*(1-kf) rounded up      new weight
+                                # 
+                                kv = V.mul(b.weight, c.kf, round='up') * b.multiplier  # exact
+                                c.vote += kv
+                                b.weight = V.mul(b.weight, V1-c.kf, round='up')
+                                
+                            b.residual -= kv  # residual value of ballot
+                            #
                             if b.weight <= V0:
                                 break
                     R.residual += b.residual  # residual for round
@@ -240,13 +275,15 @@ class Rule:
                     
                 #  D.8. update keep factors
                 #
-                #  variations:
-                #  Hill: full-precision multiply, round quotient up; transfer quota-keep
-                #  NZ Schedule 1A: full-precision multiply(?), round quotient up; transfer (1-kf) rounded up
-                #  OpenSTV MeekStV: full-precision multiply, round quotient down; transfer (1-kf) rounded down
+                #  rounding options for non-exact arithmetic:
+                #
+                #  kf * quota    / vote
+                #     full         up        OpenSTV MeekSTV
+                #      up          up        Hill & NZ Calculator & NZ Schedule 1A
                 #
                 for c in C.elected:
-                    c.kf = V.muldiv(c.kf, R.quota, c.vote, round='up')  # Hill (and NZ STV Calculator) variant
+                    c.kf = V.muldiv(c.kf, R.quota, c.vote, round='up')  # OpenSTV variant
+                    #c.kf = V.div(V.mul(c.kf, R.quota, round='up'), c.vote, round='up')  # NZ variant
             
         #########################
         #
