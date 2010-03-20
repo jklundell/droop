@@ -41,7 +41,7 @@ if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 from modules.value import Value
 import random
 
-class Rule:
+class Rule(object):
     '''
     Rule for counting Minneapolis MN STV
     '''

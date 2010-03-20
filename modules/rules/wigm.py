@@ -9,7 +9,7 @@ path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 from modules.value import Value
 
-class Rule:
+class Rule(object):
     '''
     Rule for counting Model WIGM elections
     
