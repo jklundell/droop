@@ -111,7 +111,7 @@ class Election(object):
         s += "\tArithmetic: %s\n" % self.V.info
         s += "\tSeats: %d\n" % self.nSeats
         s += "\tBallots: %d\n" % self.nBallots
-        s += "\tQuota: %s\n" % self.R0.quota
+        s += "\tQuota: %s\n" % self.V(self.R0.quota)
         s += '\n'
         if intr:
             s += "\t** Count terminated prematurely by user interrupt **\n\n"
@@ -177,6 +177,7 @@ class Election(object):
             
         def report(self, E, reportMeek):
             "report a round"
+            V = E.V
             saveR, E.R = E.R, self # provide reporting context
             s = ''
             for line in self._log:
@@ -187,11 +188,11 @@ class Election(object):
             s += '\tElected: %s\n' % (" ".join(sorted([c.name for c in self.C.elected])) or 'None')
             s += '\tDefeated: %s\n' % (" ".join(sorted([c.name for c in self.C.defeated])) or 'None')
             if reportMeek:
-                s += '\tQuota: %s\n' % E.R.quota
-                s += '\tVotes: %s\n' % E.R.votes
-                s += '\tResidual: %s\n' % E.R.residual
-                s += '\tTotal: %s\n' % (E.R.votes + E.R.residual)
-                s += '\tSurplus: %s\n' % E.R.surplus
+                s += '\tQuota: %s\n' % V(E.R.quota)
+                s += '\tVotes: %s\n' % V(E.R.votes)
+                s += '\tResidual: %s\n' % V(E.R.residual)
+                s += '\tTotal: %s\n' % V((E.R.votes + E.R.residual))
+                s += '\tSurplus: %s\n' % V(E.R.surplus)
             else: # wigm
                 pvotes = E.V0  # elected pending transfer
                 hvotes = E.V0  # top-ranked hopeful
@@ -211,12 +212,12 @@ class Election(object):
                 total = evotes + pvotes + hvotes + nontransferable
                 #  residual here (wigm) is votes lost due to rounding
                 residual = E.V(E.nBallots) - total
-                s += '\tElected votes (not pending) %s\n' % evotes
-                s += '\tTop-rank votes (elected): %s\n' % pvotes
-                s += '\tTop-rank votes (hopeful): %s\n' % hvotes
-                s += '\tNontransferable votes: %s\n' % nontransferable
-                s += '\tResidual: %s\n' % residual
-                s += '\tTotal: %s\n' % (evotes + pvotes + hvotes + nontransferable + residual)
+                s += '\tElected votes (not pending) %s\n' % V(evotes)
+                s += '\tTop-rank votes (elected): %s\n' % V(pvotes)
+                s += '\tTop-rank votes (hopeful): %s\n' % V(hvotes)
+                s += '\tNontransferable votes: %s\n' % V(nontransferable)
+                s += '\tResidual: %s\n' % V(residual)
+                s += '\tTotal: %s\n' % V(evotes + pvotes + hvotes + nontransferable + residual)
 
             E.R = saveR
             return s
@@ -225,6 +226,7 @@ class Election(object):
             "dump a round"
 
             saveR, E.R = E.R, self # provide reporting context
+            V = E.V
             C = E.R.C
             s = ''
             
@@ -242,18 +244,18 @@ class Election(object):
                 h = [str(item) for item in h]
                 s += ','.join(h) + '\n'
                 
-            r = [self.n, self.quota]
-            if reportMeek: r.append(self.residual)
+            r = [self.n, V(self.quota)]
+            if reportMeek: r.append(V(self.residual))
             for c in candidates:
                 cid = c.cid
                 r.append(c.name)
                 if self.n:
                     r.append('W' if c in C.withdrawn else 'H' if c in C.hopeful else 'P' if c in C.pending else 'E' if c in C.elected else 'D' if c in C.defeated else '?') # state
-                    r.append(c.vote)
-                    if reportMeek: r.append(c.kf)
+                    r.append(V(c.vote))
+                    if reportMeek: r.append(V(c.kf))
                 else:
                     r.append('W' if c in C.withdrawn else 'H') # state
-                    r.append(c.vote) # vote
+                    r.append(V(c.vote)) # vote
                     if reportMeek: r.append("'-'") # kf
                 
             r = [str(item) for item in r]

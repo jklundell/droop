@@ -34,7 +34,7 @@ Usage:
   -a: override default arithmetic: fixed, qx, rational, integer
   -p: override default precision (in digits)
   -g: override guard precision (in digits, qx only)
-  -e: override epsilon (in digits, rational only)
+  -e: override epsilon (in digits, meek/warren)
   -r: report format: tbd
   -t: strong tie-break method: random
   -w: weak tie-break method: tbd
@@ -65,7 +65,7 @@ try:
                   reportformat = a
               else: raise UsageError("Unrecognized report format '%s'" % a)
         if o == "-a":
-              if a in ["fixed", "qx", "rational", "integer"]:
+              if a in ["fixed", "qx", "quasi-exact", "rational", "integer"]:
                   arithmetic = a
               else: raise UsageError("Unrecognized arithmetic '%s'" % a)
         if o == "-p":
@@ -121,7 +121,7 @@ except UsageError as err:
     print >>sys.stderr, usage
     sys.exit(1)
 
-_rule = __import__('rules.%s' % rule, globals(), locals(), ['Rule'], -1)
+_rule = __import__('modules.rules.%s' % rule, globals(), locals(), ['Rule'], -1)
 Rule = _rule.Rule
 
 #####################

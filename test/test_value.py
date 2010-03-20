@@ -7,12 +7,11 @@ import unittest
 import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
-import modules.value
 
-# shortcuts for the value classes
-V = modules.value.Value
-R = modules.value.Rational
-F = modules.value.Fixed
+from modules.value import Value as V
+from modules.values.fixed import Fixed as F
+from modules.values.qx import QX as Q
+from modules.values.rational import Rational as R
 
 class ValueTest(unittest.TestCase):
     "test value-class initialization"
@@ -23,7 +22,7 @@ class ValueTest(unittest.TestCase):
 
     def testValueInitRationalDefault(self):
         "default class Fixed"
-        self.assertEqual(V.ArithmeticClass(), F)
+        self.assertEqual(V.ArithmeticClass(), Q)
 
     def testBadP1(self):
         "precision must be an int"
@@ -44,20 +43,21 @@ class ValueTest(unittest.TestCase):
 class ValueTestFixed6(unittest.TestCase):
     p = 6
     g = 0
+    A = None
     def setUp(self):
         "initialize fixed point six places"
-        V.ArithmeticClass(options=dict(arithmetic='fixed', precision=self.p, guard=self.g))
+        self.A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=self.p, guard=self.g))
         
     def testFixed6(self):
         "simple assertions"
-        self.assertEqual(F.name, 'fixed')               # Fixed.name
-        self.assertEqual(F.exact, False)                # Fixed.exact
-        self.assertEqual(F._Fixed__precision, self.p)   # Fixed.__precision
-        self.assertEqual(F._Fixed__scalep, 10**self.p)  # Fixed.__scalep
-        self.assertEqual(F(0)._value, 0)                # 0
-        self.assertEqual(F(1)._value, 10**self.p)       # 1
-        self.assertEqual(F(100)._value, 100*10**self.p) # 100
-        self.assertEqual((F(1)/F(10))._value, 10**(self.p-1))  # 1/10
+        self.assertEqual(self.A.name, 'fixed')               # Fixed.name
+        self.assertEqual(self.A.exact, False)                # Fixed.exact
+        self.assertEqual(self.A._Fixed__precision, self.p)   # Fixed.__precision
+        self.assertEqual(self.A._Fixed__scale, 10**self.p)   # Fixed.__scale
+        self.assertEqual(self.A(0)._value, 0)                # 0
+        self.assertEqual(self.A(1)._value, 10**self.p)       # 1
+        self.assertEqual(self.A(100)._value, 100*10**self.p) # 100
+        self.assertEqual((self.A(1)/self.A(10))._value, 10**(self.p-1))  # 1/10
 
 class ValueTestRounding(unittest.TestCase):
     "test rounding of fixed values"
@@ -98,25 +98,26 @@ class ValueTestRounding(unittest.TestCase):
 class ValueTestQX9(unittest.TestCase):
     p = 9
     g = p
+    A = None
     def setUp(self):
         "initialize quasi-exact 9.None s/b 9.9"
-        V.ArithmeticClass(options=dict(precision=self.p))
+        self.A = V.ArithmeticClass(options=dict(arithmetic='qx', precision=self.p))
         
     def testExact(self):
         "quasi-exact is exact"
-        self.assertEqual(F.exact, True)
+        self.assertEqual(self.A.exact, True)
 
     def testScale(self):
         "scale is a function of precision and guard"
-        self.assertEqual(F._Fixed__scale, 10**(self.p+self.g))
+        self.assertEqual(self.A._QX__scale, 10**(self.p+self.g))
 
     def testGeps(self):
         "geps is a function of guard"
-        self.assertEqual(F._Fixed__geps, 10**self.g/10)
+        self.assertEqual(self.A._QX__geps, 10**self.g/10)
 
     def testBadP(self):
         "test illegal precision"
-        self.assertEqual(F.exact, True)
+        self.assertEqual(self.A.exact, True) # TBD
 
 if __name__ == '__main__':
     unittest.main()

@@ -16,6 +16,9 @@ class Rule:
     Parameter: arithmetic type
     '''
     
+    epsilon = None   # epsilon for terminating iteration
+    _e = None        # epsilon = 1/10^e
+    
     @classmethod
     def initialize(cls, E, options=dict()):
         "initialize election parameters"
@@ -33,13 +36,25 @@ class Rule:
         
         #  set epsilon
         #
-        Rule.epsilon = V.epsilon
+        #  epsilon will be 1/10**e
+        #
+        assert V.name in ('rational', 'quasi-exact', 'fixed')
+        if V.name == 'rational':
+            e = 10
+        elif V.name == 'quasi-exact':
+            e = V.precision * 2 // 3
+        else: # fixed
+            e = V.precision * 2 // 3
+        # allow epsilon to be overridden
+        cls._e = options.get('epsilon', None) or e
+        cls.epsilon = V(1) / V(10**cls._e)
         return V
 
     @classmethod
     def info(cls):
         "return an info string for the election report"
-        return "Warren Reference" if cls.warren else "Meek Reference" 
+        name = "Warren" if cls.warren else "Meek"
+        return "%s Reference (epsilon = 1/10^%d)" % (name, cls._e)
 
     @classmethod
     def reportMode(cls):
@@ -113,19 +128,17 @@ class Rule:
         def batchDefeat(surplus):
             "find a batch of candidates that can be defeated at the current surplus"
             
-            #  sortedCands = candidates sorted by vote
-            #
-            sortedCands = C.sortByVote(C.hopeful)
-            
-            #   copy the sorted candidates list, 
+            #   get a sorted list of candidates
+            #   copy to a new list,
             #   making each entry a list
             #   where each list has tied candidates, if any
             #
+            sortedCands = C.sortByVote(C.hopeful)
             group = []
             sortedGroups = []
             vote = V0
             for c in sortedCands:
-                if c.vote == vote:
+                if V.equal_within(c.vote, vote, cls.epsilon):
                     group.append(c)  # add candidate to tied group
                 else:
                     if group:
@@ -170,7 +183,7 @@ class Rule:
         def iterate():
             "Iterate until surplus is sufficiently low"
             iStatus = IS_none
-            lastsurplus = V0
+            lastsurplus = V(E.nBallots)
             while True:
                 if V.exact:
                     sys.stdout.write('.')
@@ -265,8 +278,8 @@ class Rule:
                 #
                 if surplus <= Rule.epsilon:
                     return IS_epsilon, None
-                if surplus == lastsurplus:
-                    R.log("Stable state detected") # move to caller?
+                if surplus >= lastsurplus:
+                    R.log("Stable state detected (%s)" % surplus) # move to caller?
                     return IS_stable, None
                 lastsurplus = surplus
                 batch = batchDefeat(surplus)
@@ -339,7 +352,7 @@ class Rule:
             low_vote = R.quota
             low_candidates = []
             for c in C.hopeful:
-                if c.vote == low_vote:
+                if V.equal_within(c.vote, low_vote, cls.epsilon):
                     low_candidates.append(c)
                 elif c.vote < low_vote:
                     low_vote = c.vote
@@ -349,7 +362,7 @@ class Rule:
             #
             if low_candidates:
                 low_candidate = breakTie(E, low_candidates, 'defeat')
-                C.defeat(low_candidate, msg='Defeat (surplus<epsilon)')
+                C.defeat(low_candidate, msg='Defeat (surplus %s < epsilon)' % V(R.surplus))
                 low_candidate.kf = V0
                 low_candidate.vote = V0
         
