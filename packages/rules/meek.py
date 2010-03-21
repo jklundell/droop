@@ -16,8 +16,8 @@ class Rule(object):
     Parameter: arithmetic type
     '''
     
-    epsilon = None   # epsilon for terminating iteration
-    _e = None        # epsilon = 1/10^e
+    omega = None     # epsilon for terminating iteration
+    _o = None        # omega = 1/10^o
     
     @classmethod
     def initialize(cls, E, options=dict()):
@@ -37,27 +37,27 @@ class Rule(object):
 
         V = Value.ArithmeticClass(options) # initialize arithmetic
         
-        #  set epsilon
+        #  set omega
         #
-        #  epsilon will be 1/10**e
+        #  omega will be 1/10**o
         #
         assert V.name in ('rational', 'quasi-exact', 'fixed')
         if V.name == 'rational':
-            e = 10
+            o = 10
         elif V.name == 'quasi-exact':
-            e = V.precision * 2 // 3
+            o = V.precision * 2 // 3
         else: # fixed
-            e = V.precision * 2 // 3
-        # allow epsilon to be overridden
-        cls._e = options.get('epsilon', None) or e
-        cls.epsilon = V(1) / V(10**cls._e)
+            o = V.precision * 2 // 3
+        # allow omega to be overridden
+        cls._o = options.get('omega', None) or o
+        cls.omega = V(1) / V(10**cls._o)
         return V
 
     @classmethod
     def info(cls):
         "return an info string for the election report"
         name = "Warren" if cls.warren else "Meek"
-        return "%s Reference (epsilon = 1/10^%d)" % (name, cls._e)
+        return "%s Reference (omega = 1/10^%d)" % (name, cls._o)
 
     @classmethod
     def reportMode(cls):
@@ -141,7 +141,7 @@ class Rule(object):
             sortedGroups = []
             vote = V0
             for c in sortedCands:
-                if V.equal_within(c.vote, vote, cls.epsilon):
+                if V.equal_within(c.vote, vote, cls.omega):
                     group.append(c)  # add candidate to tied group
                 else:
                     if group:
@@ -178,7 +178,7 @@ class Rule(object):
         #  iterateStatus constants
         #
         IS_none = None
-        IS_epsilon = 1
+        IS_omega = 1
         IS_batch = 2
         IS_elected = 3
         IS_stable = 4
@@ -279,8 +279,8 @@ class Rule(object):
                 
                 #  D.7. test iteration complete
                 #
-                if surplus <= Rule.epsilon:
-                    return IS_epsilon, None
+                if surplus <= Rule.omega:
+                    return IS_omega, None
                 if surplus >= lastsurplus:
                     R.log("Stable state detected (%s)" % surplus) # move to caller?
                     return IS_stable, None
@@ -355,7 +355,7 @@ class Rule(object):
             low_vote = R.quota
             low_candidates = []
             for c in C.hopeful:
-                if V.equal_within(c.vote, low_vote, cls.epsilon):
+                if V.equal_within(c.vote, low_vote, cls.omega):
                     low_candidates.append(c)
                 elif c.vote < low_vote:
                     low_vote = c.vote
@@ -365,7 +365,7 @@ class Rule(object):
             #
             if low_candidates:
                 low_candidate = breakTie(E, low_candidates, 'defeat')
-                C.defeat(low_candidate, msg='Defeat (surplus %s < epsilon)' % V(R.surplus))
+                C.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))
                 low_candidate.kf = V0
                 low_candidate.vote = V0
         
