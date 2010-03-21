@@ -1,160 +1,616 @@
 #!/usr/bin/env python
 '''
-Count election using OpenDroop
+Generic Election Support
+
+copyright 2010 by Jonathan Lundell
+
+Top-level structure:
+
+  A driver program (for example droop, the CLI) 
+    1. creates an ElectionProfile from a ballot file,
+    2. imports a Rule, 
+    3. creates an Election(Rule, ElectionProfile, options),
+    4. counts the election with Election.count(), and
+    5. generates a report with Election.report().
+  
+  The options are used to override default Rule parameters, such as arithmetic.
+'''
+class Election(object):
+    '''
+    container for an election
+    '''
+    rule = None      # election rule class
+    V = None         # arithmetic method
+    V0 = None        # constant zero
+    V1 = None        # constant one
+    rounds = None    # election rounds
+    R0 = None        # round 0 (initial state)
+    R = None         # current round
+    eligible = set() # all the non-withdrawn candidates
+    withdrawn = set()  # all the withdrawn candidates
+    _candidates = dict() # candidates by candidate ID
+    
+    class ElectionError(Exception):
+        "error counting election"
+
+    def __init__(self, rule, electionProfile, options=dict()):
+        "create an election from the incoming election profile"
+
+        self.rule = rule # a class
+        self.V = self.rule.initialize(self, options) # set arithmetic class
+        self.V0 = self.V(0)  # constant zero for efficiency
+        self.V1 = self.V(1)  # constant one for efficiency
+        self.electionProfile = electionProfile
+
+        self.rounds = [self.Round(self)]
+        self.R0 = self.R = self.rounds[0]
+        #
+        #  create candidate objects for candidates in election profile
+        #
+        for cid in electionProfile.eligible | electionProfile.withdrawn:
+            c = Candidate(self, cid, electionProfile.candidateOrder(cid), electionProfile.candidateName(cid))
+            if c.cid in self._candidates.keys():
+                raise self.ElectionError('duplicate candidate id: %s (%s)' % (c.cid, c.name))
+            self._candidates[cid] = c
+            #
+            #  add each candidate to either the eligible or withdrawn set
+            #
+            if cid in electionProfile.eligible:
+                self.eligible.add(c)
+            else:
+                self.withdrawn.add(c)
+            #
+            #  and add the candidate to round 0
+            #
+            self.R0.C.addCandidate(c, isWithdrawn=cid in electionProfile.withdrawn)
+        #
+        #  create a ballot object (ranking candidate objects) from the profile rankings of candidate IDs
+        #  only eligible (not withdrawn) will be added
+        #
+        for bl in electionProfile.ballotLines:
+            self.R0.ballots.append(self.Ballot(self, bl.multiplier, bl.ranking))
+
+    @property
+    def title(self):
+        "election title"
+        return self.electionProfile.title
+
+    @property
+    def nSeats(self):
+        "number of seats"
+        return self.electionProfile.nSeats
+        
+    @property
+    def nBallots(self):
+        "number of ballots"
+        return self.electionProfile.nBallots
+        
+    def candidate(self, cid):
+        "look up a candidate from a candidate ID"
+        return self._candidates[cid]
+        
+    def count(self):
+        "count the election"
+        self.rule.count(self)
+        
+    def newRound(self):
+       "add a round"
+       self.rounds.append(self.Round(self))
+       self.R = self.rounds[-1]
+       self.R.prior = self.rounds[-2]
+       return self.R
+
+    def log(self, msg):
+        "log a message to the current round"
+        self.R.log(msg)
+
+    def report(self, intr=False):
+        "report election by round"
+        s = "\nElection: %s\n\n" % self.title
+        s += "\tRule: %s\n" % self.rule.info()
+        s += "\tArithmetic: %s\n" % self.V.info
+        s += "\tSeats: %d\n" % self.nSeats
+        s += "\tBallots: %d\n" % self.nBallots
+        s += "\tQuota: %s\n" % self.V(self.R0.quota)
+        s += '\n'
+        if intr:
+            s += "\t** Count terminated prematurely by user interrupt **\n\n"
+            self.R.log('** count interrupted; this round is incomplete **')
+        s += self.V.report()
+        reportMeek = self.rule.reportMode() == 'meek'
+        for round in self.rounds:
+            s += "Round %d:\n" % round.n
+            s += round.report(self, reportMeek)
+        return s
+
+    def dump(self):
+        "dump election by round"
+        reportMeek = self.rule.reportMode() == 'meek'
+        s = ''
+        for round in self.rounds:
+            s += round.dump(self, reportMeek)
+        return s
+
+    def seatsLeftToFill(self):
+        "number of seats not yet filled"
+        return self.nSeats - self.R.C.nElected
+
+    class Round(object):
+        "one election round"
+        
+        def __init__(self, E):
+            "create a round"
+            if not E.R0:
+                #
+                #  create round 0: the initial state
+                #  quota & ballots are filled in later
+                #
+                self.n = 0
+                self.C = CandidateState(E)
+                self.quota = None
+                self.ballots = list()
+            else:
+                #
+                #  subsequent rounds are copies,
+                #  so we can look back at previous rounds
+                #
+                #  E.R and E.C are the current round and candidate states
+                #
+                previous = E.R
+                self.n = previous.n + 1
+                self.C = previous.C.copy()
+                self.quota = previous.quota
+                self.ballots = [b.copy() for b in previous.ballots]
+            self.residual = E.V0
+            self.votes = E.V0
+            self.surplus = E.V0
+            self._log = [] # list of log messages
+    
+        def transfer(self, c):
+            "transfer ballots with candidate c at top"
+            for b in [b for b in self.ballots if b.topCand == c]:
+                b.transfer(self.C.hopeful)
+    
+        def log(self, msg):
+            "log a message"
+            self._log.append(msg)
+            
+        def report(self, E, reportMeek):
+            "report a round"
+            V = E.V
+            saveR, E.R = E.R, self # provide reporting context
+            s = ''
+            for line in self._log:
+                s += '\t%s\n' % line
+            if self._log:
+                s += '\t...\n'
+            s += '\tHopeful: %s\n' % (" ".join(sorted([c.name for c in self.C.hopeful])) or 'None')
+            s += '\tElected: %s\n' % (" ".join(sorted([c.name for c in self.C.elected])) or 'None')
+            s += '\tDefeated: %s\n' % (" ".join(sorted([c.name for c in self.C.defeated])) or 'None')
+            if reportMeek:
+                s += '\tQuota: %s\n' % V(E.R.quota)
+                s += '\tVotes: %s\n' % V(E.R.votes)
+                s += '\tResidual: %s\n' % V(E.R.residual)
+                s += '\tTotal: %s\n' % V((E.R.votes + E.R.residual))
+                s += '\tSurplus: %s\n' % V(E.R.surplus)
+            else: # wigm
+                pvotes = E.V0  # elected pending transfer
+                hvotes = E.V0  # top-ranked hopeful
+                nontransferable = E.V0
+                for b in self.ballots:
+                    if b.exhausted:
+                        nontransferable += b.vote
+                    else:
+                        if b.topCand in self.C.elected:
+                            pvotes += b.vote
+                        else:
+                            hvotes += b.vote
+                evotes = E.V0
+                for c in self.C.elected:
+                    if not c in self.C.pending:
+                        evotes += E.R.quota
+                total = evotes + pvotes + hvotes + nontransferable
+                #  residual here (wigm) is votes lost due to rounding
+                residual = E.V(E.nBallots) - total
+                s += '\tElected votes (not pending) %s\n' % V(evotes)
+                s += '\tTop-rank votes (elected): %s\n' % V(pvotes)
+                s += '\tTop-rank votes (hopeful): %s\n' % V(hvotes)
+                s += '\tNontransferable votes: %s\n' % V(nontransferable)
+                s += '\tResidual: %s\n' % V(residual)
+                s += '\tTotal: %s\n' % V(evotes + pvotes + hvotes + nontransferable + residual)
+
+            E.R = saveR
+            return s
+            
+        def dump(self, E, reportMeek):
+            "dump a round"
+
+            saveR, E.R = E.R, self # provide reporting context
+            V = E.V
+            C = E.R.C
+            s = ''
+            
+            candidates = C.sortByOrder(E.eligible) # report in ballot order
+            #  if round 0, include a header line
+            if self.n == 0:
+                h = ['R', 'Q']
+                if reportMeek: h += ['residual']
+                for c in candidates:
+                    cid = c.cid
+                    h += ["'%s.name'" % cid]
+                    h += ["'%s.state'" % cid]
+                    h += ["'%s.vote'" % cid]
+                    if reportMeek: h += ["'%s.kf'" % cid]
+                h = [str(item) for item in h]
+                s += ','.join(h) + '\n'
+                
+            r = [self.n, V(self.quota)]
+            if reportMeek: r.append(V(self.residual))
+            for c in candidates:
+                cid = c.cid
+                r.append(c.name)
+                if self.n:
+                    r.append('W' if c in C.withdrawn else 'H' if c in C.hopeful else 'P' if c in C.pending else 'E' if c in C.elected else 'D' if c in C.defeated else '?') # state
+                    r.append(V(c.vote))
+                    if reportMeek: r.append(V(c.kf))
+                else:
+                    r.append('W' if c in C.withdrawn else 'H') # state
+                    r.append(V(c.vote)) # vote
+                    if reportMeek: r.append("'-'") # kf
+                
+            r = [str(item) for item in r]
+            s += ','.join(r) + '\n'
+            E.R = saveR
+            return s
+
+    class Ballot(object):
+        "one ballot"
+        
+        def __init__(self, E, multiplier=1, ranking=None):
+            "create a ballot"
+            if E is not None:  # E=None signals a copy operation
+                self.multiplier = multiplier  # number of ballots like this
+                self.index = 0                # current ranking
+                self.weight = E.V1            # initial weight
+                self.residual = E.V0          # untransferable weight
+                #
+                #  fast copy of ranking -> self.ranking with duplicate detection
+                #  http://www.peterbe.com/plog/uniqifiers-benchmark (see f11)
+                #
+                #  Note that the speed is no longer necessary, since we're sharing
+                #  the ranking tuple across rounds, but it's here as an example
+                #  of an interesting technique that might be useful elsewhere.
+                #
+        #         def dedupe(cids):
+        #             seen = set()
+        #             for cid in cids:
+        #                 if cid in seen:
+        #                     raise ValueError('duplicate ranking: %s' % cid)
+        #                 seen.add(cid)
+        #                 yield cid
+        #         self.ranking = tuple(dedupe(ranking)) if ranking else tuple()
+        
+                #  self.ranking is a tuple of candidate IDs, with a None sentinel at the end
+                self.ranking = list()
+                for cid in ranking:
+                    c = E.candidate(cid)
+                    if c in E.eligible:
+                        self.ranking.append(c)
+                self.ranking = tuple(self.ranking)
+
+        def copy(self):
+            "return a copy of this ballot"
+            b = Election.Ballot(None)
+            b.multiplier = self.multiplier
+            b.index = self.index
+            b.weight = self.weight
+            b.residual = self.residual
+            b.ranking = self.ranking    # share the immutable tuple of ranking
+            return b
+    
+        def transfer(self, hopeful):
+            "advance index to next candidate on this ballot; return True if exists"
+            while self.index < len(self.ranking) and self.topCand not in hopeful:
+                self.index += 1
+            return not self.exhausted
+    
+        @property
+        def exhausted(self):
+            "is ballot exhausted?"
+            return self.index >= len(self.ranking)    # detect end-of-ranking
+        
+        @property
+        def topCand(self):
+            "return top candidate, or None if exhausted"
+            return self.ranking[self.index] if self.index < len(self.ranking) else None
+        
+        @property
+        def vote(self):
+            "return total vote of this ballot"
+            return self.weight * self.multiplier
+            
+'''
+Candidate and CandidateState classes
+
+Candidate holds a candidate ID and uses it to manage state in CandidateState.
+CandidateState contains the per-round candidate state.
 
 copyright 2010 by Jonathan Lundell
 '''
 
-import sys, os, getopt
-path = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
-if path not in sys.path: sys.path.insert(0, path)
+class Candidate(object):
+    '''
+    a candidate
+    
+    A Candidate object is immutable, and shared across Rounds.
+    '''
 
-#######################################################################
-#
-#   Count an election
-#
-#######################################################################
+    def __init__(self, E, cid, order, cname):
+        "new candidate"
+        self.E = E
+        self.cid = cid     # candidate id
+        self.order = order # ballot order
+        self.name = cname  # candidate name
 
+    #  get/set vote total of this candidate
+    #
+    def getvote(self):
+       "get current vote for candidate"
+       return self.E.R.C._vote[self.cid]
+    def setvote(self, newvote):
+        "set vote for candidate"
+        self.E.R.C._vote[self.cid] = newvote
+    vote = property(getvote, setvote)
+    
+    @property
+    def surplus(self):
+        "return candidate's current surplus vote"
+        s = self.vote - self.E.R.quota
+        return self.E.V0 if s < self.E.V0 else s
+        
+    #  get/set keep factor of this candidate
+    #
+    def getkf(self):
+       "get current keep factor for candidate"
+       if not self.E.R.C._kf: return None
+       return self.E.R.C._kf[self.cid]
+    def setkf(self, newkf):
+        "set keep factor for candidate"
+        self.E.R.C._kf[self.cid] = newkf
+    kf = property(getkf, setkf)
+
+    def __str__(self):
+        "stringify"
+        return self.name
+
+    def __eq__(self, other):
+        "test for equality of cid"
+        if isinstance(other, str):
+            return self.cid == other
+        if other is None:
+            return False
+        return self.cid == other.cid
+
+class CandidateState(object):
+    '''
+    per-round candidate state
+    
+    vote: get candidate vote
+    kf: get candidate keep factor
+    hopeful: the set of hopeful candidates
+    elected: the set of elected candidates
+    defeated: the set of defeated candidates
+    withdrawn: access to Election's set of withdrawn candidates
+    pending: a (virtual) set of elected candidates pending transfer (WIGM, not Meek)
+    isHopeful, etc: boolean test of a single candidate
+    nHopeful, etc: number of candidates in set (properties)
+    
+    
+    '''
+
+    def __init__(self, E):
+        "create candidate-state object"
+        
+        self.E = E
+
+        self._vote = dict()   # votes by candidate cid
+        self._kf = dict()     # keep factor by candidate cid
+        
+        self.hopeful = set()
+        self.elected = set()
+        self.defeated = set()
+
+    @property
+    def withdrawn(self):
+        "interface to E.withdrawn for consistency"
+        return self.E.withdrawn
+
+    @property
+    def pending(self):
+        "set of elected candidates with transfer pending"
+        _pending = set()
+        for c in [b.topCand for b in self.E.R.ballots if not b.exhausted and b.topCand in self.elected]:
+            _pending.add(c)
+        return _pending
+
+    @property
+    def hopefulOrElected(self):
+        "return union of hopeful and elected candidates"
+        return self.hopeful.union(self.elected)
+
+    @property
+    def hopefulOrPending(self):
+        "return union of hopeful and transfer-pending candidates"
+        return self.hopeful.union(self.pending)
+
+    def copy(self):
+        "return a copy of ourself"
+        C = CandidateState(self.E)
+        
+        C._vote = self._vote.copy()
+        C._kf = self._kf.copy()
+        
+        C.hopeful = self.hopeful.copy()
+        C.elected = self.elected.copy()
+        C.defeated = self.defeated.copy()
+        return C
+
+    #  add a candidate to the election
+    #
+    def addCandidate(self, c, isWithdrawn=False):
+        "add a candidate"
+        if isWithdrawn:
+            self.E.withdrawn.add(c)
+            self.E.R.log("Add withdrawn: %s" % c.name)
+        else:
+            self.hopeful.add(c)
+            self.E.R.log("Add hopeful: %s" % c.name)
+
+    def elect(self, c, msg='Elect'):
+        "elect a candidate; optionally transfer-pending"
+        self.hopeful.remove(c)
+        self.elected.add(c)
+        self.E.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
+    def defeat(self, c, msg='Defeat'):
+        "defeat a candidate"
+        self.hopeful.remove(c)
+        self.defeated.add(c)
+        self.E.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
+
+    def vote(self, c, r=None):
+        "return vote for candidate in round r (default=current)"
+        if r is None: return self._vote[c.cid]
+        return self.E.rounds[r].C._vote[c.cid]
+
+    #  return count of candidates in requested state
+    #
+    @property
+    def nHopeful(self):
+        "return count of hopeful candidates"
+        return len(self.hopeful)
+    @property
+    def nPending(self):
+        "return count of transfer-pending candidates"
+        return len(self.pending)
+    @property
+    def nElected(self):
+        "return count of elected candidates"
+        return len(self.elected)
+    @property
+    def nHopefulOrElected(self):
+        "return count of hopeful+elected candidates"
+        return self.nHopeful + self.nElected
+    @property
+    def nDefeated(self):
+        "return count of defeated candidates"
+        return len(self.defeated)
+    @property
+    def nWithdrawn(self):
+        "return count of withdrawn candidates"
+        return len(self.E.withdrawn)
+        
+    def sortByVote(self, collection):
+        "sort a collection of candidates by vote"
+        # keep the result stable by ballot order
+        return sorted(collection, key=lambda c: (c.vote, c.order))
+
+    def sortByOrder(self, collection):
+        "sort a collection of candidates by ballot order"
+        return sorted(collection, key=lambda c: c.order)
+
+
+
+###################
+#
+#   main(options)
+#
+#   main is a convenience function for running an election from outside
+#
+#   options is a dictionary that must, at a minimum, include a path to a ballot file
+#   It may also include rule parameters and report requests (pending)
+#
+#   The default rule is 'meek'
+#
+#   options currently include:
+#   path=ballot_file_path
+#   rule=election_rule_name
+#     variant=warren to switch meek to warren mode
+#     epsilon=<set meek surplus limit to 10^-epsilon>
+#   report= [not currently suppported]
+#   arithmetic=quasi-exact|fixed|integer|rational
+#     (integer is fixed with precision=0)
+#     precision=<precision for fixed or qx in digits>
+#     guard=<guard for qx in digits>
+#     dp=<display precision (digits) for rational>
+#     
+#   
+import sys
 from modules.profile import ElectionProfile
-from modules.election import Election
+from modules.rules import meek, wigm, mpls
 
-class UsageError(Exception):
-    "command-line usage error"
-
-rules = ['wigm', 'meek', 'warren', 'mpls']
-reportNames = None
-
-usage = """
-Usage:
-
-  droop.py [-a arith] [-p prec] [-r report] [-t tiebreak] [-w weaktie] 
-                 [-P] [-x reps] rule ballotfile
-
-  -h: print this message
-  -a: override default arithmetic: fixed, qx, rational, integer
-  -p: override default precision (in digits)
-  -g: override guard precision (in digits, qx only)
-  -e: override epsilon (in digits, meek/warren)
-  -r: report format: tbd
-  -t: strong tie-break method: random
-  -w: weak tie-break method: tbd
-  -P: profile and send output to profile.out
-  -x: specify repeat count (for profiling)
-
-  Runs an election for the given election rule and ballot file.
-  Results are printed to stdout.
-  The following methods are available:
-  %s
-""" % ", ".join(rules)
-
-
-try:
-    # Parse the command line.
-    (opts, args) = getopt.getopt(sys.argv[1:], "Pha:p:g:e:r:t:w:x:")
-
-    doProfile = False
-    reps = 1
-    prec = None
-    guard = None
-    arithmetic = None
-    epsilon = None
+def main(options=None):
+    "run an election"
     
-    for o, a in opts:
-        if o == "-r":
-              if a in reportNames:
-                  reportformat = a
-              else: raise UsageError("Unrecognized report format '%s'" % a)
-        if o == "-a":
-              if a in ["fixed", "qx", "quasi-exact", "rational", "integer"]:
-                  arithmetic = a
-              else: raise UsageError("Unrecognized arithmetic '%s'" % a)
-        if o == "-p":
-              prec = int(a)
-        if o == "-g":
-              guard = int(a)
-        if o == "-e":
-              epsilon = int(a)
-        if o == "-t":
-              if a in ["random", "alpha", "index"]:
-                  strongTieBreakMethod = a
-              else: raise UsageError("Unrecognized tie-break method '%s'" % a)
-        if o == "-w":
-              if a in ["strong", "forward", "backward"]:
-                  weakTieBreakMethod = a
-              else: raise UsageError("Unrecognized weak tie-break method '%s'" % a)
-        if o == "-P":
-              import cProfile
-              import pstats
-              doProfile = True
-              profilefile = "profile.out"
-        if o == "-x":
-              reps = int(a)
-        if o == "-h": raise UsageError('-h')
+    myname = 'droop'
+
+    if not options:
+        print >>sys.stderr, "%s: no ballot file" % myname
+        sys.exit(1)
+        
+    rule = 'meek'  # default rule
+    path = None    # ballot path must be specified
     
-    if len(args) == 1:
-        ruleName = 'meek'  # handy default for testing
-        bltPath = args[0]
-    elif len(args) != 2:
-        if len(args) < 2: raise UsageError("Specify rule and ballot file")
-        else: raise UsageError("Too many arguments")
+    for opt,arg in options.items():
+        if opt == 'rule':
+            rule = arg
+        elif opt == 'path':
+            path = arg
+    # else we pass the option along
+    if not path:
+        print >> sys.stderr, "%s: no ballot file specfied" % myname
+        sys.exit(1)
+    # TODO: let rule.py handle this
+    if rule == 'meek' or rule == 'warren':
+        Rule = meek.Rule
+    elif rule == 'wigm':
+        Rule = wigm.Rule
+    elif rule == 'mpls':
+        Rule = mpls.Rule
     else:
-        ruleName = args[0]
-        bltPath = args[1]
+        print >> sys.stderr, "%s: unknown rule %s" % (myname, rule)
+        sys.exit(1)
+    try:
+        electionProfile = ElectionProfile(path=path)
+    except ElectionProfile.ElectionProfileError as err:
+        print >>sys.stderr, "**Election profile error: %s" % str(err)
+        sys.exit(2)
+    try:
+        intr = False
+        E = Election(Rule, electionProfile, options={})
+        E.count()
+    except KeyboardInterrupt:
+        intr = True
+    return E.report(intr)
 
-    options=dict(arithmetic=arithmetic, precision=prec, guard=guard, epsilon=epsilon)
-    if ruleName == 'warren':
-        rule = 'meek'
-        options['variant'] = 'warren'
-    elif ruleName in rules:
-        rule = ruleName
-    else: raise UsageError("Unrecognized rule '%s'" % ruleName)
-
-except getopt.GetoptError as err:
-    print >>sys.stderr, str(err) # will print something like "option -q not recognized"
-    print >>sys.stderr, usage
-    sys.exit(1)
-except UsageError as err:
-    if str(err) == '-h':
-        print >>sys.stderr, usage
-        sys.exit(0)
-    print >>sys.stderr, str(err)
-    print >>sys.stderr, usage
-    sys.exit(1)
-
-_rule = __import__('modules.rules.%s' % rule, globals(), locals(), ['Rule'], -1)
-Rule = _rule.Rule
-
-#####################
+#   provide a basic CLI
 #
-#  Run the election
-#
-#####################
-def doElection(reps=1):
-    "run election with repeat count for profiling"
-    electionProfile = ElectionProfile(path=bltPath)
-    intr = False
-    for i in xrange(reps):
-        E = Election(Rule, electionProfile, options=options)
-        try:
-            E.count()    # repeat for profiling
-        except KeyboardInterrupt:
-            intr = True
-    print E.report(intr)    # election report
-    print "\nDump:\n"
-    print E.dump()      # round-by-round dump
-
-try:
-    if doProfile:
-        cProfile.run('E = doElection(reps)', profilefile)
-    else:
-        E = doElection()
-except ElectionProfile.ElectionProfileError as err:
-    print >>sys.stderr, "**Election profile error: %s" % str(err)
-    sys.exit(2)
-except Election.ElectionError as err:
-    print >>sys.stderr, "**Election error: %s" % str(err)
-    sys.exit(2)
-
-if doProfile:
-    p = pstats.Stats(profilefile)
-    p.strip_dirs().sort_stats('time').print_stats(50)
+if __name__ == "__main__":
+    rule = None
+    path = None
+    options = dict()
+    for arg in sys.argv[1:]:
+        optarg = arg.split('=')
+        if len(optarg) == 1:
+            rule = path
+            path = optarg[0]
+        else:
+            options[optarg[0]] = optarg[1]
+    if path is None:
+        print >>sys.stderr, "droop: must specify ballot file"
+        sys.exit(1)
+    options['path'] = path
+    if rule:
+        options['rule'] = rule
+    report = main(options)
+    print report
+    sys.exit(0)

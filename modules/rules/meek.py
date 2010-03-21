@@ -25,9 +25,12 @@ class Rule(object):
         
         #  set defaults
         #
-        variant = options.get('variant', 'meek').lower()
-        if variant not in ['meek', 'warren']:
-            raise ValueError('unknown  %s; use Meek or Warren' % variant)
+        if options.get('rule') == 'warren':
+            variant = 'warren'
+        else:
+            variant = options.get('variant', 'meek').lower()
+            if variant not in ['meek', 'warren']:
+                raise ValueError('unknown  %s; use Meek or Warren' % variant)
         cls.warren = (variant == 'warren')
         if not options.get('arithmetic'):
             options['arithmetic'] = 'quasi-exact'
