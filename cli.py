@@ -15,7 +15,7 @@ if path not in sys.path: sys.path.insert(0, path)
 #
 #######################################################################
 
-from modules.profile import ElectionProfile
+from packages.profile import ElectionProfile
 from droop import Election
 
 class UsageError(Exception):
@@ -121,7 +121,7 @@ except UsageError as err:
     print >>sys.stderr, usage
     sys.exit(1)
 
-_rule = __import__('modules.rules.%s' % rule, globals(), locals(), ['Rule'], -1)
+_rule = __import__('packages.rules.%s' % rule, globals(), locals(), ['Rule'], -1)
 Rule = _rule.Rule
 
 #####################

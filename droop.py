@@ -28,9 +28,9 @@ copyright 2010 by Jonathan Lundell
 '''
    
 import sys
-from modules.profile import ElectionProfile
-from modules.election import Election
-import modules.rules
+from packages.profile import ElectionProfile
+from packages.election import Election
+import packages.rules
 
 
 def main(options=None):
@@ -55,11 +55,11 @@ def main(options=None):
         print >> sys.stderr, "%s: no ballot file specfied" % myname
         sys.exit(1)
     
-    if rule in modules.rules.electionRuleNames:
-        Rule = modules.rules.electionRules[rule]
+    if rule in packages.rules.electionRuleNames:
+        Rule = packages.rules.electionRules[rule]
     else:
         print >> sys.stderr, "%s: unknown rule %s" % (myname, rule)
-        print >> sys.stderr, "    known rules: %s" % ','.join(modules.rules.electionRuleNames)
+        print >> sys.stderr, "    known rules: %s" % ','.join(packages.rules.electionRuleNames)
         sys.exit(1)
     try:
         electionProfile = ElectionProfile(path=path)
