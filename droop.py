@@ -68,11 +68,14 @@ def main(options=None):
         sys.exit(2)
     try:
         intr = False
-        E = Election(Rule, electionProfile, options={})
+        E = Election(Rule, electionProfile, options=options)
         E.count()
     except KeyboardInterrupt:
         intr = True
-    return E.report(intr)
+    report = E.report(intr)
+    if 'dump' in options and options['dump']:
+        report += E.dump()
+    return report
 
 #   provide a basic CLI
 #
@@ -93,6 +96,7 @@ if __name__ == "__main__":
     options['path'] = path
     if rule:
         options['rule'] = rule
+    options['dump'] = True
     report = main(options)
     print report
     sys.exit(0)

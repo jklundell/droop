@@ -33,6 +33,11 @@ should instead have "equal to or less than", and is so implemented.
 4. The language at the end of 167.70(1)(f) should be clarified. The "tie between two"
 should be "tie between two or more". But the language isn't needed at all, since any
 such tie will be broken when the candidates are defeated.
+
+5. The test for count-complete given in 167.70(1)(f) must be performed after the defeat
+of certain losers per 167.70(1)(c) to avoid defeating too many candidates and leaving
+a seat unfilled. This should be made explicit, since a reasonable interpretation of (f)
+is that the test is performed only after defeating the lowest-vote candidate per (e).
 '''
 
 import sys, os
@@ -208,7 +213,22 @@ class Rule(object):
             names = ", ".join([c.name for c in tied])
             R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
+            
+        def countComplete():
+            '''
+            test for count complete 167.70(1)(f)]
+            '''
+            ##  f. The procedures in clauses a. to e. must be repeated 
+            ##     until the number of candidates whose vote total is equal to or greater than 
+            ##     the threshold is equal to the number of seats to be filled, 
+            ##     or until the number of continuing candidates is equal to the number of offices 
+            ##     yet to be elected. 
 
+            if E.seatsLeftToFill() <= 0:
+                return True
+            if C.nHopeful <= E.seatsLeftToFill():
+                return True
+            return False
 
         #########################
         #
@@ -277,13 +297,18 @@ class Rule(object):
             certainLosers = findCertainLosers(surplus, fixSpec=True)
             for c in certainLosers:
                 C.defeat(c, 'Defeat certain loser')
-                R.transfer(c)
+                R.transfer(c, c.vote, 'Transfer defeated')
 
             ##     If no candidate can be defeated mathematically, the tabulation must continue
             ##     as described in clause d. 
             ##     Otherwise, the tabulation must continue as described in clause a.
+            
+            #   By implication, the test for tabulation-complete given in 167.70(1)(f)
+            #   must be performed here; otherwise too many candidates can be defeated.
 
             if certainLosers:
+                if countComplete():
+                    break
                 continue  ## continue as described in clause a.
 
             ##  d. The transfer value of each vote cast for an elected candidate 
@@ -324,7 +349,7 @@ class Rule(object):
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 for b in [b for b in R.ballots if b.topCand == high_candidate]:
                     b.weight = (b.weight * high_surplus) // high_candidate.vote
-                R.transfer(high_candidate)
+                R.transfer(high_candidate, high_candidate.surplus, msg='Transfer surplus')
                 high_candidate.vote = R.quota
                 continue  ## continue as described in clause a.
 
@@ -353,7 +378,7 @@ class Rule(object):
             if low_candidates:
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 C.defeat(low_candidate, 'Defeat low candidate')
-                R.transfer(low_candidate)
+                R.transfer(low_candidate, low_candidate.vote, msg='Transfer defeated')
 
             ##  f. The procedures in clauses a. to e. must be repeated 
             ##     until the number of candidates whose vote total is equal to or greater than 
@@ -361,7 +386,7 @@ class Rule(object):
             ##     or until the number of continuing candidates is equal to the number of offices 
             ##     yet to be elected. 
 
-            if E.seatsLeftToFill() <= 0:
+            if countComplete():
                 break
 
             ##     If the number of continuing candidates is equal to the number of offices 
@@ -383,10 +408,21 @@ class Rule(object):
             # Note: this will happen, if necessary, at the next defeat-lowest step e above
 
 
-        #  Election over.
-        #  Defeat remaining hopeful candidates
+        #  Tabulation complete.
+
+        ##  f. ...
+        ##     If the number of continuing candidates is equal to the number of offices 
+        ##     yet to be elected, any remaining continuing candidates must be declared elected.
+
+        #  Note: implemented as "less than or equal to"
+        #
+        if C.nHopeful <= E.seatsLeftToFill():
+            for c in C.hopeful.copy():
+                C.elect(c, 'Elect remaining candidates')
+
+        #  Defeat remaining hopeful candidates for reporting purposes
         #
         for c in C.hopeful.copy():
-            C.defeat(c, msg='Defeat remaining')
+            C.defeat(c, msg='Defeat remaining candidates')
 
 

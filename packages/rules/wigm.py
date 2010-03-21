@@ -102,12 +102,12 @@ class Rule(object):
 
         #  Calculate quota
         #
-        E.R0.quota = calcQuota(E)
         R = E.R0  # current round
         C = R.C   # candidate state
         V = E.V   # arithmetic value class
         V0 = E.V0 # constant zero
-        
+        E.R0.quota = calcQuota(E)
+
         #  Count votes in round 0 for reporting purposes
         #
         for c in C.hopeful:
@@ -132,7 +132,7 @@ class Rule(object):
             for c in [c for c in C.hopeful if hasQuota(E, c)]:
                 C.elect(c)                # elect; transfer pending
                 if c.vote == R.quota:     # handle new winners with no surplus
-                    R.transfer(c)
+                    R.transfer(c, c.surplus, msg='Transfer surplus')
         
             #  find highest surplus
             #
@@ -153,7 +153,7 @@ class Rule(object):
                 surplus = high_vote - R.quota
                 for b in [b for b in R.ballots if b.topCand == high_candidate]:
                     b.weight = (b.weight * surplus) / high_vote
-                R.transfer(high_candidate)
+                R.transfer(high_candidate, high_candidate.surplus, msg='Transfer surplus')
                 high_candidate.vote = R.quota
 
             #  if no surplus to transfer, eliminate a candidate
@@ -175,7 +175,7 @@ class Rule(object):
                 if low_candidates:
                     low_candidate = breakTie(E, low_candidates, 'defeat')
                     C.defeat(low_candidate)
-                    R.transfer(low_candidate)
+                    R.transfer(low_candidate, low_candidate.vote, msg='Transfer defeated')
         
         #  Election over.
         #  Elect or defeat remaining hopeful candidates

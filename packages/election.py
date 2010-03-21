@@ -119,7 +119,7 @@ class Election(object):
         reportMeek = self.rule.reportMode() == 'meek'
         for round in self.rounds:
             s += "Round %d:\n" % round.n
-            s += round.report(self, reportMeek)
+            s += round.report(reportMeek)
         return s
 
     def dump(self):
@@ -127,7 +127,7 @@ class Election(object):
         reportMeek = self.rule.reportMode() == 'meek'
         s = ''
         for round in self.rounds:
-            s += round.dump(self, reportMeek)
+            s += round.dump(reportMeek)
         return s
 
     def seatsLeftToFill(self):
@@ -139,6 +139,7 @@ class Election(object):
         
         def __init__(self, E):
             "create a round"
+            self.E = E
             if not E.R0:
                 #
                 #  create round 0: the initial state
@@ -165,8 +166,9 @@ class Election(object):
             self.surplus = E.V0
             self._log = [] # list of log messages
     
-        def transfer(self, c):
+        def transfer(self, c, val, msg='Transfer'):
             "transfer ballots with candidate c at top"
+            self.log("%s: %s (%s)" % (msg, c.name, self.E.V(val)))
             for b in [b for b in self.ballots if b.topCand == c]:
                 b.transfer(self.C.hopeful)
     
@@ -174,8 +176,9 @@ class Election(object):
             "log a message"
             self._log.append(msg)
             
-        def report(self, E, reportMeek):
+        def report(self, reportMeek):
             "report a round"
+            E = self.E
             V = E.V
             saveR, E.R = E.R, self # provide reporting context
             s = ''
@@ -221,9 +224,10 @@ class Election(object):
             E.R = saveR
             return s
             
-        def dump(self, E, reportMeek):
+        def dump(self, reportMeek):
             "dump a round"
 
+            E = self.E
             saveR, E.R = E.R, self # provide reporting context
             V = E.V
             C = E.R.C
@@ -307,7 +311,7 @@ class Election(object):
             b.ranking = self.ranking    # share the immutable tuple of ranking
             return b
     
-        def transfer(self, hopeful):
+        def transfer(self, hopeful, msg='Transfer'):
             "advance index to next candidate on this ballot; return True if exists"
             while self.index < len(self.ranking) and self.topCand not in hopeful:
                 self.index += 1
@@ -469,12 +473,12 @@ class CandidateState(object):
         "elect a candidate; optionally transfer-pending"
         self.hopeful.remove(c)
         self.elected.add(c)
-        self.E.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
+        self.E.R.log("%s: %s (%s)" % (msg, c.name, self.E.V(c.vote)))
     def defeat(self, c, msg='Defeat'):
         "defeat a candidate"
         self.hopeful.remove(c)
         self.defeated.add(c)
-        self.E.R.log("%s: %s (%s)" % (msg, c.name, c.vote))
+        self.E.R.log("%s: %s (%s)" % (msg, c.name, self.E.V(c.vote)))
 
     def vote(self, c, r=None):
         "return vote for candidate in round r (default=current)"
