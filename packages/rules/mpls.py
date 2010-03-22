@@ -40,10 +40,6 @@ a seat unfilled. This should be made explicit, since a reasonable interpretation
 is that the test is performed only after defeating the lowest-vote candidate per (e).
 '''
 
-import sys, os
-path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
-from packages.value import Value
 import random
 
 class Rule(object):
@@ -52,7 +48,7 @@ class Rule(object):
     '''
 
     @classmethod
-    def initialize(cls, E, options=dict()):
+    def initialize(cls, E, Value, options=dict()):
         "initialize election parameters"
 
         #  initialize and return arithmetic

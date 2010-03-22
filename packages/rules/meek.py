@@ -4,10 +4,7 @@ Count election using Reference Meek or Warren STV
 copyright 2010 by Jonathan Lundell
 '''
 
-import sys, os
-path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
-from packages.value import Value
+import sys
 
 class Rule(object):
     '''
@@ -20,7 +17,7 @@ class Rule(object):
     _o = None        # omega = 1/10^o
     
     @classmethod
-    def initialize(cls, E, options=dict()):
+    def initialize(cls, E, Value, options=dict()):
         "initialize election parameters"
         
         #  set defaults
