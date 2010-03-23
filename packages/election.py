@@ -15,7 +15,7 @@ Top-level structure:
   The options are used to override default Rule parameters, such as arithmetic.
 '''
 
-import value
+import values
 
 class Election(object):
     '''
@@ -39,7 +39,9 @@ class Election(object):
         "create an election from the incoming election profile"
 
         self.rule = rule # a class
-        self.V = self.rule.initialize(self, value.Value, options) # set arithmetic class
+        options = self.rule.options(options)
+        self.V = values.ArithmeticClass(options)
+        self.rule.initialize(self, options) # set arithmetic class
         self.V0 = self.V(0)  # constant zero for efficiency
         self.V1 = self.V(1)  # constant one for efficiency
         self.electionProfile = electionProfile

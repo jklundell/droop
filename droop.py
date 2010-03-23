@@ -55,9 +55,8 @@ def main(options=None):
         print >> sys.stderr, "%s: no ballot file specfied" % myname
         sys.exit(1)
     
-    if rule in packages.rules.electionRuleNames:
-        Rule = packages.rules.electionRules[rule]
-    else:
+    Rule = packages.rules.electionRule(rule)
+    if not Rule:
         print >> sys.stderr, "%s: unknown rule %s" % (myname, rule)
         print >> sys.stderr, "    known rules: %s" % ','.join(packages.rules.electionRuleNames)
         sys.exit(1)

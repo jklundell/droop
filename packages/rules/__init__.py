@@ -22,3 +22,7 @@ electionRules = dict(
     wigm=wigm.Rule,
     mpls=mpls.Rule
 )
+
+def electionRule(name):
+    "convert a rule name to a rule class"
+    return electionRules.get(name, None)

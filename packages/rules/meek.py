@@ -15,10 +15,10 @@ class Rule(object):
     
     omega = None     # epsilon for terminating iteration
     _o = None        # omega = 1/10^o
-    
+
     @classmethod
-    def initialize(cls, E, Value, options=dict()):
-        "initialize election parameters"
+    def options(cls, options=dict()):
+        "filter options"
         
         #  set defaults
         #
@@ -31,13 +31,17 @@ class Rule(object):
         cls.warren = (variant == 'warren')
         if not options.get('arithmetic'):
             options['arithmetic'] = 'quasi-exact'
+        return options
 
-        V = Value.ArithmeticClass(options) # initialize arithmetic
-        
+    @classmethod
+    def initialize(cls, E, options=dict()):
+        "initialize election parameters"
+
         #  set omega
         #
         #  omega will be 1/10**o
         #
+        V = E.V
         assert V.name in ('rational', 'quasi-exact', 'fixed')
         if V.name == 'rational':
             o = 10
@@ -48,7 +52,6 @@ class Rule(object):
         # allow omega to be overridden
         cls._o = options.get('omega', None) or o
         cls.omega = V(1) / V(10**cls._o)
-        return V
 
     @classmethod
     def info(cls):

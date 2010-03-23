@@ -48,7 +48,7 @@ class Rule(object):
     '''
 
     @classmethod
-    def initialize(cls, E, Value, options=dict()):
+    def options(cls, options=dict()):
         "initialize election parameters"
 
         #  initialize and return arithmetic
@@ -61,7 +61,12 @@ class Rule(object):
         options['arithmetic'] = 'fixed'
         options['precision'] = 4
         options['guard'] = 0
-        return Value.ArithmeticClass(options)
+        return options
+
+    @classmethod
+    def initialize(cls, E, options=dict()):
+        "initialize election parameters"
+        pass
 
     @classmethod
     def info(cls):
