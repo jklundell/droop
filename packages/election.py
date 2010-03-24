@@ -28,9 +28,9 @@ class Election(object):
     rounds = None    # election rounds
     R0 = None        # round 0 (initial state)
     R = None         # current round
-    eligible = set() # all the non-withdrawn candidates
-    withdrawn = set()  # all the withdrawn candidates
-    _candidates = dict() # candidates by candidate ID
+    eligible = None    # all the non-withdrawn candidates
+    withdrawn = None   # all the withdrawn candidates
+    _candidates = None # candidates by candidate ID
     
     class ElectionError(Exception):
         "error counting election"
@@ -39,15 +39,18 @@ class Election(object):
         "create an election from the incoming election profile"
 
         self.rule = rule # a class
-        options = self.rule.options(options)
-        self.V = values.ArithmeticClass(options)
-        self.rule.initialize(self, options) # set arithmetic class
+        options = self.rule.options(options)     # allow rule to process options
+        self.V = values.ArithmeticClass(options) # then set arithmetic
         self.V0 = self.V(0)  # constant zero for efficiency
         self.V1 = self.V(1)  # constant one for efficiency
         self.electionProfile = electionProfile
 
         self.rounds = [self.Round(self)]
         self.R0 = self.R = self.rounds[0]
+        
+        self.eligible = set()
+        self.withdrawn = set()
+        self._candidates = dict()
         #
         #  create candidate objects for candidates in election profile
         #
@@ -210,7 +213,7 @@ class Election(object):
                     else:
                         if b.topCand in self.C.elected:
                             pvotes += b.vote
-                        else:
+                        elif b.topCand in self.C.hopeful:
                             hvotes += b.vote
                 evotes = E.V0
                 for c in self.C.elected:

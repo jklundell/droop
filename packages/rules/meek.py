@@ -31,27 +31,8 @@ class Rule(object):
         cls.warren = (variant == 'warren')
         if not options.get('arithmetic'):
             options['arithmetic'] = 'quasi-exact'
+        cls._o = options.get('omega', None)
         return options
-
-    @classmethod
-    def initialize(cls, E, options=dict()):
-        "initialize election parameters"
-
-        #  set omega
-        #
-        #  omega will be 1/10**o
-        #
-        V = E.V
-        assert V.name in ('rational', 'quasi-exact', 'fixed')
-        if V.name == 'rational':
-            o = 10
-        elif V.name == 'quasi-exact':
-            o = V.precision * 2 // 3
-        else: # fixed
-            o = V.precision * 2 // 3
-        # allow omega to be overridden
-        cls._o = options.get('omega', None) or o
-        cls.omega = V(1) / V(10**cls._o)
 
     @classmethod
     def info(cls):
@@ -309,6 +290,21 @@ class Rule(object):
         V = E.V    # arithmetic value class
         V0 = E.V0  # constant zero
         V1 = E.V1  # constant one
+
+        #  set omega
+        #
+        #  omega will be 1/10**o
+        #
+        assert V.name in ('rational', 'quasi-exact', 'fixed')
+        if not cls._o:
+            if V.name == 'rational':
+                cls._o = 10
+            elif V.name == 'quasi-exact':
+                cls._o = V.precision * 2 // 3
+            else: # fixed
+                cls._o = V.precision * 2 // 3
+        cls.omega = V(1) / V(10**cls._o)
+
         E.R0.votes = V(E.electionProfile.nBallots)
         E.R0.quota = calcQuota(E)
         R = E.R0

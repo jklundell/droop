@@ -64,11 +64,6 @@ class Rule(object):
         return options
 
     @classmethod
-    def initialize(cls, E, options=dict()):
-        "initialize election parameters"
-        pass
-
-    @classmethod
     def info(cls):
         "return an info string for the election report"
         return "Minneapolis MN STV"

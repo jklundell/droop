@@ -10,6 +10,8 @@ class Rule(object):
     Parameter: arithmetic type
     '''
     
+    integer_quota = False
+    
     @classmethod
     def options(cls, options=dict()):
         "initialize election parameters"
@@ -19,15 +21,16 @@ class Rule(object):
         if not options.get('arithmetic'):
             options['arithmetic'] = 'quasi-exact'
 
+        #  integer_quota: use Droop quota rounded up to whole number
+        #  defeat_zero: defeat all hopeful candidates with zero votes after first surplus transfer
+        #
+        cls.integer_quota = options.get('integer_quota', False)
+        cls.defeat_zero = options.get('defeat_zero', False)
+
         #  initialize and return arithmetic
         #
         return options
     
-    @classmethod
-    def initialize(cls, E, options=dict()):
-        "initialize rule"
-        pass
-
     @classmethod
     def info(cls):
         "return an info string for the election report"
@@ -66,6 +69,8 @@ class Rule(object):
             
             Round up if not using exact arithmetic.
             '''
+            if cls.integer_quota:
+                return V(1 + E.nBallots // (E.nSeats+1))
             if V.exact:
                 return V(E.nBallots) / V(E.nSeats+1)
             return V(E.nBallots) / V(E.nSeats+1) + V.epsilon
@@ -172,10 +177,16 @@ class Rule(object):
                 #  defeat candidate with lowest vote
                 #
                 if low_candidates:
-                    low_candidate = breakTie(E, low_candidates, 'defeat')
-                    C.defeat(low_candidate)
-                    R.transfer(low_candidate, low_candidate.vote, msg='Transfer defeated')
-        
+                    if low_vote == V0 and cls.defeat_zero:
+                        for c in low_candidates:
+                            C.defeat(c, msg='Defeat zero')
+                            R.transfer(c, c.vote, msg='Transfer defeated')
+                    else:
+                        low_candidate = breakTie(E, low_candidates, 'defeat')
+                        C.defeat(low_candidate)
+                        R.transfer(low_candidate, low_candidate.vote, msg='Transfer defeated')
+
+
         #  Election over.
         #  Elect or defeat remaining hopeful candidates
         #

@@ -88,7 +88,7 @@ class ElectionProfile(object):
             f = open(path, 'r')
             data = f.read()
         except Exception as emsg:
-            raise self.ElectionProfileError("droop: can't open ballot file %s (%s)" % (path, emsg))
+            raise self.ElectionProfileError("can't open ballot file %s (%s)" % (path, emsg))
         f.close()
         return data
         

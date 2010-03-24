@@ -4,6 +4,11 @@ election arithmetic values module init
 copyright 2010 by Jonathan Lundell
 '''
 
+arithmeticClassNames = ('fixed', 'integer', 'rational', 'quasi-exact', 'qx')
+
+class arithmeticValuesError(Exception):
+    "election arithmetic value selection error"
+
 def ArithmeticClass(options=dict()):
     "initialize a value class and return it"
 
@@ -20,4 +25,6 @@ def ArithmeticClass(options=dict()):
         from qx import QX
         QX.initialize(options)
         return QX
-    return None
+    vals = ' '.join(arithmeticClassNames)
+    raise arithmeticValuesError("unknown arithmetic %s\n\tuse: %s" % (arithmetic, vals))
+

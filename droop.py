@@ -31,71 +31,145 @@ import sys
 from packages.profile import ElectionProfile
 from packages.election import Election
 import packages.rules
+import packages.values
 
+class UsageError(Exception):
+    "command-line usage error"
+
+E = None
 
 def main(options=None):
     "run an election"
-    
-    myname = 'droop'
 
     if not options:
-        print >>sys.stderr, "%s: no ballot file" % myname
-        sys.exit(1)
-        
-    rule = 'meek'  # default rule
-    path = None    # ballot path must be specified
-    
+        raise UsageError("no ballot file specified")
+
+    #  process options
+    #
+    #  we know about (rule, path, profile)
+    #  all the others are passed to the various consumers
+    #
+    rule = 'meek'       # default rule
+    path = None         # ballot path must be specified
+    doProfile = False   # performance profiling
+    reps = 1            # repetitions (for profiling)
     for opt,arg in options.items():
-        if opt == 'rule':
+        if opt == 'rule':       # rule=<election rule name> default: 'meek'
             rule = arg
-        elif opt == 'path':
+        elif opt == 'path':     # path=<path to ballot file>
             path = arg
+        elif opt == 'profile':  # profile=<number of repetitions>
+            import cProfile
+            import pstats
+            reps = int(arg)
+            doProfile = True
+            profilefile = "profile.out"
     # else we pass the option along
     if not path:
-        print >> sys.stderr, "%s: no ballot file specfied" % myname
-        sys.exit(1)
+        raise UsageError("no ballot file specfied")
     
+    #  get the rule class
+    #
     Rule = packages.rules.electionRule(rule)
     if not Rule:
-        print >> sys.stderr, "%s: unknown rule %s" % (myname, rule)
-        print >> sys.stderr, "    known rules: %s" % ','.join(packages.rules.electionRuleNames)
-        sys.exit(1)
-    try:
-        electionProfile = ElectionProfile(path=path)
-    except ElectionProfile.ElectionProfileError as err:
-        print >>sys.stderr, "**Election profile error: %s" % str(err)
-        sys.exit(2)
+        rules = ' '.join(packages.rules.electionRuleNames)
+        raise UsageError("unknown rule %s; known rules:\n\t%s" % (rule, rules))
+
+    #  run the election
+    #
+    #    fetch the election profile
+    #    create the Election object
+    #    count
+    #    report
+    #
+    def countElection(repeat=1):
+        "encapsulate for optional profiling"
+        global E
+        for i in xrange(repeat):
+            E = Election(Rule, electionProfile, options=options)
+            E.count()
+
+    electionProfile = ElectionProfile(path=path)
     try:
         intr = False
-        E = Election(Rule, electionProfile, options=options)
-        E.count()
+        if doProfile:
+            cProfile.runctx('countElection(reps)', globals(), locals(), profilefile)
+        else:
+            countElection(reps)
     except KeyboardInterrupt:
         intr = True
+    global E  # if E isn't global, the profiled assignment of E isn't visible
     report = E.report(intr)
-    if 'dump' in options and options['dump']:
+    if 'dump' in options:
         report += E.dump()
+
+    if doProfile:
+        p = pstats.Stats(profilefile)
+        p.strip_dirs().sort_stats('time').print_stats(50)
+
     return report
 
 #   provide a basic CLI
 #
+#   options appear on the command line in the form of opt=val
+#   a single bare opt (no '=') is interpreted as a path to the ballot file
+#   two bare opts are interpreted as a rule followed by the ballot file path
+#
+def usage(subject=None):
+    "return a usage string"
+    u = ''
+    if subject:
+        u = 'usage(%s)' % subject
+    else:
+        u = 'usage'
+    return u
+    
 if __name__ == "__main__":
-    rule = None
-    path = None
     options = dict()
-    for arg in sys.argv[1:]:
-        optarg = arg.split('=')
-        if len(optarg) == 1:
-            rule = path
-            path = optarg[0]
-        else:
-            options[optarg[0]] = optarg[1]
-    if path is None:
-        print >>sys.stderr, "droop: must specify ballot file"
+    if len(sys.argv) < 2:
+        print >>sys.stderr, usage()
         sys.exit(1)
-    options['path'] = path
-    if rule:
-        options['rule'] = rule
-    options['dump'] = True
-    report = main(options)
+    if len(sys.argv) > 1 and sys.argv[1] == 'help':
+        if len(sys.argv) > 2:
+            print usage(sys.argv[2])
+        else:
+            print usage()
+        sys.exit(0)
+    path = None
+    try:
+        for arg in sys.argv[1:]:
+            optarg = arg.split('=')
+            if len(optarg) == 1:
+                if optarg[0] in packages.values.arithmeticClassNames:
+                    options['arithmetic'] = optarg[0]
+                elif optarg[0] in packages.rules.electionRuleNames:
+                    options['rule'] = optarg[1]
+                elif optarg[0] == 'dump':
+                    options['dump'] = True
+                else:
+                    if path:
+                        raise UsageError("multiple ballot files: %s and %s" % (path, optarg[0]))
+                    path = optarg[0]
+                    options['path'] = path
+            else:
+                options[optarg[0]] = optarg[1]
+        if path is None:
+            print >>sys.stderr, "droop: must specify ballot file"
+            sys.exit(1)
+        try:
+            report = main(options)
+        except ElectionProfile.ElectionProfileError as err:
+            print >>sys.stderr, "** droop: Election profile error: %s" % err
+            sys.exit(1)
+        except packages.values.arithmeticValuesError as err:
+            print >>sys.stderr, "** droop: %s" % err
+            sys.exit(1)
+        except Election.ElectionError as err:
+            print >>sys.stderr, "** droop: Election error: %s" % err
+            sys.exit(1)
+    except UsageError as err:
+        print >>sys.stderr, "** droop: %s" % err
+        print >>sys.stderr, usage()
+        sys.exit(1)
     print report
     sys.exit(0)
