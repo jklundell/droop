@@ -28,6 +28,11 @@ class QX(object):
     __scaleg = None
     __dfmt = None     # display format
 
+    @classmethod
+    def help(cls, subject):
+        "return help on this arithmetic class"
+        return 'qx'
+
     #  initialize must be called before using the class
     #
     @classmethod

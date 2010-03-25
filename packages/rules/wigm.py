@@ -13,6 +13,18 @@ class Rule(object):
     integer_quota = False
     
     @classmethod
+    def help(cls, subject):
+        "return help on wigm"
+        if subject == 'wigm':
+            h =  'wigm implements the Weighted Inclusive Gregory Method.\n'
+            h += 'options:\n'
+            h += '  arithmetic=(quasi-exact, rational, fixed, integer) (default=quasi-exact)\n'
+            h += '  integer_quota: round quota up to next integer\n'
+            h += '  defeat_zero: after surplus transfer, defeat candidates with no first choices\n'
+            return h
+        return None
+        
+    @classmethod
     def options(cls, options=dict()):
         "initialize election parameters"
         

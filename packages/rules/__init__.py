@@ -26,3 +26,13 @@ electionRules = dict(
 def electionRule(name):
     "convert a rule name to a rule class"
     return electionRules.get(name, None)
+
+def help(subject):
+    "try to find help on the requested subject"
+    if subject == 'rule':
+        return 'available rules: %s' % ','.join(electionRuleNames)
+    for rule in electionRules:
+        h = electionRules[rule].help(subject)
+        if h:
+            return h
+    return None

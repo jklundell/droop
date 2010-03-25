@@ -17,6 +17,18 @@ class Rule(object):
     _o = None        # omega = 1/10^o
 
     @classmethod
+    def help(cls, subject):
+        "return help on meek or warren"
+        if subject == 'meek' or subject == 'warren':
+            h =  'meek and warren are iterative election rules.\n'
+            h += 'options:\n'
+            h += '  arithmetic=quasi-exact, rational, fixed (default=quasi-exact)\n'
+            h += '  omega=iteration limit such that an interation is terminated\n'
+            h += '    when surplus < 1/10^omega.\n'
+            return h
+        return None
+        
+    @classmethod
     def options(cls, options=dict()):
         "filter options"
         

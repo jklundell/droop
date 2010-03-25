@@ -20,6 +20,11 @@ class Fixed(object):
     precision = None  # precision in decimal digits
     __scale = None      # scale factor
     __dfmt = None       # display format
+    
+    @classmethod
+    def help(cls, subject):
+        "return help on this arithmetic class"
+        return 'fixed\n'
 
     #  initialize must be called before using the class
     #

@@ -27,7 +27,7 @@ copyright 2010 by Jonathan Lundell
      dp=<display precision (digits) for rational>
 '''
    
-import sys
+import sys, os
 from packages.profile import ElectionProfile
 from packages.election import Election
 import packages.rules
@@ -115,13 +115,27 @@ def main(options=None):
 #   a single bare opt (no '=') is interpreted as a path to the ballot file
 #   two bare opts are interpreted as a rule followed by the ballot file path
 #
+me = os.path.basename(__file__)
+
 def usage(subject=None):
     "return a usage string"
-    u = ''
+    u = 'Usage:\n'
     if subject:
-        u = 'usage(%s)' % subject
+        h = packages.rules.help(subject)
+        h = h or packages.values.help(subject)
+        h = h or 'no help available on %s' % subject
+        return h
     else:
-        u = 'usage'
+        u += '%s options ballotfile\n' % me
+        u += '  options can be the name of a rule (%s),\n' % ','.join(packages.rules.electionRuleNames)
+        u += '  the name of an arithmetic class (%s)\n' % ','.join(packages.values.arithmeticNames)
+        u += '  profile=reps, to profile the count, running reps repetitions,\n'
+        u += '  dump, to dump a csv of the rounds,\n'
+        u += '  or rule- or arithmetic-specific options:\n'
+        u += '    precision=n: decimal digits of precision (fixed, qx)\n'
+        u += '    guard=n: guard digits (qx; default to guard=precision)\n'
+        u += '    dp=n: display precision (rational)\n'
+        u += '    omega=n: meek iteration terminates when surplus < 1/10^omega'
     return u
     
 if __name__ == "__main__":
@@ -140,7 +154,7 @@ if __name__ == "__main__":
         for arg in sys.argv[1:]:
             optarg = arg.split('=')
             if len(optarg) == 1:
-                if optarg[0] in packages.values.arithmeticClassNames:
+                if optarg[0] in packages.values.arithmeticNames:
                     options['arithmetic'] = optarg[0]
                 elif optarg[0] in packages.rules.electionRuleNames:
                     options['rule'] = optarg[1]

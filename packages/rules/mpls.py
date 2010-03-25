@@ -60,9 +60,20 @@ class Rule(object):
         #
         options['arithmetic'] = 'fixed'
         options['precision'] = 4
-        options['guard'] = 0
+        options['guard'] = None
         return options
 
+    @classmethod
+    def help(cls, subject):
+        "return help on mpls"
+        if subject == 'mpls':
+            h =  'Minneapolis STV is a variant on WIGM.\n'
+            h += 'There are no options.\n'
+            h += '  arithmetic=fixed\n'
+            h += '  precision=4\n'
+            return h
+        return None
+        
     @classmethod
     def info(cls):
         "return an info string for the election report"

@@ -23,6 +23,11 @@ class Rational(Fraction):
     _dfmt = None # display format string
     
     @classmethod
+    def help(cls, subject):
+        "return help on this arithmetic class"
+        return 'rational'
+
+    @classmethod
     def initialize(cls, options=dict()):
         '''
         initialize class Rational, a value class based on Fraction
