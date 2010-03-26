@@ -28,7 +28,7 @@ copyright 2010 by Jonathan Lundell
 '''
    
 import sys, os
-from packages.profile import ElectionProfile
+from packages.profile import ElectionProfile, ElectionProfileError
 from packages.election import Election
 import packages.rules
 import packages.values
@@ -184,7 +184,7 @@ if __name__ == "__main__":
             sys.exit(1)
         try:
             report = main(options)
-        except ElectionProfile.ElectionProfileError as err:
+        except ElectionProfileError as err:
             print >>sys.stderr, "** droop: Election profile error: %s" % err
             sys.exit(1)
         except packages.values.arithmeticValuesError as err:

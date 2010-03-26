@@ -52,7 +52,7 @@ class ValueTestFixed6(unittest.TestCase):
         "simple assertions"
         self.assertEqual(self.A.name, 'fixed')               # Fixed.name
         self.assertEqual(self.A.exact, False)                # Fixed.exact
-        self.assertEqual(self.A._Fixed__precision, self.p)   # Fixed.__precision
+        self.assertEqual(self.A.precision, self.p)           # Fixed.precision
         self.assertEqual(self.A._Fixed__scale, 10**self.p)   # Fixed.__scale
         self.assertEqual(self.A(0)._value, 0)                # 0
         self.assertEqual(self.A(1)._value, 10**self.p)       # 1

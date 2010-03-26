@@ -4,6 +4,12 @@ droop: election profile support
 copyright 2010 by Jonathan Lundell
 '''
 
+import re
+
+class ElectionProfileError(Exception):
+    "error processing election profile"
+
+
 class ElectionProfile(object):
     '''
     Election profile
@@ -33,9 +39,6 @@ class ElectionProfile(object):
     All attributes should be treated as immutable.
     '''
     
-    class ElectionProfileError(Exception):
-        "error processing election profile"
-
     def __init__(self, path=None, data=None):
         "initialize profile"
         self.title = None
@@ -49,6 +52,8 @@ class ElectionProfile(object):
 
         if path:
             data = self.__bltPath(path)
+        if not data:
+            raise ElectionProfileError('no profile data')
         self.__bltData(data)
 
     class BallotLine(object):
@@ -62,16 +67,16 @@ class ElectionProfile(object):
     def __validate(self):
         "check for internal consistency"
         if not self.nSeats or self.nSeats > len(self.eligible):
-            raise self.ElectionProfileError('too few candidates (%d seats; %d candidates)' % (self.nSeats, len(self.eligible)))
+            raise ElectionProfileError('too few candidates (%d seats; %d candidates)' % (self.nSeats, len(self.eligible)))
         if self.nBallots < len(self.eligible):
-            raise self.ElectionProfileError('too few ballots (%d ballots; %d candidates)' % (self.nBallots, len(self.eligible)))
+            raise ElectionProfileError('too few ballots (%d ballots; %d candidates)' % (self.nBallots, len(self.eligible)))
         n = 0
         for ranking in [bl.ranking for bl in self.ballotLines]:
             n += 1
             d = dict()
             for cid in ranking:
                 if cid in d:
-                    raise self.ElectionProfileError('candidate ID %s duplicated on ballot line %d' % (cid, n))
+                    raise ElectionProfileError('candidate ID %s duplicated on ballot line %d' % (cid, n))
                 d[cid] = cid
     
     def candidateName(self, cid):
@@ -88,7 +93,7 @@ class ElectionProfile(object):
             f = open(path, 'r')
             data = f.read()
         except Exception as emsg:
-            raise self.ElectionProfileError("can't open ballot file %s (%s)" % (path, emsg))
+            raise ElectionProfileError("can't open ballot file %s (%s)" % (path, emsg))
         f.close()
         return data
         
@@ -106,19 +111,30 @@ class ElectionProfile(object):
         
         #  number of candidates, eligible or withdrawn
         #
-        ncand = int(blt.next())
+        tok = blt.next()
+        if not re.match(r'\d+', tok):
+            raise ElectionProfileError('bad first blt item "%s"; expected number of candidates' % tok)
+        ncand = int(tok)
 
         #  number of seats
         #
-        self.nSeats = int(blt.next())
+        tok = blt.next()
+        if not re.match(r'\d+', tok):
+            raise ElectionProfileError('ba dsecond blt item "%s"; expected number of seats' % tok)
+        self.nSeats = int(tok)
 
         #  optional: withdrawn candidates, flagged with a minus sign
         #
         self.withdrawn = set()
-        wd = int(blt.next())
-        while wd < 0:
+        tok = blt.next()
+        while True:
+            if not re.match(r'-?\d+', tok):
+                raise ElectionProfileError('bad blt item "%s" near first ballot line; expected decimal number' % tok)
+            wd = int(tok)
+            if wd >= 0:
+                break
             self.withdrawn.add(str(-wd))
-            wd = blt.next()
+            tok = blt.next()
         
         #  ballots
         #
@@ -129,17 +145,26 @@ class ElectionProfile(object):
         #  a multiplier of 0 ends the ballot list
         #
         ballotlines = list()
-        multiplier = wd
-        while (multiplier):
+        
+        while True:
+            if not re.match(r'\d+', tok):
+                raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(ballotlines)+1))
+            multiplier = int(tok)
+            if not multiplier:  # test end of ballot lines
+                break
             ranking = list()
-            cid = int(blt.next())
-            while (cid):
+            while True:
+                tok = blt.next()  # next ranked candidate or 0
+                if not re.match(r'\d+', tok):
+                    raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(ballotlines)+1))
+                cid = int(tok)
+                if not cid:  # test end of ballot
+                    break;
                 ranking.append(str(cid))
-                cid = int(blt.next())
             if ranking:                         # ignore empty ballots
                 ballotlines.append(self.BallotLine(multiplier, tuple(ranking)))
                 self.nBallots += multiplier
-            multiplier = int(blt.next())
+            tok = blt.next()  # next multiplier or 0
         self.ballotLines = tuple(ballotlines)
             
         #  candidate names
@@ -149,6 +174,8 @@ class ElectionProfile(object):
         #
         for cid in xrange(1, ncand+1):
             name = blt.next()
+            if not name.startswith('"'):
+                raise ElectionProfileError('bad blt item "%s" near candidate name #%d; expected quoted string' % (name, cid))
             while not name.endswith('"'):
                 name += ' ' + blt.next()
             if str(cid) not in self.withdrawn:
@@ -159,11 +186,13 @@ class ElectionProfile(object):
         #  election title
         #
         self.title = blt.next()
+        if not self.title.startswith('"'):
+            raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % self.title)
         try:
             while not self.title.endswith('"'):
                 self.title += ' ' + blt.next()
         except StopIteration:
-            pass
+            raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % self.title)
         self.title.strip('"')
 
     def __bltBlob(self, blob):
