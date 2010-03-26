@@ -41,8 +41,9 @@ is that the test is performed only after defeating the lowest-vote candidate per
 '''
 
 import random
+from rule import ElectionRule
 
-class Rule(object):
+class Rule(ElectionRule):
     '''
     Rule for counting Minneapolis MN STV
     '''
@@ -64,15 +65,13 @@ class Rule(object):
         return options
 
     @classmethod
-    def help(cls, subject):
-        "return help on mpls"
-        if subject == 'mpls':
-            h =  'Minneapolis STV is a variant on WIGM.\n'
-            h += 'There are no options.\n'
-            h += '  arithmetic=fixed\n'
-            h += '  precision=4\n'
-            return h
-        return None
+    def helps(cls, helps):
+        "create help string for mpls"
+        h =  'Minneapolis STV is a variant on WIGM.\n'
+        h += '\nThere are no options.\n'
+        h += '  arithmetic: fixed\n'
+        h += '  precision=4\n'
+        helps['mpls'] = h
         
     @classmethod
     def info(cls):

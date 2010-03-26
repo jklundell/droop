@@ -118,25 +118,32 @@ def main(options=None):
 me = os.path.basename(__file__)
 
 def usage(subject=None):
-    "return a usage string"
-    u = 'Usage:\n'
-    if subject:
-        h = packages.rules.help(subject)
-        h = h or packages.values.help(subject)
-        h = h or 'no help available on %s' % subject
-        return h
-    else:
-        u += '%s options ballotfile\n' % me
-        u += '  options can be the name of a rule (%s),\n' % ','.join(packages.rules.electionRuleNames)
-        u += '  the name of an arithmetic class (%s)\n' % ','.join(packages.values.arithmeticNames)
-        u += '  profile=reps, to profile the count, running reps repetitions,\n'
-        u += '  dump, to dump a csv of the rounds,\n'
-        u += '  or rule- or arithmetic-specific options:\n'
-        u += '    precision=n: decimal digits of precision (fixed, qx)\n'
-        u += '    guard=n: guard digits (qx; default to guard=precision)\n'
-        u += '    dp=n: display precision (rational)\n'
-        u += '    omega=n: meek iteration terminates when surplus < 1/10^omega'
-    return u
+    "usage and help"
+    
+    helps = Election.helps()
+    helpers = sorted(helps.keys())
+
+    u = '\nUsage:\n'
+    u += '%s options ballotfile\n' % me
+    u += '  options can be the name of a rule (%s),\n' % ','.join(packages.rules.electionRuleNames)
+    u += '  the name of an arithmetic class (%s)\n' % ','.join(packages.values.arithmeticNames)
+    u += '  profile=reps, to profile the count, running reps repetitions,\n'
+    u += '  dump, to dump a csv of the rounds,\n'
+    u += '  or rule- or arithmetic-specific options:\n'
+    u += '    precision=n: decimal digits of precision (fixed, qx)\n'
+    u += '    guard=n: guard digits (qx; default to guard=precision)\n'
+    u += '    dp=n: display precision (rational)\n'
+    u += '    omega=n: meek iteration terminates when surplus < 1/10^omega\n'
+    u += '  help is available on the following subjects:\n'
+    u += '    %s' % ' '.join(helpers)
+    helps['usage'] = u
+
+    if not subject:
+        return u
+    if subject in helps:
+        return '\n%s' % helps[subject]
+    return 'no help available on %s' % subject
+
     
 if __name__ == "__main__":
     options = dict()
@@ -157,7 +164,7 @@ if __name__ == "__main__":
                 if optarg[0] in packages.values.arithmeticNames:
                     options['arithmetic'] = optarg[0]
                 elif optarg[0] in packages.rules.electionRuleNames:
-                    options['rule'] = optarg[1]
+                    options['rule'] = optarg[0]
                 elif optarg[0] == 'dump':
                     options['dump'] = True
                 else:
@@ -166,7 +173,12 @@ if __name__ == "__main__":
                     path = optarg[0]
                     options['path'] = path
             else:
-                options[optarg[0]] = optarg[1]
+                if optarg[1].lower() == 'false':
+                    options[optarg[0]] = False
+                elif optarg[1].lower() == 'true':
+                    options[optarg[0]] = True
+                else:
+                    options[optarg[0]] = optarg[1]
         if path is None:
             print >>sys.stderr, "droop: must specify ballot file"
             sys.exit(1)

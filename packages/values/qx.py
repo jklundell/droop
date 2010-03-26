@@ -29,9 +29,9 @@ class QX(object):
     __dfmt = None     # display format
 
     @classmethod
-    def help(cls, subject):
-        "return help on this arithmetic class"
-        return 'qx'
+    def helps(cls, helps):
+        "add help string"
+        helps['qx'] = 'qx help tbd'
 
     #  initialize must be called before using the class
     #

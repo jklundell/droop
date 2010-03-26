@@ -27,12 +27,9 @@ def ArithmeticClass(options=dict()):
     vals = ' '.join(arithmeticClassNames)
     raise arithmeticValuesError("unknown arithmetic %s\n\tuse: %s" % (arithmetic, vals))
 
-def help(subject):
-    "try to find help on the requested subject"
-    h = None
-    if subject == 'arithmetic':
-        h = 'available arithmetic: %s' % ','.join(arithmeticNames)
-    h = h or rational.Rational.help(subject)
-    h = h or fixed.Fixed.help(subject)
-    h = h or qx.QX.help(subject)
-    return h
+def helps(helps):
+    "build a help-string dictionary"
+    helps['arithmetic'] = 'available arithmetic: %s' % ','.join(arithmeticNames)
+    rational.Rational.helps(helps)
+    fixed.Fixed.helps(helps)
+    qx.QX.helps(helps)

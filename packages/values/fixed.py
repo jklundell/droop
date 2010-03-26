@@ -22,9 +22,9 @@ class Fixed(object):
     __dfmt = None       # display format
     
     @classmethod
-    def help(cls, subject):
-        "return help on this arithmetic class"
-        return 'fixed\n'
+    def helps(cls, helps):
+        "add help string"
+        helps['fixed'] = 'fixed help tbd'
 
     #  initialize must be called before using the class
     #

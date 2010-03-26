@@ -4,7 +4,6 @@ election rules module init
 copyright 2010 by Jonathan Lundell
 '''
 
-
 #  for now, we have built-in knowledge of the available election rules;
 #  at some point we'll scan the rules package for more rules
 #
@@ -27,12 +26,8 @@ def electionRule(name):
     "convert a rule name to a rule class"
     return electionRules.get(name, None)
 
-def help(subject):
-    "try to find help on the requested subject"
-    if subject == 'rule':
-        return 'available rules: %s' % ','.join(electionRuleNames)
+def helps(helps):
+    "build a help-string dictionary"
+    helps['rule'] =  'available rules: %s' % ','.join(electionRuleNames)
     for rule in electionRules:
-        h = electionRules[rule].help(subject)
-        if h:
-            return h
-    return None
+        electionRules[rule].helps(helps)

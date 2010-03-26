@@ -4,9 +4,9 @@ Count election using Reference Meek or Warren STV
 copyright 2010 by Jonathan Lundell
 '''
 
-import sys
+from rule import ElectionRule
 
-class Rule(object):
+class Rule(ElectionRule):
     '''
     Rule for counting Model Meek or Warren elections
     
@@ -17,16 +17,16 @@ class Rule(object):
     _o = None        # omega = 1/10^o
 
     @classmethod
-    def help(cls, subject):
-        "return help on meek or warren"
-        if subject == 'meek' or subject == 'warren':
-            h =  'meek and warren are iterative election rules.\n'
-            h += 'options:\n'
-            h += '  arithmetic=quasi-exact, rational, fixed (default=quasi-exact)\n'
-            h += '  omega=iteration limit such that an interation is terminated\n'
-            h += '    when surplus < 1/10^omega.\n'
-            return h
-        return None
+    def helps(cls, helps):
+        "add help strings for meek and warren"
+        h =  'meek and warren are iterative election rules.\n'
+        h += '\noptions:\n'
+        h += '  arithmetic: (qx*, rational, fixed)  *default\n'
+        h += '  omega=iteration limit such that an interation is terminated\n'
+        h += '    when surplus < 1/10^omega.\n'
+        h += '    default: 10 if rational, else 2/3 of precision\n'
+        helps['meek'] = h
+        helps['warren'] = h
         
     @classmethod
     def options(cls, options=dict()):
@@ -182,8 +182,7 @@ class Rule(object):
             lastsurplus = V(E.nBallots)
             while True:
                 if V.exact:
-                    sys.stdout.write('.')
-                    sys.stdout.flush()
+                    E.prog('.')
                 #
                 #  distribute vote for each ballot
                 #  and add up vote for each candidate
@@ -336,8 +335,7 @@ class Rule(object):
             #
             R = E.newRound()
             if V.exact:
-                sys.stdout.write('%d' % R.n)
-                sys.stdout.flush()
+                E.prog('%d' % R.n)
             C = R.C   # candidate state
 
             #  C. iterate

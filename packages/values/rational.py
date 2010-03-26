@@ -23,9 +23,9 @@ class Rational(Fraction):
     _dfmt = None # display format string
     
     @classmethod
-    def help(cls, subject):
-        "return help on this arithmetic class"
-        return 'rational'
+    def helps(cls, helps):
+        "add help string"
+        helps['rational'] = 'rational help tbd'
 
     @classmethod
     def initialize(cls, options=dict()):

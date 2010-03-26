@@ -3,26 +3,31 @@ Count election using Reference WIGM STV
 
 copyright 2010 by Jonathan Lundell
 '''
-class Rule(object):
+
+from rule import ElectionRule
+
+class Rule(ElectionRule):
     '''
     Rule for counting Model WIGM elections
     
-    Parameter: arithmetic type
+    Parameters: arithmetic type, integer_quota, defeat_zero
     '''
     
+    #  options
+    #
     integer_quota = False
+    defeat_zero = False
     
     @classmethod
-    def help(cls, subject):
-        "return help on wigm"
-        if subject == 'wigm':
-            h =  'wigm implements the Weighted Inclusive Gregory Method.\n'
-            h += 'options:\n'
-            h += '  arithmetic=(quasi-exact, rational, fixed, integer) (default=quasi-exact)\n'
-            h += '  integer_quota: round quota up to next integer\n'
-            h += '  defeat_zero: after surplus transfer, defeat candidates with no first choices\n'
-            return h
-        return None
+    def helps(cls, helps):
+        "create help string for wigm"
+        h =  'wigm implements the Weighted Inclusive Gregory Method.\n'
+        h += '\noptions:\n'
+        h += '  (qx*, rational, fixed, integer): arithmetic\n'
+        h += '  integer_quota=(false*, true): round quota up to next integer\n'
+        h += '  defeat_zero=(false*, true): after surplus transfer, defeat candidates with no first choices\n'
+        h += '    *default\n'
+        helps['wigm'] = h
         
     @classmethod
     def options(cls, options=dict()):

@@ -15,7 +15,8 @@ Top-level structure:
   The options are used to override default Rule parameters, such as arithmetic.
 '''
 
-import values
+import sys
+import rules, values
 
 class Election(object):
     '''
@@ -77,6 +78,14 @@ class Election(object):
         for bl in electionProfile.ballotLines:
             self.R0.ballots.append(self.Ballot(self, bl.multiplier, bl.ranking))
 
+    @classmethod
+    def helps(cls):
+        "build a dictionary of help strings on various subjects"
+        helps = dict()
+        rules.helps(helps)
+        values.helps(helps)
+        return helps
+
     @property
     def title(self):
         "election title"
@@ -110,6 +119,11 @@ class Election(object):
     def log(self, msg):
         "log a message to the current round"
         self.R.log(msg)
+
+    def prog(self, msg):
+        "log to the console (immediate output)"
+        sys.stdout.write(msg)
+        sys.stdout.flush()
 
     def report(self, intr=False):
         "report election by round"
