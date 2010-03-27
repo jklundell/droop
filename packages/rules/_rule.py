@@ -10,10 +10,15 @@ class ElectionRule(object):
     '''
     
     @classmethod
-    def help(cls, subject):
-        "return help string"
+    def helps(cls, helps, name):
+        "add help string for rule 'name'"
         return None
-        
+
+    @classmethod
+    def ruleNames(cls):
+        "return supported rule name or names"
+        return None
+
     @classmethod
     def options(cls, options=dict()):
         "initialize election parameters"

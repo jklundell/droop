@@ -72,7 +72,7 @@ def main(options=None):
     #
     Rule = packages.rules.electionRule(rule)
     if not Rule:
-        rules = ' '.join(packages.rules.electionRuleNames)
+        rules = ' '.join(packages.rules.electionRuleNames())
         raise UsageError("unknown rule %s; known rules:\n\t%s" % (rule, rules))
 
     #  run the election
@@ -125,15 +125,17 @@ def usage(subject=None):
 
     u = '\nUsage:\n'
     u += '%s options ballotfile\n' % me
-    u += '  options can be the name of a rule (%s),\n' % ','.join(packages.rules.electionRuleNames)
-    u += '  the name of an arithmetic class (%s)\n' % ','.join(packages.values.arithmeticNames)
-    u += '  profile=reps, to profile the count, running reps repetitions,\n'
-    u += '  dump, to dump a csv of the rounds,\n'
-    u += '  or rule- or arithmetic-specific options:\n'
-    u += '    precision=n: decimal digits of precision (fixed, guarded)\n'
-    u += '    guard=n: guard digits (guarded; default to guard=precision)\n'
-    u += '    dp=n: display precision (rational)\n'
-    u += '    omega=n: meek iteration terminates when surplus < 1/10^omega\n'
+    u += '  options:\n'
+    u += '    rule name (%s)\n' % ','.join(packages.rules.electionRuleNames())
+    u += '    arithmetic class name (%s)\n' % ','.join(packages.values.arithmeticNames)
+    u += '    profile=reps, to profile the count, running reps repetitions\n'
+    u += '    dump, to dump a csv of the rounds\n'
+    u += '    rule- or arithmetic-specific options:\n'
+    u += '      precision=n: decimal digits of precision (fixed, guarded)\n'
+    u += '      guard=n: guard digits (guarded; default to guard=precision)\n'
+    u += '      dp=n: display precision (rational)\n'
+    u += '      omega=n: meek iteration terminates when surplus < 1/10^omega\n'
+    u += '\n'
     u += '  help is available on the following subjects:\n'
     u += '    %s' % ' '.join(helpers)
     helps['usage'] = u
@@ -163,7 +165,7 @@ if __name__ == "__main__":
             if len(optarg) == 1:
                 if optarg[0] in packages.values.arithmeticNames:
                     options['arithmetic'] = optarg[0]
-                elif optarg[0] in packages.rules.electionRuleNames:
+                elif optarg[0] in packages.rules.electionRuleNames():
                     options['rule'] = optarg[0]
                 elif optarg[0] == 'dump':
                     options['dump'] = True

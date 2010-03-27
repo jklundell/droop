@@ -4,30 +4,38 @@ election rules module init
 copyright 2010 by Jonathan Lundell
 '''
 
-#  for now, we have built-in knowledge of the available election rules;
-#  at some point we'll scan the rules package for more rules
-#
-#  warren is a special case, since it shares the meek module with meek
-#
-electionRuleNames = ('meek', 'warren', 'wigm', 'mpls')
+import os
 
-import meek
-import mpls
-import wigm
+#  collect the names of all the rule modules in this directory:
+#    name.py where name does not have a leading underscore
+#
+#  make a dict of the Rule classes by module name
+#  make a dict of the Rule classes by rule name
+#
+mydir = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
+modules = [os.path.splitext(name)[0] for name in os.listdir(mydir) if name.endswith('.py') and not name.startswith('_')]
 
-electionRules = dict(
-    meek=meek.Rule,
-    warren=meek.Rule,
-    wigm=wigm.Rule,
-    mpls=mpls.Rule
-)
+RuleByModule = dict()
+RuleByName = dict()
+for module in modules:
+    Rule = __import__(module, globals()).Rule
+    RuleByModule[module] = Rule
+    names = RuleByModule[module].ruleNames()
+    if isinstance(names, str):
+        names = [names]
+    for name in names:
+        RuleByName[name] = Rule
+
+def electionRuleNames():
+    "return all the rule names"
+    return sorted(RuleByName.keys())
 
 def electionRule(name):
-    "convert a rule name to a rule class"
-    return electionRules.get(name, None)
-
+    "look up a Rule class by rule name"
+    return RuleByName[name]
+    
 def helps(helps):
-    "build a help-string dictionary"
-    helps['rule'] =  'available rules: %s' % ','.join(electionRuleNames)
-    for rule in electionRules:
-        electionRules[rule].helps(helps)
+    "add election rules to the help-string dictionary"
+    helps['rule'] =  'available rules: %s' % ','.join(electionRuleNames())
+    for name in electionRuleNames():
+        RuleByName[name].helps(helps, name)

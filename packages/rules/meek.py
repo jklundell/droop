@@ -4,7 +4,7 @@ Count election using Reference Meek or Warren STV
 copyright 2010 by Jonathan Lundell
 '''
 
-from rule import ElectionRule
+from _rule import ElectionRule
 
 class Rule(ElectionRule):
     '''
@@ -17,16 +17,20 @@ class Rule(ElectionRule):
     _o = None        # omega = 1/10^o
 
     @classmethod
-    def helps(cls, helps):
+    def ruleNames(cls):
+        "return supported rule name or names"
+        return ('meek', 'warren')
+
+    @classmethod
+    def helps(cls, helps, name):
         "add help strings for meek and warren"
-        h =  'meek and warren are iterative election rules.\n'
+        h =  '%s is an iterative election rule.\n' % name
         h += '\noptions:\n'
         h += '  arithmetic: (qx*, rational, fixed)  *default\n'
         h += '  omega=iteration limit such that an interation is terminated\n'
         h += '    when surplus < 1/10^omega.\n'
         h += '    default: 10 if rational, else 2/3 of precision\n'
-        helps['meek'] = h
-        helps['warren'] = h
+        helps[name] = h
         
     @classmethod
     def options(cls, options=dict()):

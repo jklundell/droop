@@ -4,7 +4,7 @@ Count election using Reference WIGM STV
 copyright 2010 by Jonathan Lundell
 '''
 
-from rule import ElectionRule
+from _rule import ElectionRule
 
 class Rule(ElectionRule):
     '''
@@ -19,7 +19,12 @@ class Rule(ElectionRule):
     defeat_zero = False
     
     @classmethod
-    def helps(cls, helps):
+    def ruleNames(cls):
+        "return supported rule name or names"
+        return 'wigm'
+
+    @classmethod
+    def helps(cls, helps, name):
         "create help string for wigm"
         h =  'wigm implements the Weighted Inclusive Gregory Method.\n'
         h += '\noptions:\n'
@@ -27,7 +32,7 @@ class Rule(ElectionRule):
         h += '  integer_quota=(false*, true): round quota up to next integer\n'
         h += '  defeat_zero=(false*, true): after surplus transfer, defeat candidates with no first choices\n'
         h += '    *default\n'
-        helps['wigm'] = h
+        helps[name] = h
         
     @classmethod
     def options(cls, options=dict()):

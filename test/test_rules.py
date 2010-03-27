@@ -9,37 +9,34 @@ path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
 from packages import rules as R
-from packages.rules.meek import Rule as Meek
-from packages.rules.mpls import Rule as Mpls
-from packages.rules.wigm import Rule as WIGM
+
+class RuleInitTest(unittest.TestCase):
+    "test rules.__init__"
+    
+    def testRuleNames(self):
+        "check the list of names"
+        self.assertTrue(len(R.electionRuleNames()) >= 4, 'at least four rule names')
+
+    def testRuleNameMpls(self):
+        "check the list of names for mpls"
+        self.assertTrue('mpls' in R.electionRuleNames(), 'one of the rule names is mpls')
+
+    def testElectionRule(self):
+        "look up one election rule"
+        from packages.rules.mpls import Rule as Mpls
+        self.assertEqual(R.electionRule('mpls'), Mpls, 'the mpls Rule should match its name lookup')
 
 
 class RuleTest(unittest.TestCase):
     "test rules class methods"
     
-    def testMeekReportMode(self):
-        "meek.Rule report mode is meek"
-        self.assertEqual(Meek.reportMode(), 'meek')
+    def testReportModes(self):
+        "reportMode is meek or wigm for each rule"
+        for name in R.electionRuleNames():
+            Rule = R.electionRule(name)
+            reportMode = Rule.reportMode()
+            self.assertTrue(reportMode in ('meek','wigm'), 'bad reportMode "%s"' % reportMode)
 
-    def testWIGMReportMode(self):
-        "meek.Rule report mode is meek"
-        self.assertEqual(WIGM.reportMode(), 'wigm')
-
-    def testMplsReportMode(self):
-        "meek.Rule report mode is meek"
-        self.assertEqual(Mpls.reportMode(), 'wigm')
-
-    def testMeekNameClass(self):
-        "test name to class"
-        self.assertEqual(R.electionRule('meek'), Meek)
-        
-    def testWIGMNameClass(self):
-        "test name to class"
-        self.assertEqual(R.electionRule('wigm'), WIGM)
-        
-    def testMplsNameClass(self):
-        "test name to class"
-        self.assertEqual(R.electionRule('mpls'), Mpls)
         
 if __name__ == '__main__':
     unittest.main()
