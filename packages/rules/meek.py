@@ -42,7 +42,7 @@ class Rule(ElectionRule):
                 raise ValueError('unknown  %s; use Meek or Warren' % variant)
         cls.warren = (variant == 'warren')
         if not options.get('arithmetic'):
-            options['arithmetic'] = 'quasi-exact'
+            options['arithmetic'] = 'guarded'
         cls._o = options.get('omega', None)
         return options
 
@@ -306,11 +306,11 @@ class Rule(ElectionRule):
         #
         #  omega will be 1/10**o
         #
-        assert V.name in ('rational', 'quasi-exact', 'fixed')
+        assert V.name in ('rational', 'guarded', 'fixed')
         if not cls._o:
             if V.name == 'rational':
                 cls._o = 10
-            elif V.name == 'quasi-exact':
+            elif V.name == 'guarded':
                 cls._o = V.precision * 2 // 3
             else: # fixed
                 cls._o = V.precision * 2 // 3

@@ -36,7 +36,7 @@ class Rule(ElectionRule):
         #  set defaults
         #
         if not options.get('arithmetic'):
-            options['arithmetic'] = 'quasi-exact'
+            options['arithmetic'] = 'guarded'
 
         #  integer_quota: use Droop quota rounded up to whole number
         #  defeat_zero: defeat all hopeful candidates with zero votes after first surplus transfer

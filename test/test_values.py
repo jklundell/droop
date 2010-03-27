@@ -104,11 +104,11 @@ class ValueTestGuarded9(unittest.TestCase):
     g = p
     A = None
     def setUp(self):
-        "initialize quasi-exact 9.None s/b 9.9"
+        "initialize guarded 9.None s/b 9.9"
         self.A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=self.p))
         
     def testExact(self):
-        "quasi-exact is exact"
+        "guarded is exact"
         self.assertEqual(self.A.exact, True)
 
     def testScale(self):

@@ -188,7 +188,7 @@ class Fixed(object):
         
     def __str__(self):
         '''
-        stringify a quasi-exact value
+        stringify a fixed value
         print as full precision
         '''
         v = self._value
