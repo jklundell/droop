@@ -1,22 +1,21 @@
 '''
-Quasi-exact value class
-   QX supports quasi-exact fixed-decimal with specified precision and guard
+Guarded-precision fixed-point decimal value class
+   Guarded supports quasi-exact fixed-decimal with specified precision and guard
 
 copyright 2010 by Jonathan Lundell
 '''
 
-class QX(object):
+class Guarded(object):
     '''
-    quasi-exact fixed-point decimal arithmetic with guard digits
+    guarded-precision fixed-point decimal arithmetic 
     
-    Note that because of approximate equality, Fixed quasi-exact (ie, guard>0) numbers 
-    will not behave quite normally. Equality is not transitive, and two "equal" valules
-    do not necessarily hash to the same value.
+    Note that because of approximate equality, Guarded numbers will not behave quite normally. 
+    Equality is not transitive, and two "equal" values do not necessarily hash to the same value.
     
     This is acceptable for our purposes, but may not be generally desirable.
     '''
     
-    name = 'quasi-exact'
+    name = 'guarded'
     info = None
     exact = True
     quasi_exact = True
@@ -30,8 +29,8 @@ class QX(object):
 
     @classmethod
     def helps(cls, helps):
-        "add help string"
-        helps['qx'] = 'qx help tbd'
+        "add our help string"
+        helps['guarded'] = 'guarded help tbd'
 
     #  initialize must be called before using the class
     #
@@ -39,17 +38,17 @@ class QX(object):
     def initialize(cls, options=dict()):
         "initialize class variables"
         
-        arithmetic = options.get('arithmetic', 'qx')
-        if arithmetic not in ('quasi-exact', 'qx'):
-            raise TypeError('QX: unrecognized arithmetic type (%s)' % arithmetic)
+        arithmetic = options.get('arithmetic', 'guarded')
+        if arithmetic not in ('guarded', 'guarded'):
+            raise TypeError('Guarded: unrecognized arithmetic type (%s)' % arithmetic)
             
         precision = options.get('precision', None) or 9
         if int(precision) != precision or precision < 0:
-            raise TypeError('QX: precision must be an int >= 0')
+            raise TypeError('Guarded: precision must be an int >= 0')
         guard = options.get('guard', None)
         if guard is None: guard = precision
         if int(guard) != guard or guard < 1:
-            raise TypeError('QX: guard must be an int > 0')
+            raise TypeError('Guarded: guard must be an int > 0')
 
         cls.precision = precision
         cls.guard = guard
@@ -65,36 +64,36 @@ class QX(object):
 
         cls.__dfmt = "%d.%0" + str(precision) + "d" # %d.%0pd
 
-        cls.info = "quasi-exact fixed-point decimal arithmetic (%s+%s places)" % (str(cls.precision), str(cls.guard))
+        cls.info = "guarded-precision fixed-point decimal arithmetic (%s+%s places)" % (str(cls.precision), str(cls.guard))
 
     def __init__(self, arg, setval=False):
-        "create a new QX object"
+        "create a new Guarded object"
         if setval:
             self._value = arg                  # direct-set value
         elif isinstance(arg, (int,long)):
             self._value = arg * self.__scale  # scale incoming integers
         else:
-            self._value = arg._value          # copy incoming QX
+            self._value = arg._value          # copy incoming Guarded
         
     #  arithmetic operations
     #
     def __add__(self, other):
         "self + other"
-        v = QX(other)
-        return QX(self._value + v._value, True)
+        v = Guarded(other)
+        return Guarded(self._value + v._value, True)
 
     def __sub__(self, other):
         "subtract other from self"
-        v = QX(other)
-        return QX(self._value - v._value, True)
+        v = Guarded(other)
+        return Guarded(self._value - v._value, True)
         
     def __neg__(self):
         "return negated self"
-        return QX(-self._value, True)
+        return Guarded(-self._value, True)
 
     def __pos__(self):
         "return +self"
-        return QX(self, True)
+        return Guarded(self, True)
 
     def __nonzero__(self):
         "bool(self)"
@@ -102,19 +101,19 @@ class QX(object):
 
     def __abs__(self):
         "absolute value"
-        return QX(abs(self._value), True)
+        return Guarded(abs(self._value), True)
         
     def __mul__(self, other):
         "return self * other"
         if isinstance(other, (int,long)):
-            return QX(self._value * other, True)
-        return QX((self._value*other._value)//self.__scale, True)
+            return Guarded(self._value * other, True)
+        return Guarded((self._value*other._value)//self.__scale, True)
         
     def __floordiv__(self, other):
         "return self // other"
         if isinstance(other, (int,long)):
-            return QX(self._value // other, True)
-        return QX((self._value * self.__scale) // other._value, True)
+            return Guarded(self._value // other, True)
+        return Guarded((self._value * self.__scale) // other._value, True)
 
     __div__ = __floordiv__
     __truediv__ = __floordiv__
@@ -193,13 +192,13 @@ class QX(object):
         
     def __str__(self):
         '''
-        stringify a quasi-exact value
+        stringify a guarded value
         print as full precision
         '''
         
         v = self._value
         gv = (v + self.__grnd) // self.__scaleg
-        return QX.__dfmt % (gv // self.__scalep, gv % self.__scalep)
+        return Guarded.__dfmt % (gv // self.__scalep, gv % self.__scalep)
 
     @classmethod
     def report(cls):

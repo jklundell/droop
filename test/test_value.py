@@ -8,21 +8,25 @@ import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
-from packages.value import Value as V
+from packages import values as V
 from packages.values.fixed import Fixed as F
-from packages.values.qx import QX as Q
+from packages.values.guarded import Guarded as G
 from packages.values.rational import Rational as R
 
 class ValueTest(unittest.TestCase):
     "test value-class initialization"
     
     def testValueInitRational(self):
-        "class Rational if precision & guard are None"
+        "class Rational if arithmetic=rational"
         self.assertEqual(V.ArithmeticClass(dict(arithmetic='rational')), R)
 
     def testValueInitRationalDefault(self):
-        "default class Fixed"
-        self.assertEqual(V.ArithmeticClass(), Q)
+        "default class Guarded"
+        self.assertEqual(V.ArithmeticClass(), G)
+
+    def testBadArithmetic(self):
+        "try unknown arithmetic"
+        self.assertRaises(V.arithmeticValuesError, V.ArithmeticClass, dict(arithmetic='saywhat'))
 
     def testBadP1(self):
         "precision must be an int"
@@ -95,13 +99,13 @@ class ValueTestRounding(unittest.TestCase):
         "round= must be present"
         self.assertRaises(ValueError, F.div, F(1),F(3))
 
-class ValueTestQX9(unittest.TestCase):
+class ValueTestGuarded9(unittest.TestCase):
     p = 9
     g = p
     A = None
     def setUp(self):
         "initialize quasi-exact 9.None s/b 9.9"
-        self.A = V.ArithmeticClass(options=dict(arithmetic='qx', precision=self.p))
+        self.A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=self.p))
         
     def testExact(self):
         "quasi-exact is exact"
@@ -109,11 +113,11 @@ class ValueTestQX9(unittest.TestCase):
 
     def testScale(self):
         "scale is a function of precision and guard"
-        self.assertEqual(self.A._QX__scale, 10**(self.p+self.g))
+        self.assertEqual(self.A._Guarded__scale, 10**(self.p+self.g))
 
     def testGeps(self):
         "geps is a function of guard"
-        self.assertEqual(self.A._QX__geps, 10**self.g/10)
+        self.assertEqual(self.A._Guarded__geps, 10**self.g/10)
 
     def testBadP(self):
         "test illegal precision"

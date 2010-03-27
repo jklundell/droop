@@ -4,9 +4,9 @@ election arithmetic values module init
 copyright 2010 by Jonathan Lundell
 '''
 
-import rational, fixed, qx
+import rational, fixed, guarded
 
-arithmeticNames = ('fixed', 'integer', 'rational', 'qx')
+arithmeticNames = ('fixed', 'integer', 'rational', 'guarded')
 
 class arithmeticValuesError(Exception):
     "election arithmetic value selection error"
@@ -14,17 +14,17 @@ class arithmeticValuesError(Exception):
 def ArithmeticClass(options=dict()):
     "initialize a value class and return it"
 
-    arithmetic = options.get('arithmetic', None) or 'quasi-exact'
+    arithmetic = options.get('arithmetic', None) or 'guarded'
     if arithmetic == 'rational':
         rational.Rational.initialize(options)
         return rational.Rational
     if arithmetic in ('fixed', 'integer'):
         fixed.Fixed.initialize(options)
         return fixed.Fixed
-    if arithmetic in ('quasi-exact', 'qx'):
-        qx.QX.initialize(options)
-        return qx.QX
-    vals = ' '.join(arithmeticClassNames)
+    if arithmetic in ('guarded'):
+        guarded.Guarded.initialize(options)
+        return guarded.Guarded
+    vals = ' '.join(arithmeticNames)
     raise arithmeticValuesError("unknown arithmetic %s\n\tuse: %s" % (arithmetic, vals))
 
 def helps(helps):
@@ -32,4 +32,4 @@ def helps(helps):
     helps['arithmetic'] = 'available arithmetic: %s' % ','.join(arithmeticNames)
     rational.Rational.helps(helps)
     fixed.Fixed.helps(helps)
-    qx.QX.helps(helps)
+    guarded.Guarded.helps(helps)

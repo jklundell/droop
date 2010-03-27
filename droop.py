@@ -20,10 +20,10 @@ copyright 2010 by Jonathan Lundell
      variant=warren to switch meek to warren mode
      epsilon=<set meek surplus limit to 10^-epsilon>
    report= [not currently suppported]
-   arithmetic=quasi-exact|fixed|integer|rational
+   arithmetic=guarded|fixed|integer|rational
      (integer is fixed with precision=0)
-     precision=<precision for fixed or qx in digits>
-     guard=<guard for qx in digits>
+     precision=<precision for fixed or guarded, in digits>
+     guard=<guard for guarded, in digits>
      dp=<display precision (digits) for rational>
 '''
    
@@ -130,8 +130,8 @@ def usage(subject=None):
     u += '  profile=reps, to profile the count, running reps repetitions,\n'
     u += '  dump, to dump a csv of the rounds,\n'
     u += '  or rule- or arithmetic-specific options:\n'
-    u += '    precision=n: decimal digits of precision (fixed, qx)\n'
-    u += '    guard=n: guard digits (qx; default to guard=precision)\n'
+    u += '    precision=n: decimal digits of precision (fixed, guarded)\n'
+    u += '    guard=n: guard digits (guarded; default to guard=precision)\n'
     u += '    dp=n: display precision (rational)\n'
     u += '    omega=n: meek iteration terminates when surplus < 1/10^omega\n'
     u += '  help is available on the following subjects:\n'
