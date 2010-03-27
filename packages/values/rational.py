@@ -25,7 +25,15 @@ class Rational(Fraction):
     @classmethod
     def helps(cls, helps):
         "add help string"
-        helps['rational'] = 'rational help tbd'
+        helps['rational'] = '''Rational arithmetic uses rational fractions to exactly represent numeric values.
+number of digits of precision.
+
+Options:
+    dp=p   display precision
+           for display purposes only, round values to p digits of precision (default 10)
+
+See also: fixed, guarded
+'''
 
     @classmethod
     def initialize(cls, options=dict()):

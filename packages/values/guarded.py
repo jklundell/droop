@@ -30,7 +30,20 @@ class Guarded(object):
     @classmethod
     def helps(cls, helps):
         "add our help string"
-        helps['guarded'] = 'guarded help tbd'
+        helps['guarded'] = '''Guarded arithmetic is an extension of fixed-point decimal arithmetic.
+To its p digits of precision, it adds g guard digits. All arithmetic is done with p+g digits
+of precision, but numbers that differ by less than half a unit of precision (10^g/2) are considered
+to be equal.
+
+If p & g are sufficiently large, guarded arithmetic produces the same outcomes as exact (rational)
+arithmetic, but with considerably greater speed in most cases.
+
+Options:
+    precision=p   p digits of precision (default 9)
+    guard=g       g guard digits (default p)
+
+See also: fixed, rational
+'''
 
     #  initialize must be called before using the class
     #
@@ -56,9 +69,20 @@ class Guarded(object):
         cls.__scalep = 10 ** precision
         cls.__scaleg = 10 ** guard
         cls.__scale = 10 ** (precision+guard)
+        
+        #  __grnd is the rounding value for string conversions
+        #  __geps is used in the test for equality (see __cmp__ below)
+        #
+        #  In the current implementation, we have a fairly narrow definition of equality, 
+        #  a factor of 10 below one unit of precision.
+        #
         cls.__grnd = cls.__scaleg//2
-        cls.__geps = cls.__scaleg//10
+        cls.__geps = cls.__scaleg//2
 
+        #  We keep statistics on how close our comparisons come to epsilon
+        #
+        #  maxDiff: the largest absolute difference less than epsilon (__cmp__ == 0)
+        #  minDiff: the smallest absolute difference greater than epsilon (__cmp__ != 0)
         cls.maxDiff = 0
         cls.minDiff = cls.__scale * 100
 

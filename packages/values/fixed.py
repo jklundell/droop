@@ -24,7 +24,15 @@ class Fixed(object):
     @classmethod
     def helps(cls, helps):
         "add help string"
-        helps['fixed'] = 'fixed help tbd'
+        helps['fixed'] = '''Fixed arithmetic uses fixed-point decimal arithmetic with a specified
+number of digits of precision.
+
+Options:
+    precision=p   p digits of precision (default 9)
+    precision=0   integer arithmetic
+
+See also: guarded, rational
+'''
 
     #  initialize must be called before using the class
     #

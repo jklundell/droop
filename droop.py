@@ -19,7 +19,7 @@ copyright 2010 by Jonathan Lundell
    rule=election_rule_name
      variant=warren to switch meek to warren mode
      epsilon=<set meek surplus limit to 10^-epsilon>
-   report= [not currently suppported]
+   report= [not currently supported]
    arithmetic=guarded|fixed|integer|rational
      (integer is fixed with precision=0)
      precision=<precision for fixed or guarded, in digits>
