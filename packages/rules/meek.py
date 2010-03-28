@@ -355,7 +355,7 @@ class Rule(ElectionRule):
             #
             if iterationStatus == IS_batch:
                 for c in batch:
-                    C.defeat(c, msg='Defeat')
+                    C.defeat(c, msg='Defeat certain loser')
                     c.kf = V0
                     c.vote = V0
                 continue
@@ -375,7 +375,10 @@ class Rule(ElectionRule):
             #
             if low_candidates:
                 low_candidate = breakTie(E, low_candidates, 'defeat')
-                C.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))
+                if iterationStatus == IS_omega:
+                    C.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))
+                else:
+                    C.defeat(low_candidate, msg='Defeat (stable surplus %s)' % V(R.surplus))
                 low_candidate.kf = V0
                 low_candidate.vote = V0
         

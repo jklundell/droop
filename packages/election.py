@@ -127,18 +127,20 @@ class Election(object):
 
     def report(self, intr=False):
         "report election by round"
+        reportMeek = self.rule.reportMode() == 'meek'
         s = "\nElection: %s\n\n" % self.title
         s += "\tRule: %s\n" % self.rule.info()
         s += "\tArithmetic: %s\n" % self.V.info
         s += "\tSeats: %d\n" % self.nSeats
         s += "\tBallots: %d\n" % self.nBallots
         s += "\tQuota: %s\n" % self.V(self.R0.quota)
+        if reportMeek:
+            s += "\tOmega: %s\n" % self.rule.omega
         s += '\n'
         if intr:
             s += "\t** Count terminated prematurely by user interrupt **\n\n"
             self.R.log('** count interrupted; this round is incomplete **')
         s += self.V.report()
-        reportMeek = self.rule.reportMode() == 'meek'
         for round in self.rounds:
             s += "Round %d:\n" % round.n
             s += round.report(reportMeek)
@@ -202,15 +204,16 @@ class Election(object):
             "report a round"
             E = self.E
             V = E.V
+            C = self.C
             saveR, E.R = E.R, self # provide reporting context
             s = ''
             for line in self._log:
                 s += '\t%s\n' % line
             if self._log:
                 s += '\t...\n'
-            s += '\tHopeful: %s\n' % (" ".join(sorted([c.name for c in self.C.hopeful])) or 'None')
-            s += '\tElected: %s\n' % (" ".join(sorted([c.name for c in self.C.elected])) or 'None')
-            s += '\tDefeated: %s\n' % (" ".join(sorted([c.name for c in self.C.defeated])) or 'None')
+            s += '\tHopeful: %s\n' % (" ".join([c.name for c in C.sortByOrder(C.hopeful)]) or 'None')
+            s += '\tElected: %s\n' % (" ".join([c.name for c in C.sortByOrder(C.elected)]) or 'None')
+            s += '\tDefeated: %s\n' % (" ".join([c.name for c in C.sortByOrder(C.defeated)]) or 'None')
             if reportMeek:
                 s += '\tQuota: %s\n' % V(E.R.quota)
                 s += '\tVotes: %s\n' % V(E.R.votes)
@@ -225,13 +228,13 @@ class Election(object):
                     if b.exhausted:
                         nontransferable += b.vote
                     else:
-                        if b.topCand in self.C.elected:
+                        if b.topCand in C.elected:
                             pvotes += b.vote
-                        elif b.topCand in self.C.hopeful:
+                        elif b.topCand in C.hopeful:
                             hvotes += b.vote
                 evotes = E.V0
-                for c in self.C.elected:
-                    if not c in self.C.pending:
+                for c in C.elected:
+                    if not c in C.pending:
                         evotes += E.R.quota
                 total = evotes + pvotes + hvotes + nontransferable
                 #  residual here (wigm) is votes lost due to rounding
