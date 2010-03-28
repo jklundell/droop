@@ -244,9 +244,8 @@ class Rule(ElectionRule):
                             if b.weight <= V0:
                                 break
                     R.residual += b.residual  # residual for round
-                R.votes = V0
-                for c in C.hopefulOrElected:
-                    R.votes += c.vote            # find sum of all votes
+
+                R.votes = sum([c.vote for c in C.hopefulOrElected], V0)
 
                 #  D.3. update quota
                 #
@@ -268,9 +267,7 @@ class Rule(ElectionRule):
     
                 #  D.6. calculate total surplus
                 #
-                surplus = V0
-                for c in C.elected:
-                    surplus += c.vote - R.quota
+                surplus = sum([c.vote-R.quota for c in C.elected], V0)
                 R.surplus = surplus # for reporting
                 
                 #  D.7. test iteration complete

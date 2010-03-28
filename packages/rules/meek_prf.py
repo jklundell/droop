@@ -79,40 +79,37 @@ class Rule(ElectionRule):
             "Calculate quota."
             return E.R.votes / E.V(E.electionProfile.nSeats+1) + E.V.epsilon
     
-        def breakTie(E, tied, purpose=None, strong=True):
+        def breakTie(E, tied, purpose=None):
             '''
             break a tie
             
-            purpose must be 'surplus' or 'elect' or 'defeat', 
+            purpose is 'surplus' or 'elect' or 'defeat', 
             indicating whether the tie is being broken for the purpose 
             of choosing a surplus to transfer, a winner, 
             or a candidate to eliminate. 
             
-            Set strong to False to indicate that weak tiebreaking should be
-            attempted, if relevant. Otherwise the tie is treated as strong.
-            
-            Not all tiebreaking methods will care about 'purpose' or 'strength',
-            but the requirement is enforced for consistency of interface.
+            the tiebreaking method: candidates are randomly ordered,
+            and the order of entry in the ballot file is the tiebreaking order:
+            choose the first candidate in that order.
             '''
             assert purpose in ('surplus', 'elect', 'defeat')
             if not tied:
                 return None
             if len(tied) == 1:
                 return tied[0]
-            if len(tied) > 1:
-                t = tied[0]  # TODO: real tiebreaker
-                s = 'Break tie (%s): [' % purpose
-                s += ", ".join([c.name for c in tied])
-                s += '] -> %s' % t.name
-                R.log(s)
-                return t
+            t = C.sortByOrder(tied)[0]
+            s = 'Break tie (%s): [' % purpose
+            s += ", ".join([c.name for c in tied])
+            s += '] -> %s' % t.name
+            R.log(s)
+            return t
 
         #  iterateStatus constants
         #
         IS_none = None
-        IS_omega = 1
-        IS_elected = 2
-        IS_stable = 3
+        IS_omega = 1      # iteration stopped because surplus < omega
+        IS_elected = 2    # iteration stopped because candidate(s) elected
+        IS_stable = 3     # iteration stopped because surplus reached stable value
 
         def iterate():
             "Iterate until surplus is sufficiently low"
@@ -137,17 +134,16 @@ class Rule(ElectionRule):
                         #  w -= w*kf rounded up         new weight
                         # 
                         kw = V.mul(b.weight, c.kf, round='up')  # keep weight
-                        kv = kw * b.multiplier  # exact
+                        kv = kw * b.multiplier
                         c.vote += kv
                         b.weight -= kw
                         b.residual -= kv  # residual value of ballot
                         #
                         if b.weight <= V0:
                             break
-                    R.residual += b.residual    # residual for round
-                R.votes = V0
-                for c in C.hopefulOrElected:
-                    R.votes += c.vote            # find sum of all votes
+                    R.residual += b.residual     # residual for round
+
+                R.votes = sum([c.vote for c in C.hopefulOrElected], V0)
 
                 #  D.3. update quota
                 #
@@ -162,25 +158,23 @@ class Rule(ElectionRule):
                     #  D.5. test for election complete
                     #
                     #if countComplete():
-                    #    return IS_complete, None
+                    #    return IS_complete
                 
                 if iStatus == IS_elected:
-                    return IS_elected, None
+                    return IS_elected
     
                 #  D.6. calculate total surplus
                 #
-                surplus = V0
-                for c in C.elected:
-                    surplus += c.vote - R.quota
+                surplus = sum([c.vote-R.quota for c in C.elected], V0)
                 R.surplus = surplus # for reporting
                 
                 #  D.7. test iteration complete
                 #
                 if surplus <= Rule.omega:
-                    return IS_omega, None
+                    return IS_omega
                 if surplus >= lastsurplus:
                     R.log("Stable state detected (%s)" % surplus) # move to caller?
-                    return IS_stable, None
+                    return IS_stable
                 lastsurplus = surplus
                     
                 #  D.8. update keep factors
@@ -224,7 +218,7 @@ class Rule(ElectionRule):
             #  C. iterate
             #     next round if iteration elected a candidate
             #
-            iterationStatus, batch = iterate()
+            iterationStatus = iterate()
             if iterationStatus == IS_elected:
                 continue
 
