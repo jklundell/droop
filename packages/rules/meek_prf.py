@@ -1,5 +1,5 @@
 '''
-Count election using PRF Meek Reference STV
+Count election using PR Foundation Meek Reference STV
 
 copyright 2010 by Jonathan Lundell
 '''
@@ -8,9 +8,15 @@ from _rule import ElectionRule
 
 class Rule(ElectionRule):
     '''
-    Rule for counting PRF Meek Reference STV
+    Rule for counting PR Foundation Meek Reference STV
     
     Parameters: none
+
+    Meek-PRF is equivalent to the generalized Meek rule with the following options:
+        arithmetic=fixed
+        precision=6
+        omega=4
+    ...and no batch defeats.
     '''
     
     omega = None   # epsilon for terminating iteration
@@ -43,7 +49,7 @@ class Rule(ElectionRule):
     @classmethod
     def info(cls):
         "return an info string for the election report"
-        return "PR Foundation Meek Reference (omega = 1/10^%d)" % (cls._o)
+        return "PR Foundation Meek Reference"
 
     @classmethod
     def reportMode(cls):
@@ -66,15 +72,11 @@ class Rule(ElectionRule):
             return C.nHopeful <= E.seatsLeftToFill() or E.seatsLeftToFill() <= 0
 
         def hasQuota(E, candidate):
-            '''
-            Determine whether a candidate has a quota (ie, is elected).
-            '''
+            "Determine whether a candidate has a quota (ie, is elected)."
             return candidate.vote >= E.R.quota
     
         def calcQuota(E):
-            '''
-            Calculate quota.
-            '''
+            "Calculate quota."
             return E.R.votes / E.V(E.electionProfile.nSeats+1) + E.V.epsilon
     
         def breakTie(E, tied, purpose=None, strong=True):
