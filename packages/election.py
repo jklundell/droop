@@ -16,7 +16,8 @@ Top-level structure:
 '''
 
 import sys
-import rules, values
+import values
+import packages
 
 class Election(object):
     '''
@@ -79,10 +80,12 @@ class Election(object):
             self.R0.ballots.append(self.Ballot(self, bl.multiplier, bl.ranking))
 
     @classmethod
-    def helps(cls):
+    def makehelp(cls):
         "build a dictionary of help strings on various subjects"
         helps = dict()
-        rules.helps(helps)
+        helps['rule'] =  'available rules: %s' % ','.join(packages.electionRuleNames())
+        for name in packages.electionRuleNames():
+            packages.ruleByName[name].helps(helps, name)
         values.helps(helps)
         return helps
 

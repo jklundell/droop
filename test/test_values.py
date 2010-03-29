@@ -117,7 +117,7 @@ class ValueTestGuarded9(unittest.TestCase):
 
     def testGeps(self):
         "geps is a function of guard"
-        self.assertEqual(self.A._Guarded__geps, 10**self.g/10)
+        self.assertEqual(self.A._Guarded__geps, 10**self.g/2)
 
     def testBadP(self):
         "test illegal precision"

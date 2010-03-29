@@ -30,7 +30,6 @@ copyright 2010 by Jonathan Lundell
 import sys, os
 from packages.profile import ElectionProfile, ElectionProfileError
 from packages.election import Election
-import packages.rules
 import packages.values
 
 class UsageError(Exception):
@@ -70,10 +69,10 @@ def main(options=None):
     
     #  get the rule class
     #
-    Rule = packages.rules.electionRule(rule)
+    Rule = packages.electionRule(rule)
     if not Rule:
-        rules = ' '.join(packages.rules.electionRuleNames())
-        raise UsageError("unknown rule %s; known rules:\n\t%s" % (rule, rules))
+        rules = ' '.join(packages.electionRuleNames())
+        raise UsageError("unknown rule '%s'; known rules:\n\t%s" % (rule, rules))
 
     #  run the election
     #
@@ -120,13 +119,13 @@ me = os.path.basename(__file__)
 def usage(subject=None):
     "usage and help"
     
-    helps = Election.helps()
+    helps = Election.makehelp()
     helpers = sorted(helps.keys())
 
     u = '\nUsage:\n'
     u += '%s options ballotfile\n' % me
     u += '  options:\n'
-    u += '    rule name (%s)\n' % ','.join(packages.rules.electionRuleNames())
+    u += '    rule name (%s)\n' % ','.join(packages.electionRuleNames())
     u += '    arithmetic class name (%s)\n' % ','.join(packages.values.arithmeticNames)
     u += '    profile=reps, to profile the count, running reps repetitions\n'
     u += '    dump, to dump a csv of the rounds\n'
@@ -165,7 +164,7 @@ if __name__ == "__main__":
             if len(optarg) == 1:
                 if optarg[0] in packages.values.arithmeticNames:
                     options['arithmetic'] = optarg[0]
-                elif optarg[0] in packages.rules.electionRuleNames():
+                elif optarg[0] in packages.electionRuleNames():
                     options['rule'] = optarg[0]
                 elif optarg[0] == 'dump':
                     options['dump'] = True
