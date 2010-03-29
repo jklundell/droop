@@ -28,9 +28,9 @@ copyright 2010 by Jonathan Lundell
 '''
    
 import sys, os
-from packages.profile import ElectionProfile, ElectionProfileError
-from packages.election import Election
-import packages.values
+from droop.profile import ElectionProfile, ElectionProfileError
+from droop.election import Election
+import droop.values
 
 class UsageError(Exception):
     "command-line usage error"
@@ -69,9 +69,9 @@ def main(options=None):
     
     #  get the rule class
     #
-    Rule = packages.electionRule(rule)
+    Rule = droop.electionRule(rule)
     if not Rule:
-        rules = ' '.join(packages.electionRuleNames())
+        rules = ' '.join(droop.electionRuleNames())
         raise UsageError("unknown rule '%s'; known rules:\n\t%s" % (rule, rules))
 
     #  run the election
@@ -125,8 +125,8 @@ def usage(subject=None):
     u = '\nUsage:\n'
     u += '%s options ballotfile\n' % me
     u += '  options:\n'
-    u += '    rule name (%s)\n' % ','.join(packages.electionRuleNames())
-    u += '    arithmetic class name (%s)\n' % ','.join(packages.values.arithmeticNames)
+    u += '    rule name (%s)\n' % ','.join(droop.electionRuleNames())
+    u += '    arithmetic class name (%s)\n' % ','.join(droop.values.arithmeticNames)
     u += '    profile=reps, to profile the count, running reps repetitions\n'
     u += '    dump, to dump a csv of the rounds\n'
     u += '    rule- or arithmetic-specific options:\n'
@@ -162,9 +162,9 @@ if __name__ == "__main__":
         for arg in sys.argv[1:]:
             optarg = arg.split('=')
             if len(optarg) == 1:
-                if optarg[0] in packages.values.arithmeticNames:
+                if optarg[0] in droop.values.arithmeticNames:
                     options['arithmetic'] = optarg[0]
-                elif optarg[0] in packages.electionRuleNames():
+                elif optarg[0] in droop.electionRuleNames():
                     options['rule'] = optarg[0]
                 elif optarg[0] == 'dump':
                     options['dump'] = True
@@ -188,7 +188,7 @@ if __name__ == "__main__":
         except ElectionProfileError as err:
             print >>sys.stderr, "** droop: Election profile error: %s" % err
             sys.exit(1)
-        except packages.values.arithmeticValuesError as err:
+        except droop.values.arithmeticValuesError as err:
             print >>sys.stderr, "** droop: %s" % err
             sys.exit(1)
         except Election.ElectionError as err:

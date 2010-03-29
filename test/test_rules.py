@@ -8,8 +8,8 @@ import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
-from packages import electionRuleNames, electionRule
-from packages import rules as R
+from droop import electionRuleNames, electionRule
+from droop import rules as R
 
 class RuleInitTest(unittest.TestCase):
     "test rules.__init__"
@@ -24,7 +24,7 @@ class RuleInitTest(unittest.TestCase):
 
     def testElectionRule(self):
         "look up one election rule"
-        from packages.rules.mpls import Rule as Mpls
+        from droop.rules.mpls import Rule as Mpls
         self.assertEqual(electionRule('mpls'), Mpls, 'the mpls Rule should match its name lookup')
 
 

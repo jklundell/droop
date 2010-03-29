@@ -8,8 +8,8 @@ import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
-from packages.profile import ElectionProfile
-from packages.profile import ElectionProfileError
+from droop.profile import ElectionProfile
+from droop.profile import ElectionProfileError
 
 p_42 = '''3 2
 4 1 2 0

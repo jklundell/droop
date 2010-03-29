@@ -17,7 +17,7 @@ Top-level structure:
 
 import sys
 import values
-import packages
+import droop
 
 class Election(object):
     '''
@@ -83,9 +83,9 @@ class Election(object):
     def makehelp(cls):
         "build a dictionary of help strings on various subjects"
         helps = dict()
-        helps['rule'] =  'available rules: %s' % ','.join(packages.electionRuleNames())
-        for name in packages.electionRuleNames():
-            packages.ruleByName[name].helps(helps, name)
+        helps['rule'] =  'available rules: %s' % ','.join(droop.electionRuleNames())
+        for name in droop.electionRuleNames():
+            droop.ruleByName[name].helps(helps, name)
         values.helps(helps)
         return helps
 

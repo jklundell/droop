@@ -41,7 +41,7 @@ is that the test is performed only after defeating the lowest-vote candidate per
 '''
 
 import random
-from _rule import ElectionRule
+from electionrule import ElectionRule
 
 class Rule(ElectionRule):
     '''

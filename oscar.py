@@ -6,11 +6,11 @@ copyright 2010 by Jonathan Lundell
 '''
 
 import sys, os
-import droop
+import Droop
 
 if len(sys.argv) != 2:
     print >>sys.stderr, "usage: %s ballot_file" % os.path.basename(sys.argv[0])
     sys.exit(1)
-print droop.main(dict(rule='wigm', path=sys.argv[1], arithmetic='fixed', precision=2, integer_quota=True, defeat_zero=True))
+print Droop.main(dict(rule='wigm', path=sys.argv[1], arithmetic='fixed', precision=2, integer_quota=True, defeat_batch='zero'))
 
 sys.exit(0)

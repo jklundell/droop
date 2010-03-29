@@ -8,10 +8,10 @@ import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
-from packages import values as V
-from packages.values.fixed import Fixed as F
-from packages.values.guarded import Guarded as G
-from packages.values.rational import Rational as R
+from droop import values as V
+from droop.values.fixed import Fixed as F
+from droop.values.guarded import Guarded as G
+from droop.values.rational import Rational as R
 
 class ValueTest(unittest.TestCase):
     "test value-class initialization"

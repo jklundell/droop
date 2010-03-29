@@ -4,7 +4,7 @@ Count election using Reference Meek or Warren STV
 copyright 2010 by Jonathan Lundell
 '''
 
-from _rule import ElectionRule
+from electionrule import ElectionRule
 
 class Rule(ElectionRule):
     '''
@@ -13,7 +13,8 @@ class Rule(ElectionRule):
     Parameter: arithmetic type
     '''
     
-    omega = None     # in digits
+    omega = None          # in digits
+    defeatBatch = 'safe'  # default
 
     @classmethod
     def ruleNames(cls):
@@ -25,10 +26,12 @@ class Rule(ElectionRule):
         "add help strings for meek and warren"
         h =  '%s is an iterative election rule.\n' % name
         h += '\noptions:\n'
-        h += '  arithmetic: (qx*, rational, fixed)  *default\n'
+        h += '  arithmetic: (guarded*, rational, fixed)\n'
         h += '  omega=iteration limit such that an interation is terminated\n'
         h += '    when surplus < 1/10^omega.\n'
         h += '    default: 10 if rational, else 2/3 of precision\n'
+        h += '  defeat_batch=(safe*, none)\n'
+        h += '  * default\n'
         helps[name] = h
         
     @classmethod
@@ -42,11 +45,14 @@ class Rule(ElectionRule):
         else:
             variant = options.get('variant', 'meek').lower()
             if variant not in ['meek', 'warren']:
-                raise ValueError('unknown  %s; use Meek or Warren' % variant)
+                raise ValueError('unknown variant %s; use meek or warren' % variant)
         cls.warren = (variant == 'warren')
         if not options.get('arithmetic'):
             options['arithmetic'] = 'guarded'
         cls.omega = options.get('omega', None)
+        cls.defeatBatch = options.get('defeat_batch', cls.defeatBatch)
+        if cls.defeatBatch not in ('none', 'safe'):
+            raise ValueError('unknown defeat_batch %s; use none or safe' % cls.defeatBatch)
         return options
 
     @classmethod
@@ -127,6 +133,9 @@ class Rule(ElectionRule):
         def batchDefeat(surplus):
             "find a batch of candidates that can be defeated at the current surplus"
             
+            if cls.defeatBatch == 'none':
+                return []
+                
             #   get a sorted list of candidates
             #   copy to a new list,
             #   making each entry a list
@@ -307,13 +316,13 @@ class Rule(ElectionRule):
         #  _omega will be 1/10**omega
         #
         assert V.name in ('rational', 'guarded', 'fixed')
-        if not cls._o:
+        if not cls.omega:
             if V.name == 'rational':
-                cls._o = 10
+                cls.omega = 10
             elif V.name == 'guarded':
-                cls._o = V.precision * 2 // 3
+                cls.omega = V.precision * 2 // 3
             else: # fixed
-                cls._o = V.precision * 2 // 3
+                cls.omega = V.precision * 2 // 3
         cls._omega = V(1) / V(10**cls.omega)
 
         E.R0.votes = V(E.electionProfile.nBallots)

@@ -4,19 +4,19 @@ Count election using Reference WIGM STV
 copyright 2010 by Jonathan Lundell
 '''
 
-from _rule import ElectionRule
+from electionrule import ElectionRule
 
 class Rule(ElectionRule):
     '''
     Rule for counting Model WIGM elections
     
-    Parameters: arithmetic type, integer_quota, defeat_zero
+    Parameters: arithmetic type, integer_quota, defeat_batch
     '''
     
     #  options
     #
     integer_quota = False
-    defeat_zero = False
+    defeatBatch = 'none'
     
     @classmethod
     def ruleNames(cls):
@@ -30,7 +30,7 @@ class Rule(ElectionRule):
         h += '\noptions:\n'
         h += '  (qx*, rational, fixed, integer): arithmetic\n'
         h += '  integer_quota=(false*, true): round quota up to next integer\n'
-        h += '  defeat_zero=(false*, true): after surplus transfer, defeat candidates with no first choices\n'
+        h += '  defeat_batch=(none*, zero): after surplus transfer, defeat candidates with no first choices\n'
         h += '    *default\n'
         helps[name] = h
         
@@ -44,10 +44,10 @@ class Rule(ElectionRule):
             options['arithmetic'] = 'guarded'
 
         #  integer_quota: use Droop quota rounded up to whole number
-        #  defeat_zero: defeat all hopeful candidates with zero votes after first surplus transfer
+        #  defeat_batch=zero: defeat all hopeful candidates with zero votes after first surplus transfer
         #
         cls.integer_quota = options.get('integer_quota', False)
-        cls.defeat_zero = options.get('defeat_zero', False)
+        cls.defeatBatch = options.get('defeat_batch', 'none')
 
         #  initialize and return arithmetic
         #
@@ -199,9 +199,9 @@ class Rule(ElectionRule):
                 #  defeat candidate with lowest vote
                 #
                 if low_candidates:
-                    if low_vote == V0 and cls.defeat_zero:
+                    if low_vote == V0 and cls.defeatBatch == 'zero':
                         for c in low_candidates:
-                            C.defeat(c, msg='Defeat zero')
+                            C.defeat(c, msg='Defeat batch(zero)')
                             R.transfer(c, c.vote, msg='Transfer defeated')
                     else:
                         low_candidate = breakTie(E, low_candidates, 'defeat')

@@ -4,7 +4,7 @@ Count election using PR Foundation Meek Reference STV
 copyright 2010 by Jonathan Lundell
 '''
 
-from _rule import ElectionRule
+from electionrule import ElectionRule
 
 class Rule(ElectionRule):
     '''
