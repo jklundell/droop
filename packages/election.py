@@ -138,7 +138,7 @@ class Election(object):
         s += "\tBallots: %d\n" % self.nBallots
         s += "\tQuota: %s\n" % self.V(self.R0.quota)
         if reportMeek:
-            s += "\tOmega: %s\n" % self.rule.omega
+            s += "\tOmega: %s\n" % self.rule._omega
         s += '\n'
         if intr:
             s += "\t** Count terminated prematurely by user interrupt **\n\n"

@@ -14,13 +14,13 @@ class Rule(ElectionRule):
 
     Meek-PRF is equivalent to the generalized Meek rule with the following options:
         arithmetic=fixed
-        precision=6
-        omega=4
+        precision=9
+        omega=6
     ...and no batch defeats.
     '''
     
-    omega = None   # epsilon for terminating iteration
-    _o = 4         # omega = 1/10^o
+    precision = 9  # fixed-arithmetic precision in digits
+    omega = 6      # iteration terminator
 
     @classmethod
     def ruleNames(cls):
@@ -32,8 +32,8 @@ class Rule(ElectionRule):
         "add help string for meek-prf"
         h =  "%s is the PR Foundation's Meek Reference STV.\n" % name
         h += '\nThere are no options.\n'
-        h += '  arithmetic: fixed, 6-digit precision\n'
-        h += '  omega=4 (iteration limit such that an interation is terminated\n'
+        h += '  arithmetic: fixed, %d-digit precision\n' % cls.precision
+        h += '  omega=%d (iteration limit such that an interation is terminated\n' % cls.omega
         h += '    when surplus < 1/10^omega)\n'
         helps[name] = h
         
@@ -41,9 +41,9 @@ class Rule(ElectionRule):
     def options(cls, options=dict()):
         "override options"
         
-        options['arithmetic'] = 'fixed' # fixed-point arithmetic
-        options['precision'] = 6        # 6-digit precision
-        options['omega'] = 4            # 1/10^4 omega
+        options['arithmetic'] = 'fixed'       # fixed-point arithmetic
+        options['precision'] = cls.precision  # digits of precision
+        options['omega'] = cls.omega          # test: surplus < 1/10^omega
         return options
 
     @classmethod
@@ -170,7 +170,7 @@ class Rule(ElectionRule):
                 
                 #  D.7. test iteration complete
                 #
-                if surplus <= Rule.omega:
+                if surplus <= Rule._omega:
                     return IS_omega
                 if surplus >= lastsurplus:
                     R.log("Stable state detected (%s)" % surplus) # move to caller?
@@ -191,9 +191,9 @@ class Rule(ElectionRule):
         V0 = E.V0  # constant zero
         V1 = E.V1  # constant one
 
-        #  set omega: 1/10**4
+        #  set _omega: 1/10**omega
         #
-        cls.omega = V(1) / V(10**cls._o)
+        cls._omega = V(1) / V(10**cls.omega)
 
         E.R0.votes = V(E.electionProfile.nBallots)
         E.R0.quota = calcQuota(E)
@@ -229,7 +229,7 @@ class Rule(ElectionRule):
             low_vote = R.quota
             low_candidates = []
             for c in C.hopeful:
-                if V.equal_within(c.vote, low_vote, cls.omega):
+                if V.equal_within(c.vote, low_vote, cls._omega):
                     low_candidates.append(c)
                 elif c.vote < low_vote:
                     low_vote = c.vote

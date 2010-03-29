@@ -13,8 +13,7 @@ class Rule(ElectionRule):
     Parameter: arithmetic type
     '''
     
-    omega = None     # epsilon for terminating iteration
-    _o = None        # omega = 1/10^o
+    omega = None     # in digits
 
     @classmethod
     def ruleNames(cls):
@@ -47,14 +46,14 @@ class Rule(ElectionRule):
         cls.warren = (variant == 'warren')
         if not options.get('arithmetic'):
             options['arithmetic'] = 'guarded'
-        cls._o = options.get('omega', None)
+        cls.omega = options.get('omega', None)
         return options
 
     @classmethod
     def info(cls):
         "return an info string for the election report"
         name = "Warren" if cls.warren else "Meek"
-        return "%s Reference (omega = 1/10^%d)" % (name, cls._o)
+        return "%s Reference (omega = 1/10^%d)" % (name, cls.omega)
 
     @classmethod
     def reportMode(cls):
@@ -138,7 +137,7 @@ class Rule(ElectionRule):
             sortedGroups = []
             vote = V0
             for c in sortedCands:
-                if V.equal_within(c.vote, vote, cls.omega):
+                if V.equal_within(c.vote, vote, cls._omega):
                     group.append(c)  # add candidate to tied group
                 else:
                     if group:
@@ -272,7 +271,7 @@ class Rule(ElectionRule):
                 
                 #  D.7. test iteration complete
                 #
-                if surplus <= Rule.omega:
+                if surplus <= Rule._omega:
                     return IS_omega, None
                 if surplus >= lastsurplus:
                     R.log("Stable state detected (%s)" % surplus) # move to caller?
@@ -303,9 +302,9 @@ class Rule(ElectionRule):
         V0 = E.V0  # constant zero
         V1 = E.V1  # constant one
 
-        #  set omega
+        #  set _omega
         #
-        #  omega will be 1/10**o
+        #  _omega will be 1/10**omega
         #
         assert V.name in ('rational', 'guarded', 'fixed')
         if not cls._o:
@@ -315,7 +314,7 @@ class Rule(ElectionRule):
                 cls._o = V.precision * 2 // 3
             else: # fixed
                 cls._o = V.precision * 2 // 3
-        cls.omega = V(1) / V(10**cls._o)
+        cls._omega = V(1) / V(10**cls.omega)
 
         E.R0.votes = V(E.electionProfile.nBallots)
         E.R0.quota = calcQuota(E)
@@ -362,7 +361,7 @@ class Rule(ElectionRule):
             low_vote = R.quota
             low_candidates = []
             for c in C.hopeful:
-                if V.equal_within(c.vote, low_vote, cls.omega):
+                if V.equal_within(c.vote, low_vote, cls._omega):
                     low_candidates.append(c)
                 elif c.vote < low_vote:
                     low_vote = c.vote
