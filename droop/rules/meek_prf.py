@@ -145,11 +145,11 @@ class Rule(ElectionRule):
                         #  kv = w*kf rounded up * m     keep vote
                         #  w -= w*kf rounded up         new weight
                         # 
-                        kw = V.mul(b.weight, c.kf, round='up')  # keep weight
-                        kv = kw * b.multiplier
-                        c.vote += kv
-                        b.weight -= kw
-                        b.residual -= kv  # residual value of ballot
+                        kw = V.mul(b.weight, c.kf, round='up')  # keep-weight
+                        kv = kw * b.multiplier  # keep-value
+                        c.vote += kv            # credit keep-value to candidate
+                        b.weight -= kw          # reduce ballot weight
+                        b.residual -= kv        # residual value of ballot
                         #
                         if b.weight <= V0:
                             break
@@ -232,7 +232,7 @@ class Rule(ElectionRule):
             #
             #  find candidate(s) within surplus of lowest vote (effectively tied)
             #
-            low_vote = V.min(c.vote for c in C.hopeful)
+            low_vote = V.min([c.vote for c in C.hopeful])
             low_candidates = [c for c in C.hopeful if (low_vote + R.surplus) >= c.vote]
             
             #  defeat candidate with lowest vote, breaking tie if necessary

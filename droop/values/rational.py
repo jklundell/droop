@@ -107,7 +107,7 @@ See also: fixed, guarded
         return arg1 / arg2
         round is ignored
         '''
-        return Fraction.__div(arg1, arg2)
+        return Fraction.__div__(arg1, arg2)
 
     @staticmethod
     def muldiv(arg1, arg2, arg3, round=None):

@@ -121,29 +121,23 @@ class Rule(ElectionRule):
             '''
             break a tie
             
-            purpose must be 'surplus' or 'elect' or 'defeat', 
+            purpose is 'surplus' or 'elect' or 'defeat', 
             indicating whether the tie is being broken for the purpose 
             of choosing a surplus to transfer, a winner, 
             or a candidate to eliminate. 
             
-            Set strong to False to indicate that weak tiebreaking should be
-            attempted, if relevant. Otherwise the tie is treated as strong.
-            
-            Not all tiebreaking methods will care about 'purpose' or 'strength',
-            but the requirement is enforced for consistency of interface.
+            the tiebreaking method: candidates are randomly ordered,
+            and the order of entry in the ballot file is the tiebreaking order:
+            choose the first candidate in that order.
             '''
             assert purpose in ('surplus', 'elect', 'defeat')
             if not tied:
                 return None
             if len(tied) == 1:
                 return tied[0]
-            if len(tied) > 1:
-                t = tied[0]  # TODO: real tiebreaker
-                s = 'Break tie (%s): [' % purpose
-                s += ", ".join([c.name for c in tied])
-                s += '] -> %s' % t.name
-                R.log(s)
-                return t
+            t = C.sortByOrder(tied)[0]
+            R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
+            return t
 
         def batchDefeat(surplus):
             "find a batch of candidates that can be defeated at the current surplus"
@@ -151,17 +145,17 @@ class Rule(ElectionRule):
             if cls.defeatBatch == 'none':
                 return []
                 
-            #   get a sorted list of candidates
-            #   copy to a new list,
-            #   making each entry a list
-            #   where each list has tied candidates, if any
+            #   start with candidates sorted by vote
+            #   build a sorted list of groups
+            #     where each group cosnists of the candidates tied at that vote
+            #     (when there's no tie, a group will have one candidate)
             #
             sortedCands = C.sortByVote(C.hopeful)
-            group = []
             sortedGroups = []
+            group = []
             vote = V0
             for c in sortedCands:
-                if V.equal_within(c.vote, vote, cls._omega):
+                if (vote + surplus) >= c.vote:
                     group.append(c)  # add candidate to tied group
                 else:
                     if group:
@@ -183,19 +177,24 @@ class Rule(ElectionRule):
             #   the election is already complete and we wouldn't be here.
             #   
             vote = V0
-            batch = []
             maxDefeat = C.nHopeful - E.seatsLeftToFill()
-            for g in range(len(sortedGroups) - 1):
+            maxg = None
+            ncand = 0
+            for g in xrange(len(sortedGroups) - 1):
                 group = sortedGroups[g]
-                if (len(batch) + len(group)) > maxDefeat:
+                ncand += len(group)
+                if ncand > maxDefeat:
                     break  # too many defeats
-                vote += group[0].vote * len(group)
-                if (vote + surplus) >= sortedGroups[g+1][0].vote:
-                    break  # not sure losers
-                batch += group
+                vote += sum([c.vote for c in group], V0)
+                if (vote + surplus) < sortedGroups[g+1][0].vote:
+                    maxg = g  # sure losers
+            batch = []
+            if maxg is not None:
+                for g in xrange(maxg+1):
+                    batch.extend(sortedGroups[g])
             return batch
 
-        #  iterateStatus constants
+        #  iterateStatus constants: why did the iteration terminate?
         #
         IS_none = None
         IS_omega = 1
@@ -280,31 +279,29 @@ class Rule(ElectionRule):
                     C.elect(c)
                     iStatus = IS_elected
                     
-                    #  D.5. test for election complete
-                    #
-                    #if countComplete():
-                    #    return IS_complete, None
-                
-                if iStatus == IS_elected:
-                    return IS_elected, None
-    
                 #  D.6. calculate total surplus
                 #
-                surplus = sum([c.vote-R.quota for c in C.elected], V0)
-                R.surplus = surplus # for reporting
+                R.surplus = sum([c.vote-R.quota for c in C.elected], V0)
                 
                 #  D.7. test iteration complete
                 #
-                if surplus <= Rule._omega:
+                #  case 1: a candidate was elected
+                #  case 2: surplus < omega
+                #  case 3: surplus stable (not decreasing)
+                #  case 4: there are sure losers to defeat
+                #
+                if iStatus == IS_elected:
+                    return IS_elected, None
+                if R.surplus <= Rule._omega:
                     return IS_omega, None
-                if surplus >= lastsurplus:
-                    R.log("Stable state detected (%s)" % surplus) # move to caller?
+                if R.surplus >= lastsurplus:
+                    R.log("Stable state detected (%s)" % R.surplus)
                     return IS_stable, None
-                lastsurplus = surplus
-                batch = batchDefeat(surplus)
+                batch = batchDefeat(R.surplus)
                 if batch:
                     return IS_batch, batch
-                    
+                lastsurplus = R.surplus
+
                 #  D.8. update keep factors
                 #
                 #  rounding options for non-exact arithmetic:
@@ -314,8 +311,8 @@ class Rule(ElectionRule):
                 #      up          up        Hill & NZ Calculator & NZ Schedule 1A
                 #
                 for c in C.elected:
-                    c.kf = V.muldiv(c.kf, R.quota, c.vote, round='up')  # OpenSTV variant
-                    #c.kf = V.div(V.mul(c.kf, R.quota, round='up'), c.vote, round='up')  # NZ variant
+                    #c.kf = V.muldiv(c.kf, R.quota, c.vote, round='up')  # OpenSTV variant
+                    c.kf = V.div(V.mul(c.kf, R.quota, round='up'), c.vote, round='up')  # NZ variant
             
         #########################
         #
@@ -380,18 +377,12 @@ class Rule(ElectionRule):
                     c.vote = V0
                 continue
 
-            #  Otherwise find and defeat candidate with lowest vote
+            #  find candidate(s) within surplus of lowest vote (effectively tied)
             #
-            low_vote = R.quota
-            low_candidates = []
-            for c in C.hopeful:
-                if V.equal_within(c.vote, low_vote, cls._omega):
-                    low_candidates.append(c)
-                elif c.vote < low_vote:
-                    low_vote = c.vote
-                    low_candidates = [c]
-
-            #  defeat candidate with lowest vote
+            low_vote = V.min([c.vote for c in C.hopeful])
+            low_candidates = [c for c in C.hopeful if (low_vote + R.surplus) >= c.vote]
+            
+            #  defeat candidate with lowest vote, breaking tie if necessary
             #
             if low_candidates:
                 low_candidate = breakTie(E, low_candidates, 'defeat')
