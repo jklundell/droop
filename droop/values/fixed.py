@@ -63,11 +63,11 @@ See also: guarded, rational
             precision = 0
         if precision == 0:
             cls.name = 'integer'
-        if int(precision) != precision or precision < 0:
-            raise TypeError('Fixed: precision must be an int >= 0')
+        if str(int(precision)) != precision or int(precision) < 0:
+            raise TypeError('Fixed: precision=%s; must be an int >= 0' % precision)
 
-        cls.precision = precision
-        cls.__scale = 10 ** (precision)
+        cls.precision = int(precision)
+        cls.__scale = 10 ** cls.precision
         
         cls.epsilon = cls(0)
         cls.epsilon._value = 1
@@ -209,6 +209,11 @@ See also: guarded, rational
         "test for equality within epsilon"
         return abs(a-b) < e
         
+    @classmethod
+    def min(cls, vals):
+        "find minimum value in a list"
+        return min(vals)
+ 
     def __str__(self):
         '''
         stringify a fixed value

@@ -113,10 +113,7 @@ class Rule(ElectionRule):
             if len(tied) == 1:
                 return tied[0]
             t = C.sortByOrder(tied)[0]
-            s = 'Break tie (%s): [' % purpose
-            s += ", ".join([c.name for c in tied])
-            s += '] -> %s' % t.name
-            R.log(s)
+            R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
             return t
 
         #  iterateStatus constants
@@ -169,28 +166,22 @@ class Rule(ElectionRule):
                 for c in [c for c in C.hopeful if hasQuota(E, c)]:
                     C.elect(c)
                     iStatus = IS_elected
-                    
-                    #  D.5. test for election complete
-                    #
-                    #if countComplete():
-                    #    return IS_complete
                 
-                if iStatus == IS_elected:
-                    return IS_elected
-    
                 #  D.6. calculate total surplus
                 #
-                surplus = sum([c.vote-R.quota for c in C.elected], V0)
-                R.surplus = surplus # for reporting
+                R.surplus = sum([c.vote-R.quota for c in C.elected], V0)
                 
                 #  D.7. test iteration complete
                 #
-                if surplus <= Rule._omega:
+                if iStatus == IS_elected:
+                    return IS_elected
+    
+                if R.surplus < Rule._omega:
                     return IS_omega
-                if surplus >= lastsurplus:
-                    R.log("Stable state detected (%s)" % surplus) # move to caller?
+                if R.surplus >= lastsurplus:
+                    R.log("Stable state detected (%s)" % R.surplus)
                     return IS_stable
-                lastsurplus = surplus
+                lastsurplus = R.surplus
                     
                 #  D.8. update keep factors
                 #
@@ -239,17 +230,11 @@ class Rule(ElectionRule):
 
             #  D. defeat candidate with lowest vote
             #
-            #  find candidate(s) with lowest vote
+            #  find candidate(s) within surplus of lowest vote (effectively tied)
             #
-            low_vote = R.quota
-            low_candidates = []
-            for c in C.hopeful:
-                if V.equal_within(c.vote, low_vote, cls._omega):
-                    low_candidates.append(c)
-                elif c.vote < low_vote:
-                    low_vote = c.vote
-                    low_candidates = [c]
-
+            low_vote = V.min(c.vote for c in C.hopeful)
+            low_candidates = [c for c in C.hopeful if (low_vote + R.surplus) >= c.vote]
+            
             #  defeat candidate with lowest vote, breaking tie if necessary
             #
             if low_candidates:

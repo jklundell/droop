@@ -71,6 +71,11 @@ See also: fixed, guarded
         "test for equality within specified epsilon"
         return abs(a-b) < e
 
+    @classmethod
+    def min(cls, vals):
+        "find minimum value in a list"
+        return min(vals)
+ 
     #  leave repr alone, but redefine str as decimal notation for readability
     def __str__(self):
         "represent Rational as fixed-decimal string"

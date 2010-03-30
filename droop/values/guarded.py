@@ -70,20 +70,20 @@ See also: fixed, rational
         if arithmetic not in ('guarded', 'guarded'):
             raise TypeError('Guarded: unrecognized arithmetic type (%s)' % arithmetic)
             
-        precision = options.get('precision', None) or 9
-        if int(precision) != precision or precision < 0:
-            raise TypeError('Guarded: precision must be an int >= 0')
+        precision = str(options.get('precision', None) or 9)
+        if str(int(precision)) != precision or int(precision) < 0:
+            raise TypeError('Guarded: precision=%s; must be an int >= 0' % precision)
         guard = options.get('guard', None)
         if guard is None: guard = precision
-        if int(guard) != guard or guard < 1:
-            raise TypeError('Guarded: guard must be an int > 0')
+        if str(int(guard)) != str(guard) or int(guard) < 1:
+            raise TypeError('Guarded: guard=%s; must be an int > 0' % guard)
 
-        cls.precision = precision
-        cls.guard = guard
+        cls.precision = int(precision)
+        cls.guard = int(guard)
 
-        cls.__scalep = 10 ** precision
-        cls.__scaleg = 10 ** guard
-        cls.__scale = 10 ** (precision+guard)
+        cls.__scalep = 10 ** cls.precision
+        cls.__scaleg = 10 ** cls.guard
+        cls.__scale = 10 ** (cls.precision+cls.guard)
         
         #  __grnd is the rounding value for string conversions
         #  __geps is used in the test for equality (see __cmp__ below)
@@ -229,6 +229,15 @@ See also: fixed, rational
         "test for equality within specified epsilon"
         return abs(a-b) < e
         
+    @classmethod
+    def min(cls, vals):
+        "find actual minimum value in a list"
+        min_ = vals[0]
+        for val in vals[1:]:
+            if val._value < min_._value:
+                min_ = val
+        return min_
+ 
     def __str__(self):
         '''
         stringify a guarded value
