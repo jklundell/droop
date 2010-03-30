@@ -43,12 +43,10 @@ This file is part of Droop.
 '''
    
 import sys, os
+from droop.common import UsageError, ElectionError
 from droop.profile import ElectionProfile, ElectionProfileError
 from droop.election import Election
 import droop.values
-
-class UsageError(Exception):
-    "command-line usage error"
 
 E = None
 
@@ -206,7 +204,7 @@ if __name__ == "__main__":
         except droop.values.arithmeticValuesError as err:
             print >>sys.stderr, "** droop: %s" % err
             sys.exit(1)
-        except Election.ElectionError as err:
+        except ElectionError as err:
             print >>sys.stderr, "** droop: Election error: %s" % err
             sys.exit(1)
     except UsageError as err:

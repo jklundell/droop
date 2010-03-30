@@ -33,6 +33,7 @@ Top-level structure:
 import sys
 import values
 import droop
+from droop.common import ElectionError
 
 class Election(object):
     '''
@@ -49,9 +50,6 @@ class Election(object):
     withdrawn = None   # all the withdrawn candidates
     _candidates = None # candidates by candidate ID
     
-    class ElectionError(Exception):
-        "error counting election"
-
     def __init__(self, rule, electionProfile, options=dict()):
         "create an election from the incoming election profile"
 
@@ -74,7 +72,7 @@ class Election(object):
         for cid in electionProfile.eligible | electionProfile.withdrawn:
             c = Candidate(self, cid, electionProfile.candidateOrder(cid), electionProfile.candidateName(cid))
             if c.cid in self._candidates.keys():
-                raise self.ElectionError('duplicate candidate id: %s (%s)' % (c.cid, c.name))
+                raise ElectionError('duplicate candidate id: %s (%s)' % (c.cid, c.name))
             self._candidates[cid] = c
             #
             #  add each candidate to either the eligible or withdrawn set

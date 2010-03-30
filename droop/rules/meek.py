@@ -19,6 +19,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+from droop.common import UsageError
 from electionrule import ElectionRule
 
 class Rule(ElectionRule):
@@ -60,21 +61,21 @@ class Rule(ElectionRule):
         else:
             variant = options.get('variant', 'meek').lower()
             if variant not in ['meek', 'warren']:
-                raise ValueError('unknown variant %s; use meek or warren' % variant)
+                raise UsageError('unknown variant %s; use meek or warren' % variant)
         cls.warren = (variant == 'warren')
         if not options.get('arithmetic'):
             options['arithmetic'] = 'guarded'
         cls.omega = options.get('omega', None)
         cls.defeatBatch = options.get('defeat_batch', cls.defeatBatch)
         if cls.defeatBatch not in ('none', 'safe'):
-            raise ValueError('unknown defeat_batch %s; use none or safe' % cls.defeatBatch)
+            raise UsageError('unknown defeat_batch %s; use none or safe' % cls.defeatBatch)
         return options
 
     @classmethod
     def info(cls):
         "return an info string for the election report"
         name = "Warren" if cls.warren else "Meek"
-        return "%s Reference (omega = 1/10^%d)" % (name, cls.omega)
+        return "%s Parametric (omega = 1/10^%d)" % (name, cls.omega)
 
     @classmethod
     def reportMode(cls):

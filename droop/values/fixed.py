@@ -21,6 +21,8 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+from droop.common import UsageError
+
 class Fixed(object):
     '''
     fixed-point decimal arithmetic
@@ -57,7 +59,7 @@ See also: guarded, rational
         
         arithmetic = options.get('arithmetic', 'qx')
         if arithmetic not in ('fixed', 'integer'):
-            raise ValueError('Fixed: unrecognized arithmetic type (%s)' % arithmetic)
+            raise UsageError('Fixed: unrecognized arithmetic type (%s)' % arithmetic)
         precision = options.get('precision', None) or 9
         if arithmetic == 'integer':
             precision = 0
@@ -66,9 +68,9 @@ See also: guarded, rational
         try:
             cls.precision = int(precision)
         except ValueError:
-            raise ValueError('Guarded: precision=%s; must be an int >= 0' % precision)
+            raise UsageError('Guarded: precision=%s; must be an int >= 0' % precision)
         if cls.precision < 0 or str(cls.precision) != str(precision):
-            raise ValueError('Guarded: precision=%s; must be an int >= 0' % precision)
+            raise UsageError('Guarded: precision=%s; must be an int >= 0' % precision)
 
         cls.__scale = 10 ** cls.precision
         

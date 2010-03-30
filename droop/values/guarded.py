@@ -20,6 +20,8 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+from droop.common import UsageError
+
 class Guarded(object):
     '''
     guarded-precision fixed-point decimal arithmetic 
@@ -68,23 +70,23 @@ See also: fixed, rational
         
         arithmetic = options.get('arithmetic', 'guarded')
         if arithmetic not in ('guarded', 'guarded'):
-            raise ValueError('Guarded: unrecognized arithmetic type (%s)' % arithmetic)
+            raise UsageError('Guarded: unrecognized arithmetic type (%s)' % arithmetic)
             
         precision = options.get('precision', None) or 9
         try:
             cls.precision = int(precision)
         except ValueError:
-            raise ValueError('Guarded: precision=%s; must be an int >= 0' % precision)
+            raise UsageError('Guarded: precision=%s; must be an int >= 0' % precision)
         if cls.precision < 0 or str(cls.precision) != str(precision):
-            raise ValueError('Guarded: precision=%s; must be an int >= 0' % precision)
+            raise UsageError('Guarded: precision=%s; must be an int >= 0' % precision)
         guard = options.get('guard', None)
         if guard is None: guard = cls.precision
         try:
             cls.guard = int(guard)
         except ValueError:
-            raise ValueError('Guarded: guard=%s; must be an int > 0' % guard)
+            raise UsageError('Guarded: guard=%s; must be an int > 0' % guard)
         if cls.guard < 1 or str(cls.guard) != str(guard):
-            raise ValueError('Guarded: guard=%s; must be an int > 0' % guard)
+            raise UsageError('Guarded: guard=%s; must be an int > 0' % guard)
 
         cls.__scalep = 10 ** cls.precision
         cls.__scaleg = 10 ** cls.guard
