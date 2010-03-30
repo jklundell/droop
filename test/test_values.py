@@ -43,21 +43,29 @@ class ValueTest(unittest.TestCase):
         "try unknown arithmetic"
         self.assertRaises(V.arithmeticValuesError, V.ArithmeticClass, dict(arithmetic='saywhat'))
 
+    def testBadFP1(self):
+        "precision must be an int"
+        self.assertRaises(ValueError, V.ArithmeticClass, dict(arithmetic='fixed', precision=5.5))
+
+    def testBadFP2(self):
+        "precision must be >= 0"
+        self.assertRaises(ValueError, V.ArithmeticClass, dict(arithmetic='fixed', precision=-1))
+
     def testBadP1(self):
         "precision must be an int"
-        self.assertRaises(TypeError, V.ArithmeticClass, dict(precision=5.5))
+        self.assertRaises(ValueError, V.ArithmeticClass, dict(precision=5.5))
 
     def testBadP2(self):
         "precision must be >= 0"
-        self.assertRaises(TypeError, V.ArithmeticClass, dict(precision=-1))
+        self.assertRaises(ValueError, V.ArithmeticClass, dict(precision=-1))
 
     def testBadG1(self):
         "guard must be an int"
-        self.assertRaises(TypeError, V.ArithmeticClass, 5, 5.5)
+        self.assertRaises(ValueError, V.ArithmeticClass, dict(precision=5, guard=5.5))
 
     def testBadG2(self):
         "guard must be >= 0"
-        self.assertRaises(TypeError, V.ArithmeticClass, 5, -1)
+        self.assertRaises(ValueError, V.ArithmeticClass, dict(precision=5, guard=-1))
 
 class ValueTestFixed6(unittest.TestCase):
     p = 6

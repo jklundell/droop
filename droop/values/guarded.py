@@ -68,18 +68,23 @@ See also: fixed, rational
         
         arithmetic = options.get('arithmetic', 'guarded')
         if arithmetic not in ('guarded', 'guarded'):
-            raise TypeError('Guarded: unrecognized arithmetic type (%s)' % arithmetic)
+            raise ValueError('Guarded: unrecognized arithmetic type (%s)' % arithmetic)
             
-        precision = str(options.get('precision', None) or 9)
-        if str(int(precision)) != precision or int(precision) < 0:
-            raise TypeError('Guarded: precision=%s; must be an int >= 0' % precision)
+        precision = options.get('precision', None) or 9
+        try:
+            cls.precision = int(precision)
+        except ValueError:
+            raise ValueError('Guarded: precision=%s; must be an int >= 0' % precision)
+        if cls.precision < 0 or str(cls.precision) != str(precision):
+            raise ValueError('Guarded: precision=%s; must be an int >= 0' % precision)
         guard = options.get('guard', None)
-        if guard is None: guard = precision
-        if str(int(guard)) != str(guard) or int(guard) < 1:
-            raise TypeError('Guarded: guard=%s; must be an int > 0' % guard)
-
-        cls.precision = int(precision)
-        cls.guard = int(guard)
+        if guard is None: guard = cls.precision
+        try:
+            cls.guard = int(guard)
+        except ValueError:
+            raise ValueError('Guarded: guard=%s; must be an int > 0' % guard)
+        if cls.guard < 1 or str(cls.guard) != str(guard):
+            raise ValueError('Guarded: guard=%s; must be an int > 0' % guard)
 
         cls.__scalep = 10 ** cls.precision
         cls.__scaleg = 10 ** cls.guard
@@ -101,7 +106,7 @@ See also: fixed, rational
         cls.maxDiff = 0
         cls.minDiff = cls.__scale * 100
 
-        cls.__dfmt = "%d.%0" + str(precision) + "d" # %d.%0pd
+        cls.__dfmt = "%d.%0" + str(cls.precision) + "d" # %d.%0pd
 
         cls.info = "guarded-precision fixed-point decimal arithmetic (%s+%s places)" % (str(cls.precision), str(cls.guard))
 

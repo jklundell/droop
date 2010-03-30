@@ -57,22 +57,25 @@ See also: guarded, rational
         
         arithmetic = options.get('arithmetic', 'qx')
         if arithmetic not in ('fixed', 'integer'):
-            raise TypeError('Fixed: unrecognized arithmetic type (%s)' % arithmetic)
+            raise ValueError('Fixed: unrecognized arithmetic type (%s)' % arithmetic)
         precision = options.get('precision', None) or 9
         if arithmetic == 'integer':
             precision = 0
         if precision == 0:
             cls.name = 'integer'
-        if str(int(precision)) != precision or int(precision) < 0:
-            raise TypeError('Fixed: precision=%s; must be an int >= 0' % precision)
+        try:
+            cls.precision = int(precision)
+        except ValueError:
+            raise ValueError('Guarded: precision=%s; must be an int >= 0' % precision)
+        if cls.precision < 0 or str(cls.precision) != str(precision):
+            raise ValueError('Guarded: precision=%s; must be an int >= 0' % precision)
 
-        cls.precision = int(precision)
         cls.__scale = 10 ** cls.precision
         
         cls.epsilon = cls(0)
         cls.epsilon._value = 1
 
-        cls.__dfmt = "%d.%0" + str(precision) + "d" # %d.%0pd
+        cls.__dfmt = "%d.%0" + str(cls.precision) + "d" # %d.%0pd
 
         if cls.name == 'integer':
             cls.info = "integer arithmetic"
