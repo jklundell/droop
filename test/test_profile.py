@@ -20,11 +20,11 @@ This file is part of Droop.
 '''
 import unittest
 import sys, os
-path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
+testdir = os.path.dirname(os.path.abspath(__file__))
+basedir = os.path.normpath(os.path.join(testdir, '..'))
+if basedir not in sys.path: sys.path.insert(0, os.path.normpath(basedir))
 
-from droop.profile import ElectionProfile
-from droop.profile import ElectionProfileError
+from droop.profile import ElectionProfile, ElectionProfileError
 
 p_42 = '''3 2
 4 1 2 0
@@ -149,6 +149,17 @@ class ProfileTest(unittest.TestCase):
         "exception bad file name"
         self.assertRaises(ElectionProfileError, ElectionProfile, path='nofileatall')
 
+    def testInitSeatsFile(self):
+        "normal init from file: 2 seats"
+        path = testdir + '/blt/42.blt'
+        self.assertEqual(ElectionProfile(path=path).nSeats, 2)
+
+    def testCompareFile(self):
+        "normal init from file: 2 seats"
+        path = testdir + '/blt/42.blt'
+        pd = ElectionProfile(data=p_42)
+        pp = ElectionProfile(path)
+        self.assertFalse(pp.compare(pd), 'compare election 42 from file vs data blob')
 
 
 if __name__ == '__main__':

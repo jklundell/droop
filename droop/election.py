@@ -66,6 +66,9 @@ class Election(object):
         self.eligible = set()
         self.withdrawn = set()
         self._candidates = dict()
+        
+        self.elected = None  # for communicating results
+        
         #
         #  create candidate objects for candidates in election profile
         #
@@ -124,6 +127,7 @@ class Election(object):
     def count(self):
         "count the election"
         self.rule.count(self)
+        self.elected = self.rounds[-1].C.elected  # collect set of elected candidates
         
     def newRound(self):
        "add a round"

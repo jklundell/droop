@@ -21,4 +21,15 @@ This file is part of Droop.
 '''
 
 from setuptools import setup, find_packages
-setup(name = "droop", version = "0.1", packages = find_packages())
+setup(name = "droop", 
+    version = "0.1", 
+    script_args = ['bdist_egg'],
+    author = "Jonathan Lundell",
+    author_email = "jlundell@prfound.org",
+    url = "http://prfound.org", # for now
+    license = "GNU General Public License version 3",
+    description = "Counting software for STV elections",
+    long_description = "Droop is a flexible counting package for STV elections.",
+    platforms = ["Python 2.6"],
+    packages = find_packages(),
+    )

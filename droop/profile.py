@@ -95,6 +95,23 @@ class ElectionProfile(object):
                     raise ElectionProfileError('candidate ID %s duplicated on ballot line %d' % (cid, n))
                 d[cid] = cid
     
+    def compare(self, other):
+        "compare this profile to another (unittest support)"
+        if self.title != other.title: return 'title mismatch'
+        if self.nSeats != other.nSeats: return 'nSeats mismatch'
+        if self.nBallots != other.nBallots: return 'nBallots mismatch'
+        if self.eligible != other.eligible: return 'eligible mismatch'
+        if self.withdrawn != other.withdrawn: return 'withdrawn mismatch'
+        for cid in self._candidateName:
+            if self._candidateName[cid] != other._candidateName[cid]: return 'candidate name mismatch'
+        for cid in self._candidateOrder:
+            if self._candidateOrder[cid] != other._candidateOrder[cid]: return 'candidate order mismatch'
+        if len(self.ballotLines) != len(other.ballotLines): return 'ballot-line count mismatch'
+        for b, bo in zip(self.ballotLines, other.ballotLines):
+            if b.multiplier != bo.multiplier: return 'ballot-line multiplier mismatch'
+            if b.ranking != bo.ranking: return 'ballot-line ranking mismatch'
+        return False
+
     def candidateName(self, cid):
         "get name of candidate"
         return self._candidateName[cid]

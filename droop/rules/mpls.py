@@ -81,7 +81,6 @@ class Rule(ElectionRule):
         #
         options['arithmetic'] = 'fixed'
         options['precision'] = 4
-        options['guard'] = None
         return options
 
     @classmethod
