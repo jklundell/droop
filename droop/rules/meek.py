@@ -131,12 +131,12 @@ class Rule(ElectionRule):
             and the order of entry in the ballot file is the tiebreaking order:
             choose the first candidate in that order.
             '''
-            assert purpose in ('surplus', 'elect', 'defeat')
             if not tied:
                 return None
             if len(tied) == 1:
                 return tied[0]
-            t = C.sortByOrder(tied)[0]
+            tied = C.sortByOrder(tied)
+            t = tied[0]
             R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
             return t
 
@@ -329,7 +329,9 @@ class Rule(ElectionRule):
         #  _omega will be 1/10**omega
         #
         assert V.name in ('rational', 'guarded', 'fixed')
-        if not cls.omega:
+        if cls.omega:
+            cls.omega = int(cls.omega)
+        else:
             if V.name == 'rational':
                 cls.omega = 10
             elif V.name == 'guarded':

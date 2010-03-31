@@ -127,19 +127,18 @@ class Rule(ElectionRule):
             Not all tiebreaking methods will care about 'purpose' or 'strength',
             but the requirement is enforced for consistency of interface.
             '''
-            assert purpose in ('surplus', 'elect', 'defeat')
             if not tied:
                 return None
             if len(tied) == 1:
                 return tied[0]
-            if len(tied) > 1:
-                tied = C.sortByOrder(tied) # sort by ballot order before making choice
-                t = tied[0]  # TODO: real tiebreaker
-                s = 'Break tie (%s): [' % purpose
-                s += ", ".join([c.name for c in tied])
-                s += '] -> %s' % t.name
-                E.R.log(s)
-                return t
+            if not tied:
+                return None
+            if len(tied) == 1:
+                return tied[0]
+            tied = C.sortByOrder(tied)
+            t = tied[0]
+            R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
+            return t
 
         #  Calculate quota
         #
