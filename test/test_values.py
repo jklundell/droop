@@ -23,6 +23,7 @@ import sys, os
 path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
+from droop.common import UsageError
 from droop import values as V
 from droop.values.fixed import Fixed as F
 from droop.values.guarded import Guarded as G
@@ -45,27 +46,27 @@ class ValueTest(unittest.TestCase):
 
     def testBadFP1(self):
         "precision must be an int"
-        self.assertRaises(ValueError, V.ArithmeticClass, dict(arithmetic='fixed', precision=5.5))
+        self.assertRaises(UsageError, V.ArithmeticClass, dict(arithmetic='fixed', precision=5.5))
 
     def testBadFP2(self):
         "precision must be >= 0"
-        self.assertRaises(ValueError, V.ArithmeticClass, dict(arithmetic='fixed', precision=-1))
+        self.assertRaises(UsageError, V.ArithmeticClass, dict(arithmetic='fixed', precision=-1))
 
     def testBadP1(self):
         "precision must be an int"
-        self.assertRaises(ValueError, V.ArithmeticClass, dict(precision=5.5))
+        self.assertRaises(UsageError, V.ArithmeticClass, dict(precision=5.5))
 
     def testBadP2(self):
         "precision must be >= 0"
-        self.assertRaises(ValueError, V.ArithmeticClass, dict(precision=-1))
+        self.assertRaises(UsageError, V.ArithmeticClass, dict(precision=-1))
 
     def testBadG1(self):
         "guard must be an int"
-        self.assertRaises(ValueError, V.ArithmeticClass, dict(precision=5, guard=5.5))
+        self.assertRaises(UsageError, V.ArithmeticClass, dict(precision=5, guard=5.5))
 
     def testBadG2(self):
         "guard must be >= 0"
-        self.assertRaises(ValueError, V.ArithmeticClass, dict(precision=5, guard=-1))
+        self.assertRaises(UsageError, V.ArithmeticClass, dict(precision=5, guard=-1))
 
 class ValueTestFixed6(unittest.TestCase):
     p = 6
@@ -145,6 +146,18 @@ class ValueTestGuarded9(unittest.TestCase):
     def testBadP(self):
         "test illegal precision"
         self.assertEqual(self.A.exact, True) # TBD
+
+class ValueTestHelps(unittest.TestCase):
+    "test the helps function"
+    def testHelps(self):
+        "helps should fill in a dict with entries for arithmetic and its methods"
+        helps = dict()
+        V.helps(helps)
+        self.assertTrue(len(helps['arithmetic']) > 10, 'arithmetic help string should exist')
+        self.assertTrue(len(helps['rational']) > 10, 'rational help string should exist')
+        self.assertTrue(len(helps['fixed']) > 10, 'fixed help string should exist')
+        self.assertTrue(len(helps['guarded']) > 10, 'guarded help string should exist')
+
 
 if __name__ == '__main__':
     unittest.main()

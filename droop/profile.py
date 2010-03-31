@@ -70,6 +70,7 @@ class ElectionProfile(object):
         if not data:
             raise ElectionProfileError('no profile data')
         self.__bltData(data)
+        self.__validate()
 
     class BallotLine(object):
         "one ballot line"

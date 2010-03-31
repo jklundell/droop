@@ -45,6 +45,10 @@ p_42_bad1 = '''x 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen s
 p_42_bad2 = '''3 2 4 1 2 0 2 3 0 0 Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
 p_42_bad3 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie '''
 
+p_42bads = '''1 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42badb = '''3 2 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42badc = '''3 2 4 1 2 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+
 p_42w = '''4 2 -4 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Bob" "Pollux and Helen should tie"'''
 
 
@@ -58,6 +62,18 @@ class ProfileTest(unittest.TestCase):
     def testInitSeats(self):
         "normal init: 2 seats"
         self.assertEqual(ElectionProfile(data=p_42).nSeats, 2)
+
+    def testBadNSeats(self):
+        "exception if too few seats"
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42bads)
+
+    def testBadNBallots(self):
+        "exception if too few ballots"
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42badb)
+
+    def testDupeCand(self):
+        "exception candidate duplicated"
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42badc)
 
     def testInitOneLine(self):
         "normal init: 2 seats (no newlines)"
@@ -118,6 +134,22 @@ class ProfileTest(unittest.TestCase):
     def testBadTitle(self):
         "exception bad title"
         self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42_bad3)
+
+    def testCandidateName(self):
+        "fetch a candidate name"
+        p = ElectionProfile(data=p_42a)
+        self.assertEqual(p.candidateName('1'), 'Castor')
+
+    def testCandidateOrder(self):
+        "fetch a candidate order"
+        p = ElectionProfile(data=p_42a)
+        self.assertEqual(p.candidateOrder('1'), 1)
+
+    def testBadFile(self):
+        "exception bad file name"
+        self.assertRaises(ElectionProfileError, ElectionProfile, path='nofileatall')
+
+
 
 if __name__ == '__main__':
     unittest.main()
