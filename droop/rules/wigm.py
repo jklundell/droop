@@ -131,10 +131,6 @@ class Rule(ElectionRule):
                 return None
             if len(tied) == 1:
                 return tied[0]
-            if not tied:
-                return None
-            if len(tied) == 1:
-                return tied[0]
             tied = C.sortByOrder(tied)
             t = tied[0]
             R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
@@ -146,7 +142,7 @@ class Rule(ElectionRule):
         C = R.C   # candidate state
         V = E.V   # arithmetic value class
         V0 = E.V0 # constant zero
-        E.R0.quota = calcQuota(E)
+        R.quota = calcQuota(E)
 
         #  Count votes in round 0 for reporting purposes
         #
