@@ -149,6 +149,7 @@ class Election(object):
         "report election by round"
         reportMeek = self.rule.reportMode() == 'meek'
         s = "\nElection: %s\n\n" % self.title
+        s += "\tDroop package: %s v%s\n" % (droop.common.droopName, droop.common.droopVersion)
         s += "\tRule: %s\n" % self.rule.info()
         s += "\tArithmetic: %s\n" % self.V.info
         s += "\tSeats: %d\n" % self.nSeats

@@ -19,6 +19,15 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+droopName = 'droop'
+droopVersion = '0.2'
+droopAuthor = 'Jonathan Lundell'
+droopAuthorEmail = 'jlundell@prfound.org'
+droopURL = 'http://prfound.org'
+droopLicense = 'GNU General Public License version 3'
+droopDescription = 'Counting software for STV elections',
+droopLongDescription = 'Droop is a flexible counting package for STV elections.'
+
 class UsageError(Exception):
     "command-line usage error"
 

@@ -43,7 +43,7 @@ This file is part of Droop.
 '''
    
 import sys, os
-from droop.common import UsageError, ElectionError
+import droop.common
 from droop.profile import ElectionProfile, ElectionProfileError
 from droop.election import Election
 import droop.values
@@ -54,7 +54,7 @@ def main(options=None):
     "run an election"
 
     if not options:
-        raise UsageError("no ballot file specified")
+        raise droop.common.UsageError("no ballot file specified")
 
     #  process options
     #
@@ -78,14 +78,14 @@ def main(options=None):
             profilefile = "profile.out"
     # else we pass the option along
     if not path:
-        raise UsageError("no ballot file specfied")
+        raise droop.common.UsageError("no ballot file specfied")
     
     #  get the rule class
     #
     Rule = droop.electionRule(rule)
     if not Rule:
         rules = ' '.join(droop.electionRuleNames())
-        raise UsageError("unknown rule '%s'; known rules:\n\t%s" % (rule, rules))
+        raise droop.common.UsageError("unknown rule '%s'; known rules:\n\t%s" % (rule, rules))
 
     #  run the election
     #
@@ -135,7 +135,8 @@ def usage(subject=None):
     helps = Election.makehelp()
     helpers = sorted(helps.keys())
 
-    u = '\nUsage:\n'
+    u =  '\n%s v%s\n' % (droop.common.droopName, droop.common.droopVersion)
+    u += '\nUsage:\n'
     u += '%s options ballotfile\n' % me
     u += '  options:\n'
     u += '    rule name (%s)\n' % ','.join(droop.electionRuleNames())
@@ -183,7 +184,7 @@ if __name__ == "__main__":
                     options['dump'] = True
                 else:
                     if path:
-                        raise UsageError("multiple ballot files: %s and %s" % (path, optarg[0]))
+                        raise droop.common.UsageError("multiple ballot files: %s and %s" % (path, optarg[0]))
                     path = optarg[0]
                     options['path'] = path
             else:
@@ -204,10 +205,10 @@ if __name__ == "__main__":
         except droop.values.arithmeticValuesError as err:
             print >>sys.stderr, "** droop: %s" % err
             sys.exit(1)
-        except ElectionError as err:
+        except droop.common.ElectionError as err:
             print >>sys.stderr, "** droop: Election error: %s" % err
             sys.exit(1)
-    except UsageError as err:
+    except droop.common.UsageError as err:
         print >>sys.stderr, "** droop: %s" % err
         print >>sys.stderr, usage()
         sys.exit(1)

@@ -21,15 +21,17 @@ This file is part of Droop.
 '''
 
 from setuptools import setup, find_packages
-setup(name = "droop", 
-    version = "0.1", 
+import droop.common
+
+setup(name = droop.common.droopName, 
+    version = droop.common.droopVersion, 
+    author = droop.common.droopAuthor,
+    author_email = droop.common.droopAuthorEmail,
+    url = droop.common.droopURL,
+    license = droop.common.droopLicense,
+    description = droop.common.droopDescription,
+    long_description = droop.common.droopLongDescription,
     script_args = ['bdist_egg'],
-    author = "Jonathan Lundell",
-    author_email = "jlundell@prfound.org",
-    url = "http://prfound.org", # for now
-    license = "GNU General Public License version 3",
-    description = "Counting software for STV elections",
-    long_description = "Droop is a flexible counting package for STV elections.",
-    platforms = ["Python 2.6"],
+    platforms = ['Python 2.6'],
     packages = find_packages(),
     )
