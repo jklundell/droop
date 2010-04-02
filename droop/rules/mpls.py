@@ -144,7 +144,7 @@ class Rule(ElectionRule):
 
             #  sortedCands = candidates sorted by vote
             #
-            sortedCands = C.sortByVote(C.hopeful)
+            sortedCands = CS.sortByVote(CS.hopeful)
 
             #   copy the sorted candidates list, 
             #   making each entry a list
@@ -177,7 +177,7 @@ class Rule(ElectionRule):
             #   
             vote = V0
             losers = []
-            maxDefeat = C.nHopeful - E.seatsLeftToFill() # limit number of defeats
+            maxDefeat = CS.nHopeful - E.seatsLeftToFill() # limit number of defeats
             for g in range(len(sortedGroups) - 1):
                 group = sortedGroups[g]
                 #
@@ -233,7 +233,7 @@ class Rule(ElectionRule):
                 return None
             if len(tied) == 1:
                 return tied[0]
-            tied = C.sortByOrder(tied) # sort by ballot order before making choice
+            tied = CS.sortByOrder(tied) # sort by ballot order before making choice
             t = random.choice(tied)  # in the absence of the City Council...
             names = ", ".join([c.name for c in tied])
             R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
@@ -251,7 +251,7 @@ class Rule(ElectionRule):
 
             if E.seatsLeftToFill() <= 0:
                 return True
-            if C.nHopeful <= E.seatsLeftToFill():
+            if CS.nHopeful <= E.seatsLeftToFill():
                 return True
             return False
 
@@ -262,7 +262,7 @@ class Rule(ElectionRule):
         #########################
 
         R = E.R0  # current round
-        C = R.C   # candidate state
+        CS = R.CS   # candidate state
         V = E.V   # arithmetic value class
         V0 = E.V0 # constant zero
         random.seed(E.nBallots + E.nSeats) # initialize PRNG
@@ -277,9 +277,9 @@ class Rule(ElectionRule):
             ##  a. The number of votes cast for each candidate for the current round 
             ##     must be counted.
             ##
-            for c in C.elected:
+            for c in CS.elected:
                 c.vote = R.quota
-            for c in C.hopefulOrPending:
+            for c in CS.hopefulOrPending:
                 c.vote = V0
             for b in [b for b in R.ballots if not b.exhausted]:
                 b.topCand.vote += b.vote
@@ -290,9 +290,9 @@ class Rule(ElectionRule):
             ##     and the tabulation is complete. 
             ##
 
-            for c in [c for c in C.hopeful if hasQuota(c)]:
-                C.elect(c)
-            if C.nElected >= E.nSeats:
+            for c in [c for c in CS.hopeful if hasQuota(c)]:
+                CS.elect(c)
+            if CS.nElected >= E.nSeats:
                 break
 
             ##     If the number of candidates whose vote total is equal to or greater than
@@ -300,13 +300,13 @@ class Rule(ElectionRule):
             ##     a new round begins and the tabulation must continue as described in clause b.
 
             R = E.newRound()
-            C = R.C   # candidate state
+            CS = R.CS   # candidate state
 
             ##  167.70(1)(b)
             ##  b. Surplus votes for any candidates whose vote total is equal to 
             ##     or greater than the threshold must be calculated.
 
-            surplus = sum([c.surplus for c in C.elected], V0)
+            surplus = sum([c.surplus for c in CS.elected], V0)
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -321,7 +321,7 @@ class Rule(ElectionRule):
 
             certainLosers = findCertainLosers(surplus, fixSpec=True)
             for c in certainLosers:
-                C.defeat(c, 'Defeat certain loser')
+                CS.defeat(c, 'Defeat certain loser')
                 R.transfer(c, c.vote, 'Transfer defeated')
 
             ##     If no candidate can be defeated mathematically, the tabulation must continue
@@ -355,7 +355,7 @@ class Rule(ElectionRule):
             #
             high_surplus = V0
             high_candidates = []
-            for c in C.pending:
+            for c in CS.pending:
                 if c.surplus == high_surplus:
                     high_candidates.append(c)
                 elif c.surplus > high_surplus:
@@ -391,7 +391,7 @@ class Rule(ElectionRule):
             #
             low_vote = R.quota
             low_candidates = []
-            for c in C.hopeful:
+            for c in CS.hopeful:
                 if c.vote == low_vote:
                     low_candidates.append(c)
                 elif c.vote < low_vote:
@@ -402,7 +402,7 @@ class Rule(ElectionRule):
             #
             if low_candidates:
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
-                C.defeat(low_candidate, 'Defeat low candidate')
+                CS.defeat(low_candidate, 'Defeat low candidate')
                 R.transfer(low_candidate, low_candidate.vote, msg='Transfer defeated')
 
             ##  f. The procedures in clauses a. to e. must be repeated 
@@ -419,9 +419,9 @@ class Rule(ElectionRule):
 
             #  Note: implemented as "less than or equal to"
             #
-            if C.nHopeful <= E.seatsLeftToFill():
-                for c in C.hopeful:
-                    C.elect(c, 'Elect remaining candidates')
+            if CS.nHopeful <= E.seatsLeftToFill():
+                for c in CS.hopeful:
+                    CS.elect(c, 'Elect remaining candidates')
                 break
 
             ##     In the case of a tie between two (2) continuing candidates, 
@@ -441,13 +441,13 @@ class Rule(ElectionRule):
 
         #  Note: implemented as "less than or equal to"
         #
-        if C.nHopeful <= E.seatsLeftToFill():
-            for c in C.hopeful.copy():
-                C.elect(c, 'Elect remaining candidates')
+        if CS.nHopeful <= E.seatsLeftToFill():
+            for c in CS.hopeful.copy():
+                CS.elect(c, 'Elect remaining candidates')
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #
-        for c in C.hopeful.copy():
-            C.defeat(c, msg='Defeat remaining candidates')
+        for c in CS.hopeful.copy():
+            CS.defeat(c, msg='Defeat remaining candidates')
 
 

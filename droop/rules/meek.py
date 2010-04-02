@@ -95,7 +95,7 @@ class Rule(ElectionRule):
         #
         def countComplete():
             "test for end of count"
-            return C.nHopeful <= E.seatsLeftToFill() or E.seatsLeftToFill() <= 0
+            return CS.nHopeful <= E.seatsLeftToFill() or E.seatsLeftToFill() <= 0
 
         def hasQuota(E, candidate):
             '''
@@ -135,7 +135,7 @@ class Rule(ElectionRule):
                 return None
             if len(tied) == 1:
                 return tied[0]
-            tied = C.sortByOrder(tied)
+            tied = CS.sortByOrder(tied)
             t = tied[0]
             R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
             return t
@@ -151,7 +151,7 @@ class Rule(ElectionRule):
             #     where each group cosnists of the candidates tied at that vote
             #     (when there's no tie, a group will have one candidate)
             #
-            sortedCands = C.sortByVote(C.hopeful)
+            sortedCands = CS.sortByVote(CS.hopeful)
             sortedGroups = []
             group = []
             vote = V0
@@ -178,7 +178,7 @@ class Rule(ElectionRule):
             #   the election is already complete and we wouldn't be here.
             #   
             vote = V0
-            maxDefeat = C.nHopeful - E.seatsLeftToFill()
+            maxDefeat = CS.nHopeful - E.seatsLeftToFill()
             maxg = None
             ncand = 0
             for g in xrange(len(sortedGroups) - 1):
@@ -214,7 +214,7 @@ class Rule(ElectionRule):
                 #  distribute vote for each ballot
                 #  and add up vote for each candidate
                 #
-                for c in C.hopefulOrElected:
+                for c in CS.hopefulOrElected:
                     c.vote = V0
                 R.residual = V0
                 for b in R.ballots:
@@ -268,7 +268,7 @@ class Rule(ElectionRule):
                                 break
                     R.residual += b.residual  # residual for round
 
-                R.votes = sum([c.vote for c in C.hopefulOrElected], V0)
+                R.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
 
                 #  D.3. update quota
                 #
@@ -276,13 +276,13 @@ class Rule(ElectionRule):
                 
                 #  D.4. find winners
                 #
-                for c in [c for c in C.hopeful if hasQuota(E, c)]:
-                    C.elect(c)
+                for c in [c for c in CS.hopeful if hasQuota(E, c)]:
+                    CS.elect(c)
                     iStatus = IS_elected
                     
                 #  D.6. calculate total surplus
                 #
-                R.surplus = sum([c.vote-R.quota for c in C.elected], V0)
+                R.surplus = sum([c.vote-R.quota for c in CS.elected], V0)
                 
                 #  D.7. test iteration complete
                 #
@@ -311,7 +311,7 @@ class Rule(ElectionRule):
                 #     full         up        OpenSTV MeekSTV
                 #      up          up        Hill & NZ Calculator & NZ Schedule 1A
                 #
-                for c in C.elected:
+                for c in CS.elected:
                     #c.kf = V.muldiv(c.kf, R.quota, c.vote, round='up')  # OpenSTV variant
                     c.kf = V.div(V.mul(c.kf, R.quota, round='up'), c.vote, round='up')  # NZ variant
             
@@ -343,10 +343,10 @@ class Rule(ElectionRule):
         E.R0.votes = V(E.electionProfile.nBallots)
         E.R0.quota = calcQuota(E)
         R = E.R0
-        C = R.C   # candidate state
+        CS = R.CS   # candidate state
         for c in E.withdrawn:
             c.kf = V0
-        for c in C.hopeful:
+        for c in CS.hopeful:
             c.kf = V1    # initialize keep factors
             c.vote = V0  # initialize round-0 vote
         for b in R.ballots:
@@ -360,9 +360,9 @@ class Rule(ElectionRule):
             R = E.newRound()
             if V.exact:
                 E.prog('%d' % R.n)
-            C = R.C   # candidate state
+            CS = R.CS   # candidate state
 
-            #  C. iterate
+            #  CS. iterate
             #     next round if iteration elected a candidate
             #
             iterationStatus, batch = iterate()
@@ -375,33 +375,33 @@ class Rule(ElectionRule):
             #
             if iterationStatus == IS_batch:
                 for c in batch:
-                    C.defeat(c, msg='Defeat certain loser')
+                    CS.defeat(c, msg='Defeat certain loser')
                     c.kf = V0
                     c.vote = V0
                 continue
 
             #  find candidate(s) within surplus of lowest vote (effectively tied)
             #
-            low_vote = V.min([c.vote for c in C.hopeful])
-            low_candidates = [c for c in C.hopeful if (low_vote + R.surplus) >= c.vote]
+            low_vote = V.min([c.vote for c in CS.hopeful])
+            low_candidates = [c for c in CS.hopeful if (low_vote + R.surplus) >= c.vote]
             
             #  defeat candidate with lowest vote, breaking tie if necessary
             #
             if low_candidates:
                 low_candidate = breakTie(E, low_candidates, 'defeat')
                 if iterationStatus == IS_omega:
-                    C.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))
+                    CS.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))
                 else:
-                    C.defeat(low_candidate, msg='Defeat (stable surplus %s)' % V(R.surplus))
+                    CS.defeat(low_candidate, msg='Defeat (stable surplus %s)' % V(R.surplus))
                 low_candidate.kf = V0
                 low_candidate.vote = V0
         
         #  Elect or defeat remaining hopeful candidates
         #
-        for c in C.hopeful.copy():
-            if C.nElected < E.electionProfile.nSeats:
-                C.elect(c, msg='Elect remaining')
+        for c in CS.hopeful.copy():
+            if CS.nElected < E.electionProfile.nSeats:
+                CS.elect(c, msg='Elect remaining')
             else:
-                C.defeat(c, msg='Defeat remaining')
+                CS.defeat(c, msg='Defeat remaining')
                 c.kf = V0
                 c.vote = V0

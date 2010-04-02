@@ -87,7 +87,7 @@ class Election(object):
             #
             #  and add the candidate to round 0
             #
-            self.R0.C.addCandidate(c, isWithdrawn=cid in electionProfile.withdrawn)
+            self.R0.CS.addCandidate(c, isWithdrawn=cid in electionProfile.withdrawn)
         #
         #  create a ballot object (ranking candidate objects) from the profile rankings of candidate IDs
         #  only eligible (not withdrawn) will be added
@@ -127,7 +127,7 @@ class Election(object):
     def count(self):
         "count the election"
         self.rule.count(self)
-        self.elected = self.rounds[-1].C.elected  # collect set of elected candidates
+        self.elected = self.rounds[-1].CS.elected  # collect set of elected candidates
         
     def newRound(self):
        "add a round"
@@ -176,7 +176,7 @@ class Election(object):
 
     def seatsLeftToFill(self):
         "number of seats not yet filled"
-        return self.nSeats - self.R.C.nElected
+        return self.nSeats - self.R.CS.nElected
 
     class Round(object):
         "one election round"
@@ -190,7 +190,7 @@ class Election(object):
                 #  quota & ballots are filled in later
                 #
                 self.n = 0
-                self.C = CandidateState(E)
+                self.CS = CandidateState(E)
                 self.quota = None
                 self.ballots = list()
             else:
@@ -198,11 +198,11 @@ class Election(object):
                 #  subsequent rounds are copies,
                 #  so we can look back at previous rounds
                 #
-                #  E.R and E.C are the current round and candidate states
+                #  E.R and E.CS are the current round and candidate states
                 #
                 previous = E.R
                 self.n = previous.n + 1
-                self.C = previous.C.copy()
+                self.CS = previous.CS.copy()
                 self.quota = previous.quota
                 self.ballots = [b.copy() for b in previous.ballots]
             self.residual = E.V0
@@ -214,7 +214,7 @@ class Election(object):
             "transfer ballots with candidate c at top"
             self.log("%s: %s (%s)" % (msg, c.name, self.E.V(val)))
             for b in [b for b in self.ballots if b.topCand == c]:
-                b.transfer(self.C.hopeful)
+                b.transfer(self.CS.hopeful)
     
         def log(self, msg):
             "log a message"
@@ -224,16 +224,16 @@ class Election(object):
             "report a round"
             E = self.E
             V = E.V
-            C = self.C
+            CS = self.CS
             saveR, E.R = E.R, self # provide reporting context
             s = ''
             for line in self._log:
                 s += '\t%s\n' % line
             if self._log:
                 s += '\t...\n'
-            s += '\tHopeful: %s\n' % (" ".join([c.name for c in C.sortByOrder(C.hopeful)]) or 'None')
-            s += '\tElected: %s\n' % (" ".join([c.name for c in C.sortByOrder(C.elected)]) or 'None')
-            s += '\tDefeated: %s\n' % (" ".join([c.name for c in C.sortByOrder(C.defeated)]) or 'None')
+            s += '\tHopeful: %s\n' % (" ".join([c.name for c in CS.sortByOrder(CS.hopeful)]) or 'None')
+            s += '\tElected: %s\n' % (" ".join([c.name for c in CS.sortByOrder(CS.elected)]) or 'None')
+            s += '\tDefeated: %s\n' % (" ".join([c.name for c in CS.sortByOrder(CS.defeated)]) or 'None')
             if reportMeek:
                 s += '\tQuota: %s\n' % V(E.R.quota)
                 s += '\tVotes: %s\n' % V(E.R.votes)
@@ -248,13 +248,13 @@ class Election(object):
                     if b.exhausted:
                         nontransferable += b.vote
                     else:
-                        if b.topCand in C.elected:
+                        if b.topCand in CS.elected:
                             pvotes += b.vote
-                        elif b.topCand in C.hopeful:
+                        elif b.topCand in CS.hopeful:
                             hvotes += b.vote
                 evotes = E.V0
-                for c in C.elected:
-                    if not c in C.pending:
+                for c in CS.elected:
+                    if not c in CS.pending:
                         evotes += E.R.quota
                 total = evotes + pvotes + hvotes + nontransferable
                 #  residual here (wigm) is votes lost due to rounding
@@ -275,10 +275,10 @@ class Election(object):
             E = self.E
             saveR, E.R = E.R, self # provide reporting context
             V = E.V
-            C = E.R.C
+            CS = E.R.CS
             s = ''
             
-            candidates = C.sortByOrder(E.eligible) # report in ballot order
+            candidates = CS.sortByOrder(E.eligible) # report in ballot order
             #  if round 0, include a header line
             if self.n == 0:
                 h = ['R', 'Q']
@@ -298,11 +298,11 @@ class Election(object):
                 cid = c.cid
                 r.append(c.name)
                 if self.n:
-                    r.append('W' if c in C.withdrawn else 'H' if c in C.hopeful else 'P' if c in C.pending else 'E' if c in C.elected else 'D' if c in C.defeated else '?') # state
+                    r.append('W' if c in CS.withdrawn else 'H' if c in CS.hopeful else 'P' if c in CS.pending else 'E' if c in CS.elected else 'D' if c in CS.defeated else '?') # state
                     r.append(V(c.vote))
                     if reportMeek: r.append(V(c.kf))
                 else:
-                    r.append('W' if c in C.withdrawn else 'H') # state
+                    r.append('W' if c in CS.withdrawn else 'H') # state
                     r.append(V(c.vote)) # vote
                     if reportMeek: r.append("'-'") # kf
                 
@@ -404,10 +404,10 @@ class Candidate(object):
     #
     def getvote(self):
        "get current vote for candidate"
-       return self.E.R.C._vote[self.cid]
+       return self.E.R.CS._vote[self.cid]
     def setvote(self, newvote):
         "set vote for candidate"
-        self.E.R.C._vote[self.cid] = newvote
+        self.E.R.CS._vote[self.cid] = newvote
     vote = property(getvote, setvote)
     
     @property
@@ -420,11 +420,11 @@ class Candidate(object):
     #
     def getkf(self):
        "get current keep factor for candidate"
-       if not self.E.R.C._kf: return None
-       return self.E.R.C._kf[self.cid]
+       if not self.E.R.CS._kf: return None
+       return self.E.R.CS._kf[self.cid]
     def setkf(self, newkf):
         "set keep factor for candidate"
-        self.E.R.C._kf[self.cid] = newkf
+        self.E.R.CS._kf[self.cid] = newkf
     kf = property(getkf, setkf)
 
     def __str__(self):
@@ -493,15 +493,15 @@ class CandidateState(object):
 
     def copy(self):
         "return a copy of ourself"
-        C = CandidateState(self.E)
+        CS = CandidateState(self.E)
         
-        C._vote = self._vote.copy()
-        C._kf = self._kf.copy()
+        CS._vote = self._vote.copy()
+        CS._kf = self._kf.copy()
         
-        C.hopeful = self.hopeful.copy()
-        C.elected = self.elected.copy()
-        C.defeated = self.defeated.copy()
-        return C
+        CS.hopeful = self.hopeful.copy()
+        CS.elected = self.elected.copy()
+        CS.defeated = self.defeated.copy()
+        return CS
 
     #  add a candidate to the election
     #
@@ -528,7 +528,7 @@ class CandidateState(object):
     def vote(self, c, r=None):
         "return vote for candidate in round r (default=current)"
         if r is None: return self._vote[c.cid]
-        return self.E.rounds[r].C._vote[c.cid]
+        return self.E.rounds[r].CS._vote[c.cid]
 
     #  return count of candidates in requested state
     #
