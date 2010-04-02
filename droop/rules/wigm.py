@@ -136,12 +136,15 @@ class Rule(ElectionRule):
             R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
             return t
 
-        #  Calculate quota
+        #  Local variables for convenience
         #
         R = E.R0  # current round
         C = R.C   # candidate state
         V = E.V   # arithmetic value class
         V0 = E.V0 # constant zero
+        
+        #  calculate quota
+        #
         R.quota = calcQuota(E)
 
         #  Count votes in round 0 for reporting purposes

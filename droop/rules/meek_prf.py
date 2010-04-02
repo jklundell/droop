@@ -99,78 +99,6 @@ class Rule(ElectionRule):
             R.log('Break tie (defeat low candidate): [%s] -> %s' % (", ".join([c.name for c in tied]), t.name))
             return t
 
-        #  iterateStatus constants
-        #
-        IS_none = None
-        IS_omega = 1      # iteration stopped because surplus < omega
-        IS_elected = 2    # iteration stopped because candidate(s) elected
-        IS_stable = 3     # iteration stopped because surplus reached stable value
-
-        def iterate():
-            "Iterate until surplus is less than omega"
-            iStatus = IS_none
-            lastsurplus = V(E.nBallots)
-            while True:
-                #
-                #  I.1.
-                #  distribute vote for each ballot
-                #  and add up vote for each candidate
-                #
-                for c in C.hopefulOrElected:
-                    c.vote = V0
-                R.residual = V0
-                for b in R.ballots:
-                    b.weight = V1
-                    b.residual = V(b.multiplier)
-                    for c in b.ranking:
-                        #
-                        #  distribute surpluses
-                        #
-                        #  kv = w*kf rounded up * m     keep vote
-                        #  w -= w*kf rounded up         new weight
-                        # 
-                        kw = V.mul(b.weight, c.kf, round='up')  # keep-weight
-                        kv = kw * b.multiplier  # keep-value
-                        c.vote += kv            # credit keep-value to candidate
-                        b.weight -= kw          # reduce ballot weight
-                        b.residual -= kv        # residual value of ballot
-                        #
-                        if b.weight <= V0:
-                            break
-                    R.residual += b.residual     # residual for round
-
-
-                #  I.2. update quota
-                #
-                R.votes = sum([c.vote for c in C.hopefulOrElected], V0)
-                R.quota = R.votes / V(E.electionProfile.nSeats+1) + V.epsilon
-                
-                #  I.3. find winners
-                #
-                for c in [c for c in C.hopeful if c.vote >= R.quota]:
-                    C.elect(c)
-                    iStatus = IS_elected
-                
-                #  I.4. calculate total surplus
-                #
-                R.surplus = sum([c.vote-R.quota for c in C.elected], V0)
-                
-                #  I.5. test iteration complete
-                #
-                if iStatus == IS_elected:
-                    return IS_elected
-                if R.surplus < Rule._omega:
-                    return IS_omega
-                if R.surplus >= lastsurplus:
-                    R.log("Stable state detected (%s)" % R.surplus)
-                    return IS_stable
-                lastsurplus = R.surplus
-                    
-                #  I.6. update keep factors
-                #
-                for c in C.elected:
-                    c.kf = V.div(V.mul(c.kf, R.quota, round='up'), c.vote, round='up')
-            
         #########################
         #
         #   Initialize Count
@@ -213,11 +141,75 @@ class Rule(ElectionRule):
             #  B.2. iterate
             #       next round if iteration elected a candidate
             #
-            iterationStatus = iterate()
+            iterationStatus = 'iterate'
+            lastsurplus = V(E.nBallots)
+            while True:
+                #
+                #  B.2.a
+                #  distribute vote for each ballot
+                #  and add up vote for each candidate
+                #
+                for c in C.hopefulOrElected:
+                    c.vote = V0
+                R.residual = V0
+                for b in R.ballots:
+                    b.weight = V1
+                    b.residual = V(b.multiplier)
+                    for c in b.ranking:
+                        #
+                        #  distribute surpluses
+                        #
+                        #  kv = w*kf rounded up * m     keep vote
+                        #  w -= w*kf rounded up         new weight
+                        # 
+                        kw = V.mul(b.weight, c.kf, round='up')  # keep-weight
+                        kv = kw * b.multiplier  # keep-value
+                        c.vote += kv            # credit keep-value to candidate
+                        b.weight -= kw          # reduce ballot weight
+                        b.residual -= kv        # residual value of ballot
+                        #
+                        if b.weight <= V0:
+                            break
+                    R.residual += b.residual     # residual for round
+
+
+                #  B.2.b. update quota
+                #
+                R.votes = sum([c.vote for c in C.hopefulOrElected], V0)
+                R.quota = R.votes / V(E.electionProfile.nSeats+1) + V.epsilon
+                
+                #  B.2.c. find winners
+                #
+                for c in [c for c in C.hopeful if c.vote >= R.quota]:
+                    C.elect(c)
+                    iterationStatus = 'elected'
+                
+                #  B.2.d. calculate total surplus
+                #
+                R.surplus = sum([c.vote-R.quota for c in C.elected], V0)
+                
+                #  B.2.e. test iteration complete
+                #
+                if iterationStatus == 'elected':
+                    break
+                if R.surplus < Rule._omega:
+                    iterationStatus = 'omega'
+                if R.surplus >= lastsurplus:
+                    R.log("Stable state detected (%s)" % R.surplus)
+                    iterationStatus = 'stable'
+                if iterationStatus != 'iterate':
+                    break  # iteration complete
+
+                lastsurplus = R.surplus
+                    
+                #  B.2.f. update keep factors
+                #
+                for c in C.elected:
+                    c.kf = V.div(V.mul(c.kf, R.quota, round='up'), c.vote, round='up')
 
             #  B.3. end of round if iteration resulted in an election
             #
-            if iterationStatus == IS_elected:
+            if iterationStatus == 'elected':
                 continue
 
             #  B.4. defeat candidate with lowest vote
@@ -231,7 +223,7 @@ class Rule(ElectionRule):
             #
             if low_candidates:
                 low_candidate = breakTie(E, low_candidates)
-                if iterationStatus == IS_omega:
+                if iterationStatus == 'omega':
                     C.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))
                 else:
                     C.defeat(low_candidate, msg='Defeat (stable surplus %s)' % V(R.surplus))
