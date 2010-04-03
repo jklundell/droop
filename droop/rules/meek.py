@@ -125,7 +125,7 @@ class Rule(ElectionRule):
             purpose is 'surplus' or 'elect' or 'defeat', 
             indicating whether the tie is being broken for the purpose 
             of choosing a surplus to transfer, a winner, 
-            or a candidate to eliminate. 
+            or a candidate to defeat. 
             
             the tiebreaking method: candidates are randomly ordered,
             and the order of entry in the ballot file is the tiebreaking order:

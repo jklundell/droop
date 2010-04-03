@@ -119,7 +119,7 @@ class Rule(ElectionRule):
             purpose must be 'surplus' or 'elect' or 'defeat', 
             indicating whether the tie is being broken for the purpose 
             of choosing a surplus to transfer, a winner, 
-            or a candidate to eliminate. 
+            or a candidate to defeat. 
             
             Set strong to False to indicate that weak tiebreaking should be
             attempted, if relevant. Otherwise the tie is treated as strong.
@@ -195,7 +195,7 @@ class Rule(ElectionRule):
                 R.transfer(high_candidate, high_candidate.surplus, msg='Transfer surplus')
                 high_candidate.vote = R.quota
 
-            #  if no surplus to transfer, eliminate a candidate
+            #  if no surplus to transfer, defeat a candidate
             #
             else:
                 #  find candidate(s) with lowest vote
