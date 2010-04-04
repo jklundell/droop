@@ -130,7 +130,7 @@ class Rule(ElectionRule):
             if not tied:
                 return None
             if len(tied) == 1:
-                return tied[0]
+                return tied.pop()
             tied = CS.sortByOrder(tied)
             t = tied[0]
             R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
@@ -169,25 +169,31 @@ class Rule(ElectionRule):
             #  elect new winners
             #
             for c in [c for c in CS.hopeful if hasQuota(E, c)]:
-                CS.elect(c)                # elect; transfer pending
-                if c.vote == R.quota:     # handle new winners with no surplus
-                    R.transfer(c, c.surplus, msg='Transfer surplus')
-        
+                CS.elect(c)     # elect; transfer pending
+                #
+                #  If a candidate is elected with no surplus,
+                #  the associated ballots are exhausted,
+                #  so do the "transfer" now
+                #
+                if c.vote == R.quota:
+                    for b in [b for b in R.ballots if b.topCand == c]:
+                        b.weight = V0
+                    R.transfer(c, V0, msg='Transfer zero surplus')
+
             #  find highest surplus
             #
-            high_vote = R.quota
-            high_candidates = []
-            for c in CS.elected:
+            high_vote, high_candidates = R.quota, set()
+            for c in CS.pending:
                 if c.vote == high_vote:
-                    high_candidates.append(c)
+                    high_candidates.add(c)
                 elif c.vote > high_vote:
                     high_vote = c.vote
-                    high_candidates = [c]
+                    high_candidates = set([c])
             
             # transfer highest surplus
             #
             if high_vote > R.quota:
-                # transfer surplus
+                # break tie if necessary and transfer surplus
                 high_candidate = breakTie(E, high_candidates, 'surplus')
                 surplus = high_vote - R.quota
                 for b in [b for b in R.ballots if b.topCand == high_candidate]:

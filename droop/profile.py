@@ -64,6 +64,7 @@ class ElectionProfile(object):
         self._candidateName = dict()  # cid => candidate name
         self._candidateOrder = dict() # cid -> ballot order
         self.ballotLines = tuple()
+        self.tieOrder = None          # tiebreaking cid sequence
 
         if path:
             data = self.__bltPath(path)
@@ -193,6 +194,8 @@ class ElectionProfile(object):
                 cid = int(tok)
                 if not cid:  # test end of ballot
                     break;
+                if cid > ncand:
+                    raise ElectionProfileError('bad blt item "%s" near ballot line %d is not a valid candidate ID' % (tok, len(ballotlines)+1))
                 ranking.append(str(cid))
             if ranking:                         # ignore empty ballots
                 ballotlines.append(self.BallotLine(multiplier, tuple(ranking)))
@@ -216,12 +219,36 @@ class ElectionProfile(object):
             self._candidateName[str(cid)] = name.strip('"')
             self._candidateOrder[str(cid)] = int(cid)
             
+        #  election title or options
         #  election title
         #
-        self.title = blt.next()
-        if not self.title.startswith('"'):
-            raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % self.title)
+        tok = blt.next()
+        while tok.startswith('='):
+            if tok == '=tie':
+                tieseq = []
+                while True:
+                    tok = blt.next()
+                    if not re.match(r'\d+', tok):
+                        raise ElectionProfileError('bad blt item "%s" reading =tie option; expected decimal number' % (tok, len(ballotlines)+1))
+                    cid = int(tok)
+                    if not cid:
+                        break
+                    if cid > ncand:
+                        raise ElectionProfileError('bad blt: =tie item "%d" is not a valid candidate ID' % cid)
+                    tieseq.append(cid)
+                if len(tieseq) != ncand:
+                    raise ElectionProfileError('bad blt: =tie tiebreak sequence must list each candidate ID exactly once')
+                self.tieOrder = tieseq
+            else:
+                raise ElectionProfileError('bad blt item "%s": unknown option' % tok)
+            tok = blt.next()
+
+        #  election title
+        #
+        if not tok.startswith('"'):
+            raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % tok)
         try:
+            self.title = tok
             while not self.title.endswith('"'):
                 self.title += ' ' + blt.next()
         except StopIteration:
