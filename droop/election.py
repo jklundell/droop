@@ -285,35 +285,39 @@ class Election(object):
             s = ''
             
             candidates = CS.sortByOrder(E.eligible) # report in ballot order
+
             #  if round 0, include a header line
+            #
             if self.n == 0:
-                h = ['R', 'Q']
-                if reportMeek: h += ['residual']
+                h = ['R', 'Quota', 'Votes', 'Surplus']
+                if reportMeek: h += ['Residual']
                 for c in candidates:
                     cid = c.cid
-                    h += ["'%s.name'" % cid]
-                    h += ["'%s.state'" % cid]
-                    h += ["'%s.vote'" % cid]
-                    if reportMeek: h += ["'%s.kf'" % cid]
+                    h += ['%s.name' % cid]
+                    h += ['%s.state' % cid]
+                    h += ['%s.vote' % cid]
+                    if reportMeek: h += ['%s.kf' % cid]
                 h = [str(item) for item in h]
-                s += ','.join(h) + '\n'
-                
-            r = [self.n, V(self.quota)]
+                s += '\t'.join(h) + '\n'
+            
+            #  dump a line of data
+            #
+            r = [self.n, V(self.quota), V(self.votes), V(self.surplus)]
             if reportMeek: r.append(V(self.residual))
             for c in candidates:
                 cid = c.cid
                 r.append(c.name)
                 if self.n:
-                    r.append('W' if c in CS.withdrawn else 'H' if c in CS.hopeful else 'P' if c in CS.pending else 'E' if c in CS.elected else 'D' if c in CS.defeated else '?') # state
+                    r.append('W' if c in CS.withdrawn else 'H' if c in CS.hopeful else 'P' if not reportMeek and c in CS.pending else 'E' if c in CS.elected else 'D' if c in CS.defeated else '?') # state
                     r.append(V(c.vote))
                     if reportMeek: r.append(V(c.kf))
                 else:
                     r.append('W' if c in CS.withdrawn else 'H') # state
                     r.append(V(c.vote)) # vote
-                    if reportMeek: r.append("'-'") # kf
+                    if reportMeek: r.append('-') # kf
                 
             r = [str(item) for item in r]
-            s += ','.join(r) + '\n'
+            s += '\t'.join(r) + '\n'
             E.R = saveR
             return s
 

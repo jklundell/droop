@@ -38,6 +38,11 @@ class Rational(Fraction):
     _dfmt = None # display format string
     
     @classmethod
+    def tag(cls):
+        "return a tag for unit test"
+        return 'rational-d%d' % (cls.dp)
+
+    @classmethod
     def helps(cls, helps):
         "add help string"
         helps['rational'] = '''Rational arithmetic uses rational fractions to exactly represent numeric values.
@@ -65,11 +70,6 @@ See also: fixed, guarded
         cls._dps = 10 ** cls.dp                            # display scaler
         cls._dpr = Fraction(1, cls._dps*2)                 # display rounder
         cls._dfmt = "%d.%0" + str(cls.dp) + "d" # %d.%0_d  # display format
-
-    @staticmethod
-    def equal_within(a, b, e):
-        "test for equality within specified epsilon"
-        return abs(a-b) < e
 
     @classmethod
     def min(cls, vals):

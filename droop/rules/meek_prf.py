@@ -40,7 +40,7 @@ class Rule(ElectionRule):
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
-        return 'meek-prf'
+        return 'prf-meek-basic'
 
     @classmethod
     def helps(cls, helps, name):
@@ -67,6 +67,11 @@ class Rule(ElectionRule):
         return "PR Foundation Meek Reference"
 
     @classmethod
+    def tag(cls):
+        "return a tag string for unit tests"
+        return "prf-meek-basic"
+
+    @classmethod
     def reportMode(cls):
         "how should this election be reported? meek or wigm"
         return 'meek'
@@ -91,8 +96,6 @@ class Rule(ElectionRule):
             or the profile =tie order is the tiebreaking order:
             choose the first candidate in that order.
             '''
-            if not tied:
-                return None
             if len(tied) == 1:
                 return tied[0]
             tied = CS.sortByTieOrder(tied)
@@ -119,8 +122,8 @@ class Rule(ElectionRule):
         #
         cls._omega = V(1) / V(10**cls.omega)
 
-        R.votes = V(E.electionProfile.nBallots)
-        R.quota = R.votes / V(E.electionProfile.nSeats+1) + V.epsilon
+        R.votes = V(E.nBallots)
+        R.quota = R.votes / V(E.nSeats+1) + V.epsilon
         CS = R.CS   # candidate state
         for c in E.withdrawn:
             c.kf = V0
@@ -181,7 +184,7 @@ class Rule(ElectionRule):
                 
                 #  B.2.c. find winners
                 #
-                for c in [c for c in CS.hopeful if c.vote >= R.quota]:
+                for c in [c for c in CS.sortByOrder(CS.hopeful) if c.vote >= R.quota]:
                     CS.elect(c)
                     iterationStatus = 'elected'
                 
@@ -235,7 +238,7 @@ class Rule(ElectionRule):
         
         #  C. Elect or defeat remaining hopeful candidates
         #
-        for c in CS.hopeful.copy():
+        for c in CS.sortByOrder(CS.hopeful):
             if CS.nElected < E.electionProfile.nSeats:
                 CS.elect(c, msg='Elect remaining')
             else:

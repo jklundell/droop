@@ -28,16 +28,25 @@ class Fixed(object):
     fixed-point decimal arithmetic
     '''
     
-    name = 'fixed'     # or 'integer'
+    name = 'fixed'      # or 'integer'
     info = None
     exact = False
     quasi_exact = False
-    epsilon = None     # smallest value > 0
+    epsilon = None      # smallest value > 0
     
-    precision = None  # precision in decimal digits
+    precision = None    # precision in decimal digits
+    display = None      # display precision, in decimal digits
     __scale = None      # scale factor
     __dfmt = None       # display format
+    __scaled = None     # display scale factor
     
+    @classmethod
+    def tag(cls):
+        "return a tag for unit test"
+        if cls.precision == 0:
+            return 'integer'
+        return 'fixed-p%d-d%d' % (cls.precision, cls.display)
+
     @classmethod
     def helps(cls, helps):
         "add help string"
@@ -73,6 +82,8 @@ See also: guarded, rational
             raise UsageError('Guarded: precision=%s; must be an int >= 0' % precision)
 
         cls.__scale = 10 ** cls.precision
+        cls.display = cls.precision
+        cls.__scaled = 10 ** cls.display
         
         cls.epsilon = cls(0)
         cls.epsilon._value = 1
@@ -210,11 +221,6 @@ See also: guarded, rational
         return self.__cmp__(other) >= 0
 
     @classmethod
-    def equal_within(cls, a, b, e):
-        "test for equality within epsilon"
-        return abs(a-b) < e
-        
-    @classmethod
     def min(cls, vals):
         "find minimum value in a list"
         return min(vals)
@@ -227,7 +233,7 @@ See also: guarded, rational
         v = self._value
         if Fixed.precision == 0:  # integer arithmetic
             return str(v)
-        return self.__dfmt % (v//self.__scale, v%self.__scale)
+        return self.__dfmt % (v//self.__scaled, v%self.__scaled)
 
     @classmethod
     def report(cls):

@@ -39,10 +39,17 @@ class Guarded(object):
     
     precision = None
     guard = None
+    display = None
     __scale = None
     __scalep = None
     __scaleg = None
-    __dfmt = None     # display format
+    __scaled = None     # not implemented yet
+    __dfmt = None       # display format
+
+    @classmethod
+    def tag(cls):
+        "return a tag for unit test"
+        return 'guarded-p%d-g%d-d%d' % (cls.precision, cls.guard, cls.display)
 
     @classmethod
     def helps(cls, helps):
@@ -91,6 +98,8 @@ See also: fixed, rational
         cls.__scalep = 10 ** cls.precision
         cls.__scaleg = 10 ** cls.guard
         cls.__scale = 10 ** (cls.precision+cls.guard)
+        cls.display = cls.precision
+        cls.__scaled = 10 ** cls.display
         
         #  __grnd is the rounding value for string conversions
         #  __geps is used in the test for equality (see __cmp__ below)
@@ -231,11 +240,6 @@ See also: fixed, rational
     def __ge__(self, other):
         return self.__cmp__(other) >= 0
 
-    @classmethod
-    def equal_within(cls, a, b, e):
-        "test for equality within specified epsilon"
-        return abs(a-b) < e
-        
     @classmethod
     def min(cls, vals):
         "find actual minimum value in a list"

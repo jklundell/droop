@@ -25,8 +25,7 @@ basedir = os.path.normpath(os.path.join(testdir, '..'))
 if basedir not in sys.path: sys.path.insert(0, os.path.normpath(basedir))
 
 from droop.election import Election
-from droop import electionRuleNames, electionRule
-from droop.profile import ElectionProfile, ElectionProfileError
+from droop.profile import ElectionProfile
 from droop import rules as R
 
 #from droop.rules.mpls import Rule as Mpls
@@ -112,6 +111,78 @@ class ElectionCountTest(unittest.TestCase):
         E = self.doCount(R.meek_prf.Rule, options, '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
+class ElectionDumpTest(unittest.TestCase):
+    "compare some dumps"
+
+    def readFile(self, path):
+        "read a dump file"
+        f = open(path, 'r')
+        data = f.read()
+        f.close()
+        return data
+        
+    def writeFile(self, path, data):
+        "write a dump file"
+        f = open(path, 'w')
+        f.write(data)
+        f.close()
+        
+    def doDumpCompare(self, Rule, options, base):
+        "run a count and compare dump/report to reference"
+        blt = '%s/blt/%s.blt' % (testdir, base)
+        E = Election(Rule, ElectionProfile(blt), options)
+        E.count()
+        tag = '%s-%s-%s' % (base, Rule.tag(), E.V.tag())
+
+        #  first do dump
+        #
+        dref = '%s/ref/dump/%s.txt' % (testdir, tag)
+        dout = '%s/out/dump/%s.txt' % (testdir, tag)
+        dump = E.dump()
+        if not os.path.isfile(dref):
+            self.writeFile(dref, dump)
+        dumpref = self.readFile(dref)
+        if os.path.isfile(dout):
+            os.unlink(dout)
+        if dump != dumpref:
+            self.writeFile(dout, dump)
+            return False
+
+        #  same logic with report
+        #
+        rref = '%s/ref/report/%s.txt' % (testdir, tag)
+        rout = '%s/out/report/%s.txt' % (testdir, tag)
+        report = E.report()
+        if not os.path.isfile(rref):
+            self.writeFile(rref, report)
+        reportref = self.readFile(rref)
+        if os.path.isfile(rout):
+            os.unlink(rout)
+        if report != reportref:
+            self.writeFile(rout, report)
+            return False
+
+        return True
+
+    def testElectionDump(self):
+        "try a basic count & dump"
+        self.assertTrue(self.doDumpCompare(R.mpls.Rule, dict(), '42'), 'Minneapolis 42.blt')
+
+    def testElectionDumps(self):
+        "try several counts & dumps"
+        blts = ('42', '42t', 'M135', '513', 'SC', 'SC-Vm-12')
+        Rules = (R.mpls.Rule, R.meek.Rule, R.wigm.Rule, R.meek_prf.Rule)
+        for blt in blts:
+            for Rule in Rules:
+                self.assertTrue(self.doDumpCompare(Rule, dict(), blt), '%s %s.blt' % (Rule.info(), blt))
+
+    def testElectionDumpRational(self):
+        "try several counts & dumps with rational arithmetic"
+        blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
+        Rules = (R.meek.Rule, R.wigm.Rule)
+        for blt in blts:
+            for Rule in Rules:
+                self.assertTrue(self.doDumpCompare(Rule, dict(arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
 
 if __name__ == '__main__':
     unittest.main()

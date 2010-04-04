@@ -53,6 +53,13 @@ class RuleTest(unittest.TestCase):
             reportMode = Rule.reportMode()
             self.assertTrue(reportMode in ('meek','wigm'), 'bad reportMode "%s"' % reportMode)
 
-        
+    def testReportHelps(self):
+        "helps gives us back a string"
+        for name in electionRuleNames():
+            Rule = electionRule(name)
+            helps = dict()
+            Rule.helps(helps, name)
+            self.assertTrue(isinstance(helps[name], str), 'expected help string for %s' % name)
+
 if __name__ == '__main__':
     unittest.main()

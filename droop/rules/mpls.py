@@ -69,6 +69,11 @@ class Rule(ElectionRule):
         return 'mpls'
 
     @classmethod
+    def tag(cls):
+        "return a tag string for unit tests"
+        return 'mpls'
+
+    @classmethod
     def options(cls, options=dict()):
         "initialize election parameters"
 
@@ -229,11 +234,9 @@ class Rule(ElectionRule):
             ##     at such time and in such manner as the City Council shall direct. 
             ##     (As amended 83-Or-139, Sec 1, 6-10-83; Charter Amend. No. 161, Sec 6, ref. of 11-7-06)
 
-            if not tied:
-                return None
             if len(tied) == 1:
                 return tied[0]
-            tied = CS.sortByOrder(tied) # sort by tie-order before making choice
+            tied = CS.sortByTieOrder(tied) # sort by tie-order before making choice
             t = tied[0]  # in the absence of the City Council...
             names = ", ".join([c.name for c in tied])
             R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
@@ -270,6 +273,7 @@ class Rule(ElectionRule):
         #  Calculate quota per 167.20(Threshold)
         #
         E.R0.quota = calcQuota(E)
+        R.votes = V(E.nBallots)
 
         while True:
 
@@ -290,7 +294,7 @@ class Rule(ElectionRule):
             ##     and the tabulation is complete. 
             ##
 
-            for c in [c for c in CS.hopeful if hasQuota(c)]:
+            for c in [c for c in CS.sortByOrder(CS.hopeful) if hasQuota(c)]:
                 CS.elect(c)
             if CS.nElected >= E.nSeats:
                 break
@@ -306,7 +310,11 @@ class Rule(ElectionRule):
             ##  b. Surplus votes for any candidates whose vote total is equal to 
             ##     or greater than the threshold must be calculated.
 
-            surplus = sum([c.surplus for c in CS.elected], V0)
+            R.surplus = sum([c.surplus for c in CS.elected], V0)
+
+            #  count votes for reporting
+            #
+            R.votes = sum([c.vote for c in (CS.elected | CS.hopeful | CS.pending)], V0)
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -319,8 +327,8 @@ class Rule(ElectionRule):
             #  of mathematical certainty of defeat instead of the erroneous definition
             #  in 167.20.
 
-            certainLosers = findCertainLosers(surplus, fixSpec=True)
-            for c in certainLosers:
+            certainLosers = findCertainLosers(R.surplus, fixSpec=True)
+            for c in CS.sortByOrder(certainLosers):
                 CS.defeat(c, 'Defeat certain loser')
                 R.transfer(c, c.vote, 'Transfer defeated')
 
@@ -420,7 +428,7 @@ class Rule(ElectionRule):
             #  Note: implemented as "less than or equal to"
             #
             if CS.nHopeful <= E.seatsLeftToFill():
-                for c in CS.hopeful:
+                for c in CS.sortByOrder(CS.hopeful):
                     CS.elect(c, 'Elect remaining candidates')
                 break
 
@@ -442,12 +450,12 @@ class Rule(ElectionRule):
         #  Note: implemented as "less than or equal to"
         #
         if CS.nHopeful <= E.seatsLeftToFill():
-            for c in CS.hopeful.copy():
+            for c in CS.sortByOrder(CS.hopeful):
                 CS.elect(c, 'Elect remaining candidates')
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #
-        for c in CS.hopeful.copy():
+        for c in CS.sortByOrder(CS.hopeful):
             CS.defeat(c, msg='Defeat remaining candidates')
 
 

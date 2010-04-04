@@ -31,11 +31,19 @@ class Rule(ElectionRule):
     
     omega = None          # in digits
     defeatBatch = 'safe'  # default
+    warren = False
 
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
         return ('meek', 'warren')
+
+    @classmethod
+    def tag(cls):
+        "return a tag string for unit tests"
+        if cls.warren:
+            return 'warren-generic'
+        return 'meek-generic'
 
     @classmethod
     def helps(cls, helps, name):
@@ -115,8 +123,8 @@ class Rule(ElectionRule):
             Round up if not using exact arithmetic.
             '''
             if E.V.exact:
-                return E.R.votes / E.V(E.electionProfile.nSeats+1)
-            return E.R.votes / E.V(E.electionProfile.nSeats+1) + E.V.epsilon
+                return E.R.votes / E.V(E.nSeats+1)
+            return E.R.votes / E.V(E.nSeats+1) + E.V.epsilon
     
         def breakTie(E, tied, purpose=None, strong=True):
             '''
@@ -277,7 +285,7 @@ class Rule(ElectionRule):
                 
                 #  D.4. find winners
                 #
-                for c in [c for c in CS.hopeful if hasQuota(E, c)]:
+                for c in [c for c in CS.sortByOrder(CS.hopeful) if hasQuota(E, c)]:
                     CS.elect(c)
                     iStatus = IS_elected
                     
@@ -341,7 +349,7 @@ class Rule(ElectionRule):
                 cls.omega = V.precision * 2 // 3
         cls._omega = V(1) / V(10**cls.omega)
 
-        E.R0.votes = V(E.electionProfile.nBallots)
+        E.R0.votes = V(E.nBallots)
         E.R0.quota = calcQuota(E)
         R = E.R0
         CS = R.CS   # candidate state
@@ -375,7 +383,7 @@ class Rule(ElectionRule):
             #     defeat a batch if possible
             #
             if iterationStatus == IS_batch:
-                for c in batch:
+                for c in CS.sortByOrder(batch):
                     CS.defeat(c, msg='Defeat certain loser')
                     c.kf = V0
                     c.vote = V0
@@ -399,7 +407,7 @@ class Rule(ElectionRule):
         
         #  Elect or defeat remaining hopeful candidates
         #
-        for c in CS.hopeful.copy():
+        for c in CS.sortByOrder(CS.hopeful):
             if CS.nElected < E.electionProfile.nSeats:
                 CS.elect(c, msg='Elect remaining')
             else:

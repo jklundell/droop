@@ -39,6 +39,11 @@ class Rule(ElectionRule):
         return 'wigm'
 
     @classmethod
+    def tag(cls):
+        "return a tag string for unit tests"
+        return 'wigm-generic'
+
+    @classmethod
     def helps(cls, helps, name):
         "create help string for wigm"
         h =  'wigm implements the Weighted Inclusive Gregory Method.\n'
@@ -168,7 +173,7 @@ class Rule(ElectionRule):
 
             #  elect new winners
             #
-            for c in [c for c in CS.hopeful if hasQuota(E, c)]:
+            for c in [c for c in CS.sortByOrder(CS.hopeful) if hasQuota(E, c)]:
                 CS.elect(c)     # elect; transfer pending
                 #
                 #  If a candidate is elected with no surplus,
@@ -206,14 +211,8 @@ class Rule(ElectionRule):
             else:
                 #  find candidate(s) with lowest vote
                 #
-                low_vote = R.quota
-                low_candidates = []
-                for c in CS.hopeful:
-                    if c.vote == low_vote:
-                        low_candidates.append(c)
-                    elif c.vote < low_vote:
-                        low_vote = c.vote
-                        low_candidates = [c]
+                low_vote = V.min([c.vote for c in CS.hopeful])
+                low_candidates = [c for c in CS.hopeful if c.vote == low_vote]
 
                 #  defeat candidate with lowest vote
                 #
@@ -231,7 +230,7 @@ class Rule(ElectionRule):
         #  Election over.
         #  Elect or defeat remaining hopeful candidates
         #
-        for c in CS.hopeful.copy():
+        for c in CS.sortByOrder(CS.hopeful):
             if CS.nElected < E.nSeats:
                 CS.elect(c, msg='Elect remaining')
             else:
