@@ -69,7 +69,6 @@ class Election(object):
         
         self.elected = None  # for communicating results
         
-        #
         #  create candidate objects for candidates in election profile
         #
         for cid in electionProfile.eligible | electionProfile.withdrawn:
@@ -88,7 +87,13 @@ class Election(object):
             #  and add the candidate to round 0
             #
             self.R0.CS.addCandidate(c, isWithdrawn=cid in electionProfile.withdrawn)
+        
+        #  update tiebreaking order if one was specified via profile =tie option
         #
+        if electionProfile.tieOrder:
+            for c in self._candidates.values():
+                c.tieOrder = electionProfile.tieOrder[c.cid]
+
         #  create a ballot object (ranking candidate objects) from the profile rankings of candidate IDs
         #  only eligible (not withdrawn) will be added
         #
@@ -397,9 +402,10 @@ class Candidate(object):
     def __init__(self, E, cid, order, cname):
         "new candidate"
         self.E = E
-        self.cid = cid     # candidate id
-        self.order = order # ballot order
-        self.name = cname  # candidate name
+        self.cid = cid        # candidate id
+        self.order = order    # ballot order
+        self.name = cname     # candidate name
+        self.tieOrder = order # default tiebreaking order
 
     #  get/set vote total of this candidate
     #
@@ -566,3 +572,7 @@ class CandidateState(object):
     def sortByOrder(self, collection):
         "sort a collection of candidates by ballot order"
         return sorted(collection, key=lambda c: c.order)
+
+    def sortByTieOrder(self, collection):
+        "sort a collection of candidates by tieOrder"
+        return sorted(collection, key=lambda c: c.tieOrder)

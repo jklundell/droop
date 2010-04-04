@@ -233,8 +233,8 @@ class Rule(ElectionRule):
                 return None
             if len(tied) == 1:
                 return tied[0]
-            tied = CS.sortByOrder(tied) # sort by ballot order before making choice
-            t = random.choice(tied)  # in the absence of the City Council...
+            tied = CS.sortByOrder(tied) # sort by tie-order before making choice
+            t = tied[0]  # in the absence of the City Council...
             names = ", ".join([c.name for c in tied])
             R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t

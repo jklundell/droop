@@ -128,14 +128,15 @@ class Rule(ElectionRule):
             or a candidate to defeat. 
             
             the tiebreaking method: candidates are randomly ordered,
-            and the order of entry in the ballot file is the tiebreaking order:
+            and the order of entry in the ballot file 
+            or the profile =tie order is the tiebreaking order:
             choose the first candidate in that order.
             '''
             if not tied:
                 return None
             if len(tied) == 1:
                 return tied[0]
-            tied = CS.sortByOrder(tied)
+            tied = CS.sortByTieOrder(tied)
             t = tied[0]
             R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
             return t

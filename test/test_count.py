@@ -52,6 +52,12 @@ class ElectionInitTest(unittest.TestCase):
         self.assertEqual(options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
         self.assertEqual(options['precision'], 4, 'mpls should set precision=4')
 
+    def testElectionTieOrder(self):
+        "test default tie order"
+        E = Election(self.Rule, self.Profile, dict())
+        for c in E._candidates.values():
+            self.assertEqual(c.order, c.tieOrder)
+
     def testElectionCount1(self):
         "try a basic count"
         options = dict()
@@ -74,6 +80,13 @@ class ElectionCountTest(unittest.TestCase):
         options = dict()
         E = self.doCount(R.mpls.Rule, options, '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
+
+    def testElectionTieCount(self):
+        "check a different tiebreaking order"
+        E = self.doCount(R.mpls.Rule, dict(), '42t.blt')
+        tieOrder = [0, 3, 2, 1]
+        for c in E._candidates.values():
+            self.assertEqual(c.tieOrder, tieOrder[c.order])
 
     def testElectionCount2(self):
         "try a bigger count"

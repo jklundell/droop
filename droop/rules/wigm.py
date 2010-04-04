@@ -131,7 +131,7 @@ class Rule(ElectionRule):
                 return None
             if len(tied) == 1:
                 return tied.pop()
-            tied = CS.sortByOrder(tied)
+            tied = CS.sortByTieOrder(tied)
             t = tied[0]
             R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
             return t

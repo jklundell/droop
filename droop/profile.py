@@ -225,8 +225,10 @@ class ElectionProfile(object):
         tok = blt.next()
         while tok.startswith('='):
             if tok == '=tie':
-                tieseq = []
+                tieOrder = dict()
+                o = 0
                 while True:
+                    o += 1
                     tok = blt.next()
                     if not re.match(r'\d+', tok):
                         raise ElectionProfileError('bad blt item "%s" reading =tie option; expected decimal number' % (tok, len(ballotlines)+1))
@@ -235,10 +237,10 @@ class ElectionProfile(object):
                         break
                     if cid > ncand:
                         raise ElectionProfileError('bad blt: =tie item "%d" is not a valid candidate ID' % cid)
-                    tieseq.append(cid)
-                if len(tieseq) != ncand:
+                    tieOrder[str(cid)] = o
+                if len(tieOrder) != ncand:
                     raise ElectionProfileError('bad blt: =tie tiebreak sequence must list each candidate ID exactly once')
-                self.tieOrder = tieseq
+                self.tieOrder = tieOrder
             else:
                 raise ElectionProfileError('bad blt item "%s": unknown option' % tok)
             tok = blt.next()
