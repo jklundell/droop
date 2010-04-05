@@ -173,7 +173,7 @@ class Rule(ElectionRule):
 
             #  elect new winners
             #
-            for c in [c for c in CS.sortByOrder(CS.hopeful) if hasQuota(E, c)]:
+            for c in [c for c in CS.hopeful if hasQuota(E, c)]:
                 CS.elect(c)     # elect; transfer pending
                 #
                 #  If a candidate is elected with no surplus,
@@ -230,7 +230,7 @@ class Rule(ElectionRule):
         #  Election over.
         #  Elect or defeat remaining hopeful candidates
         #
-        for c in CS.sortByOrder(CS.hopeful):
+        for c in list(CS.hopeful):
             if CS.nElected < E.nSeats:
                 CS.elect(c, msg='Elect remaining')
             else:

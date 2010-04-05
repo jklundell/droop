@@ -285,7 +285,7 @@ class Rule(ElectionRule):
                 
                 #  D.4. find winners
                 #
-                for c in [c for c in CS.sortByOrder(CS.hopeful) if hasQuota(E, c)]:
+                for c in [c for c in CS.hopeful if hasQuota(E, c)]:
                     CS.elect(c)
                     iStatus = IS_elected
                     
@@ -407,7 +407,7 @@ class Rule(ElectionRule):
         
         #  Elect or defeat remaining hopeful candidates
         #
-        for c in CS.sortByOrder(CS.hopeful):
+        for c in list(CS.hopeful):
             if CS.nElected < E.electionProfile.nSeats:
                 CS.elect(c, msg='Elect remaining')
             else:

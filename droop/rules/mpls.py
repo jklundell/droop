@@ -294,7 +294,7 @@ class Rule(ElectionRule):
             ##     and the tabulation is complete. 
             ##
 
-            for c in [c for c in CS.sortByOrder(CS.hopeful) if hasQuota(c)]:
+            for c in [c for c in CS.hopeful if hasQuota(c)]:
                 CS.elect(c)
             if CS.nElected >= E.nSeats:
                 break
@@ -314,7 +314,7 @@ class Rule(ElectionRule):
 
             #  count votes for reporting
             #
-            R.votes = sum([c.vote for c in (CS.elected | CS.hopeful | CS.pending)], V0)
+            R.votes = sum([c.vote for c in (CS.elected + CS.hopeful + CS.pending)], V0)
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -428,7 +428,7 @@ class Rule(ElectionRule):
             #  Note: implemented as "less than or equal to"
             #
             if CS.nHopeful <= E.seatsLeftToFill():
-                for c in CS.sortByOrder(CS.hopeful):
+                for c in list(CS.hopeful):
                     CS.elect(c, 'Elect remaining candidates')
                 break
 
@@ -449,13 +449,15 @@ class Rule(ElectionRule):
 
         #  Note: implemented as "less than or equal to"
         #
+        print "1 nH=%d seats=%d" % (CS.nHopeful, E.seatsLeftToFill())
         if CS.nHopeful <= E.seatsLeftToFill():
-            for c in CS.sortByOrder(CS.hopeful):
+            for c in list(CS.hopeful):
                 CS.elect(c, 'Elect remaining candidates')
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #
-        for c in CS.sortByOrder(CS.hopeful):
+        print "2 nH=%d seats=%d" % (CS.nHopeful, E.seatsLeftToFill())
+        for c in list(CS.hopeful):
             CS.defeat(c, msg='Defeat remaining candidates')
 
 

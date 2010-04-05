@@ -184,7 +184,7 @@ class Rule(ElectionRule):
                 
                 #  B.2.c. find winners
                 #
-                for c in [c for c in CS.sortByOrder(CS.hopeful) if c.vote >= R.quota]:
+                for c in [c for c in CS.hopeful if c.vote >= R.quota]:
                     CS.elect(c)
                     iterationStatus = 'elected'
                 
@@ -238,7 +238,7 @@ class Rule(ElectionRule):
         
         #  C. Elect or defeat remaining hopeful candidates
         #
-        for c in CS.sortByOrder(CS.hopeful):
+        for c in list(CS.hopeful):
             if CS.nElected < E.electionProfile.nSeats:
                 CS.elect(c, msg='Elect remaining')
             else:

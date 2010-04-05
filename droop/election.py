@@ -63,8 +63,8 @@ class Election(object):
         self.rounds = [self.Round(self)]
         self.R0 = self.R = self.rounds[0]
         
-        self.eligible = set()
-        self.withdrawn = set()
+        self.eligible = list()
+        self.withdrawn = list()
         self._candidates = dict()
         
         self.elected = None  # for communicating results
@@ -80,9 +80,9 @@ class Election(object):
             #  add each candidate to either the eligible or withdrawn set
             #
             if cid in electionProfile.eligible:
-                self.eligible.add(c)
+                self.eligible.append(c)
             else:
-                self.withdrawn.add(c)
+                self.withdrawn.append(c)
             #
             #  and add the candidate to round 0
             #
@@ -456,11 +456,11 @@ class CandidateState(object):
     
     vote: get candidate vote
     kf: get candidate keep factor
-    hopeful: the set of hopeful candidates
-    elected: the set of elected candidates
-    defeated: the set of defeated candidates
-    withdrawn: access to Election's set of withdrawn candidates
-    pending: a (virtual) set of elected candidates pending transfer (WIGM, not Meek)
+    hopeful: the list of hopeful candidates
+    elected: the list of elected candidates
+    defeated: the list of defeated candidates
+    withdrawn: access to Election's list of withdrawn candidates
+    pending: a (virtual) list of elected candidates pending transfer (WIGM, not Meek)
     isHopeful, etc: boolean test of a single candidate
     nHopeful, etc: number of candidates in set (properties)
     
@@ -475,9 +475,9 @@ class CandidateState(object):
         self._vote = dict()   # votes by candidate cid
         self._kf = dict()     # keep factor by candidate cid
         
-        self.hopeful = set()
-        self.elected = set()
-        self.defeated = set()
+        self.hopeful = list()
+        self.elected = list()
+        self.defeated = list()
 
     @property
     def withdrawn(self):
@@ -490,17 +490,17 @@ class CandidateState(object):
         _pending = set()
         for c in [b.topCand for b in self.E.R.ballots if not b.exhausted and b.topCand in self.elected]:
             _pending.add(c)
-        return _pending
+        return self.sortByOrder(_pending)  # keep in a deterministic order
 
     @property
     def hopefulOrElected(self):
-        "return union of hopeful and elected candidates"
-        return self.hopeful.union(self.elected)
+        "return combined list of hopeful and elected candidates"
+        return self.hopeful + self.elected
 
     @property
     def hopefulOrPending(self):
-        "return union of hopeful and transfer-pending candidates"
-        return self.hopeful.union(self.pending)
+        "return combined list of hopeful and transfer-pending candidates"
+        return self.hopeful + self.pending
 
     def copy(self):
         "return a copy of ourself"
@@ -509,9 +509,9 @@ class CandidateState(object):
         CS._vote = self._vote.copy()
         CS._kf = self._kf.copy()
         
-        CS.hopeful = self.hopeful.copy()
-        CS.elected = self.elected.copy()
-        CS.defeated = self.defeated.copy()
+        CS.hopeful = list(self.hopeful)
+        CS.elected = list(self.elected)
+        CS.defeated = list(self.defeated)
         return CS
 
     #  add a candidate to the election
@@ -519,21 +519,21 @@ class CandidateState(object):
     def addCandidate(self, c, isWithdrawn=False):
         "add a candidate"
         if isWithdrawn:
-            self.E.withdrawn.add(c)
+            self.E.withdrawn.append(c)
             self.E.R.log("Add withdrawn: %s" % c.name)
         else:
-            self.hopeful.add(c)
+            self.hopeful.append(c)
             self.E.R.log("Add hopeful: %s" % c.name)
 
     def elect(self, c, msg='Elect'):
-        "elect a candidate; optionally transfer-pending"
+        "elect a candidate"
         self.hopeful.remove(c)
-        self.elected.add(c)
+        self.elected.append(c)
         self.E.R.log("%s: %s (%s)" % (msg, c.name, self.E.V(c.vote)))
     def defeat(self, c, msg='Defeat'):
         "defeat a candidate"
         self.hopeful.remove(c)
-        self.defeated.add(c)
+        self.defeated.append(c)
         self.E.R.log("%s: %s (%s)" % (msg, c.name, self.E.V(c.vote)))
 
     def vote(self, c, r=None):
