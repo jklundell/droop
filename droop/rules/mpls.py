@@ -103,8 +103,8 @@ class Rule(ElectionRule):
         return "Minneapolis MN STV"
         
     @classmethod
-    def reportMode(cls):
-        "how should this election be reported? meek or wigm"
+    def method(cls):
+        "underlying method: meek or wigm"
         return 'wigm'
 
     #########################
@@ -314,7 +314,7 @@ class Rule(ElectionRule):
 
             #  count votes for reporting
             #
-            R.votes = sum([c.vote for c in (CS.elected + CS.hopeful + CS.pending)], V0)
+            R.votes = sum([c.vote for c in (CS.elected + CS.hopeful)], V0)
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -449,15 +449,18 @@ class Rule(ElectionRule):
 
         #  Note: implemented as "less than or equal to"
         #
-        print "1 nH=%d seats=%d" % (CS.nHopeful, E.seatsLeftToFill())
         if CS.nHopeful <= E.seatsLeftToFill():
             for c in list(CS.hopeful):
                 CS.elect(c, 'Elect remaining candidates')
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #
-        print "2 nH=%d seats=%d" % (CS.nHopeful, E.seatsLeftToFill())
         for c in list(CS.hopeful):
             CS.defeat(c, msg='Defeat remaining candidates')
+        
+        #  Transfer any pending candidates for reporting purposes
+        #
+        for c in list(CS.pending):
+            R.transfer(c, c.surplus, msg='Transfer remaining')
 
 

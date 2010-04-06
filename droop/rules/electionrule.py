@@ -45,8 +45,13 @@ class ElectionRule(object):
         return None
 
     @classmethod
-    def reportMode(cls):
-        "how should this election be reported? meek or wigm"
+    def tag(cls):
+        "return a string for unit tests to tag files"
+        return None
+
+    @classmethod
+    def method(cls):
+        "underlying method: meek or wigm"
         return None
 
     @classmethod

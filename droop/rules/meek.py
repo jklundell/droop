@@ -86,8 +86,8 @@ class Rule(ElectionRule):
         return "%s Parametric (omega = 1/10^%d)" % (name, cls.omega)
 
     @classmethod
-    def reportMode(cls):
-        "how should this election be reported? meek or wigm"
+    def method(cls):
+        "underlying method: meek or wigm"
         return 'meek'
 
     #########################

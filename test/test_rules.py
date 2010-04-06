@@ -46,12 +46,12 @@ class RuleInitTest(unittest.TestCase):
 class RuleTest(unittest.TestCase):
     "test rules class methods"
     
-    def testReportModes(self):
-        "reportMode is meek or wigm for each rule"
+    def testMethod(self):
+        "method is meek or wigm for each rule"
         for name in electionRuleNames():
             Rule = electionRule(name)
-            reportMode = Rule.reportMode()
-            self.assertTrue(reportMode in ('meek','wigm'), 'bad reportMode "%s"' % reportMode)
+            method = Rule.method()
+            self.assertTrue(method in ('meek','wigm'), 'bad method "%s"' % method)
 
     def testReportHelps(self):
         "helps gives us back a string"

@@ -79,8 +79,8 @@ class Rule(ElectionRule):
         return "Model Weighted Inclusive Gregory Method (WIGM)"
 
     @classmethod
-    def reportMode(cls):
-        "how should this election be reported? meek or wigm"
+    def method(cls):
+        "underlying method: meek or wigm"
         return 'wigm'
 
     #########################
@@ -151,6 +151,7 @@ class Rule(ElectionRule):
         #  calculate quota
         #
         R.quota = calcQuota(E)
+        R.votes = V(E.nBallots)
 
         #  Count votes in round 0 for reporting purposes
         #
@@ -170,6 +171,10 @@ class Rule(ElectionRule):
                 c.vote = V0
             for b in [b for b in R.ballots if not b.exhausted]:
                 b.topCand.vote = b.topCand.vote + b.vote
+
+            #  count votes for reporting
+            #
+            R.votes = sum([c.vote for c in (CS.elected + CS.hopeful)], V0)
 
             #  elect new winners
             #

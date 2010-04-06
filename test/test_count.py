@@ -19,7 +19,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import unittest
-import sys, os
+import sys, os, re
 testdir = os.path.dirname(os.path.abspath(__file__))
 basedir = os.path.normpath(os.path.join(testdir, '..'))
 if basedir not in sys.path: sys.path.insert(0, os.path.normpath(basedir))
@@ -158,7 +158,10 @@ class ElectionDumpTest(unittest.TestCase):
         reportref = self.readFile(rref)
         if os.path.isfile(rout):
             os.unlink(rout)
-        if report != reportref:
+        # don't include version number in comparison
+        report0 = re.sub(r'droop v\d+\.\d+', 'droop v0.0', report)
+        reportref = re.sub(r'droop v\d+\.\d+', 'droop v0.0', reportref)
+        if report0 != reportref:
             self.writeFile(rout, report)
             return False
 

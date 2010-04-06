@@ -152,7 +152,7 @@ class Election(object):
 
     def report(self, intr=False):
         "report election by round"
-        reportMeek = self.rule.reportMode() == 'meek'
+        reportMeek = self.rule.method() == 'meek'
         s = "\nElection: %s\n\n" % self.title
         s += "\tDroop package: %s v%s\n" % (droop.common.droopName, droop.common.droopVersion)
         s += "\tRule: %s\n" % self.rule.info()
@@ -174,7 +174,7 @@ class Election(object):
 
     def dump(self):
         "dump election by round"
-        reportMeek = self.rule.reportMode() == 'meek'
+        reportMeek = self.rule.method() == 'meek'
         s = ''
         for round in self.rounds:
             s += round.dump(reportMeek)
@@ -221,6 +221,8 @@ class Election(object):
             self.log("%s: %s (%s)" % (msg, c.name, self.E.V(val)))
             for b in [b for b in self.ballots if b.topCand == c]:
                 b.transfer(self.CS.hopeful)
+            if c in self.CS.pending:
+                self.CS.pending.remove(c)
     
         def log(self, msg):
             "log a message"
@@ -271,6 +273,7 @@ class Election(object):
                 s += '\tNontransferable votes: %s\n' % V(nontransferable)
                 s += '\tResidual: %s\n' % V(residual)
                 s += '\tTotal: %s\n' % V(evotes + pvotes + hvotes + nontransferable + residual)
+                s += '\tSurplus: %s\n' % V(E.R.surplus)
 
             E.R = saveR
             return s
@@ -331,24 +334,8 @@ class Election(object):
                 self.index = 0                # current ranking
                 self.weight = E.V1            # initial weight
                 self.residual = E.V0          # untransferable weight
-                #
-                #  fast copy of ranking -> self.ranking with duplicate detection
-                #  http://www.peterbe.com/plog/uniqifiers-benchmark (see f11)
-                #
-                #  Note that the speed is no longer necessary, since we're sharing
-                #  the ranking tuple across rounds, but it's here as an example
-                #  of an interesting technique that might be useful elsewhere.
-                #
-        #         def dedupe(cids):
-        #             seen = set()
-        #             for cid in cids:
-        #                 if cid in seen:
-        #                     raise ValueError('duplicate ranking: %s' % cid)
-        #                 seen.add(cid)
-        #                 yield cid
-        #         self.ranking = tuple(dedupe(ranking)) if ranking else tuple()
         
-                #  self.ranking is a tuple of candidate IDs, with a None sentinel at the end
+                #  self.ranking is a tuple of candidates
                 self.ranking = list()
                 for cid in ranking:
                     c = E.candidate(cid)
@@ -460,11 +447,9 @@ class CandidateState(object):
     elected: the list of elected candidates
     defeated: the list of defeated candidates
     withdrawn: access to Election's list of withdrawn candidates
-    pending: a (virtual) list of elected candidates pending transfer (WIGM, not Meek)
+    pending: a list of elected candidates pending transfer (WIGM, not Meek)
     isHopeful, etc: boolean test of a single candidate
     nHopeful, etc: number of candidates in set (properties)
-    
-    
     '''
 
     def __init__(self, E):
@@ -476,6 +461,7 @@ class CandidateState(object):
         self._kf = dict()     # keep factor by candidate cid
         
         self.hopeful = list()
+        self.pending = list()
         self.elected = list()
         self.defeated = list()
 
@@ -483,14 +469,6 @@ class CandidateState(object):
     def withdrawn(self):
         "interface to E.withdrawn for consistency"
         return self.E.withdrawn
-
-    @property
-    def pending(self):
-        "set of elected candidates with transfer pending"
-        _pending = set()
-        for c in [b.topCand for b in self.E.R.ballots if not b.exhausted and b.topCand in self.elected]:
-            _pending.add(c)
-        return self.sortByOrder(_pending)  # keep in a deterministic order
 
     @property
     def hopefulOrElected(self):
@@ -512,6 +490,7 @@ class CandidateState(object):
         CS.hopeful = list(self.hopeful)
         CS.elected = list(self.elected)
         CS.defeated = list(self.defeated)
+        CS.pending = list(self.pending)
         return CS
 
     #  add a candidate to the election
@@ -529,6 +508,7 @@ class CandidateState(object):
         "elect a candidate"
         self.hopeful.remove(c)
         self.elected.append(c)
+        self.pending.append(c)
         self.E.R.log("%s: %s (%s)" % (msg, c.name, self.E.V(c.vote)))
     def defeat(self, c, msg='Defeat'):
         "defeat a candidate"

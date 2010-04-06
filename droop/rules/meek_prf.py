@@ -72,8 +72,8 @@ class Rule(ElectionRule):
         return "prf-meek-basic"
 
     @classmethod
-    def reportMode(cls):
-        "how should this election be reported? meek or wigm"
+    def method(cls):
+        "underlying method: meek or wigm"
         return 'meek'
 
     #########################
