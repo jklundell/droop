@@ -32,6 +32,7 @@ class Guarded(object):
     This is acceptable for our purposes, but may not be generally desirable.
     '''
     
+    __slots__ = '_value'
     name = 'guarded'
     info = None
     exact = True
@@ -218,9 +219,9 @@ See also: fixed, rational
     def __cmp__(self, other):
         gdiff = abs(self._value - other._value)
         if gdiff < self.__geps and gdiff > self.maxDiff:
-            self.maxDiff = gdiff
+            Guarded.maxDiff = gdiff
         if gdiff >= self.__geps and gdiff < self.minDiff:
-            self.minDiff = gdiff
+            Guarded.minDiff = gdiff
         if gdiff < self.__geps:
             return 0
         if self._value > other._value:

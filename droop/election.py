@@ -68,13 +68,6 @@ class Election(object):
             self.candidates[cid] = c
             c.vote = self.V0
             #
-            #  add each candidate to either the eligible or withdrawn set
-            #
-            if cid in electionProfile.eligible:
-                self.eligible.append(c)
-            else:
-                self.withdrawn.append(c)
-            #
             #  and add the candidate to round 0
             #
             self.R0.CS.addCandidate(c, isWithdrawn=cid in electionProfile.withdrawn)
@@ -318,6 +311,8 @@ class Election(object):
     class Ballot(object):
         "one ballot"
         
+        __slots__ = ('E', 'multiplier', 'index', 'weight', 'residual', 'ranking')
+        
         def __init__(self, E, multiplier=1, ranking=None):
             "create a ballot"
             if E is not None:  # E=None signals a copy operation
@@ -487,8 +482,9 @@ class CandidateState(object):
             self.E.withdrawn.append(c)
             self.E.R.log("Add withdrawn: %s" % c.name)
         else:
+            self.E.eligible.append(c)
             self.hopeful.append(c)
-            self.E.R.log("Add hopeful: %s" % c.name)
+            self.E.R.log("Add eligible: %s" % c.name)
 
     def elect(self, c, msg='Elect'):
         "elect a candidate"

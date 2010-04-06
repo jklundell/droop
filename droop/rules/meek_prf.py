@@ -165,14 +165,15 @@ class Rule(ElectionRule):
                         #  kv = w*kf rounded up * m     keep vote
                         #  w -= w*kf rounded up         new weight
                         # 
-                        kw = V.mul(b.weight, c.kf, round='up')  # keep-weight
-                        kv = kw * b.multiplier  # keep-value
-                        c.vote += kv            # credit keep-value to candidate
-                        b.weight -= kw          # reduce ballot weight
-                        b.residual -= kv        # residual value of ballot
-                        #
-                        if b.weight <= V0:
-                            break
+                        if c.kf:
+                            kw = V.mul(b.weight, c.kf, round='up')  # keep-weight
+                            kv = kw * b.multiplier  # keep-value
+                            c.vote += kv            # credit keep-value to candidate
+                            b.weight -= kw          # reduce ballot weight
+                            b.residual -= kv        # residual value of ballot
+                            #
+                            if b.weight <= V0:
+                                break
                     R.residual += b.residual    # residual for round
 
 

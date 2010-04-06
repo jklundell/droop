@@ -27,7 +27,7 @@ class Fixed(object):
     '''
     fixed-point decimal arithmetic
     '''
-    
+    __slots__ = '_value'
     name = 'fixed'      # or 'integer'
     info = None
     exact = False

@@ -182,13 +182,15 @@ class Rule(ElectionRule):
             #   
             vote = V0
             losers = []
+            maybe = []
             maxDefeat = CS.nHopeful - E.seatsLeftToFill() # limit number of defeats
             for g in range(len(sortedGroups) - 1):
                 group = sortedGroups[g]
+                maybe += group
                 #
                 #  stop if adding the next higher group would leave too few hopefuls
                 #
-                if (len(losers) + len(group)) > maxDefeat:
+                if len(maybe) > maxDefeat:
                     break  # too many defeats
                 #
                 #  vote is all the votes a candidate in this group could get
@@ -210,10 +212,10 @@ class Rule(ElectionRule):
                     else:
                         R.log("Defeating uncertain loser(s): %s" % names)
                 if (vote + surplus) > sortedGroups[g+1][0].vote:
-                    break
+                    continue
                 if fixSpec and (vote + surplus) == sortedGroups[g+1][0].vote:
-                    break
-                losers += group
+                    continue
+                losers = list(maybe)
             return losers
 
         def breakTie(tied, reason=None):
@@ -275,6 +277,11 @@ class Rule(ElectionRule):
         E.R0.quota = calcQuota(E)
         R.votes = V(E.nBallots)
 
+        #  skip withdrawn candidates
+        #
+        for c in E.withdrawn:
+            R.transfer(c, c.vote, 'Transfer withdrawn')
+        
         while True:
 
             ##  167.70(1)(a)

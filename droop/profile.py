@@ -77,6 +77,8 @@ class ElectionProfile(object):
     class BallotLine(object):
         "one ballot line"
         
+        __slots__ = ('multiplier', 'ranking')
+        
         def __init__(self, multiplier, ranking, nCand):
             "create a ballot-line object"
             self.multiplier = multiplier

@@ -231,12 +231,13 @@ class Rule(ElectionRule):
                     b.residual = V(b.multiplier)
                     if cls.warren:
                         for c in [E.candidate(cid) for cid in b.ranking]:
-                            keep = c.kf if c.kf < b.residual else b.residual
-                            b.weight -= keep
-                            c.vote += keep * b.multiplier      # b.multiplier is an int
-                            b.residual -= keep * b.multiplier  # residual value of ballot
-                            if b.weight <= V0:
-                                break
+                            if c.kf:
+                                keep = c.kf if c.kf < b.residual else b.residual
+                                b.weight -= keep
+                                c.vote += keep * b.multiplier      # b.multiplier is an int
+                                b.residual -= keep * b.multiplier  # residual value of ballot
+                                if b.weight <= V0:
+                                    break
                     else: # meek
                         for c in [E.candidate(cid) for cid in b.ranking]:
                             if True:
@@ -246,9 +247,9 @@ class Rule(ElectionRule):
                                 #  kv = w*kf*m rounded down     keep vote
                                 #  w = w*(1-kf) rounded down    new weight
                                 #
-                                kv = V.mul(b.weight*b.multiplier, c.kf, round='down')
-                                c.vote += kv
-                                b.weight = V.mul(b.weight, V1-c.kf, round='down')
+                                if c.kf:
+                                    kv = V.mul(b.weight*b.multiplier, c.kf, round='down')
+                                    b.weight = V.mul(b.weight, V1-c.kf, round='down')
                             if False:
                                 #
                                 #  Hill/NZ Calculator
@@ -256,10 +257,10 @@ class Rule(ElectionRule):
                                 #  kv = w*kf rounded up * m     keep vote
                                 #  w -= w*kf rounded up         new weight
                                 # 
-                                kw = V.mul(b.weight, c.kf, round='up')  # keep weight
-                                kv = kw * b.multiplier  # exact
-                                c.vote += kv
-                                b.weight -= kw
+                                if c.kf:
+                                    kw = V.mul(b.weight, c.kf, round='up')  # keep weight
+                                    kv = kw * b.multiplier  # exact
+                                    b.weight -= kw
                             if False:
                                 #
                                 #  NZ Schedule 1A
@@ -267,14 +268,16 @@ class Rule(ElectionRule):
                                 #  kv = w*kf rounded up * m     keep vote
                                 #  w = w*(1-kf) rounded up      new weight
                                 # 
-                                kv = V.mul(b.weight, c.kf, round='up') * b.multiplier  # exact
-                                c.vote += kv
-                                b.weight = V.mul(b.weight, V1-c.kf, round='up')
+                                if c.kf:
+                                    kv = V.mul(b.weight, c.kf, round='up') * b.multiplier  # exact
+                                    b.weight = V.mul(b.weight, V1-c.kf, round='up')
                                 
-                            b.residual -= kv  # residual value of ballot
-                            #
-                            if b.weight <= V0:
-                                break
+                            if c.kf:
+                                c.vote += kv
+                                b.residual -= kv  # residual value of ballot
+                                #
+                                if b.weight <= V0:
+                                    break
                     R.residual += b.residual  # residual for round
 
                 R.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
