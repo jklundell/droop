@@ -153,6 +153,11 @@ class Rule(ElectionRule):
         R.quota = calcQuota(E)
         R.votes = V(E.nBallots)
 
+        #  skip withdrawn candidates
+        #
+        for c in E.withdrawn:
+            R.transfer(c, c.vote, 'Transfer withdrawn')
+        
         #  Count votes in round 0 for reporting purposes
         #
         for c in CS.hopeful:
@@ -160,8 +165,7 @@ class Rule(ElectionRule):
         for b in [b for b in R.ballots if not b.exhausted]:
             b.topCand.vote = b.topCand.vote + b.vote
 
-        while CS.nHopefulOrElected > E.nSeats and \
-               CS.nElected < E.nSeats:
+        while CS.nHopefulOrElected > E.nSeats and CS.nElected < E.nSeats:
             R = E.newRound()
             CS = R.CS   # candidate state
 
