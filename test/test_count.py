@@ -54,7 +54,7 @@ class ElectionInitTest(unittest.TestCase):
     def testElectionTieOrder(self):
         "test default tie order"
         E = Election(self.Rule, self.Profile, dict())
-        for c in E._candidates.values():
+        for c in E.candidates.values():
             self.assertEqual(c.order, c.tieOrder)
 
     def testElectionCount1(self):
@@ -84,7 +84,7 @@ class ElectionCountTest(unittest.TestCase):
         "check a different tiebreaking order"
         E = self.doCount(R.mpls.Rule, dict(), '42t.blt')
         tieOrder = [0, 3, 2, 1]
-        for c in E._candidates.values():
+        for c in E.candidates.values():
             self.assertEqual(c.tieOrder, tieOrder[c.order])
 
     def testElectionCount2(self):

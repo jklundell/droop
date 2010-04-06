@@ -230,7 +230,7 @@ class Rule(ElectionRule):
                     b.weight = V1
                     b.residual = V(b.multiplier)
                     if cls.warren:
-                        for c in b.ranking:
+                        for c in [E.candidate(cid) for cid in b.ranking]:
                             keep = c.kf if c.kf < b.residual else b.residual
                             b.weight -= keep
                             c.vote += keep * b.multiplier      # b.multiplier is an int
@@ -238,7 +238,7 @@ class Rule(ElectionRule):
                             if b.weight <= V0:
                                 break
                     else: # meek
-                        for c in b.ranking:
+                        for c in [E.candidate(cid) for cid in b.ranking]:
                             if True:
                                 #
                                 #  OpenSTV MeekSTV

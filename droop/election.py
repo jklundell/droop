@@ -39,16 +39,6 @@ class Election(object):
     '''
     container for an election
     '''
-    rule = None      # election rule class
-    V = None         # arithmetic method
-    V0 = None        # constant zero
-    V1 = None        # constant one
-    rounds = None    # election rounds
-    R0 = None        # round 0 (initial state)
-    R = None         # current round
-    eligible = None    # all the non-withdrawn candidates
-    withdrawn = None   # all the withdrawn candidates
-    _candidates = None # candidates by candidate ID
     
     def __init__(self, rule, electionProfile, options=dict()):
         "create an election from the incoming election profile"
@@ -65,7 +55,7 @@ class Election(object):
         
         self.eligible = list()
         self.withdrawn = list()
-        self._candidates = dict()
+        self.candidates = dict()
         
         self.elected = None  # for communicating results
         
@@ -73,9 +63,9 @@ class Election(object):
         #
         for cid in electionProfile.eligible | electionProfile.withdrawn:
             c = Candidate(self, cid, electionProfile.candidateOrder(cid), electionProfile.candidateName(cid))
-            if c.cid in self._candidates.keys():
+            if c.cid in self.candidates.keys():
                 raise ElectionError('duplicate candidate id: %s (%s)' % (c.cid, c.name))
-            self._candidates[cid] = c
+            self.candidates[cid] = c
             #
             #  add each candidate to either the eligible or withdrawn set
             #
@@ -91,10 +81,10 @@ class Election(object):
         #  update tiebreaking order if one was specified via profile =tie option
         #
         if electionProfile.tieOrder:
-            for c in self._candidates.values():
+            for c in self.candidates.values():
                 c.tieOrder = electionProfile.tieOrder[c.cid]
 
-        #  create a ballot object (ranking candidate objects) from the profile rankings of candidate IDs
+        #  create a ballot object (ranking candidate IDs) from the profile rankings of candidate IDs
         #  only eligible (not withdrawn) will be added
         #
         for bl in electionProfile.ballotLines:
@@ -127,7 +117,7 @@ class Election(object):
         
     def candidate(self, cid):
         "look up a candidate from a candidate ID"
-        return self._candidates[cid]
+        return self.candidates[cid]
         
     def count(self):
         "count the election"
@@ -136,7 +126,7 @@ class Election(object):
         
     def newRound(self):
        "add a round"
-       self.rounds.append(self.Round(self))
+       self.rounds.append(self.Round(self, copy=True))
        self.R = self.rounds[-1]
        self.R.prior = self.rounds[-2]
        return self.R
@@ -187,10 +177,10 @@ class Election(object):
     class Round(object):
         "one election round"
         
-        def __init__(self, E):
+        def __init__(self, E, copy=False):
             "create a round"
             self.E = E
-            if not E.R0:
+            if not copy:
                 #
                 #  create round 0: the initial state
                 #  quota & ballots are filled in later
@@ -330,22 +320,23 @@ class Election(object):
         def __init__(self, E, multiplier=1, ranking=None):
             "create a ballot"
             if E is not None:  # E=None signals a copy operation
+                self.E = E
                 self.multiplier = multiplier  # number of ballots like this
                 self.index = 0                # current ranking
                 self.weight = E.V1            # initial weight
                 self.residual = E.V0          # untransferable weight
         
-                #  self.ranking is a tuple of candidates
+                #  self.ranking is a tuple of candidate IDs
                 self.ranking = list()
                 for cid in ranking:
-                    c = E.candidate(cid)
-                    if c in E.eligible:
-                        self.ranking.append(c)
+                    if E.candidate(cid) in E.eligible:
+                        self.ranking.append(cid)
                 self.ranking = tuple(self.ranking)
 
         def copy(self):
             "return a copy of this ballot"
             b = Election.Ballot(None)
+            b.E = self.E
             b.multiplier = self.multiplier
             b.index = self.index
             b.weight = self.weight
@@ -367,7 +358,7 @@ class Election(object):
         @property
         def topCand(self):
             "return top candidate, or None if exhausted"
-            return self.ranking[self.index] if self.index < len(self.ranking) else None
+            return self.E.candidates[self.ranking[self.index]] if self.index < len(self.ranking) else None
         
         @property
         def vote(self):
