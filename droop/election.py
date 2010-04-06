@@ -66,6 +66,7 @@ class Election(object):
             if c.cid in self.candidates.keys():
                 raise ElectionError('duplicate candidate id: %s (%s)' % (c.cid, c.name))
             self.candidates[cid] = c
+            c.vote = self.V0
             #
             #  add each candidate to either the eligible or withdrawn set
             #
@@ -325,13 +326,7 @@ class Election(object):
                 self.index = 0                # current ranking
                 self.weight = E.V1            # initial weight
                 self.residual = E.V0          # untransferable weight
-        
-                #  self.ranking is a tuple of candidate IDs
-                self.ranking = list()
-                for cid in ranking:
-                    if E.candidate(cid) in E.eligible:
-                        self.ranking.append(cid)
-                self.ranking = tuple(self.ranking)
+                self.ranking = ranking
 
         def copy(self):
             "return a copy of this ballot"

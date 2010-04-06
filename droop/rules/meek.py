@@ -357,7 +357,6 @@ class Rule(ElectionRule):
             c.kf = V0
         for c in CS.hopeful:
             c.kf = V1    # initialize keep factors
-            c.vote = V0  # initialize round-0 vote
         for b in R.ballots:
             if b.topCand:
                 b.topCand.vote += V(b.multiplier)  # count first-place votes for round 0 reporting
