@@ -19,6 +19,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+import array
 import re
 
 class ElectionProfileError(Exception):
@@ -76,10 +77,10 @@ class ElectionProfile(object):
     class BallotLine(object):
         "one ballot line"
         
-        def __init__(self, multiplier, ranking):
+        def __init__(self, multiplier, ranking, nCand):
             "create a ballot-line object"
             self.multiplier = multiplier
-            self.ranking = tuple(ranking)
+            self.ranking = array.array('B' if nCand<=256 else 'H', ranking)
             
     def __validate(self):
         "check for internal consistency"
@@ -178,11 +179,11 @@ class ElectionProfile(object):
         #
         #  a multiplier of 0 ends the ballot list
         #
-        ballotlines = list()
+        self.ballotLines = list()
         
         while True:
             if not re.match(r'\d+', tok):
-                raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(ballotlines)+1))
+                raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(self.ballotLines)+1))
             multiplier = int(tok)
             if not multiplier:  # test end of ballot lines
                 break
@@ -190,18 +191,17 @@ class ElectionProfile(object):
             while True:
                 tok = blt.next()  # next ranked candidate or 0
                 if not re.match(r'\d+', tok):
-                    raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(ballotlines)+1))
+                    raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(self.ballotLines)+1))
                 cid = int(tok)
                 if not cid:  # test end of ballot
                     break;
                 if cid > ncand:
-                    raise ElectionProfileError('bad blt item "%s" near ballot line %d is not a valid candidate ID' % (tok, len(ballotlines)+1))
+                    raise ElectionProfileError('bad blt item "%s" near ballot line %d is not a valid candidate ID' % (tok, len(self.ballotLines)+1))
                 ranking.append(cid)
             if ranking:                         # ignore empty ballots
-                ballotlines.append(self.BallotLine(multiplier, tuple(ranking)))
+                self.ballotLines.append(self.BallotLine(multiplier, ranking, ncand))
                 self.nBallots += multiplier
             tok = blt.next()  # next multiplier or 0
-        self.ballotLines = tuple(ballotlines)
             
         #  candidate names
         #
