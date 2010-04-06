@@ -167,7 +167,7 @@ class ElectionProfile(object):
             wd = int(tok)
             if wd >= 0:
                 break
-            self.withdrawn.add(str(-wd))
+            self.withdrawn.add(-wd)
             tok = blt.next()
         
         #  ballots
@@ -196,7 +196,7 @@ class ElectionProfile(object):
                     break;
                 if cid > ncand:
                     raise ElectionProfileError('bad blt item "%s" near ballot line %d is not a valid candidate ID' % (tok, len(ballotlines)+1))
-                ranking.append(str(cid))
+                ranking.append(cid)
             if ranking:                         # ignore empty ballots
                 ballotlines.append(self.BallotLine(multiplier, tuple(ranking)))
                 self.nBallots += multiplier
@@ -214,10 +214,10 @@ class ElectionProfile(object):
                 raise ElectionProfileError('bad blt item "%s" near candidate name #%d; expected quoted string' % (name, cid))
             while not name.endswith('"'):
                 name += ' ' + blt.next()
-            if str(cid) not in self.withdrawn:
-                self.eligible.add(str(cid))
-            self._candidateName[str(cid)] = name.strip('"')
-            self._candidateOrder[str(cid)] = int(cid)
+            if cid not in self.withdrawn:
+                self.eligible.add(cid)
+            self._candidateName[cid] = name.strip('"')
+            self._candidateOrder[cid] = cid
             
         #  election title or options
         #  election title
@@ -237,7 +237,7 @@ class ElectionProfile(object):
                         break
                     if cid > ncand:
                         raise ElectionProfileError('bad blt: =tie item "%d" is not a valid candidate ID' % cid)
-                    tieOrder[str(cid)] = o
+                    tieOrder[cid] = o
                 if len(tieOrder) != ncand:
                     raise ElectionProfileError('bad blt: =tie tiebreak sequence must list each candidate ID exactly once')
                 self.tieOrder = tieOrder

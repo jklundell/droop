@@ -457,10 +457,5 @@ class Rule(ElectionRule):
         #
         for c in list(CS.hopeful):
             CS.defeat(c, msg='Defeat remaining candidates')
-        
-        #  Transfer any pending candidates for reporting purposes
-        #
-        for c in list(CS.pending):
-            R.transfer(c, c.surplus, msg='Transfer remaining')
 
 

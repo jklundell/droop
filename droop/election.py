@@ -61,7 +61,7 @@ class Election(object):
         
         #  create candidate objects for candidates in election profile
         #
-        for cid in electionProfile.eligible | electionProfile.withdrawn:
+        for cid in sorted(electionProfile.eligible | electionProfile.withdrawn):
             c = Candidate(self, cid, electionProfile.candidateOrder(cid), electionProfile.candidateName(cid))
             if c.cid in self.candidates.keys():
                 raise ElectionError('duplicate candidate id: %s (%s)' % (c.cid, c.name))
