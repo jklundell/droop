@@ -292,7 +292,7 @@ class Rule(ElectionRule):
                 c.vote = R.quota
             for c in CS.hopefulOrPending:
                 c.vote = V0
-            for b in [b for b in R.ballots if not b.exhausted]:
+            for b in (b for b in R.ballots if not b.exhausted):
                 b.topCand.vote += b.vote
 
             ##     If the number of candidates whose vote total is equal to or greater than
@@ -387,7 +387,7 @@ class Rule(ElectionRule):
             if high_candidates:
                 # break tie if required
                 high_candidate = breakTie(high_candidates, 'largest surplus')
-                for b in [b for b in R.ballots if b.topCand == high_candidate]:
+                for b in (b for b in R.ballots if b.topCand == high_candidate):
                     b.weight = (b.weight * high_surplus) // high_candidate.vote
                 R.transfer(high_candidate, high_candidate.surplus, msg='Transfer surplus')
                 high_candidate.vote = R.quota

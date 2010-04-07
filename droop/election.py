@@ -203,7 +203,7 @@ class Election(object):
         def transfer(self, c, val, msg='Transfer'):
             "transfer ballots with candidate c at top"
             self.log("%s: %s (%s)" % (msg, c.name, self.E.V(val)))
-            for b in [b for b in self.ballots if b.topCand == c]:
+            for b in (b for b in self.ballots if b.topCand == c):
                 b.transfer(self.CS.hopeful)
             if c in self.CS.pending:
                 self.CS.pending.remove(c)

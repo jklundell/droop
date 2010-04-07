@@ -91,7 +91,7 @@ class ElectionProfile(object):
         if self.nBallots < len(self.eligible):
             raise ElectionProfileError('too few ballots (%d ballots; %d candidates)' % (self.nBallots, len(self.eligible)))
         n = 0
-        for ranking in [bl.ranking for bl in self.ballotLines]:
+        for ranking in (bl.ranking for bl in self.ballotLines):
             n += 1
             d = dict()
             for cid in ranking:
@@ -233,7 +233,7 @@ class ElectionProfile(object):
                     o += 1
                     tok = blt.next()
                     if not re.match(r'\d+', tok):
-                        raise ElectionProfileError('bad blt item "%s" reading =tie option; expected decimal number' % (tok, len(ballotlines)+1))
+                        raise ElectionProfileError('bad blt item "%s" reading =tie option; expected decimal number' % (tok, len(self.ballotLines)+1))
                     cid = int(tok)
                     if not cid:
                         break

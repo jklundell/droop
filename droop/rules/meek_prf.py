@@ -158,7 +158,7 @@ class Rule(ElectionRule):
                 for b in R.ballots:
                     b.weight = V1
                     b.residual = V(b.multiplier)
-                    for c in [E.candidate(cid) for cid in b.ranking]:
+                    for c in (E.candidate(cid) for cid in b.ranking):
                         #
                         #  distribute surpluses
                         #
