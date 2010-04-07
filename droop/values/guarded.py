@@ -218,11 +218,11 @@ See also: fixed, rational
     #
     def __cmp__(self, other):
         gdiff = abs(self._value - other._value)
-        if gdiff < self.__geps and gdiff > self.maxDiff:
+        if gdiff < Guarded.__geps and gdiff > Guarded.maxDiff:
             Guarded.maxDiff = gdiff
-        if gdiff >= self.__geps and gdiff < self.minDiff:
+        if gdiff >= Guarded.__geps and gdiff < Guarded.minDiff:
             Guarded.minDiff = gdiff
-        if gdiff < self.__geps:
+        if gdiff < Guarded.__geps:
             return 0
         if self._value > other._value:
             return 1
