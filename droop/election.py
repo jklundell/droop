@@ -81,8 +81,9 @@ class Election(object):
         #  create a ballot object (ranking candidate IDs) from the profile rankings of candidate IDs
         #  only eligible (not withdrawn) will be added
         #
+        self.ballots = list()
         for bl in electionProfile.ballotLines:
-            self.R0.ballots.append(self.Ballot(self, bl.multiplier, bl.ranking))
+            self.ballots.append(self.Ballot(self, bl.multiplier, bl.ranking))
 
     @classmethod
     def makehelp(cls):
@@ -116,13 +117,14 @@ class Election(object):
     def count(self):
         "count the election"
         self.rule.count(self)
-        self.elected = self.rounds[-1].CS.elected  # collect set of elected candidates
+        self.R.rollup(self.rule.method())             # roll up last round
+        self.elected = self.rounds[-1].CS.elected   # collect set of elected candidates
         
     def newRound(self):
        "add a round"
+       self.R.rollup(self.rule.method())      # capture summaries of ballots
        self.rounds.append(self.Round(self, copy=True))
        self.R = self.rounds[-1]
-       self.R.prior = self.rounds[-2]
        return self.R
 
     def log(self, msg):
@@ -182,7 +184,6 @@ class Election(object):
                 self.n = 0
                 self.CS = CandidateState(E)
                 self.quota = None
-                self.ballots = list()
             else:
                 #
                 #  subsequent rounds are copies,
@@ -194,7 +195,6 @@ class Election(object):
                 self.n = previous.n + 1
                 self.CS = previous.CS.copy()
                 self.quota = previous.quota
-                self.ballots = [b.copy() for b in previous.ballots]
             self.residual = E.V0
             self.votes = E.V0
             self.surplus = E.V0
@@ -203,15 +203,50 @@ class Election(object):
         def transfer(self, c, val, msg='Transfer'):
             "transfer ballots with candidate c at top"
             self.log("%s: %s (%s)" % (msg, c.name, self.E.V(val)))
-            for b in (b for b in self.ballots if b.topCand == c):
+            cid = c.cid
+            ballots = self.E.ballots
+            for b in (b for b in ballots if b.topCid == cid):
                 b.transfer(self.CS.hopeful)
             if c in self.CS.pending:
                 self.CS.pending.remove(c)
-    
+
+        def rollup(self, method):
+            "roll up stats from ballots"
+            E = self.E
+            CS = self.CS
+            if method == 'wigm':
+                #
+                #  this is expensive in a big election, so we've done a little optimization
+                #
+                pvotes = E.V0  # elected pending transfer
+                hvotes = E.V0  # top-ranked hopeful
+                nontransferable = E.V0
+                elected = [c.cid for c in CS.elected]
+                hopeful = [c.cid for c in CS.hopeful]
+                for b in E.ballots:
+                    if b.exhausted:
+                        nontransferable += b.vote
+                    else:
+                        topCid = b.topCid
+                        if topCid in elected:
+                            pvotes += b.vote
+                        elif topCid in hopeful:
+                            hvotes += b.vote
+                self.pvotes = pvotes
+                self.hvotes = hvotes
+                self.nontransferable = nontransferable
+                self.evotes = E.V0
+                for c in CS.elected:
+                    if not c in CS.pending:
+                        self.evotes += E.R.quota
+                total = self.evotes + self.pvotes + self.hvotes + self.nontransferable
+                #  wigm residual is votes lost due to rounding
+                self.residual = E.V(E.nBallots) - total
+            
         def log(self, msg):
             "log a message"
             self._log.append(msg)
-            
+
         def report(self, reportMeek):
             "report a round"
             E = self.E
@@ -227,38 +262,19 @@ class Election(object):
             s += '\tElected: %s\n' % (" ".join([c.name for c in CS.sortByOrder(CS.elected)]) or 'None')
             s += '\tDefeated: %s\n' % (" ".join([c.name for c in CS.sortByOrder(CS.defeated)]) or 'None')
             if reportMeek:
-                s += '\tQuota: %s\n' % V(E.R.quota)
-                s += '\tVotes: %s\n' % V(E.R.votes)
-                s += '\tResidual: %s\n' % V(E.R.residual)
-                s += '\tTotal: %s\n' % V((E.R.votes + E.R.residual))
-                s += '\tSurplus: %s\n' % V(E.R.surplus)
+                s += '\tQuota: %s\n' % V(self.quota)
+                s += '\tVotes: %s\n' % V(self.votes)
+                s += '\tResidual: %s\n' % V(self.residual)
+                s += '\tTotal: %s\n' % V((self.votes + self.residual))
+                s += '\tSurplus: %s\n' % V(self.surplus)
             else: # wigm
-                pvotes = E.V0  # elected pending transfer
-                hvotes = E.V0  # top-ranked hopeful
-                nontransferable = E.V0
-                for b in self.ballots:
-                    if b.exhausted:
-                        nontransferable += b.vote
-                    else:
-                        if b.topCand in CS.elected:
-                            pvotes += b.vote
-                        elif b.topCand in CS.hopeful:
-                            hvotes += b.vote
-                evotes = E.V0
-                for c in CS.elected:
-                    if not c in CS.pending:
-                        evotes += E.R.quota
-                total = evotes + pvotes + hvotes + nontransferable
-                #  residual here (wigm) is votes lost due to rounding
-                residual = E.V(E.nBallots) - total
-                s += '\tElected votes (not pending) %s\n' % V(evotes)
-                s += '\tTop-rank votes (elected): %s\n' % V(pvotes)
-                s += '\tTop-rank votes (hopeful): %s\n' % V(hvotes)
-                s += '\tNontransferable votes: %s\n' % V(nontransferable)
-                s += '\tResidual: %s\n' % V(residual)
-                s += '\tTotal: %s\n' % V(evotes + pvotes + hvotes + nontransferable + residual)
-                s += '\tSurplus: %s\n' % V(E.R.surplus)
-
+                s += '\tElected votes (not pending) %s\n' % V(self.evotes)
+                s += '\tTop-rank votes (elected): %s\n' % V(self.pvotes)
+                s += '\tTop-rank votes (hopeful): %s\n' % V(self.hvotes)
+                s += '\tNontransferable votes: %s\n' % V(self.nontransferable)
+                s += '\tResidual: %s\n' % V(self.residual)
+                s += '\tTotal: %s\n' % V(self.evotes + self.pvotes + self.hvotes + self.nontransferable + self.residual)
+                s += '\tSurplus: %s\n' % V(self.surplus)
             E.R = saveR
             return s
             
@@ -266,9 +282,9 @@ class Election(object):
             "dump a round"
 
             E = self.E
-            saveR, E.R = E.R, self # provide reporting context
             V = E.V
-            CS = E.R.CS
+            CS = self.CS
+            saveR, E.R = E.R, self # provide reporting context
             s = ''
             
             candidates = CS.sortByOrder(E.eligible) # report in ballot order
@@ -344,6 +360,11 @@ class Election(object):
         def exhausted(self):
             "is ballot exhausted?"
             return self.index >= len(self.ranking)    # detect end-of-ranking
+        
+        @property
+        def topCid(self):
+            "return top candidate ID, or None if exhausted"
+            return self.ranking[self.index] if self.index < len(self.ranking) else None
         
         @property
         def topCand(self):

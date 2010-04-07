@@ -162,7 +162,7 @@ class Rule(ElectionRule):
         #
         for c in CS.hopeful:
             c.vote = V0
-        for b in (b for b in R.ballots if not b.exhausted):
+        for b in (b for b in E.ballots if not b.exhausted):
             b.topCand.vote = b.topCand.vote + b.vote
 
         while CS.nHopefulOrElected > E.nSeats and CS.nElected < E.nSeats:
@@ -173,7 +173,7 @@ class Rule(ElectionRule):
             #
             for c in CS.hopefulOrPending:
                 c.vote = V0
-            for b in (b for b in R.ballots if not b.exhausted):
+            for b in (b for b in E.ballots if not b.exhausted):
                 b.topCand.vote = b.topCand.vote + b.vote
 
             #  count votes for reporting
@@ -190,7 +190,7 @@ class Rule(ElectionRule):
                 #  so do the "transfer" now
                 #
                 if c.vote == R.quota:
-                    for b in (b for b in R.ballots if b.topCand == c):
+                    for b in (b for b in E.ballots if b.topCand == c):
                         b.weight = V0
                     R.transfer(c, V0, msg='Transfer zero surplus')
 
@@ -210,7 +210,7 @@ class Rule(ElectionRule):
                 # break tie if necessary and transfer surplus
                 high_candidate = breakTie(E, high_candidates, 'surplus')
                 surplus = high_vote - R.quota
-                for b in (b for b in R.ballots if b.topCand == high_candidate):
+                for b in (b for b in E.ballots if b.topCand == high_candidate):
                     b.weight = (b.weight * surplus) / high_vote
                 R.transfer(high_candidate, high_candidate.surplus, msg='Transfer surplus')
                 high_candidate.vote = R.quota

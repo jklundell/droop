@@ -97,11 +97,11 @@ def main(options=None):
     def countElection(repeat=1):
         "encapsulate for optional profiling"
         global E
+        electionProfile = ElectionProfile(path=path)  # don't repeat the profile loading
         for i in xrange(repeat):
             E = Election(Rule, electionProfile, options=options)
             E.count()
 
-    electionProfile = ElectionProfile(path=path)
     try:
         intr = False
         if doProfile:
