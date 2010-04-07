@@ -144,20 +144,23 @@ class ElectionProfile(object):
         # we do allow /* comments */; the comment delimiters must appear
         # at the beginning and ending of their respective tokens
         #
+        digits = re.compile(r'\d+')
+        sdigits = re.compile(r'-?\d+')
+
         blt = self.__bltBlob(data)  # fetch a token at a time
         
         #  number of candidates, eligible or withdrawn
         #
         tok = blt.next()
-        if not re.match(r'\d+', tok):
+        if not digits.match(tok):
             raise ElectionProfileError('bad first blt item "%s"; expected number of candidates' % tok)
         ncand = int(tok)
 
         #  number of seats
         #
         tok = blt.next()
-        if not re.match(r'\d+', tok):
-            raise ElectionProfileError('ba dsecond blt item "%s"; expected number of seats' % tok)
+        if not digits.match(tok):
+            raise ElectionProfileError('bad second blt item "%s"; expected number of seats' % tok)
         self.nSeats = int(tok)
 
         #  optional: withdrawn candidates, flagged with a minus sign
@@ -165,7 +168,7 @@ class ElectionProfile(object):
         self.withdrawn = set()
         tok = blt.next()
         while True:
-            if not re.match(r'-?\d+', tok):
+            if not sdigits.match(tok):
                 raise ElectionProfileError('bad blt item "%s" near first ballot line; expected decimal number' % tok)
             wd = int(tok)
             if wd >= 0:
@@ -184,7 +187,7 @@ class ElectionProfile(object):
         self.ballotLines = list()
         
         while True:
-            if not re.match(r'\d+', tok):
+            if not digits.match(tok):
                 raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(self.ballotLines)+1))
             multiplier = int(tok)
             if not multiplier:  # test end of ballot lines
@@ -192,7 +195,7 @@ class ElectionProfile(object):
             ranking = list()
             while True:
                 tok = blt.next()  # next ranked candidate or 0
-                if not re.match(r'\d+', tok):
+                if not digits.match(tok):
                     raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(self.ballotLines)+1))
                 cid = int(tok)
                 if not cid:  # test end of ballot
@@ -232,7 +235,7 @@ class ElectionProfile(object):
                 while True:
                     o += 1
                     tok = blt.next()
-                    if not re.match(r'\d+', tok):
+                    if not digits.match(tok):
                         raise ElectionProfileError('bad blt item "%s" reading =tie option; expected decimal number' % (tok, len(self.ballotLines)+1))
                     cid = int(tok)
                     if not cid:

@@ -374,6 +374,8 @@ class Election(object):
         @property
         def vote(self):
             "return total vote of this ballot"
+            if self.multiplier == 1:
+                return self.weight  # faster
             return self.weight * self.multiplier
             
 '''
