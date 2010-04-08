@@ -39,6 +39,7 @@ class Fixed(object):
     __scale = None      # scale factor
     __dfmt = None       # display format
     __scaled = None     # display scale factor
+    __scaledr = None    # display rounding
     
     @classmethod
     def tag(cls):
@@ -66,9 +67,11 @@ See also: guarded, rational
     def initialize(cls, options=dict()):
         "initialize class variables"
         
-        arithmetic = options.get('arithmetic', 'qx')
+        arithmetic = options.get('arithmetic', None)
         if arithmetic not in ('fixed', 'integer'):
             raise UsageError('Fixed: unrecognized arithmetic type (%s)' % arithmetic)
+        
+        #  set precision
         precision = options.get('precision', None) or 9
         if arithmetic == 'integer':
             precision = 0
@@ -77,23 +80,40 @@ See also: guarded, rational
         try:
             cls.precision = int(precision)
         except ValueError:
-            raise UsageError('Guarded: precision=%s; must be an int >= 0' % precision)
+            raise UsageError('Fixed: precision=%s; must be an int >= 0' % precision)
         if cls.precision < 0 or str(cls.precision) != str(precision):
-            raise UsageError('Guarded: precision=%s; must be an int >= 0' % precision)
-
+            raise UsageError('Fixed: precision=%s; must be an int >= 0' % precision)
+            
+        #  set display precision
+        display = options.get('display', None) or cls.precision
+        try:
+            display = int(display)
+        except ValueError:
+            raise UsageError('Fixed: display=%s; must be an int >= 0' % display)
+        if display < 0 or display > cls.precision:
+            display = cls.precision
+        print display
         cls.__scale = 10 ** cls.precision
-        cls.display = cls.precision
+        cls.display = int(display)
         cls.__scaled = 10 ** cls.display
+        cls.__scaledd = 10 ** (cls.precision - cls.display)
+        cls.__scaledr = cls.__scaled // 2
         
         cls.epsilon = cls(0)
         cls.epsilon._value = 1
 
-        cls.__dfmt = "%d.%0" + str(cls.precision) + "d" # %d.%0pd
+        cls.__dfmt = "%d.%0" + str(cls.display) + "d" # %d.%0pd
+
+        print "display=%s dfmt=%s" % (cls.display, cls.__dfmt)
 
         if cls.name == 'integer':
             cls.info = "integer arithmetic"
         else:
-            cls.info = "fixed-point decimal arithmetic (%s places)" % str(cls.precision)
+            if cls.display != cls.precision:
+                cls.info = "fixed-point decimal arithmetic (%s places, %s displayed)" % \
+                    (str(cls.precision), str(cls.display))
+            else:
+                cls.info = "fixed-point decimal arithmetic (%s places)" % str(cls.precision)
 
     def __init__(self, arg):
         "create a new Fixed object"
@@ -233,6 +253,9 @@ See also: guarded, rational
         v = self._value
         if Fixed.precision == 0:  # integer arithmetic
             return str(v)
+        if self.display < self.precision:
+            v += self.__scaledr    # round
+            v //= self.__scaledd   # reduce display precision
         return self.__dfmt % (v//self.__scaled, v%self.__scaled)
 
     @classmethod
