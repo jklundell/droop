@@ -112,12 +112,14 @@ See also: guarded, rational
             else:
                 cls.info = "fixed-point decimal arithmetic (%s places)" % str(cls.precision)
 
-    def __init__(self, arg):
+    def __new__(cls, arg):
         "create a new Fixed object"
+        fixed = super(Fixed, cls).__new__(cls)
         if isinstance(arg, (int,long)):
-            self._value = arg * self.__scale  # scale incoming integers
+            fixed._value = arg * cls.__scale  # scale incoming integers
         else:
-            self._value = arg._value          # copy incoming Fixed
+            fixed._value = arg._value         # copy incoming Fixed
+        return fixed
         
     #  arithmetic operations
     #

@@ -50,7 +50,7 @@ number of digits of precision.
 
 Options:
     dp=p   display precision
-           for display purposes only, round values to p digits of precision (default 10)
+           for display purposes only, round values to p digits of precision (default 12)
 
 See also: fixed, guarded
 '''
@@ -61,12 +61,12 @@ See also: fixed, guarded
         initialize class Rational, a value class based on Fraction
         
         options:
-            dp is the display precision (fixed-decimal with dp places); defaults to 10
+            display is the display precision (fixed-decimal with dp places); defaults to 12
         '''
 
         #  initialize __str__ parameters
         #
-        cls.dp = options.get('dp', None) or 12             # display precision
+        cls.dp = options.get('display', None) or 12        # display precision
         cls._dps = 10 ** cls.dp                            # display scaler
         cls._dpr = Fraction(1, cls._dps*2)                 # display rounder
         cls._dfmt = "%d.%0" + str(cls.dp) + "d" # %d.%0_d  # display format

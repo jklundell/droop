@@ -125,10 +125,6 @@ See also: fixed, rational
         #
         cls.__geps = cls.__scaleg//2
 
-        print "scaled=%s" % cls.__scaled
-        print "scaledd=%s" % cls.__scaledd
-        print "scaledr=%s" % cls.__scaledr
-
         #  We keep statistics on how close our comparisons come to epsilon
         #
         #  maxDiff: the largest absolute difference less than epsilon (__cmp__ == 0)
@@ -167,14 +163,16 @@ See also: fixed, rational
             gvp = gv % self.__scaled
             return Guarded.__dfmt % (gv // self.__scaled, gvp // self.__scaledg, gvp % self.__scaledg)
 
-    def __init__(self, arg, setval=False):
+    def __new__(cls, arg, setval=False):
         "create a new Guarded object"
+        guarded = super(Guarded, cls).__new__(cls)
         if setval:
-            self._value = arg                  # direct-set value
+            guarded._value = arg                # direct-set value
         elif isinstance(arg, (int,long)):
-            self._value = arg * self.__scale  # scale incoming integers
+            guarded._value = arg * cls.__scale  # scale incoming integers
         else:
-            self._value = arg._value          # copy incoming Guarded
+            guarded._value = arg._value         # copy incoming Guarded
+        return guarded
         
     #  arithmetic operations
     #
