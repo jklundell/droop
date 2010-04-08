@@ -44,7 +44,9 @@ class Guarded(object):
     __scale = None
     __scalep = None
     __scaleg = None
-    __scaled = None     # not implemented yet
+    __scaled = None
+    __scaledd = None
+    __scaledr = None
     __dfmt = None       # display format
 
     @classmethod
@@ -87,6 +89,7 @@ See also: fixed, rational
             raise UsageError('Guarded: precision=%s; must be an int >= 0' % precision)
         if cls.precision < 0 or str(cls.precision) != str(precision):
             raise UsageError('Guarded: precision=%s; must be an int >= 0' % precision)
+
         guard = options.get('guard', None)
         if guard is None: guard = cls.precision
         try:
@@ -96,20 +99,35 @@ See also: fixed, rational
         if cls.guard < 1 or str(cls.guard) != str(guard):
             raise UsageError('Guarded: guard=%s; must be an int > 0' % guard)
 
+        display = options.get('display', None)
+        if display is None: display = cls.precision
+        try:
+            cls.display = int(display)
+        except ValueError:
+            raise UsageError('Guarded: display=%s; must be an int > 0' % display)
+        if cls.display < 0 or str(cls.display) != str(display):
+            raise UsageError('Guarded: display=%s; must be an int >= 0' % display)
+
         cls.__scalep = 10 ** cls.precision
         cls.__scaleg = 10 ** cls.guard
         cls.__scale = 10 ** (cls.precision+cls.guard)
-        cls.display = cls.precision
+
+        if cls.display > (cls.precision + cls.guard):
+            cls.display = cls.precision + cls.guard
+        cls.__scaledd = 10 ** (cls.guard + cls.precision - cls.display)
+        cls.__scaledr = cls.__scaledd // 2
+
         cls.__scaled = 10 ** cls.display
+        if (cls.display > cls.precision):
+            cls.__scaledg = 10 ** (cls.display - cls.precision)
         
-        #  __grnd is the rounding value for string conversions
         #  __geps is used in the test for equality (see __cmp__ below)
         #
-        #  In the current implementation, we have a fairly narrow definition of equality, 
-        #  a factor of 10 below one unit of precision.
-        #
-        cls.__grnd = cls.__scaleg//2
         cls.__geps = cls.__scaleg//2
+
+        print "scaled=%s" % cls.__scaled
+        print "scaledd=%s" % cls.__scaledd
+        print "scaledr=%s" % cls.__scaledr
 
         #  We keep statistics on how close our comparisons come to epsilon
         #
@@ -118,9 +136,36 @@ See also: fixed, rational
         cls.maxDiff = 0
         cls.minDiff = cls.__scale * 100
 
-        cls.__dfmt = "%d.%0" + str(cls.precision) + "d" # %d.%0pd
+        if cls.display <= cls.precision:
+            cls.__dfmt = "%d.%0" + str(cls.display) + "d" # %d.%0pd
+        else:
+            cls.__dfmt = "%d.%0" + str(cls.precision) + "d_%0" + str(cls.display-cls.precision) + "d" # %d.%0pd_%0gd
 
-        cls.info = "guarded-precision fixed-point decimal arithmetic (%s+%s places)" % (str(cls.precision), str(cls.guard))
+        if cls.display != cls.precision:
+            cls.info = "guarded-precision fixed-point decimal arithmetic (%s+%s places; %s displayed)" % \
+                (str(cls.precision), str(cls.guard), str(cls.display))
+        else:
+            cls.info = "guarded-precision fixed-point decimal arithmetic (%s+%s places)" % \
+                (str(cls.precision), str(cls.guard))
+
+    def __str__(self):
+        '''
+        stringify a guarded value
+        print at specified display precision
+        '''
+        v = self._value
+        #
+        #  gv trims off the digits we aren't going to display at all. 
+        #  normally that's the guard digits, but it could be more if display<precision
+        #    or less if display>precision
+        gv = (v + self.__scaledr) // self.__scaledd
+        if Guarded.display <= Guarded.precision:
+            return Guarded.__dfmt % (gv // self.__scaled, gv % self.__scaled)
+        else:
+            #  here the fractional part has more than precision digits (by display-precision)
+            #  we'll show <precision> digits, then _, then (display-precision) digits
+            gvp = gv % self.__scaled
+            return Guarded.__dfmt % (gv // self.__scaled, gvp // self.__scaledg, gvp % self.__scaledg)
 
     def __init__(self, arg, setval=False):
         "create a new Guarded object"
@@ -250,16 +295,6 @@ See also: fixed, rational
                 min_ = val
         return min_
  
-    def __str__(self):
-        '''
-        stringify a guarded value
-        print as full precision
-        '''
-        
-        v = self._value
-        gv = (v + self.__grnd) // self.__scaleg
-        return Guarded.__dfmt % (gv // self.__scalep, gv % self.__scalep)
-
     @classmethod
     def report(cls):
         "Report arithmetic statistics"

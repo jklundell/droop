@@ -92,7 +92,6 @@ See also: guarded, rational
             raise UsageError('Fixed: display=%s; must be an int >= 0' % display)
         if display < 0 or display > cls.precision:
             display = cls.precision
-        print display
         cls.__scale = 10 ** cls.precision
         cls.display = int(display)
         cls.__scaled = 10 ** cls.display
@@ -103,8 +102,6 @@ See also: guarded, rational
         cls.epsilon._value = 1
 
         cls.__dfmt = "%d.%0" + str(cls.display) + "d" # %d.%0pd
-
-        print "display=%s dfmt=%s" % (cls.display, cls.__dfmt)
 
         if cls.name == 'integer':
             cls.info = "integer arithmetic"
