@@ -195,9 +195,28 @@ class ElectionDumpTest(unittest.TestCase):
 
     def testElectionDumpFixedVsGuarded(self):
         "guarded with guard=0 should match fixed"
-        fdump = self.getDump(R.wigm.Rule, dict(arithmetic='fixed', precision=6), '42')
-        gdump = self.getDump(R.wigm.Rule, dict(arithmetic='guarded', precision=6, guard=0), '42')
-        self.assertEqual(fdump, gdump, 'guarded with guard=0 should match fixed')
+        blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
+        Rules = (R.meek.Rule, R.wigm.Rule)
+        for blt in blts:
+            for Rule in Rules:
+                fdump = self.getDump(Rule, dict(arithmetic='fixed', precision=6), blt)
+                gdump = self.getDump(Rule, dict(arithmetic='guarded', precision=6, guard=0), blt)
+                if fdump != gdump:
+                    print Rule
+                    print blt
+                    print fdump
+                    print gdump
+                self.assertEqual(fdump, gdump, 'guarded with guard=0 should match fixed')
+
+    def testElectionDumpRationalVsGuarded(self):
+        "guarded should match rational"
+        blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
+        Rules = (R.meek.Rule, R.wigm.Rule)
+        for blt in blts:
+            for Rule in Rules:
+                fdump = self.getDump(Rule, dict(arithmetic='rational', omega=9, display=18), blt)
+                gdump = self.getDump(Rule, dict(arithmetic='guarded', precision=18, guard=9, omega=9), blt)
+                self.assertEqual(fdump, gdump, 'guarded should match rational')
 
 if __name__ == '__main__':
     unittest.main()

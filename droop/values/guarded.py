@@ -98,15 +98,6 @@ See also: fixed, rational
             raise UsageError('Guarded: guard=%s; must be an int >= 0' % guard)
         if cls.guard < 0 or str(cls.guard) != str(guard):
             raise UsageError('Guarded: guard=%s; must be an int >= 0' % guard)
-        # guard=0 should behave like Fixed
-        if guard == 0:
-            cls.quasi_exact = False
-            cls.exact = False
-            cls.epsilon = cls(0)
-            cls.epsilon._value = 1
-        else:
-            cls.quasi_exact = True
-            cls.exact = True
 
         display = options.get('display', None)
         if display is None: display = cls.precision
@@ -153,6 +144,16 @@ See also: fixed, rational
         else:
             cls.info = "guarded-precision fixed-point decimal arithmetic (%s+%s places)" % \
                 (str(cls.precision), str(cls.guard))
+
+        # guard=0 should behave like Fixed
+        if cls.guard == 0:
+            cls.quasi_exact = False
+            cls.exact = False
+            cls.epsilon = cls(0)
+            cls.epsilon._value = 1
+        else:
+            cls.quasi_exact = True
+            cls.exact = True
 
     def __str__(self):
         '''
@@ -240,7 +241,12 @@ See also: fixed, rational
         '''
         v1 = cls(arg1)
         v2 = cls(arg2)
-        v1._value = (v1._value * v2._value) // cls.__scale
+        if cls.guard:
+            v1._value = (v1._value * v2._value) // cls.__scale
+        else:
+            v1._value, rem = divmod(v1._value * v2._value, cls.__scale)
+            if rem and round == 'up':
+                v1._value += 1
         return v1
         
     @classmethod
@@ -251,7 +257,12 @@ See also: fixed, rational
         '''
         v1 = cls(arg1)
         v2 = cls(arg2)
-        v1._value = (v1._value * cls.__scale) // v2._value
+        if cls.guard:
+            v1._value = (v1._value * cls.__scale) // v2._value
+        else:
+            v1._value, rem = divmod(v1._value * cls.__scale, v2._value)
+            if rem and round == 'up':
+                v1._value += 1
         return v1
 
     @classmethod
@@ -265,7 +276,12 @@ See also: fixed, rational
         v1 = cls(arg1)
         v2 = cls(arg2)
         v3 = cls(arg3)
-        v1._value = (v1._value * v2._value) // v3._value
+        if cls.guard:
+            v1._value = (v1._value * v2._value) // v3._value
+        else:
+            v1._value, rem = divmod(v1._value * v2._value, v3._value)
+            if rem and round == 'up':
+                v1._value += 1
         return v1
 
     #  comparison operators
