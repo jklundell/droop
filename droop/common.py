@@ -20,7 +20,7 @@ This file is part of Droop.
 '''
 
 droopName = 'droop'
-droopVersion = '0.5'
+droopVersion = '0.6'
 droopAuthor = 'Jonathan Lundell'
 droopAuthorEmail = 'jlundell@prfound.org'
 droopURL = 'http://prfound.org'

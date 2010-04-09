@@ -127,6 +127,13 @@ class ElectionDumpTest(unittest.TestCase):
         f.write(data)
         f.close()
         
+    def getDump(self, Rule, options, base):
+        "run a count and return the dump"
+        blt = '%s/blt/%s.blt' % (testdir, base)
+        E = Election(Rule, ElectionProfile(blt), options)
+        E.count()
+        return E.dump()
+
     def doDumpCompare(self, Rule, options, base):
         "run a count and compare dump/report to reference"
         blt = '%s/blt/%s.blt' % (testdir, base)
@@ -164,7 +171,6 @@ class ElectionDumpTest(unittest.TestCase):
         if report0 != reportref:
             self.writeFile(rout, report)
             return False
-
         return True
 
     def testElectionDump(self):
@@ -186,6 +192,12 @@ class ElectionDumpTest(unittest.TestCase):
         for blt in blts:
             for Rule in Rules:
                 self.assertTrue(self.doDumpCompare(Rule, dict(arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
+
+    def testElectionDumpFixedVsGuarded(self):
+        "guarded with guard=0 should match fixed"
+        fdump = self.getDump(R.wigm.Rule, dict(arithmetic='fixed', precision=6), '42')
+        gdump = self.getDump(R.wigm.Rule, dict(arithmetic='guarded', precision=6, guard=0), '42')
+        self.assertEqual(fdump, gdump, 'guarded with guard=0 should match fixed')
 
 if __name__ == '__main__':
     unittest.main()

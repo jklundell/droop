@@ -198,6 +198,10 @@ class Election(object):
             self.residual = E.V0
             self.votes = E.V0
             self.surplus = E.V0
+            self.pvotes = E.V0
+            self.hvotes = E.V0
+            self.nontransferable = E.V0
+            self.evotes = E.V0
             self._log = [] # list of log messages
     
         def transfer(self, c, val, msg='Transfer'):

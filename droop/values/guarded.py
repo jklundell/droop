@@ -95,9 +95,18 @@ See also: fixed, rational
         try:
             cls.guard = int(guard)
         except ValueError:
-            raise UsageError('Guarded: guard=%s; must be an int > 0' % guard)
-        if cls.guard < 1 or str(cls.guard) != str(guard):
-            raise UsageError('Guarded: guard=%s; must be an int > 0' % guard)
+            raise UsageError('Guarded: guard=%s; must be an int >= 0' % guard)
+        if cls.guard < 0 or str(cls.guard) != str(guard):
+            raise UsageError('Guarded: guard=%s; must be an int >= 0' % guard)
+        # guard=0 should behave like Fixed
+        if guard == 0:
+            cls.quasi_exact = False
+            cls.exact = False
+            cls.epsilon = cls(0)
+            cls.epsilon._value = 1
+        else:
+            cls.quasi_exact = True
+            cls.exact = True
 
         display = options.get('display', None)
         if display is None: display = cls.precision
@@ -124,6 +133,7 @@ See also: fixed, rational
         #  __geps is used in the test for equality (see __cmp__ below)
         #
         cls.__geps = cls.__scaleg//2
+        if cls.__geps == 0: cls.__geps = 1  # no less than an epsilon
 
         #  We keep statistics on how close our comparisons come to epsilon
         #
@@ -156,12 +166,13 @@ See also: fixed, rational
         #    or less if display>precision
         gv = (v + self.__scaledr) // self.__scaledd
         if Guarded.display <= Guarded.precision:
-            return Guarded.__dfmt % (gv // self.__scaled, gv % self.__scaled)
+            s = Guarded.__dfmt % (gv // self.__scaled, gv % self.__scaled)
         else:
             #  here the fractional part has more than precision digits (by display-precision)
             #  we'll show <precision> digits, then _, then (display-precision) digits
             gvp = gv % self.__scaled
-            return Guarded.__dfmt % (gv // self.__scaled, gvp // self.__scaledg, gvp % self.__scaledg)
+            s = Guarded.__dfmt % (gv // self.__scaled, gvp // self.__scaledg, gvp % self.__scaledg)
+        return s
 
     def __new__(cls, arg, setval=False):
         "create a new Guarded object"
