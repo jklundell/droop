@@ -46,11 +46,10 @@ class Rational(Fraction):
     def helps(cls, helps):
         "add help string"
         helps['rational'] = '''Rational arithmetic uses rational fractions to exactly represent numeric values.
-number of digits of precision.
 
 Options:
-    dp=p   display precision
-           for display purposes only, round values to p digits of precision (default 12)
+    display=d   display precision
+                for display purposes only, round values to p digits of precision (default 12)
 
 See also: fixed, guarded
 '''

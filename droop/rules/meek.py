@@ -51,9 +51,15 @@ class Rule(ElectionRule):
         h =  '%s is an iterative election rule.\n' % name
         h += '\noptions:\n'
         h += '  arithmetic: (guarded*, rational, fixed)\n'
+        h += '  precision=significant precision (not counting guard) if guarded or fixed\n'
+        h += '    default: 9 if fixed; 18 if guarded\n'
+        h += '  guard=guard digits (guarded only)\n'
+        h += '    default: precision/2\n'
         h += '  omega=iteration limit such that an interation is terminated\n'
         h += '    when surplus < 1/10^omega.\n'
-        h += '    default: 10 if rational, else 2/3 of precision\n'
+        h += '    default: 10 if rational\n'
+        h += '    default: precision/2 if guarded\n'
+        h += '    default: 2/3 of precision if fixed\n'
         h += '  defeat_batch=(safe*, none)\n'
         h += '  * default\n'
         helps[name] = h
@@ -71,9 +77,17 @@ class Rule(ElectionRule):
             if variant not in ['meek', 'warren']:
                 raise UsageError('unknown variant %s; use meek or warren' % variant)
         cls.warren = (variant == 'warren')
-        if not options.get('arithmetic'):
-            options['arithmetic'] = 'guarded'
-        cls.omega = options.get('omega', None)
+        options.setdefault('arithmetic', 'guarded')
+        if options['arithmetic'] == 'guarded':
+            options.setdefault('precision', 18)
+            options.setdefault('guard', options['precision']//2)
+            cls.omega = options.get('omega', options['precision']//2)
+        elif options['arithmetic'] == 'fixed':
+            options.setdefault('precision', 9)
+            cls.omega = options.get('omega', options['precision']*2//3)
+        elif options['arithmetic'] == 'rational':
+            cls.omega = options.get('omega', 10)
+
         cls.defeatBatch = options.get('defeat_batch', cls.defeatBatch)
         if cls.defeatBatch not in ('none', 'safe'):
             raise UsageError('unknown defeat_batch %s; use none or safe' % cls.defeatBatch)
@@ -341,16 +355,8 @@ class Rule(ElectionRule):
         #  _omega will be 1/10**omega
         #
         assert V.name in ('rational', 'guarded', 'fixed')
-        if cls.omega:
-            cls.omega = int(cls.omega)
-        else:
-            if V.name == 'rational':
-                cls.omega = 10
-            elif V.name == 'guarded':
-                cls.omega = V.precision * 2 // 3
-            else: # fixed
-                cls.omega = V.precision * 2 // 3
-        cls._omega = V(1) / V(10**cls.omega)
+        cls.omega = int(cls.omega)
+        cls._omega = V1 / V(10**cls.omega)
 
         E.R0.votes = V(E.nBallots)
         E.R0.quota = calcQuota(E)

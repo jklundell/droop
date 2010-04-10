@@ -60,8 +60,13 @@ class Rule(ElectionRule):
         
         #  set defaults
         #
-        if not options.get('arithmetic'):
-            options['arithmetic'] = 'guarded'
+        options.setdefault('arithmetic', 'guarded')
+
+        if options['arithmetic'] == 'guarded':
+            options.setdefault('precision', 18)
+            options.setdefault('guard', options['precision']//2)
+        elif options['arithmetic'] == 'fixed':
+            options.setdefault('precision', 9)
 
         #  integer_quota: use Droop quota rounded up to whole number
         #  defeat_batch=zero: defeat all hopeful candidates with zero votes after first surplus transfer

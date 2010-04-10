@@ -68,6 +68,7 @@ arithmetic, but with considerably greater speed in most cases.
 Options:
     precision=p   p digits of precision (default 9)
     guard=g       g guard digits (default p)
+    display=d     d display digits (default p)
 
 See also: fixed, rational
 '''
@@ -154,7 +155,7 @@ See also: fixed, rational
         else:
             cls.quasi_exact = True
             cls.exact = True
-
+        
     def __str__(self):
         '''
         stringify a guarded value
@@ -178,12 +179,9 @@ See also: fixed, rational
     def __new__(cls, arg, setval=False):
         "create a new Guarded object"
         guarded = super(Guarded, cls).__new__(cls)
-        if setval:
-            guarded._value = arg                # direct-set value
-        elif isinstance(arg, (int,long)):
-            guarded._value = arg * cls.__scale  # scale incoming integers
-        else:
-            guarded._value = arg._value         # copy incoming Guarded
+        if setval: guarded._value = arg           # direct-set value
+        elif isinstance(arg, (int,long)): guarded._value = arg * cls.__scale  # scale incoming integers
+        else: guarded._value = arg._value         # copy incoming Guarded
         return guarded
         
     #  arithmetic operations
@@ -288,9 +286,9 @@ See also: fixed, rational
     #
     def __cmp__(self, other):
         gdiff = abs(self._value - other._value)
-        if gdiff < Guarded.__geps and gdiff > Guarded.maxDiff:
+        if (gdiff < Guarded.__geps) and (gdiff > Guarded.maxDiff):
             Guarded.maxDiff = gdiff
-        if gdiff >= Guarded.__geps and gdiff < Guarded.minDiff:
+        if (gdiff >= Guarded.__geps) and (gdiff < Guarded.minDiff):
             Guarded.minDiff = gdiff
         if gdiff < Guarded.__geps:
             return 0

@@ -57,6 +57,7 @@ number of digits of precision.
 Options:
     precision=p   p digits of precision (default 9)
     precision=0   integer arithmetic
+    display=d     d display digits (default p)
 
 See also: guarded, rational
 '''
