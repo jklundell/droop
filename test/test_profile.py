@@ -40,6 +40,7 @@ p_42a = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen shoul
 p_42b = '''3 2 4 1 2 0 2 3 0 0 /* comment */ "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
 p_42c = '''3 2 4 1 2 0 2 3 0 0 /* nested /*comment */ */ "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
 p_42d = '''3 2 4 1 2 0 2 3 0 0 /* nested /*comment*/ */ "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42h = '''3 2 4 1 2 0 2 3 0 0 # comment\n "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
 
 p_42_bad1 = '''x 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
 p_42_bad2 = '''3 2 4 1 2 0 2 3 0 0 Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
@@ -95,6 +96,10 @@ class ProfileTest(unittest.TestCase):
     def testInitOneTokenComment(self):
         "normal init: 2 seats (single-token comment)"
         self.assertEqual(ElectionProfile(data=p_42d).nSeats, 2)
+
+    def testInitHashComment(self):
+        "normal init: 2 seats (hash comment)"
+        self.assertEqual(ElectionProfile(data=p_42h).nSeats, 2)
 
     def testInitTitle(self):
         "normal init: title set"

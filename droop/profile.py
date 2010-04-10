@@ -58,6 +58,8 @@ class ElectionProfile(object):
     def __init__(self, path=None, data=None):
         "initialize profile"
         self.title = None
+        self.source = None
+        self.comment = None
         self.nSeats = None
         self.nBallots = 0
         self.eligible = set()
@@ -100,7 +102,7 @@ class ElectionProfile(object):
                 d[cid] = cid
     
     def compare(self, other):
-        "compare this profile to another (unittest support)"
+        "compare this profile (self) to other (unittest support)"
         if self.title != other.title: return 'title mismatch'
         if self.nSeats != other.nSeats: return 'nSeats mismatch'
         if self.nBallots != other.nBallots: return 'nBallots mismatch'
@@ -261,17 +263,62 @@ class ElectionProfile(object):
         except StopIteration:
             raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % self.title)
         self.title.strip('"')
+        
+        #  optional election-source string
+        #
+        try:
+            tok = blt.next()
+        except StopIteration:
+            return
+        if not tok.startswith('"'):  # ignore unquoted material at end of file
+            return
+        try:
+            self.source = tok
+            while not self.source.endswith('"'):
+                self.source += ' ' + blt.next()
+        except StopIteration:
+            raise ElectionProfileError('bad blt item "%s" near election source; expected quoted string' % self.source)
+        self.source.strip('"')
+
+        #  optional comment string
+        #
+        try:
+            tok = blt.next()
+        except StopIteration:
+            return
+        if not tok.startswith('"'):  # ignore unquoted material at end of file
+            return
+        try:
+            self.comment = tok
+            while not self.comment.endswith('"'):
+                self.comment += ' ' + blt.next()
+        except StopIteration:
+            raise ElectionProfileError('bad blt item "%s" near election comment; expected quoted string' % self.comment)
+        self.comment.strip('"')
 
     def __bltBlob(self, blob):
-        "parse a blt blob into tokens, skipping /* comments */"
-
-        tokens = blob.split()
+        '''
+        parse a blt blob into tokens
+        
+        skip /* comments */ and # comments (if not in quoted strings)
+        '''
+        lines = blob.splitlines()
         inComment = 0
-        for token in tokens:
-            if token.startswith('/*'):
-                inComment += 1
-            if inComment:
-                if token.endswith('*/'):
-                    inComment -= 1
-                continue
-            yield token
+        inQuote = False
+        for line in lines:
+            tokens = line.split()
+            for token in tokens:
+                if not inComment and token.startswith('"'):
+                    inQuote = True
+                if inQuote and token.endswith('"'):
+                    inQuote = False
+                if not inQuote and token.startswith('/*'):
+                    inComment += 1
+                if inComment:
+                    if token.endswith('*/'):
+                        inComment -= 1
+                    continue
+                # if not in quote or comment, # means comment to end-of-line
+                if token.startswith('#'):
+                    break
+                yield token
