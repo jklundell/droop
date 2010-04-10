@@ -1,0 +1,25 @@
+5 3
+123 1 0
+52 1 2 0
+159 2 1 0
+161 3 2 0
+161 3 4 0
+161 4 5 0
+50 5 4 0
+123 5 0
+0
+"A"
+"B"
+"C"
+"D"
+"E"
+"Dave Kadlecek: different winners for 2 & 3 seats: AE vs BCD (q=330,247.5)" 
+
+A: 123 votes
+AB: 52 votes
+BA: 159 votes
+CB: 161 votes
+CD: 161 votes
+DE: 161 votes
+ED: 50 votes
+E: 123 votes
