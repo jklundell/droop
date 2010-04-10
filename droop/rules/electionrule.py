@@ -19,7 +19,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-class ElectionRule(object):
+class ElectionRule(object):  # pragma: no cover
     '''
     abstract class for election rules
     '''

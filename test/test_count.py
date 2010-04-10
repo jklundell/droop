@@ -177,6 +177,10 @@ class ElectionDumpTest(unittest.TestCase):
         "try a basic count & dump"
         self.assertTrue(self.doDumpCompare(R.mpls.Rule, dict(), '42'), 'Minneapolis 42.blt')
 
+    def testElectionDumpWarrem(self):
+        "try a basic count & dump"
+        self.assertTrue(self.doDumpCompare(R.meek.Rule, dict(variant='warren'), '42'), 'Warren 42.blt')
+
     def testElectionDumps(self):
         "try several counts & dumps"
         blts = ('42', '42t', 'M135', '513', 'SC', 'SC-Vm-12')

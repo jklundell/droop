@@ -429,16 +429,6 @@ class Rule(ElectionRule):
             if countComplete():
                 break
 
-            ##     If the number of continuing candidates is equal to the number of offices 
-            ##     yet to be elected, any remaining continuing candidates must be declared elected.
-
-            #  Note: implemented as "less than or equal to"
-            #
-            if CS.nHopeful <= E.seatsLeftToFill():
-                for c in list(CS.hopeful):
-                    CS.elect(c, 'Elect remaining candidates')
-                break
-
             ##     In the case of a tie between two (2) continuing candidates, 
             ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2, 
             ##     Section 12, and the candidate chosen by lot must be defeated. 
