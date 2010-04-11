@@ -257,12 +257,12 @@ class ElectionProfile(object):
         if not tok.startswith('"'):
             raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % tok)
         try:
-            self.title = tok
-            while not self.title.endswith('"'):
-                self.title += ' ' + blt.next()
+            s = tok
+            while not s.endswith('"'):
+                s += ' ' + blt.next()
         except StopIteration:
-            raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % self.title)
-        self.title.strip('"')
+            raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % s)
+        self.title = s.strip('"')
         
         #  optional election-source string
         #
@@ -273,12 +273,12 @@ class ElectionProfile(object):
         if not tok.startswith('"'):  # ignore unquoted material at end of file
             return
         try:
-            self.source = tok
-            while not self.source.endswith('"'):
-                self.source += ' ' + blt.next()
+            s = tok
+            while not s.endswith('"'):
+                s += ' ' + blt.next()
         except StopIteration:
-            raise ElectionProfileError('bad blt item "%s" near election source; expected quoted string' % self.source)
-        self.source.strip('"')
+            raise ElectionProfileError('bad blt item "%s" near election source; expected quoted string' % s)
+        self.source = s.strip('"')
 
         #  optional comment string
         #
@@ -289,12 +289,12 @@ class ElectionProfile(object):
         if not tok.startswith('"'):  # ignore unquoted material at end of file
             return
         try:
-            self.comment = tok
-            while not self.comment.endswith('"'):
-                self.comment += ' ' + blt.next()
+            s = tok
+            while not s.endswith('"'):
+                s += ' ' + blt.next()
         except StopIteration:
-            raise ElectionProfileError('bad blt item "%s" near election comment; expected quoted string' % self.comment)
-        self.comment.strip('"')
+            raise ElectionProfileError('bad blt item "%s" near election comment; expected quoted string' % s)
+        self.comment = s.strip('"')
 
     def __bltBlob(self, blob):
         '''

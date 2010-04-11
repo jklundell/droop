@@ -103,7 +103,7 @@ class ProfileTest(unittest.TestCase):
 
     def testInitTitle(self):
         "normal init: title set"
-        self.assertEqual(ElectionProfile(data=p_42).title, '"Pollux and Helen should tie"')
+        self.assertEqual(ElectionProfile(data=p_42).title, 'Pollux and Helen should tie')
 
     def testInitnBallots(self):
         "normal init: 6 ballots"
