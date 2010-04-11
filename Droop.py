@@ -111,8 +111,10 @@ def main(options=None):
     except KeyboardInterrupt:
         intr = True
     global E  # if E isn't global, the profiled assignment of E isn't visible
-    report = E.report(intr)
-    if 'dump' in options:
+    report = ''
+    if options.get('report', True):
+        report += E.report(intr)
+    if options.get('dump', False):
         report += E.dump()
 
     if doProfile:
@@ -188,9 +190,9 @@ if __name__ == "__main__":
                     path = optarg[0]
                     options['path'] = path
             else:
-                if optarg[1].lower() == 'false':
+                if optarg[1].lower() in ('false', 'no'):
                     options[optarg[0]] = False
-                elif optarg[1].lower() == 'true':
+                elif optarg[1].lower() in ('true' , 'yes'):
                     options[optarg[0]] = True
                 else:
                     options[optarg[0]] = optarg[1]
