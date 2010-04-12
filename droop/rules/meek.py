@@ -286,7 +286,8 @@ class Rule(ElectionRule):
                                     #  w = w*(1-kf) rounded down    new weight
                                     #
                                     if c.kf:
-                                        kv = V.mul(b.weight*b.multiplier, c.kf, round='down')
+                                        kw = V.mul(b.weight, c.kf, round='down')
+                                        kv = kw * b.multiplier  # exact
                                         b.weight = V.mul(b.weight, V1-c.kf, round='down')
                                 if False:
                                     #
