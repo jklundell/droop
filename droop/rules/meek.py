@@ -229,22 +229,18 @@ class Rule(ElectionRule):
         def iterate():
             "Iterate until surplus is sufficiently low"
 
-            @staticmethod
             def kw_warren(kf, weight):
                 "calculate keep and new weight for Warren"
                 return (kf if kf < weight else weight), (weight - keep)
                 
-            @staticmethod
             def kw_meekOpenSTV(kf, weight):
                 "calculate keep and new weight for OpenSTV MeekSTV"
                 return V.mul(weight, kf, round='down'), V.mul(weight, V1-kf, round='down')
         
-            @staticmethod
             def kw_meekHill(kf, weight):
                 "calculate keep and new weight for Hill/NZ Calculator"
                 return V.mul(weight, kf, round='up'), (weight - keep)
         
-            @staticmethod
             def kw_meekNZ1A(kf, weight):
                 "calculate keep and new weight for NZ Schedule 1A"
                 return V.mul(weight, kf, round='up'), V.mul(weight, V1-kf, round='up')
@@ -260,65 +256,7 @@ class Rule(ElectionRule):
                 #
                 for c in CS.hopefulOrElected:
                     c.vote = V0
-                if False:
-                    E.transferBallots(kw_meekOpenSTV)
-                else:
-                    R.residual = V0
-                    for b in E.ballots:
-                        b.weight = V1
-                        b.residual = V(b.multiplier)
-                        if cls.warren:
-                            for c in (E.candidate(cid) for cid in b.ranking):
-                                if c.kf:
-                                    keep = c.kf if c.kf < b.weight else b.weight
-                                    b.weight -= keep
-                                    c.vote += keep * b.multiplier      # b.multiplier is an int
-                                    b.residual -= keep * b.multiplier  # residual value of ballot
-                                    if b.weight <= V0:
-                                        break
-                        else: # meek
-                            for c in (E.candidate(cid) for cid in b.ranking):
-                                if True:
-                                    #
-                                    #  OpenSTV MeekSTV
-                                    #
-                                    #  kv = w*kf*m rounded down     keep vote
-                                    #  w = w*(1-kf) rounded down    new weight
-                                    #
-                                    if c.kf:
-                                        kw = V.mul(b.weight, c.kf, round='down')
-                                        kv = kw * b.multiplier  # exact
-                                        b.weight = V.mul(b.weight, V1-c.kf, round='down')
-                                if False:
-                                    #
-                                    #  Hill/NZ Calculator
-                                    #
-                                    #  kv = w*kf rounded up * m     keep vote
-                                    #  w -= w*kf rounded up         new weight
-                                    # 
-                                    if c.kf:
-                                        kw = V.mul(b.weight, c.kf, round='up')  # keep weight
-                                        kv = kw * b.multiplier  # exact
-                                        b.weight -= kw
-                                if False:
-                                    #
-                                    #  NZ Schedule 1A
-                                    #
-                                    #  kv = w*kf rounded up * m     keep vote
-                                    #  w = w*(1-kf) rounded up      new weight
-                                    # 
-                                    if c.kf:
-                                        kv = V.mul(b.weight, c.kf, round='up') * b.multiplier  # exact
-                                        b.weight = V.mul(b.weight, V1-c.kf, round='up')
-                                    
-                                if c.kf:
-                                    c.vote += kv
-                                    b.residual -= kv  # residual value of ballot
-                                    #
-                                    if b.weight <= V0:
-                                        break
-                        R.residual += b.residual  # residual for round
-
+                E.transferBallots(kw_meekOpenSTV)
                 R.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
 
                 #  D.3. update quota
