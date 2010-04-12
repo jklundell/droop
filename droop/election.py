@@ -174,6 +174,23 @@ class Election(object):
         "number of seats not yet filled"
         return self.nSeats - self.R.CS.nElected
 
+    def transferBallots(self, kt):
+        "perform a Meek/Warren transfer of votes on all ballots"
+        V0 = self.V0
+        candidate = self.candidate
+        self.R.residual = V0
+        for b in self.ballots:
+            b.weight = self.V1
+            b.residual = self.V(b.multiplier)
+            for c in (candidate(cid) for cid in b.ranking):
+                if c.kf:
+                    keep, b.weight = kt(c.kf, b.weight)
+                    c.vote += keep * b.multiplier      # b.multiplier is an int
+                    b.residual -= keep * b.multiplier  # residual value of ballot
+                    if b.weight <= V0:
+                        break
+            self.R.residual += b.residual  # residual for round
+
     class Round(object):
         "one election round"
         
