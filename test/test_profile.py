@@ -52,10 +52,11 @@ p_42badc = '''3 2 4 1 2 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen 
 
 p_42w = '''4 2 -4 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Bob" "Pollux and Helen should tie"'''
 
-p_42t = '''3 2 =tie 3 2 1 == 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42t1 = '''3 2 =x 3 2 1 == 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42t2 = '''3 2 =tie 3 2 == 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42t3 = '''3 2 =tie 3 2 4 == 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42t = '''3 2 [tie 3 2 1 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42t0 = '''3 2 [tie 3 2 1] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42t1 = '''3 2 [x 3 2 1 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42t2 = '''3 2 [tie 3 2 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42t3 = '''3 2 [tie 3 2 4 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
 
 
 class ProfileTest(unittest.TestCase):
@@ -176,16 +177,21 @@ class ProfileTest(unittest.TestCase):
         p = ElectionProfile(data=p_42t)
         self.assertEqual(len(p.tieOrder), 3)
 
+    def testTiedOrder0(self):
+        "test tied order"
+        p = ElectionProfile(data=p_42t0)
+        self.assertEqual(len(p.tieOrder), 3)
+
     def testTiedOrder1(self):
         "test bad option"
         self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42t1)
 
     def testTiedOrder2(self):
-        "test bad =tied: too few elements"
+        "test bad [tie: too few elements"
         self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42t1)
 
     def testTiedOrder3(self):
-        "test bad =tied: cid out of range"
+        "test bad [tie: cid out of range"
         self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42t1)
 
 

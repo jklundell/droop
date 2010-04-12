@@ -139,22 +139,24 @@ class ElectionProfile(object):
 
     def __bltOption(self, option, blt):
         "process a blt option line"
-        if option == '=tie':
+        if option == '[tie':
             self.tieOrder = dict()
             o = 0
             while True:
                 o += 1
                 tok = blt.next()
-                if tok == '==' or tok == '0':
-                    break
+                if tok == ']': break
+                end = tok.endswith(']')
+                tok = tok.rstrip(']')
                 if not re.match(r'\d+', tok):
-                    raise ElectionProfileError('bad blt item "%s" reading =tie option; expected decimal number' % (tok, len(self.ballotLines)+1))
+                    raise ElectionProfileError('bad blt item "%s" reading [tie] option; expected decimal number' % (tok, len(self.ballotLines)+1))
                 cid = int(tok)
                 if cid > self.nCand:
-                    raise ElectionProfileError('bad blt: =tie item "%d" is not a valid candidate ID' % cid)
+                    raise ElectionProfileError('bad blt: [tie] item "%d" is not a valid candidate ID' % cid)
                 self.tieOrder[cid] = o
+                if end: break
             if len(self.tieOrder) != self.nCand:
-                raise ElectionProfileError('bad blt: =tie tiebreak sequence must list each candidate exactly once')
+                raise ElectionProfileError('bad blt: [tie] tiebreak sequence must list each candidate exactly once')
         else:
             raise ElectionProfileError('bad blt item "%s": unknown option' % option)
 
@@ -194,7 +196,7 @@ class ElectionProfile(object):
         self.withdrawn = set()
         tok = blt.next()
         while True:
-            if tok.startswith('='):
+            if tok.startswith('['):
                 self.__bltOption(tok, blt)
             elif sdigits.match(tok):
                 wd = int(tok)
