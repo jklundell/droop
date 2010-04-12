@@ -61,6 +61,7 @@ class ElectionProfile(object):
         self.source = None
         self.comment = None
         self.nSeats = None
+        self.nCand = None
         self.nBallots = 0
         self.eligible = set()
         self.withdrawn = set()
@@ -135,7 +136,28 @@ class ElectionProfile(object):
             raise ElectionProfileError("can't open ballot file %s (%s)" % (path, emsg))
         f.close()
         return data
-        
+
+    def __bltOption(self, option, blt):
+        "process a blt option line"
+        if option == '=tie':
+            self.tieOrder = dict()
+            o = 0
+            while True:
+                o += 1
+                tok = blt.next()
+                if tok == '==' or tok == '0':
+                    break
+                if not re.match(r'\d+', tok):
+                    raise ElectionProfileError('bad blt item "%s" reading =tie option; expected decimal number' % (tok, len(self.ballotLines)+1))
+                cid = int(tok)
+                if cid > self.nCand:
+                    raise ElectionProfileError('bad blt: =tie item "%d" is not a valid candidate ID' % cid)
+                self.tieOrder[cid] = o
+            if len(self.tieOrder) != self.nCand:
+                raise ElectionProfileError('bad blt: =tie tiebreak sequence must list each candidate exactly once')
+        else:
+            raise ElectionProfileError('bad blt item "%s": unknown option' % option)
+
     def __bltData(self, data):
         "process a blt file"
         
@@ -156,7 +178,7 @@ class ElectionProfile(object):
         tok = blt.next()
         if not digits.match(tok):
             raise ElectionProfileError('bad first blt item "%s"; expected number of candidates' % tok)
-        ncand = int(tok)
+        self.nCand = int(tok)
 
         #  number of seats
         #
@@ -165,19 +187,24 @@ class ElectionProfile(object):
             raise ElectionProfileError('bad second blt item "%s"; expected number of seats' % tok)
         self.nSeats = int(tok)
 
-        #  optional: withdrawn candidates, flagged with a minus sign
+        #  optional:
+        #    withdrawn candidates, flagged with a minus sign
+        #    general options, flagged with an equal sign
         #
         self.withdrawn = set()
         tok = blt.next()
         while True:
-            if not sdigits.match(tok):
+            if tok.startswith('='):
+                self.__bltOption(tok, blt)
+            elif sdigits.match(tok):
+                wd = int(tok)
+                if wd >= 0:
+                    break
+                self.withdrawn.add(-wd)
+            else:
                 raise ElectionProfileError('bad blt item "%s" near first ballot line; expected decimal number' % tok)
-            wd = int(tok)
-            if wd >= 0:
-                break
-            self.withdrawn.add(-wd)
             tok = blt.next()
-        
+
         #  ballots
         #
         #  each ballot begins with a multiplier
@@ -202,11 +229,11 @@ class ElectionProfile(object):
                 cid = int(tok)
                 if not cid:  # test end of ballot
                     break;
-                if cid > ncand:
+                if cid > self.nCand:
                     raise ElectionProfileError('bad blt item "%s" near ballot line %d is not a valid candidate ID' % (tok, len(self.ballotLines)+1))
                 ranking.append(cid)
             if ranking:                         # ignore empty ballots
-                self.ballotLines.append(self.BallotLine(multiplier, ranking, ncand))
+                self.ballotLines.append(self.BallotLine(multiplier, ranking, self.nCand))
                 self.nBallots += multiplier
             tok = blt.next()  # next multiplier or 0
             
@@ -215,7 +242,7 @@ class ElectionProfile(object):
         #  a list of candidate names, quoted
         #  we know in advance how many there should be
         #
-        for cid in xrange(1, ncand+1):
+        for cid in xrange(1, self.nCand+1):
             name = blt.next()
             if not name.startswith('"'):
                 raise ElectionProfileError('bad blt item "%s" near candidate name #%d; expected quoted string' % (name, cid))
@@ -226,34 +253,9 @@ class ElectionProfile(object):
             self._candidateName[cid] = name.strip('"')
             self._candidateOrder[cid] = cid
             
-        #  election title or options
         #  election title
         #
         tok = blt.next()
-        while tok.startswith('='):
-            if tok == '=tie':
-                tieOrder = dict()
-                o = 0
-                while True:
-                    o += 1
-                    tok = blt.next()
-                    if not digits.match(tok):
-                        raise ElectionProfileError('bad blt item "%s" reading =tie option; expected decimal number' % (tok, len(self.ballotLines)+1))
-                    cid = int(tok)
-                    if not cid:
-                        break
-                    if cid > ncand:
-                        raise ElectionProfileError('bad blt: =tie item "%d" is not a valid candidate ID' % cid)
-                    tieOrder[cid] = o
-                if len(tieOrder) != ncand:
-                    raise ElectionProfileError('bad blt: =tie tiebreak sequence must list each candidate ID exactly once')
-                self.tieOrder = tieOrder
-            else:
-                raise ElectionProfileError('bad blt item "%s": unknown option' % tok)
-            tok = blt.next()
-
-        #  election title
-        #
         if not tok.startswith('"'):
             raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % tok)
         try:

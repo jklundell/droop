@@ -52,10 +52,10 @@ p_42badc = '''3 2 4 1 2 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen 
 
 p_42w = '''4 2 -4 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Bob" "Pollux and Helen should tie"'''
 
-p_42t = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" =tie 3 2 1 0 "Pollux and Helen should tie"'''
-p_42t1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" =x 3 2 1 0 "Pollux and Helen should tie"'''
-p_42t2 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" =tie 3 2 0 "Pollux and Helen should tie"'''
-p_42t3 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" =tie 3 2 4 0 "Pollux and Helen should tie"'''
+p_42t = '''3 2 =tie 3 2 1 == 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42t1 = '''3 2 =x 3 2 1 == 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42t2 = '''3 2 =tie 3 2 == 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+p_42t3 = '''3 2 =tie 3 2 4 == 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
 
 
 class ProfileTest(unittest.TestCase):
