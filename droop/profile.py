@@ -22,6 +22,7 @@ This file is part of Droop.
 
 import array
 import re
+import codecs
 
 class ElectionProfileError(Exception):
     "error processing election profile"
@@ -163,7 +164,7 @@ class ElectionProfile(object):
 
     def __bltData(self, data):
         "process a blt file"
-        
+
         digits = re.compile(r'\d+')
         sdigits = re.compile(r'-?\d+')
 
@@ -171,7 +172,7 @@ class ElectionProfile(object):
         
         #  number of candidates, eligible or withdrawn
         #
-        tok = blt.next()
+        tok = blt.next().lstrip(codecs.BOM_UTF8) # strip utf-8 BOM from first token
         if not digits.match(tok):
             raise ElectionProfileError('bad first blt item "%s"; expected number of candidates' % tok)
         self.nCand = int(tok)

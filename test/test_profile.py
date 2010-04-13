@@ -233,7 +233,7 @@ class BallotIDTest(unittest.TestCase):
         self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
 class Utf8Test(unittest.TestCase):
-    "test utf-8 input"
+    "test utf-8 blt input"
     
     def testUTF1(self):
         "utf-8 names, title"
@@ -242,6 +242,16 @@ class Utf8Test(unittest.TestCase):
     def testUTF2(self):
         "utf-8 names, title"
         self.assertEqual(ElectionProfile(data=p_42u).title, 'Pøllux and Hélen should tie')
+
+    def testUTF3(self):
+        "utf-8 file"
+        path = testdir + '/blt/42u.blt'
+        self.assertEqual(ElectionProfile(path=path).title, 'Pøllüx and Hélen should tie')
+
+    def testUTF4(self):
+        "utf-8 file with bom"
+        path = testdir + '/blt/42ubom.blt'
+        self.assertEqual(ElectionProfile(path=path).title, 'Pøllüx and Hélen should tie')
 
 if __name__ == '__main__':
     unittest.main()
