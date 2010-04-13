@@ -179,13 +179,17 @@ class ElectionDumpTest(unittest.TestCase):
         "try a basic count & dump"
         self.assertTrue(self.doDumpCompare(R.mpls.Rule, dict(), '42'), 'Minneapolis 42.blt')
 
-    def testElectionDumpWarrem(self):
+    def testElectionDump(self):
+        "try a basic count & dump with utf-8 blt"
+        self.assertTrue(self.doDumpCompare(R.mpls.Rule, dict(), '42u'), 'Minneapolis 42u.blt')
+
+    def testElectionDumpWarren(self):
         "try a basic count & dump"
         self.assertTrue(self.doDumpCompare(R.meek.Rule, dict(variant='warren'), '42'), 'Warren 42.blt')
 
     def testElectionDumps(self):
         "try several counts & dumps"
-        blts = ('42', '42t', 'M135', '513', 'SC', 'SC-Vm-12')
+        blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SC-Vm-12')
         Rules = (R.mpls.Rule, R.meek.Rule, R.wigm.Rule, R.meek_prf.Rule)
         for blt in blts:
             for Rule in Rules:

@@ -39,27 +39,7 @@ p_42 = '''3 2
 '''
 
 p_42a = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42b = '''3 2 4 1 2 0 2 3 0 0 /* comment */ "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42c = '''3 2 4 1 2 0 2 3 0 0 /* nested /*comment */ */ "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42d = '''3 2 4 1 2 0 2 3 0 0 /* nested /*comment*/ */ "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42h = '''3 2 4 1 2 0 2 3 0 0 # comment\n "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-
-p_42_bad1 = '''x 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
-p_42_bad2 = '''3 2 4 1 2 0 2 3 0 0 Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
-p_42_bad3 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie '''
-
-p_42bads = '''1 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42badb = '''3 2 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42badc = '''3 2 4 1 2 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-
-p_42w = '''4 2 -4 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Bob" "Pollux and Helen should tie"'''
-
-p_42t = '''3 2 [tie 3 2 1 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42t0 = '''3 2 [tie 3 2 1] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42t1 = '''3 2 [x 3 2 1 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42t2 = '''3 2 [tie 3 2 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-p_42t3 = '''3 2 [tie 3 2 4 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-
+p_42u = '''3 2 4 1 2 0 2 3 0 0 "Cåstor" "Pøllux" "Hélen" "Pøllux and Hélen should tie"'''
 
 class ProfileTest(unittest.TestCase):
     "test profile-class initialization"
@@ -74,15 +54,18 @@ class ProfileTest(unittest.TestCase):
 
     def testBadNSeats(self):
         "exception if too few seats"
-        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42bads)
+        b = '''1 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
     def testBadNBallots(self):
         "exception if too few ballots"
-        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42badb)
+        b = '''3 2 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
     def testDupeCand(self):
         "exception candidate duplicated"
-        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42badc)
+        b = '''3 2 4 1 2 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
     def testInitOneLine(self):
         "normal init: 2 seats (no newlines)"
@@ -90,19 +73,23 @@ class ProfileTest(unittest.TestCase):
 
     def testInitComment(self):
         "normal init: 2 seats (comment)"
-        self.assertEqual(ElectionProfile(data=p_42b).nSeats, 2)
+        b = '''3 2 4 1 2 0 2 3 0 0 /* comment */ "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertEqual(ElectionProfile(data=b).nSeats, 2)
 
     def testInitNestedComment(self):
         "normal init: 2 seats (nested comment)"
-        self.assertEqual(ElectionProfile(data=p_42c).nSeats, 2)
+        b = '''3 2 4 1 2 0 2 3 0 0 /* nested /*comment */ */ "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertEqual(ElectionProfile(data=b).nSeats, 2)
 
     def testInitOneTokenComment(self):
         "normal init: 2 seats (single-token comment)"
-        self.assertEqual(ElectionProfile(data=p_42d).nSeats, 2)
+        b = '''3 2 4 1 2 0 2 3 0 0 /* nested /*comment*/ */ "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertEqual(ElectionProfile(data=b).nSeats, 2)
 
     def testInitHashComment(self):
         "normal init: 2 seats (hash comment)"
-        self.assertEqual(ElectionProfile(data=p_42h).nSeats, 2)
+        b = '''3 2 4 1 2 0 2 3 0 0 # comment\n "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertEqual(ElectionProfile(data=b).nSeats, 2)
 
     def testInitTitle(self):
         "normal init: title set"
@@ -127,33 +114,38 @@ class ProfileTest(unittest.TestCase):
         "normal init: 0 withdrawn"
         self.assertEqual(len(ElectionProfile(data=p_42a).withdrawn), 0)
 
+    p_42w = '''4 2 -4 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Bob" "Pollux and Helen should tie"'''
+
     def testInitOneWithdrawn(self):
         "normal init: 1 withdrawn"
-        self.assertEqual(len(ElectionProfile(data=p_42w).withdrawn), 1)
+        self.assertEqual(len(ElectionProfile(data=self.p_42w).withdrawn), 1)
 
     def testInitOneWithdrawnEligible(self):
         "normal init: 1 withdrawn"
-        self.assertEqual(len(ElectionProfile(data=p_42w).eligible), 3)
+        self.assertEqual(len(ElectionProfile(data=self.p_42w).eligible), 3)
 
     def testInitBobName(self):
         "normal init: name of candidate"
-        self.assertEqual(ElectionProfile(data=p_42w)._candidateName[4], 'Bob')
+        self.assertEqual(ElectionProfile(data=self.p_42w)._candidateName[4], 'Bob')
 
     def testInitBobOrder(self):
         "normal init: order of candidate"
-        self.assertEqual(ElectionProfile(data=p_42w)._candidateOrder[4], 4)
+        self.assertEqual(ElectionProfile(data=self.p_42w)._candidateOrder[4], 4)
 
     def testBadNcand(self):
         "exception bad candidate format"
-        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42_bad1)
+        b = '''x 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
     def testBadName(self):
         "exception bad candidate name"
-        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42_bad2)
+        b = '''3 2 4 1 2 0 2 3 0 0 Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
     def testBadTitle(self):
         "exception bad title"
-        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42_bad3)
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie '''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
     def testCandidateName(self):
         "fetch a candidate name"
@@ -191,25 +183,30 @@ class OptionTieTest(unittest.TestCase):
     
     def testTiedOrder(self):
         "test tied order"
-        p = ElectionProfile(data=p_42t)
+        b = '''3 2 [tie 3 2 1 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        p = ElectionProfile(data=b)
         self.assertEqual(len(p.tieOrder), 3)
 
     def testTiedOrder0(self):
         "test tied order"
-        p = ElectionProfile(data=p_42t0)
+        b = '''3 2 [tie 3 2 1] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        p = ElectionProfile(data=b)
         self.assertEqual(len(p.tieOrder), 3)
 
     def testTiedOrder1(self):
         "test bad option"
-        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42t1)
+        b = '''3 2 [x 3 2 1 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
     def testTiedOrder2(self):
         "test bad [tie: too few elements"
-        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42t1)
+        b = '''3 2 [tie 3 2 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
     def testTiedOrder3(self):
         "test bad [tie: cid out of range"
-        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42t1)
+        b = '''3 2 [tie 3 2 4 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
 class BallotIDTest(unittest.TestCase):
     "test ballot IDs"
@@ -234,6 +231,17 @@ class BallotIDTest(unittest.TestCase):
         "test ballot ID: collision after stripping"
         b = '''3 2 (id1) 1 2 0 (id2) 1 2 0 (id3 ) 1 2 0 ( id4) 1 2 0 ( id1 ) 3 0 (id6) 3 0 0 "A" "B" "C" "Title"'''
         self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+class Utf8Test(unittest.TestCase):
+    "test utf-8 input"
+    
+    def testUTF1(self):
+        "utf-8 names, title"
+        self.assertEqual(ElectionProfile(data=p_42u).nSeats, 2)
+
+    def testUTF2(self):
+        "utf-8 names, title"
+        self.assertEqual(ElectionProfile(data=p_42u).title, 'Pøllux and Hélen should tie')
 
 if __name__ == '__main__':
     unittest.main()
