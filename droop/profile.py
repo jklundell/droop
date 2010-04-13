@@ -163,13 +163,6 @@ class ElectionProfile(object):
     def __bltData(self, data):
         "process a blt file"
         
-        # see http://code.google.com/p/stv/wiki/BLTFileFormat
-        # (though we don't support the OpenSTV extensions,
-        # since we don't currently support any rules that need them
-        #
-        # we do allow /* comments */; the comment delimiters must appear
-        # at the beginning and ending of their respective tokens
-        #
         digits = re.compile(r'\d+')
         sdigits = re.compile(r'-?\d+')
 
@@ -196,9 +189,11 @@ class ElectionProfile(object):
         self.withdrawn = set()
         tok = blt.next()
         while True:
-            if tok.startswith('['):
+            if tok.startswith('['):     # look for an option
                 self.__bltOption(tok, blt)
-            elif sdigits.match(tok):
+            elif tok.startswith('('):   # look for a ballot ID
+                break
+            elif sdigits.match(tok):    # look for a withdrawn candidate or multiplier
                 wd = int(tok)
                 if wd >= 0:
                     break
@@ -209,20 +204,32 @@ class ElectionProfile(object):
 
         #  ballots
         #
-        #  each ballot begins with a multiplier
+        #  each ballot begins with a multiplier or ballot ID,
         #  then a sequence of candidate IDs 1..n
         #  finally a 0 for EOL
         #
         #  a multiplier of 0 ends the ballot list
         #
         self.ballotLines = list()
+        ballotIDs = set()
         
         while True:
-            if not digits.match(tok):
+            if tok.startswith('('):
+                bid = tok
+                while not bid.endswith(')'):
+                    bid += ' ' + blt.next()
+                bid = bid.lstrip('(').rstrip(')').strip(' ')
+                if bid in ballotIDs:
+                    raise ElectionProfileError('duplicate ballot ID %s' % bid)
+                ballotIDs.add(bid)
+                multiplier = 1
+            elif digits.match(tok):
+                multiplier = int(tok)
+            else:
                 raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(self.ballotLines)+1))
-            multiplier = int(tok)
             if not multiplier:  # test end of ballot lines
                 break
+
             ranking = list()
             while True:
                 tok = blt.next()  # next ranked candidate or 0
@@ -239,6 +246,9 @@ class ElectionProfile(object):
                 self.nBallots += multiplier
             tok = blt.next()  # next multiplier or 0
             
+        if len(ballotIDs) and len(ballotIDs) != len(self.ballotLines):
+            raise ElectionProfileError('number of ballot IDs (%d) does not match number of ballots (%d)' % (len(ballotIDs), len(self.ballotLines)))
+
         #  candidate names
         #
         #  a list of candidate names, quoted
@@ -266,7 +276,7 @@ class ElectionProfile(object):
                 s += ' ' + blt.next()
         except StopIteration:
             raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % s)
-        self.title = s.strip('"')
+        self.title = s.strip('"').strip(' ')
         
         #  optional election-source string
         #
@@ -282,7 +292,7 @@ class ElectionProfile(object):
                 s += ' ' + blt.next()
         except StopIteration:
             raise ElectionProfileError('bad blt item "%s" near election source; expected quoted string' % s)
-        self.source = s.strip('"')
+        self.source = s.strip('"').strip(' ')
 
         #  optional comment string
         #
@@ -298,7 +308,7 @@ class ElectionProfile(object):
                 s += ' ' + blt.next()
         except StopIteration:
             raise ElectionProfileError('bad blt item "%s" near election comment; expected quoted string' % s)
-        self.comment = s.strip('"')
+        self.comment = s.strip('"').strip(' ')
 
     def __bltBlob(self, blob):
         '''

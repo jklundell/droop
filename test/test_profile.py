@@ -106,6 +106,13 @@ class ProfileTest(unittest.TestCase):
         "normal init: title set"
         self.assertEqual(ElectionProfile(data=p_42).title, 'Pollux and Helen should tie')
 
+    def testInitSourceComment(self):
+        "normal init: source & comment set"
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less" "comment more"'''
+        self.assertEqual(ElectionProfile(data=b).title, 'title')
+        self.assertEqual(ElectionProfile(data=b).source, 'source less')
+        self.assertEqual(ElectionProfile(data=b).comment, 'comment more')
+
     def testInitnBallots(self):
         "normal init: 6 ballots"
         self.assertEqual(ElectionProfile(data=p_42).nBallots, 6)
@@ -157,8 +164,13 @@ class ProfileTest(unittest.TestCase):
         self.assertEqual(p.candidateOrder(1), 1)
 
     def testBadFile(self):
-        "exception bad file name"
+        "exception: bad file name"
         self.assertRaises(ElectionProfileError, ElectionProfile, path='nofileatall')
+
+    def testNoEnd(self):
+        "exception: no end of blt"
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should...'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
     def testInitSeatsFile(self):
         "normal init from file: 2 seats"
@@ -172,6 +184,9 @@ class ProfileTest(unittest.TestCase):
         pp = ElectionProfile(path)
         self.assertFalse(pp.compare(pd), 'compare election 42 from file vs data blob')
 
+class OptionTieTest(unittest.TestCase):
+    "test blt option [tie...]"
+    
     def testTiedOrder(self):
         "test tied order"
         p = ElectionProfile(data=p_42t)
@@ -194,6 +209,29 @@ class ProfileTest(unittest.TestCase):
         "test bad [tie: cid out of range"
         self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42t1)
 
+class BallotIDTest(unittest.TestCase):
+    "test ballot IDs"
+    
+    def testBallotID1(self):
+        "test basic ballot ID parsing"
+        b = '''3 2 (id1) 1 2 0 (id2) 1 2 0 (id3 ) 1 2 0 ( id4) 1 2 0 ( id5 ) 3 0 (id6) 3 0 0 "A" "B" "C" "Title"'''
+        p = ElectionProfile(data=b)
+        self.assertEqual(len(p.ballotLines), 6)
+
+    def testBallotID2(self):
+        "test ballot ID: duplicate"
+        b = '''3 2 (id1) 1 2 0 (id1) 1 2 0 (id3 ) 1 2 0 ( id4) 1 2 0 ( id5 ) 3 0 (id6) 3 0 0 "A" "B" "C" "Title"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBallotID3(self):
+        "test ballot ID: missing one"
+        b = '''3 2 (id1) 1 2 0 (id2) 1 2 0 (id3 ) 1 2 0 ( id4) 1 2 0 ( id5 ) 3 0 1 3 0 0 "A" "B" "C" "Title"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBallotID4(self):
+        "test ballot ID: collision after stripping"
+        b = '''3 2 (id1) 1 2 0 (id2) 1 2 0 (id3 ) 1 2 0 ( id4) 1 2 0 ( id1 ) 3 0 (id6) 3 0 0 "A" "B" "C" "Title"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
 if __name__ == '__main__':
     unittest.main()

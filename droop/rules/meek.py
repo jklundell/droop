@@ -329,9 +329,7 @@ class Rule(ElectionRule):
             c.kf = V0
         for c in CS.hopeful:
             c.kf = V1    # initialize keep factors
-        for b in E.ballots:
-            if b.topCand:
-                b.topCand.vote += V(b.multiplier)  # count first-place votes for round 0 reporting
+        E.countTopVotes()  # count first-place votes for round 0 reporting
 
         while not countComplete():
 

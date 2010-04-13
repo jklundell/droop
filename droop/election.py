@@ -174,6 +174,22 @@ class Election(object):
         "number of seats not yet filled"
         return self.nSeats - self.R.CS.nElected
 
+    def transferSurplus(self, c):
+        "WIGM: transfer surplus for elected candidate"
+        vote = c.vote
+        surplus = vote - self.R.quota
+        for b in (b for b in self.ballots if b.topCand == c):
+            b.weight = (b.weight * surplus) / vote
+
+    def countTopVotes(self):
+        "count first-place votes"
+        if self.rule.method() == 'meek':
+            for b in (b for b in self.ballots if b.topCand):
+                b.topCand.vote += self.V(b.multiplier)
+        else:
+            for b in (b for b in self.ballots if not b.exhausted):
+                b.topCand.vote = b.topCand.vote + b.vote
+
     def transferBallots(self, kt):
         "perform a Meek/Warren transfer of votes on all ballots"
         V0 = self.V0
