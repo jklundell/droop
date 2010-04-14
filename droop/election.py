@@ -420,14 +420,6 @@ class Election(object):
                 return self.weight  # faster
             return self.weight * self.multiplier
             
-'''
-Candidate and CandidateState classes
-
-Candidate holds a candidate ID and uses it to manage state in CandidateState.
-CandidateState contains the per-round candidate state.
-
-copyright 2010 by Jonathan Lundell
-'''
 
 class Candidate(object):
     '''
@@ -445,6 +437,7 @@ class Candidate(object):
         self.tieOrder = order # default tiebreaking order
 
     #  get/set vote total of this candidate
+    #  vote counts are held in CandidateState
     #
     def getvote(self):
        "get current vote for candidate"
@@ -461,6 +454,7 @@ class Candidate(object):
         return self.E.V0 if s < self.E.V0 else s
         
     #  get/set keep factor of this candidate
+    #  keep factors are held in CandidateState
     #
     def getkf(self):
        "get current keep factor for candidate"
@@ -557,6 +551,7 @@ class CandidateState(object):
         self.elected.append(c)
         self.pending.append(c)
         self.E.R.log("%s: %s (%s)" % (msg, c.name, self.E.V(c.vote)))
+
     def defeat(self, c, msg='Defeat'):
         "defeat a candidate"
         self.hopeful.remove(c)
@@ -601,7 +596,7 @@ class CandidateState(object):
         return sorted(collection, key=lambda c: (c.vote, c.order))
 
     def sortByOrder(self, collection):
-        "sort a collection of candidates by ballot order"
+        "sort a collection of candidates by ballot-file order"
         return sorted(collection, key=lambda c: c.order)
 
     def sortByTieOrder(self, collection):
