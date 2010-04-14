@@ -256,7 +256,7 @@ class Rule(ElectionRule):
                 #
                 for c in CS.hopefulOrElected:
                     c.vote = V0
-                E.transferBallots(kw_meekOpenSTV)
+                E.distributeVotes(kw_meekOpenSTV)
                 R.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
 
                 #  D.3. update quota

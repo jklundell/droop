@@ -280,7 +280,7 @@ class Rule(ElectionRule):
         #  skip withdrawn candidates
         #
         for c in E.withdrawn:
-            R.transfer(c, c.vote, 'Transfer withdrawn')
+            E.transferBallots(c, msg='Transfer withdrawn')
         
         while True:
 
@@ -337,7 +337,7 @@ class Rule(ElectionRule):
             certainLosers = findCertainLosers(R.surplus, fixSpec=True)
             for c in CS.sortByOrder(certainLosers):
                 CS.defeat(c, 'Defeat certain loser')
-                R.transfer(c, c.vote, 'Transfer defeated')
+                E.transferBallots(c, msg='Transfer defeated')
 
             ##     If no candidate can be defeated mathematically, the tabulation must continue
             ##     as described in clause d. 
@@ -387,9 +387,7 @@ class Rule(ElectionRule):
             if high_candidates:
                 # break tie if required
                 high_candidate = breakTie(high_candidates, 'largest surplus')
-                for b in (b for b in E.ballots if b.topCand == high_candidate):
-                    b.weight = (b.weight * high_surplus) // high_candidate.vote
-                R.transfer(high_candidate, high_candidate.surplus, msg='Transfer surplus')
+                E.transferBallots(high_candidate, msg='Transfer surplus')
                 high_candidate.vote = R.quota
                 continue  ## continue as described in clause a.
 
@@ -418,7 +416,7 @@ class Rule(ElectionRule):
             if low_candidates:
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 CS.defeat(low_candidate, 'Defeat low candidate')
-                R.transfer(low_candidate, low_candidate.vote, msg='Transfer defeated')
+                E.transferBallots(low_candidate, msg='Transfer defeated')
 
             ##  f. The procedures in clauses a. to e. must be repeated 
             ##     until the number of candidates whose vote total is equal to or greater than 

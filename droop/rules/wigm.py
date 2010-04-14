@@ -193,8 +193,7 @@ class Rule(ElectionRule):
                 #  so do the "transfer" now
                 #
                 if c.vote == R.quota:
-                    E.transferSurplus(c)
-                    R.transfer(c, V0, msg='Transfer zero surplus')
+                    E.transferBallots(c, msg='Transfer zero surplus')
 
             #  find highest surplus
             #
@@ -211,8 +210,7 @@ class Rule(ElectionRule):
             if high_vote > R.quota:
                 # break tie if necessary and transfer surplus
                 high_candidate = breakTie(E, high_candidates, 'surplus')
-                E.transferSurplus(high_candidate)
-                R.transfer(high_candidate, high_candidate.surplus, msg='Transfer surplus')
+                E.transferBallots(high_candidate, msg='Transfer surplus')
                 high_candidate.vote = R.quota
 
             #  if no surplus to transfer, defeat a candidate
@@ -229,12 +227,11 @@ class Rule(ElectionRule):
                     if low_vote == V0 and cls.defeatBatch == 'zero':
                         for c in low_candidates:
                             CS.defeat(c, msg='Defeat batch(zero)')
-                            R.transfer(c, c.vote, msg='Transfer defeated')
+                            E.transferBallots(c, msg='Transfer defeated')
                     else:
                         low_candidate = breakTie(E, low_candidates, 'defeat')
                         CS.defeat(low_candidate)
-                        R.transfer(low_candidate, low_candidate.vote, msg='Transfer defeated')
-
+                        E.transferBallots(low_candidate, msg='Transfer defeated')
 
         #  Election over.
         #  Elect or defeat remaining hopeful candidates

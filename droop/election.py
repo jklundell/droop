@@ -175,12 +175,24 @@ class Election(object):
         "number of seats not yet filled"
         return self.nSeats - self.R.CS.nElected
 
-    def transferSurplus(self, c):
-        "WIGM: transfer surplus for elected candidate"
+    def transferBallots(self, c, msg='Transfer'):
+        "WIGM: transfer ballots for elected or defeated candidate"
         vote = c.vote
-        surplus = vote - self.R.quota
-        for b in (b for b in self.ballots if b.topCand == c):
-            b.weight = (b.weight * surplus) / vote
+        cid = c.cid
+        ballots = self.ballots
+        hopeful = self.R.CS.hopeful
+        if c in self.R.CS.elected:
+            self.R.CS.pending.remove(c)
+            surplus = vote - self.R.quota
+            for b in (b for b in ballots if b.topCid == cid):
+                b.weight = (b.weight * surplus) / vote
+                b.transfer(hopeful)
+            val = surplus
+        else:
+            for b in (b for b in ballots if b.topCid == cid):
+                b.transfer(hopeful)
+            val = vote
+        self.log("%s: %s (%s)" % (msg, c.name, self.V(val)))
 
     def countTopVotes(self):
         "count first-place votes"
@@ -191,8 +203,8 @@ class Election(object):
             for b in (b for b in self.ballots if not b.exhausted):
                 b.topCand.vote = b.topCand.vote + b.vote
 
-    def transferBallots(self, kt):
-        "perform a Meek/Warren transfer of votes on all ballots"
+    def distributeVotes(self, kt):
+        "perform a Meek/Warren distribution of votes on all ballots"
         V0 = self.V0
         candidate = self.candidate
         self.R.residual = V0
@@ -242,16 +254,6 @@ class Election(object):
             self.evotes = E.V0
             self._log = [] # list of log messages
     
-        def transfer(self, c, val, msg='Transfer'):
-            "transfer ballots with candidate c at top"
-            self.log("%s: %s (%s)" % (msg, c.name, self.E.V(val)))
-            cid = c.cid
-            ballots = self.E.ballots
-            for b in (b for b in ballots if b.topCid == cid):
-                b.transfer(self.CS.hopeful)
-            if c in self.CS.pending:
-                self.CS.pending.remove(c)
-
         def rollup(self, method):
             "roll up stats from ballots"
             E = self.E
