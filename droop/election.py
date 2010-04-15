@@ -31,7 +31,7 @@ Top-level structure:
   The options are used to override default Rule parameters, such as arithmetic.
 '''
 
-import sys
+import sys, re
 import values
 import droop
 from droop.common import ElectionError
@@ -45,9 +45,10 @@ class Election(object):
         "create an election from the incoming election profile"
 
         self.rule = rule # a class
-        for opt in ('precision', 'guard', 'omega'):
-            if options.get(opt):
-                options[opt] = int(options[opt])
+        # convert numeric options (precision, etc) to ints
+        for key, value in options.iteritems():
+            if isinstance(value, str) and re.match(r'\d+$', value):
+                options[key] = int(value)
         options = self.rule.options(options)     # allow rule to process options
         self.V = values.ArithmeticClass(options) # then set arithmetic
         self.V0 = self.V(0)  # constant zero for efficiency
