@@ -45,6 +45,9 @@ class Election(object):
         "create an election from the incoming election profile"
 
         self.rule = rule # a class
+        for opt in ('precision', 'guard', 'omega'):
+            if options.get(opt):
+                options[opt] = int(options[opt])
         options = self.rule.options(options)     # allow rule to process options
         self.V = values.ArithmeticClass(options) # then set arithmetic
         self.V0 = self.V(0)  # constant zero for efficiency
