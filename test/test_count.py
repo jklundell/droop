@@ -30,41 +30,39 @@ from droop.election import Election
 from droop.profile import ElectionProfile
 from droop import rules as R
 
-#from droop.rules.mpls import Rule as Mpls
-
 class ElectionInitTest(unittest.TestCase):
-    "test election.__init__"
+    '''
+    test Election.__init__
     
-    Profile = None   # profile
-    Rule = None      # rule
+    Create an Election instance from a simple profile 
+    and the Minneapolis rule and test its basic initialization,
+    and that it elects the specified number of seats.
+    '''
     
     def setUp(self):
         "initialize profile and rule"
         path = testdir + '/blt/42.blt'
         self.Profile = ElectionProfile(path)
         self.Rule = R.mpls.Rule
+        self.options = dict()
+        self.E = Election(self.Rule, self.Profile, self.options)
 
     def testElectionInit(self):
         "check that election is initialized"
-        options = dict()
-        E = Election(self.Rule, self.Profile, options)
-        self.assertTrue(E.rule == self.Rule, 'bad rule class')
-        self.assertEqual(len(options), 2, 'mpls should set two options')
-        self.assertEqual(options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
-        self.assertEqual(options['precision'], 4, 'mpls should set precision=4')
+        self.assertTrue(self.E.rule == self.Rule, 'bad rule class')
+        self.assertEqual(len(self.options), 2, 'mpls should set two options')
+        self.assertEqual(self.options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
+        self.assertEqual(self.options['precision'], 4, 'mpls should set precision=4')
 
     def testElectionTieOrder(self):
         "test default tie order"
-        E = Election(self.Rule, self.Profile, dict())
-        for c in E.candidates.values():
+        for c in self.E.candidates.values():
             self.assertEqual(c.order, c.tieOrder)
 
     def testElectionCount1(self):
         "try a basic count"
-        options = dict()
-        E = Election(self.Rule, self.Profile, options)
-        E.count()
-        self.assertEqual(len(E.elected), E.nSeats)
+        self.E.count()
+        self.assertEqual(len(self.E.elected), self.E.nSeats)
 
 class ElectionCountTest(unittest.TestCase):
     "test some counts"
@@ -78,8 +76,7 @@ class ElectionCountTest(unittest.TestCase):
 
     def testElectionCount1(self):
         "try a basic count"
-        options = dict()
-        E = self.doCount(R.mpls.Rule, options, '42.blt')
+        E = self.doCount(R.mpls.Rule, dict(), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionTieCount(self):
@@ -90,45 +87,28 @@ class ElectionCountTest(unittest.TestCase):
             self.assertEqual(c.tieOrder, tieOrder[c.order])
 
     def testElectionCount2(self):
-        "try a bigger count"
-        options = dict()
-        E = self.doCount(R.mpls.Rule, options, 'M135.blt')
+        "try a bigger election"
+        E = self.doCount(R.mpls.Rule, dict(), 'M135.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount3(self):
         "try wigm default"
-        options = dict()
-        E = self.doCount(R.wigm.Rule, options, '42.blt')
+        E = self.doCount(R.wigm.Rule, dict(), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount4(self):
         "try meek default"
-        options = dict()
-        E = self.doCount(R.meek.Rule, options, '42.blt')
+        E = self.doCount(R.meek.Rule, dict(), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount5(self):
         "try meek_prf default"
-        options = dict()
-        E = self.doCount(R.meek_prf.Rule, options, '42.blt')
+        E = self.doCount(R.meek_prf.Rule, dict(), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
 class ElectionDumpTest(unittest.TestCase):
     "compare some dumps"
 
-    def readFile(self, path):
-        "read a dump file"
-        f = open(path, 'r')
-        data = f.read()
-        f.close()
-        return data
-        
-    def writeFile(self, path, data):
-        "write a dump file"
-        f = open(path, 'w')
-        f.write(data)
-        f.close()
-        
     def getDump(self, Rule, options, base):
         "run a count and return the dump"
         blt = '%s/blt/%s.blt' % (testdir, base)
@@ -143,18 +123,31 @@ class ElectionDumpTest(unittest.TestCase):
         E.count()
         tag = '%s-%s-%s' % (base, Rule.tag(), E.V.tag())
 
+        def readFile(path):
+            "read a dump file"
+            f = open(path, 'r')
+            data = f.read()
+            f.close()
+            return data
+            
+        def writeFile(path, data):
+            "write a dump file"
+            f = open(path, 'w')
+            f.write(data)
+            f.close()
+            
         #  first do dump
         #
         dref = '%s/ref/dump/%s.txt' % (testdir, tag)
         dout = '%s/out/dump/%s.txt' % (testdir, tag)
         dump = E.dump()
         if not os.path.isfile(dref):
-            self.writeFile(dref, dump)
-        dumpref = self.readFile(dref)
+            writeFile(dref, dump)
+        dumpref = readFile(dref)
         if os.path.isfile(dout):
             os.unlink(dout)
         if dump != dumpref:
-            self.writeFile(dout, dump)
+            writeFile(dout, dump)
             return False
 
         #  same logic with report
@@ -164,14 +157,14 @@ class ElectionDumpTest(unittest.TestCase):
         report = E.report()
         if not os.path.isfile(rref):
             self.writeFile(rref, report)
-        reportref = self.readFile(rref)
+        reportref = readFile(rref)
         if os.path.isfile(rout):
             os.unlink(rout)
         # don't include version number in comparison
         report0 = re.sub(r'droop v\d+\.\d+', 'droop v0.0', report)
         reportref = re.sub(r'droop v\d+\.\d+', 'droop v0.0', reportref)
         if report0 != reportref:
-            self.writeFile(rout, report)
+            writeFile(rout, report)
             return False
         return True
 
@@ -179,7 +172,7 @@ class ElectionDumpTest(unittest.TestCase):
         "try a basic count & dump"
         self.assertTrue(self.doDumpCompare(R.mpls.Rule, dict(), '42'), 'Minneapolis 42.blt')
 
-    def testElectionDump(self):
+    def testElectionDumpu(self):
         "try a basic count & dump with utf-8 blt"
         self.assertTrue(self.doDumpCompare(R.mpls.Rule, dict(), '42u'), 'Minneapolis 42u.blt')
 
