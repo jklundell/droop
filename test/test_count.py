@@ -26,6 +26,7 @@ testdir = os.path.dirname(os.path.abspath(__file__))
 basedir = os.path.normpath(os.path.join(testdir, '..'))
 if basedir not in sys.path: sys.path.insert(0, os.path.normpath(basedir))
 
+import droop
 from droop.election import Election
 from droop.profile import ElectionProfile
 from droop import rules as R
@@ -220,6 +221,71 @@ class ElectionDumpTest(unittest.TestCase):
                 fdump = self.getDump(Rule, dict(arithmetic='rational', omega=9, display=18), blt)
                 gdump = self.getDump(Rule, dict(arithmetic='guarded', precision=18, guard=9, omega=9), blt)
                 self.assertEqual(fdump, gdump, 'guarded should match rational')
+
+    def doDumpCompareRule(self, ruleName, options, file):
+        "run a count and compare dump/report to reference"
+        base, ext = os.path.splitext(file)
+        blt = os.path.join(testdir, 'blt', ruleName, file)
+        Rule = droop.electionRule(ruleName)
+        E = Election(Rule, ElectionProfile(blt), options)
+        E.count()
+
+        def readFile(path):
+            "read a dump/report file"
+            f = open(path, 'r')
+            data = f.read()
+            f.close()
+            return data
+            
+        def writeFile(path, data):
+            "write a dump/report file"
+            if not os.path.isdir(os.path.dirname(path)):
+                os.makedirs(os.path.dirname(path))
+            f = open(path, 'w')
+            f.write(data)
+            f.close()
+            
+        #  first do dump
+        #
+        dref = os.path.join(testdir, 'ref', 'dump', ruleName, '%s.txt' % base)
+        dout = os.path.join(testdir, 'out', 'dump', ruleName, '%s.txt' % base)
+        dump = E.dump()
+        if not os.path.isfile(dref):
+            writeFile(dref, dump)
+        dumpref = readFile(dref)
+        if os.path.isfile(dout):
+            os.unlink(dout)
+        if dump != dumpref:
+            writeFile(dout, dump)
+            return False
+
+        #  same logic with report
+        #
+        rref = os.path.join(testdir, 'ref', 'report', ruleName, '%s.txt' % base)
+        rout = os.path.join(testdir, 'out', 'report', ruleName, '%s.txt' % base)
+        report = E.report()
+        if not os.path.isfile(rref):
+            writeFile(rref, report)
+        reportref = readFile(rref)
+        if os.path.isfile(rout):
+            os.unlink(rout)
+        # don't include version number in comparison
+        report0 = re.sub(r'droop v\d+\.\d+', 'droop v0.0', report)
+        reportref = re.sub(r'droop v\d+\.\d+', 'droop v0.0', reportref)
+        if report0 != reportref:
+            writeFile(rout, report)
+            return False
+        return True
+
+    def testElectionDumpRules(self):
+        "run rule-specific counts"
+        ruleNames = droop.electionRuleNames()
+        for name in ruleNames:
+            bltdir = os.path.join(testdir, 'blt', name)
+            if os.path.isdir(bltdir):
+                blts = os.listdir(bltdir)
+                for blt in blts:
+                    self.assertTrue(self.doDumpCompareRule(name, dict(), blt), '%s/%s.blt' % (name, blt))
 
 if __name__ == '__main__':
     unittest.main()
