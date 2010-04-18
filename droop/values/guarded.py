@@ -80,7 +80,7 @@ See also: fixed, rational
         "initialize class variables"
         
         arithmetic = options.get('arithmetic', 'guarded')
-        if arithmetic not in ('guarded', 'guarded'):
+        if arithmetic != 'guarded':
             raise UsageError('Guarded: unrecognized arithmetic type (%s)' % arithmetic)
             
         precision = options.get('precision', None) or 9
@@ -176,6 +176,10 @@ See also: fixed, rational
             s = Guarded.__dfmt % (gv // self.__scaled, gvp // self.__scaledg, gvp % self.__scaledg)
         return s
 
+    def __repr__(self):
+        "represent ourself as str(_value)"
+        return str(self._value)
+
     def __new__(cls, arg, setval=False):
         "create a new Guarded object"
         guarded = super(Guarded, cls).__new__(cls)
@@ -202,7 +206,7 @@ See also: fixed, rational
 
     def __pos__(self):
         "return +self"
-        return Guarded(self, True)
+        return Guarded(self._value, True)
 
     def __nonzero__(self):
         "bool(self)"

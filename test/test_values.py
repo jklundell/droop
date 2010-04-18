@@ -126,29 +126,130 @@ class ValueTestRounding(unittest.TestCase):
         self.assertRaises(ValueError, F.div, F(1),F(3))
 
 class ValueTestGuarded9(unittest.TestCase):
-    p = 9
-    g = p
-    A = None
-    def setUp(self):
-        "initialize guarded 9.None s/b 9.9"
-        self.A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=self.p))
-        
+    "guarded-specific unit tests"
+
     def testExact(self):
         "guarded is exact"
-        self.assertEqual(self.A.exact, True)
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        self.assertEqual(A.exact, True)
 
     def testScale(self):
         "scale is a function of precision and guard"
-        self.assertEqual(self.A._Guarded__scale, 10**(self.p+self.g))
+        p = 9
+        g = p
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=p))
+        self.assertEqual(A._Guarded__scale, 10**(p+g))
 
     def testGeps(self):
         "geps is a function of guard"
-        self.assertEqual(self.A._Guarded__geps, 10**self.g/2)
+        p = 9
+        g = p
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=p))
+        self.assertEqual(A._Guarded__geps, 10**g/2)
 
-    def testBadP(self):
+    def testBadPrecision(self):
         "test illegal precision"
-        self.assertEqual(self.A.exact, True) # TBD
+        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', precision=1.1))
+        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', precision=-1))
+        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', precision='abc'))
 
+    def testBadGuard(self):
+        "test illegal guard"
+        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', guard=1.1))
+        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', guard=-1))
+        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', guard='abc'))
+
+    def testBadDisplay(self):
+        "test illegal display"
+        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', display=1.1))
+        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', display=-1))
+        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', display='abc'))
+
+    def testDisplay(self):
+        "display is limited to precision+guard"
+        p = 5
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=p))
+        self.assertEqual(A.display, p)
+        self.assertEqual(str(A(20)/A(3)), '6.66667')
+
+    def testBigDisplay(self):
+        "display is limited to precision+guard"
+        p = 5
+        g = 6
+        d = p + g + 1
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=p, guard=g, display=d))
+        self.assertEqual(A.display, p+g)
+        self.assertEqual(str(A(20)/A(3)), '6.66666_666666')
+
+    def testBadArithmetic(self):
+        "test illegal arithmetic"
+        self.assertRaises(UsageError, G.initialize, options=dict(arithmetic='fixed'))
+
+    def testUnaryOps(self):
+        "test unary + and -"
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        x = A(1)
+        y = A(2)
+        self.assertEqual(x-y, -x)
+        self.assertEqual(y-x, +x)
+        self.assertEqual(abs(x-y), x)
+
+    def testDivInt(self):
+        "test guarded/int"
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        x = A(2)
+        y = A(3)
+        self.assertEqual(x/y, x/3)
+
+    def testNoHash(self):
+        "test guarded/int"
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        x = A(2)
+        self.assertRaises(NotImplementedError, hash, x)
+
+    def testMulDiv(self):
+        "guarded muldiv"
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        f13 = A(1)/A(3)
+        f15 = A(1)/A(5)
+        f17 = A(1)/A(7)
+        self.assertEqual(A.muldiv(f13, f15, f17), f13*f15/f17)
+    
+    def testMulDiv0(self):
+        "guarded muldiv with g=0"
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded', guard=0))
+        f13 = A(1)/A(3)
+        f15 = A(1)/A(5)
+        f17 = A(1)/A(7)
+        self.assertEqual(A.muldiv(f13, f15, f17)._value, (f13*f15/f17)._value+5)
+        self.assertEqual(A.muldiv(f13, f15, f17, round='down')._value, (f13*f15/f17)._value+5)
+        self.assertEqual(A.muldiv(f13, f15, f17, round='up')._value, (f13*f15/f17)._value+6)
+
+    def testRepr(self):
+        "repr is the underlying _value"
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        self.assertEqual(repr(A(1)), '1000000000000000000')
+
+    def testNe(self):
+        "not equal"
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        self.assertFalse(A(1)!=A(1))
+
+class ValueTestRational(unittest.TestCase):
+    "rational-specific unit tests"
+
+    f13 = R(1)/R(3)
+    f15 = R(1)/R(5)
+    f17 = R(1)/R(7)
+
+    def testRat1(self):
+        "no loss of precision"
+        self.assertEqual(self.f13 * R(3), R(1))
+        
+    def testMulDiv(self):
+        "rational muldiv is the same as multiply followed by divide"
+        self.assertEqual(R.muldiv(self.f13, self.f15, self.f17), self.f13*self.f15/self.f17)
+    
 class ValueTestHelps(unittest.TestCase):
     "test the helps function"
     def testHelps(self):
