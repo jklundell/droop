@@ -351,6 +351,7 @@ class Rule(ElectionRule):
                     break
                 continue  ## continue as described in clause a.
 
+            ##  167.70(1)(d)
             ##  d. The transfer value of each vote cast for an elected candidate 
             ##     must be transferred to the next continuing candidate on that ballot. 
             ##     The candidate with the largest surplus is declared elected and that candidate's
@@ -391,6 +392,7 @@ class Rule(ElectionRule):
                 high_candidate.vote = R.quota
                 continue  ## continue as described in clause a.
 
+            ##  167.70(1)(e)
             ##  e. If there are no transferable surplus votes, 
             ##     the candidate with the fewest votes is defeated. 
             ##     Votes for a defeated candidate are transferred at their transfer value 
@@ -418,6 +420,7 @@ class Rule(ElectionRule):
                 CS.defeat(low_candidate, 'Defeat low candidate')
                 E.transferBallots(low_candidate, msg='Transfer defeated')
 
+            ##  167.70(1)(f)
             ##  f. The procedures in clauses a. to e. must be repeated 
             ##     until the number of candidates whose vote total is equal to or greater than 
             ##     the threshold is equal to the number of seats to be filled, 
@@ -438,6 +441,7 @@ class Rule(ElectionRule):
 
         #  Tabulation complete.
 
+        ##  167.70(1)(f)
         ##  f. ...
         ##     If the number of continuing candidates is equal to the number of offices 
         ##     yet to be elected, any remaining continuing candidates must be declared elected.
