@@ -78,10 +78,10 @@ See also: fixed, guarded
     #  leave repr alone, but redefine str as decimal notation for readability
     def __str__(self):
         "represent Rational as fixed-decimal string"
-        self += Rational._dpr  # add 1/2 of lsd for rounding
         if self._numerator == 0 or self._denominator == 1:
             v = self._numerator * Rational._dps
         else:
+            self += Rational._dpr  # add 1/2 of lsd for rounding
             v = self._numerator * Rational._dps / self._denominator
         return Rational._dfmt % (v//Rational._dps, v%Rational._dps)
     

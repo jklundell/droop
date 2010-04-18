@@ -161,8 +161,8 @@ class Rule(ElectionRule):
         #  skip withdrawn candidates
         #
         for c in E.withdrawn:
-            R.transfer(c, c.vote, 'Transfer withdrawn')
-        
+            E.transferBallots(c, msg='Transfer withdrawn')
+
         #  Count votes in round 0 for reporting purposes
         #
         for c in CS.hopeful:

@@ -191,10 +191,11 @@ class ElectionDumpTest(unittest.TestCase):
 
     def testElectionDumps(self):
         "try several counts & dumps"
-        blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SC-Vm-12')
-        Rules = (R.mpls.Rule, R.meek.Rule, R.wigm.Rule, R.meek_prf.Rule)
+        blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SCw', 'SC-Vm-12')
+        ruleNames = droop.electionRuleNames()
         for blt in blts:
-            for Rule in Rules:
+            for name in ruleNames:
+                Rule = droop.electionRule(name)
                 self.assertTrue(doDumpCompare(Rule, dict(), blt), '%s %s.blt' % (Rule.info(), blt))
 
     def testElectionDumpRational(self):

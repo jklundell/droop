@@ -387,17 +387,6 @@ class Election(object):
                 self.residual = E.V0          # untransferable weight
                 self.ranking = ranking
 
-        def copy(self):
-            "return a copy of this ballot"
-            b = Election.Ballot(None)
-            b.E = self.E
-            b.multiplier = self.multiplier
-            b.index = self.index
-            b.weight = self.weight
-            b.residual = self.residual
-            b.ranking = self.ranking    # share the immutable tuple of ranking
-            return b
-    
         def transfer(self, hopeful, msg='Transfer'):
             "advance index to next candidate on this ballot; return True if exists"
             while self.index < len(self.ranking) and self.topCand not in hopeful:
