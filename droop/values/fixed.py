@@ -96,7 +96,7 @@ See also: guarded, rational
         cls.display = int(display)
         cls.__scaled = 10 ** cls.display
         cls.__scaledd = 10 ** (cls.precision - cls.display)
-        cls.__scaledr = cls.__scaled // 2
+        cls.__scaledr = cls.__scaledd // 2
         
         cls.epsilon = cls(0)
         cls.epsilon._value = 1
@@ -151,7 +151,9 @@ See also: guarded, rational
 
     def __abs__(self):
         "absolute value"
-        return Fixed(abs(self._value))
+        v = Fixed(self)
+        v._value = abs(v._value)
+        return v
         
     def __mul__(self, other):
         "return self * other"

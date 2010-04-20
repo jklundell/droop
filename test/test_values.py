@@ -34,47 +34,27 @@ from droop.values.rational import Rational as R
 class ValueTest(unittest.TestCase):
     "test value-class initialization"
     
-    def testValueInitRational(self):
-        "class Rational if arithmetic=rational"
-        self.assertEqual(V.ArithmeticClass(dict(arithmetic='rational')), R)
+    #  general initialization
+    #
+    def testBadArithmetic(self):
+        "try unknown arithmetic"
+        self.assertRaises(V.arithmeticValuesError, V.ArithmeticClass, dict(arithmetic='saywhat'))
 
     def testValueInitRationalDefault(self):
         "default class Guarded"
         self.assertEqual(V.ArithmeticClass(), G)
 
-    def testBadArithmetic(self):
-        "try unknown arithmetic"
-        self.assertRaises(V.arithmeticValuesError, V.ArithmeticClass, dict(arithmetic='saywhat'))
-
-    def testFixedIntegerP0(self):
-        "fixed=integer yields precision 0"
-        F0 = V.ArithmeticClass(dict(arithmetic='integer'))
-        self.assertEqual(F0.precision, 0)
-
-    def testBadFixedPx(self):
-        "fixed precision must be in"
-        self.assertRaises(UsageError, F.initialize, dict(arithmetic='fixed', precision='abc'))
-
-    def testBadFixedDx(self):
-        "fixed display must be in"
-        self.assertRaises(UsageError, F.initialize, dict(arithmetic='fixed', display='abc'))
+    def testValueInitFixed(self):
+        "class Fixed if arithmetic=fixed"
+        self.assertEqual(V.ArithmeticClass(dict(arithmetic='fixed')), F)
 
     def testBadFixedA(self):
-        "fixed must be fixed or integer"
+        "fixed called directly must be fixed or integer"
         self.assertRaises(UsageError, F.initialize, dict(arithmetic='bill'))
 
-    def testBadFP1(self):
-        "precision must be an int"
-        self.assertRaises(UsageError, V.ArithmeticClass, dict(arithmetic='fixed', precision=5.5))
-
-    def testBadFP2(self):
-        "precision must be >= 0"
-        self.assertRaises(UsageError, V.ArithmeticClass, dict(arithmetic='fixed', precision=-1))
-
-    def testFixedInteger(self):
-        "precision 0 means integer"
-        F0 = V.ArithmeticClass(dict(arithmetic='fixed', precision=0))
-        self.assertEqual(F0.tag(), 'integer')
+    def testValueInitRational(self):
+        "class Rational if arithmetic=rational"
+        self.assertEqual(V.ArithmeticClass(dict(arithmetic='rational')), R)
 
     def testBadP1(self):
         "precision must be an int"
@@ -91,6 +71,52 @@ class ValueTest(unittest.TestCase):
     def testBadG2(self):
         "guard must be >= 0"
         self.assertRaises(UsageError, V.ArithmeticClass, dict(precision=5, guard=-1))
+
+    #  Fixed initialization
+    #
+    def testFixedIntegerP0(self):
+        "fixed=integer yields precision 0"
+        V.ArithmeticClass(dict(arithmetic='integer'))
+        self.assertEqual(F.precision, 0)
+
+    def testBadFixedPx(self):
+        "fixed precision must be numeric"
+        self.assertRaises(UsageError, F.initialize, dict(arithmetic='fixed', precision='abc'))
+
+    def testBadFixedDx(self):
+        "fixed display must be numeric"
+        self.assertRaises(UsageError, F.initialize, dict(arithmetic='fixed', display='abc'))
+
+    def testBadFP1(self):
+        "fixed precision must be an int"
+        self.assertRaises(UsageError, V.ArithmeticClass, dict(arithmetic='fixed', precision=5.5))
+
+    def testBadFP2(self):
+        "fixed precision must be >= 0"
+        self.assertRaises(UsageError, V.ArithmeticClass, dict(arithmetic='fixed', precision=-1))
+
+    def testFixedInteger(self):
+        "fixed precision 0 means integer"
+        V.ArithmeticClass(dict(arithmetic='fixed', precision=0))
+        self.assertEqual(F.tag(), 'integer')
+
+    def testFixedDisplay1(self):
+        "fixed display must be <= precision"
+        V.ArithmeticClass(dict(arithmetic='fixed', precision=6, display=7))
+        self.assertEqual(F.display, 6)
+        self.assertTrue(F.info.find('display') < 0)
+
+    def testFixedDisplay2(self):
+        "fixed display != precision gets a mention in info"
+        V.ArithmeticClass(dict(arithmetic='fixed', precision=6, display=5))
+        self.assertTrue(F.info.find('display') > 0)
+
+    def testFixedDisplay3(self):
+        "fixed display < precision rounds properly"
+        V.ArithmeticClass(dict(arithmetic='fixed', precision=6, display=6))
+        self.assertEqual(str(F(20)/F(3)), '6.666666')
+        V.ArithmeticClass(dict(arithmetic='fixed', precision=7, display=6))
+        self.assertEqual(str(F(20)/F(3)), '6.666667')
 
 class ValueTestFixed6(unittest.TestCase):
     p = 6
@@ -110,6 +136,94 @@ class ValueTestFixed6(unittest.TestCase):
         self.assertEqual(self.A(1)._value, 10**self.p)       # 1
         self.assertEqual(self.A(100)._value, 100*10**self.p) # 100
         self.assertEqual((self.A(1)/self.A(10))._value, 10**(self.p-1))  # 1/10
+        x = self.A(1)
+        y = self.A(2)
+        self.assertEqual(-x, x-y)
+        self.assertEqual(+x, y-x)
+        self.assertEqual(abs(x-y), x)
+        self.assertEqual(y/1, y/x)
+        self.assertRaises(ValueError, self.A.mul, x, y, 'bad')
+        self.assertRaises(ValueError, self.A.muldiv, x, y, y, 'bad')
+        f13 = F(1)/F(3)
+        f15 = F(1)/F(5)
+        f17 = F(1)/F(7)
+        self.assertTrue(F.muldiv(f13, f15, f17, round='down') > f13*f15/f17)
+        self.assertTrue(F.muldiv(f13, f15, f17, round='up') > F.muldiv(f13, f15, f17, round='down'))
+        self.assertEqual(str(f13*f15/f17), '0.466662')
+        self.assertEqual(str(F.muldiv(f13, f15, f17, round='down')), '0.466666')
+        self.assertEqual(str(F.muldiv(f13, f15, f17, round='up')), '0.466667')
+        self.assertTrue(x != y)
+        self.assertEqual(str(x/y), '0.500000')
+
+class ValueTestFixed0(unittest.TestCase):
+    "Fixed with precision=0 is Integer"
+    p = 0
+    g = 0
+    A = None
+    def setUp(self):
+        "initialize fixed point 0 places"
+        self.A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=self.p, guard=self.g))
+        
+    def testFixed0(self):
+        "simple assertions"
+        self.assertEqual(self.A.name, 'integer')               # Fixed.name
+        x = F(1)
+        self.assertEqual(str(x), '1')
+
+class ValueTestGuarded0(unittest.TestCase):
+    "Guarded with guard=0 should match Fixed"
+    p = 6
+    g = 0
+    def setUp(self):
+        "initialize guarded and fixed to no guard"
+        F.initialize(options=dict(arithmetic='fixed', precision=self.p, guard=self.g))
+        G.initialize(options=dict(arithmetic='guarded', precision=self.p, guard=self.g))
+
+    def testG0(self):
+        "basic equalities"
+        f1 = F(1)
+        f2 = F(2)
+        f3 = F(3)
+        f7 = F(7)
+        g1 = G(1)
+        g2 = G(2)
+        g3 = G(3)
+        g7 = G(7)
+        self.assertEqual(str(f1), str(g1))
+        self.assertEqual(str(f1/f3), str(g1/g3))
+        self.assertEqual(str(f2/f3), str(g2/g3))
+        self.assertEqual(F.mul(f2,f3,round='down'), G.mul(g2,g3,round='down'))
+        self.assertEqual(F.mul(f2,f3,round='up'), G.mul(g2,g3,round='up'))
+        self.assertEqual(F.div(f2,f3,round='down'), G.div(g2,g3,round='down'))
+        self.assertEqual(F.div(f2,f3,round='up'), G.div(g2,g3,round='up'))
+        self.assertEqual(F.muldiv(f2,f3,f7,round='down'), G.muldiv(g2,g3,g7,round='down'))
+        self.assertEqual(F.muldiv(f2,f3,f7,round='up'), G.muldiv(g2,g3,g7,round='up'))
+
+class ValueTestGuardedRat(unittest.TestCase):
+    "Guarded should match Rational given equivalent display precision and enough guard"
+    p = 18
+    g = 9
+    def setUp(self):
+        "initialize guarded and rational"
+        R.initialize(options=dict(arithmetic='rational', display=self.p))
+        G.initialize(options=dict(arithmetic='guarded', precision=self.p, guard=self.g))
+
+    def testGR(self):
+        "basic equalities"
+        r1 = R(1)
+        r2 = R(2)
+        r3 = R(3)
+        r7 = R(7)
+        g1 = G(1)
+        g2 = G(2)
+        g3 = G(3)
+        g7 = G(7)
+        self.assertEqual(str(R(r1)), str(g1))
+        self.assertEqual(str(R(r1/r3)), str(g1/g3))
+        self.assertEqual(str(R(r2/r3)), str(g2/g3))
+        self.assertEqual(str(R(R.mul(r2,r3))), str(G.mul(g2,g3)))
+        self.assertEqual(str(R(R.div(r2,r3))), str(G.div(g2,g3)))
+        self.assertEqual(str(R(R.muldiv(r2,r3,r7))), str(G.muldiv(g2,g3,g7)))
 
 class ValueTestRounding(unittest.TestCase):
     "test rounding of fixed values"
@@ -236,7 +350,9 @@ class ValueTestGuarded9(unittest.TestCase):
         f15 = A(1)/A(5)
         f17 = A(1)/A(7)
         self.assertEqual(A.muldiv(f13, f15, f17), f13*f15/f17)
-    
+        self.assertEqual(str(f13*f15/f17), '0.466666667')
+        self.assertEqual(str(A.muldiv(f13, f15, f17)), '0.466666667')
+
     def testMulDiv0(self):
         "guarded muldiv with g=0"
         A = V.ArithmeticClass(options=dict(arithmetic='guarded', guard=0))
@@ -246,6 +362,8 @@ class ValueTestGuarded9(unittest.TestCase):
         self.assertEqual(A.muldiv(f13, f15, f17)._value, (f13*f15/f17)._value+5)
         self.assertEqual(A.muldiv(f13, f15, f17, round='down')._value, (f13*f15/f17)._value+5)
         self.assertEqual(A.muldiv(f13, f15, f17, round='up')._value, (f13*f15/f17)._value+6)
+        self.assertEqual(str(f13*f15/f17), '0.466666664')
+        self.assertEqual(str(A.muldiv(f13, f15, f17)), '0.466666669')
 
     def testRepr(self):
         "repr is the underlying _value"

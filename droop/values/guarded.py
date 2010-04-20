@@ -239,7 +239,7 @@ See also: fixed, rational
     def mul(cls, arg1, arg2, round=None):
         '''
         return arg1 * arg2
-        round is ignored   
+        round is ignored if guard > 0
         '''
         v1 = cls(arg1)
         v2 = cls(arg2)
@@ -255,7 +255,7 @@ See also: fixed, rational
     def div(cls, arg1, arg2, round=None):
         '''
         return arg1 / arg2
-        round is ignored
+        round is ignored if guard > 0
         '''
         v1 = cls(arg1)
         v2 = cls(arg2)
@@ -273,7 +273,7 @@ See also: fixed, rational
         return (arg1*arg2)/arg3
         
         a*b/c retains the full precision of a*b.
-        round is ignored
+        round is ignored if guard > 0
         '''
         v1 = cls(arg1)
         v2 = cls(arg2)
