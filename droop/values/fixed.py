@@ -28,7 +28,7 @@ class Fixed(object):
     fixed-point decimal arithmetic
     '''
     __slots__ = '_value'
-    name = 'fixed'      # or 'integer'
+    name = None      # 'fixed' or 'integer'
     info = None
     exact = False
     quasi_exact = False
@@ -73,11 +73,10 @@ See also: guarded, rational
             raise UsageError('Fixed: unrecognized arithmetic type (%s)' % arithmetic)
         
         #  set precision
-        precision = options.get('precision', None) or 9
+        precision = options.setdefault('precision', 9)
         if arithmetic == 'integer':
             precision = 0
-        if precision == 0:
-            cls.name = 'integer'
+        cls.name = 'integer' if precision == 0 else 'fixed'
         try:
             cls.precision = int(precision)
         except ValueError:

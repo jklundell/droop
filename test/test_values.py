@@ -46,6 +46,23 @@ class ValueTest(unittest.TestCase):
         "try unknown arithmetic"
         self.assertRaises(V.arithmeticValuesError, V.ArithmeticClass, dict(arithmetic='saywhat'))
 
+    def testFixedIntegerP0(self):
+        "fixed=integer yields precision 0"
+        F0 = V.ArithmeticClass(dict(arithmetic='integer'))
+        self.assertEqual(F0.precision, 0)
+
+    def testBadFixedPx(self):
+        "fixed precision must be in"
+        self.assertRaises(UsageError, F.initialize, dict(arithmetic='fixed', precision='abc'))
+
+    def testBadFixedDx(self):
+        "fixed display must be in"
+        self.assertRaises(UsageError, F.initialize, dict(arithmetic='fixed', display='abc'))
+
+    def testBadFixedA(self):
+        "fixed must be fixed or integer"
+        self.assertRaises(UsageError, F.initialize, dict(arithmetic='bill'))
+
     def testBadFP1(self):
         "precision must be an int"
         self.assertRaises(UsageError, V.ArithmeticClass, dict(arithmetic='fixed', precision=5.5))
@@ -53,6 +70,11 @@ class ValueTest(unittest.TestCase):
     def testBadFP2(self):
         "precision must be >= 0"
         self.assertRaises(UsageError, V.ArithmeticClass, dict(arithmetic='fixed', precision=-1))
+
+    def testFixedInteger(self):
+        "precision 0 means integer"
+        F0 = V.ArithmeticClass(dict(arithmetic='fixed', precision=0))
+        self.assertEqual(F0.tag(), 'integer')
 
     def testBadP1(self):
         "precision must be an int"
