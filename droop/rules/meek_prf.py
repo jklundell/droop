@@ -20,6 +20,7 @@ This file is part of Droop.
 '''
 
 from electionrule import ElectionRule
+from droop.common import UsageError
 
 class Rule(ElectionRule):
     '''
@@ -43,6 +44,17 @@ class Rule(ElectionRule):
         return 'prf-meek-basic'
 
     @classmethod
+    def options(cls, options=dict()):
+        "override options"
+        
+        options.setdefault('arithmetic', 'fixed')
+        if options['arithmetic'] != 'fixed':
+            raise UsageError('Meek-PRF does not support %s arithmetic' % options['arithmetic'])
+        cls.precision = options.setdefault('precision', cls.precision)
+        cls.omega = options.setdefault('omega', cls.omega)
+        return options
+
+    @classmethod
     def helps(cls, helps, name):
         "add help string for meek-prf"
         h =  "%s is the PR Foundation's Meek Reference STV.\n" % name
@@ -52,15 +64,6 @@ class Rule(ElectionRule):
         h += '    when surplus < 1/10^omega)\n'
         helps[name] = h
         
-    @classmethod
-    def options(cls, options=dict()):
-        "override options"
-        
-        options['arithmetic'] = 'fixed'       # fixed-point arithmetic
-        options['precision'] = cls.precision  # digits of precision
-        options['omega'] = cls.omega          # test: surplus < 1/10^omega
-        return options
-
     @classmethod
     def info(cls):
         "return an info string for the election report"

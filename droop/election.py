@@ -44,6 +44,18 @@ class Election(object):
     def __init__(self, rule, electionProfile, options=dict()):
         "create an election from the incoming election profile"
 
+        #  before this, a rule has been specified and a profile created
+        #
+        #  sequence of operations:
+        #
+        #    convert numeric option values to ints
+        #    let rule process options (set defaults, etc)
+        #    initialize arithmetic class
+        #    save profile
+        #    build candidate objects
+        #    make a tiebreaking-order, if specified
+        #    make the ballots object
+        #
         self.rule = rule # a class
         # convert numeric options (precision, etc) to ints
         for key, value in options.iteritems():
