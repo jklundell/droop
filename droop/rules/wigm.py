@@ -137,8 +137,6 @@ class Rule(ElectionRule):
             Not all tiebreaking methods will care about 'purpose' or 'strength',
             but the requirement is enforced for consistency of interface.
             '''
-            if not tied:
-                return None
             if len(tied) == 1:
                 return tied.pop()
             tied = CS.sortByTieOrder(tied)

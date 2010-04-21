@@ -97,6 +97,11 @@ class ElectionCountTest(unittest.TestCase):
         E = self.doCount(R.wigm.Rule, dict(), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
+    def testElectionCount3a(self):
+        "try wigm with integer quota"
+        E = self.doCount(R.wigm.Rule, dict(integer_quota='true'), '42.blt')
+        self.assertEqual(len(E.elected), E.nSeats)
+
     def testElectionCount4(self):
         "try meek default"
         E = self.doCount(R.meek.Rule, dict(), '42.blt')
@@ -111,6 +116,13 @@ class ElectionCountTest(unittest.TestCase):
         "meek-prf-basic stable state"
         E = self.doCount(R.meek_prf.Rule, dict(precision=7, omega=7), 'M135.blt')
         self.assertEqual(len(E.elected), E.nSeats)
+
+    def testElectionMpls1(self):
+        "mpls: everyone elected at first"
+        p_mpls1 = '''3 2 4 1 2 0 4 2 1 0 1 3 0 0 "a" "b" "c" "2 elected at first"'''
+        E = Election(R.mpls.Rule, ElectionProfile(data=p_mpls1), options=dict())
+        E.count()
+        self.assertEqual(len(E.elected), 2)
 
 def doDumpCompare(rule, options, file, subdir=''):
     '''
@@ -247,8 +259,7 @@ class ElectionDumpTest(unittest.TestCase):
             bltdir = os.path.join(testdir, 'blt', name)
             if os.path.isdir(bltdir):
                 rule = droop.electionRule(name)
-                blts = os.listdir(bltdir)
-                for blt in blts:
+                for blt in [blt for blt in os.listdir(bltdir) if blt.endswith('.blt')]:
                     self.assertTrue(doDumpCompare(rule, dict(), blt, name), '%s/%s' % (name, blt))
 
 if __name__ == '__main__':
