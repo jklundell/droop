@@ -30,7 +30,7 @@ class Rule(ElectionRule):
     '''
     
     omega = None          # in digits
-    defeatBatch = 'safe'  # default
+    defeatBatch = None    # default
     warren = False
 
     @classmethod
@@ -88,7 +88,7 @@ class Rule(ElectionRule):
         elif options['arithmetic'] == 'rational':
             cls.omega = options.get('omega', 10)
 
-        cls.defeatBatch = options.get('defeat_batch', cls.defeatBatch)
+        cls.defeatBatch = options.get('defeat_batch', 'safe')
         if cls.defeatBatch not in ('none', 'safe'):
             raise UsageError('unknown defeat_batch %s; use none or safe' % cls.defeatBatch)
         return options
