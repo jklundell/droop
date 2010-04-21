@@ -35,13 +35,16 @@ class Rule(ElectionRule):
     ...and no batch defeats.
     '''
     
-    precision = 9  # fixed-arithmetic precision in digits
-    omega = 6      # iteration terminator
+    defaultPrecision = 9  # fixed-arithmetic precision in digits
+    defaultOmega = 6      # iteration terminator
+    precision = None
+    omega = None
+    name = 'prf-meek-basic'
 
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
-        return 'prf-meek-basic'
+        return cls.name
 
     @classmethod
     def options(cls, options=dict()):
@@ -49,14 +52,14 @@ class Rule(ElectionRule):
         
         options.setdefault('arithmetic', 'fixed')
         if options['arithmetic'] != 'fixed':
-            raise UsageError('Meek-PRF does not support %s arithmetic' % options['arithmetic'])
-        cls.precision = options.setdefault('precision', cls.precision)
-        cls.omega = options.setdefault('omega', cls.omega)
+            raise UsageError('%s does not support %s arithmetic' % (cls.name, options['arithmetic']))
+        cls.precision = options.setdefault('precision', cls.defaultPrecision)
+        cls.omega = options.setdefault('omega', cls.defaultOmega)
         return options
 
     @classmethod
     def helps(cls, helps, name):
-        "add help string for meek-prf"
+        "add help string for prf-meek-basic"
         h =  "%s is the PR Foundation's Meek Reference STV.\n" % name
         h += '\nThere are no options.\n'
         h += '  arithmetic: fixed, %d-digit precision\n' % cls.precision
@@ -72,7 +75,7 @@ class Rule(ElectionRule):
     @classmethod
     def tag(cls):
         "return a tag string for unit tests"
-        return "prf-meek-basic"
+        return "%s-o%s" % (cls.name, cls.omega)
 
     @classmethod
     def method(cls):
@@ -179,7 +182,6 @@ class Rule(ElectionRule):
                                 break
                     R.residual += b.residual    # residual for round
 
-
                 #  B.2.b. update quota
                 #
                 R.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
@@ -194,6 +196,8 @@ class Rule(ElectionRule):
                 #  B.2.d. calculate total surplus
                 #
                 R.surplus = sum([c.vote-R.quota for c in CS.elected], V0)
+                if R.surplus < V0:  # unlikely but possible due to precision limits if omega too small
+                    R.surplus = V0
                 
                 #  B.2.e. test iteration complete
                 #

@@ -54,4 +54,4 @@ def electionRuleNames():
 
 def electionRule(name):
     "look up a Rule class by rule name"
-    return ruleByName.get(name, None)
+    return ruleByName[name]

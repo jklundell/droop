@@ -27,6 +27,7 @@ if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
 from droop import electionRuleNames, electionRule
 from droop import rules as R
+from droop.common import UsageError
 
 class RuleInitTest(unittest.TestCase):
     "test rules.__init__"
@@ -63,5 +64,9 @@ class RuleTest(unittest.TestCase):
             Rule.helps(helps, name)
             self.assertTrue(isinstance(helps[name], str), 'expected help string for %s' % name)
 
+    def testMeekPrf(self):
+        "meek-prf requires fixed"
+        Rule = electionRule('prf-meek-basic')
+        self.assertRaises(UsageError, Rule.options, dict(arithmetic='guarded'))
 if __name__ == '__main__':
     unittest.main()

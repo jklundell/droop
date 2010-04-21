@@ -107,6 +107,11 @@ class ElectionCountTest(unittest.TestCase):
         E = self.doCount(R.meek_prf.Rule, dict(), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
+    def testElectionCount6(self):
+        "meek-prf-basic stable state"
+        E = self.doCount(R.meek_prf.Rule, dict(precision=7, omega=7), 'M135.blt')
+        self.assertEqual(len(E.elected), E.nSeats)
+
 def doDumpCompare(rule, options, file, subdir=''):
     '''
     helper: do a count and compare dump/report to reference
@@ -188,6 +193,10 @@ class ElectionDumpTest(unittest.TestCase):
     def testElectionDumpWarren(self):
         "try a basic count & dump"
         self.assertTrue(doDumpCompare(R.meek.Rule, dict(variant='warren'), '42'), 'Warren 42.blt')
+
+    def testElectionDumpMPRFStable(self):
+        "meek-prf-basic stable state"
+        self.assertTrue(doDumpCompare(R.meek_prf.Rule, dict(precision=7, omega=7), 'SC-Vm-12'), 'meek-prf stable state')
 
     def testElectionDumps(self):
         "try several counts & dumps"
