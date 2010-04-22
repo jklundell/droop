@@ -226,13 +226,11 @@ class Rule(ElectionRule):
             #  B.4. defeat candidate with lowest vote
             #
             #  find candidate(s) within surplus of lowest vote (effectively tied)
-            #
-            low_vote = V.min([c.vote for c in CS.hopeful])
-            low_candidates = [c for c in CS.hopeful if (low_vote + R.surplus) >= c.vote]
-            
             #  defeat candidate with lowest vote, breaking tie if necessary
             #
-            if low_candidates:
+            if CS.hopeful:
+                low_vote = V.min([c.vote for c in CS.hopeful])
+                low_candidates = [c for c in CS.hopeful if (low_vote + R.surplus) >= c.vote]
                 low_candidate = breakTie(E, low_candidates)
                 if iterationStatus == 'omega':
                     CS.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))

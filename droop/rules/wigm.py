@@ -193,43 +193,30 @@ class Rule(ElectionRule):
                 if c.vote == R.quota:
                     E.transferBallots(c, msg='Transfer zero surplus')
 
-            #  find highest surplus
+            #  find & transfer highest surplus
             #
-            high_vote, high_candidates = R.quota, set()
-            for c in CS.pending:
-                if c.vote == high_vote:
-                    high_candidates.add(c)
-                elif c.vote > high_vote:
-                    high_vote = c.vote
-                    high_candidates = set([c])
-            
-            # transfer highest surplus
-            #
-            if high_vote > R.quota:
-                # break tie if necessary and transfer surplus
+            if CS.pending:
+                high_vote = max(c.vote for c in CS.pending)
+                high_candidates = [c for c in CS.pending if c.vote == high_vote]
                 high_candidate = breakTie(E, high_candidates, 'surplus')
                 E.transferBallots(high_candidate, msg='Transfer surplus')
                 high_candidate.vote = R.quota
 
             #  if no surplus to transfer, defeat a candidate
             #
-            else:
-                #  find candidate(s) with lowest vote
+            elif CS.hopeful:
+                #  find & defeat candidate with lowest vote
                 #
-                low_vote = V.min([c.vote for c in CS.hopeful])
+                low_vote = min(c.vote for c in CS.hopeful)
                 low_candidates = [c for c in CS.hopeful if c.vote == low_vote]
-
-                #  defeat candidate with lowest vote
-                #
-                if low_candidates:
-                    if low_vote == V0 and cls.defeatBatch == 'zero':
-                        for c in low_candidates:
-                            CS.defeat(c, msg='Defeat batch(zero)')
-                            E.transferBallots(c, msg='Transfer defeated')
-                    else:
-                        low_candidate = breakTie(E, low_candidates, 'defeat')
-                        CS.defeat(low_candidate)
-                        E.transferBallots(low_candidate, msg='Transfer defeated')
+                if low_vote == V0 and cls.defeatBatch == 'zero':
+                    for c in low_candidates:
+                        CS.defeat(c, msg='Defeat batch(zero)')
+                        E.transferBallots(c, msg='Transfer defeated')
+                else:
+                    low_candidate = breakTie(E, low_candidates, 'defeat')
+                    CS.defeat(low_candidate)
+                    E.transferBallots(low_candidate, msg='Transfer defeated')
 
         #  Election over.
         #  Elect or defeat remaining hopeful candidates

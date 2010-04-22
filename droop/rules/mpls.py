@@ -365,25 +365,16 @@ class Rule(ElectionRule):
             ##     Otherwise, the tabulation must continue as described in clause a.
 
             #  find candidate(s) with largest surplus
-            #
-            high_surplus = V0
-            high_candidates = []
-            for c in CS.pending:
-                if c.surplus == high_surplus:
-                    high_candidates.append(c)
-                elif c.surplus > high_surplus:
-                    high_surplus = c.surplus
-                    high_candidates = [c]
-
-            # transfer largest surplus
+            #  and transfer largest surplus
             #
             ## 167.20(Surplus fraction of a vote)
             ##     Surplus fraction of a vote = 
             ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate), 
             ##     calculated to four (4) decimal places, ignoring any remainder. 
 
-            if high_candidates:
-                # break tie if required
+            if CS.pending:
+                high_vote = max(c.vote for c in CS.pending)
+                high_candidates = [c for c in CS.pending if c.vote == high_vote]
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 E.transferBallots(high_candidate, msg='Transfer surplus')
                 high_candidate.vote = R.quota
@@ -400,19 +391,11 @@ class Rule(ElectionRule):
             ##     in the event of a recount.
 
             #  find candidate(s) with lowest vote
-            #
-            low_vote = R.quota
-            low_candidates = []
-            for c in CS.hopeful:
-                if c.vote == low_vote:
-                    low_candidates.append(c)
-                elif c.vote < low_vote:
-                    low_vote = c.vote
-                    low_candidates = [c]
-
             #  defeat candidate with lowest vote
             #
-            if low_candidates:
+            if CS.hopeful:
+                low_vote = min(c.vote for c in CS.hopeful)
+                low_candidates = [c for c in CS.hopeful if c.vote == low_vote]
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 CS.defeat(low_candidate, 'Defeat low candidate')
                 E.transferBallots(low_candidate, msg='Transfer defeated')
