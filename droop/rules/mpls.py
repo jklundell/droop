@@ -37,9 +37,8 @@ rather than the erroneous specification, and logs a complaint if the condition a
 This should be fixed in the ordinance.
 
 2. The tiebreaking rule requires the presence of the City Council. In their absence,
-the implementation uses the standard Python random number generator to break ties.
-Ideally, there would be a mechanism to accept external tiebreaking input, or the rule
-would be changed so that, for example, the City Council would predetermine a tiebreaking
+the implementation uses an external tiebreaking order to break ties.
+Ideally, the rule would be changed so that the City Council would predetermine a tiebreaking
 order.
 
 3. 167.70(1)(f) "number of continuing candidates is equal to the number of offices"
@@ -55,7 +54,6 @@ a seat unfilled. This should be made explicit, since a reasonable interpretation
 is that the test is performed only after defeating the lowest-vote candidate per (e).
 '''
 
-import random
 from electionrule import ElectionRule
 
 class Rule(ElectionRule):
@@ -270,7 +268,6 @@ class Rule(ElectionRule):
         CS = R.CS   # candidate state
         V = E.V   # arithmetic value class
         V0 = E.V0 # constant zero
-        random.seed(E.nBallots + E.nSeats) # initialize PRNG
 
         #  Calculate quota per 167.20(Threshold)
         #
