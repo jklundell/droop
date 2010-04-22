@@ -207,8 +207,6 @@ class Rule(ElectionRule):
             '''
             break a tie by most-recent difference or by lot [49,51]
             '''
-            if not tied:
-                raise Exception # JKL DEBUG
             if len(tied) == 1:
                 return tied[0]
             names = ", ".join([c.name for c in tied])
@@ -274,7 +272,7 @@ class Rule(ElectionRule):
             #
             for c in [c for c in CS.hopeful if hasQuota(c)]:
                 CS.elect(c)
-            if CS.nElected >= E.nSeats:
+            if countComplete():
                 break
 
             R = E.newRound()
