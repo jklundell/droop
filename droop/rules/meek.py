@@ -154,8 +154,6 @@ class Rule(ElectionRule):
             or the profile =tie order is the tiebreaking order:
             choose the first candidate in that order.
             '''
-            if not tied:
-                return None
             if len(tied) == 1:
                 return tied[0]
             tied = CS.sortByTieOrder(tied)

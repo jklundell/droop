@@ -68,5 +68,15 @@ class RuleTest(unittest.TestCase):
         "meek-prf requires fixed"
         Rule = electionRule('prf-meek-basic')
         self.assertRaises(UsageError, Rule.options, dict(arithmetic='guarded'))
+
+    def testMeekWarren1(self):
+        "meek responds to warren"
+        Rule = electionRule('warren')
+        Rule.options(dict(rule='warren'))
+        self.assertEqual(Rule.tag(), 'warren-generic-o9')
+        self.assertRaises(UsageError, Rule.options, dict(variant='whatever'))
+        self.assertRaises(UsageError, Rule.options, dict(defeat_batch='whatever'))
+
+
 if __name__ == '__main__':
     unittest.main()

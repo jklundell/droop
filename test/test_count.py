@@ -107,6 +107,11 @@ class ElectionCountTest(unittest.TestCase):
         E = self.doCount(R.meek.Rule, dict(), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
+    def testElectionCount4a(self):
+        "try meek default"
+        E = self.doCount(R.meek.Rule, dict(defeat_batch='none'), '42.blt')
+        self.assertEqual(len(E.elected), E.nSeats)
+
     def testElectionCount5(self):
         "try meek_prf default"
         E = self.doCount(R.meek_prf.Rule, dict(), '42.blt')

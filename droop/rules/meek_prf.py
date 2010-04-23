@@ -62,8 +62,8 @@ class Rule(ElectionRule):
         "add help string for prf-meek-basic"
         h =  "%s is the PR Foundation's Meek Reference STV.\n" % name
         h += '\nThere are no options.\n'
-        h += '  arithmetic: fixed, %d-digit precision\n' % cls.precision
-        h += '  omega=%d (iteration limit such that an interation is terminated\n' % cls.omega
+        h += '  arithmetic: fixed, %d-digit precision\n' % cls.defaultPrecision
+        h += '  omega=%d (iteration limit such that an interation is terminated\n' % cls.defaultOmega
         h += '    when surplus < 1/10^omega)\n'
         helps[name] = h
         
@@ -166,17 +166,17 @@ class Rule(ElectionRule):
                     b.residual = V(b.multiplier)
                     for c in (E.candidate(cid) for cid in b.ranking):
                         #
-                        #  distribute surpluses
+                        #  distribute votes
                         #
                         #  kv = w*kf rounded up * m     keep vote
                         #  w -= w*kf rounded up         new weight
                         # 
                         if c.kf:
-                            kw = V.mul(b.weight, c.kf, round='up')  # keep-weight
-                            kv = kw * b.multiplier  # keep-value
-                            c.vote += kv            # credit keep-value to candidate
-                            b.weight -= kw          # reduce ballot weight
-                            b.residual -= kv        # residual value of ballot
+                            keep_weight = V.mul(b.weight, c.kf, round='up')
+                            keep_value = keep_weight * b.multiplier
+                            c.vote += keep_value          # credit keep-value to candidate
+                            b.weight -= keep_weight       # reduce ballot weight
+                            b.residual -= keep_value      # residual value of ballot
                             #
                             if b.weight <= V0:
                                 break
