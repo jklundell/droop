@@ -150,8 +150,8 @@ class ElectionProfile(object):
                 if tok == ']': break
                 end = tok.endswith(']')
                 tok = tok.rstrip(']')
-                if not re.match(r'\d+', tok):
-                    raise ElectionProfileError('bad blt item "%s" reading [tie] option; expected decimal number' % (tok, len(self.ballotLines)+1))
+                if not re.match(r'\d+$', tok):
+                    raise ElectionProfileError('bad blt item "%s" reading [tie] option; expected decimal number' % tok)
                 cid = int(tok)
                 if cid > self.nCand:
                     raise ElectionProfileError('bad blt: [tie] item "%d" is not a valid candidate ID' % cid)
@@ -165,8 +165,8 @@ class ElectionProfile(object):
     def __bltData(self, data):
         "process a blt file"
 
-        digits = re.compile(r'\d+')
-        sdigits = re.compile(r'-?\d+')
+        digits = re.compile(r'\d+$')
+        sdigits = re.compile(r'-?\d+$')
 
         blt = self.__bltBlob(data)  # fetch a token at a time
         

@@ -93,14 +93,25 @@ class ProfileTest(unittest.TestCase):
 
     def testInitTitle(self):
         "normal init: title set"
-        self.assertEqual(ElectionProfile(data=p_42).title, 'Pollux and Helen should tie')
+        t1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        t2 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" junk'''
+        self.assertEqual(ElectionProfile(data=t1).title, 'Pollux and Helen should tie')
+        self.assertEqual(ElectionProfile(data=t2).title, 'Pollux and Helen should tie')
 
     def testInitSourceComment(self):
         "normal init: source & comment set"
-        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less" "comment more"'''
-        self.assertEqual(ElectionProfile(data=b).title, 'title')
-        self.assertEqual(ElectionProfile(data=b).source, 'source less')
-        self.assertEqual(ElectionProfile(data=b).comment, 'comment more')
+        b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less" "comment more"'''
+        b2 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less'''
+        b3 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less" "comment more'''
+        b4 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less" junk'''
+        b5 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less" "comment more" junk'''
+        self.assertEqual(ElectionProfile(data=b1).title, 'title')
+        self.assertEqual(ElectionProfile(data=b1).source, 'source less')
+        self.assertEqual(ElectionProfile(data=b4).source, 'source less')
+        self.assertEqual(ElectionProfile(data=b1).comment, 'comment more')
+        self.assertEqual(ElectionProfile(data=b5).comment, 'comment more')
+        self.assertRaises(ElectionProfileError, ElectionProfile, b2)
+        self.assertRaises(ElectionProfileError, ElectionProfile, b3)
 
     def testInitnBallots(self):
         "normal init: 6 ballots"
@@ -109,6 +120,13 @@ class ProfileTest(unittest.TestCase):
     def testInitnBallotLines(self):
         "normal init: 2 ballot lines"
         self.assertEqual(len(ElectionProfile(data=p_42).ballotLines), 2)
+
+    def testInitnSeats(self):
+        "0 > nSeats <=candidates"
+        p_42s1 = '''4 0 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Bob" "Pollux and Helen should tie"'''
+        p_42s2 = '''4 5 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Bob" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42s1)
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=p_42s2)
 
     def testInitNoWithdrawn(self):
         "normal init: 0 withdrawn"
@@ -134,8 +152,30 @@ class ProfileTest(unittest.TestCase):
 
     def testBadNcand(self):
         "exception bad candidate format"
-        b = '''x 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
+        b = '''3x 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
         self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBadNSeats(self):
+        "exception bad seats format"
+        b = '''3 2x 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBadWithdrawn(self):
+        "exception bad withdrawn"
+        b = '''3 2 -2x 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBadMultiplier(self):
+        "exception ballot multiplier"
+        b = '''3 2 4 1 2 0 2x 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBadCid(self):
+        "exception bad cid"
+        b1 = '''3 2 4 1 2 0 2 3x 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
+        b2 = '''3 2 4 1 2 0 2 4 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie" '''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b1)
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b2)
 
     def testBadName(self):
         "exception bad candidate name"
@@ -144,8 +184,10 @@ class ProfileTest(unittest.TestCase):
 
     def testBadTitle(self):
         "exception bad title"
-        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie '''
-        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+        b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie '''
+        b2 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" Pollux and Helen should tie" '''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b1)
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b2)
 
     def testCandidateName(self):
         "fetch a candidate name"
@@ -206,6 +248,11 @@ class OptionTieTest(unittest.TestCase):
     def testTiedOrder3(self):
         "test bad [tie: cid out of range"
         b = '''3 2 [tie 3 2 4 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testTiedOrder4(self):
+        "test bad [tie: non-numeric cid"
+        b = '''3 2 [tie 3 2 1x ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
 class BallotIDTest(unittest.TestCase):
