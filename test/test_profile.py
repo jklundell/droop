@@ -52,7 +52,7 @@ class ProfileTest(unittest.TestCase):
         "normal init: 2 seats"
         self.assertEqual(ElectionProfile(data=p_42).nSeats, 2)
 
-    def testBadNSeats(self):
+    def testTooFewSeats(self):
         "exception if too few seats"
         b = '''1 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.assertRaises(ElectionProfileError, ElectionProfile, data=b)

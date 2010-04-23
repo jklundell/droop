@@ -139,26 +139,36 @@ class ElectionProfile(object):
         f.close()
         return data
 
+    def __bltOptionTie(self, option_name, option_list):
+        "process a blt [tie option line"
+        self.tieOrder = dict()
+        o = 0
+        for tok in option_list:
+            o += 1
+            if not re.match(r'\d+$', tok):
+                raise ElectionProfileError('bad blt item "%s" reading [tie] option; expected decimal number' % tok)
+            cid = int(tok)
+            if cid > self.nCand:
+                raise ElectionProfileError('bad blt: [tie] item "%d" is not a valid candidate ID' % cid)
+            self.tieOrder[cid] = o
+        if len(self.tieOrder) != self.nCand:
+            raise ElectionProfileError('bad blt: [tie] tiebreak sequence must list each candidate exactly once')
+
     def __bltOption(self, option, blt):
         "process a blt option line"
-        if option == '[tie':
-            self.tieOrder = dict()
-            o = 0
+        option_name = option.lstrip('[')
+        option_list = list()
+        if option_name.endswith(']'):
+            option_name = option_name.rstrip(']')
+        else:
             while True:
-                o += 1
                 tok = blt.next()
-                if tok == ']': break
-                end = tok.endswith(']')
-                tok = tok.rstrip(']')
-                if not re.match(r'\d+$', tok):
-                    raise ElectionProfileError('bad blt item "%s" reading [tie] option; expected decimal number' % tok)
-                cid = int(tok)
-                if cid > self.nCand:
-                    raise ElectionProfileError('bad blt: [tie] item "%d" is not a valid candidate ID' % cid)
-                self.tieOrder[cid] = o
-                if end: break
-            if len(self.tieOrder) != self.nCand:
-                raise ElectionProfileError('bad blt: [tie] tiebreak sequence must list each candidate exactly once')
+                if tok != ']':
+                    option_list.append(tok.rstrip(']'))
+                if tok.endswith(']'):
+                    break
+        if option_name == 'tie':
+            self.__bltOptionTie(option_name, option_list)
         else:
             raise ElectionProfileError('bad blt item "%s": unknown option' % option)
 
