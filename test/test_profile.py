@@ -220,6 +220,36 @@ class ProfileTest(unittest.TestCase):
         pp = ElectionProfile(path)
         self.assertFalse(pp.compare(pd), 'compare election 42 from file vs data blob')
 
+class OptionNickTest(unittest.TestCase):
+    "test blt option [nick...]"
+    
+    def testNick1(self):
+        "test basic nicknames"
+        b0 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        b1 = '''3 2 [nick a b c ] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        b2 = '''3 2 [nick a b c] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        p0 = ElectionProfile(data=b1)
+        self.assertEqual(len(p0.nickName), 3)
+        p1 = ElectionProfile(data=b1)
+        self.assertEqual(len(p1.nickName), 3)
+        p2 = ElectionProfile(data=b2)
+        self.assertEqual(len(p2.nickName), 3)
+        self.assertEqual(len(p2.nickCid), 3)
+        for i in xrange(len(p1.ballotLines)):
+            self.assertEqual(p1.ballotLines[i].multiplier, p2.ballotLines[i].multiplier)
+            self.assertEqual(p1.ballotLines[i].ranking, p2.ballotLines[i].ranking)
+            self.assertEqual(p1.ballotLines[i].multiplier, p0.ballotLines[i].multiplier)
+            self.assertEqual(p1.ballotLines[i].ranking, p0.ballotLines[i].ranking)
+
+    def testNick2(self):
+        "test invalid nicknames"
+        b1 = '''3 2 [nick a b c d ] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b1)
+        b2 = '''3 2 [nick a b 3 ] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b2)
+        b3 = '''3 2 [nick a b a ] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b3)
+
 class OptionTieTest(unittest.TestCase):
     "test blt option [tie...]"
     

@@ -129,6 +129,21 @@ class ElectionCountTest(unittest.TestCase):
         E.count()
         self.assertEqual(len(E.elected), 2)
 
+    def testNickReport(self):
+        "using nicknames shouldn't alter dump or report"
+        b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        b2 = '''3 2 [nick a b c] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        E = Election(R.scotland.Rule, ElectionProfile(data=b1), options=dict())
+        E.count()
+        r1 = E.report()
+        d1 = E.dump()
+        E = Election(R.scotland.Rule, ElectionProfile(data=b2), options=dict())
+        E.count()
+        r2 = E.report()
+        d2 = E.dump()
+        self.assertEqual(r1, r2)
+        self.assertEqual(d1, d2)
+
 def doDumpCompare(rule, options, file, subdir=''):
     '''
     helper: do a count and compare dump/report to reference

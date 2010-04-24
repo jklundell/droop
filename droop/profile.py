@@ -156,7 +156,7 @@ class ElectionProfile(object):
 
     def __bltOptionNick(self, option_name, option_list):
         "process a blt [nick option line"
-        if len(self.option_list) != self.nCand:
+        if len(option_list) != self.nCand:
             raise ElectionProfileError('bad blt: [nick] nickname list must list each candidate exactly once')
         self.nickCid = dict()
         self.nickName = dict()
@@ -194,6 +194,8 @@ class ElectionProfile(object):
                     break
         if option_name == 'tie':
             self.__bltOptionTie(option_name, option_list)
+        elif option_name == 'nick':
+            self.__bltOptionNick(option_name, option_list)
         else:
             raise ElectionProfileError('bad blt item "%s": unknown option' % option)
 
