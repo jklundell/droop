@@ -220,7 +220,7 @@ class Rule(ElectionRule):
                     t = tied[0]
                     E.R.log('Break tie by prior stage (%s): [%s] -> %s' % (reason, names, t.name))
                     return t
-            E.R = E.rounds[-1]
+            E.R = E.rounds[-1]             # restore current round
             tied = CS.sortByTieOrder(tied) # sort by tie-order before making choice
             t = tied[0]                    # break tie by lot
             E.R.log('Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
@@ -293,7 +293,7 @@ class Rule(ElectionRule):
                 high_candidate.vote = R.quota
                 continue  # to next stage
 
-            #  defeat candidate(s) with lowest vote
+            #  defeat candidate(s) with lowest vote [50,51]
             #
             if CS.hopeful:
                 low_vote = min(c.vote for c in CS.hopeful)

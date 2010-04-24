@@ -71,6 +71,8 @@ class ElectionProfile(object):
         self._candidateOrder = dict() # cid -> ballot order
         self.ballotLines = tuple()
         self.tieOrder = None          # tiebreaking cid sequence
+        self.nickCid = None           # nick to cid
+        self.nickName = None          # cid to nick
 
         if path:
             data = self.__bltPath(path)
@@ -139,17 +141,40 @@ class ElectionProfile(object):
         f.close()
         return data
 
+    def getCid(self, nick, loc):
+        "convert a nick (or cid) to a cid, and validate the cid"
+        if isinstance(nick, str) and re.match(r'\d+$', nick):
+            nick = int(nick)
+        if isinstance(nick, int):
+            if nick > 0 and nick <= self.nCand:
+                return nick
+        elif self.nickCid and nick in self.nickCid:
+            return self.nickCid[nick]
+        if isinstance(loc, int):
+            raise ElectionProfileError('bad blt: bad candidate ID %s near ballot %d' % (nick, loc))
+        raise ElectionProfileError('bad blt: bad candidate ID %s in %s' % (nick, loc))
+
+    def __bltOptionNick(self, option_name, option_list):
+        "process a blt [nick option line"
+        if len(self.option_list) != self.nCand:
+            raise ElectionProfileError('bad blt: [nick] nickname list must list each candidate exactly once')
+        self.nickCid = dict()
+        self.nickName = dict()
+        cid = 0
+        for nick in option_list:
+            cid += 1
+            if nick in self.nickCid:
+                raise ElectionProfileError('bad blt: duplicate nickname: %s' % nick)
+            self.nickCid[nick] = cid
+            self.nickName[cid] = nick
+        
     def __bltOptionTie(self, option_name, option_list):
         "process a blt [tie option line"
         self.tieOrder = dict()
         o = 0
         for tok in option_list:
             o += 1
-            if not re.match(r'\d+$', tok):
-                raise ElectionProfileError('bad blt item "%s" reading [tie] option; expected decimal number' % tok)
-            cid = int(tok)
-            if cid > self.nCand:
-                raise ElectionProfileError('bad blt: [tie] item "%d" is not a valid candidate ID' % cid)
+            cid = self.getCid(tok, '[tie] option')
             self.tieOrder[cid] = o
         if len(self.tieOrder) != self.nCand:
             raise ElectionProfileError('bad blt: [tie] tiebreak sequence must list each candidate exactly once')
@@ -245,14 +270,9 @@ class ElectionProfile(object):
             ranking = list()
             while True:
                 tok = blt.next()  # next ranked candidate or 0
-                if not digits.match(tok):
-                    raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(self.ballotLines)+1))
-                cid = int(tok)
-                if not cid:  # test end of ballot
-                    break;
-                if cid > self.nCand:
-                    raise ElectionProfileError('bad blt item "%s" near ballot line %d is not a valid candidate ID' % (tok, len(self.ballotLines)+1))
-                ranking.append(cid)
+                if tok == '0':
+                    break   # end of ballot
+                ranking.append(self.getCid(tok, len(self.ballotLines)+1))
             if ranking:                         # ignore empty ballots
                 self.ballotLines.append(self.BallotLine(multiplier, ranking, self.nCand))
                 self.nBallots += multiplier
