@@ -201,13 +201,12 @@ class Rule(ElectionRule):
                 
                 #  B.2.e. test iteration complete
                 #
-                if iterationStatus == 'elected':
-                    break
-                if R.surplus < Rule._omega:
-                    iterationStatus = 'omega'
-                if R.surplus >= lastsurplus:
-                    R.log("Stable state detected (%s)" % R.surplus)
-                    iterationStatus = 'stable'
+                if iterationStatus != 'elected':
+                    if R.surplus < Rule._omega:
+                        iterationStatus = 'omega'
+                    elif R.surplus >= lastsurplus:
+                        iterationStatus = 'stable'
+                        R.log("Stable state detected (%s)" % R.surplus)
                 if iterationStatus != 'iterate':
                     break  # iteration complete
 
