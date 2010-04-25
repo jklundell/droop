@@ -171,13 +171,7 @@ class Rule(ElectionRule):
             R = E.newRound()
             CS = R.CS   # candidate state
 
-            #  count votes for hopeful or pending-transfer candidates
-            #
-            for c in CS.hopefulOrPending:
-                c.vote = V0
-            E.countTopVotes()
-
-            #  count votes for reporting
+            #  total vote count for reporting
             #
             R.votes = sum([c.vote for c in (CS.elected + CS.hopeful)], V0)
 
@@ -200,7 +194,6 @@ class Rule(ElectionRule):
                 high_candidates = [c for c in CS.pending if c.vote == high_vote]
                 high_candidate = breakTie(E, high_candidates, 'surplus')
                 E.transferBallots(high_candidate, msg='Transfer surplus')
-                high_candidate.vote = R.quota
 
             #  if no surplus to transfer, defeat a candidate
             #

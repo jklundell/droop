@@ -377,7 +377,6 @@ class Rule(ElectionRule):
                 high_candidates = [c for c in CS.pending if c.vote == high_vote]
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 E.transferBallots(high_candidate, msg='Transfer surplus')
-                high_candidate.vote = R.quota
                 continue  ## continue as described in clause a.
 
             ##  167.70(1)(e)

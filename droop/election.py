@@ -203,11 +203,17 @@ class Election(object):
             for b in (b for b in ballots if b.topCid == cid):
                 b.weight = (b.weight * surplus) / vote
                 b.transfer(hopeful)
+                if not b.exhausted:
+                    b.topCand.vote += b.vote
             val = surplus
+            c.vote = self.R.quota
         else:
             for b in (b for b in ballots if b.topCid == cid):
                 b.transfer(hopeful)
+                if not b.exhausted:
+                    b.topCand.vote += b.vote
             val = vote
+            c.vote = self.V0
         self.log("%s: %s (%s)" % (msg, c.name, self.V(val)))
 
     def countTopVotes(self):
@@ -318,9 +324,9 @@ class Election(object):
                 s += '\t%s\n' % line
             if self._log:
                 s += '\t...\n'
-            s += '\tHopeful: %s\n' % (" ".join([c.name for c in CS.sortByOrder(CS.hopeful)]) or 'None')
-            s += '\tElected: %s\n' % (" ".join([c.name for c in CS.sortByOrder(CS.elected)]) or 'None')
-            s += '\tDefeated: %s\n' % (" ".join([c.name for c in CS.sortByOrder(CS.defeated)]) or 'None')
+            s += '\tHopeful: %s\n' % (", ".join([c.name for c in CS.sortByOrder(CS.hopeful)]) or 'None')
+            s += '\tElected: %s\n' % (", ".join([c.name for c in CS.sortByOrder(CS.elected)]) or 'None')
+            s += '\tDefeated: %s\n' % (", ".join([c.name for c in CS.sortByOrder(CS.defeated)]) or 'None')
             if reportMeek:
                 s += '\tQuota: %s\n' % V(self.quota)
                 s += '\tVotes: %s\n' % V(self.votes)

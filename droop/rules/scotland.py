@@ -257,16 +257,14 @@ class Rule(ElectionRule):
         for c in E.withdrawn:
             E.transferBallots(c, msg='Transfer withdrawn')
         
-        while True:
+        #  count first-preference votes [45]
+        #
+        for c in CS.hopeful:
+            c.vote = V0
+        for b in (b for b in E.ballots if not b.exhausted):
+            b.topCand.vote += b.vote
 
-            #  count first-preference votes [45]
-            #
-            for c in CS.elected:
-                c.vote = R.quota
-            for c in CS.hopefulOrPending:
-                c.vote = V0
-            for b in (b for b in E.ballots if not b.exhausted):
-                b.topCand.vote += b.vote
+        while True:
 
             #  elect candidates with quota [47]
             #
@@ -290,7 +288,6 @@ class Rule(ElectionRule):
                 high_candidates = [c for c in CS.pending if c.vote == high_vote]
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 E.transferBallots(high_candidate, msg='Transfer surplus')
-                high_candidate.vote = R.quota
                 continue  # to next stage
 
             #  defeat candidate(s) with lowest vote [50,51]
