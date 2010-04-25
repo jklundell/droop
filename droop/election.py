@@ -191,17 +191,18 @@ class Election(object):
         "number of seats not yet filled"
         return self.nSeats - self.R.CS.nElected
 
-    def transferBallots(self, c, msg='Transfer'):
+    def transferBallots(self, c, msg='Transfer', tf=None):
         "WIGM: transfer ballots for elected or defeated candidate"
         vote = c.vote
         cid = c.cid
         ballots = self.ballots
         hopeful = self.R.CS.hopeful
+        
         if c in self.R.CS.elected:
             self.R.CS.pending.remove(c)
             surplus = vote - self.R.quota
             for b in (b for b in ballots if b.topCid == cid):
-                b.weight = (b.weight * surplus) / vote
+                b.weight = tf(self.V, b.weight, surplus, vote)
                 b.transfer(hopeful)
                 if not b.exhausted:
                     b.topCand.vote += b.vote

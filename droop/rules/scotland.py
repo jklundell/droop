@@ -225,6 +225,11 @@ class Rule(ElectionRule):
             t = tied[0]                    # break tie by lot
             E.R.log('Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
             return t
+
+        def transferFunction(V, ballotweight, surplus, vote):
+            "calculate new ballot weight on surplus transfer"
+            # see http://www.votingmatters.org.uk/RES/eSTV-Eval.pdf section 7.1 #5
+            return V.muldiv(ballotweight, surplus, vote, round='down')
             
         def countComplete():
             '''
@@ -287,7 +292,7 @@ class Rule(ElectionRule):
                 high_vote = max(c.vote for c in CS.pending)
                 high_candidates = [c for c in CS.pending if c.vote == high_vote]
                 high_candidate = breakTie(high_candidates, 'largest surplus')
-                E.transferBallots(high_candidate, msg='Transfer surplus')
+                E.transferBallots(high_candidate, msg='Transfer surplus', tf=transferFunction)
                 continue  # to next stage
 
             #  defeat candidate(s) with lowest vote [50,51]

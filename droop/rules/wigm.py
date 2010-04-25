@@ -144,6 +144,10 @@ class Rule(ElectionRule):
             R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
             return t
 
+        def transferFunction(V, ballotweight, surplus, vote):
+            "calculate new ballot weight on surplus transfer"
+            return (ballotweight * surplus) / vote
+            
         #  Local variables for convenience
         #
         R = E.R0  # current round
@@ -185,7 +189,7 @@ class Rule(ElectionRule):
                 #  so do the "transfer" now
                 #
                 if c.vote == R.quota:
-                    E.transferBallots(c, msg='Transfer zero surplus')
+                    E.transferBallots(c, msg='Transfer zero surplus', tf=transferFunction)
 
             #  find & transfer highest surplus
             #
@@ -193,7 +197,7 @@ class Rule(ElectionRule):
                 high_vote = max(c.vote for c in CS.pending)
                 high_candidates = [c for c in CS.pending if c.vote == high_vote]
                 high_candidate = breakTie(E, high_candidates, 'surplus')
-                E.transferBallots(high_candidate, msg='Transfer surplus')
+                E.transferBallots(high_candidate, msg='Transfer surplus', tf=transferFunction)
 
             #  if no surplus to transfer, defeat a candidate
             #
