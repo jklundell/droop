@@ -23,6 +23,7 @@ This file is part of Droop.
 
 import sys, os
 import Droop
+import droop.common
 
 def usage():
     "scotland usage string"
@@ -33,7 +34,7 @@ if len(sys.argv) != 2:
     sys.exit(1)
 try:
     print Droop.main(dict(rule='scotland', path=sys.argv[1]))
-except Droop.UsageError as err:
+except droop.common.UsageError as err:
     print >>sys.stderr, "** scotland: %s" % err
     print >>sys.stderr, usage()
     sys.exit(1)

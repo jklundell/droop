@@ -72,7 +72,7 @@ class Election(object):
         
         self.eligible = list()
         self.withdrawn = list()
-        self.candidates = dict()
+        self.candidates = dict()  # cid: Candidate
         
         self.elected = None  # for communicating results
         
