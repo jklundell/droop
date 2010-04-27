@@ -34,7 +34,6 @@ Top-level structure:
 import sys, re
 import values
 import droop
-from droop.common import ElectionError
 
 class Election(object):
     '''
@@ -80,8 +79,6 @@ class Election(object):
         #
         for cid in sorted(electionProfile.eligible | electionProfile.withdrawn):
             c = Candidate(self, cid, electionProfile.candidateOrder(cid), electionProfile.candidateName(cid))
-            if c.cid in self.candidates.keys():
-                raise ElectionError('duplicate candidate id: %s (%s)' % (c.cid, c.name))
             self.candidates[cid] = c
             c.vote = self.V0
             #
@@ -134,7 +131,7 @@ class Election(object):
     def count(self):
         "count the election"
         self.rule.count(self)
-        self.R.rollup(self.rule.method())             # roll up last round
+        self.R.rollup(self.rule.method())           # roll up last round
         self.elected = self.rounds[-1].CS.elected   # collect set of elected candidates
         
     def newRound(self):
@@ -170,7 +167,7 @@ class Election(object):
         if self.electionProfile.comment:
             s += "{%s}\n" % self.electionProfile.comment
         s += '\n'
-        if intr:
+        if intr:    # pragma: no cover
             s += "\t** Count terminated prematurely by user interrupt **\n\n"
             self.R.log('** count interrupted; this round is incomplete **')
         s += self.V.report()
@@ -485,8 +482,10 @@ class Candidate(object):
 
     def __eq__(self, other):
         "test for equality of cid"
-        if isinstance(other, str):
+        if isinstance(other, int):
             return self.cid == other
+        if isinstance(other, str):
+            return str(self.cid) == other
         if other is None:
             return False
         return self.cid == other.cid
@@ -572,21 +571,12 @@ class CandidateState(object):
         self.defeated.append(c)
         self.E.R.log("%s: %s (%s)" % (msg, c.name, self.E.V(c.vote)))
 
-    def vote(self, c, r=None):
-        "return vote for candidate in round r (default=current)"
-        if r is None: return self._vote[c.cid]
-        return self.E.rounds[r].CS._vote[c.cid]
-
     #  return count of candidates in requested state
     #
     @property
     def nHopeful(self):
         "return count of hopeful candidates"
         return len(self.hopeful)
-    @property
-    def nPending(self):
-        "return count of transfer-pending candidates"
-        return len(self.pending)
     @property
     def nElected(self):
         "return count of elected candidates"
@@ -595,14 +585,6 @@ class CandidateState(object):
     def nHopefulOrElected(self):
         "return count of hopeful+elected candidates"
         return self.nHopeful + self.nElected
-    @property
-    def nDefeated(self):
-        "return count of defeated candidates"
-        return len(self.defeated)
-    @property
-    def nWithdrawn(self):
-        "return count of withdrawn candidates"
-        return len(self.E.withdrawn)
         
     def sortByVote(self, collection):
         "sort a collection of candidates by vote"

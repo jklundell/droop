@@ -105,13 +105,15 @@ class ProfileTest(unittest.TestCase):
         b3 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less" "comment more'''
         b4 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less" junk'''
         b5 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less" "comment more" junk'''
+        b6 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "title" "source less"'''
         self.assertEqual(ElectionProfile(data=b1).title, 'title')
         self.assertEqual(ElectionProfile(data=b1).source, 'source less')
+        self.assertEqual(ElectionProfile(data=b6).source, 'source less')
         self.assertEqual(ElectionProfile(data=b4).source, 'source less')
         self.assertEqual(ElectionProfile(data=b1).comment, 'comment more')
         self.assertEqual(ElectionProfile(data=b5).comment, 'comment more')
-        self.assertRaises(ElectionProfileError, ElectionProfile, b2)
-        self.assertRaises(ElectionProfileError, ElectionProfile, b3)
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b2)
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b3)
 
     def testInitnBallots(self):
         "normal init: 6 ballots"
@@ -249,6 +251,8 @@ class OptionNickTest(unittest.TestCase):
         self.assertRaises(ElectionProfileError, ElectionProfile, data=b2)
         b3 = '''3 2 [nick a b a ] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.assertRaises(ElectionProfileError, ElectionProfile, data=b3)
+        b4 = '''3 2 [nick] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b4)
 
 class OptionTieTest(unittest.TestCase):
     "test blt option [tie...]"

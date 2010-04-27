@@ -42,8 +42,8 @@ class ElectionInitTest(unittest.TestCase):
     
     def setUp(self):
         "initialize profile and rule"
-        path = testdir + '/blt/42.blt'
-        self.Profile = ElectionProfile(path)
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.Profile = ElectionProfile(data=b)
         self.Rule = R.mpls.Rule
         self.options = dict()
         self.E = Election(self.Rule, self.Profile, self.options)
@@ -54,6 +54,11 @@ class ElectionInitTest(unittest.TestCase):
         self.assertEqual(len(self.options), 2, 'mpls should set two options')
         self.assertEqual(self.options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
         self.assertEqual(self.options['precision'], 4, 'mpls should set precision=4')
+        self.assertEqual(self.E.candidates[1].name, "Castor")
+        self.assertEqual(str(self.E.candidates[1]), "Castor")
+        self.assertTrue(self.E.candidates[1] == 1)
+        self.assertTrue(self.E.candidates[1] == '1')
+        self.assertFalse(self.E.candidates[1] == None)
 
     def testElectionTieOrder(self):
         "test default tie order"
@@ -64,6 +69,15 @@ class ElectionInitTest(unittest.TestCase):
         "try a basic count"
         self.E.count()
         self.assertEqual(len(self.E.elected), self.E.nSeats)
+
+class ElectionHelps(unittest.TestCase):
+    "check that helps dict is initialized"
+
+    def testElectionHelps(self):
+        "test helps"
+        helps = Election.makehelp()
+        self.assertTrue(isinstance(helps['rule'], str))
+        self.assertTrue(isinstance(helps['arithmetic'], str))
 
 class ElectionCountTest(unittest.TestCase):
     "test some counts"
@@ -101,6 +115,12 @@ class ElectionCountTest(unittest.TestCase):
         "try wigm with integer quota"
         E = self.doCount(R.wigm.Rule, dict(integer_quota='true'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
+
+    def testElectionCount3b(self):
+        "try wigm with precision as string"
+        E = self.doCount(R.wigm.Rule, dict(precision='8'), '42.blt')
+        self.assertEqual(len(E.elected), E.nSeats)
+        self.assertEqual(E.V.precision, 8)
 
     def testElectionCount4(self):
         "try meek default"
