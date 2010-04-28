@@ -70,13 +70,7 @@ class Rule(ElectionRule):
         
         #  set defaults
         #
-        if options.get('rule') == 'warren':
-            variant = 'warren'
-        else:
-            variant = options.get('variant', 'meek').lower()
-            if variant not in ['meek', 'warren']:
-                raise UsageError('unknown variant %s; use meek or warren' % variant)
-        cls.warren = (variant == 'warren')
+        cls.warren = options.get('rule') == 'warren'
         options.setdefault('arithmetic', 'guarded')
         if options['arithmetic'] == 'guarded':
             options.setdefault('precision', 18)
@@ -229,20 +223,24 @@ class Rule(ElectionRule):
 
             def kw_warren(kf, weight):
                 "calculate keep and new weight for Warren"
+                keep = kf if kf < weight else weight
                 return (kf if kf < weight else weight), (weight - keep)
                 
             def kw_meekOpenSTV(kf, weight):
                 "calculate keep and new weight for OpenSTV MeekSTV"
                 return V.mul(weight, kf, round='down'), V.mul(weight, V1-kf, round='down')
         
-            def kw_meekHill(kf, weight):
+            def kw_meekHill(kf, weight):    # pragma: no cover
                 "calculate keep and new weight for Hill/NZ Calculator"
-                return V.mul(weight, kf, round='up'), (weight - keep)
+                keep = V.mul(weight, kf, round='up')
+                return keep, (weight - keep)
         
-            def kw_meekNZ1A(kf, weight):
+            def kw_meekNZ1A(kf, weight):    # pragma: no cover
                 "calculate keep and new weight for NZ Schedule 1A"
                 return V.mul(weight, kf, round='up'), V.mul(weight, V1-kf, round='up')
 
+            kw_function = kw_warren if cls.warren else kw_meekOpenSTV
+            
             iStatus = IS_none
             lastsurplus = V(E.nBallots)
             while True:
@@ -254,7 +252,7 @@ class Rule(ElectionRule):
                 #
                 for c in CS.hopefulOrElected:
                     c.vote = V0
-                E.distributeVotes(kw_meekOpenSTV)
+                E.distributeVotes(kw_function)
                 R.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
 
                 #  D.3. update quota

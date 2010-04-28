@@ -34,13 +34,14 @@ Top-level structure:
 import sys, re
 import values
 import droop
+from droop.common import ElectionError
 
 class Election(object):
     '''
     container for an election
     '''
     
-    def __init__(self, rule, electionProfile, options=dict()):
+    def __init__(self, electionProfile, options=dict()):
         "create an election from the incoming election profile"
 
         #  before this, a rule has been specified and a profile created
@@ -55,7 +56,14 @@ class Election(object):
         #    make a tiebreaking-order, if specified
         #    make the ballots object
         #
-        self.rule = rule # a class
+        rulename = options.get('rule')
+        if rulename is None:
+            raise ElectionError('no election rule specified')
+        Rule = droop.electionRule(rulename)    # get rule class
+        if Rule is None:
+            raise ElectionError('unknown election rule: %s' % rulename)
+        self.rule = Rule
+
         # convert numeric options (precision, etc) to ints
         for key, value in options.iteritems():
             if isinstance(value, str) and re.match(r'\d+$', value):

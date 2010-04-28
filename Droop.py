@@ -33,8 +33,7 @@ This file is part of Droop.
    options currently include:
    path=ballot_file_path
    rule=election_rule_name
-     variant=warren to switch meek to warren mode
-     epsilon=<set meek surplus limit to 10^-epsilon>
+     omega=<set meek surplus limit to 10^-epsilon>
    report= [not currently supported]
    arithmetic=guarded|fixed|integer|rational
      (integer is fixed with precision=0)
@@ -62,13 +61,14 @@ def main(options=None):
     #  we know about (rule, path, profile)
     #  all the others are passed to the various consumers
     #
-    rule = 'meek'       # default rule
+    rulename = 'meek'   # default rule
     path = None         # ballot path must be specified
     doProfile = False   # performance profiling
     reps = 1            # repetitions (for profiling)
+    options.setdefault('rule', rulename)
     for opt,arg in options.items():
         if opt == 'rule':       # rule=<election rule name> default: 'meek'
-            rule = arg
+            rulename = arg
         elif opt == 'path':     # path=<path to ballot file>
             path = arg
         elif opt == 'profile':  # profile=<number of repetitions>
@@ -77,16 +77,12 @@ def main(options=None):
             reps = int(arg)
             doProfile = True
             profilefile = "profile.out"
-    # else we pass the option along
     if not path:
         raise droop.common.UsageError("no ballot file specfied")
     
-    #  get the rule class
-    #
-    Rule = droop.electionRule(rule)
-    if not Rule:
+    if not rulename in droop.electionRuleNames():
         rules = ' '.join(droop.electionRuleNames())
-        raise droop.common.UsageError("unknown rule '%s'; known rules:\n\t%s" % (rule, rules))
+        raise droop.common.UsageError("unknown rule '%s'; known rules:\n\t%s" % (rulename, rules))
 
     #  run the election
     #
@@ -100,7 +96,7 @@ def main(options=None):
         global E
         electionProfile = ElectionProfile(path=path)  # don't repeat the profile loading
         for i in xrange(repeat):
-            E = Election(Rule, electionProfile, options=options)
+            E = Election(electionProfile, options)
             E.count()
 
     try:

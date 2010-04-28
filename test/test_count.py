@@ -44,14 +44,13 @@ class ElectionInitTest(unittest.TestCase):
         "initialize profile and rule"
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.Profile = ElectionProfile(data=b)
-        self.Rule = R.mpls.Rule
-        self.options = dict()
-        self.E = Election(self.Rule, self.Profile, self.options)
+        self.options = dict(rule='mpls')
+        self.E = Election(self.Profile, self.options)
 
     def testElectionInit(self):
         "check that election is initialized"
-        self.assertTrue(self.E.rule == self.Rule, 'bad rule class')
-        self.assertEqual(len(self.options), 2, 'mpls should set two options')
+        self.assertTrue(self.E.rule == R.mpls.Rule, 'bad rule class')
+        self.assertEqual(len(self.options), 3, 'mpls should set three options')
         self.assertEqual(self.options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
         self.assertEqual(self.options['precision'], 4, 'mpls should set precision=4')
         self.assertEqual(self.E.candidates[1].name, "Castor")
@@ -82,70 +81,75 @@ class ElectionHelps(unittest.TestCase):
 class ElectionCountTest(unittest.TestCase):
     "test some counts"
 
-    def doCount(self, Rule, options, blt):
+    def doCount(self, options, blt):
         "run the count and return the Election"
         p = ElectionProfile(testdir + '/blt/' + blt)
-        E = Election(Rule, p, options)
+        E = Election(p, options)
         E.count()
         return E
 
     def testElectionCount1(self):
         "try a basic count"
-        E = self.doCount(R.mpls.Rule, dict(), '42.blt')
+        E = self.doCount(dict(rule='mpls'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionTieCount(self):
         "check a different tiebreaking order"
-        E = self.doCount(R.mpls.Rule, dict(), '42t.blt')
+        E = self.doCount(dict(rule='mpls'), '42t.blt')
         tieOrder = [0, 3, 2, 1]
         for c in E.candidates.values():
             self.assertEqual(c.tieOrder, tieOrder[c.order])
 
     def testElectionCount2(self):
         "try a bigger election"
-        E = self.doCount(R.mpls.Rule, dict(), 'M135.blt')
+        E = self.doCount(dict(rule='mpls'), 'M135.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount3(self):
         "try wigm default"
-        E = self.doCount(R.wigm.Rule, dict(), '42.blt')
+        E = self.doCount(dict(rule='wigm'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount3a(self):
         "try wigm with integer quota"
-        E = self.doCount(R.wigm.Rule, dict(integer_quota='true'), '42.blt')
+        E = self.doCount(dict(rule='wigm', integer_quota='true'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount3b(self):
         "try wigm with precision as string"
-        E = self.doCount(R.wigm.Rule, dict(precision='8'), '42.blt')
+        E = self.doCount(dict(rule='wigm', precision='8'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
         self.assertEqual(E.V.precision, 8)
 
     def testElectionCount4(self):
         "try meek default"
-        E = self.doCount(R.meek.Rule, dict(), '42.blt')
+        E = self.doCount(dict(rule='meek'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount4a(self):
         "try meek default"
-        E = self.doCount(R.meek.Rule, dict(defeat_batch='none'), '42.blt')
+        E = self.doCount(dict(rule='meek', defeat_batch='none'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount5(self):
         "try meek_prf default"
-        E = self.doCount(R.meek_prf.Rule, dict(), '42.blt')
+        E = self.doCount(dict(rule='prf-meek-basic'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount6(self):
-        "meek-prf-basic stable state"
-        E = self.doCount(R.meek_prf.Rule, dict(precision=7, omega=7), 'M135.blt')
+        "prf-meek-basic stable state"
+        E = self.doCount(dict(rule='prf-meek-basic', precision=7, omega=7), 'M135.blt')
+        self.assertEqual(len(E.elected), E.nSeats)
+
+    def testElectionCount7(self):
+        "meek-generic stable state"
+        E = self.doCount(dict(rule='meek', precision=7, omega=7), 'M135.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionMpls1(self):
         "mpls: everyone elected at first"
         p_mpls1 = '''3 2 4 1 2 0 4 2 1 0 1 3 0 0 "a" "b" "c" "2 elected at first"'''
-        E = Election(R.mpls.Rule, ElectionProfile(data=p_mpls1), options=dict())
+        E = Election(ElectionProfile(data=p_mpls1), dict(rule='mpls'))
         E.count()
         self.assertEqual(len(E.elected), 2)
 
@@ -153,18 +157,18 @@ class ElectionCountTest(unittest.TestCase):
         "using nicknames shouldn't alter dump or report"
         b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         b2 = '''3 2 [nick a b c] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-        E = Election(R.scotland.Rule, ElectionProfile(data=b1), options=dict())
+        E = Election(ElectionProfile(data=b1), dict(rule='scotland'))
         E.count()
         r1 = E.report()
         d1 = E.dump()
-        E = Election(R.scotland.Rule, ElectionProfile(data=b2), options=dict())
+        E = Election(ElectionProfile(data=b2), dict(rule='scotland'))
         E.count()
         r2 = E.report()
         d2 = E.dump()
         self.assertEqual(r1, r2)
         self.assertEqual(d1, d2)
 
-def doDumpCompare(rule, options, file, subdir=''):
+def doDumpCompare(options, file, subdir=''):
     '''
     helper: do a count and compare dump/report to reference
     '''
@@ -173,9 +177,9 @@ def doDumpCompare(rule, options, file, subdir=''):
     base, ext = os.path.splitext(file)
         
     blt = os.path.join(testdir, 'blt', subdir, file)
-    E = Election(rule, ElectionProfile(blt), options)
+    E = Election(ElectionProfile(blt), options)
     E.count()
-    tag = '%s-%s-%s' % (base, rule.tag(), E.V.tag())
+    tag = '%s-%s-%s' % (base, E.rule.tag(), E.V.tag())
 
     def readFile(path):
         "read a dump/report file"
@@ -227,80 +231,75 @@ def doDumpCompare(rule, options, file, subdir=''):
 class ElectionDumpTest(unittest.TestCase):
     "compare some dumps"
 
-    def getDump(self, Rule, options, base):
+    def getDump(self, options, base):
         "run a count and return the dump"
         blt = '%s/blt/%s.blt' % (testdir, base)
-        E = Election(Rule, ElectionProfile(blt), options)
+        E = Election(ElectionProfile(blt), options)
         E.count()
         return E.dump()
 
     def testElectionDump(self):
         "try a basic count & dump"
-        self.assertTrue(doDumpCompare(R.mpls.Rule, dict(), '42'), 'Minneapolis 42.blt')
+        self.assertTrue(doDumpCompare(dict(rule='mpls'), '42'), 'Minneapolis 42.blt')
 
     def testElectionDumpu(self):
         "try a basic count & dump with utf-8 blt"
-        self.assertTrue(doDumpCompare(R.mpls.Rule, dict(), '42u'), 'Minneapolis 42u.blt')
+        self.assertTrue(doDumpCompare(dict(rule='mpls'), '42u'), 'Minneapolis 42u.blt')
 
     def testElectionDumpWarren(self):
         "try a basic count & dump"
-        self.assertTrue(doDumpCompare(R.meek.Rule, dict(variant='warren'), '42'), 'Warren 42.blt')
+        self.assertTrue(doDumpCompare(dict(rule='warren'), '42'), 'Warren 42.blt')
 
     def testElectionDumpMPRFStable(self):
         "meek-prf-basic stable state"
-        self.assertTrue(doDumpCompare(R.meek_prf.Rule, dict(precision=7, omega=7), 'SC-Vm-12'), 'meek-prf stable state')
+        self.assertTrue(doDumpCompare(dict(rule='prf-meek-basic', precision=7, omega=7), 'SC-Vm-12'), 'meek-prf stable state')
 
     def testElectionDumps(self):
         "try several counts & dumps"
         blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SCw', 'SC-Vm-12')
-        ruleNames = droop.electionRuleNames()
+        rulenames = droop.electionRuleNames()
         for blt in blts:
-            for name in ruleNames:
-                Rule = droop.electionRule(name)
-                self.assertTrue(doDumpCompare(Rule, dict(), blt), '%s %s.blt' % (Rule.info(), blt))
+            for rulename in rulenames:
+                Rule = droop.electionRule(rulename)
+                self.assertTrue(doDumpCompare(dict(rule=rulename), blt), '%s %s.blt' % (Rule.info(), blt))
 
     def testElectionDumpRational(self):
         "try several counts & dumps with rational arithmetic"
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
-        Rules = (R.meek.Rule, R.wigm.Rule)
+        rulenames = ('meek', 'wigm')
         for blt in blts:
-            for Rule in Rules:
-                self.assertTrue(doDumpCompare(Rule, dict(arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
+            for rulename in rulenames:
+                Rule = droop.electionRule(rulename)
+                self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
 
     def testElectionDumpFixedVsGuarded(self):
         "guarded with guard=0 should match fixed"
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
-        Rules = (R.meek.Rule, R.wigm.Rule)
+        rulenames = ('meek', 'wigm')
         for blt in blts:
-            for Rule in Rules:
-                fdump = self.getDump(Rule, dict(arithmetic='fixed', precision=6), blt)
-                gdump = self.getDump(Rule, dict(arithmetic='guarded', precision=6, guard=0), blt)
-                if fdump != gdump:
-                    print Rule
-                    print blt
-                    print fdump
-                    print gdump
+            for rulename in rulenames:
+                fdump = self.getDump(dict(rule=rulename, arithmetic='fixed', precision=6), blt)
+                gdump = self.getDump(dict(rule=rulename, arithmetic='guarded', precision=6, guard=0), blt)
                 self.assertEqual(fdump, gdump, 'guarded with guard=0 should match fixed')
 
     def testElectionDumpRationalVsGuarded(self):
         "guarded should match rational"
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
-        Rules = (R.meek.Rule, R.wigm.Rule)
+        rulenames = ('meek', 'wigm')
         for blt in blts:
-            for Rule in Rules:
-                fdump = self.getDump(Rule, dict(arithmetic='rational', omega=9, display=18), blt)
-                gdump = self.getDump(Rule, dict(arithmetic='guarded', precision=18, guard=9, omega=9), blt)
+            for rulename in rulenames:
+                fdump = self.getDump(dict(rule=rulename, arithmetic='rational', omega=9, display=18), blt)
+                gdump = self.getDump(dict(rule=rulename, arithmetic='guarded', precision=18, guard=9, omega=9), blt)
                 self.assertEqual(fdump, gdump, 'guarded should match rational')
 
     def testElectionDumpRules(self):
         "run rule-specific counts"
-        ruleNames = droop.electionRuleNames()
-        for name in ruleNames:
-            bltdir = os.path.join(testdir, 'blt', name)
+        rulenames = droop.electionRuleNames()
+        for rulename in rulenames:
+            bltdir = os.path.join(testdir, 'blt', rulename)
             if os.path.isdir(bltdir):
-                rule = droop.electionRule(name)
                 for blt in [blt for blt in os.listdir(bltdir) if blt.endswith('.blt')]:
-                    self.assertTrue(doDumpCompare(rule, dict(), blt, name), '%s/%s' % (name, blt))
+                    self.assertTrue(doDumpCompare(dict(rule=rulename), blt, rulename), '%s/%s' % (rulename, blt))
 
 if __name__ == '__main__':
     unittest.main()

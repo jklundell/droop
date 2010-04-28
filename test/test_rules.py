@@ -74,7 +74,6 @@ class RuleTest(unittest.TestCase):
         Rule = electionRule('warren')
         Rule.options(dict(rule='warren'))
         self.assertEqual(Rule.tag(), 'warren-generic-o9')
-        self.assertRaises(UsageError, Rule.options, dict(variant='whatever'))
         self.assertRaises(UsageError, Rule.options, dict(defeat_batch='whatever'))
 
 
