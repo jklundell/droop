@@ -132,7 +132,7 @@ class ElectionCountTest(unittest.TestCase):
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount5(self):
-        "try meek_prf default"
+        "try prf-meek-basic default"
         E = self.doCount(dict(rule='prf-meek-basic'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 

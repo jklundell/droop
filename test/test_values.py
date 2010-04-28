@@ -302,7 +302,7 @@ class ValueTestGuarded9(unittest.TestCase):
         self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', display='abc'))
 
     def testDisplay(self):
-        "display is limited to precision+guard"
+        "display defaults to precision"
         p = 5
         A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=p))
         self.assertEqual(A.display, p)
