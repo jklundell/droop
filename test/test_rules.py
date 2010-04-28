@@ -27,14 +27,15 @@ if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
 from droop import electionRuleNames, electionRule
 from droop import rules as R
-from droop.common import UsageError
+from droop.common import UsageError, ElectionError
+from droop.election import Election
 
 class RuleInitTest(unittest.TestCase):
     "test rules.__init__"
     
     def testRuleNames(self):
-        "check the list of names"
-        self.assertTrue(len(electionRuleNames()) >= 4, 'at least four rule names')
+        "check the list of rule names"
+        self.assertTrue(len(electionRuleNames()) >= 1, 'at least one rule name')
 
     def testRuleNameMpls(self):
         "check the list of names for mpls"
@@ -45,6 +46,13 @@ class RuleInitTest(unittest.TestCase):
         from droop.rules.mpls import Rule as Mpls
         self.assertEqual(electionRule('mpls'), Mpls, 'the mpls Rule should match its name lookup')
 
+    def testElectionNoRule(self):
+        "trying an election without a rule should fail"
+        self.assertRaises(ElectionError, Election, None, dict())
+
+    def testElectionBadRule(self):
+        "trying an election with an undefined rule should fail"
+        self.assertRaises(ElectionError, Election, None, dict(rule='nothing'))
 
 class RuleTest(unittest.TestCase):
     "test rules class methods"
