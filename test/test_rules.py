@@ -26,7 +26,6 @@ path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
 from droop import electionRuleNames, electionRule
-from droop import rules as R
 from droop.common import UsageError, ElectionError
 from droop.election import Election
 
@@ -36,15 +35,6 @@ class RuleInitTest(unittest.TestCase):
     def testRuleNames(self):
         "check the list of rule names"
         self.assertTrue(len(electionRuleNames()) >= 1, 'at least one rule name')
-
-    def testRuleNameMpls(self):
-        "check the list of names for mpls"
-        self.assertTrue('mpls' in electionRuleNames(), 'one of the rule names is mpls')
-
-    def testElectionRule(self):
-        "look up one election rule"
-        from droop.rules.mpls import Rule as Mpls
-        self.assertEqual(electionRule('mpls'), Mpls, 'the mpls Rule should match its name lookup')
 
     def testElectionNoRule(self):
         "trying an election without a rule should fail"

@@ -29,9 +29,9 @@ if basedir not in sys.path: sys.path.insert(0, os.path.normpath(basedir))
 import droop
 from droop.election import Election
 from droop.profile import ElectionProfile
-from droop import rules as R
+from droop import electionRuleNames
 
-class ElectionInitTest(unittest.TestCase):
+class ElectionBasics(unittest.TestCase):
     '''
     test Election.__init__
     
@@ -39,35 +39,27 @@ class ElectionInitTest(unittest.TestCase):
     and the Minneapolis rule and test its basic initialization,
     and that it elects the specified number of seats.
     '''
-    
-    def setUp(self):
-        "initialize profile and rule"
+
+    def testRules(self):
+        "basic test of each rule"
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-        self.Profile = ElectionProfile(data=b)
-        self.options = dict(rule='mpls')
-        self.E = Election(self.Profile, self.options)
 
-    def testElectionInit(self):
-        "check that election is initialized"
-        self.assertTrue(self.E.rule == R.mpls.Rule, 'bad rule class')
-        self.assertEqual(len(self.options), 3, 'mpls should set three options')
-        self.assertEqual(self.options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
-        self.assertEqual(self.options['precision'], 4, 'mpls should set precision=4')
-        self.assertEqual(self.E.candidates[1].name, "Castor")
-        self.assertEqual(str(self.E.candidates[1]), "Castor")
-        self.assertTrue(self.E.candidates[1] == 1)
-        self.assertTrue(self.E.candidates[1] == '1')
-        self.assertFalse(self.E.candidates[1] == None)
-
-    def testElectionTieOrder(self):
-        "test default tie order"
-        for c in self.E.candidates.values():
-            self.assertEqual(c.order, c.tieOrder)
-
-    def testElectionCount1(self):
-        "try a basic count"
-        self.E.count()
-        self.assertEqual(len(self.E.elected), self.E.nSeats)
+        for rulename in electionRuleNames():
+            profile = ElectionProfile(data=b)
+            options = dict(rule=rulename)
+            E = Election(profile, options)
+            self.assertTrue(E.rule.__name__ == 'Rule', 'bad rule class')
+            self.assertTrue(len(options) >= 1, 'rule should set/leave at least one option')
+            self.assertTrue(options.get('arithmetic', 'fixed') in ('fixed', 'integer', 'guarded', 'rational'), 'legal arithmetic')
+            self.assertEqual(E.candidates[1].name, "Castor")
+            self.assertEqual(str(E.candidates[1]), "Castor")
+            self.assertTrue(E.candidates[1] == 1)
+            self.assertTrue(E.candidates[1] == '1')
+            self.assertFalse(E.candidates[1] == None)
+            for c in E.candidates.values():
+                self.assertEqual(c.order, c.tieOrder)
+            E.count()
+            self.assertEqual(len(E.elected), E.nSeats)
 
 class ElectionHelps(unittest.TestCase):
     "check that helps dict is initialized"
