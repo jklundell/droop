@@ -27,27 +27,27 @@ from droop import electionRuleNames, electionRule
 from droop.election import Election
 from droop.profile import ElectionProfile
 
-from droop.rules.mpls import Rule
+from droop.rules.scotland import Rule
 
-class MplsTestBasic(unittest.TestCase):
+class TestBasic(unittest.TestCase):
     "test rules.__init__"
     
-    def testRuleNameMpls(self):
-        "check the list of names for mpls"
-        self.assertTrue('mpls' in electionRuleNames(), 'one of the rule names is mpls')
+    def testRuleName(self):
+        "check the list of names for scotland"
+        self.assertTrue('scotland' in electionRuleNames(), 'one of the rule names is scotland')
 
     def testElectionRule(self):
         "look up one election rule"
-        self.assertEqual(electionRule('mpls'), Rule, 'the mpls Rule should match its name lookup')
+        self.assertEqual(electionRule('scotland'), Rule, 'the scotland Rule should match its name lookup')
 
-    def testMplsWigm(self):
-        "mpls is is a wigm variant"
+    def testWigm(self):
+        "scotland is is a wigm variant"
         self.assertEqual(Rule.method(), 'wigm')
 
-class MplsTest(unittest.TestCase):
+class TestScotland(unittest.TestCase):
     '''
     Create an Election instance from a simple profile 
-    and the Minneapolis rule and test its basic initialization,
+    and the Scottish STV rule and test its basic initialization,
     and that it elects the specified number of seats.
     '''
     
@@ -55,15 +55,15 @@ class MplsTest(unittest.TestCase):
         "initialize profile and rule"
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.Profile = ElectionProfile(data=b)
-        self.options = dict(rule='mpls')
+        self.options = dict(rule='scotland')
         self.E = Election(self.Profile, self.options)
 
     def testElectionInit(self):
         "check that election is initialized"
         self.assertTrue(self.E.rule == Rule, 'bad rule class')
-        self.assertEqual(len(self.options), 3, 'mpls should set three options')
-        self.assertEqual(self.options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
-        self.assertEqual(self.options['precision'], 4, 'mpls should set precision=4')
+        self.assertEqual(len(self.options), 3, 'scotland should set three options')
+        self.assertEqual(self.options['arithmetic'], 'fixed', 'scotland should set arithmetic=fixed')
+        self.assertEqual(self.options['precision'], 5, 'scotland should set precision=5')
         self.assertEqual(self.E.candidates[1].name, "Castor")
         self.assertEqual(str(self.E.candidates[1]), "Castor")
         self.assertTrue(self.E.candidates[1] == 1)
@@ -92,25 +92,25 @@ class ElectionCountTest(unittest.TestCase):
 
     def testElectionCount1(self):
         "try a basic count"
-        E = self.doCount(dict(rule='mpls'), '42.blt')
+        E = self.doCount(dict(rule='scotland'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionTieCount(self):
         "check a different tiebreaking order"
-        E = self.doCount(dict(rule='mpls'), '42t.blt')
+        E = self.doCount(dict(rule='scotland'), '42t.blt')
         tieOrder = [0, 3, 2, 1]
         for c in E.candidates.values():
             self.assertEqual(c.tieOrder, tieOrder[c.order])
 
     def testElectionCount2(self):
         "try a bigger election"
-        E = self.doCount(dict(rule='mpls'), 'M135.blt')
+        E = self.doCount(dict(rule='scotland'), 'M135.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
-    def testElectionMpls1(self):
-        "mpls: everyone elected at first"
-        p_mpls1 = '''3 2 4 1 2 0 4 2 1 0 1 3 0 0 "a" "b" "c" "2 elected at first"'''
-        E = Election(ElectionProfile(data=p_mpls1), dict(rule='mpls'))
+    def testElectionScotland1(self):
+        "scotland: everyone elected at first"
+        b = '''3 2 4 1 2 0 4 2 1 0 1 3 0 0 "a" "b" "c" "2 elected at first"'''
+        E = Election(ElectionProfile(data=b), dict(rule='scotland'))
         E.count()
         self.assertEqual(len(E.elected), 2)
 
@@ -118,11 +118,11 @@ class ElectionCountTest(unittest.TestCase):
         "using nicknames shouldn't alter dump or report"
         b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         b2 = '''3 2 [nick a b c] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-        E = Election(ElectionProfile(data=b1), dict(rule='mpls'))
+        E = Election(ElectionProfile(data=b1), dict(rule='scotland'))
         E.count()
         r1 = E.report()
         d1 = E.dump()
-        E = Election(ElectionProfile(data=b2), dict(rule='mpls'))
+        E = Election(ElectionProfile(data=b2), dict(rule='scotland'))
         E.count()
         r2 = E.report()
         d2 = E.dump()
@@ -134,11 +134,11 @@ class ElectionDumpTest(unittest.TestCase):
 
     def testElectionDump(self):
         "try a basic count & dump"
-        self.assertTrue(doDumpCompare(dict(rule='mpls'), '42'), 'Minneapolis 42.blt')
+        self.assertTrue(doDumpCompare(dict(rule='scotland'), '42'), 'Scotland 42.blt')
 
     def testElectionDumpu(self):
         "try a basic count & dump with utf-8 blt"
-        self.assertTrue(doDumpCompare(dict(rule='mpls'), '42u'), 'Minneapolis 42u.blt')
+        self.assertTrue(doDumpCompare(dict(rule='scotland'), '42u'), 'Scotland 42u.blt')
 
 if __name__ == '__main__':
     unittest.main()

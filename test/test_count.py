@@ -123,11 +123,11 @@ class ElectionCountTest(unittest.TestCase):
         "using nicknames shouldn't alter dump or report"
         b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         b2 = '''3 2 [nick a b c] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-        E = Election(ElectionProfile(data=b1), dict(rule='scotland'))
+        E = Election(ElectionProfile(data=b1), dict(rule='prf-meek-basic'))
         E.count()
         r1 = E.report()
         d1 = E.dump()
-        E = Election(ElectionProfile(data=b2), dict(rule='scotland'))
+        E = Election(ElectionProfile(data=b2), dict(rule='prf-meek-basic'))
         E.count()
         r2 = E.report()
         d2 = E.dump()
