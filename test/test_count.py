@@ -21,11 +21,9 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import unittest
-import sys, os, re
-testdir = os.path.dirname(os.path.abspath(__file__))
-basedir = os.path.normpath(os.path.join(testdir, '..'))
-if basedir not in sys.path: sys.path.insert(0, os.path.normpath(basedir))
+import os
 
+from common import testdir, doDumpCompare
 import droop
 from droop.election import Election
 from droop.profile import ElectionProfile
@@ -81,33 +79,16 @@ class ElectionCountTest(unittest.TestCase):
         return E
 
     def testElectionCount1(self):
-        "try a basic count"
-        E = self.doCount(dict(rule='mpls'), '42.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-
-    def testElectionTieCount(self):
-        "check a different tiebreaking order"
-        E = self.doCount(dict(rule='mpls'), '42t.blt')
-        tieOrder = [0, 3, 2, 1]
-        for c in E.candidates.values():
-            self.assertEqual(c.tieOrder, tieOrder[c.order])
-
-    def testElectionCount2(self):
-        "try a bigger election"
-        E = self.doCount(dict(rule='mpls'), 'M135.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-
-    def testElectionCount3(self):
         "try wigm default"
         E = self.doCount(dict(rule='wigm'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
-    def testElectionCount3a(self):
+    def testElectionCount2(self):
         "try wigm with integer quota"
         E = self.doCount(dict(rule='wigm', integer_quota='true'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
-    def testElectionCount3b(self):
+    def testElectionCount3(self):
         "try wigm with precision as string"
         E = self.doCount(dict(rule='wigm', precision='8'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
@@ -138,13 +119,6 @@ class ElectionCountTest(unittest.TestCase):
         E = self.doCount(dict(rule='meek', precision=7, omega=7), 'M135.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
-    def testElectionMpls1(self):
-        "mpls: everyone elected at first"
-        p_mpls1 = '''3 2 4 1 2 0 4 2 1 0 1 3 0 0 "a" "b" "c" "2 elected at first"'''
-        E = Election(ElectionProfile(data=p_mpls1), dict(rule='mpls'))
-        E.count()
-        self.assertEqual(len(E.elected), 2)
-
     def testNickReport(self):
         "using nicknames shouldn't alter dump or report"
         b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
@@ -160,66 +134,6 @@ class ElectionCountTest(unittest.TestCase):
         self.assertEqual(r1, r2)
         self.assertEqual(d1, d2)
 
-def doDumpCompare(options, file, subdir=''):
-    '''
-    helper: do a count and compare dump/report to reference
-    '''
-    if not file.endswith('.blt'):
-        file += '.blt'
-    base, ext = os.path.splitext(file)
-        
-    blt = os.path.join(testdir, 'blt', subdir, file)
-    E = Election(ElectionProfile(blt), options)
-    E.count()
-    tag = '%s-%s-%s' % (base, E.rule.tag(), E.V.tag())
-
-    def readFile(path):
-        "read a dump/report file"
-        f = open(path, 'r')
-        data = f.read()
-        f.close()
-        return data
-        
-    def writeFile(path, data):
-        "write a dump/report file"
-        if not os.path.isdir(os.path.dirname(path)):
-            os.makedirs(os.path.dirname(path))
-        f = open(path, 'w')
-        f.write(data)
-        f.close()
-        
-    #  first do dump
-    #
-    dref = os.path.join(testdir, 'ref', 'dump', subdir, '%s.txt' % tag)
-    dout = os.path.join(testdir, 'out', 'dump', subdir, '%s.txt' % tag)
-    dump = E.dump()
-    if not os.path.isfile(dref):
-        writeFile(dref, dump)
-    dumpref = readFile(dref)
-    if os.path.isfile(dout):
-        os.unlink(dout)
-    if dump != dumpref:
-        writeFile(dout, dump)
-        return False
-
-    #  same logic with report
-    #
-    rref = os.path.join(testdir, 'ref', 'report', subdir, '%s.txt' % tag)
-    rout = os.path.join(testdir, 'out', 'report', subdir, '%s.txt' % tag)
-    report = E.report()
-    if not os.path.isfile(rref):
-        writeFile(rref, report)
-    reportref = readFile(rref)
-    if os.path.isfile(rout):
-        os.unlink(rout)
-    # don't include version number in comparison
-    report0 = re.sub(r'droop v\d+\.\d+', 'droop v0.0', report)
-    reportref = re.sub(r'droop v\d+\.\d+', 'droop v0.0', reportref)
-    if report0 != reportref:
-        writeFile(rout, report)
-        return False
-    return True
-
 class ElectionDumpTest(unittest.TestCase):
     "compare some dumps"
 
@@ -229,14 +143,6 @@ class ElectionDumpTest(unittest.TestCase):
         E = Election(ElectionProfile(blt), options)
         E.count()
         return E.dump()
-
-    def testElectionDump(self):
-        "try a basic count & dump"
-        self.assertTrue(doDumpCompare(dict(rule='mpls'), '42'), 'Minneapolis 42.blt')
-
-    def testElectionDumpu(self):
-        "try a basic count & dump with utf-8 blt"
-        self.assertTrue(doDumpCompare(dict(rule='mpls'), '42u'), 'Minneapolis 42u.blt')
 
     def testElectionDumpWarren(self):
         "try a basic count & dump"

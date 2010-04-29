@@ -21,11 +21,8 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import unittest
-import sys, os
-testdir = os.path.dirname(os.path.abspath(__file__))
-basedir = os.path.normpath(os.path.join(testdir, '..'))
-if basedir not in sys.path: sys.path.insert(0, os.path.normpath(basedir))
 
+from common import testdir
 from droop.profile import ElectionProfile, ElectionProfileError
 
 p_42 = '''3 2
@@ -230,7 +227,7 @@ class OptionNickTest(unittest.TestCase):
         b0 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         b1 = '''3 2 [nick a b c ] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         b2 = '''3 2 [nick a b c] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-        p0 = ElectionProfile(data=b1)
+        p0 = ElectionProfile(data=b0)
         self.assertEqual(len(p0.nickName), 3)
         p1 = ElectionProfile(data=b1)
         self.assertEqual(len(p1.nickName), 3)

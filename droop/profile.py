@@ -70,9 +70,9 @@ class ElectionProfile(object):
         self._candidateName = dict()  # cid => candidate name
         self._candidateOrder = dict() # cid -> ballot order
         self.ballotLines = tuple()
-        self.tieOrder = None          # tiebreaking cid sequence
-        self.nickCid = None           # nick to cid
-        self.nickName = None          # cid to nick
+        self.tieOrder = dict()        # tiebreaking cid sequence: cid->order
+        self.nickCid = dict()         # nick to cid
+        self.nickName = dict()        # cid to nick
 
         if path:
             data = self.__bltPath(path)
@@ -80,6 +80,10 @@ class ElectionProfile(object):
             raise ElectionProfileError('no profile data')
         self.__bltData(data)
         self.__validate()
+        if not self.nickCid:          # create default nicknames: str(cid)
+            for cid in xrange(1, self.nCand+1):
+                self.nickCid[str(cid)] = cid
+                self.nickName[cid] = str(cid)
 
     class BallotLine(object):
         "one ballot line"

@@ -21,10 +21,8 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import unittest
-import sys, os
-path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
+import common  # to set sys.path
 from droop.common import UsageError
 from droop import values as V
 from droop.values.fixed import Fixed as F

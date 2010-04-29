@@ -21,10 +21,8 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import unittest
-import sys, os
-path = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-if path not in sys.path: sys.path.insert(0, os.path.normpath(path))
 
+from common import testdir, doDumpCompare
 from droop import electionRuleNames, electionRule
 from droop.election import Election
 from droop.profile import ElectionProfile
@@ -81,6 +79,66 @@ class MplsTest(unittest.TestCase):
         "try a basic count"
         self.E.count()
         self.assertEqual(len(self.E.elected), self.E.nSeats)
+
+class ElectionCountTest(unittest.TestCase):
+    "test some counts"
+
+    def doCount(self, options, blt):
+        "run the count and return the Election"
+        p = ElectionProfile(testdir + '/blt/' + blt)
+        E = Election(p, options)
+        E.count()
+        return E
+
+    def testElectionCount1(self):
+        "try a basic count"
+        E = self.doCount(dict(rule='mpls'), '42.blt')
+        self.assertEqual(len(E.elected), E.nSeats)
+
+    def testElectionTieCount(self):
+        "check a different tiebreaking order"
+        E = self.doCount(dict(rule='mpls'), '42t.blt')
+        tieOrder = [0, 3, 2, 1]
+        for c in E.candidates.values():
+            self.assertEqual(c.tieOrder, tieOrder[c.order])
+
+    def testElectionCount2(self):
+        "try a bigger election"
+        E = self.doCount(dict(rule='mpls'), 'M135.blt')
+        self.assertEqual(len(E.elected), E.nSeats)
+
+    def testElectionMpls1(self):
+        "mpls: everyone elected at first"
+        p_mpls1 = '''3 2 4 1 2 0 4 2 1 0 1 3 0 0 "a" "b" "c" "2 elected at first"'''
+        E = Election(ElectionProfile(data=p_mpls1), dict(rule='mpls'))
+        E.count()
+        self.assertEqual(len(E.elected), 2)
+
+    def testNickReport(self):
+        "using nicknames shouldn't alter dump or report"
+        b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        b2 = '''3 2 [nick a b c] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        E = Election(ElectionProfile(data=b1), dict(rule='mpls'))
+        E.count()
+        r1 = E.report()
+        d1 = E.dump()
+        E = Election(ElectionProfile(data=b2), dict(rule='mpls'))
+        E.count()
+        r2 = E.report()
+        d2 = E.dump()
+        self.assertEqual(r1, r2)
+        self.assertEqual(d1, d2)
+
+class ElectionDumpTest(unittest.TestCase):
+    "compare some dumps"
+
+    def testElectionDump(self):
+        "try a basic count & dump"
+        self.assertTrue(doDumpCompare(dict(rule='mpls'), '42'), 'Minneapolis 42.blt')
+
+    def testElectionDumpu(self):
+        "try a basic count & dump with utf-8 blt"
+        self.assertTrue(doDumpCompare(dict(rule='mpls'), '42u'), 'Minneapolis 42u.blt')
 
 if __name__ == '__main__':
     unittest.main()

@@ -155,7 +155,7 @@ class Rule(ElectionRule):
 
     @classmethod
     def helps(cls, helps, name):
-        "create help string for mpls"
+        "create help string for scottish stv"
         h =  'Scottish STV is a variant on WIGM.\n'
         h += '\nThere are no options.\n'
         h += '  arithmetic: fixed\n'
