@@ -68,72 +68,6 @@ class ElectionHelps(unittest.TestCase):
         self.assertTrue(isinstance(helps['rule'], str))
         self.assertTrue(isinstance(helps['arithmetic'], str))
 
-class ElectionCountTest(unittest.TestCase):
-    "test some counts"
-
-    def doCount(self, options, blt):
-        "run the count and return the Election"
-        p = ElectionProfile(testdir + '/blt/' + blt)
-        E = Election(p, options)
-        E.count()
-        return E
-
-    def testElectionCount1(self):
-        "try wigm default"
-        E = self.doCount(dict(rule='wigm'), '42.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-
-    def testElectionCount2(self):
-        "try wigm with integer quota"
-        E = self.doCount(dict(rule='wigm', integer_quota='true'), '42.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-
-    def testElectionCount3(self):
-        "try wigm with precision as string"
-        E = self.doCount(dict(rule='wigm', precision='8'), '42.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-        self.assertEqual(E.V.precision, 8)
-
-    def testElectionCount4(self):
-        "try meek default"
-        E = self.doCount(dict(rule='meek'), '42.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-
-    def testElectionCount4a(self):
-        "try meek default"
-        E = self.doCount(dict(rule='meek', defeat_batch='none'), '42.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-
-    def testElectionCount5(self):
-        "try prf-meek-basic default"
-        E = self.doCount(dict(rule='prf-meek-basic'), '42.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-
-    def testElectionCount6(self):
-        "prf-meek-basic stable state"
-        E = self.doCount(dict(rule='prf-meek-basic', precision=7, omega=7), 'M135.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-
-    def testElectionCount7(self):
-        "meek-generic stable state"
-        E = self.doCount(dict(rule='meek', precision=7, omega=7), 'M135.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-
-    def testNickReport(self):
-        "using nicknames shouldn't alter dump or report"
-        b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-        b2 = '''3 2 [nick a b c] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-        E = Election(ElectionProfile(data=b1), dict(rule='prf-meek-basic'))
-        E.count()
-        r1 = E.report()
-        d1 = E.dump()
-        E = Election(ElectionProfile(data=b2), dict(rule='prf-meek-basic'))
-        E.count()
-        r2 = E.report()
-        d2 = E.dump()
-        self.assertEqual(r1, r2)
-        self.assertEqual(d1, d2)
-
 class ElectionDumpTest(unittest.TestCase):
     "compare some dumps"
 
@@ -144,14 +78,6 @@ class ElectionDumpTest(unittest.TestCase):
         E.count()
         return E.dump()
 
-    def testElectionDumpWarren(self):
-        "try a basic count & dump"
-        self.assertTrue(doDumpCompare(dict(rule='warren'), '42'), 'Warren 42.blt')
-
-    def testElectionDumpMPRFStable(self):
-        "meek-prf-basic stable state"
-        self.assertTrue(doDumpCompare(dict(rule='prf-meek-basic', precision=7, omega=7), 'SC-Vm-12'), 'meek-prf stable state')
-
     def testElectionDumps(self):
         "try several counts & dumps"
         blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SCw', 'SC-Vm-12')
@@ -160,35 +86,6 @@ class ElectionDumpTest(unittest.TestCase):
             for rulename in rulenames:
                 Rule = droop.electionRule(rulename)
                 self.assertTrue(doDumpCompare(dict(rule=rulename), blt), '%s %s.blt' % (Rule.info(), blt))
-
-    def testElectionDumpRational(self):
-        "try several counts & dumps with rational arithmetic"
-        blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
-        rulenames = ('meek', 'wigm')
-        for blt in blts:
-            for rulename in rulenames:
-                Rule = droop.electionRule(rulename)
-                self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
-
-    def testElectionDumpFixedVsGuarded(self):
-        "guarded with guard=0 should match fixed"
-        blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
-        rulenames = ('meek', 'wigm')
-        for blt in blts:
-            for rulename in rulenames:
-                fdump = self.getDump(dict(rule=rulename, arithmetic='fixed', precision=6), blt)
-                gdump = self.getDump(dict(rule=rulename, arithmetic='guarded', precision=6, guard=0), blt)
-                self.assertEqual(fdump, gdump, 'guarded with guard=0 should match fixed')
-
-    def testElectionDumpRationalVsGuarded(self):
-        "guarded should match rational"
-        blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
-        rulenames = ('meek', 'wigm')
-        for blt in blts:
-            for rulename in rulenames:
-                fdump = self.getDump(dict(rule=rulename, arithmetic='rational', omega=9, display=18), blt)
-                gdump = self.getDump(dict(rule=rulename, arithmetic='guarded', precision=18, guard=9, omega=9), blt)
-                self.assertEqual(fdump, gdump, 'guarded should match rational')
 
     def testElectionDumpRules(self):
         "run rule-specific counts"
