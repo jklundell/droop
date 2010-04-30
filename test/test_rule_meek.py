@@ -98,14 +98,21 @@ class ElectionDumpTest(unittest.TestCase):
                 Rule = droop.electionRule(rulename)
                 self.assertTrue(doDumpCompare(dict(rule=rulename), blt), '%s %s.blt' % (Rule.info(), blt))
 
-    def testElectionDumpRational(self):
+    def testElectionDumpRationalMeek(self):
         "try several counts & dumps with rational arithmetic"
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
-        rulenames = ('meek', 'warren')
+        rulename = 'meek'
         for blt in blts:
-            for rulename in rulenames:
-                Rule = droop.electionRule(rulename)
-                self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
+            Rule = droop.electionRule(rulename)
+            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
+
+    def testElectionDumpRationalWarren(self):
+        "try several counts & dumps with rational arithmetic"
+        blts = ('42', '42t', '513', 'SC')  # SC-Vm-12 runs too long with warren+rational
+        rulename = 'warren'
+        for blt in blts:
+            Rule = droop.electionRule(rulename)
+            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
 
     def testElectionDumpFixedVsGuardedMeek(self):
         "meek: guarded with guard=0 should match fixed"
