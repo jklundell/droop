@@ -364,6 +364,8 @@ class ElectionProfile(object):
                     inQuote = True
                 if inQuote and token.endswith('"'):
                     inQuote = False
+                    yield token
+                    continue
                 if not inQuote and token.startswith('/*'):
                     inComment += 1
                 if inComment:
@@ -371,6 +373,6 @@ class ElectionProfile(object):
                         inComment -= 1
                     continue
                 # if not in quote or comment, # means comment to end-of-line
-                if token.startswith('#'):
+                if not inQuote and token.startswith('#'):
                     break
                 yield token

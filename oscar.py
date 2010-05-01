@@ -20,13 +20,21 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
-
 import sys, os
 import Droop
+import droop
+
+def usage():
+    "oscar usage string"
+    return "usage: %s ballot_file" % os.path.basename(sys.argv[0])
 
 if len(sys.argv) != 2:
-    print >>sys.stderr, "usage: %s ballot_file" % os.path.basename(sys.argv[0])
+    print >>sys.stderr, usage()
     sys.exit(1)
-print Droop.main(dict(rule='wigm', path=sys.argv[1], arithmetic='fixed', precision=2, integer_quota=True, defeat_batch='zero'))
-
+try:
+    print Droop.main(dict(rule='wigm', path=sys.argv[1], arithmetic='fixed', precision=2, integer_quota=True, defeat_batch='zero'))
+except (droop.common.UsageError, droop.common.ElectionError, droop.profile.ElectionProfileError) as err:
+    print >>sys.stderr, "** oscar: %s" % err
+    print >>sys.stderr, usage()
+    sys.exit(1)
 sys.exit(0)

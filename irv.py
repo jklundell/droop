@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 '''
-Count election using Droop's Scottish STV rule
+Count IRV election using Droop's WIGM rule
 
 Copyright 2010 by Jonathan Lundell
 
@@ -26,16 +26,16 @@ import Droop
 import droop
 
 def usage():
-    "scotland usage string"
+    "irv usage string"
     return "usage: %s ballot_file" % os.path.basename(sys.argv[0])
 
 if len(sys.argv) != 2:
     print >>sys.stderr, usage()
     sys.exit(1)
 try:
-    print Droop.main(dict(rule='scotland', path=sys.argv[1]))
+    print Droop.main(dict(rule='wigm', arithmetic='integer', path=sys.argv[1]))
 except (droop.common.UsageError, droop.common.ElectionError, droop.profile.ElectionProfileError) as err:
-    print >>sys.stderr, "** scotland: %s" % err
+    print >>sys.stderr, "** irv: %s" % err
     print >>sys.stderr, usage()
     sys.exit(1)
 sys.exit(0)

@@ -88,6 +88,16 @@ class ProfileTest(unittest.TestCase):
         b = '''3 2 4 1 2 0 2 3 0 0 # comment\n "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.assertEqual(ElectionProfile(data=b).nSeats, 2)
 
+    def testInitHashInQuote(self):
+        "normal init: 2 seats (ignore hash in title)"
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen # should tie"'''
+        self.assertEqual(ElectionProfile(data=b).nSeats, 2)
+
+    def testInitHashEndsQuote(self):
+        "normal init: 2 seats (ignore hash at end of title)"
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should #tie"'''
+        self.assertEqual(ElectionProfile(data=b).nSeats, 2)
+
     def testInitTitle(self):
         "normal init: title set"
         t1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
