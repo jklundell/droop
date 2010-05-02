@@ -45,6 +45,14 @@ class ProfileTest(unittest.TestCase):
         "exception if no profile data supplied"
         self.assertRaises(ElectionProfileError, ElectionProfile)
 
+    def testEmptyData(self):
+        "exception if empty profile data supplied"
+        self.assertRaises(ElectionProfileError, ElectionProfile, data='')
+
+    def testTruncData(self):
+        "exception if truncated profile data supplied"
+        self.assertRaises(ElectionProfileError, ElectionProfile, data='1 2')
+
     def testInitSeats(self):
         "normal init: 2 seats"
         self.assertEqual(ElectionProfile(data=p_42).nSeats, 2)
