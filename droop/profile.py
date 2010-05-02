@@ -75,10 +75,10 @@ class ElectionProfile(object):
         self.nickName = dict()        # cid to nick
 
         if path:
-            data = self.__bltPath(path)
+            data = self._bltPath(path)
         if not data:
             raise ElectionProfileError('no profile data')
-        self.__bltData(data)
+        self._bltData(data)
         self.__validate()
         if not self.nickCid:          # create default nicknames: str(cid)
             for cid in xrange(1, self.nCand+1):
@@ -135,7 +135,7 @@ class ElectionProfile(object):
         "get ballot order of candidate"
         return self._candidateOrder[cid]
     
-    def __bltPath(self, path):
+    def _bltPath(self, path):
         "open a path to a blt file"
         try:
             f = open(path, 'r')
@@ -203,8 +203,15 @@ class ElectionProfile(object):
         else:
             raise ElectionProfileError('bad blt item "%s": unknown option' % option)
 
+    def _bltData(self, data):
+        "process a blt data blob, catching iteration exceptions"
+        try:
+            self.__bltData(data)
+        except StopIteration:
+            raise ElectionProfileError('bad blt file: unexpected end-of-file')
+
     def __bltData(self, data):
-        "process a blt file"
+        "process a blt blob"
 
         digits = re.compile(r'\d+$')
         sdigits = re.compile(r'-?\d+$')
@@ -293,7 +300,10 @@ class ElectionProfile(object):
         #  we know in advance how many there should be
         #
         for cid in xrange(1, self.nCand+1):
-            name = blt.next()
+            try:
+                name = blt.next()
+            except StopIteration:
+                raise ElectionProfileError('bad blt item "%s" near candidate name #%d; expected quoted string' % (name, cid))
             if not name.startswith('"'):
                 raise ElectionProfileError('bad blt item "%s" near candidate name #%d; expected quoted string' % (name, cid))
             while not name.endswith('"'):

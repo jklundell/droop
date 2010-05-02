@@ -64,6 +64,11 @@ class ProfileTest(unittest.TestCase):
         b = '''3 2 4 1 2 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
+    def testJammedCand(self):
+        "exception candidates jammed together"
+        b = '''3 2 4 1 2 2 0 2 3 0 0 "Castor""Pollux""Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
     def testInitOneLine(self):
         "normal init: 2 seats (no newlines)"
         self.assertEqual(ElectionProfile(data=p_42a).nSeats, 2)
