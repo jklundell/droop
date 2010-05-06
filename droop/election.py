@@ -206,15 +206,13 @@ class Election(object):
             surplus = vote - self.R.quota
             for b in (b for b in ballots if b.topCid == cid):
                 b.weight = tf(self.V, b.weight, surplus, vote)
-                b.transfer(hopeful)
-                if not b.exhausted:
+                if b.transfer(hopeful):
                     b.topCand.vote += b.vote
             val = surplus
             c.vote = self.R.quota
         else:
             for b in (b for b in ballots if b.topCid == cid):
-                b.transfer(hopeful)
-                if not b.exhausted:
+                if b.transfer(hopeful):
                     b.topCand.vote += b.vote
             val = vote
             c.vote = self.V0
@@ -547,11 +545,6 @@ class CandidateState(object):
     def hopefulOrElected(self):
         "return combined list of hopeful and elected candidates"
         return self.hopeful + self.elected
-
-    @property
-    def hopefulOrPending(self):
-        "return combined list of hopeful and transfer-pending candidates"
-        return self.hopeful + self.pending
 
     def copy(self):
         "return a copy of ourself"

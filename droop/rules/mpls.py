@@ -242,66 +242,40 @@ class Rule(ElectionRule):
             R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
             
-        def transferFunction(V, ballotweight, surplus, vote):
-            "calculate new ballot weight on surplus transfer"
-            return (ballotweight * surplus) / vote
-            
-        def countComplete():
-            '''
-            test for count complete 167.70(1)(f)]
-            '''
-            ##  f. The procedures in clauses a. to e. must be repeated 
-            ##     until the number of candidates whose vote total is equal to or greater than 
-            ##     the threshold is equal to the number of seats to be filled, 
-            ##     or until the number of continuing candidates is equal to the number of offices 
-            ##     yet to be elected. 
-
-            if E.seatsLeftToFill() <= 0:
-                return True
-            if CS.nHopeful <= E.seatsLeftToFill():
-                return True
-            return False
-
         #########################
         #
         #   COUNT THE ELECTION
         #
         #########################
 
-        R = E.R0  # current round
+        R = E.R0    # current round
         CS = R.CS   # candidate state
-        V = E.V   # arithmetic value class
-        V0 = E.V0 # constant zero
+        V = E.V     # arithmetic value class
+        V0 = E.V0   # constant zero
 
         #  Calculate quota per 167.20(Threshold)
         #
         E.R0.quota = calcQuota(E)
         R.votes = V(E.nBallots)
 
-        #  skip withdrawn candidates
+        #  skip withdrawn candidates & make initial vote count
         #
-        for c in E.withdrawn:
-            E.transferBallots(c, msg='Transfer withdrawn')
-        
-        while True:
+        ##  167.70(1)(a)
+        ##  a. The number of votes cast for each candidate for the current round 
+        ##     must be counted.
+        ##
+        for b in E.ballots:
+            if b.topCand in CS.withdrawn:
+                b.transfer(CS.hopeful)
+            b.topCand.vote += b.vote
 
-            ##  167.70(1)(a)
-            ##  a. The number of votes cast for each candidate for the current round 
-            ##     must be counted.
-            ##
-            for c in CS.elected:
-                c.vote = R.quota
-            for c in CS.hopefulOrPending:
-                c.vote = V0
-            for b in (b for b in E.ballots if not b.exhausted):
-                b.topCand.vote += b.vote
+        while True:
 
             ##     If the number of candidates whose vote total is equal to or greater than
             ##     the threshold is equal to the number of seats to be filled, 
             ##     those candidates who are continuing candidates are elected 
             ##     and the tabulation is complete. 
             ##
-
             for c in [c for c in CS.hopeful if hasQuota(c)]:
                 CS.elect(c)
             if CS.nElected >= E.nSeats:
@@ -338,7 +312,11 @@ class Rule(ElectionRule):
             certainLosers = findCertainLosers(R.surplus, fixSpec=True)
             for c in CS.sortByOrder(certainLosers):
                 CS.defeat(c, 'Defeat certain loser')
-                E.transferBallots(c, msg='Transfer defeated')
+                for b in (b for b in E.ballots if b.topCid == c.cid):
+                    if b.transfer(CS.hopeful):
+                        b.topCand.vote += b.vote
+                E.log("%s: %s (%s)" % ('Transfer defeated', c.name, c.vote))
+                c.vote = V0
 
             ##     If no candidate can be defeated mathematically, the tabulation must continue
             ##     as described in clause d. 
@@ -348,7 +326,7 @@ class Rule(ElectionRule):
             #   must be performed here; otherwise too many candidates can be defeated.
 
             if certainLosers:
-                if countComplete():
+                if CS.nHopeful <= E.seatsLeftToFill():
                     break
                 continue  ## continue as described in clause a.
 
@@ -380,7 +358,15 @@ class Rule(ElectionRule):
                 high_vote = max(c.vote for c in CS.pending)
                 high_candidates = [c for c in CS.pending if c.vote == high_vote]
                 high_candidate = breakTie(high_candidates, 'largest surplus')
-                E.transferBallots(high_candidate, msg='Transfer surplus', tf=transferFunction)
+                CS.pending.remove(high_candidate)
+                surplus = high_candidate.vote - R.quota
+                for b in (b for b in E.ballots if b.topCid == high_candidate.cid):
+                    #b.weight = tf(self.V, b.weight, surplus, vote)
+                    b.weight = (b.weight * surplus) / high_candidate.vote
+                    if b.transfer(CS.hopeful):
+                        b.topCand.vote += b.vote
+                E.log("%s: %s (%s)" % ('Transfer surplus', high_candidate.name, surplus))
+                high_candidate.vote = R.quota
                 continue  ## continue as described in clause a.
 
             ##  167.70(1)(e)
@@ -401,7 +387,11 @@ class Rule(ElectionRule):
                 low_candidates = [c for c in CS.hopeful if c.vote == low_vote]
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 CS.defeat(low_candidate, 'Defeat low candidate')
-                E.transferBallots(low_candidate, msg='Transfer defeated')
+                for b in (b for b in E.ballots if b.topCid == low_candidate.cid):
+                    if b.transfer(CS.hopeful):
+                        b.topCand.vote += b.vote
+                E.log("%s: %s (%s)" % ('Transfer defeated', low_candidate.name, low_candidate.vote))
+                low_candidate.vote = V0
 
             ##  167.70(1)(f)
             ##  f. The procedures in clauses a. to e. must be repeated 
@@ -410,7 +400,7 @@ class Rule(ElectionRule):
             ##     or until the number of continuing candidates is equal to the number of offices 
             ##     yet to be elected. 
 
-            if countComplete():
+            if CS.nHopeful <= E.seatsLeftToFill():
                 break
 
             ##     In the case of a tie between two (2) continuing candidates, 
