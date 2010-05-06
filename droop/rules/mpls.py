@@ -266,7 +266,7 @@ class Rule(ElectionRule):
         ##
         for b in E.ballots:
             if b.topCand in CS.withdrawn:
-                b.transfer(CS.hopeful)
+                b.transfer()
             b.topCand.vote += b.vote
 
         while True:
@@ -313,7 +313,7 @@ class Rule(ElectionRule):
             for c in CS.sortByOrder(certainLosers):
                 CS.defeat(c, 'Defeat certain loser')
                 for b in (b for b in E.ballots if b.topCid == c.cid):
-                    if b.transfer(CS.hopeful):
+                    if b.transfer():
                         b.topCand.vote += b.vote
                 E.log("%s: %s (%s)" % ('Transfer defeated', c.name, c.vote))
                 c.vote = V0
@@ -363,7 +363,7 @@ class Rule(ElectionRule):
                 for b in (b for b in E.ballots if b.topCid == high_candidate.cid):
                     #b.weight = tf(self.V, b.weight, surplus, vote)
                     b.weight = (b.weight * surplus) / high_candidate.vote
-                    if b.transfer(CS.hopeful):
+                    if b.transfer():
                         b.topCand.vote += b.vote
                 E.log("%s: %s (%s)" % ('Transfer surplus', high_candidate.name, surplus))
                 high_candidate.vote = R.quota
@@ -388,7 +388,7 @@ class Rule(ElectionRule):
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 CS.defeat(low_candidate, 'Defeat low candidate')
                 for b in (b for b in E.ballots if b.topCid == low_candidate.cid):
-                    if b.transfer(CS.hopeful):
+                    if b.transfer():
                         b.topCand.vote += b.vote
                 E.log("%s: %s (%s)" % ('Transfer defeated', low_candidate.name, low_candidate.vote))
                 low_candidate.vote = V0

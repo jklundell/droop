@@ -199,20 +199,19 @@ class Election(object):
         vote = c.vote
         cid = c.cid
         ballots = self.ballots
-        hopeful = self.R.CS.hopeful
         
         if c in self.R.CS.elected:
             self.R.CS.pending.remove(c)
             surplus = vote - self.R.quota
             for b in (b for b in ballots if b.topCid == cid):
                 b.weight = tf(self.V, b.weight, surplus, vote)
-                if b.transfer(hopeful):
+                if b.transfer():
                     b.topCand.vote += b.vote
             val = surplus
             c.vote = self.R.quota
         else:
             for b in (b for b in ballots if b.topCid == cid):
-                if b.transfer(hopeful):
+                if b.transfer():
                     b.topCand.vote += b.vote
             val = vote
             c.vote = self.V0
@@ -402,17 +401,16 @@ class Election(object):
         
         def __init__(self, E, multiplier=1, ranking=None):
             "create a ballot"
-            if E is not None:  # E=None signals a copy operation
-                self.E = E
-                self.multiplier = multiplier  # number of ballots like this
-                self.index = 0                # current ranking
-                self.weight = E.V1            # initial weight
-                self.residual = E.V0          # untransferable weight
-                self.ranking = ranking
+            self.E = E
+            self.multiplier = multiplier  # number of ballots like this
+            self.index = 0                # current ranking
+            self.weight = E.V1            # initial weight
+            self.residual = E.V0          # untransferable weight
+            self.ranking = ranking
 
-        def transfer(self, hopeful):
+        def transfer(self):
             "advance index to next candidate on this ballot; return True if exists"
-            while self.index < len(self.ranking) and self.topCand not in hopeful:
+            while self.index < len(self.ranking) and self.topCand not in self.E.R.CS.hopeful:
                 self.index += 1
             return not self.exhausted
 

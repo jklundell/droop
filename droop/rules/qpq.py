@@ -158,7 +158,7 @@ class Rule(ElectionRule):
                     CS.unelect(c)
                 for b in E.ballots:
                     b.restart(V0)
-                    b.transfer(CS.hopeful)
+                    b.transfer()
 
             #  2.3. At the start of each stage, the quotients of all the hopeful candidates 
             #  are calculated, as follows. The ballots contributing to a particular hopeful
@@ -218,7 +218,7 @@ class Rule(ElectionRule):
                 new_weight = V1 / high_candidate.quotient
                 for b in (b for b in E.ballots if b.topCid == high_candidate.cid):
                     b.weight = new_weight
-                    b.transfer(CS.hopeful)
+                    b.transfer()
                 E.log("%s: %s (%s)" % ('Transfer elected', high_candidate.name, high_quotient))
             else:
                 low_quotient = min(c.quotient for c in CS.hopeful)
@@ -226,7 +226,7 @@ class Rule(ElectionRule):
                 low_candidate = breakTie(low_candidates, 'smallest quotient')
                 CS.defeat(low_candidate, 'Defeat low quotient', low_quotient)
                 for b in (b for b in E.ballots if b.topCid == low_candidate.cid):
-                    b.transfer(CS.hopeful)
+                    b.transfer()
                 E.log("%s: %s (%s)" % ('Transfer defeated', low_candidate.name, low_quotient))
                 restart = True
 
