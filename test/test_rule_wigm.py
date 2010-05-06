@@ -90,7 +90,7 @@ class ElectionDumpTest(unittest.TestCase):
         self.assertTrue(doDumpCompare(dict(rule='wigm'), '42'), 'WIGM 42.blt')
 
     def testElectionDumps(self):
-        "try several counts & dumps"
+        "try several counts & dumps (wigm)"
         blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SCw', 'SC-Vm-12')
         rulename = 'wigm'
         for blt in blts:

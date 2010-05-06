@@ -183,13 +183,6 @@ class Rule(ElectionRule):
             #
             for c in [c for c in CS.hopeful if hasQuota(E, c)]:
                 CS.elect(c)     # elect; transfer pending
-                #
-                #  If a candidate is elected with no surplus,
-                #  the associated ballots are exhausted,
-                #  so do the "transfer" now
-                #
-                if c.vote == R.quota:
-                    E.transferBallots(c, msg='Transfer zero surplus', tf=transferFunction)
 
             #  find & transfer highest surplus
             #

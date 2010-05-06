@@ -80,11 +80,11 @@ class ElectionDumpTest(unittest.TestCase):
         return E.dump()
 
     def testElectionDumpMPRFStable(self):
-        "meek-prf-basic stable state"
+        "prf-meek-basic stable state"
         self.assertTrue(doDumpCompare(dict(rule='prf-meek-basic', precision=7, omega=7), 'SC-Vm-12'), 'meek-prf stable state')
 
     def testElectionDumps(self):
-        "try several counts & dumps"
+        "try several counts & dumps (prf-meek-basic)"
         blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SCw', 'SC-Vm-12')
         rulename = 'prf-meek-basic'
         for blt in blts:

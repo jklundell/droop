@@ -90,7 +90,7 @@ class ElectionDumpTest(unittest.TestCase):
         self.assertTrue(doDumpCompare(dict(rule='warren'), '42'), 'Warren 42.blt')
 
     def testElectionDumps(self):
-        "try several counts & dumps"
+        "try several counts & dumps (meek)"
         blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SCw', 'SC-Vm-12')
         rulenames = ('meek', 'warren')
         for blt in blts:
