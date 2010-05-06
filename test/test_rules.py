@@ -50,7 +50,7 @@ class RuleTest(unittest.TestCase):
         for name in electionRuleNames():
             Rule = electionRule(name)
             method = Rule.method()
-            self.assertTrue(method in ('meek','wigm'), 'bad method "%s"' % method)
+            self.assertTrue(method in ('meek','wigm','qpq'), 'bad method "%s"' % method)
 
     def testReportHelps(self):
         "helps gives us back a string"

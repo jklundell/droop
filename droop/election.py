@@ -140,7 +140,7 @@ class Election(object):
         "count the election"
         self.rule.count(self)
         self.R.rollup(self.rule.method())           # roll up last round
-        self.elected = self.rounds[-1].CS.elected   # collect set of elected candidates
+        self.elected = self.R.CS.sortByOrder(self.rounds[-1].CS.elected)   # collect set of elected candidates
         
     def newRound(self):
        "add a round"
@@ -160,7 +160,6 @@ class Election(object):
 
     def report(self, intr=False):
         "report election by round"
-        reportMeek = self.rule.method() == 'meek'
         s = "\nElection: %s\n\n" % self.title
         s += "\tDroop package: %s v%s\n" % (droop.common.droopName, droop.common.droopVersion)
         s += "\tRule: %s\n" % self.rule.info()
@@ -168,7 +167,7 @@ class Election(object):
         s += "\tSeats: %d\n" % self.nSeats
         s += "\tBallots: %d\n" % self.nBallots
         s += "\tQuota: %s\n" % self.V(self.R0.quota)
-        if reportMeek:
+        if self.rule.method() == 'meek':
             s += "\tOmega: %s\n" % self.rule._omega
         if self.electionProfile.source:
             s += "Source: %s\n" % self.electionProfile.source
@@ -181,15 +180,14 @@ class Election(object):
         s += self.V.report()
         for round in self.rounds:
             s += "Round %d:\n" % round.n
-            s += round.report(reportMeek)
+            s += round.report()
         return s
 
     def dump(self):
         "dump election by round"
-        reportMeek = self.rule.method() == 'meek'
         s = ''
         for round in self.rounds:
-            s += round.dump(reportMeek)
+            s += round.dump()
         return s
 
     def seatsLeftToFill(self):
@@ -319,7 +317,7 @@ class Election(object):
             "log a message"
             self._log.append(msg)
 
-        def report(self, reportMeek):
+        def report(self):
             "report a round"
             E = self.E
             V = E.V
@@ -333,13 +331,13 @@ class Election(object):
             s += '\tHopeful: %s\n' % (", ".join([c.name for c in CS.sortByOrder(CS.hopeful)]) or 'None')
             s += '\tElected: %s\n' % (", ".join([c.name for c in CS.sortByOrder(CS.elected)]) or 'None')
             s += '\tDefeated: %s\n' % (", ".join([c.name for c in CS.sortByOrder(CS.defeated)]) or 'None')
-            if reportMeek:
+            if E.rule.method() == 'meek':
                 s += '\tQuota: %s\n' % V(self.quota)
                 s += '\tVotes: %s\n' % V(self.votes)
                 s += '\tResidual: %s\n' % V(self.residual)
                 s += '\tTotal: %s\n' % V((self.votes + self.residual))
                 s += '\tSurplus: %s\n' % V(self.surplus)
-            else: # wigm
+            elif E.rule.method() == 'wigm':
                 s += '\tElected votes (not pending) %s\n' % V(self.evotes)
                 s += '\tTop-rank votes (elected): %s\n' % V(self.pvotes)
                 s += '\tTop-rank votes (hopeful): %s\n' % V(self.hvotes)
@@ -347,10 +345,13 @@ class Election(object):
                 s += '\tResidual: %s\n' % V(self.residual)
                 s += '\tTotal: %s\n' % V(self.evotes + self.pvotes + self.hvotes + self.nontransferable + self.residual)
                 s += '\tSurplus: %s\n' % V(self.surplus)
+            elif E.rule.method() == 'qpq':
+                s += '\tCandidates elected by active ballots: %s\n' % self.ta
+                s += '\tCandidates elected by inactive ballots: %s\n' % self.tx
             E.R = saveR
             return s
             
-        def dump(self, reportMeek):
+        def dump(self):
             "dump a round"
 
             E = self.E
@@ -365,31 +366,31 @@ class Election(object):
             #
             if self.n == 0:
                 h = ['R', 'Quota', 'Votes', 'Surplus']
-                if reportMeek: h += ['Residual']
+                if E.rule.method() == 'meek': h += ['Residual']
                 for c in candidates:
                     cid = c.cid
                     h += ['%s.name' % cid]
                     h += ['%s.state' % cid]
                     h += ['%s.vote' % cid]
-                    if reportMeek: h += ['%s.kf' % cid]
+                    if E.rule.method() == 'meek': h += ['%s.kf' % cid]
                 h = [str(item) for item in h]
                 s += '\t'.join(h) + '\n'
             
             #  dump a line of data
             #
             r = [self.n, V(self.quota), V(self.votes), V(self.surplus)]
-            if reportMeek: r.append(V(self.residual))
+            if E.rule.method() == 'meek': r.append(V(self.residual))
             for c in candidates:
                 cid = c.cid
                 r.append(c.name)
                 if self.n:
-                    r.append('W' if c in CS.withdrawn else 'H' if c in CS.hopeful else 'P' if not reportMeek and c in CS.pending else 'E' if c in CS.elected else 'D' if c in CS.defeated else '?') # state
+                    r.append('W' if c in CS.withdrawn else 'H' if c in CS.hopeful else 'P' if E.rule.method() == 'wigm' and c in CS.pending else 'E' if c in CS.elected else 'D' if c in CS.defeated else '?') # state
                     r.append(V(c.vote))
-                    if reportMeek: r.append(V(c.kf))
+                    if E.rule.method() == 'meek': r.append(V(c.kf))
                 else:
                     r.append('W' if c in CS.withdrawn else 'H') # state
                     r.append(V(c.vote)) # vote
-                    if reportMeek: r.append('-') # kf
+                    if E.rule.method() == 'meek': r.append('-') # kf
                 
             r = [str(item) for item in r]
             s += '\t'.join(r) + '\n'
@@ -411,12 +412,18 @@ class Election(object):
                 self.residual = E.V0          # untransferable weight
                 self.ranking = ranking
 
-        def transfer(self, hopeful, msg='Transfer'):
+        def transfer(self, hopeful):
             "advance index to next candidate on this ballot; return True if exists"
             while self.index < len(self.ranking) and self.topCand not in hopeful:
                 self.index += 1
             return not self.exhausted
-    
+
+        def restart(self, weight):
+            "restart a ballot (for qpq)"
+            self.index = 0
+            self.weight = weight
+            self.residual = self.E.V0
+
         @property
         def exhausted(self):
             "is ballot exhausted?"
@@ -483,10 +490,15 @@ class Candidate(object):
         "set keep factor for candidate"
         self.E.R.CS._kf[self.cid] = newkf
     kf = property(getkf, setkf)
+    quotient = property(getkf, setkf)   # overload kf with QPQ quotient
 
     def __str__(self):
-        "stringify"
+        "use candidate name as the string representation"
         return self.name
+
+    def __hash__(self):
+        "use candidate id as the candidate hash"
+        return self.cid
 
     def __eq__(self, other):
         "test for equality of cid"
@@ -566,18 +578,26 @@ class CandidateState(object):
             self.hopeful.append(c)
             self.E.R.log("Add eligible: %s" % c.name)
 
-    def elect(self, c, msg='Elect'):
+    def elect(self, c, msg='Elect', val=None):
         "elect a candidate"
         self.hopeful.remove(c)
         self.elected.append(c)
         self.pending.append(c)
-        self.E.R.log("%s: %s (%s)" % (msg, c.name, self.E.V(c.vote)))
+        if val is None: val = self.E.V(c.vote)
+        self.E.R.log("%s: %s (%s)" % (msg, c.name, val))
 
-    def defeat(self, c, msg='Defeat'):
+    def unelect(self, c):
+        "unelect a candidate (qpq restart)"
+        self.hopeful.append(c)
+        self.elected.remove(c)
+        self.pending.remove(c)
+
+    def defeat(self, c, msg='Defeat', val=None):
         "defeat a candidate"
         self.hopeful.remove(c)
         self.defeated.append(c)
-        self.E.R.log("%s: %s (%s)" % (msg, c.name, self.E.V(c.vote)))
+        if val is None: val = self.E.V(c.vote)
+        self.E.R.log("%s: %s (%s)" % (msg, c.name, val))
 
     #  return count of candidates in requested state
     #

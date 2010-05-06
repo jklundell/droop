@@ -51,7 +51,7 @@ class ElectionRule(object):  # pragma: no cover
 
     @classmethod
     def method(cls):
-        "underlying method: meek or wigm"
+        "underlying method: meek, wigm or qpq"
         return None
 
     @classmethod

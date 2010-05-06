@@ -124,7 +124,7 @@ See also: fixed, rational
         
         #  __geps is used in the test for equality (see __cmp__ below)
         #
-        cls.__geps = cls.__scaleg//2
+        cls.__geps = cls.__scaleg // 2
         if cls.__geps == 0: cls.__geps = 1  # no less than an epsilon
 
         #  We keep statistics on how close our comparisons come to epsilon
