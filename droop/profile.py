@@ -73,6 +73,7 @@ class ElectionProfile(object):
         self.tieOrder = dict()        # tiebreaking cid sequence: cid->order
         self.nickCid = dict()         # nick to cid
         self.nickName = dict()        # cid to nick
+        self.options = list()         # list of options for main counter
 
         if path:
             data = self._bltPath(path)
@@ -200,6 +201,8 @@ class ElectionProfile(object):
             self.__bltOptionTie(option_name, option_list)
         elif option_name == 'nick':
             self.__bltOptionNick(option_name, option_list)
+        elif option_name == 'droop':
+            self.options.extend(option_list)
         else:
             raise ElectionProfileError('bad blt item "%s": unknown option' % option)
 

@@ -160,7 +160,6 @@ def usage(subject=None):
 
     
 if __name__ == "__main__":
-    options = dict()
     if len(sys.argv) < 2:
         print >>sys.stderr, usage()
         sys.exit(1)
@@ -172,27 +171,8 @@ if __name__ == "__main__":
         sys.exit(0)
     path = None
     try:
-        for arg in sys.argv[1:]:
-            optarg = arg.split('=')
-            if len(optarg) == 1:
-                if optarg[0] in droop.values.arithmeticNames:
-                    options['arithmetic'] = optarg[0]
-                elif optarg[0] in droop.electionRuleNames():
-                    options['rule'] = optarg[0]
-                elif optarg[0] == 'dump':
-                    options['dump'] = True
-                else:
-                    if path:
-                        raise droop.common.UsageError("multiple ballot files: %s and %s" % (path, optarg[0]))
-                    path = optarg[0]
-                    options['path'] = path
-            else:
-                if optarg[1].lower() in ('false', 'no'):
-                    options[optarg[0]] = False
-                elif optarg[1].lower() in ('true' , 'yes'):
-                    options[optarg[0]] = True
-                else:
-                    options[optarg[0]] = optarg[1]
+        options = droop.common.parseOptions(sys.argv[1:])
+        path = options.get('path')
         if path is None:
             print >>sys.stderr, "droop: must specify ballot file"
             sys.exit(1)

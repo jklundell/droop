@@ -26,6 +26,7 @@ import common  # to set sys.path
 from droop import electionRuleNames, electionRule
 from droop.common import UsageError, ElectionError
 from droop.election import Election
+from droop.profile import ElectionProfile
 
 class RuleInitTest(unittest.TestCase):
     "test rules.__init__"
@@ -34,13 +35,21 @@ class RuleInitTest(unittest.TestCase):
         "check the list of rule names"
         self.assertTrue(len(electionRuleNames()) >= 1, 'at least one rule name')
 
+    def testElectionNoProfile(self):
+        "trying an election without a profile should fail"
+        self.assertRaises(ElectionError, Election, None, dict())
+
     def testElectionNoRule(self):
         "trying an election without a rule should fail"
-        self.assertRaises(ElectionError, Election, None, dict())
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        p = ElectionProfile(data=b)
+        self.assertRaises(ElectionError, Election, p, dict())
 
     def testElectionBadRule(self):
         "trying an election with an undefined rule should fail"
-        self.assertRaises(ElectionError, Election, None, dict(rule='nothing'))
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        p = ElectionProfile(data=b)
+        self.assertRaises(ElectionError, Election, p, dict(rule='nothing'))
 
 class RuleTest(unittest.TestCase):
     "test rules class methods"

@@ -34,7 +34,7 @@ Top-level structure:
 import sys, re
 import values
 import droop
-from droop.common import ElectionError
+from droop.common import ElectionError, parseOptions
 
 class Election(object):
     '''
@@ -48,6 +48,8 @@ class Election(object):
         #
         #  sequence of operations:
         #
+        #    merge options from profile
+        #    find rule class
         #    convert numeric option values to ints
         #    let rule process options (set defaults, etc)
         #    initialize arithmetic class
@@ -56,6 +58,13 @@ class Election(object):
         #    make a tiebreaking-order, if specified
         #    make the ballots object
         #
+        if not electionProfile:
+            raise ElectionError('no election profile specified')
+
+        for opt, value in parseOptions(electionProfile.options).items():
+            if opt not in options:
+                options[opt] = value
+
         rulename = options.get('rule')
         if rulename is None:
             raise ElectionError('no election rule specified')
@@ -68,8 +77,8 @@ class Election(object):
         for key, value in options.iteritems():
             if isinstance(value, str) and re.match(r'\d+$', value):
                 options[key] = int(value)
-        options = self.rule.options(options)     # allow rule to process options
-        self.V = values.ArithmeticClass(options) # then set arithmetic
+        self.options = self.rule.options(options)     # allow rule to process options
+        self.V = values.ArithmeticClass(self.options) # then set arithmetic
         self.V0 = self.V(0)  # constant zero for efficiency
         self.V1 = self.V(1)  # constant one for efficiency
         self.electionProfile = electionProfile

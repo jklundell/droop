@@ -28,6 +28,7 @@ import droop
 from droop.election import Election
 from droop.profile import ElectionProfile
 from droop import electionRuleNames
+from droop.common import UsageError
 
 class ElectionBasics(unittest.TestCase):
     '''
@@ -58,6 +59,36 @@ class ElectionBasics(unittest.TestCase):
                 self.assertEqual(c.order, c.tieOrder)
             E.count()
             self.assertEqual(len(E.elected), E.nSeats)
+
+class ElectionOptions(unittest.TestCase):
+    "test options via [droop ...] in blt file"
+
+    def testDroopOptions(self):
+        "test [droop ...]"
+        if 'meek' in droop.electionRuleNames():
+            b = '''3 2 [droop arithmetic=fixed precision=4] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            E = Election(ElectionProfile(data=b), dict(rule='meek'))
+            self.assertEqual(E.V.precision, 4)
+            E = Election(ElectionProfile(data=b), dict(rule='meek', precision=6))
+            self.assertEqual(E.V.precision, 6)
+            b = '''3 2 [droop rational precision=4] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            E = Election(ElectionProfile(data=b), dict(rule='meek'))
+            self.assertEqual(E.V.name, 'rational')
+            b = '''3 2 [droop meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            E = Election(ElectionProfile(data=b), dict())
+            self.assertEqual(E.rule.method(), 'meek')
+            b = '''3 2 [droop dump meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            E = Election(ElectionProfile(data=b), dict())
+            self.assertTrue(E.options.get('dump'))
+            b = '''3 2 [droop dump=true meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            E = Election(ElectionProfile(data=b), dict())
+            self.assertTrue(E.options.get('dump'))
+            b = '''3 2 [droop dump=false meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            E = Election(ElectionProfile(data=b), dict())
+            self.assertFalse(E.options.get('dump'))
+            # fake a path to test double-path logic
+            b = '''3 2 [droop 42.blt 513.blt meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            self.assertRaises(UsageError, Election, ElectionProfile(data=b), dict())
 
 class ElectionHelps(unittest.TestCase):
     "check that helps dict is initialized"
