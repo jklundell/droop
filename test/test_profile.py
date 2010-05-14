@@ -348,6 +348,38 @@ class BallotIDTest(unittest.TestCase):
         b = '''3 2 (id1) 1 2 0 (id2) 1 2 0 (id3 ) 1 2 0 ( id4) 1 2 0 ( id1 ) 3 0 (id6) 3 0 0 "A" "B" "C" "Title"'''
         self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
 
+class BallotEqualRankTest(unittest.TestCase):
+    "test ballots with equal rankings"
+    
+    def testBallotEQ1(self):
+        "verify profile with no equal rankings"
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        p = ElectionProfile(data=b)
+        self.assertEqual(len(p.ballotLines), 2)
+        self.assertEqual(len(p.ballotLinesEqual), 0)
+
+    def testBallotEQ2(self):
+        "verify profile with an equal ranking"
+        b = '''3 2 4 1 2 0 2 2=3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        p = ElectionProfile(data=b)
+        self.assertEqual(len(p.ballotLines), 1)
+        self.assertEqual(len(p.ballotLinesEqual), 1)
+
+    def testBallotEQ3(self):
+        "verify profile with a bad ranking"
+        b = '''3 2 4 1 2 0 2 2==3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBallotEQ4(self):
+        "verify profile with a bad ranking"
+        b = '''3 2 4 1 2 0 2 2=3= 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBallotEQ5(self):
+        "verify profile with a bad ranking"
+        b = '''3 2 4 1 2 0 2 =2 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
 class Utf8Test(unittest.TestCase):
     "test utf-8 blt input"
     

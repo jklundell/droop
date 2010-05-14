@@ -47,10 +47,12 @@ class ElectionProfile(object):
     withdrawn: the set of withdrawn candidate IDs
     candidateName(cid): maps candidate ID to candidate name
     candidateOrder(cid): maps candidate ID to ballot order
-    ballotLines: a tuple of BallotLine objects, each with a:
+    ballotLines: a list of BallotLine objects, each with a:
        multiplier: a repetition count >=1
-       ranking: a tuple of candidate IDs
-    
+       ranking: an array of candidate IDs
+    ballotLinesequal: a list of BallotLine objects, each with a:
+       multiplier: a repetition count >=1
+       ranking: tuple of tuples of candidate IDs
     candidates and withdrawn should be treated as frozenset; that is, unordered and immutable,
        though they may be implemented as any iterable.
        
@@ -69,7 +71,14 @@ class ElectionProfile(object):
         self.withdrawn = set()
         self._candidateName = dict()  # cid => candidate name
         self._candidateOrder = dict() # cid -> ballot order
-        self.ballotLines = tuple()
+        #
+        #  ballotLines is a list of BallotLine objects for ballots with no equal rankings
+        #    ranking is an array of cids
+        #  ballotLinesEqual is a list of BallotLine objects with at least one equal ranking
+        #    ranking is a tuple of tuples of cids
+        #
+        self.ballotLines = list()
+        self.ballotLinesEqual = list()
         self.tieOrder = dict()        # tiebreaking cid sequence: cid->order
         self.nickCid = dict()         # nick to cid
         self.nickName = dict()        # cid to nick
@@ -91,10 +100,20 @@ class ElectionProfile(object):
         
         __slots__ = ('multiplier', 'ranking')
         
-        def __init__(self, multiplier, ranking, nCand):
-            "create a ballot-line object"
+        def __init__(self, multiplier, ranking, equal_rank, nCand):
+            '''
+            create a ballot-line object
+            
+            ranking is a list of tuples
+            if all the tuples are singletons (equal_rank is False), store an array
+            else store the list (as a tuple)
+            '''
             self.multiplier = multiplier
-            self.ranking = array.array('B' if nCand<=256 else 'H', ranking)
+            if equal_rank:
+                self.ranking = tuple(ranking)
+            else:
+                ranking = [rank[0] for rank in ranking]
+                self.ranking = array.array('B' if nCand<=256 else 'H', ranking)
             
     def __validate(self):
         "check for internal consistency"
@@ -147,7 +166,15 @@ class ElectionProfile(object):
         return data
 
     def getCid(self, nick, loc):
-        "convert a nick (or cid) to a cid, and validate the cid"
+        '''
+        convert a nick (or cid) to a cid, and validate the cid
+        
+        If nick is an int (or a decimal string), validate and return it.
+        Otherwise, it's a nickname; look it up and return the cid.
+        
+        loc is used for error messages if the nickname is unknown 
+        or theresulting cid is out of range
+        '''
         if isinstance(nick, str) and re.match(r'\d+$', nick):
             nick = int(nick)
         if isinstance(nick, int):
@@ -160,7 +187,11 @@ class ElectionProfile(object):
         raise ElectionProfileError('bad blt: bad candidate ID %s in %s' % (nick, loc))
 
     def __bltOptionNick(self, option_name, option_list):
-        "process a blt [nick option line"
+        '''
+        process a blt [nick option line
+        
+        we require a list of exactly nCand unique nicknames
+        '''
         if len(option_list) != self.nCand:
             raise ElectionProfileError('bad blt: [nick] nickname list must list each candidate exactly once')
         self.nickCid = dict()
@@ -284,14 +315,22 @@ class ElectionProfile(object):
                 break
 
             ranking = list()
+            equal_rank = False
             while True:
                 tok = blt.next()  # next ranked candidate or 0
                 if tok == '0':
                     break   # end of ballot
-                ranking.append(self.getCid(tok, len(self.ballotLines)+1))
+                toks = tok.split('=')
+                if len(toks) > 1:
+                    equal_rank = True
+                cids = [self.getCid(c, len(self.ballotLines)+1) for c in toks]
+                ranking.append(tuple(cids))
+
             if ranking:                         # ignore empty ballots
-                self.ballotLines.append(self.BallotLine(multiplier, ranking, self.nCand))
                 self.nBallots += multiplier
+                blines = self.ballotLinesEqual if equal_rank else self.ballotLines
+                blines.append(self.BallotLine(multiplier, ranking, equal_rank, self.nCand))
+
             tok = blt.next()  # next multiplier or 0
             
         if len(ballotIDs) and len(ballotIDs) != len(self.ballotLines):
