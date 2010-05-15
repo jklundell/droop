@@ -137,7 +137,7 @@ class Rule(ElectionRule):
             c.kf = V1    # initialize keep factors
         for b in E.ballots:
             if b.topCand:
-                b.topCand.vote += V(b.multiplier)  # count first-place votes for round 0 reporting
+                b.topCand.vote += b.multiplier  # count first-place votes for round 0 reporting
 
         #  B. next round
         #  B.1. test count complete
@@ -163,7 +163,7 @@ class Rule(ElectionRule):
                 R.residual = V0
                 for b in E.ballots:
                     b.weight = V1
-                    b.residual = V(b.multiplier)
+                    b.residual = b.multiplier
                     for c in (E.candidate(cid) for cid in b.ranking):
                         #
                         #  distribute votes

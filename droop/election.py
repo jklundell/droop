@@ -230,7 +230,7 @@ class Election(object):
         "count first-place votes"
         if self.rule.method() == 'meek':
             for b in (b for b in self.ballots if b.topCand):
-                b.topCand.vote += self.V(b.multiplier)
+                b.topCand.vote += b.multiplier
         else:
             for b in (b for b in self.ballots if not b.exhausted):
                 b.topCand.vote = b.topCand.vote + b.vote
@@ -242,7 +242,7 @@ class Election(object):
         self.R.residual = V0
         for b in self.ballots:
             b.weight = self.V1
-            b.residual = self.V(b.multiplier)
+            b.residual = b.multiplier
             for c in (candidate(cid) for cid in b.ranking):
                 if c.kf:
                     keep, b.weight = kt(c.kf, b.weight)
@@ -411,7 +411,7 @@ class Election(object):
         def __init__(self, E, multiplier=1, ranking=None):
             "create a ballot"
             self.E = E
-            self.multiplier = multiplier  # number of ballots like this
+            self.multiplier = E.V(multiplier)  # number of ballots like this
             self.index = 0                # current ranking
             self.weight = E.V1            # initial weight
             self.residual = E.V0          # untransferable weight
@@ -447,7 +447,7 @@ class Election(object):
         @property
         def vote(self):
             "return total vote of this ballot"
-            if self.multiplier == 1:
+            if self.multiplier == self.E.V1:
                 return self.weight  # faster
             return self.weight * self.multiplier
             

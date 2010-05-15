@@ -138,7 +138,7 @@ class Rule(ElectionRule):
         #
         R.tx = V0
         R.ta = V0
-        R.va = V(sum(b.multiplier for b in E.ballots if not b.exhausted))
+        R.va = sum((b.multiplier for b in E.ballots if not b.exhausted), V0)
         R.quota = R.va / V(1 + E.nSeats) - R.tx  # quota [2.4]
         R.votes = V(E.nBallots)
 
@@ -183,9 +183,9 @@ class Rule(ElectionRule):
                 if b.exhausted:
                     R.tx += b.weight * b.multiplier  # candidates elected by inactive ballots
                 else:
-                    R.va += V1 * b.multiplier
+                    R.va += b.multiplier
                     tc[b.topCand] += b.weight * b.multiplier
-                    b.topCand.vote += V(b.multiplier)  # vc [2.3]
+                    b.topCand.vote += b.multiplier  # vc [2.3]
 
             R.ta = V0  # for reporting
             for c in CS.hopeful:
