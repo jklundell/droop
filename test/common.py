@@ -28,6 +28,8 @@ if basedir not in sys.path: sys.path.insert(0, os.path.normpath(basedir))
 from droop.election import Election
 from droop.profile import ElectionProfile
 
+pyflakes = True	# dummy for pyflakes
+
 def doDumpCompare(options, file, subdir=''):
     '''
     helper: do a count and compare dump/report to reference

@@ -29,6 +29,9 @@ from droop.values.fixed import Fixed as F
 from droop.values.guarded import Guarded as G
 from droop.values.rational import Rational as R
 
+if common.pyflakes: # satisfy pyflakes that we're using common
+    pass
+
 class ValueTest(unittest.TestCase):
     "test value-class initialization"
     

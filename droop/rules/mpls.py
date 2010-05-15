@@ -147,7 +147,7 @@ class Rule(ElectionRule):
 
             #  sortedCands = candidates sorted by vote
             #
-            sortedCands = CS.sortByVote(CS.hopeful)
+            sortedCands = CS.hopeful.byVote()
 
             #   copy the sorted candidates list, 
             #   making each entry a list
@@ -296,7 +296,7 @@ class Rule(ElectionRule):
 
             #  count votes for reporting
             #
-            R.votes = sum([c.vote for c in (CS.elected + CS.hopeful)], V0)
+            R.votes = sum([c.vote for c in (CS.elected | CS.hopeful)], V0)
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -310,7 +310,7 @@ class Rule(ElectionRule):
             #  in 167.20.
 
             certainLosers = findCertainLosers(R.surplus, fixSpec=True)
-            for c in CS.sortByOrder(certainLosers):
+            for c in CS.sortByBallotOrder(certainLosers):
                 CS.defeat(c, 'Defeat certain loser')
                 for b in (b for b in E.ballots if b.topCid == c.cid):
                     if b.transfer():

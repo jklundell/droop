@@ -177,7 +177,7 @@ class Rule(ElectionRule):
 
             #  total vote count for reporting
             #
-            R.votes = sum([c.vote for c in (CS.elected + CS.hopeful)], V0)
+            R.votes = sum([c.vote for c in (CS.elected | CS.hopeful)], V0)
 
             #  elect new winners
             #

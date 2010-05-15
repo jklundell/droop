@@ -284,7 +284,7 @@ class Rule(ElectionRule):
             #  calculate surplus and total votes for reporting
             #
             R.surplus = sum([c.surplus for c in CS.elected], V0)
-            R.votes = sum([c.vote for c in (CS.elected + CS.hopeful)], V0)
+            R.votes = sum([c.vote for c in (CS.elected | CS.hopeful)], V0)
 
             #  transfer surplus votes of candidate with largest surplus [48,49]
             #

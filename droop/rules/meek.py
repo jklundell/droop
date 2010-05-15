@@ -166,7 +166,7 @@ class Rule(ElectionRule):
             #     where each group cosnists of the candidates tied at that vote
             #     (when there's no tie, a group will have one candidate)
             #
-            sortedCands = CS.sortByVote(CS.hopeful)
+            sortedCands = CS.hopeful.byVote()
             sortedGroups = []
             group = []
             vote = V0
@@ -348,7 +348,7 @@ class Rule(ElectionRule):
             #     defeat a batch if possible
             #
             if iterationStatus == IS_batch:
-                for c in CS.sortByOrder(batch):
+                for c in CS.sortByBallotOrder(batch):
                     CS.defeat(c, msg='Defeat certain loser')
                     c.kf = V0
                     c.vote = V0

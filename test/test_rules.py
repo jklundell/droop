@@ -28,6 +28,9 @@ from droop.common import UsageError, ElectionError
 from droop.election import Election
 from droop.profile import ElectionProfile
 
+if common.pyflakes: # satisfy pyflakes that we're using common
+    pass
+
 class RuleInitTest(unittest.TestCase):
     "test rules.__init__"
     

@@ -86,8 +86,8 @@ class Election(object):
         self.rounds = [self.Round(self)]
         self.R0 = self.R = self.rounds[0]
         
-        self.eligible = list()
-        self.withdrawn = list()
+        self.eligible = CandidateSet()
+        self.withdrawn = CandidateSet()
         self.candidates = dict()  # cid: Candidate
         
         self.elected = None  # for communicating results
@@ -149,7 +149,7 @@ class Election(object):
         "count the election"
         self.rule.count(self)
         self.R.rollup(self.rule.method())           # roll up last round
-        self.elected = self.R.CS.sortByOrder(self.rounds[-1].CS.elected)   # collect set of elected candidates
+        self.elected = self.rounds[-1].CS.elected.byBallotOrder()
         
     def newRound(self):
        "add a round"
@@ -334,9 +334,9 @@ class Election(object):
                 s += '\t%s\n' % line
             if self._log:
                 s += '\t...\n'
-            s += '\tHopeful: %s\n' % (", ".join([c.name for c in CS.sortByOrder(CS.hopeful)]) or 'None')
-            s += '\tElected: %s\n' % (", ".join([c.name for c in CS.sortByOrder(CS.elected)]) or 'None')
-            s += '\tDefeated: %s\n' % (", ".join([c.name for c in CS.sortByOrder(CS.defeated)]) or 'None')
+            s += '\tHopeful: %s\n' % (", ".join([c.name for c in CS.hopeful.byBallotOrder()]) or 'None')
+            s += '\tElected: %s\n' % (", ".join([c.name for c in CS.elected.byBallotOrder()]) or 'None')
+            s += '\tDefeated: %s\n' % (", ".join([c.name for c in CS.defeated.byBallotOrder()]) or 'None')
             if E.rule.method() == 'meek':
                 s += '\tQuota: %s\n' % V(self.quota)
                 s += '\tVotes: %s\n' % V(self.votes)
@@ -366,7 +366,7 @@ class Election(object):
             saveR, E.R = E.R, self # provide reporting context
             s = ''
             
-            candidates = CS.sortByOrder(E.eligible) # report in ballot order
+            candidates = E.eligible.byBallotOrder() # report in ballot order
 
             #  if round 0, include a header line
             #
@@ -515,6 +515,40 @@ class Candidate(object):
             return False
         return self.cid == other.cid
 
+class CandidateSet(set):
+    '''
+    sets of candidates
+    
+    special methods are provided to keep the results from escaping the CandidateSet class
+    '''
+    def byVote(self):
+        "list of candidates sorted by vote, ascending"
+        return sorted(self, key=lambda c: (c.vote, c.order))
+
+    def byBallotOrder(self):
+        "list of candidates sorted by ballot order"
+        return sorted(self, key=lambda c: c.order)
+
+    def byTieOrder(self):
+        "list of candidates sorted by tie-break order"
+        return sorted(self, key=lambda c: c.tieOrder)
+
+    def __or__(self, other):
+        "union"
+        return CandidateSet(set(self) | set(other))
+        
+    def __and__(self, other):
+        "intersection"
+        return CandidateSet(set(self) & set(other))
+
+    def __sub__(self, other):
+        "difference"
+        return CandidateSet(set(self) - set(other))
+
+    def __iter__(self):
+        "iterate CandidateSet in ballot order"
+        return iter(sorted(set(self), key=lambda c: c.order))
+
 class CandidateState(object):
     '''
     per-round candidate state
@@ -538,10 +572,10 @@ class CandidateState(object):
         self._vote = dict()   # votes by candidate cid
         self._kf = dict()     # keep factor by candidate cid
         
-        self.hopeful = list()
-        self.pending = list()
-        self.elected = list()
-        self.defeated = list()
+        self.hopeful = CandidateSet()
+        self.pending = CandidateSet()
+        self.elected = CandidateSet()
+        self.defeated = CandidateSet()
 
     @property
     def withdrawn(self):
@@ -551,7 +585,7 @@ class CandidateState(object):
     @property
     def hopefulOrElected(self):
         "return combined list of hopeful and elected candidates"
-        return self.hopeful + self.elected
+        return self.hopeful | self.elected
 
     def copy(self):
         "return a copy of ourself"
@@ -560,10 +594,10 @@ class CandidateState(object):
         CS._vote = self._vote.copy()
         CS._kf = self._kf.copy()
         
-        CS.hopeful = list(self.hopeful)
-        CS.elected = list(self.elected)
-        CS.defeated = list(self.defeated)
-        CS.pending = list(self.pending)
+        CS.hopeful = CandidateSet(self.hopeful)
+        CS.elected = CandidateSet(self.elected)
+        CS.defeated = CandidateSet(self.defeated)
+        CS.pending = CandidateSet(self.pending)
         return CS
 
     #  add a candidate to the election
@@ -571,31 +605,31 @@ class CandidateState(object):
     def addCandidate(self, c, isWithdrawn=False):
         "add a candidate"
         if isWithdrawn:
-            self.E.withdrawn.append(c)
+            self.E.withdrawn.add(c)
             self.E.R.log("Add withdrawn: %s" % c.name)
         else:
-            self.E.eligible.append(c)
-            self.hopeful.append(c)
+            self.E.eligible.add(c)
+            self.hopeful.add(c)
             self.E.R.log("Add eligible: %s" % c.name)
 
     def elect(self, c, msg='Elect', val=None):
         "elect a candidate"
         self.hopeful.remove(c)
-        self.elected.append(c)
-        self.pending.append(c)
+        self.elected.add(c)
+        self.pending.add(c)
         if val is None: val = self.E.V(c.vote)
         self.E.R.log("%s: %s (%s)" % (msg, c.name, val))
 
     def unelect(self, c):
         "unelect a candidate (qpq restart)"
-        self.hopeful.append(c)
+        self.hopeful.add(c)
         self.elected.remove(c)
         self.pending.remove(c)
 
     def defeat(self, c, msg='Defeat', val=None):
         "defeat a candidate"
         self.hopeful.remove(c)
-        self.defeated.append(c)
+        self.defeated.add(c)
         if val is None: val = self.E.V(c.vote)
         self.E.R.log("%s: %s (%s)" % (msg, c.name, val))
 
@@ -613,13 +647,13 @@ class CandidateState(object):
     def nHopefulOrElected(self):
         "return count of hopeful+elected candidates"
         return self.nHopeful + self.nElected
-        
+
     def sortByVote(self, collection):
         "sort a collection of candidates by vote"
         # keep the result stable by ballot order
         return sorted(collection, key=lambda c: (c.vote, c.order))
 
-    def sortByOrder(self, collection):
+    def sortByBallotOrder(self, collection):
         "sort a collection of candidates by ballot-file order"
         return sorted(collection, key=lambda c: c.order)
 
