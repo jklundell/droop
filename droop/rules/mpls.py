@@ -55,6 +55,7 @@ is that the test is performed only after defeating the lowest-vote candidate per
 '''
 
 from electionrule import ElectionRule
+from droop.election import CandidateSet
 
 class Rule(ElectionRule):
     '''
@@ -214,7 +215,7 @@ class Rule(ElectionRule):
                 if fixSpec and (vote + surplus) == sortedGroups[g+1][0].vote:
                     continue
                 losers = list(maybe)
-            return losers
+            return CandidateSet(losers)
 
         def breakTie(tied, reason=None):
             '''
@@ -235,8 +236,8 @@ class Rule(ElectionRule):
             ##     (As amended 83-Or-139, Sec 1, 6-10-83; Charter Amend. No. 161, Sec 6, ref. of 11-7-06)
 
             if len(tied) == 1:
-                return tied[0]
-            tied = CS.sortByTieOrder(tied) # sort by tie-order before making choice
+                return tied.pop()
+            tied = tied.byTieOrder()	# sort by tie-order before making choice
             t = tied[0]  # in the absence of the City Council...
             names = ", ".join([c.name for c in tied])
             R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
@@ -310,7 +311,7 @@ class Rule(ElectionRule):
             #  in 167.20.
 
             certainLosers = findCertainLosers(R.surplus, fixSpec=True)
-            for c in CS.sortByBallotOrder(certainLosers):
+            for c in certainLosers.byBallotOrder():
                 CS.defeat(c, 'Defeat certain loser')
                 for b in (b for b in E.ballots if b.topCid == c.cid):
                     if b.transfer():
@@ -356,12 +357,11 @@ class Rule(ElectionRule):
 
             if CS.pending:
                 high_vote = max(c.vote for c in CS.pending)
-                high_candidates = [c for c in CS.pending if c.vote == high_vote]
+                high_candidates = CandidateSet([c for c in CS.pending if c.vote == high_vote])
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 CS.pending.remove(high_candidate)
                 surplus = high_candidate.vote - R.quota
                 for b in (b for b in E.ballots if b.topCid == high_candidate.cid):
-                    #b.weight = tf(self.V, b.weight, surplus, vote)
                     b.weight = (b.weight * surplus) / high_candidate.vote
                     if b.transfer():
                         b.topCand.vote += b.vote
@@ -384,7 +384,7 @@ class Rule(ElectionRule):
             #
             if CS.hopeful:
                 low_vote = min(c.vote for c in CS.hopeful)
-                low_candidates = [c for c in CS.hopeful if c.vote == low_vote]
+                low_candidates = CandidateSet([c for c in CS.hopeful if c.vote == low_vote])
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 CS.defeat(low_candidate, 'Defeat low candidate')
                 for b in (b for b in E.ballots if b.topCid == low_candidate.cid):

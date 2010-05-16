@@ -95,19 +95,16 @@ class Election(object):
         #  create candidate objects for candidates in election profile
         #
         for cid in sorted(electionProfile.eligible | electionProfile.withdrawn):
-            c = Candidate(self, cid, electionProfile.candidateOrder(cid), electionProfile.candidateName(cid))
+            c = Candidate(self, cid, electionProfile.candidateOrder(cid), 
+                electionProfile.tieOrder[cid],
+                electionProfile.candidateName(cid),
+                electionProfile.nickName[cid])
             self.candidates[cid] = c
             c.vote = self.V0
             #
             #  and add the candidate to round 0
             #
             self.R0.CS.addCandidate(c, isWithdrawn=cid in electionProfile.withdrawn)
-        
-        #  update tiebreaking order if one was specified via profile =tie option
-        #
-        if electionProfile.tieOrder:
-            for c in self.candidates.values():
-                c.tieOrder = electionProfile.tieOrder[c.cid]
 
         #  create a ballot object (ranking candidate IDs) from the profile rankings of candidate IDs
         #  only eligible (not withdrawn) will be added
@@ -459,13 +456,14 @@ class Candidate(object):
     A Candidate object is immutable, and shared across Rounds.
     '''
 
-    def __init__(self, E, cid, order, cname):
+    def __init__(self, E, cid, ballotOrder, tieOrder, cname, cnick=None):
         "new candidate"
         self.E = E
-        self.cid = cid        # candidate id
-        self.order = order    # ballot order
-        self.name = cname     # candidate name
-        self.tieOrder = order # default tiebreaking order
+        self.cid = cid              # candidate id
+        self.order = ballotOrder    # ballot order
+        self.tieOrder = tieOrder    # tie-breaking order
+        self.name = cname           # candidate name
+        self.nick = str(cid) if cnick is None else str(cnick)
 
     #  get/set vote total of this candidate
     #  vote counts are held in CandidateState

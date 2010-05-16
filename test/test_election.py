@@ -23,10 +23,29 @@ This file is part of Droop.
 import unittest
 
 import common  # to set sys.path
-from droop.election import CandidateSet
+from droop.election import Candidate, CandidateSet
 
 if common.pyflakes: # satisfy pyflakes that we're using common
     pass
+
+class CandidateTest(unittest.TestCase):
+    "test class Candidate"
+    
+    def testCandidateString(self):
+        "candidate string is its cname"
+        c1 = Candidate(None, 1, 2, 2, 'abc')  # Election, cid, ballotOrder, tieOrder, cname
+        self.assertEqual(str(c1), 'abc', 'candidate string is its cname')
+
+    def testCandidateHash(self):
+        "candidate hash is its ID"
+        c1 = Candidate(None, 1, 2, 2, 'abc')  # Election, cid, order, cname
+        self.assertEqual(hash(c1), 1, 'candidate hash is its ID')
+
+    def testCandidateCompare(self):
+        "compare candidates by ID"
+        c1 = Candidate(None, 1, 2, 2, 'abc')  # Election, cid, order, cname
+        c2 = Candidate(None, 1, 3, 3, 'def')  # Election, cid, order, cname
+        self.assertEqual(c1, c2, 'candidates are compared by ID')
 
 class CandidateSetTest(unittest.TestCase):
     "test class CandidateSet"

@@ -94,6 +94,9 @@ class ElectionProfile(object):
             for cid in xrange(1, self.nCand+1):
                 self.nickCid[str(cid)] = cid
                 self.nickName[cid] = str(cid)
+        if not self.tieOrder:         # create default tie-break order: cid
+            for cid in xrange(1, self.nCand+1):
+                self.tieOrder[cid] = cid
 
     class BallotLine(object):
         "one ballot line"
