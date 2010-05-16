@@ -338,6 +338,13 @@ class ValueTestGuarded9(unittest.TestCase):
         y = A(3)
         self.assertEqual(x/y, x/3)
 
+    def testMulInt(self):
+        "test guarded*int"
+        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        x = A(2)
+        y = A(3)
+        self.assertEqual(x*y, x*3)
+
     def testNoHash(self):
         "test guarded/int"
         A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
