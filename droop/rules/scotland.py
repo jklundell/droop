@@ -122,6 +122,7 @@ using fixed-point decimal arithmetic with five digits of precision.
 '''
 
 from electionrule import ElectionRule
+from droop.election import CandidateSet
 
 class Rule(ElectionRule):
     '''
@@ -208,21 +209,20 @@ class Rule(ElectionRule):
             break a tie by most-recent difference or by lot [49,51]
             '''
             if len(tied) == 1:
-                return tied[0]
+                return tied.pop()
             names = ", ".join([c.name for c in tied])
             direction = 0 if reason.find('defeat') >= 0 else -1
             for n in xrange(R.n-1, -1, -1):
                 E.R = E.rounds[n]
-                tied = E.R.CS.sortByVote(tied)
-                tied = [c for c in tied if c.vote == tied[direction].vote]
-                if len(tied) == 1:
+                tiedlist = tied.byVote()
+                tiedlist = [c for c in tiedlist if c.vote == tiedlist[direction].vote]
+                if len(tiedlist) == 1:
                     E.R = E.rounds[-1]
-                    t = tied[0]
+                    t = tiedlist[0]
                     E.R.log('Break tie by prior stage (%s): [%s] -> %s' % (reason, names, t.name))
                     return t
             E.R = E.rounds[-1]             # restore current round
-            tied = CS.sortByTieOrder(tied) # sort by tie-order before making choice
-            t = tied[0]                    # break tie by lot
+            t = CandidateSet(tiedlist).byTieOrder()[0]	# break tie by lot
             E.R.log('Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
             return t
 
@@ -290,7 +290,7 @@ class Rule(ElectionRule):
             #
             if CS.pending:
                 high_vote = max(c.vote for c in CS.pending)
-                high_candidates = [c for c in CS.pending if c.vote == high_vote]
+                high_candidates = CandidateSet([c for c in CS.pending if c.vote == high_vote])
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 E.transferBallots(high_candidate, msg='Transfer surplus', tf=transferFunction)
                 continue  # to next stage
@@ -299,7 +299,7 @@ class Rule(ElectionRule):
             #
             if CS.hopeful:
                 low_vote = min(c.vote for c in CS.hopeful)
-                low_candidates = [c for c in CS.hopeful if c.vote == low_vote]
+                low_candidates = CandidateSet([c for c in CS.hopeful if c.vote == low_vote])
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 CS.defeat(low_candidate, 'Defeat low candidate')
                 E.transferBallots(low_candidate, msg='Transfer defeated')

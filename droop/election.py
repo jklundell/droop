@@ -645,16 +645,3 @@ class CandidateState(object):
     def nHopefulOrElected(self):
         "return count of hopeful+elected candidates"
         return self.nHopeful + self.nElected
-
-    def sortByVote(self, collection):
-        "sort a collection of candidates by vote"
-        # keep the result stable by ballot order
-        return sorted(collection, key=lambda c: (c.vote, c.order))
-
-    def sortByBallotOrder(self, collection):
-        "sort a collection of candidates by ballot-file order"
-        return sorted(collection, key=lambda c: c.order)
-
-    def sortByTieOrder(self, collection):
-        "sort a collection of candidates by tieOrder"
-        return sorted(collection, key=lambda c: c.tieOrder)

@@ -42,6 +42,7 @@ This file is part of Droop.
 '''
 
 from electionrule import ElectionRule
+from droop.election import CandidateSet
 
 class Rule(ElectionRule):
     '''
@@ -105,10 +106,9 @@ class Rule(ElectionRule):
             break a tie by lot
             '''
             if len(tied) == 1:
-                return tied[0]
+                return tied.pop()
             names = ", ".join([c.name for c in tied])
-            tied = CS.sortByTieOrder(tied) # sort by tie-order before making choice
-            t = tied[0]                    # break tie by lot
+            t = tied.byTieOrder()[0]
             E.R.log('Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
             return t
 
@@ -212,7 +212,7 @@ class Rule(ElectionRule):
 
             high_quotient = max(c.quotient for c in CS.hopeful)
             if high_quotient > R.quota:
-                high_candidates = [c for c in CS.hopeful if c.quotient == high_quotient]
+                high_candidates = CandidateSet([c for c in CS.hopeful if c.quotient == high_quotient])
                 high_candidate = breakTie(high_candidates, 'largest quotient')
                 CS.elect(high_candidate, 'Elect high quotient', high_quotient)
                 new_weight = V1 / high_candidate.quotient
@@ -222,7 +222,7 @@ class Rule(ElectionRule):
                 E.log("%s: %s (%s)" % ('Transfer elected', high_candidate.name, high_quotient))
             else:
                 low_quotient = min(c.quotient for c in CS.hopeful)
-                low_candidates = [c for c in CS.hopeful if c.quotient == low_quotient]
+                low_candidates = CandidateSet([c for c in CS.hopeful if c.quotient == low_quotient])
                 low_candidate = breakTie(low_candidates, 'smallest quotient')
                 CS.defeat(low_candidate, 'Defeat low quotient', low_quotient)
                 for b in (b for b in E.ballots if b.topCid == low_candidate.cid):

@@ -237,9 +237,8 @@ class Rule(ElectionRule):
 
             if len(tied) == 1:
                 return tied.pop()
-            tied = tied.byTieOrder()	# sort by tie-order before making choice
-            t = tied[0]  # in the absence of the City Council...
             names = ", ".join([c.name for c in tied])
+            t = tied.byTieOrder()[0]	# sort by tie-order before making choice
             R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
             

@@ -20,6 +20,7 @@ This file is part of Droop.
 '''
 
 from droop.common import UsageError
+from droop.election import CandidateSet
 from electionrule import ElectionRule
 
 class Rule(ElectionRule):
@@ -149,9 +150,8 @@ class Rule(ElectionRule):
             choose the first candidate in that order.
             '''
             if len(tied) == 1:
-                return tied[0]
-            tied = CS.sortByTieOrder(tied)
-            t = tied[0]
+                return tied.pop()
+            t = tied.byTieOrder()[0]
             R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
             return t
 
@@ -208,7 +208,7 @@ class Rule(ElectionRule):
             if maxg is not None:
                 for g in xrange(maxg+1):
                     batch.extend(sortedGroups[g])
-            return batch
+            return CandidateSet(batch)
 
         #  iterateStatus constants: why did the iteration terminate?
         #
@@ -348,7 +348,7 @@ class Rule(ElectionRule):
             #     defeat a batch if possible
             #
             if iterationStatus == IS_batch:
-                for c in CS.sortByBallotOrder(batch):
+                for c in batch.byBallotOrder():
                     CS.defeat(c, msg='Defeat certain loser')
                     c.kf = V0
                     c.vote = V0
@@ -359,7 +359,7 @@ class Rule(ElectionRule):
             #
             if CS.hopeful:
                 low_vote = V.min([c.vote for c in CS.hopeful])
-                low_candidates = [c for c in CS.hopeful if (low_vote + R.surplus) >= c.vote]
+                low_candidates = CandidateSet([c for c in CS.hopeful if (low_vote + R.surplus) >= c.vote])
                 low_candidate = breakTie(E, low_candidates, 'defeat')
                 if iterationStatus == IS_omega:
                     CS.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))

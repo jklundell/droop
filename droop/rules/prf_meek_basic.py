@@ -21,6 +21,7 @@ This file is part of Droop.
 
 from electionrule import ElectionRule
 from droop.common import UsageError
+from droop.election import CandidateSet
 
 class Rule(ElectionRule):
     '''
@@ -103,9 +104,8 @@ class Rule(ElectionRule):
             choose the first candidate in that order.
             '''
             if len(tied) == 1:
-                return tied[0]
-            tied = CS.sortByTieOrder(tied)
-            t = tied[0]
+                return tied.pop()
+            t = tied.byTieOrder()[0]
             R.log('Break tie (defeat low candidate): [%s] -> %s' % (", ".join([c.name for c in tied]), t.name))
             return t
 
@@ -229,7 +229,7 @@ class Rule(ElectionRule):
             #
             if CS.hopeful:
                 low_vote = V.min([c.vote for c in CS.hopeful])
-                low_candidates = [c for c in CS.hopeful if (low_vote + R.surplus) >= c.vote]
+                low_candidates = CandidateSet([c for c in CS.hopeful if (low_vote + R.surplus) >= c.vote])
                 low_candidate = breakTie(E, low_candidates)
                 if iterationStatus == 'omega':
                     CS.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))
