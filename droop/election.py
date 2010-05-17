@@ -243,7 +243,7 @@ class Election(object):
             for c in (candidate(cid) for cid in b.ranking):
                 if c.kf:
                     keep, b.weight = kt(c.kf, b.weight)
-                    c.vote += keep * b.multiplier      # b.multiplier is an int
+                    c.vote += keep * b.multiplier
                     b.residual -= keep * b.multiplier  # residual value of ballot
                     if b.weight <= V0:
                         break
