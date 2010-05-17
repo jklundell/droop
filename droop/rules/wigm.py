@@ -171,7 +171,7 @@ class Rule(ElectionRule):
             c.vote = V0
         E.countTopVotes()
 
-        while CS.nHopefulOrElected > E.nSeats and CS.nElected < E.nSeats:
+        while CS.nHopeful > E.seatsLeftToFill() > 0:
             R = E.newRound()
             CS = R.CS   # candidate state
 

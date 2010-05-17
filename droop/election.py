@@ -553,12 +553,11 @@ class CandidateState(object):
     
     vote: get candidate vote
     kf: get candidate keep factor
-    hopeful: the list of hopeful candidates
-    elected: the list of elected candidates
-    defeated: the list of defeated candidates
+    hopeful: the set of hopeful candidates
+    elected: the set of elected candidates
+    defeated: the set of defeated candidates
     withdrawn: access to Election's list of withdrawn candidates
-    pending: a list of elected candidates pending transfer (WIGM, not Meek)
-    isHopeful, etc: boolean test of a single candidate
+    pending: a set of elected candidates pending transfer (WIGM, not Meek)
     nHopeful, etc: number of candidates in set (properties)
     '''
 
@@ -641,7 +640,3 @@ class CandidateState(object):
     def nElected(self):
         "return count of elected candidates"
         return len(self.elected)
-    @property
-    def nHopefulOrElected(self):
-        "return count of hopeful+elected candidates"
-        return self.nHopeful + self.nElected
