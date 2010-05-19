@@ -171,7 +171,7 @@ class Rule(ElectionRule):
             c.vote = V0
         E.countTopVotes()
 
-        while CS.nHopeful > E.seatsLeftToFill() > 0:
+        while len(CS.hopeful) > E.seatsLeftToFill() > 0:
             R = E.newRound()
             CS = R.CS   # candidate state
 
@@ -212,7 +212,7 @@ class Rule(ElectionRule):
         #  Elect or defeat remaining hopeful candidates
         #
         for c in list(CS.hopeful):
-            if CS.nElected < E.nSeats:
+            if len(CS.elected) < E.nSeats:
                 CS.elect(c, msg='Elect remaining')
             else:
                 CS.defeat(c, msg='Defeat remaining')

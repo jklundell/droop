@@ -182,7 +182,7 @@ class Rule(ElectionRule):
             vote = V0
             losers = []
             maybe = []
-            maxDefeat = CS.nHopeful - E.seatsLeftToFill() # limit number of defeats
+            maxDefeat = len(CS.hopeful) - E.seatsLeftToFill() # limit number of defeats
             for g in range(len(sortedGroups) - 1):
                 group = sortedGroups[g]
                 maybe += group
@@ -278,7 +278,7 @@ class Rule(ElectionRule):
             ##
             for c in [c for c in CS.hopeful if hasQuota(c)]:
                 CS.elect(c)
-            if CS.nElected >= E.nSeats:
+            if len(CS.elected) >= E.nSeats:
                 break
 
             ##     If the number of candidates whose vote total is equal to or greater than
@@ -326,7 +326,7 @@ class Rule(ElectionRule):
             #   must be performed here; otherwise too many candidates can be defeated.
 
             if certainLosers:
-                if CS.nHopeful <= E.seatsLeftToFill():
+                if len(CS.hopeful) <= E.seatsLeftToFill():
                     break
                 continue  ## continue as described in clause a.
 
@@ -399,7 +399,7 @@ class Rule(ElectionRule):
             ##     or until the number of continuing candidates is equal to the number of offices 
             ##     yet to be elected. 
 
-            if CS.nHopeful <= E.seatsLeftToFill():
+            if len(CS.hopeful) <= E.seatsLeftToFill():
                 break
 
             ##     In the case of a tie between two (2) continuing candidates, 
@@ -420,7 +420,7 @@ class Rule(ElectionRule):
 
         #  Note: implemented as "less than or equal to"
         #
-        if CS.nHopeful <= E.seatsLeftToFill():
+        if len(CS.hopeful) <= E.seatsLeftToFill():
             for c in list(CS.hopeful):
                 CS.elect(c, 'Elect remaining candidates')
 

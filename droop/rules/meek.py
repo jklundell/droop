@@ -112,7 +112,7 @@ class Rule(ElectionRule):
         #
         def countComplete():
             "test for end of count"
-            return CS.nHopeful <= E.seatsLeftToFill() or E.seatsLeftToFill() <= 0
+            return len(CS.hopeful) <= E.seatsLeftToFill() or E.seatsLeftToFill() <= 0
 
         def hasQuota(E, candidate):
             '''
@@ -193,7 +193,7 @@ class Rule(ElectionRule):
             #   the election is already complete and we wouldn't be here.
             #   
             vote = V0
-            maxDefeat = CS.nHopeful - E.seatsLeftToFill()
+            maxDefeat = len(CS.hopeful) - E.seatsLeftToFill()
             maxg = None
             ncand = 0
             for g in xrange(len(sortedGroups) - 1):
@@ -371,7 +371,7 @@ class Rule(ElectionRule):
         #  Elect or defeat remaining hopeful candidates
         #
         for c in list(CS.hopeful):
-            if CS.nElected < E.electionProfile.nSeats:
+            if len(CS.elected) < E.electionProfile.nSeats:
                 CS.elect(c, msg='Elect remaining')
             else:
                 CS.defeat(c, msg='Defeat remaining')

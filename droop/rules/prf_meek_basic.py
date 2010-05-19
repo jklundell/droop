@@ -142,7 +142,7 @@ class Rule(ElectionRule):
         #  B. next round
         #  B.1. test count complete
         #
-        while CS.nHopeful > E.seatsLeftToFill() > 0:
+        while len(CS.hopeful) > E.seatsLeftToFill() > 0:
 
             R = E.newRound()    # data structures for new round
             CS = R.CS           # candidate state
@@ -243,7 +243,7 @@ class Rule(ElectionRule):
         #  C. Elect or defeat remaining hopeful candidates
         #
         for c in list(CS.hopeful):
-            if CS.nElected < E.electionProfile.nSeats:
+            if len(CS.elected) < E.electionProfile.nSeats:
                 CS.elect(c, msg='Elect remaining')
             else:
                 CS.defeat(c, msg='Defeat remaining')

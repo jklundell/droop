@@ -118,7 +118,7 @@ class Rule(ElectionRule):
             '''
             if E.seatsLeftToFill() <= 0:
                 return True
-            if CS.nHopeful <= E.seatsLeftToFill():
+            if len(CS.hopeful) <= E.seatsLeftToFill():
                 return True
             return False
 
@@ -234,7 +234,7 @@ class Rule(ElectionRule):
 
         #  Fill any remaining seats
         #
-        if CS.nHopeful <= E.seatsLeftToFill():
+        if len(CS.hopeful) <= E.seatsLeftToFill():
             for c in list(CS.hopeful):
                 CS.elect(c, 'Elect remaining candidates')
 

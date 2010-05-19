@@ -198,7 +198,7 @@ class Election(object):
 
     def seatsLeftToFill(self):
         "number of seats not yet filled"
-        return self.nSeats - self.R.CS.nElected
+        return self.nSeats - len(self.R.CS.elected)
 
     def transferBallots(self, c, msg='Transfer', tf=None):
         "WIGM: transfer ballots for elected or defeated candidate"
@@ -534,7 +534,7 @@ class CandidateSet(set):
     def __or__(self, other):
         "union"
         return CandidateSet(set(self) | set(other))
-        
+
     def __and__(self, other):
         "intersection"
         return CandidateSet(set(self) & set(other))
@@ -558,7 +558,6 @@ class CandidateState(object):
     defeated: the set of defeated candidates
     withdrawn: access to Election's list of withdrawn candidates
     pending: a set of elected candidates pending transfer (WIGM, not Meek)
-    nHopeful, etc: number of candidates in set (properties)
     '''
 
     def __init__(self, E):
@@ -629,14 +628,3 @@ class CandidateState(object):
         self.defeated.add(c)
         if val is None: val = self.E.V(c.vote)
         self.E.R.log("%s: %s (%s)" % (msg, c.name, val))
-
-    #  return count of candidates in requested state
-    #
-    @property
-    def nHopeful(self):
-        "return count of hopeful candidates"
-        return len(self.hopeful)
-    @property
-    def nElected(self):
-        "return count of elected candidates"
-        return len(self.elected)
