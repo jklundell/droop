@@ -162,8 +162,6 @@ class Rule(ElectionRule):
 
         #  Count votes in round 0 for reporting purposes
         #
-        for c in CS.hopeful:
-            c.vote = V0
         for b in E.ballots:
             b.topCand.vote += b.vote
 

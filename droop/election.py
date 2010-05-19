@@ -83,28 +83,15 @@ class Election(object):
         self.V1 = self.V(1)  # constant one for efficiency
         self.electionProfile = electionProfile
 
-        self.rounds = [self.Round(self)]
-        self.R0 = self.R = self.rounds[0]
-        
-        self.eligible = CandidateSet()
-        self.withdrawn = CandidateSet()
-        self.candidates = dict()  # cid: Candidate
-        
-        self.elected = None  # for communicating results
-        
         #  create candidate objects for candidates in election profile
         #
+        self.candidates = dict()  # cid: Candidate
         for cid in sorted(electionProfile.eligible | electionProfile.withdrawn):
             c = Candidate(self, cid, electionProfile.candidateOrder(cid), 
                 electionProfile.tieOrder[cid],
                 electionProfile.candidateName(cid),
                 electionProfile.nickName[cid])
             self.candidates[cid] = c
-            c.vote = self.V0
-            #
-            #  and add the candidate to round 0
-            #
-            self.R0.CS.addCandidate(c, isWithdrawn=cid in electionProfile.withdrawn)
 
         #  create a ballot object (ranking candidate IDs) from the profile rankings of candidate IDs
         #  withdrawn candidates have been removed alreay
@@ -116,6 +103,14 @@ class Election(object):
 
     def count(self):
         "count the election"
+        self.rounds = [self.Round(self)]
+        self.R0 = self.R = self.rounds[0]
+        self.elected = None  # for communicating results
+        self.eligible = CandidateSet()
+        self.withdrawn = CandidateSet()
+        for cid, c in self.candidates.iteritems():
+            c.vote = self.V0
+            self.R0.CS.addCandidate(c, isWithdrawn=cid in self.electionProfile.withdrawn)
         self.rule.count(self)
         self.R.rollup(self.rule.method())           # roll up last round
         self.elected = self.rounds[-1].CS.elected.byBallotOrder()
