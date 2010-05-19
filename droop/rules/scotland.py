@@ -259,8 +259,6 @@ class Rule(ElectionRule):
 
         #  count first-preference votes [45]
         #
-        for c in CS.hopeful:
-            c.vote = V0
         for b in E.ballots:
             b.topCand.vote += b.vote
 
