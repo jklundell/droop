@@ -124,10 +124,12 @@ class ElectionProfile(object):
                     equal_rank = True
             ranking = [rank for rank in ranking if len(rank)]   # strip empty ranks
             if len(ranking) == 0:
-                self.ranking = None
+                self.ranking = None     # empty ballot line
             elif equal_rank:
+                profile.nBallots += multiplier
                 self.ranking = tuple(ranking)
             else:
+                profile.nBallots += multiplier
                 ranking = [rank[0] for rank in ranking] # possibly empty
                 self.ranking = array.array('B' if profile.nCand<=256 else 'H', ranking)
             
@@ -348,11 +350,10 @@ class ElectionProfile(object):
                 ranking.append([self.getCid(c, len(self.ballotLines)+1) for c in toks])
 
             if ranking:                         # ignore empty ballots
-                self.nBallots += multiplier
                 ballot = self.BallotLine(self, multiplier, ranking)
                 if isinstance(ballot.ranking, tuple):
                     self.ballotLinesEqual.append(ballot)
-                else:
+                elif ballot.ranking is not None:
                     self.ballotLines.append(ballot)
 
             tok = blt.next()  # next multiplier or 0
