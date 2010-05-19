@@ -52,8 +52,8 @@ using fixed-point decimal arithmetic with five digits of precision.
         exceeds the quota and, subject to rules 49 and 52, one or more vacancies remain to be filled, 
         the returning officer shall sort the ballot papers received by that candidate into further parcels 
         so that they are grouped-
-        (a)	according to the next available preference given on those papers; and
-        (b)	where no such preference is given, as a parcel of non-transferable papers.
+        (a) according to the next available preference given on those papers; and
+        (b) where no such preference is given, as a parcel of non-transferable papers.
     (2) The returning officer shall, in accordance with this rule and rule 49, transfer each parcel 
         of ballot papers referred to in paragraph (1)(a) to the continuing candidate for whom the next 
         available preference is given on those papers and shall credit such continuing candidates with 
@@ -68,15 +68,15 @@ using fixed-point decimal arithmetic with five digits of precision.
                 to five decimal places (any remainder being ignored).
     (4) For the purposes of paragraph (3)-
         (a) "transferring candidate" means the candidate from whom the ballot paper is being transferred; and
-        (b)	"the value of the ballot paper" means-
+        (b) "the value of the ballot paper" means-
             (i) for a ballot paper on which a first preference vote is given for the transferring candidate, one; and
             (ii) in all other cases, the transfer value of the ballot paper when received by the transferring candidate.
 
 49. Transfer of ballot papers - supplementary provisions
     (1) If, at the end of any stage of the count, the number of votes credited to two or more candidates 
         exceeds the quota the returning officer shall-
-        (a)	first sort the ballot papers of the candidate with the highest surplus; and
-        (b)	then transfer the transferable papers of that candidate.
+        (a) first sort the ballot papers of the candidate with the highest surplus; and
+        (b) then transfer the transferable papers of that candidate.
     (2) If the surpluses determined in respect of two or more candidates are equal, the transferable papers 
         of the candidate who had the highest number of votes at the end of the most recent preceding stage 
         at which they had unequal numbers of votes shall be transferred first.
@@ -85,15 +85,15 @@ using fixed-point decimal arithmetic with five digits of precision.
 
 50. Exclusion of candidates
     (1) If, one or more vacancies remain to be filled and-
-        (a)	the returning officer has transferred all ballot papers which are required by rule 48 
+        (a) the returning officer has transferred all ballot papers which are required by rule 48 
             or this rule to be transferred; or 
-        (b)	there are no ballot papers to be transferred under rule 48 or this rule,
+        (b) there are no ballot papers to be transferred under rule 48 or this rule,
             the returning officer shall exclude from the election at that stage the candidate with the then 
             lowest number of votes.
     (2) The returning officer shall sort the ballot papers for the candidate excluded under paragraph (1) 
         into parcels so that they are grouped-
-        (a)	according to the next available preference given on those papers; and
-        (b)	where no such preference is given, as a parcel of non-transferable papers.
+        (a) according to the next available preference given on those papers; and
+        (b) where no such preference is given, as a parcel of non-transferable papers.
     (3) The returning officer shall, in accordance with this article, transfer each parcel of ballot papers 
         referred to in paragraph (2)(a) to the continuing candidate for whom the next available preference 
         is given on those papers and shall credit such continuing candidates with an additional number of votes 
@@ -105,11 +105,11 @@ using fixed-point decimal arithmetic with five digits of precision.
 
 51. Exclusion of candidates - supplementary provisions
     (1) If, when a candidate has to be excluded under rule 50- 
-        (a)	two or more candidates each have the same number of votes; and 
-        (b)	no other candidate has fewer votes,
+        (a) two or more candidates each have the same number of votes; and 
+        (b) no other candidate has fewer votes,
         paragraph (2) applies. 
     (2) Where this paragraph applies-
-        (a)	regard shall be had to the total number of votes credited to those candidates 
+        (a) regard shall be had to the total number of votes credited to those candidates 
             at the end of the most recently preceding stage of the count at which they had an unequal number 
             of votes and the candidate with the lowest number of votes at that stage shall be excluded; and
         (b) where the number of votes credited to those candidates was equal at all stages, 
@@ -222,7 +222,7 @@ class Rule(ElectionRule):
                     E.R.log('Break tie by prior stage (%s): [%s] -> %s' % (reason, names, t.name))
                     return t
             E.R = E.rounds[-1]             # restore current round
-            t = CandidateSet(tiedlist).byTieOrder()[0]	# break tie by lot
+            t = CandidateSet(tiedlist).byTieOrder()[0]  # break tie by lot
             E.R.log('Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
             return t
 
@@ -257,16 +257,11 @@ class Rule(ElectionRule):
         E.R0.quota = calcQuota(E)
         R.votes = V(E.nBallots)
 
-        #  skip withdrawn candidates
-        #
-        for c in E.withdrawn:
-            E.transferBallots(c, msg='Transfer withdrawn')
-        
         #  count first-preference votes [45]
         #
         for c in CS.hopeful:
             c.vote = V0
-        for b in (b for b in E.ballots if not b.exhausted):
+        for b in E.ballots:
             b.topCand.vote += b.vote
 
         while True:

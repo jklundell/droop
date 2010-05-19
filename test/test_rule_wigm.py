@@ -85,18 +85,6 @@ class ElectionDumpTest(unittest.TestCase):
         E.count()
         return E.dump()
 
-    def testElectionDump(self):
-        "try a basic count & dump"
-        self.assertTrue(doDumpCompare(dict(rule='wigm'), '42'), 'WIGM 42.blt')
-
-    def testElectionDumps(self):
-        "try several counts & dumps (wigm)"
-        blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SCw', 'SC-Vm-12')
-        rulename = 'wigm'
-        for blt in blts:
-            Rule = droop.electionRule(rulename)
-            self.assertTrue(doDumpCompare(dict(rule=rulename), blt), '%s %s.blt' % (Rule.info(), blt))
-
     def testElectionDumpRational(self):
         "try several counts & dumps with rational arithmetic"
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')

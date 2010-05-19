@@ -321,11 +321,10 @@ class Rule(ElectionRule):
         E.R0.quota = calcQuota(E)
         R = E.R0
         CS = R.CS   # candidate state
-        for c in E.withdrawn:
-            c.kf = V0
         for c in CS.hopeful:
             c.kf = V1    # initialize keep factors
-        E.countTopVotes()  # count first-place votes for round 0 reporting
+        for b in (b for b in E.ballots if b.topCand): # count first-place votes for round 0 reporting
+            b.topCand.vote += b.multiplier
 
         while not countComplete():
 

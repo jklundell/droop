@@ -122,7 +122,6 @@ class Rule(ElectionRule):
         #  A. initialize omega: 1/10^6
         #     initialize quota
         #     set hopeful keep factors to 1
-        #     set withdrawn keep factors to 0
         #
         #     count votes for reporting purposes
         #
@@ -131,13 +130,10 @@ class Rule(ElectionRule):
         R.votes = V(E.nBallots)
         R.quota = R.votes / V(E.nSeats+1) + V.epsilon
         CS = R.CS   # candidate state
-        for c in E.withdrawn:
-            c.kf = V0
         for c in CS.hopeful:
             c.kf = V1    # initialize keep factors
         for b in E.ballots:
-            if b.topCand:
-                b.topCand.vote += b.multiplier  # count first-place votes for round 0 reporting
+            b.topCand.vote += b.multiplier  # count first-place votes for round 0 reporting
 
         #  B. next round
         #  B.1. test count complete

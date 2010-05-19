@@ -107,12 +107,19 @@ class Election(object):
             self.R0.CS.addCandidate(c, isWithdrawn=cid in electionProfile.withdrawn)
 
         #  create a ballot object (ranking candidate IDs) from the profile rankings of candidate IDs
-        #  only eligible (not withdrawn) will be added
+        #  withdrawn candidates have been removed alreay
         #
         self.ballots = list()
         for bl in electionProfile.ballotLines:
-            self.ballots.append(self.Ballot(self, bl.multiplier, bl.ranking))
+            if bl.ranking:  # if only withdrawn candidates
+                self.ballots.append(self.Ballot(self, bl.multiplier, bl.ranking))
 
+    def count(self):
+        "count the election"
+        self.rule.count(self)
+        self.R.rollup(self.rule.method())           # roll up last round
+        self.elected = self.rounds[-1].CS.elected.byBallotOrder()
+        
     @classmethod
     def makehelp(cls):
         "build a dictionary of help strings on various subjects"
@@ -141,12 +148,6 @@ class Election(object):
     def candidate(self, cid):
         "look up a candidate from a candidate ID"
         return self.candidates[cid]
-        
-    def count(self):
-        "count the election"
-        self.rule.count(self)
-        self.R.rollup(self.rule.method())           # roll up last round
-        self.elected = self.rounds[-1].CS.elected.byBallotOrder()
         
     def newRound(self):
        "add a round"
@@ -222,15 +223,6 @@ class Election(object):
             val = vote
             c.vote = self.V0
         self.log("%s: %s (%s)" % (msg, c.name, self.V(val)))
-
-    def countTopVotes(self):
-        "count first-place votes"
-        if self.rule.method() == 'meek':
-            for b in (b for b in self.ballots if b.topCand):
-                b.topCand.vote += b.multiplier
-        else:
-            for b in (b for b in self.ballots if not b.exhausted):
-                b.topCand.vote = b.topCand.vote + b.vote
 
     def distributeVotes(self, kt):
         "perform a Meek/Warren distribution of votes on all ballots"

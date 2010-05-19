@@ -160,16 +160,12 @@ class Rule(ElectionRule):
         R.quota = calcQuota(E)
         R.votes = V(E.nBallots)
 
-        #  skip withdrawn candidates
-        #
-        for c in E.withdrawn:
-            E.transferBallots(c, msg='Transfer withdrawn')
-
         #  Count votes in round 0 for reporting purposes
         #
         for c in CS.hopeful:
             c.vote = V0
-        E.countTopVotes()
+        for b in E.ballots:
+            b.topCand.vote += b.vote
 
         while len(CS.hopeful) > E.seatsLeftToFill() > 0:
             R = E.newRound()

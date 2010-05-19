@@ -83,13 +83,5 @@ class ElectionDumpTest(unittest.TestCase):
         "prf-meek-basic stable state"
         self.assertTrue(doDumpCompare(dict(rule='prf-meek-basic', precision=7, omega=7), 'SC-Vm-12'), 'meek-prf stable state')
 
-    def testElectionDumps(self):
-        "try several counts & dumps (prf-meek-basic)"
-        blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SCw', 'SC-Vm-12')
-        rulename = 'prf-meek-basic'
-        for blt in blts:
-            Rule = droop.electionRule(rulename)
-            self.assertTrue(doDumpCompare(dict(rule=rulename), blt), '%s %s.blt' % (Rule.info(), blt))
-
 if __name__ == '__main__':
     unittest.main()

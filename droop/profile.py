@@ -103,20 +103,31 @@ class ElectionProfile(object):
         
         __slots__ = ('multiplier', 'ranking')
         
-        def __init__(self, multiplier, ranking, equal_rank, nCand):
+        def __init__(self, profile, multiplier, ranking):
             '''
             create a ballot-line object
             
-            ranking is a list of tuples
-            if all the tuples are singletons (equal_rank is False), store an array
+            ranking is a list of lists of cids
+            remove any withdrawn candidates
+            if all the cid-lists are singletons, store an array
             else store the list (as a tuple)
             '''
             self.multiplier = multiplier
-            if equal_rank:
+            equal_rank = False
+            for rank in ranking:
+                for cid in set(rank):
+                    if cid in profile.withdrawn:
+                        rank.remove(cid)
+                if len(rank) > 1:
+                    equal_rank = True
+            ranking = [rank for rank in ranking if len(rank)]   # strip empty ranks
+            if len(ranking) == 0:
+                self.ranking = None
+            elif equal_rank:
                 self.ranking = tuple(ranking)
             else:
-                ranking = [rank[0] for rank in ranking]
-                self.ranking = array.array('B' if nCand<=256 else 'H', ranking)
+                ranking = [rank[0] for rank in ranking] # possibly empty
+                self.ranking = array.array('B' if profile.nCand<=256 else 'H', ranking)
             
     def __validate(self):
         "check for internal consistency"
@@ -132,7 +143,17 @@ class ElectionProfile(object):
                 if cid in d:
                     raise ElectionProfileError('candidate ID %s duplicated on ballot line %d' % (cid, n))
                 d[cid] = cid
-    
+        # TODO: line number needs to be stored in ballot array
+        n = 0
+        for ranking in (bl.ranking for bl in self.ballotLinesEqual):
+            n += 1
+            d = dict()
+            for rank in ranking:
+                for cid in rank:
+                    if cid in d:
+                        raise ElectionProfileError('candidate ID %s duplicated on ballot line %d' % (cid, n))
+                    d[cid] = cid
+
     def compare(self, other):
         "compare this profile (self) to other (unittest support)"
         if self.title != other.title: return 'title mismatch'
@@ -318,21 +339,20 @@ class ElectionProfile(object):
                 break
 
             ranking = list()
-            equal_rank = False
             while True:
                 tok = blt.next()  # next ranked candidate or 0
                 if tok == '0':
                     break   # end of ballot
                 toks = tok.split('=')
-                if len(toks) > 1:
-                    equal_rank = True
-                cids = [self.getCid(c, len(self.ballotLines)+1) for c in toks]
-                ranking.append(tuple(cids))
+                ranking.append([self.getCid(c, len(self.ballotLines)+1) for c in toks])
 
             if ranking:                         # ignore empty ballots
                 self.nBallots += multiplier
-                blines = self.ballotLinesEqual if equal_rank else self.ballotLines
-                blines.append(self.BallotLine(multiplier, ranking, equal_rank, self.nCand))
+                ballot = self.BallotLine(self, multiplier, ranking)
+                if isinstance(ballot.ranking, tuple):
+                    self.ballotLinesEqual.append(ballot)
+                else:
+                    self.ballotLines.append(ballot)
 
             tok = blt.next()  # next multiplier or 0
             

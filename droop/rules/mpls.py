@@ -238,7 +238,7 @@ class Rule(ElectionRule):
             if len(tied) == 1:
                 return tied.pop()
             names = ", ".join([c.name for c in tied])
-            t = tied.byTieOrder()[0]	# sort by tie-order before making choice
+            t = tied.byTieOrder()[0]    # sort by tie-order before making choice
             R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
             
@@ -258,15 +258,13 @@ class Rule(ElectionRule):
         E.R0.quota = calcQuota(E)
         R.votes = V(E.nBallots)
 
-        #  skip withdrawn candidates & make initial vote count
+        #  make initial vote count
         #
         ##  167.70(1)(a)
         ##  a. The number of votes cast for each candidate for the current round 
         ##     must be counted.
         ##
         for b in E.ballots:
-            if b.topCand in CS.withdrawn:
-                b.transfer()
             b.topCand.vote += b.vote
 
         while True:
