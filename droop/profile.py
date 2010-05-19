@@ -79,6 +79,7 @@ class ElectionProfile(object):
         #
         self.ballotLines = list()
         self.ballotLinesEqual = list()
+        self.lineNumber = 0           # line number during parsing
         self.tieOrder = dict()        # tiebreaking cid sequence: cid->order
         self.nickCid = dict()         # nick to cid
         self.nickName = dict()        # cid to nick
@@ -101,7 +102,7 @@ class ElectionProfile(object):
     class BallotLine(object):
         "one ballot line"
         
-        __slots__ = ('multiplier', 'ranking')
+        __slots__ = ('multiplier', 'ranking', 'line')
         
         def __init__(self, profile, multiplier, ranking):
             '''
@@ -113,6 +114,7 @@ class ElectionProfile(object):
             else store the list (as a tuple)
             '''
             self.multiplier = multiplier
+            self.line = profile.lineNumber
             equal_rank = False
             for rank in ranking:
                 for cid in set(rank):
@@ -130,28 +132,23 @@ class ElectionProfile(object):
                 self.ranking = array.array('B' if profile.nCand<=256 else 'H', ranking)
             
     def __validate(self):
-        "check for internal consistency"
+        "check profile for internal consistency"
         if not self.nSeats or self.nSeats > len(self.eligible):
             raise ElectionProfileError('too few candidates (%d seats; %d candidates)' % (self.nSeats, len(self.eligible)))
         if self.nBallots < len(self.eligible):
             raise ElectionProfileError('too few ballots (%d ballots; %d candidates)' % (self.nBallots, len(self.eligible)))
-        n = 0
-        for ranking in (bl.ranking for bl in self.ballotLines):
-            n += 1
+        for bl in self.ballotLines:
             d = dict()
-            for cid in ranking:
+            for cid in bl.ranking:
                 if cid in d:
-                    raise ElectionProfileError('candidate ID %s duplicated on ballot line %d' % (cid, n))
+                    raise ElectionProfileError('candidate ID %s duplicated on line %d' % (cid, bl.line))
                 d[cid] = cid
-        # TODO: line number needs to be stored in ballot array
-        n = 0
-        for ranking in (bl.ranking for bl in self.ballotLinesEqual):
-            n += 1
+        for bl in self.ballotLinesEqual:
             d = dict()
-            for rank in ranking:
+            for rank in bl.ranking:
                 for cid in rank:
                     if cid in d:
-                        raise ElectionProfileError('candidate ID %s duplicated on ballot line %d' % (cid, n))
+                        raise ElectionProfileError('candidate ID %s duplicated on line %d' % (cid, bl.line))
                     d[cid] = cid
 
     def compare(self, other):
@@ -166,9 +163,13 @@ class ElectionProfile(object):
         for cid in self._candidateOrder:
             if self._candidateOrder[cid] != other._candidateOrder[cid]: return 'candidate order mismatch'
         if len(self.ballotLines) != len(other.ballotLines): return 'ballot-line count mismatch'
+        if len(self.ballotLinesEqual) != len(other.ballotLinesEqual): return 'ballot-line (equal) count mismatch'
         for b, bo in zip(self.ballotLines, other.ballotLines):
             if b.multiplier != bo.multiplier: return 'ballot-line multiplier mismatch'
             if b.ranking != bo.ranking: return 'ballot-line ranking mismatch'
+        for b, bo in zip(self.ballotLinesEqual, other.ballotLinesEqual):
+            if b.multiplier != bo.multiplier: return 'ballot-line (equal) multiplier mismatch'
+            if b.ranking != bo.ranking: return 'ballot-line (equal) ranking mismatch'
         return False
 
     def candidateName(self, cid):
@@ -334,7 +335,7 @@ class ElectionProfile(object):
             elif digits.match(tok):
                 multiplier = int(tok)
             else:
-                raise ElectionProfileError('bad blt item "%s" near ballot line %d; expected decimal number' % (tok, len(self.ballotLines)+1))
+                raise ElectionProfileError('bad blt item "%s" near line %d; expected decimal number' % (tok, self.lineNumber))
             if not multiplier:  # test end of ballot lines
                 break
 
@@ -432,7 +433,9 @@ class ElectionProfile(object):
         lines = blob.splitlines()
         inComment = 0
         inQuote = False
+        lineNumber = 0
         for line in lines:
+            lineNumber += 1
             tokens = line.split()
             for token in tokens:
                 if not inComment and token.startswith('"'):
