@@ -155,6 +155,7 @@ class ProfileTest(unittest.TestCase):
         self.assertEqual(len(ElectionProfile(data=p_42a).withdrawn), 0)
 
     p_42w = '''4 2 -4 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Bob" "Pollux and Helen should tie"'''
+    p_42w3 = '''4 2 -3 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Bob" "Pollux and Helen should tie"'''
 
     def testInitOneWithdrawn(self):
         "normal init: 1 withdrawn"
@@ -163,6 +164,12 @@ class ProfileTest(unittest.TestCase):
     def testInitOneWithdrawnEligible(self):
         "normal init: 1 withdrawn"
         self.assertEqual(len(ElectionProfile(data=self.p_42w).eligible), 3)
+
+    def testInitBallotCount(self):
+        "effect of withdrawals on ballot count"
+        self.assertEqual(ElectionProfile(data=p_42a).nBallots, 6)
+        self.assertEqual(ElectionProfile(data=self.p_42w).nBallots, 6)
+        self.assertEqual(ElectionProfile(data=self.p_42w3).nBallots, 4)
 
     def testInitBobName(self):
         "normal init: name of candidate"
@@ -379,6 +386,30 @@ class BallotEqualRankTest(unittest.TestCase):
         "verify profile with a bad ranking"
         b = '''3 2 4 1 2 0 2 =2 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBallotEQ6(self):
+        "verify profile with equality and a duplicate ranking"
+        b = '''3 2 4 1 2 0 2 2=2 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBallotEQ7(self):
+        "verify profile with equality and a duplicate ranking"
+        b = '''3 2 4 1 2 0 2 2=3 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        self.assertRaises(ElectionProfileError, ElectionProfile, data=b)
+
+    def testBallotEQ8(self):
+        "test profile compare with equal rankings"
+        b1 = '''3 2 4 1 2=3 0 2 2=3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        b2 = '''3 2 4 1 2=3 0 2 2=3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        b3 = '''3 2 3 1 2=3 0 3 2=3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        b4 = '''3 2 4 1 2=3 0 2 2=1 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        p1 = ElectionProfile(data=b1)
+        p2 = ElectionProfile(data=b2)
+        self.assertFalse(p1.compare(p2))
+        p3 = ElectionProfile(data=b3)
+        p4 = ElectionProfile(data=b4)
+        self.assertTrue(p1.compare(p3))
+        self.assertTrue(p1.compare(p4))
 
 class Utf8Test(unittest.TestCase):
     "test utf-8 blt input"
