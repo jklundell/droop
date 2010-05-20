@@ -23,7 +23,6 @@ This file is part of Droop.
 import unittest
 
 from common import testdir, doDumpCompare
-import droop
 from droop.election import Election
 from droop.profile import ElectionProfile
 from droop import electionRuleNames
