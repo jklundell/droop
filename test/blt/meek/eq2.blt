@@ -1,0 +1,12 @@
+4 2
+[nick a b c d]
+5 a b=c d 0
+1 b=c a 0
+3 c=d b=a 0
+2 b a=d c 0
+0
+"A"
+"B"
+"C"
+"D"
+"simple election with equal rankings"
