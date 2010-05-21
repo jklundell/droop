@@ -218,6 +218,44 @@ class Rule(ElectionRule):
         IS_elected = 3
         IS_stable = 4
 
+        def distributeVotes(kt):
+            "perform a Meek/Warren distribution of votes on all ballots"
+            candidate = E.candidate
+            R.residual = V0
+            for b in E.ballots:
+                multiplier = b.multiplier
+                b.residual = multiplier
+                b.weight = V1
+                for c in (candidate(cid) for cid in b.ranking):
+                    if c.kf:
+                        keep, b.weight = kt(c.kf, b.weight)
+                        c.vote += keep * multiplier
+                        b.residual -= keep * multiplier  # residual value of ballot
+                        if b.weight <= V0:
+                            break
+                R.residual += b.residual  # residual for round
+                
+            for b in E.ballotsEqual:
+                cset = [c.cid for c in (CS.hopeful | CS.elected)]
+                nrank = len(b.ranking)
+                multiplier = b.multiplier
+                b.residual = multiplier
+
+                def dist(i, weight):
+                    "distribute via recursive descent"
+                    cids = [cid for cid in b.ranking[i] if cid in cset]
+                    cweight = weight / V(len(cids))
+                    for cid in cids:
+                        c = candidate(cid)
+                        keep, weight = kt(c.kf, cweight)
+                        c.vote += keep * multiplier
+                        b.residual -= keep * multiplier  # residual value of ballot
+                        if weight and i < nrank:
+                            dist(i+1, weight)
+
+                dist(0, V1)
+                R.residual += b.residual  # residual for round
+
         def iterate():
             "Iterate until surplus is sufficiently low"
 
@@ -252,7 +290,7 @@ class Rule(ElectionRule):
                 #
                 for c in CS.hopefulOrElected:
                     c.vote = V0
-                E.distributeVotes(kw_function)
+                distributeVotes(kw_function)
                 R.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
 
                 #  D.3. update quota
@@ -325,6 +363,13 @@ class Rule(ElectionRule):
             c.kf = V1    # initialize keep factors
         for b in (b for b in E.ballots if b.topCand): # count first-place votes for round 0 reporting
             b.topCand.vote += b.multiplier
+
+        #  count votes from ballots with equal rankings
+        #
+        for b in E.ballotsEqual:
+            v = (V1 // V(len(b.topRank))) * b.multiplier
+            for cid in b.topRank:
+                E.candidate(cid).vote += v
 
         while not countComplete():
 

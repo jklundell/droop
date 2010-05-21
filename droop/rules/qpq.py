@@ -216,7 +216,7 @@ class Rule(ElectionRule):
                 high_candidate = breakTie(high_candidates, 'largest quotient')
                 CS.elect(high_candidate, 'Elect high quotient', high_quotient)
                 new_weight = V1 / high_candidate.quotient
-                for b in (b for b in E.ballots if b.topCid == high_candidate.cid):
+                for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = new_weight
                     b.transfer()
                 E.log("%s: %s (%s)" % ('Transfer elected', high_candidate.name, high_quotient))
@@ -225,7 +225,7 @@ class Rule(ElectionRule):
                 low_candidates = CandidateSet([c for c in CS.hopeful if c.quotient == low_quotient])
                 low_candidate = breakTie(low_candidates, 'smallest quotient')
                 CS.defeat(low_candidate, 'Defeat low quotient', low_quotient)
-                for b in (b for b in E.ballots if b.topCid == low_candidate.cid):
+                for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
                     b.transfer()
                 E.log("%s: %s (%s)" % ('Transfer defeated', low_candidate.name, low_quotient))
                 restart = True

@@ -98,8 +98,12 @@ class Election(object):
         #
         self.ballots = list()
         for bl in electionProfile.ballotLines:
-            if bl.ranking:  # if only withdrawn candidates
+            if bl.ranking:  # skip if only withdrawn candidates
                 self.ballots.append(self.Ballot(self, bl.multiplier, bl.ranking))
+        self.ballotsEqual = list()
+        for bl in electionProfile.ballotLinesEqual:
+            if bl.ranking:  # skip if only withdrawn candidates
+                self.ballotsEqual.append(self.Ballot(self, bl.multiplier, bl.ranking))
 
     def count(self):
         "count the election"
@@ -205,36 +209,19 @@ class Election(object):
         if c in self.R.CS.elected:
             self.R.CS.pending.remove(c)
             surplus = vote - self.R.quota
-            for b in (b for b in ballots if b.topCid == cid):
+            for b in (b for b in ballots if b.topRank == cid):
                 b.weight = tf(self.V, b.weight, surplus, vote)
                 if b.transfer():
                     b.topCand.vote += b.vote
             val = surplus
             c.vote = self.R.quota
         else:
-            for b in (b for b in ballots if b.topCid == cid):
+            for b in (b for b in ballots if b.topRank == cid):
                 if b.transfer():
                     b.topCand.vote += b.vote
             val = vote
             c.vote = self.V0
         self.log("%s: %s (%s)" % (msg, c.name, self.V(val)))
-
-    def distributeVotes(self, kt):
-        "perform a Meek/Warren distribution of votes on all ballots"
-        V0 = self.V0
-        candidate = self.candidate
-        self.R.residual = V0
-        for b in self.ballots:
-            b.weight = self.V1
-            b.residual = b.multiplier
-            for c in (candidate(cid) for cid in b.ranking):
-                if c.kf:
-                    keep, b.weight = kt(c.kf, b.weight)
-                    c.vote += keep * b.multiplier
-                    b.residual -= keep * b.multiplier  # residual value of ballot
-                    if b.weight <= V0:
-                        break
-            self.R.residual += b.residual  # residual for round
 
     class Round(object):
         "one election round"
@@ -287,7 +274,7 @@ class Election(object):
                     if b.exhausted:
                         nontransferable += b.vote
                     else:
-                        topCid = b.topCid
+                        topCid = b.topRank
                         if topCid in elected:
                             pvotes += b.vote
                         elif topCid in hopeful:
@@ -419,8 +406,8 @@ class Election(object):
             return self.index >= len(self.ranking)    # detect end-of-ranking
         
         @property
-        def topCid(self):
-            "return top candidate ID, or None if exhausted"
+        def topRank(self):
+            "return top rank (CID or tuple), or None if exhausted"
             return self.ranking[self.index] if self.index < len(self.ranking) else None
         
         @property
