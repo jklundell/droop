@@ -23,15 +23,21 @@ This file is part of Droop.
 import unittest
 
 from common import testdir, doDumpCompare
+from droop import electionRuleNames, electionRule
 from droop.election import Election
 from droop.profile import ElectionProfile
-from droop import electionRuleNames
+from droop.common import UsageError
 
-class ElectionNameTest(unittest.TestCase):
+class RuleBasicTest(unittest.TestCase):
     "make sure we're in the book"
     
     def testElectionNames(self):
         self.assertTrue('prf-meek-basic' in electionRuleNames())
+
+    def testArithmetic(self):
+        "meek-prf requires fixed"
+        Rule = electionRule('prf-meek-basic')
+        self.assertRaises(UsageError, Rule.options, dict(arithmetic='guarded'))
 
 class ElectionCountTest(unittest.TestCase):
     "test some counts"

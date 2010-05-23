@@ -24,9 +24,10 @@ import unittest
 
 from common import testdir, doDumpCompare
 import droop
+from droop import electionRuleNames, electionRule
 from droop.election import Election
 from droop.profile import ElectionProfile
-from droop import electionRuleNames
+from droop.common import UsageError
 
 class ElectionNameTest(unittest.TestCase):
     "make sure we're in the book"
@@ -34,6 +35,13 @@ class ElectionNameTest(unittest.TestCase):
     def testElectionNames(self):
         self.assertTrue('meek' in electionRuleNames())
         self.assertTrue('warren' in electionRuleNames())
+
+    def testMeekWarren1(self):
+        "meek responds to warren"
+        Rule = electionRule('warren')
+        Rule.options(dict(rule='warren'))
+        self.assertEqual(Rule.tag(), 'warren-generic-o9')
+        self.assertRaises(UsageError, Rule.options, dict(defeat_batch='whatever'))
 
 class ElectionCountTest(unittest.TestCase):
     "test some counts"

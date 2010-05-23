@@ -142,6 +142,14 @@ class Rule(ElectionRule):
             R = E.newRound()    # data structures for new round
             CS = R.CS           # candidate state
 
+            #  B.3. set vote and keep factor of defeated candidates to 0
+            #       Note: we defer this until after the new round is begun so that the
+            #             previous-round report contains the vote for the defeated candidate.
+            #
+            for c in CS.defeated:
+                c.vote = V0
+                c.kf = V0
+
             #  B.2. iterate
             #       next round if iteration elected a candidate
             #
@@ -212,12 +220,12 @@ class Rule(ElectionRule):
                 for c in CS.elected:
                     c.kf = V.div(V.mul(c.kf, R.quota, round='up'), c.vote, round='up')
 
-            #  B.3. end of round if iteration resulted in an election
+            #  B.2.e. end of round if iteration resulted in an election
             #
             if iterationStatus == 'elected':
                 continue
 
-            #  B.4. defeat candidate with lowest vote
+            #  B.3. defeat candidate with lowest vote
             #
             #  find candidate(s) within surplus of lowest vote (effectively tied)
             #  defeat candidate with lowest vote, breaking tie if necessary
@@ -230,10 +238,8 @@ class Rule(ElectionRule):
                     CS.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))
                 else:
                     CS.defeat(low_candidate, msg='Defeat (stable surplus %s)' % V(R.surplus))
-                low_candidate.kf = V0
-                low_candidate.vote = V0
             #
-            #  B.5 continue at B.1.
+            #  B.4 continue at B.1.
         
         #  C. Elect or defeat remaining hopeful candidates
         #
