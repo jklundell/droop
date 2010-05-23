@@ -226,11 +226,6 @@ class Rule(ElectionRule):
             E.R.log('Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
             return t
 
-        def transferFunction(V, ballotweight, surplus, vote):
-            "calculate new ballot weight on surplus transfer"
-            # see http://www.votingmatters.org.uk/RES/eSTV-Eval.pdf section 7.1 #5
-            return V.muldiv(ballotweight, surplus, vote, round='down')
-            
         def countComplete():
             '''
             test for count complete
@@ -285,8 +280,16 @@ class Rule(ElectionRule):
                 high_vote = max(c.vote for c in CS.pending)
                 high_candidates = CandidateSet([c for c in CS.pending if c.vote == high_vote])
                 high_candidate = breakTie(high_candidates, 'largest surplus')
-                E.transferBallots(high_candidate, msg='Transfer surplus', tf=transferFunction)
-                continue  # to next stage
+                CS.pending.remove(high_candidate)
+                surplus = high_candidate.vote - R.quota
+                for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
+                    # see http://www.votingmatters.org.uk/RES/eSTV-Eval.pdf section 7.1 #5
+                    b.weight = V.muldiv(b.weight, surplus, high_candidate.vote, round='down')
+                    if b.transfer():
+                        b.topCand.vote += b.vote
+                high_candidate.vote = R.quota
+                E.log("%s: %s (%s)" % ('Transfer surplus', high_candidate.name, surplus))
+                continue  # to next stage/round
 
             #  defeat candidate(s) with lowest vote [50,51]
             #
@@ -295,7 +298,11 @@ class Rule(ElectionRule):
                 low_candidates = CandidateSet([c for c in CS.hopeful if c.vote == low_vote])
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 CS.defeat(low_candidate, 'Defeat low candidate')
-                E.transferBallots(low_candidate, msg='Transfer defeated')
+                for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
+                    if b.transfer():
+                        b.topCand.vote += b.vote
+                E.log("%s: %s (%s)" % ('Transfer defeated', low_candidate.name, low_candidate.vote))
+                low_candidate.vote = V0
 
             if countComplete():
                 break
