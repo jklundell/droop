@@ -200,29 +200,6 @@ class Election(object):
         "number of seats not yet filled"
         return self.nSeats - len(self.R.CS.elected)
 
-    def transferBallots(self, c, msg='Transfer', tf=None):
-        "WIGM: transfer ballots for elected or defeated candidate"
-        vote = c.vote
-        cid = c.cid
-        ballots = self.ballots
-        
-        if c in self.R.CS.elected:
-            self.R.CS.pending.remove(c)
-            surplus = vote - self.R.quota
-            for b in (b for b in ballots if b.topRank == cid):
-                b.weight = tf(self.V, b.weight, surplus, vote)
-                if b.transfer():
-                    b.topCand.vote += b.vote
-            val = surplus
-            c.vote = self.R.quota
-        else:
-            for b in (b for b in ballots if b.topRank == cid):
-                if b.transfer():
-                    b.topCand.vote += b.vote
-            val = vote
-            c.vote = self.V0
-        self.log("%s: %s (%s)" % (msg, c.name, self.V(val)))
-
     class Round(object):
         "one election round"
         
