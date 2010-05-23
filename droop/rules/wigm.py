@@ -61,9 +61,7 @@ class Rule(ElectionRule):
         
         #  set defaults
         #
-        options.setdefault('arithmetic', 'guarded')
-
-        if options['arithmetic'] == 'guarded':
+        if options.setdefault('arithmetic', 'guarded') == 'guarded':
             options.setdefault('precision', 18)
             options.setdefault('guard', options['precision']//2)
         elif options['arithmetic'] == 'fixed':
@@ -150,10 +148,10 @@ class Rule(ElectionRule):
             
         #  Local variables for convenience
         #
-        R = E.R0  # current round
+        R = E.R0    # current round
         CS = R.CS   # candidate state
-        V = E.V   # arithmetic value class
-        V0 = E.V0 # constant zero
+        V = E.V     # arithmetic value class
+        V0 = E.V0   # constant zero
         
         #  calculate quota
         #

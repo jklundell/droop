@@ -72,8 +72,7 @@ class Rule(ElectionRule):
         #  set defaults
         #
         cls.warren = options.get('rule') == 'warren'
-        options.setdefault('arithmetic', 'guarded')
-        if options['arithmetic'] == 'guarded':
+        if options.setdefault('arithmetic', 'guarded') == 'guarded':
             options.setdefault('precision', 18)
             options.setdefault('guard', options['precision']//2)
             cls.omega = options.get('omega', options['precision']//2)

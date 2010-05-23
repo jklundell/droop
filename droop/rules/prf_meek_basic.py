@@ -51,8 +51,7 @@ class Rule(ElectionRule):
     def options(cls, options=dict()):
         "override options"
         
-        options.setdefault('arithmetic', 'fixed')
-        if options['arithmetic'] != 'fixed':
+        if options.setdefault('arithmetic', 'fixed') != 'fixed':
             raise UsageError('%s does not support %s arithmetic' % (cls.name, options['arithmetic']))
         cls.precision = options.setdefault('precision', cls.defaultPrecision)
         cls.omega = options.setdefault('omega', cls.defaultOmega)
