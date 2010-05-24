@@ -179,13 +179,13 @@ class Rule(ElectionRule):
                 high_candidates = CandidateSet([c for c in CS.pending if c.vote == high_vote])
                 high_candidate = breakTie(E, high_candidates, 'surplus')
                 CS.pending.remove(high_candidate)
-                surplus = V(high_candidate.vote - R.quota)
+                surplus = high_candidate.vote - R.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = (b.weight * surplus) / high_candidate.vote
                     if b.transfer():
                         b.topCand.vote += b.vote
                 high_candidate.vote = R.quota
-                E.log("%s: %s (%s)" % ('Transfer surplus', high_candidate.name, surplus))
+                E.log("%s: %s (%s)" % ('Transfer surplus', high_candidate.name, V(surplus)))
 
             #  if no surplus to transfer, defeat a candidate
             #
