@@ -154,7 +154,7 @@ class Rule(ElectionRule):
         R.quota = calcQuota(E)
         R.votes = V(E.nBallots)
 
-        #  Count votes in round 0 for reporting purposes
+        #  Calculate initial vote totals
         #
         for b in E.ballots:
             b.topCand.vote += b.vote
