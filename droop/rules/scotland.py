@@ -276,11 +276,11 @@ class Rule(ElectionRule):
 
             #  transfer surplus votes of candidate with largest surplus [48,49]
             #
-            if CS.pending:
-                high_vote = max(c.vote for c in CS.pending)
-                high_candidates = CandidateSet([c for c in CS.pending if c.vote == high_vote])
+            if CS.elected_pending:
+                high_vote = max(c.vote for c in CS.elected_pending)
+                high_candidates = CandidateSet([c for c in CS.elected_pending if c.vote == high_vote])
                 high_candidate = breakTie(high_candidates, 'largest surplus')
-                CS.pending.remove(high_candidate)
+                CS.elected_pending.remove(high_candidate)
                 surplus = high_candidate.vote - R.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     # see http://www.votingmatters.org.uk/RES/eSTV-Eval.pdf section 7.1 #5

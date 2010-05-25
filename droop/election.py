@@ -261,7 +261,7 @@ class Election(object):
                 self.nontransferable = nontransferable
                 self.evotes = E.V0
                 for c in CS.elected:
-                    if not c in CS.pending:
+                    if not c in CS.elected_pending:
                         self.evotes += E.R.quota
                 total = self.evotes + self.pvotes + self.hvotes + self.nontransferable
                 #  wigm residual is votes lost due to rounding
@@ -338,7 +338,7 @@ class Election(object):
                 cid = c.cid
                 r.append(c.name)
                 if self.n:
-                    r.append('W' if c in CS.withdrawn else 'H' if c in CS.hopeful else 'P' if E.rule.method() == 'wigm' and c in CS.pending else 'E' if c in CS.elected else 'D' if c in CS.defeated else '?') # state
+                    r.append('W' if c in CS.withdrawn else 'H' if c in CS.hopeful else 'P' if E.rule.method() == 'wigm' and c in CS.elected_pending else 'E' if c in CS.elected else 'D' if c in CS.defeated else '?') # state
                     r.append(V(c.vote))
                     if E.rule.method() == 'meek': r.append(V(c.kf))
                 else:
@@ -508,7 +508,7 @@ class CandidateState(object):
     elected: the set of elected candidates
     defeated: the set of defeated candidates
     withdrawn: access to Election's list of withdrawn candidates
-    pending: a set of elected candidates pending transfer (WIGM, not Meek)
+    elected_pending: a set of elected candidates pending transfer (WIGM, not Meek)
     '''
 
     def __init__(self, E):
@@ -520,7 +520,7 @@ class CandidateState(object):
         self._kf = dict()     # keep factor by candidate cid
         
         self.hopeful = CandidateSet()
-        self.pending = CandidateSet()
+        self.elected_pending = CandidateSet()
         self.elected = CandidateSet()
         self.defeated = CandidateSet()
 
@@ -544,7 +544,7 @@ class CandidateState(object):
         CS.hopeful = CandidateSet(self.hopeful)
         CS.elected = CandidateSet(self.elected)
         CS.defeated = CandidateSet(self.defeated)
-        CS.pending = CandidateSet(self.pending)
+        CS.elected_pending = CandidateSet(self.elected_pending)
         return CS
 
     #  add a candidate to the election
@@ -563,7 +563,7 @@ class CandidateState(object):
         "elect a candidate"
         self.hopeful.remove(c)
         self.elected.add(c)
-        self.pending.add(c)
+        self.elected_pending.add(c)
         if val is None: val = self.E.V(c.vote)
         self.E.R.log("%s: %s (%s)" % (msg, c.name, val))
 
@@ -571,7 +571,7 @@ class CandidateState(object):
         "unelect a candidate (qpq restart)"
         self.hopeful.add(c)
         self.elected.remove(c)
-        self.pending.remove(c)
+        self.elected_pending.remove(c)
 
     def defeat(self, c, msg='Defeat', val=None):
         "defeat a candidate"

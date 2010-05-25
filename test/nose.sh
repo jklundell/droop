@@ -10,6 +10,8 @@
 NOSETESTS=/usr/local/bin/nosetests
 if [ "$1" = "cover" ]; then
 	$NOSETESTS --with-coverage --cover-package=droop --cover-erase 
-else
+elif [ "$1" = "cover" ]; then
 	$NOSETESTS --processes=4 -v
+else
+	$NOSETESTS --processes=4
 fi

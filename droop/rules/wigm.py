@@ -174,11 +174,11 @@ class Rule(ElectionRule):
 
             #  find & transfer highest surplus
             #
-            if CS.pending:
-                high_vote = max(c.vote for c in CS.pending)
-                high_candidates = CandidateSet([c for c in CS.pending if c.vote == high_vote])
+            if CS.elected_pending:
+                high_vote = max(c.vote for c in CS.elected_pending)
+                high_candidates = CandidateSet([c for c in CS.elected_pending if c.vote == high_vote])
                 high_candidate = breakTie(E, high_candidates, 'surplus')
-                CS.pending.remove(high_candidate)
+                CS.elected_pending.remove(high_candidate)
                 surplus = high_candidate.vote - R.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = (b.weight * surplus) / high_candidate.vote
