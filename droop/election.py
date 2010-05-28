@@ -285,7 +285,6 @@ class Election(object):
         def dump(self, header=False):
             "dump an action"
 
-            #return self.dump_old(header)    # DEBUG
             E = self.E
             V = E.V
             CS = self.CS
