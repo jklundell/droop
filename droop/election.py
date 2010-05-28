@@ -259,8 +259,11 @@ class Election(object):
                     s += '\tElected:  %s (%s)\n' % (c, CS.vote(c))
                 for c in CS.hopeful:
                     s += '\tHopeful:  %s (%s)\n' % (c, CS.vote(c))
-                for c in CS.defeated:
+                for c in (c for c in CS.defeated if CS.vote(c) > E.V0):
                     s += '\tDefeated: %s (%s)\n' % (c, CS.vote(c))
+                c0 = [c.name for c in CS.defeated if CS.vote(c) == E.V0]
+                if c0:
+                    s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
             if E.rule.method() == 'meek':
                 s += '\tQuota: %s\n' % V(self.quota)
                 s += '\tVotes: %s\n' % V(self.votes)

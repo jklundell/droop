@@ -29,7 +29,7 @@ from droop.election import Election
 from droop.profile import ElectionProfile
 
 pyflakes = True # dummy for pyflakes
-skip_report_compare = True  # don't return 'report' mismatches (only 'dump')
+skip_report_compare = False  # don't return 'report' mismatches (only 'dump')
 
 def doDumpCompare(options, file, subdir=''):
     '''
