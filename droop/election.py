@@ -178,6 +178,13 @@ class Election(object):
         sys.stdout.write(msg)
         sys.stdout.flush()
 
+    def signature(self):
+        "return election signature (compact form of critical actions)"
+        s = ''
+        for action in self.actions:
+            s += action.signature()
+        return s
+
     def report(self, intr=False):
         "report election by round:action"
         s = "\nElection: %s\n\n" % self.title
@@ -244,6 +251,39 @@ class Election(object):
                 self.tx = E.tx
                 self.surplus = '-'
             
+        def signature(self):
+            "return an action signature"
+
+            E = self.E
+            V = E.V
+            CS = self.CS
+            candidates = E.eligible.byBallotOrder() # report in ballot order
+            
+            #  dump a line of data
+            #
+            if self.action not in ('elect', 'defeat', 'tie', 'final'):
+                return ''
+            tag = self.action[0]
+            round = 'F' if self.action == 'final' else self.round
+            r = [round, tag, V(self.quota)]
+            if E.rule.method() == 'meek':
+                r.extend([V(self.votes), V(self.surplus), V(self.residual)])
+            elif E.rule.method() == 'wigm':
+                votes = self.e_votes + self.h_votes
+                total = votes + self.nt_votes + self.residual
+                r.extend([V(total), V(votes), V(self.nt_votes), V(self.residual)])
+            elif E.rule.method() == 'qpq':
+                pass
+
+            for c in candidates:
+                r.append(c.nick)
+                r.append(CS.code(c))
+                r.append(V(CS.vote(c)))
+                if E.rule.method() == 'meek': r.append(V(CS.kf(c)))
+
+            r = [str(item) for item in r]
+            return ':'.join(r) + '\n'
+
         def report(self):
             "report an action"
             if self.action == 'log':
@@ -327,7 +367,7 @@ class Election(object):
 
                 for c in candidates:
                     r.append(c.name)
-                    r.append('W' if c in CS.withdrawn else 'H' if c in CS.hopeful else 'e' if E.rule.method() == 'wigm' and c in CS.elected_pending else 'E' if c in CS.elected else 'd' if E.rule.method() == 'wigm' and c in CS.defeated_pending else 'D' if c in CS.defeated else '?') # state
+                    r.append(CS.code(c))
                     r.append(V(CS.vote(c)))
                     if E.rule.method() == 'meek': r.append(V(CS.kf(c)))
 
@@ -515,6 +555,16 @@ class CandidateState(object):
         self.elected = CandidateSet()
         self.defeated_pending = CandidateSet()
         self.defeated = CandidateSet()
+
+    def code(self, c):
+        "return a one-letter state code for a candidate"
+        if c in self.withdrawn: return 'W'
+        if c in self.hopeful: return 'H'
+        if self.E.rule.method() == 'wigm' and c in self.elected_pending: return 'e'
+        if c in self.elected: return 'E'
+        if self.E.rule.method() == 'wigm' and c in self.defeated_pending: return 'd'
+        if c in self.defeated: return 'D'
+        return '?'  # pragma: no cover
 
     @property
     def withdrawn(self):

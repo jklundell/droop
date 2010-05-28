@@ -29,7 +29,12 @@ from droop.election import Election
 from droop.profile import ElectionProfile
 
 pyflakes = True # dummy for pyflakes
-skip_report_compare = False  # don't return 'report' mismatches (only 'dump')
+
+#  development aids: option to suppress inclusion of signature/dump/report compares in unit tests
+#
+compare_signature = True  # complain about signature mismatches
+compare_dump = True       # complain about dump mismatches
+compare_report = True     # complain about report mismatches
 
 def doDumpCompare(options, file, subdir=''):
     '''
@@ -45,21 +50,36 @@ def doDumpCompare(options, file, subdir=''):
     tag = '%s-%s-%s' % (base, E.rule.tag(), E.V.tag())
 
     def readFile(path):
-        "read a dump/report file"
+        "read a signature/dump/report file"
         f = open(path, 'r')
         data = f.read()
         f.close()
         return data
         
     def writeFile(path, data):
-        "write a dump/report file"
+        "write a signature/dump/report file"
         if not os.path.isdir(os.path.dirname(path)):
             os.makedirs(os.path.dirname(path))
         f = open(path, 'w')
         f.write(data)
         f.close()
         
-    #  first do dump
+    #  first do signature
+    #
+    sref = os.path.join(testdir, 'ref', 'sig', subdir, '%s.txt' % tag)
+    sout = os.path.join(testdir, 'out', 'sig', subdir, '%s.txt' % tag)
+    sig = E.signature()
+    if not os.path.isfile(sref):
+        writeFile(sref, sig)
+    sigref = readFile(sref)
+    if os.path.isfile(sout):
+        os.unlink(sout)
+    if sig != sigref:
+        writeFile(sout, sig)
+        if compare_signature:
+            return False
+
+    #  same logic with dump
     #
     dref = os.path.join(testdir, 'ref', 'dump', subdir, '%s.txt' % tag)
     dout = os.path.join(testdir, 'out', 'dump', subdir, '%s.txt' % tag)
@@ -71,7 +91,8 @@ def doDumpCompare(options, file, subdir=''):
         os.unlink(dout)
     if dump != dumpref:
         writeFile(dout, dump)
-        return False
+        if compare_dump:
+            return False
 
     #  same logic with report
     #
@@ -88,6 +109,8 @@ def doDumpCompare(options, file, subdir=''):
     reportref = re.sub(r'droop v\d+\.\d+', 'droop v0.0', reportref)
     if report0 != reportref:
         writeFile(rout, report)
-        return skip_report_compare
+        if compare_report:
+            return False
+
     return True
 
