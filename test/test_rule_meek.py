@@ -114,9 +114,16 @@ class ElectionDumpTest(unittest.TestCase):
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
         rulename = 'meek'
         for blt in blts:
-            fdump = self.getDump(dict(rule=rulename, arithmetic='fixed', precision=6), blt)
-            gdump = self.getDump(dict(rule=rulename, arithmetic='guarded', precision=6, guard=0), blt)
+            fdump = self.getDump(dict(rule=rulename, arithmetic='fixed', precision=6, omega=3), blt)
+            gdump = self.getDump(dict(rule=rulename, arithmetic='guarded', precision=6, guard=0, omega=3), blt)
             self.assertEqual(fdump, gdump, 'guarded with guard=0 should match fixed')
+
+    def testStableState(self):
+        "meek: generate a stable state"
+        fdump = self.getDump(dict(rule='meek', arithmetic='fixed', precision=6, omega=4), 'SC-Vm-12')
+        gdump = self.getDump(dict(rule='meek', arithmetic='guarded', precision=6, guard=0, omega=4), 'SC-Vm-12')
+        self.assertEqual(fdump, gdump, 'guarded with guard=0 should match fixed (stable state)')
+        self.assertTrue(fdump.find('stable') > 0, 'should be stable state')
 
     def testElectionDumpRationalVsGuardedMeek(self):
         "meek: guarded should match rational"

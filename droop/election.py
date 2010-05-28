@@ -107,18 +107,43 @@ class Election(object):
 
     def count(self):
         "count the election"
-        self.rounds = [self.Round(self)]
-        self.R0 = self.R = self.rounds[0]
-        self.elected = None  # for communicating results
+        self.round = 0                    # round number
+        self.rounds = []                  # per-round list of CandidateState for weak-tie-breaking
+        self.actions = []                 # list of actions
+        self.quota = self.V0
+        self.surplus = self.V0
+        self.votes = self.V0
+        if self.rule.method() == 'meek':
+            self.residual = self.V0
+        elif self.rule.method() == 'qpq':
+            self.ta = None
+            self.tx = None
+        self.CS = CandidateState(self)    # candidate state
+        self.elected = CandidateSet()     # for communicating results
         self.eligible = CandidateSet()
         self.withdrawn = CandidateSet()
         for cid, c in self.candidates.iteritems():
             c.vote = self.V0
-            self.R0.CS.addCandidate(c, isWithdrawn=cid in self.electionProfile.withdrawn)
+            self.CS.addCandidate(c, isWithdrawn=cid in self.electionProfile.withdrawn)
         self.rule.count(self)
-        self.R.rollup(self.rule.method())           # roll up last round
-        self.elected = self.rounds[-1].CS.elected.byBallotOrder()
-        
+        self.logAction('final', 'Count Complete')
+        # TODO: end-of-election Action?
+        self.elected = self.CS.elected
+
+    def logAction(self, action, msg):
+        "record an action"
+        self.actions.append(self.Action(self, action, msg))
+
+    def log(self, msg):
+        "log a message as an action"
+        self.logAction('log', msg)
+
+    def newRound(self):
+        "add a round"
+        self.rounds.append(self.CS.copy())  # CandidateState for weak-tie-breaking
+        self.round += 1
+        self.logAction('round', 'New Round')
+
     @classmethod
     def makehelp(cls):
         "build a dictionary of help strings on various subjects"
@@ -148,31 +173,20 @@ class Election(object):
         "look up a candidate from a candidate ID"
         return self.candidates[cid]
         
-    def newRound(self):
-       "add a round"
-       self.R.rollup(self.rule.method())      # capture summaries of ballots
-       self.rounds.append(self.Round(self, copy=True))
-       self.R = self.rounds[-1]
-       return self.R
-
-    def log(self, msg):
-        "log a message to the current round"
-        self.R.log(msg)
-
     def prog(self, msg):
         "log to the console (immediate output)"
         sys.stdout.write(msg)
         sys.stdout.flush()
 
     def report(self, intr=False):
-        "report election by round"
+        "report election by round:action"
         s = "\nElection: %s\n\n" % self.title
         s += "\tDroop package: %s v%s\n" % (droop.common.droopName, droop.common.droopVersion)
         s += "\tRule: %s\n" % self.rule.info()
         s += "\tArithmetic: %s\n" % self.V.info
         s += "\tSeats: %d\n" % self.nSeats
         s += "\tBallots: %d\n" % self.nBallots
-        s += "\tQuota: %s\n" % self.V(self.R0.quota)
+        s += "\tQuota: %s\n" % self.V(self.quota)
         if self.rule.method() == 'meek':
             s += "\tOmega: %s\n" % self.rule._omega
         if self.electionProfile.source:
@@ -182,109 +196,71 @@ class Election(object):
         s += '\n'
         if intr:    # pragma: no cover
             s += "\t** Count terminated prematurely by user interrupt **\n\n"
-            self.R.log('** count interrupted; this round is incomplete **')
+            self.log('** count interrupted; this round is incomplete **')
         s += self.V.report()
-        for round in self.rounds:
-            s += "Round %d:\n" % round.n
-            s += round.report()
+        for action in self.actions:
+            s += action.report()
         return s
 
     def dump(self):
-        "dump election by round"
-        s = ''
-        for round in self.rounds:
-            s += round.dump()
+        "dump election by action"
+        s = self.actions[0].dump(header=True)
+        for action in self.actions:
+            s += action.dump()
         return s
 
     def seatsLeftToFill(self):
         "number of seats not yet filled"
-        return self.nSeats - len(self.R.CS.elected)
+        return self.nSeats - len(self.CS.elected)
 
-    class Round(object):
-        "one election round"
+    class Action(object):
+        "one action"
         
-        def __init__(self, E, copy=False):
-            "create a round"
+        def __init__(self, E, action, msg):
+            "create an action"
             self.E = E
-            if not copy:
-                #
-                #  create round 0: the initial state
-                #  quota & ballots are filled in later
-                #
-                self.n = 0
-                self.CS = CandidateState(E)
-                self.quota = None
-            else:
-                #
-                #  subsequent rounds are copies,
-                #  so we can look back at previous rounds
-                #
-                #  E.R and E.CS are the current round and candidate states
-                #
-                previous = E.R
-                self.n = previous.n + 1
-                self.CS = previous.CS.copy()
-                self.quota = previous.quota
-            self.residual = E.V0
-            self.votes = E.V0
-            self.surplus = E.V0
-            self.pvotes = E.V0
-            self.hvotes = E.V0
-            self.nontransferable = E.V0
-            self.evotes = E.V0
-            self._log = [] # list of log messages
-    
-        def rollup(self, method):
-            "roll up stats from ballots"
-            E = self.E
-            CS = self.CS
-            if method == 'wigm':
+            self.action = action
+            self.msg = msg
+            self.round = E.round
+            CS = self.CS = E.CS.copy()
+            self.votes = sum([CS.vote(c) for c in (CS.elected | CS.hopeful)], E.V0)
+            self.quota = E.quota
+            self.surplus = E.V(E.surplus)
+            if E.rule.method() == 'meek':
+                self.residual = E.residual
+            elif E.rule.method() == 'wigm':
                 #
                 #  this is expensive in a big election, so we've done a little optimization
                 #
-                pvotes = E.V0  # elected pending transfer
-                hvotes = E.V0  # top-ranked hopeful
-                nontransferable = E.V0
-                elected = [c.cid for c in CS.elected]
-                hopeful = [c.cid for c in CS.hopeful]
-                for b in E.ballots:
-                    if b.exhausted:
-                        nontransferable += b.vote
-                    else:
-                        topCid = b.topRank
-                        if topCid in elected:
-                            pvotes += b.vote
-                        elif topCid in hopeful:
-                            hvotes += b.vote
-                self.pvotes = pvotes
-                self.hvotes = hvotes
-                self.nontransferable = nontransferable
-                self.evotes = E.V0
-                for c in CS.elected:
-                    if not c in CS.elected_pending:
-                        self.evotes += E.R.quota
-                total = self.evotes + self.pvotes + self.hvotes + self.nontransferable
+                self.nt_votes = sum((b.vote for b in E.ballots if b.exhausted), E.V0)
+                self.h_votes = sum((c.vote for c in CS.hopeful), E.V0)
+                self.e_votes = sum((c.vote for c in CS.elected), E.V0)
+                total = self.e_votes + self.h_votes + self.nt_votes
                 #  wigm residual is votes lost due to rounding
                 self.residual = E.V(E.nBallots) - total
+            elif E.rule.method() == 'qpq':
+                self.votes = E.votes
+                self.ta = E.ta
+                self.tx = E.tx
+                self.surplus = '-'
             
-        def log(self, msg):
-            "log a message"
-            self._log.append(msg)
-
         def report(self):
-            "report a round"
+            "report an action"
+            if self.action == 'log':
+                return "\t%s\n" % self.msg
+            if self.action == 'round':
+                return "Round %d:\n" % self.round
             E = self.E
             V = E.V
             CS = self.CS
-            saveR, E.R = E.R, self # provide reporting context
-            s = ''
-            for line in self._log:
-                s += '\t%s\n' % line
-            if self._log:
-                s += '\t...\n'
-            s += '\tHopeful: %s\n' % (", ".join([c.name for c in CS.hopeful.byBallotOrder()]) or 'None')
-            s += '\tElected: %s\n' % (", ".join([c.name for c in CS.elected.byBallotOrder()]) or 'None')
-            s += '\tDefeated: %s\n' % (", ".join([c.name for c in CS.defeated.byBallotOrder()]) or 'None')
+            s = 'Action: %s\n' % (self.msg)
+            if self.action in ('elect', 'defeat', 'transfer'):
+                for c in CS.elected:
+                    s += '\tElected:  %s (%s)\n' % (c, CS.vote(c))
+                for c in CS.hopeful:
+                    s += '\tHopeful:  %s (%s)\n' % (c, CS.vote(c))
+                for c in CS.defeated:
+                    s += '\tDefeated: %s (%s)\n' % (c, CS.vote(c))
             if E.rule.method() == 'meek':
                 s += '\tQuota: %s\n' % V(self.quota)
                 s += '\tVotes: %s\n' % V(self.votes)
@@ -292,63 +268,69 @@ class Election(object):
                 s += '\tTotal: %s\n' % V((self.votes + self.residual))
                 s += '\tSurplus: %s\n' % V(self.surplus)
             elif E.rule.method() == 'wigm':
-                s += '\tElected votes (not pending) %s\n' % V(self.evotes)
-                s += '\tTop-rank votes (elected): %s\n' % V(self.pvotes)
-                s += '\tTop-rank votes (hopeful): %s\n' % V(self.hvotes)
-                s += '\tNontransferable votes: %s\n' % V(self.nontransferable)
+                s += '\tElected votes: %s\n' % V(self.e_votes)
+                s += '\tHopeful votes: %s\n' % V(self.h_votes)
+                s += '\tNontransferable votes: %s\n' % V(self.nt_votes)
                 s += '\tResidual: %s\n' % V(self.residual)
-                s += '\tTotal: %s\n' % V(self.evotes + self.pvotes + self.hvotes + self.nontransferable + self.residual)
+                s += '\tTotal: %s\n' % V(self.e_votes + self.h_votes + self.nt_votes + self.residual)
                 s += '\tSurplus: %s\n' % V(self.surplus)
             elif E.rule.method() == 'qpq':
                 s += '\tCandidates elected by active ballots: %s\n' % self.ta
                 s += '\tCandidates elected by inactive ballots: %s\n' % self.tx
-            E.R = saveR
             return s
             
-        def dump(self):
-            "dump a round"
+        def dump(self, header=False):
+            "dump an action"
 
+            #return self.dump_old(header)    # DEBUG
             E = self.E
             V = E.V
             CS = self.CS
-            saveR, E.R = E.R, self # provide reporting context
             s = ''
-            
             candidates = E.eligible.byBallotOrder() # report in ballot order
-
-            #  if round 0, include a header line
+            
+            #  return a header line if requested
             #
-            if self.n == 0:
-                h = ['R', 'Quota', 'Votes', 'Surplus']
-                if E.rule.method() == 'meek': h += ['Residual']
+            if header:
+                if E.rule.method() == 'meek':
+                    h = ['R', 'Quota', 'Votes', 'Surplus', 'Residual']
+                elif E.rule.method() == 'wigm':
+                    h = ['R', 'Quota', 'Total', 'Votes', 'Non-Transferable', 'Residual']
+                elif E.rule.method() == 'qpq':
+                    h = ['R', 'Quota']
+
                 for c in candidates:
-                    cid = c.cid
-                    h += ['%s.name' % cid]
-                    h += ['%s.state' % cid]
-                    h += ['%s.vote' % cid]
-                    if E.rule.method() == 'meek': h += ['%s.kf' % cid]
+                    h += ['%s.name' % c.cid]
+                    h += ['%s.state' % c.cid]
+                    h += ['%s.vote' % c.cid]
+                    if E.rule.method() == 'meek': h += ['%s.kf' % c.cid]
                 h = [str(item) for item in h]
                 s += '\t'.join(h) + '\n'
+                return s
             
             #  dump a line of data
             #
-            r = [self.n, V(self.quota), V(self.votes), V(self.surplus)]
-            if E.rule.method() == 'meek': r.append(V(self.residual))
-            for c in candidates:
-                cid = c.cid
-                r.append(c.name)
-                if self.n:
-                    r.append('W' if c in CS.withdrawn else 'H' if c in CS.hopeful else 'P' if E.rule.method() == 'wigm' and c in CS.elected_pending else 'E' if c in CS.elected else 'D' if c in CS.defeated else '?') # state
-                    r.append(V(c.vote))
-                    if E.rule.method() == 'meek': r.append(V(c.kf))
-                else:
-                    r.append('W' if c in CS.withdrawn else 'H') # state
-                    r.append(V(c.vote)) # vote
-                    if E.rule.method() == 'meek': r.append('-') # kf
-                
+            if self.action in ('round', 'log', 'iterate'):
+                r = [self.round, self.msg]
+            else:
+                round = 'F' if self.action == 'final' else self.round
+                if E.rule.method() == 'meek':
+                    r = [round, V(self.quota), V(self.votes), V(self.surplus), V(self.residual)]
+                elif E.rule.method() == 'wigm':
+                    votes = self.e_votes + self.h_votes
+                    total = votes + self.nt_votes + self.residual
+                    r = [round, V(self.quota), V(total), V(votes), V(self.nt_votes), V(self.residual)]
+                elif E.rule.method() == 'qpq':
+                    r = [round, V(self.quota)]
+
+                for c in candidates:
+                    r.append(c.name)
+                    r.append('W' if c in CS.withdrawn else 'H' if c in CS.hopeful else 'e' if E.rule.method() == 'wigm' and c in CS.elected_pending else 'E' if c in CS.elected else 'd' if E.rule.method() == 'wigm' and c in CS.defeated_pending else 'D' if c in CS.defeated else '?') # state
+                    r.append(V(CS.vote(c)))
+                    if E.rule.method() == 'meek': r.append(V(CS.kf(c)))
+
             r = [str(item) for item in r]
             s += '\t'.join(r) + '\n'
-            E.R = saveR
             return s
 
     class Ballot(object):
@@ -367,7 +349,7 @@ class Election(object):
 
         def transfer(self):
             "advance index to next candidate on this ballot; return True if exists"
-            while self.index < len(self.ranking) and self.topCand not in self.E.R.CS.hopeful:
+            while self.index < len(self.ranking) and self.topCand not in self.E.CS.hopeful:
                 self.index += 1
             return not self.exhausted
 
@@ -421,16 +403,16 @@ class Candidate(object):
     #
     def getvote(self):
        "get current vote for candidate"
-       return self.E.R.CS._vote[self.cid]
+       return self.E.CS._vote[self.cid]
     def setvote(self, newvote):
         "set vote for candidate"
-        self.E.R.CS._vote[self.cid] = newvote
+        self.E.CS._vote[self.cid] = newvote
     vote = property(getvote, setvote)
     
     @property
     def surplus(self):
         "return candidate's current surplus vote"
-        s = self.vote - self.E.R.quota
+        s = self.vote - self.E.quota
         return self.E.V0 if s < self.E.V0 else s
         
     #  get/set keep factor of this candidate
@@ -438,11 +420,11 @@ class Candidate(object):
     #
     def getkf(self):
        "get current keep factor for candidate"
-       if not self.E.R.CS._kf: return None
-       return self.E.R.CS._kf[self.cid]
+       if not self.E.CS._kf: return None
+       return self.E.CS._kf[self.cid]
     def setkf(self, newkf):
         "set keep factor for candidate"
-        self.E.R.CS._kf[self.cid] = newkf
+        self.E.CS._kf[self.cid] = newkf
     kf = property(getkf, setkf)
     quotient = property(getkf, setkf)   # overload kf with QPQ quotient
 
@@ -470,9 +452,11 @@ class CandidateSet(set):
     
     special methods are provided to keep the results from escaping the CandidateSet class
     '''
-    def byVote(self):
+    def byVote(self, CS=None):
         "list of candidates sorted by vote, ascending"
-        return sorted(self, key=lambda c: (c.vote, c.order))
+        if CS is None:
+            return sorted(self, key=lambda c: (c.vote, c.order))
+        return sorted(self, key=lambda c: (CS.vote(c), c.order))
 
     def byBallotOrder(self):
         "list of candidates sorted by ballot order"
@@ -498,6 +482,10 @@ class CandidateSet(set):
         "iterate CandidateSet in ballot order"
         return iter(sorted(set(self), key=lambda c: c.order))
 
+    def __str__(self):
+        "return list of candidate names"
+        return ','.join(str(c) for c in self)
+
 class CandidateState(object):
     '''
     per-round candidate state
@@ -509,6 +497,7 @@ class CandidateState(object):
     defeated: the set of defeated candidates
     withdrawn: access to Election's list of withdrawn candidates
     elected_pending: a set of elected candidates pending transfer (WIGM, not Meek)
+    defeated_pending: a set of defeated candidates pending transfer (WIGM, not Meek)
     '''
 
     def __init__(self, E):
@@ -522,6 +511,7 @@ class CandidateState(object):
         self.hopeful = CandidateSet()
         self.elected_pending = CandidateSet()
         self.elected = CandidateSet()
+        self.defeated_pending = CandidateSet()
         self.defeated = CandidateSet()
 
     @property
@@ -534,6 +524,14 @@ class CandidateState(object):
         "return combined list of hopeful and elected candidates"
         return self.hopeful | self.elected
 
+    def vote(self, c):
+        "return candidate vote total"
+        return self._vote[c.cid]
+
+    def kf(self, c):
+        "return candidate keep factor"
+        return self._kf[c.cid]
+
     def copy(self):
         "return a copy of ourself"
         CS = CandidateState(self.E)
@@ -545,6 +543,7 @@ class CandidateState(object):
         CS.elected = CandidateSet(self.elected)
         CS.defeated = CandidateSet(self.defeated)
         CS.elected_pending = CandidateSet(self.elected_pending)
+        CS.defeated_pending = CandidateSet(self.defeated_pending)
         return CS
 
     #  add a candidate to the election
@@ -553,29 +552,33 @@ class CandidateState(object):
         "add a candidate"
         if isWithdrawn:
             self.E.withdrawn.add(c)
-            self.E.R.log("Add withdrawn: %s" % c.name)
+            self.E.log("Add withdrawn: %s" % c.name)
         else:
             self.E.eligible.add(c)
             self.hopeful.add(c)
-            self.E.R.log("Add eligible: %s" % c.name)
+            self.E.log("Add eligible: %s" % c.name)
 
-    def elect(self, c, msg='Elect', val=None):
+    def elect(self, cand, msg='Elect'):
         "elect a candidate"
-        self.hopeful.remove(c)
-        self.elected.add(c)
-        self.elected_pending.add(c)
-        if val is None: val = self.E.V(c.vote)
-        self.E.R.log("%s: %s (%s)" % (msg, c.name, val))
+        cand = CandidateSet([cand] if isinstance(cand, Candidate) else cand)
+        for c in cand:
+            self.hopeful.remove(c)
+            self.elected.add(c)
+            if self.E.rule.method() == 'wigm':
+                self.elected_pending.add(c)
+        self.E.logAction('elect', "%s: %s" % (msg, cand))
 
     def unelect(self, c):
         "unelect a candidate (qpq restart)"
         self.hopeful.add(c)
         self.elected.remove(c)
-        self.elected_pending.remove(c)
 
-    def defeat(self, c, msg='Defeat', val=None):
+    def defeat(self, cand, msg='Defeat'):
         "defeat a candidate"
-        self.hopeful.remove(c)
-        self.defeated.add(c)
-        if val is None: val = self.E.V(c.vote)
-        self.E.R.log("%s: %s (%s)" % (msg, c.name, val))
+        cand = CandidateSet([cand] if isinstance(cand, Candidate) else cand)
+        for c in cand:
+            self.hopeful.remove(c)
+            self.defeated.add(c)
+            if self.E.rule.method() == 'wigm':
+                self.defeated_pending.add(c)
+        self.E.logAction('defeat', "%s: %s" % (msg, cand))

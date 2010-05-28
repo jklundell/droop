@@ -106,8 +106,8 @@ class Rule(ElectionRule):
             Otherwise: vote >= quota, since quota has been rounded up
             '''
             if E.V.exact:
-                return candidate.vote > E.R.quota
-            return candidate.vote >= E.R.quota
+                return candidate.vote > E.quota
+            return candidate.vote >= E.quota
     
         def calcQuota(E):
             '''
@@ -121,7 +121,7 @@ class Rule(ElectionRule):
                 return V(E.nBallots) / V(E.nSeats+1)
             return V(E.nBallots) / V(E.nSeats+1) + V.epsilon
         
-        def breakTie(E, tied, purpose=None, strong=True):
+        def breakTie(E, tied, reason=None, strong=True):
             '''
             break a tie
             
@@ -139,20 +139,19 @@ class Rule(ElectionRule):
             if len(tied) == 1:
                 return tied.pop()
             t = tied.byTieOrder()[0]
-            R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
+            names = ", ".join([c.name for c in tied])
+            E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
 
         #  Local variables for convenience
         #
-        R = E.R0    # current round
-        CS = R.CS   # candidate state
+        CS = E.CS   # candidate state
         V = E.V     # arithmetic value class
         V0 = E.V0   # constant zero
         
         #  calculate quota
         #
-        R.quota = calcQuota(E)
-        R.votes = V(E.nBallots)
+        E.quota = calcQuota(E)
 
         #  Calculate initial vote totals
         #
@@ -160,17 +159,11 @@ class Rule(ElectionRule):
             b.topCand.vote += b.vote
 
         while len(CS.hopeful) > E.seatsLeftToFill() > 0:
-            R = E.newRound()
-            CS = R.CS   # candidate state
-
-            #  total vote count for reporting
-            #
-            R.votes = sum([c.vote for c in (CS.elected | CS.hopeful)], V0)
+            E.newRound()
 
             #  elect new winners
             #
-            for c in [c for c in CS.hopeful if hasQuota(E, c)]:
-                CS.elect(c)     # elect; transfer pending
+            CS.elect([c for c in CS.hopeful if hasQuota(E, c)])     # elect; transfer pending
 
             #  find & transfer highest surplus
             #
@@ -179,13 +172,13 @@ class Rule(ElectionRule):
                 high_candidates = CandidateSet([c for c in CS.elected_pending if c.vote == high_vote])
                 high_candidate = breakTie(E, high_candidates, 'surplus')
                 CS.elected_pending.remove(high_candidate)
-                surplus = high_candidate.vote - R.quota
+                surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = (b.weight * surplus) / high_candidate.vote
                     if b.transfer():
                         b.topCand.vote += b.vote
-                high_candidate.vote = R.quota
-                E.log("%s: %s (%s)" % ('Transfer surplus', high_candidate.name, V(surplus)))
+                high_candidate.vote = E.quota
+                E.logAction('transfer', "Transfer surplus: %s (%s)" % (high_candidate, V(surplus)))
 
             #  if no surplus to transfer, defeat a candidate
             #
@@ -205,8 +198,8 @@ class Rule(ElectionRule):
                     for b in (b for b in E.ballots if b.topRank == c.cid):
                         if b.transfer():
                             b.topCand.vote += b.vote
-                    E.log("%s: %s (%s)" % ('Transfer defeated', c.name, V(c.vote)))
                     c.vote = V0
+                    E.logAction('transfer', "Transfer defeated: %s" % c)
 
         #  Election over.
         #  Elect or defeat remaining hopeful candidates

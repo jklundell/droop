@@ -121,8 +121,8 @@ class Rule(ElectionRule):
             Otherwise: vote >= quota, since quota has been rounded up
             '''
             if E.V.exact:
-                return candidate.vote > E.R.quota
-            return candidate.vote >= E.R.quota
+                return candidate.vote > E.quota
+            return candidate.vote >= E.quota
     
         def calcQuota(E):
             '''
@@ -131,14 +131,14 @@ class Rule(ElectionRule):
             Round up if not using exact arithmetic.
             '''
             if E.V.exact:
-                return E.R.votes / E.V(E.nSeats+1)
-            return E.R.votes / E.V(E.nSeats+1) + E.V.epsilon
+                return E.votes / E.V(E.nSeats+1)
+            return E.votes / E.V(E.nSeats+1) + E.V.epsilon
     
-        def breakTie(E, tied, purpose=None, strong=True):
+        def breakTie(E, tied, reason=None, strong=True):
             '''
             break a tie
             
-            purpose is 'surplus' or 'elect' or 'defeat', 
+            reason is 'surplus' or 'elect' or 'defeat', 
             indicating whether the tie is being broken for the purpose 
             of choosing a surplus to transfer, a winner, 
             or a candidate to defeat. 
@@ -151,7 +151,8 @@ class Rule(ElectionRule):
             if len(tied) == 1:
                 return tied.pop()
             t = tied.byTieOrder()[0]
-            R.log('Break tie (%s): [%s] -> %s' % (purpose, ", ".join([c.name for c in tied]), t.name))
+            names =  ", ".join([c.name for c in tied])
+            E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t))
             return t
 
         def batchDefeat(surplus):
@@ -211,16 +212,16 @@ class Rule(ElectionRule):
 
         #  iterateStatus constants: why did the iteration terminate?
         #
-        IS_none = None
-        IS_omega = 1
-        IS_batch = 2
-        IS_elected = 3
-        IS_stable = 4
+        IS_none = 'none'
+        IS_omega = 'omega'
+        IS_batch = 'batch'
+        IS_elected = 'elected'
+        IS_stable = 'stable'
 
         def distributeVotes(kt):
             "perform a Meek/Warren distribution of votes on all ballots"
             candidate = E.candidate
-            R.residual = V0
+            E.residual = V0
             for b in E.ballots:
                 multiplier = b.multiplier
                 b.residual = multiplier
@@ -232,7 +233,7 @@ class Rule(ElectionRule):
                         b.residual -= keep * multiplier  # residual value of ballot
                         if b.weight <= V0:
                             break
-                R.residual += b.residual  # residual for round
+                E.residual += b.residual  # residual for round
                 
             for b in E.ballotsEqual:
                 cset = [c.cid for c in (CS.hopeful | CS.elected)]
@@ -253,7 +254,7 @@ class Rule(ElectionRule):
                             dist(i+1, weight)
 
                 dist(0, V1)
-                R.residual += b.residual  # residual for round
+                E.residual += b.residual  # residual for round
 
         def iterate():
             "Iterate until surplus is sufficiently low"
@@ -290,11 +291,11 @@ class Rule(ElectionRule):
                 for c in CS.hopefulOrElected:
                     c.vote = V0
                 distributeVotes(kw_function)
-                R.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
+                E.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
 
                 #  D.3. update quota
                 #
-                R.quota = calcQuota(E)
+                E.quota = calcQuota(E)
                 
                 #  D.4. find winners
                 #
@@ -304,7 +305,7 @@ class Rule(ElectionRule):
                     
                 #  D.6. calculate total surplus
                 #
-                R.surplus = sum([c.vote-R.quota for c in CS.elected], V0)
+                E.surplus = sum([c.vote-E.quota for c in CS.elected], V0)
                 
                 #  D.7. test iteration complete
                 #
@@ -315,15 +316,15 @@ class Rule(ElectionRule):
                 #
                 if iStatus == IS_elected:
                     return IS_elected, None
-                if R.surplus <= Rule._omega:
+                if E.surplus <= Rule._omega:
                     return IS_omega, None
-                if R.surplus >= lastsurplus:
-                    R.log("Stable state detected (%s)" % R.surplus)
+                if E.surplus >= lastsurplus:
+                    E.log("Stable state detected (%s)" % E.surplus)
                     return IS_stable, None
-                batch = batchDefeat(R.surplus)
+                batch = batchDefeat(E.surplus)
                 if batch:
                     return IS_batch, batch
-                lastsurplus = R.surplus
+                lastsurplus = E.surplus
 
                 #  D.8. update keep factors
                 #
@@ -334,8 +335,8 @@ class Rule(ElectionRule):
                 #      up          up        Hill & NZ Calculator & NZ Schedule 1A
                 #
                 for c in CS.elected:
-                    #c.kf = V.muldiv(c.kf, R.quota, c.vote, round='up')  # OpenSTV variant
-                    c.kf = V.div(V.mul(c.kf, R.quota, round='up'), c.vote, round='up')  # NZ variant
+                    #c.kf = V.muldiv(c.kf, E.quota, c.vote, round='up')  # OpenSTV variant
+                    c.kf = V.div(V.mul(c.kf, E.quota, round='up'), c.vote, round='up')  # NZ variant
             
         #########################
         #
@@ -354,10 +355,9 @@ class Rule(ElectionRule):
         cls.omega = int(cls.omega)
         cls._omega = V1 / V(10**cls.omega)
 
-        E.R0.votes = V(E.nBallots)
-        E.R0.quota = calcQuota(E)
-        R = E.R0
-        CS = R.CS   # candidate state
+        E.votes = V(E.nBallots)
+        E.quota = calcQuota(E)
+        CS = E.CS   # candidate state
         for c in CS.hopeful:
             c.kf = V1    # initialize keep factors
         for b in (b for b in E.ballots if b.topCand): # count first-place votes for round 0 reporting
@@ -374,15 +374,15 @@ class Rule(ElectionRule):
 
             #  B. next round
             #
-            R = E.newRound()
+            E.newRound()
             if V.exact:
-                E.prog('%d' % R.n)
-            CS = R.CS   # candidate state
+                E.prog('%d' % E.round)
 
             #  CS. iterate
             #     next round if iteration elected a candidate
             #
             iterationStatus, batch = iterate()
+            E.logAction('iterate', 'Iterate (%s)' % iterationStatus)
             if iterationStatus == IS_elected:
                 continue
 
@@ -402,12 +402,12 @@ class Rule(ElectionRule):
             #
             if CS.hopeful:
                 low_vote = V.min([c.vote for c in CS.hopeful])
-                low_candidates = CandidateSet([c for c in CS.hopeful if (low_vote + R.surplus) >= c.vote])
+                low_candidates = CandidateSet([c for c in CS.hopeful if (low_vote + E.surplus) >= c.vote])
                 low_candidate = breakTie(E, low_candidates, 'defeat')
                 if iterationStatus == IS_omega:
-                    CS.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(R.surplus))
+                    CS.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(E.surplus))
                 else:
-                    CS.defeat(low_candidate, msg='Defeat (stable surplus %s)' % V(R.surplus))
+                    CS.defeat(low_candidate, msg='Defeat (stable surplus %s)' % V(E.surplus))
                 low_candidate.kf = V0
                 low_candidate.vote = V0
         
@@ -420,3 +420,7 @@ class Rule(ElectionRule):
                 CS.defeat(c, msg='Defeat remaining')
                 c.kf = V0
                 c.vote = V0
+
+        #  final vote count for reporting
+        E.votes = sum([c.vote for c in CS.elected], V0)
+        E.residual = V(E.nBallots) - E.votes

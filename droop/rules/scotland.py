@@ -188,7 +188,7 @@ class Rule(ElectionRule):
             '''
             Determine whether a candidate has a quota. [47]
             '''
-            return candidate.vote >= R.quota
+            return candidate.vote >= E.quota
 
         def calcQuota(E):
             '''
@@ -212,18 +212,16 @@ class Rule(ElectionRule):
                 return tied.pop()
             names = ", ".join([c.name for c in tied])
             direction = 0 if reason.find('defeat') >= 0 else -1
-            for n in xrange(R.n-1, -1, -1):
-                E.R = E.rounds[n]
-                tiedlist = tied.byVote()
-                tiedlist = [c for c in tiedlist if c.vote == tiedlist[direction].vote]
+            for n in xrange(E.round-1, -1, -1):
+                CS = E.rounds[n]
+                tiedlist = tied.byVote(CS)
+                tiedlist = [c for c in tiedlist if CS.vote(c) == CS.vote(tiedlist[direction])]
                 if len(tiedlist) == 1:
-                    E.R = E.rounds[-1]
                     t = tiedlist[0]
-                    E.R.log('Break tie by prior stage (%s): [%s] -> %s' % (reason, names, t.name))
+                    E.logAction('tie', 'Break tie by prior stage (%s): [%s] -> %s' % (reason, names, t.name))
                     return t
-            E.R = E.rounds[-1]             # restore current round
             t = CandidateSet(tiedlist).byTieOrder()[0]  # break tie by lot
-            E.R.log('Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
+            E.logAction('tie', 'Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
             return t
 
         def countComplete():
@@ -242,15 +240,13 @@ class Rule(ElectionRule):
         #
         #########################
 
-        R = E.R0  # current round
-        CS = R.CS   # candidate state
-        V = E.V   # arithmetic value class
-        V0 = E.V0 # constant zero
+        CS = E.CS   # candidate state
+        V = E.V     # arithmetic value class
+        V0 = E.V0   # constant zero
 
         #  Calculate quota per [46]
         #
-        E.R0.quota = calcQuota(E)
-        R.votes = V(E.nBallots)
+        E.quota = calcQuota(E)
 
         #  count first-preference votes [45]
         #
@@ -266,13 +262,11 @@ class Rule(ElectionRule):
             if countComplete():
                 break
 
-            R = E.newRound()
-            CS = R.CS   # candidate state
+            E.newRound()
 
-            #  calculate surplus and total votes for reporting
+            #  calculate surplus for reporting
             #
-            R.surplus = sum([c.surplus for c in CS.elected], V0)
-            R.votes = sum([c.vote for c in (CS.elected | CS.hopeful)], V0)
+            E.surplus = sum([c.surplus for c in CS.elected], V0)
 
             #  transfer surplus votes of candidate with largest surplus [48,49]
             #
@@ -281,14 +275,14 @@ class Rule(ElectionRule):
                 high_candidates = CandidateSet([c for c in CS.elected_pending if c.vote == high_vote])
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 CS.elected_pending.remove(high_candidate)
-                surplus = high_candidate.vote - R.quota
+                surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     # see http://www.votingmatters.org.uk/RES/eSTV-Eval.pdf section 7.1 #5
                     b.weight = V.muldiv(b.weight, surplus, high_candidate.vote, round='down')
                     if b.transfer():
                         b.topCand.vote += b.vote
-                high_candidate.vote = R.quota
-                E.log("%s: %s (%s)" % ('Transfer surplus', high_candidate.name, surplus))
+                high_candidate.vote = E.quota
+                E.logAction('transfer', "Transfer surplus: %s (%s)" % (high_candidate, V(surplus)))
                 continue  # to next stage/round
 
             #  defeat candidate(s) with lowest vote [50,51]
@@ -301,8 +295,8 @@ class Rule(ElectionRule):
                 for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
                     if b.transfer():
                         b.topCand.vote += b.vote
-                E.log("%s: %s (%s)" % ('Transfer defeated', low_candidate.name, low_candidate.vote))
                 low_candidate.vote = V0
+                E.logAction('transfer', "Transfer defeated: %s" % low_candidate)
 
             if countComplete():
                 break

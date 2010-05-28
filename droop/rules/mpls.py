@@ -121,7 +121,7 @@ class Rule(ElectionRule):
             '''
             Determine whether a candidate has a quota. [167.70(1(a,d))]
             '''
-            return candidate.vote >= R.quota
+            return candidate.vote >= E.quota
 
         def calcQuota(E):
             '''
@@ -207,9 +207,9 @@ class Rule(ElectionRule):
                 if (vote + surplus) == sortedGroups[g+1][0].vote:
                     names = ", ".join([c.name for c in group])
                     if fixSpec:
-                        R.log("Not defeating uncertain loser(s): %s" % names)
+                        E.log("Not defeating uncertain loser(s): %s" % names)
                     else:
-                        R.log("Defeating uncertain loser(s): %s" % names)
+                        E.log("Defeating uncertain loser(s): %s" % names)
                 if (vote + surplus) > sortedGroups[g+1][0].vote:
                     continue
                 if fixSpec and (vote + surplus) == sortedGroups[g+1][0].vote:
@@ -239,7 +239,7 @@ class Rule(ElectionRule):
                 return tied.pop()
             names = ", ".join([c.name for c in tied])
             t = tied.byTieOrder()[0]    # sort by tie-order before making choice
-            R.log('Break tie (%s): [%s] -> %s' % (reason, names, t.name))
+            E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
             
         #########################
@@ -248,15 +248,13 @@ class Rule(ElectionRule):
         #
         #########################
 
-        R = E.R0    # current round
-        CS = R.CS   # candidate state
+        CS = E.CS   # candidate state
         V = E.V     # arithmetic value class
         V0 = E.V0   # constant zero
 
         #  Calculate quota per 167.20(Threshold)
         #
-        E.R0.quota = calcQuota(E)
-        R.votes = V(E.nBallots)
+        E.quota = calcQuota(E)
 
         #  make initial vote count
         #
@@ -283,18 +281,13 @@ class Rule(ElectionRule):
             ##     the threshold is not equal to the number of seats to be filled, 
             ##     a new round begins and the tabulation must continue as described in clause b.
 
-            R = E.newRound()
-            CS = R.CS   # candidate state
+            E.newRound()
 
             ##  167.70(1)(b)
             ##  b. Surplus votes for any candidates whose vote total is equal to 
             ##     or greater than the threshold must be calculated.
 
-            R.surplus = sum([c.surplus for c in CS.elected], V0)
-
-            #  count votes for reporting
-            #
-            R.votes = sum([c.vote for c in (CS.elected | CS.hopeful)], V0)
+            E.surplus = sum([c.surplus for c in CS.elected], V0)
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -307,23 +300,25 @@ class Rule(ElectionRule):
             #  of mathematical certainty of defeat instead of the erroneous definition
             #  in 167.20.
 
-            certainLosers = findCertainLosers(R.surplus, fixSpec=True)
-            for c in certainLosers.byBallotOrder():
-                CS.defeat(c, 'Defeat certain loser')
-                for b in (b for b in E.ballots if b.topRank == c.cid):
+            certainLosers = findCertainLosers(E.surplus, fixSpec=True)
+            if certainLosers:
+                CS.defeat(certainLosers, 'Defeat certain losers')
+                cids = [c.cid for c in certainLosers]
+                for b in (b for b in E.ballots if b.topRank in cids):
                     if b.transfer():
                         b.topCand.vote += b.vote
-                E.log("%s: %s (%s)" % ('Transfer defeated', c.name, c.vote))
-                c.vote = V0
+                for c in certainLosers:
+                    CS.defeated_pending.remove(c)
+                    c.vote = V0
+                E.logAction('transfer', "Transfer defeated: %s" % certainLosers)
 
-            ##     If no candidate can be defeated mathematically, the tabulation must continue
-            ##     as described in clause d. 
-            ##     Otherwise, the tabulation must continue as described in clause a.
-            
-            #   By implication, the test for tabulation-complete given in 167.70(1)(f)
-            #   must be performed here; otherwise too many candidates can be defeated.
+                ##     If no candidate can be defeated mathematically, the tabulation must continue
+                ##     as described in clause d. 
+                ##     Otherwise, the tabulation must continue as described in clause a.
+                
+                #   By implication, the test for tabulation-complete given in 167.70(1)(f)
+                #   must be performed here; otherwise too many candidates can be defeated.
 
-            if certainLosers:
                 if len(CS.hopeful) <= E.seatsLeftToFill():
                     break
                 continue  ## continue as described in clause a.
@@ -357,13 +352,13 @@ class Rule(ElectionRule):
                 high_candidates = CandidateSet([c for c in CS.elected_pending if c.vote == high_vote])
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 CS.elected_pending.remove(high_candidate)
-                surplus = high_candidate.vote - R.quota
+                surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = (b.weight * surplus) / high_candidate.vote
                     if b.transfer():
                         b.topCand.vote += b.vote
-                E.log("%s: %s (%s)" % ('Transfer surplus', high_candidate.name, surplus))
-                high_candidate.vote = R.quota
+                high_candidate.vote = E.quota
+                E.logAction('transfer', "Transfer surplus: %s (%s)" % (high_candidate.name, V(surplus)))
                 continue  ## continue as described in clause a.
 
             ##  167.70(1)(e)
@@ -387,8 +382,9 @@ class Rule(ElectionRule):
                 for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
                     if b.transfer():
                         b.topCand.vote += b.vote
-                E.log("%s: %s (%s)" % ('Transfer defeated', low_candidate.name, low_candidate.vote))
+                CS.defeated_pending.remove(low_candidate)
                 low_candidate.vote = V0
+                E.logAction('transfer', "Transfer defeated: %s" % low_candidate.name)
 
             ##  167.70(1)(f)
             ##  f. The procedures in clauses a. to e. must be repeated 
@@ -418,11 +414,10 @@ class Rule(ElectionRule):
 
         #  Note: implemented as "less than or equal to"
         #
-        if len(CS.hopeful) <= E.seatsLeftToFill():
-            for c in list(CS.hopeful):
-                CS.elect(c, 'Elect remaining candidates')
+        if 0 < len(CS.hopeful) <= E.seatsLeftToFill():
+            CS.elect(CS.hopeful, 'Elect remaining candidates')
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #
-        for c in list(CS.hopeful):
-            CS.defeat(c, msg='Defeat remaining candidates')
+        if len(CS.hopeful):
+            CS.defeat(CS.hopeful, msg='Defeat remaining candidates')

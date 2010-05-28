@@ -98,8 +98,8 @@ class ElectionDumpTest(unittest.TestCase):
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
         rulename = 'wigm'
         for blt in blts:
-            fdump = self.getDump(dict(rule=rulename, arithmetic='fixed', precision=6), blt)
-            gdump = self.getDump(dict(rule=rulename, arithmetic='guarded', precision=6, guard=0), blt)
+            fdump = self.getDump(dict(rule=rulename, arithmetic='fixed', precision=6, omega=3), blt)
+            gdump = self.getDump(dict(rule=rulename, arithmetic='guarded', precision=6, guard=0, omega=3), blt)
             self.assertEqual(fdump, gdump, 'guarded with guard=0 should match fixed')
 
     def testElectionDumpRationalVsGuardedWigm(self):
