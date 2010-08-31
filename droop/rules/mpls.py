@@ -19,11 +19,11 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 
 Minneapolis Code of Ordinances, Title 8.5, Chapter 167
-http://library1.municode.com/default-test/DocView/11490/1/107/109
+http://library1.municode.com/default-test/home.htm?infobase=11490
 as of 2009-10-02
 
 Ties are to be broken per Minneapolis Charter Chapter 2 Section 12
-http://library1.municode.com/default-test/home.htm?infobase=11490&doc_action=whatsnew
+http://library1.municode.com/default-test/home.htm?infobase=11490
 
 Minneapolis STV is a variation on WIGM,
 using fixed-point decimal arithmetic with four digits of precision.
