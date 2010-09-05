@@ -64,7 +64,25 @@ def doDumpCompare(options, file, subdir=''):
         f.write(data)
         f.close()
         
-    #  first do signature
+    #  first do report
+    #
+    rref = os.path.join(testdir, 'ref', 'report', subdir, '%s.txt' % tag)
+    rout = os.path.join(testdir, 'out', 'report', subdir, '%s.txt' % tag)
+    report = E.report()
+    if not os.path.isfile(rref):
+        writeFile(rref, report)
+    reportref = readFile(rref)
+    if os.path.isfile(rout):
+        os.unlink(rout)
+    # don't include version number in comparison
+    report0 = re.sub(r'droop v\d+\.\d+', 'droop v0.0', report)
+    reportref = re.sub(r'droop v\d+\.\d+', 'droop v0.0', reportref)
+    if report0 != reportref:
+        writeFile(rout, report)
+        if compare_report:
+            return False
+
+    #  same logic with signature
     #
     sref = os.path.join(testdir, 'ref', 'sig', subdir, '%s.txt' % tag)
     sout = os.path.join(testdir, 'out', 'sig', subdir, '%s.txt' % tag)
@@ -92,24 +110,6 @@ def doDumpCompare(options, file, subdir=''):
     if dump != dumpref:
         writeFile(dout, dump)
         if compare_dump:
-            return False
-
-    #  same logic with report
-    #
-    rref = os.path.join(testdir, 'ref', 'report', subdir, '%s.txt' % tag)
-    rout = os.path.join(testdir, 'out', 'report', subdir, '%s.txt' % tag)
-    report = E.report()
-    if not os.path.isfile(rref):
-        writeFile(rref, report)
-    reportref = readFile(rref)
-    if os.path.isfile(rout):
-        os.unlink(rout)
-    # don't include version number in comparison
-    report0 = re.sub(r'droop v\d+\.\d+', 'droop v0.0', report)
-    reportref = re.sub(r'droop v\d+\.\d+', 'droop v0.0', reportref)
-    if report0 != reportref:
-        writeFile(rout, report)
-        if compare_report:
             return False
 
     return True
