@@ -54,6 +54,150 @@ a seat unfilled. This should be made explicit, since a reasonable interpretation
 is that the test is performed only after defeating the lowest-vote candidate per (e).
 '''
 
+'''
+The relevant portions of the Minneapolis election code is reproduced below, and is also 
+distributed as comments marked with ## in the body of the implementation.
+
+
+167.20. Definitions. The following words and phrases when used in this chapter shall have the
+meanings respectively ascribed to them in this section:
+
+Batch elimination  means a simultaneous defeat of multiple continuing candidates for whom it is
+mathematically impossible to be elected.
+
+Chief election official  includes the director of elections and his or her designee.
+
+Continuing candidate  means a candidate who has been neither elected nor defeated.
+
+Duplicate ranking  occurs when a voter ranks the same candidate at multiple rankings for the office
+being counted.
+
+Exhausted ballot  means a ballot that cannot be advanced under section 167.60(a)(2) or section
+167.70(a)(2).
+
+Highest continuing ranking  means the ranking on a voter's ballot with the lowest numerical value
+for a continuing candidate.
+
+Mathematically impossible to be elected  means either: 
+   (1) The candidate could never win because his or her current vote total plus all votes that could
+   possibly be transferred to him or her in future rounds (from candidates with fewer votes, tied
+   candidates, and surplus votes) would not be enough to surpass the candidate with the next higher
+   current vote total; or
+   (2) The candidate has a lower current vote total than a candidate who is described by (1).
+
+An overvote  occurs when a voter ranks more than one (1) candidate at the same ranking.
+
+Partially defective ballot  means a ballot that is defective to the extent that the election judges
+are unable to determine the voter's intent with respect to the office being counted.
+
+Ranked-choice voting  means an election method in which voters rank candidates for an office in
+order of their preference and the ballots are counted in rounds that, in the case of a single-seat
+election, simulate a series of runoffs until one (1) candidate meets the threshold, or until two (2)
+candidates remain and the candidate with the greatest number of votes is declared elected. In the
+case of multiple-seat elections, a winning threshold is calculated, and votes, or fractions thereof,
+are distributed to candidates according to the preferences marked on each ballot as described in
+section 167.70 of this chapter.
+
+Ranked-choice voting tabulation center  means the place selected for the automatic or manual
+processing and tabulation of ballots and/or votes.
+
+Ranking  means the number assigned by a voter to a candidate to express the voter's preference for
+that candidate. Ranking number one (1) is the highest ranking. A ranking of lower numerical value
+indicates a greater preference for a candidate than a ranking of higher numerical value.
+
+Round  means an instance of the sequence of voting tabulation steps established in sections 167.60
+and 167.70 of this chapter.
+
+Skipped ranking  occurs when a voter leaves a ranking blank and ranks a candidate at a subsequent
+ranking.
+
+Surplus  means the total number of votes cast for an elected candidate in excess of the threshold.
+
+Surplus fraction of a vote  means the proportion of each vote to be transferred when a surplus is
+transferred. The surplus fraction is calculated by dividing the surplus by the total votes cast for
+the elected candidate, calculated to four (4) decimal places, ignoring any remainder. Surplus
+fraction of a vote = (Surplus of an elected candidate)/(Total votes cast for elected candidate),
+calculated to four (4) decimal places, ignoring any remainder.
+
+Threshold  means the number of votes sufficient for a candidate to be elected. In any given
+election, the threshold equals the total votes counted in the first round after removing partially
+defective ballots, divided by the sum of one (1) plus the number of offices to be filled and adding
+one (1) to the quotient, disregarding any fractions. Threshold = (Total votes cast)/(Seats to be
+elected + 1) +1, with any fractions disregarded.
+
+Transfer value  means the fraction of a vote that a transferred ballot will contribute to the next
+ranked continuing candidate on that ballot. The transfer value of a vote cast for an elected
+candidate is calculated by multiplying the surplus fraction by its current value, calculated to four
+(4) decimal places, ignoring any remainder. The transfer value of a vote cast for a defeated
+candidate is the same as its current value.
+
+Transferable vote  means a vote or a fraction of a vote for a candidate who has been either elected
+or defeated.
+
+Totally defective ballot  means a ballot that is defective to the extent that the election judges
+are unable to determine the voter's intent for any office on the ballot.
+
+An undervote  occurs when a voter does not rank any candidates for an office. (2008-Or-028, 1,
+4-18-08; 2009-Or-102, 1, 10-2-09)
+
+
+167.70. Tabulation of votes, multiple-seat elections. (a) Applicability.  This section applies to a
+ranked-choice voting election in which more than one (1) seat in office is to be filled from a
+single set of candidates on the ballot. The method of tabulating ranked-choice votes for
+multiple-seat elections as described in this section must be known as the "multiple-seat single
+transferable vote" method of tabulation.
+
+(1) Tabulation of votes at the ranked-choice voting tabulation center must proceed in rounds for
+each office to be counted. The threshold must be calculated and publicly declared. Each round must
+proceed sequentially as follows:
+
+   a. The number of votes cast for each candidate for the current round must be counted. If the
+   number of candidates whose vote total is equal to or greater than the threshold is equal to the
+   number of seats to be filled, those candidates who are continuing candidates are elected and the
+   tabulation is complete. If the number of candidates whose vote total is equal to or greater than
+   the threshold is not equal to the number of seats to be filled, a new round begins and the
+   tabulation must continue as described in clause b.
+
+   b. Surplus votes for any candidates whose vote total is equal to or greater than the threshold
+   must be calculated.
+
+   c. After any surplus votes are calculated but not yet transferred, all candidates for whom it is
+   mathematically impossible to be elected must be defeated simultaneously. Votes for the defeated
+   candidates must be transferred to each ballot's next-ranked continuing candidate. If no candidate
+   can be defeated mathematically, the tabulation must continue as described in clause d. Otherwise,
+   the tabulation must continue as described in clause a.
+
+   d. The transfer value of each vote cast for an elected candidate must be transferred to the next
+   continuing candidate on that ballot. The candidate with the largest surplus is declared elected
+   and that candidate's surplus is transferred. A tie between two (2) or more candidates must
+   immediately and publicly be resolved by lot by the chief election official at the ranked-choice
+   voting tabulation center. The surplus of the candidate chosen by lot must be transferred before
+   other transfers are made. The result of the tie resolution must be recorded and reused in the
+   event of a recount. If no candidate has a surplus, the tabulation must continue as described in
+   clause e. Otherwise, the tabulation must continue as described in clause a.
+
+   e. If there are no transferable surplus votes, the candidate with the fewest votes is defeated.
+   Votes for a defeated candidate are transferred at their transfer value to each ballot's
+   next-ranked continuing candidate. Ties between candidates with the fewest votes must be decided
+   by lot, and the candidate chosen by lot must be defeated. The result of the tie resolution must
+   be recorded and reused in the event of a recount.
+
+   f. The procedures in clauses a. to e. must be repeated until the number of candidates whose vote
+   total is equal to or greater than the threshold is equal to the number of seats to be filled, or
+   until the number of continuing candidates is equal to the number of offices yet to be elected. If
+   the number of continuing candidates is equal to the number of offices yet to be elected, any
+   remaining continuing candidates must be declared elected. In the case of a tie between two (2)
+   continuing candidates, the tie must be decided by lot as provided in Minneapolis Charter Chapter
+   2, Section 12, and the candidate chosen by lot must be defeated. The result of the tie resolution
+   must be recorded and reused in the event of a recount.
+
+(2) When a single skipped ranking is encountered on a ballot, that ballot shall count towards the
+next non-skipped ranking. If any ballot cannot be advanced because no further continuing candidates
+are ranked on that ballot, or because a voter has skipped more than one (1) ranking or because an
+undervote, overvote, or duplicate ranking is encountered, the ballot shall not count towards any
+candidate in that round or in subsequent rounds for the office being counted. (2008-Or-028, 1,
+4-18-08; 2009-Or-102, 5, 10-2-09)
+'''
 from electionrule import ElectionRule
 from droop.election import CandidateSet
 
