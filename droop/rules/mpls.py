@@ -52,6 +52,12 @@ such tie will be broken when the candidates are defeated.
 of certain losers per 167.70(1)(c) to avoid defeating too many candidates and leaving
 a seat unfilled. This should be made explicit, since a reasonable interpretation of (f)
 is that the test is performed only after defeating the lowest-vote candidate per (e).
+
+6. WIGM rules typically elect candidates as soon as they reach a quota. The Minneapolis
+rule defer the election of a candidate until that candidate's surplus is to be transferred.
+This variation is defensible, even desirable, but because it's a little unusual, the rule
+language should make more explict the implication that votes can be transferred to candidates
+who already have a quota but are not yet elected per 167.70(1)(d).
 '''
 
 '''
@@ -290,7 +296,7 @@ class Rule(ElectionRule):
             ##         (2) The candidate has a lower current vote total than a candidate 
             ##             who is described by (1).
 
-            #  sortedCands = candidates sorted by vote
+            #  sortedCands = hopeful candidates below threshold, sorted by vote
             #
             sortedCands = CS.hopeful.byVote()
 
@@ -417,8 +423,11 @@ class Rule(ElectionRule):
             ##     and the tabulation is complete. 
             ##
             for c in [c for c in CS.hopeful if hasQuota(c)]:
-                CS.elect(c)
-            if len(CS.elected) >= E.nSeats:
+                CS.elect(c, 'Candidate at threshold', defer=True)  # defer actual election
+            if len(CS.elected | CS.elected_pending) >= E.nSeats:
+                for c in CS.elected_pending:
+                    CS.elect(c, 'Elect remaining candidates with threshold votes')
+                    CS.elected_pending.remove(c)
                 break
 
             ##     If the number of candidates whose vote total is equal to or greater than
@@ -430,8 +439,8 @@ class Rule(ElectionRule):
             ##  167.70(1)(b)
             ##  b. Surplus votes for any candidates whose vote total is equal to 
             ##     or greater than the threshold must be calculated.
-
-            E.surplus = sum([c.surplus for c in CS.elected], V0)
+            ##
+            E.surplus = sum([c.surplus for c in CS.elected_pending], V0)
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -483,18 +492,19 @@ class Rule(ElectionRule):
             ##     as described in clause e. 
             ##     Otherwise, the tabulation must continue as described in clause a.
 
-            #  find candidate(s) with largest surplus
+            #  elect candidate with largest surplus
             #  and transfer largest surplus
             #
             ## 167.20(Surplus fraction of a vote)
             ##     Surplus fraction of a vote = 
             ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate), 
             ##     calculated to four (4) decimal places, ignoring any remainder. 
-
+            ##
             if CS.elected_pending:
                 high_vote = max(c.vote for c in CS.elected_pending)
                 high_candidates = CandidateSet([c for c in CS.elected_pending if c.vote == high_vote])
                 high_candidate = breakTie(high_candidates, 'largest surplus')
+                CS.elect(high_candidate)
                 CS.elected_pending.remove(high_candidate)
                 surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
@@ -551,17 +561,26 @@ class Rule(ElectionRule):
 
         #  Tabulation complete.
 
+        ##  167.70(1)(a)
+        #   Elect continuing candidates with votes >= threshold
+        for c in CS.elected_pending:
+            CS.elect(c, 'Elect candidates with threshold votes')
+            CS.elected_pending.remove(c)
+
         ##  167.70(1)(f)
         ##  f. ...
         ##     If the number of continuing candidates is equal to the number of offices 
         ##     yet to be elected, any remaining continuing candidates must be declared elected.
-
+        #
         #  Note: implemented as "less than or equal to"
         #
         if 0 < len(CS.hopeful) <= E.seatsLeftToFill():
-            CS.elect(CS.hopeful, 'Elect remaining candidates')
+            for c in CS.hopeful:
+                CS.elect(c, 'Elect remaining candidates')
+                CS.elected_pending.remove(c)
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #
         if len(CS.hopeful):
-            CS.defeat(CS.hopeful, msg='Defeat remaining candidates')
+            for c in CS.hopeful:
+                CS.defeat(c, msg='Defeat remaining candidates')
