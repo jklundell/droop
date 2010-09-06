@@ -160,7 +160,7 @@ class Rule(ElectionRule):
                 #  distribute vote for each ballot
                 #  and add up vote for each candidate
                 #
-                for c in CS.hopefulOrElected:
+                for c in (CS.hopeful | CS.elected):
                     c.vote = V0
                 E.residual = V0
                 for b in E.ballots:
@@ -186,7 +186,7 @@ class Rule(ElectionRule):
 
                 #  B.2.b. update quota
                 #
-                E.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
+                E.votes = sum([c.vote for c in (CS.hopeful | CS.elected)], V0)
                 E.quota = E.votes / V(E.electionProfile.nSeats+1) + V.epsilon
                 
                 #  B.2.c. find winners

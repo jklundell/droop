@@ -583,11 +583,6 @@ class CandidateState(object):
         "interface to E.withdrawn for consistency"
         return self.E.withdrawn
 
-    @property
-    def hopefulOrElected(self):
-        "return combined list of hopeful and elected candidates"
-        return self.hopeful | self.elected | self.deferred
-
     def vote(self, c):
         "return candidate vote total"
         return self._vote[c.cid]

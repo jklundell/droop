@@ -288,10 +288,10 @@ class Rule(ElectionRule):
                 #  distribute vote for each ballot
                 #  and add up vote for each candidate
                 #
-                for c in CS.hopefulOrElected:
+                for c in (CS.hopeful | CS.elected):
                     c.vote = V0
                 distributeVotes(kw_function)
-                E.votes = sum([c.vote for c in CS.hopefulOrElected], V0)
+                E.votes = sum([c.vote for c in (CS.hopeful | CS.elected)], V0)
 
                 #  D.3. update quota
                 #
