@@ -400,7 +400,7 @@ class Election(object):
 
         def transfer(self):
             "advance index to next candidate on this ballot; return True if exists"
-            while self.index < len(self.ranking) and self.topCand not in self.E.CS.hopeful:
+            while self.index < len(self.ranking) and self.topCand not in (self.E.CS.hopeful | self.E.CS.deferred):
                 self.index += 1
             return not self.exhausted
 
