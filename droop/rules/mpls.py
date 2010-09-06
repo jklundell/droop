@@ -423,9 +423,9 @@ class Rule(ElectionRule):
             ##     and the tabulation is complete. 
             ##
             for c in [c for c in CS.hopeful if hasQuota(c)]:
-                CS.elect(c, 'Candidate at threshold', defer=True)  # defer actual election
-            if len(CS.elected | CS.elected_pending) >= E.nSeats:
-                for c in CS.elected_pending:
+                CS.defer(c, 'Candidate at threshold')  # defer actual election
+            if len(CS.elected | CS.deferred) >= E.nSeats:
+                for c in CS.deferred:
                     CS.elect(c, 'Elect remaining candidates with threshold votes')
                     CS.elected_pending.remove(c)
                 break
@@ -440,7 +440,7 @@ class Rule(ElectionRule):
             ##  b. Surplus votes for any candidates whose vote total is equal to 
             ##     or greater than the threshold must be calculated.
             ##
-            E.surplus = sum([c.surplus for c in CS.elected_pending], V0)
+            E.surplus = sum([c.surplus for c in CS.deferred], V0)
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -500,9 +500,9 @@ class Rule(ElectionRule):
             ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate), 
             ##     calculated to four (4) decimal places, ignoring any remainder. 
             ##
-            if CS.elected_pending:
-                high_vote = max(c.vote for c in CS.elected_pending)
-                high_candidates = CandidateSet([c for c in CS.elected_pending if c.vote == high_vote])
+            if CS.deferred:
+                high_vote = max(c.vote for c in CS.deferred)
+                high_candidates = CandidateSet([c for c in CS.deferred if c.vote == high_vote])
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 CS.elect(high_candidate)
                 CS.elected_pending.remove(high_candidate)
@@ -563,7 +563,7 @@ class Rule(ElectionRule):
 
         ##  167.70(1)(a)
         #   Elect continuing candidates with votes >= threshold
-        for c in CS.elected_pending:
+        for c in CS.deferred:
             CS.elect(c, 'Elect candidates with threshold votes')
             CS.elected_pending.remove(c)
 
