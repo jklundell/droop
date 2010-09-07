@@ -218,7 +218,7 @@ class Election(object):
 
     def seatsLeftToFill(self):
         "number of seats not yet filled"
-        return self.nSeats - len(self.CS.elected | self.CS.deferred)
+        return self.nSeats - len(self.CS.elected | self.CS.pending)
 
     class Action(object):
         "one action"
@@ -230,7 +230,7 @@ class Election(object):
             self.msg = msg
             self.round = E.round
             CS = self.CS = E.CS.copy()
-            self.votes = sum([CS.vote(c) for c in (CS.elected | CS.deferred | CS.hopeful)], E.V0)
+            self.votes = sum([CS.vote(c) for c in (CS.elected | CS.pending | CS.hopeful)], E.V0)
             self.quota = E.quota
             self.surplus = E.V(E.surplus)
             if E.rule.method() == 'meek':
@@ -242,9 +242,8 @@ class Election(object):
                 self.nt_votes = sum((b.vote for b in E.ballots if b.exhausted), E.V0)
                 self.h_votes = sum((c.vote for c in CS.hopeful), E.V0)
                 self.e_votes = sum((c.vote for c in CS.elected), E.V0)
-                self.d_votes = sum((c.vote for c in CS.deferred), E.V0)
-                self.p_votes = sum((c.vote for c in CS.elected_pending), E.V0)
-                total = self.e_votes + self.d_votes + self.h_votes + self.nt_votes
+                self.p_votes = sum((c.vote for c in CS.pending), E.V0)
+                total = self.e_votes + self.p_votes + self.h_votes + self.nt_votes
                 #  wigm residual is votes lost due to rounding
                 self.residual = E.V(E.nBallots) - total
             elif E.rule.method() == 'qpq':
@@ -263,7 +262,7 @@ class Election(object):
             
             #  dump a line of data
             #
-            if self.action not in ('elect', 'defeat', 'tie', 'final'):
+            if self.action not in ('elect', 'defeat', 'pend', 'tie', 'final'):
                 return ''
             tag = self.action[0]
             round = 'F' if self.action == 'final' else self.round
@@ -271,7 +270,7 @@ class Election(object):
             if E.rule.method() == 'meek':
                 r.extend([V(self.votes), V(self.surplus), V(self.residual)])
             elif E.rule.method() == 'wigm':
-                votes = self.e_votes + self.d_votes + self.h_votes
+                votes = self.e_votes + self.p_votes + self.h_votes
                 total = votes + self.nt_votes + self.residual
                 r.extend([V(total), V(votes), V(self.nt_votes), V(self.residual)])
             elif E.rule.method() == 'qpq':
@@ -296,18 +295,15 @@ class Election(object):
             V = E.V
             CS = self.CS
             s = 'Action: %s\n' % (self.msg)
-            if self.action in ('elect', 'defeat', 'transfer'):
+            if self.action in ('elect', 'defeat', 'pend', 'transfer'):
                 for c in CS.elected:
-                    s += '\tElected:  %s (%s)\n' % (c, CS.vote(c))
-                for c in CS.deferred:
-                    s += '\tDeferred:  %s (%s)\n' % (c, CS.vote(c))
-                for c in CS.elected_pending:
-                    if c not in CS.elected:
-                        s += '\tPending:  %s (%s)\n' % (c, CS.vote(c))
+                    s += '\tElected:  %s (%s)\n' % (c, V(CS.vote(c)))
+                for c in CS.pending:
+                    s += '\tPending:  %s (%s)\n' % (c, V(CS.vote(c)))
                 for c in CS.hopeful:
-                    s += '\tHopeful:  %s (%s)\n' % (c, CS.vote(c))
+                    s += '\tHopeful:  %s (%s)\n' % (c, V(CS.vote(c)))
                 for c in (c for c in CS.defeated if CS.vote(c) > E.V0):
-                    s += '\tDefeated: %s (%s)\n' % (c, CS.vote(c))
+                    s += '\tDefeated: %s (%s)\n' % (c, V(CS.vote(c)))
                 c0 = [c.name for c in CS.defeated if CS.vote(c) == E.V0]
                 if c0:
                     s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
@@ -319,12 +315,12 @@ class Election(object):
                 s += '\tSurplus: %s\n' % V(self.surplus)
             elif E.rule.method() == 'wigm':
                 s += '\tElected votes: %s\n' % V(self.e_votes)
-                if self.d_votes:
-                    s += '\tElection-deferred votes: %s\n' % V(self.d_votes)
+                if self.p_votes:
+                    s += '\tPending votes: %s\n' % V(self.p_votes)
                 s += '\tHopeful votes: %s\n' % V(self.h_votes)
                 s += '\tNontransferable votes: %s\n' % V(self.nt_votes)
                 s += '\tResidual: %s\n' % V(self.residual)
-                s += '\tTotal: %s\n' % V(self.e_votes + self.d_votes + self.h_votes + self.nt_votes + self.residual)
+                s += '\tTotal: %s\n' % V(self.e_votes + self.p_votes + self.h_votes + self.nt_votes + self.residual)
                 s += '\tSurplus: %s\n' % V(self.surplus)
             elif E.rule.method() == 'qpq':
                 s += '\tCandidates elected by active ballots: %s\n' % self.ta
@@ -368,7 +364,7 @@ class Election(object):
                 if E.rule.method() == 'meek':
                     r = [round, V(self.quota), V(self.votes), V(self.surplus), V(self.residual)]
                 elif E.rule.method() == 'wigm':
-                    votes = self.e_votes + self.d_votes + self.h_votes
+                    votes = self.e_votes + self.p_votes + self.h_votes
                     total = votes + self.nt_votes + self.residual
                     r = [round, V(self.quota), V(total), V(votes), V(self.nt_votes), V(self.residual)]
                 elif E.rule.method() == 'qpq':
@@ -398,11 +394,9 @@ class Election(object):
             self.residual = E.V0          # untransferable weight
             self.ranking = ranking
 
-        def transfer(self):
-            "advance index to next candidate on this ballot; return True if exists"
-            while self.index < len(self.ranking) and self.topCand not in (self.E.CS.hopeful | self.E.CS.deferred):
-                self.index += 1
-            return not self.exhausted
+        def advance(self):
+            "advance ballot index to next candidate"
+            self.index += 1
 
         def restart(self, weight):
             "restart a ballot (for qpq)"
@@ -503,19 +497,19 @@ class CandidateSet(set):
     
     special methods are provided to keep the results from escaping the CandidateSet class
     '''
-    def byVote(self, CS=None):
+    def byVote(self, CS=None, reverse=False):
         "list of candidates sorted by vote, ascending"
         if CS is None:
-            return sorted(self, key=lambda c: (c.vote, c.order))
-        return sorted(self, key=lambda c: (CS.vote(c), c.order))
+            return sorted(self, key=lambda c: (c.vote, c.order), reverse=reverse)
+        return sorted(self, key=lambda c: (CS.vote(c), c.order), reverse=reverse)
 
-    def byBallotOrder(self):
+    def byBallotOrder(self, reverse=False):
         "list of candidates sorted by ballot order"
-        return sorted(self, key=lambda c: c.order)
+        return sorted(self, key=lambda c: c.order, reverse=reverse)
 
-    def byTieOrder(self):
+    def byTieOrder(self, reverse=False):
         "list of candidates sorted by tie-break order"
-        return sorted(self, key=lambda c: c.tieOrder)
+        return sorted(self, key=lambda c: c.tieOrder, reverse=reverse)
 
     def __or__(self, other):
         "union"
@@ -547,9 +541,9 @@ class CandidateState(object):
     elected: the set of elected candidates
     defeated: the set of defeated candidates
     withdrawn: access to Election's list of withdrawn candidates
-    deferred: the set of candidates with a quota but with election deferred (WIGM, not Meek)
-    elected_pending: a set of elected candidates pending transfer (WIGM, not Meek)
-    defeated_pending: a set of defeated candidates pending transfer (WIGM, not Meek)
+    pending: (WIGM) the set of candidates with a quota but with election deferred
+       or elected with transfer pending
+    defeated_pending: a set of defeated candidates pending transfer (WIGM)
     '''
 
     def __init__(self, E):
@@ -561,9 +555,8 @@ class CandidateState(object):
         self._kf = dict()     # keep factor by candidate cid
         
         self.hopeful = CandidateSet()
-        self.elected_pending = CandidateSet()
+        self.pending = CandidateSet()
         self.elected = CandidateSet()
-        self.deferred = CandidateSet()
         self.defeated_pending = CandidateSet()
         self.defeated = CandidateSet()
 
@@ -571,8 +564,7 @@ class CandidateState(object):
         "return a one-letter state code for a candidate"
         if c in self.withdrawn: return 'W'
         if c in self.hopeful: return 'H'
-        if c in self.deferred: return 'f'
-        if self.E.rule.method() == 'wigm' and c in self.elected_pending: return 'e'
+        if self.E.rule.method() == 'wigm' and c in self.pending: return 'e'
         if c in self.elected: return 'E'
         if self.E.rule.method() == 'wigm' and c in self.defeated_pending: return 'd'
         if c in self.defeated: return 'D'
@@ -599,11 +591,9 @@ class CandidateState(object):
         CS._kf = self._kf.copy()
         
         CS.hopeful = CandidateSet(self.hopeful)
+        CS.pending = CandidateSet(self.pending)
         CS.elected = CandidateSet(self.elected)
         CS.defeated = CandidateSet(self.defeated)
-        CS.deferred = CandidateSet(self.deferred)
-        CS.elected_pending = CandidateSet(self.elected_pending)
-        CS.defeated_pending = CandidateSet(self.defeated_pending)
         return CS
 
     #  add a candidate to the election
@@ -618,30 +608,37 @@ class CandidateState(object):
             self.hopeful.add(c)
             self.E.log("Add eligible: %s" % c.name)
 
-    def elect(self, cand, msg='Elect'):
-        "elect a candidate"
-        cand = CandidateSet([cand] if isinstance(cand, Candidate) else cand)
-        for c in cand:
-            self.hopeful.discard(c)
-            self.deferred.discard(c)
-            self.elected.add(c)
-            if self.E.rule.method() == 'wigm':
-                self.elected_pending.add(c)
-        self.E.logAction('elect', "%s: %s" % (msg, cand))
-
-    def defer(self, cand, msg='Defer'):
-        "defer election of a candidate"
+    def pend(self, cand, msg='Elect, transfer pending'):
+        '''
+        set a candidate pending election or elected pending transfer.
+        WIGM only
+        '''
         cand = CandidateSet([cand] if isinstance(cand, Candidate) else cand)
         for c in cand:
             self.hopeful.remove(c)
-            self.deferred.add(c)
-        self.E.logAction('defer', "%s: %s" % (msg, cand))
+            self.pending.add(c)
+        self.E.logAction('pend', "%s: %s" % (msg, cand))
+
+    def elect(self, cand, msg='Elect'):
+        '''
+        Meek, QPQ: elect a candidate
+        WIGM: move a candidate from pending to elected on surplus transfer
+        '''
+        cand = CandidateSet([cand] if isinstance(cand, Candidate) else cand)
+        for c in cand:
+            if self.E.rule.method() == 'wigm':
+                self.hopeful.discard(c)
+                self.pending.discard(c)
+            else:
+                self.hopeful.remove(c)
+            self.elected.add(c)
+        self.E.logAction('elect', "%s: %s" % (msg, cand))
 
     def unelect(self, c):
         "unelect a candidate (qpq restart)"
         self.hopeful.add(c)
         self.elected.remove(c)
-        self.elected_pending.discard(c)
+        self.pending.discard(c)
 
     def defeat(self, cand, msg='Defeat'):
         "defeat a candidate"

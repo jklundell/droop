@@ -283,6 +283,22 @@ class Rule(ElectionRule):
 
             return V(E.nBallots // (E.nSeats + 1) + 1)
 
+        def transfer(ballot, CS):
+            '''
+            Transfer ballot to next continuing (hopeful or pending) candidate
+            '''
+            ##  167.70(1)(d)
+            ##  The transfer value of each vote cast for an elected candidate must be transferred
+            ##  to the next continuing candidate on that ballot. ...
+            ##
+            ##  167.70(1)(e)
+            ##  ... Votes for a defeated candidate are transferred at their transfer value to each 
+            ##  ballot's next-ranked continuing candidate. 
+   
+            while not ballot.exhausted and ballot.topCand not in (CS.hopeful | CS.pending):
+                ballot.advance()
+            return not ballot.exhausted
+
         def findCertainLosers(surplus, fixSpec=True):
             '''
             Find the group of candidates that cannot be elected per 167.20
@@ -422,12 +438,9 @@ class Rule(ElectionRule):
             ##     those candidates who are continuing candidates are elected 
             ##     and the tabulation is complete. 
             ##
-            for c in [c for c in CS.hopeful if hasQuota(c)]:
-                CS.defer(c, 'Candidate at threshold')  # defer actual election
-            if len(CS.elected | CS.deferred) >= E.nSeats:
-                for c in CS.deferred:
-                    CS.elect(c, 'Elect remaining candidates with threshold votes')
-                    CS.elected_pending.remove(c)
+            for c in [c for c in CS.hopeful.byVote(reverse=True) if hasQuota(c)]:
+                CS.pend(c, 'Candidate at threshold')  # election pending
+            if len(CS.elected | CS.pending) >= E.nSeats:
                 break
 
             ##     If the number of candidates whose vote total is equal to or greater than
@@ -440,7 +453,7 @@ class Rule(ElectionRule):
             ##  b. Surplus votes for any candidates whose vote total is equal to 
             ##     or greater than the threshold must be calculated.
             ##
-            E.surplus = sum([c.surplus for c in CS.deferred], V0)
+            E.surplus = sum([c.surplus for c in CS.pending], V0)
 
             ##  167.70(1)(c)
             ##  c. After any surplus votes are calculated but not yet transferred, 
@@ -458,7 +471,7 @@ class Rule(ElectionRule):
                 CS.defeat(certainLosers, 'Defeat certain losers')
                 cids = [c.cid for c in certainLosers]
                 for b in (b for b in E.ballots if b.topRank in cids):
-                    if b.transfer():
+                    if transfer(b, CS):
                         b.topCand.vote += b.vote
                 for c in certainLosers:
                     CS.defeated_pending.remove(c)
@@ -500,16 +513,15 @@ class Rule(ElectionRule):
             ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate), 
             ##     calculated to four (4) decimal places, ignoring any remainder. 
             ##
-            if CS.deferred:
-                high_vote = max(c.vote for c in CS.deferred)
-                high_candidates = CandidateSet([c for c in CS.deferred if c.vote == high_vote])
+            if CS.pending:
+                high_vote = max(c.vote for c in CS.pending)
+                high_candidates = CandidateSet([c for c in CS.pending if c.vote == high_vote])
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 CS.elect(high_candidate)
-                CS.elected_pending.remove(high_candidate)
                 surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = (b.weight * surplus) / high_candidate.vote
-                    if b.transfer():
+                    if transfer(b, CS):
                         b.topCand.vote += b.vote
                 high_candidate.vote = E.quota
                 E.logAction('transfer', "Transfer surplus: %s (%s)" % (high_candidate.name, V(surplus)))
@@ -534,7 +546,7 @@ class Rule(ElectionRule):
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 CS.defeat(low_candidate, 'Defeat low candidate')
                 for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
-                    if b.transfer():
+                    if transfer(b, CS):
                         b.topCand.vote += b.vote
                 CS.defeated_pending.remove(low_candidate)
                 low_candidate.vote = V0
@@ -563,9 +575,8 @@ class Rule(ElectionRule):
 
         ##  167.70(1)(a)
         #   Elect continuing candidates with votes >= threshold
-        for c in CS.deferred:
+        for c in CS.pending:
             CS.elect(c, 'Elect candidates with threshold votes')
-            CS.elected_pending.remove(c)
 
         ##  167.70(1)(f)
         ##  f. ...
@@ -577,7 +588,6 @@ class Rule(ElectionRule):
         if 0 < len(CS.hopeful) <= E.seatsLeftToFill():
             for c in CS.hopeful:
                 CS.elect(c, 'Elect remaining candidates')
-                CS.elected_pending.remove(c)
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #

@@ -112,6 +112,13 @@ class Rule(ElectionRule):
             E.logAction('tie', 'Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
             return t
 
+        def transfer(ballot, CS):
+            '''
+            Transfer ballot to next hopeful candidate.
+            '''
+            while not ballot.exhausted and ballot.topCand not in CS.hopeful:
+                ballot.advance()
+
         def countComplete():
             '''
             test for count complete
@@ -155,7 +162,7 @@ class Rule(ElectionRule):
                     CS.unelect(c)
                 for b in E.ballots:
                     b.restart(V0)
-                    b.transfer()
+                    transfer(b, CS)
 
             #  2.3. At the start of each stage, the quotients of all the hopeful candidates 
             #  are calculated, as follows. The ballots contributing to a particular hopeful
@@ -215,7 +222,7 @@ class Rule(ElectionRule):
                 new_weight = V1 / high_candidate.quotient
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = new_weight
-                    b.transfer()
+                    transfer(b, CS)
                 E.logAction('transfer', "Transfer elected: %s (%s)" % (high_candidate, V(high_quotient)))
             else:
                 low_quotient = min(c.quotient for c in CS.hopeful)
@@ -223,7 +230,7 @@ class Rule(ElectionRule):
                 low_candidate = breakTie(low_candidates, 'smallest quotient')
                 CS.defeat(low_candidate, 'Defeat low quotient')
                 for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
-                    b.transfer()
+                    transfer(b, CS)
                 E.logAction('transfer', "Transfer defeated: %s" % low_candidate)
                 restart = True
 

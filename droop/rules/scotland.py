@@ -204,6 +204,14 @@ class Rule(ElectionRule):
             
             return V(E.nBallots // (E.nSeats + 1) + 1)
 
+        def transfer(ballot, CS):
+            '''
+            Transfer ballot to next continuing (hopeful) candidate. [48,49]
+            '''
+            while not ballot.exhausted and ballot.topCand not in CS.hopeful:
+                ballot.advance()
+            return not ballot.exhausted
+
         def breakTie(tied, reason=None):
             '''
             break a tie by most-recent difference or by lot [49,51]
@@ -257,8 +265,8 @@ class Rule(ElectionRule):
 
             #  elect candidates with quota [47]
             #
-            for c in [c for c in CS.hopeful if hasQuota(c)]:
-                CS.elect(c)
+            for c in [c for c in CS.hopeful.byVote(reverse=True) if hasQuota(c)]:
+                CS.pend(c)      # elect with surplus transfer pending
             if countComplete():
                 break
 
@@ -266,23 +274,23 @@ class Rule(ElectionRule):
 
             #  calculate surplus for reporting
             #
-            E.surplus = sum([c.surplus for c in CS.elected], V0)
+            E.surplus = sum([c.surplus for c in CS.pending], V0)
 
             #  transfer surplus votes of candidate with largest surplus [48,49]
             #
-            if CS.elected_pending:
-                high_vote = max(c.vote for c in CS.elected_pending)
-                high_candidates = CandidateSet([c for c in CS.elected_pending if c.vote == high_vote])
+            if CS.pending:
+                high_vote = max(c.vote for c in CS.pending)
+                high_candidates = CandidateSet([c for c in CS.pending if c.vote == high_vote])
                 high_candidate = breakTie(high_candidates, 'largest surplus')
-                CS.elected_pending.remove(high_candidate)
+                CS.elect(high_candidate, 'Transfer high surplus')
                 surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     # see http://www.votingmatters.org.uk/RES/eSTV-Eval.pdf section 7.1 #5
                     b.weight = V.muldiv(b.weight, surplus, high_candidate.vote, round='down')
-                    if b.transfer():
+                    if transfer(b, CS):
                         b.topCand.vote += b.vote
                 high_candidate.vote = E.quota
-                E.logAction('transfer', "Transfer surplus: %s (%s)" % (high_candidate, V(surplus)))
+                E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, V(surplus)))
                 continue  # to next stage/round
 
             #  defeat candidate(s) with lowest vote [50,51]
@@ -293,7 +301,7 @@ class Rule(ElectionRule):
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 CS.defeat(low_candidate, 'Defeat low candidate')
                 for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
-                    if b.transfer():
+                    if transfer(b, CS):
                         b.topCand.vote += b.vote
                 low_candidate.vote = V0
                 E.logAction('transfer', "Transfer defeated: %s" % low_candidate)
@@ -303,6 +311,10 @@ class Rule(ElectionRule):
 
         #  Count complete.
 
+        #  Finalize any elected transfer-pending candidates
+        for c in CS.pending:
+            CS.elect(c, 'Elect pending candidates')
+        
         #  Fill any remaining seats [52]
         #
         if len(CS.hopeful) <= E.seatsLeftToFill():
