@@ -543,7 +543,6 @@ class CandidateState(object):
     withdrawn: access to Election's list of withdrawn candidates
     pending: (WIGM) the set of candidates with a quota but with election deferred
        or elected with transfer pending
-    defeated_pending: a set of defeated candidates pending transfer (WIGM)
     '''
 
     def __init__(self, E):
@@ -557,7 +556,6 @@ class CandidateState(object):
         self.hopeful = CandidateSet()
         self.pending = CandidateSet()
         self.elected = CandidateSet()
-        self.defeated_pending = CandidateSet()
         self.defeated = CandidateSet()
 
     def code(self, c):
@@ -566,7 +564,6 @@ class CandidateState(object):
         if c in self.hopeful: return 'H'
         if self.E.rule.method() == 'wigm' and c in self.pending: return 'e'
         if c in self.elected: return 'E'
-        if self.E.rule.method() == 'wigm' and c in self.defeated_pending: return 'd'
         if c in self.defeated: return 'D'
         return '?'  # pragma: no cover
 
@@ -646,6 +643,4 @@ class CandidateState(object):
         for c in cand:
             self.hopeful.remove(c)
             self.defeated.add(c)
-            if self.E.rule.method() == 'wigm':
-                self.defeated_pending.add(c)
         self.E.logAction('defeat', "%s: %s" % (msg, cand))

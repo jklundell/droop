@@ -474,7 +474,6 @@ class Rule(ElectionRule):
                     if transfer(b, CS):
                         b.topCand.vote += b.vote
                 for c in certainLosers:
-                    CS.defeated_pending.remove(c)
                     c.vote = V0
                 E.logAction('transfer', "Transfer defeated: %s" % certainLosers)
 
@@ -548,7 +547,6 @@ class Rule(ElectionRule):
                 for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
                     if transfer(b, CS):
                         b.topCand.vote += b.vote
-                CS.defeated_pending.remove(low_candidate)
                 low_candidate.vote = V0
                 E.logAction('transfer', "Transfer defeated: %s" % low_candidate.name)
 

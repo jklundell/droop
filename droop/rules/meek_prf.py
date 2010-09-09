@@ -40,7 +40,7 @@ class Rule(ElectionRule):
     defaultOmega = 6      # iteration terminator
     precision = None
     omega = None
-    name = 'prf-meek-basic'
+    name = 'meek-prf'
 
     @classmethod
     def ruleNames(cls):
@@ -59,7 +59,7 @@ class Rule(ElectionRule):
 
     @classmethod
     def helps(cls, helps, name):
-        "add help string for prf-meek-basic"
+        "add help string for meek-prf"
         h =  "%s is the PR Foundation's Meek Reference STV.\n" % name
         h += '\nThere are no options.\n'
         h += '  arithmetic: fixed, %d-digit precision\n' % cls.defaultPrecision

@@ -32,11 +32,11 @@ class RuleBasicTest(unittest.TestCase):
     "make sure we're in the book"
     
     def testElectionNames(self):
-        self.assertTrue('prf-meek-basic' in electionRuleNames())
+        self.assertTrue('meek-prf' in electionRuleNames())
 
     def testArithmetic(self):
         "meek-prf requires fixed"
-        Rule = electionRule('prf-meek-basic')
+        Rule = electionRule('meek-prf')
         self.assertRaises(UsageError, Rule.options, dict(arithmetic='guarded'))
 
 class ElectionCountTest(unittest.TestCase):
@@ -50,24 +50,24 @@ class ElectionCountTest(unittest.TestCase):
         return E
 
     def testElectionCount5(self):
-        "try prf-meek-basic default"
-        E = self.doCount(dict(rule='prf-meek-basic'), '42.blt')
+        "try meek-prf default"
+        E = self.doCount(dict(rule='meek-prf'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount6(self):
-        "prf-meek-basic stable state"
-        E = self.doCount(dict(rule='prf-meek-basic', precision=7, omega=7), 'M135.blt')
+        "meek-prf stable state"
+        E = self.doCount(dict(rule='meek-prf', precision=7, omega=7), 'M135.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testNickReport(self):
         "using nicknames shouldn't alter dump or report"
         b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         b2 = '''3 2 [nick a b c] 4 a b 0 2 c 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-        E = Election(ElectionProfile(data=b1), dict(rule='prf-meek-basic'))
+        E = Election(ElectionProfile(data=b1), dict(rule='meek-prf'))
         E.count()
         r1 = E.report()
         d1 = E.dump()
-        E = Election(ElectionProfile(data=b2), dict(rule='prf-meek-basic'))
+        E = Election(ElectionProfile(data=b2), dict(rule='meek-prf'))
         E.count()
         r2 = E.report()
         d2 = E.dump()
@@ -85,8 +85,8 @@ class ElectionDumpTest(unittest.TestCase):
         return E.dump()
 
     def testElectionDumpMPRFStable(self):
-        "prf-meek-basic stable state"
-        self.assertTrue(doDumpCompare(dict(rule='prf-meek-basic', precision=7, omega=7), 'SC-Vm-12'), 'meek-prf stable state')
+        "meek-prf stable state"
+        self.assertTrue(doDumpCompare(dict(rule='meek-prf', precision=7, omega=7), 'SC-Vm-12'), 'meek-prf stable state')
 
 if __name__ == '__main__':
     unittest.main()
