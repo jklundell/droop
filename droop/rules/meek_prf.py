@@ -187,7 +187,7 @@ class Rule(ElectionRule):
                     E.residual += b.residual    # track residual for round
 
                 ##  B.2.b. Update quota. 
-                ##         Set quota q to the sum of the vote v for all candidate (step B.2a), 
+                ##         Set quota q to the sum of the vote v for all candidates (step B.2a), 
                 ##         divided by one more than the number of seats to be filled, 
                 ##         truncated to 9 decimal places, plus 0.000000001 (1/109).
 
@@ -232,7 +232,7 @@ class Rule(ElectionRule):
                 ##         Set the keep factor kf of each elected candidate to the candidate's 
                 ##         current keep factor kf, multiplied by the current quota q 
                 ##         (to 9 decimal places, rounded up), and then divided by the candidate's 
-                ##         current vote vote v (to 9 decimal places, rounded up). 
+                ##         current vote v (to 9 decimal places, rounded up). 
                 ##         Continue iteration at step B.2a.
 
                 for c in CS.elected:
