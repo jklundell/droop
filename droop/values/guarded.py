@@ -76,13 +76,15 @@ See also: fixed, rational
     #  initialize must be called before using the class
     #
     @classmethod
-    def initialize(cls, options=dict()):
+    def initialize(cls, options=dict(), used=set(), ignored=set()):
         "initialize class variables"
-        
+
+        used |= set(('precision', 'guard', 'display'))
+
         arithmetic = options.get('arithmetic', 'guarded')
         if arithmetic != 'guarded':
             raise UsageError('Guarded: unrecognized arithmetic type (%s)' % arithmetic)
-            
+
         precision = options.get('precision', None) or 9
         try:
             cls.precision = int(precision)

@@ -56,7 +56,7 @@ class Rule(ElectionRule):
         helps[name] = h
         
     @classmethod
-    def options(cls, options=dict()):
+    def options(cls, options=dict(), used=set(), ignored=set()):
         "initialize election parameters"
         
         #  set defaults
@@ -73,6 +73,7 @@ class Rule(ElectionRule):
         cls.integer_quota = options.get('integer_quota', False)
         cls.defeatBatch = options.get('defeat_batch', 'none')
 
+        used |= set(('arithmetic', 'precision', 'guard', 'display', 'integer_quota', 'defeat_batch'))
         #  initialize and return arithmetic
         #
         return options

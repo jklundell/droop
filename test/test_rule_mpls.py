@@ -61,9 +61,10 @@ class MplsTest(unittest.TestCase):
     def testElectionInit(self):
         "check that election is initialized"
         self.assertTrue(self.E.rule == Rule, 'bad rule class')
-        self.assertEqual(len(self.options), 3, 'mpls should set three options')
+        self.assertEqual(len(self.options), 4, 'mpls should set four options')
         self.assertEqual(self.options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
         self.assertEqual(self.options['precision'], 4, 'mpls should set precision=4')
+        self.assertEqual(self.options['display'], None, 'mpls should set display=None')
         self.assertEqual(self.E.candidates[1].name, "Castor")
         self.assertEqual(str(self.E.candidates[1]), "Castor")
         self.assertTrue(self.E.candidates[1] == 1)

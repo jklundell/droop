@@ -77,8 +77,11 @@ class Election(object):
         for key, value in options.iteritems():
             if isinstance(value, str) and re.match(r'\d+$', value):
                 options[key] = int(value)
-        self.options = self.rule.options(options)     # allow rule to process options
-        self.V = values.ArithmeticClass(self.options) # then set arithmetic
+        self.options_all = set(options)
+        self.options_used = set(('rule', 'arithmetic'))
+        self.options_ignored = set()
+        self.options = self.rule.options(options, self.options_used, self.options_ignored)     # allow rule to process options
+        self.V = values.ArithmeticClass(self.options, self.options_used, self.options_ignored) # then set arithmetic
         self.V0 = self.V(0)  # constant zero for efficiency
         self.V1 = self.V(1)  # constant one for efficiency
         self.electionProfile = electionProfile
@@ -191,6 +194,12 @@ class Election(object):
         s += "\tDroop package: %s v%s\n" % (droop.common.droopName, droop.common.droopVersion)
         s += "\tRule: %s\n" % self.rule.info()
         s += "\tArithmetic: %s\n" % self.V.info
+        ignored = list()
+        for opt in self.options_all:
+            if opt in self.options_ignored or opt not in self.options_used:
+                ignored.append(opt)
+        if ignored:
+            s += "\tIgnored options: %s\n" % ", ".join(ignored)
         s += "\tSeats: %d\n" % self.nSeats
         s += "\tBallots: %d\n" % self.nBallots
         s += "\tQuota: %s\n" % self.V(self.quota)

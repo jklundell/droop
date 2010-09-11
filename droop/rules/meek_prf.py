@@ -20,7 +20,6 @@ This file is part of Droop.
 '''
 
 from electionrule import ElectionRule
-from droop.common import UsageError
 from droop.election import CandidateSet
 
 class Rule(ElectionRule):
@@ -30,17 +29,15 @@ class Rule(ElectionRule):
     
     Parameters: none
 
-    Meek-PRF is equivalent to the generalized Meek rule with the following options:
+    Meek-PRF enforces these options:
         arithmetic=fixed
         precision=9
         omega=6
     ...and no batch defeats.
     '''
     
-    defaultPrecision = 9  # fixed-arithmetic precision in digits
-    defaultOmega = 6      # iteration terminator
-    precision = None
-    omega = None
+    precision = 9   # fixed-arithmetic precision in digits
+    omega = 6       # iteration terminator
     name = 'meek-prf'
 
     @classmethod
@@ -49,13 +46,14 @@ class Rule(ElectionRule):
         return cls.name
 
     @classmethod
-    def options(cls, options=dict()):
+    def options(cls, options=dict(), used=set(), ignored=set()):
         "override options"
-        
-        if options.setdefault('arithmetic', 'fixed') != 'fixed':
-            raise UsageError('%s does not support %s arithmetic' % (cls.name, options['arithmetic']))
-        cls.precision = options.setdefault('precision', cls.defaultPrecision)
-        cls.omega = options.setdefault('omega', cls.defaultOmega)
+
+        options['arithmetic'] = 'fixed'
+        options['precision'] = cls.precision
+        options['display'] = None
+        options['omega'] = cls.omega
+        ignored |= set(('arithmetic', 'precision', 'display', 'omega'))
         return options
 
     @classmethod
@@ -63,8 +61,8 @@ class Rule(ElectionRule):
         "add help string for meek-prf"
         h =  "%s is the PR Foundation's Meek Reference STV.\n" % name
         h += '\nThere are no options.\n'
-        h += '  arithmetic: fixed, %d-digit precision\n' % cls.defaultPrecision
-        h += '  omega=%d (iteration limit such that an interation is terminated\n' % cls.defaultOmega
+        h += '  arithmetic: fixed, %d-digit precision\n' % cls.precision
+        h += '  omega=%d (iteration limit such that an interation is terminated\n' % cls.precision
         h += '    when surplus < 1/10^omega)\n'
         helps[name] = h
         
@@ -208,7 +206,7 @@ class Rule(ElectionRule):
 
                 E.surplus = sum([c.vote-E.quota for c in CS.elected], V0)
                 if E.surplus < V0:  # unlikely but possible due to precision limits if omega too small
-                    E.surplus = V0
+                    E.surplus = V0  # pragma: no cover
                 
                 ##  B.2.e. Test for iteration finished. 
                 ##         If step B.2c elected a candidate, continue at B.1. 
@@ -220,7 +218,7 @@ class Rule(ElectionRule):
                 if iterationStatus != 'elected':
                     if E.surplus < Rule._omega:
                         iterationStatus = 'omega'
-                    elif E.surplus >= lastsurplus:
+                    elif E.surplus >= lastsurplus:  # pragma: no cover
                         iterationStatus = 'stable'
                         E.log("Stable state detected (%s)" % V(E.surplus))
                 if iterationStatus != 'iterate':
@@ -256,7 +254,7 @@ class Rule(ElectionRule):
                 low_candidate = breakTie(E, low_candidates)
                 if iterationStatus == 'omega':
                     CS.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(E.surplus))
-                else:
+                else:  # pragma: no cover
                     CS.defeat(low_candidate, msg='Defeat (stable surplus %s)' % V(E.surplus))
                 low_candidate.vote = V0
                 low_candidate.kf = V0

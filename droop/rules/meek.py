@@ -66,7 +66,7 @@ class Rule(ElectionRule):
         helps[name] = h
         
     @classmethod
-    def options(cls, options=dict()):
+    def options(cls, options=dict(), used=set(), ignored=set()):
         "filter options"
         
         #  set defaults
@@ -85,6 +85,8 @@ class Rule(ElectionRule):
         cls.defeatBatch = options.get('defeat_batch', 'safe')
         if cls.defeatBatch not in ('none', 'safe'):
             raise UsageError('unknown defeat_batch %s; use none or safe' % cls.defeatBatch)
+
+        used |= set(('arithmetic', 'precision', 'omega', 'defeat_batch'))
         return options
 
     @classmethod

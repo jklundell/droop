@@ -35,9 +35,15 @@ class RuleBasicTest(unittest.TestCase):
         self.assertTrue('meek-prf' in electionRuleNames())
 
     def testArithmetic(self):
-        "meek-prf requires fixed"
+        "meek-prf uses fixed"
         Rule = electionRule('meek-prf')
-        self.assertRaises(UsageError, Rule.options, dict(arithmetic='guarded'))
+        used = set()
+        ignored = set()
+        options = Rule.options(dict(arithmetic='guarded'), used, ignored)
+        self.assertEqual(options['arithmetic'], 'fixed')
+        self.assertEqual(options['precision'], 9)
+        self.assertEqual(used, set())
+        self.assertEqual(ignored, set(('arithmetic', 'precision', 'display', 'omega')))
 
 class ElectionCountTest(unittest.TestCase):
     "test some counts"
@@ -83,10 +89,6 @@ class ElectionDumpTest(unittest.TestCase):
         E = Election(ElectionProfile(blt), options)
         E.count()
         return E.dump()
-
-    def testElectionDumpMPRFStable(self):
-        "meek-prf stable state"
-        self.assertTrue(doDumpCompare(dict(rule='meek-prf', precision=7, omega=7), 'SC-Vm-12'), 'meek-prf stable state')
 
 if __name__ == '__main__':
     unittest.main()

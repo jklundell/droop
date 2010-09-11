@@ -140,7 +140,7 @@ class Rule(ElectionRule):
         return 'scotland'
 
     @classmethod
-    def options(cls, options=dict()):
+    def options(cls, options=dict(), used=set(), ignored=set()):
         "initialize election parameters"
 
         #  initialize and return arithmetic
@@ -152,6 +152,8 @@ class Rule(ElectionRule):
         #
         options['arithmetic'] = 'fixed'
         options['precision'] = 5
+        options['display'] = None
+        ignored |= set(('arithmetic', 'precision', 'display'))
         return options
 
     @classmethod

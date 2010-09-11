@@ -62,9 +62,11 @@ class TestQpq(unittest.TestCase):
     def testElectionInit(self):
         "check that election is initialized"
         self.assertTrue(self.E.rule == Rule, 'bad rule class')
-        self.assertEqual(len(self.options), 3, 'qpq should set three options')
+        self.assertEqual(len(self.options), 5, 'qpq should set five options')
         self.assertEqual(self.options['arithmetic'], 'guarded', 'qpq should set arithmetic=guarded')
         self.assertEqual(self.options['precision'], 9, 'qpq should set precision=9')
+        self.assertEqual(self.options['guard'], None, 'qpq should set guard=None')
+        self.assertEqual(self.options['display'], None, 'qpq should set display=None')
         self.assertEqual(self.E.candidates[1].name, "Castor")
         self.assertEqual(str(self.E.candidates[1]), "Castor")
         self.assertTrue(self.E.candidates[1] == 1)

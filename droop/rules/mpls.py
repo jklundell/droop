@@ -223,7 +223,7 @@ class Rule(ElectionRule):
         return 'mpls'
 
     @classmethod
-    def options(cls, options=dict()):
+    def options(cls, options=dict(), used=set(), ignored=set()):
         "initialize election parameters"
 
         #  initialize and return arithmetic
@@ -235,6 +235,8 @@ class Rule(ElectionRule):
         #
         options['arithmetic'] = 'fixed'
         options['precision'] = 4
+        options['display'] = None
+        ignored |= set(('arithmetic', 'precision', 'display'))
         return options
 
     @classmethod
@@ -375,7 +377,7 @@ class Rule(ElectionRule):
                     if fixSpec:
                         E.log("Not defeating uncertain loser(s): %s" % names)
                     else:
-                        E.log("Defeating uncertain loser(s): %s" % names)
+                        E.log("Defeating uncertain loser(s): %s" % names)  # pragma: no cover
                 if (vote + surplus) > sortedGroups[g+1][0].vote:
                     continue
                 if fixSpec and (vote + surplus) == sortedGroups[g+1][0].vote:
