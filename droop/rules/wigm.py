@@ -1,5 +1,5 @@
 '''
-Count election using Reference WIGM STV
+Count election using Generic WIGM STV
 
 Copyright 2010 by Jonathan Lundell
 
@@ -24,7 +24,7 @@ from droop.election import CandidateSet
 
 class Rule(ElectionRule):
     '''
-    Rule for counting Model WIGM elections
+    Rule for counting Generic WIGM elections
     
     Parameters: arithmetic type, integer_quota, defeat_batch
     '''
@@ -33,21 +33,22 @@ class Rule(ElectionRule):
     #
     integer_quota = False
     defeatBatch = 'none'
+    name = 'wigm'
     
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
-        return 'wigm'
+        return cls.name
 
     @classmethod
     def tag(cls):
         "return a tag string for unit tests"
-        return 'wigm-generic'
+        return cls.name
 
     @classmethod
     def helps(cls, helps, name):
         "create help string for wigm"
-        h =  'wigm implements the Weighted Inclusive Gregory Method.\n'
+        h =  '%s implements the Weighted Inclusive Gregory Method.\n' % cls.name
         h += '\noptions:\n'
         h += '  (qx*, rational, fixed, integer): arithmetic\n'
         h += '  integer_quota=(false*, true): round quota up to next integer\n'
@@ -74,14 +75,12 @@ class Rule(ElectionRule):
         cls.defeatBatch = options.get('defeat_batch', 'none')
 
         used |= set(('arithmetic', 'precision', 'guard', 'display', 'integer_quota', 'defeat_batch'))
-        #  initialize and return arithmetic
-        #
         return options
     
     @classmethod
     def info(cls):
         "return an info string for the election report"
-        return "Model Weighted Inclusive Gregory Method (WIGM)"
+        return "Generic Weighted Inclusive Gregory Method (WIGM)"
 
     @classmethod
     def method(cls):

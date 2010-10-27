@@ -46,15 +46,9 @@ class Rule(ElectionRule):
         return cls.name
 
     @classmethod
-    def options(cls, options=dict(), used=set(), ignored=set()):
-        "override options"
-
-        options['arithmetic'] = 'fixed'
-        options['precision'] = cls.precision
-        options['display'] = None
-        options['omega'] = cls.omega
-        ignored |= set(('arithmetic', 'precision', 'display', 'omega'))
-        return options
+    def tag(cls):
+        "return a tag string for unit tests"
+        return "%s-o%s" % (cls.name, cls.omega)
 
     @classmethod
     def helps(cls, helps, name):
@@ -67,14 +61,20 @@ class Rule(ElectionRule):
         helps[name] = h
         
     @classmethod
+    def options(cls, options=dict(), used=set(), ignored=set()):
+        "override options"
+
+        options['arithmetic'] = 'fixed'
+        options['precision'] = cls.precision
+        options['display'] = None
+        options['omega'] = cls.omega
+        ignored |= set(('arithmetic', 'precision', 'display', 'omega'))
+        return options
+
+    @classmethod
     def info(cls):
         "return an info string for the election report"
         return "PR Foundation Meek Reference"
-
-    @classmethod
-    def tag(cls):
-        "return a tag string for unit tests"
-        return "%s-o%s" % (cls.name, cls.omega)
 
     @classmethod
     def method(cls):
