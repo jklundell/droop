@@ -97,7 +97,7 @@ class Rule(ElectionRule):
 
     @classmethod
     def method(cls):
-        "underlying method: meek or wigm"
+        "underlying method: meek, wigm or qpq"
         return 'meek'
 
     #########################
@@ -165,7 +165,7 @@ class Rule(ElectionRule):
                 
             #   start with candidates sorted by vote
             #   build a sorted list of groups
-            #     where each group cosnists of the candidates tied at that vote
+            #     where each group consists of the candidates tied at that vote
             #     (when there's no tie, a group will have one candidate)
             #
             sortedCands = CS.hopeful.byVote()

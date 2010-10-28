@@ -97,7 +97,7 @@ class Election(object):
             self.candidates[cid] = c
 
         #  create a ballot object (ranking candidate IDs) from the profile rankings of candidate IDs
-        #  withdrawn candidates have been removed alreay
+        #  withdrawn candidates have been removed already
         #
         self.ballots = list()
         for bl in electionProfile.ballotLines:

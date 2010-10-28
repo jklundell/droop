@@ -78,7 +78,7 @@ class Rule(ElectionRule):
 
     @classmethod
     def method(cls):
-        "underlying method: meek or wigm"
+        "underlying method: meek, wigm or qpq"
         return 'meek'
 
     #########################

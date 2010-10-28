@@ -56,7 +56,7 @@ is that the test is performed only after defeating the lowest-vote candidate per
 6. WIGM rules typically elect candidates as soon as they reach a quota. The Minneapolis
 rule defer the election of a candidate until that candidate's surplus is to be transferred.
 This variation is defensible, even desirable, but because it's a little unusual, the rule
-language should make more explict the implication that votes can be transferred to candidates
+language should make more explicit the implication that votes can be transferred to candidates
 who already have a quota but are not yet elected per 167.70(1)(d).
 '''
 
@@ -255,7 +255,7 @@ class Rule(ElectionRule):
         
     @classmethod
     def method(cls):
-        "underlying method: meek or wigm"
+        "underlying method: meek, wigm or qpq"
         return 'wigm'
 
     #########################

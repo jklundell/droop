@@ -58,7 +58,7 @@ class RuleTest(unittest.TestCase):
     "test rules class methods"
     
     def testMethod(self):
-        "method is meek or wigm for each rule"
+        "method is meek or wigm or qpq for each rule"
         for name in electionRuleNames():
             Rule = electionRule(name)
             method = Rule.method()
