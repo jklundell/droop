@@ -43,8 +43,8 @@ class Rule(ElectionRule):
     def tag(cls):
         "return a tag string for unit tests"
         if cls.warren:
-            return 'warren-generic-o%s' % cls.omega
-        return 'meek-generic-o%s' % cls.omega
+            return 'warren-o%s' % cls.omega
+        return 'meek-o%s' % cls.omega
 
     @classmethod
     def helps(cls, helps, name):

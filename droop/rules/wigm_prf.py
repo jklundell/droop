@@ -72,7 +72,6 @@ class Rule(ElectionRule):
         cls.defeatBatch = options.get('defeat_batch', 'none')
         if cls.defeatBatch not in ('none', 'losers'):
             raise UsageError('unknown defeat_batch %s; use none or losers' % cls.defeatBatch)
-
         used |= set(('defeat_batch',))
 
         return options
@@ -80,7 +79,9 @@ class Rule(ElectionRule):
     @classmethod
     def info(cls):
         "return an info string for the election report"
-        return "PR Foundation WIGM Reference"
+        if cls.defeatBatch == 'losers':
+            return "PR Foundation WIGM Reference (batch defeat)"
+        return "PR Foundation WIGM Reference (single defeat)"
 
     @classmethod
     def method(cls):
@@ -266,12 +267,24 @@ class Rule(ElectionRule):
                 CS.pend(c)      # elect with transfer pending
 
             ##     B.3. Optional: Defeat sure losers.
+            ##          ...
+            ##          If the resulting set is not empty, defeat each candidate in
+            ##          the set. Test count complete (D.3). Transfer each ballot
+            ##          assigned to a defeated candidate (D.2). Continue at step B.1.
             ##
             if cls.defeatBatch == 'losers':
                 sureLosers = batchDefeat()
                 if sureLosers:
                     for c in sureLosers.byBallotOrder():
-                        CS.defeat(c, msg='Defeat certain loser')
+                        CS.defeat(c, msg='Defeat sure loser')
+                    if len(CS.hopeful) <= E.seatsLeftToFill():
+                        break;
+                    for c in sureLosers.byBallotOrder():
+                        for b in (b for b in E.ballots if b.topRank == c.cid):
+                            if transfer(b, CS):
+                                b.topCand.vote += b.vote
+                        c.vote = V0
+                        E.logAction('transfer', "Transfer defeated: %s" % c)
                     continue
 
             ##     B.4. Transfer high surplus. Select the pending candidate c, if
@@ -306,19 +319,13 @@ class Rule(ElectionRule):
                 #
                 low_vote = min(c.vote for c in CS.hopeful)
                 low_candidates = CandidateSet([c for c in CS.hopeful if c.vote == low_vote])
-                if low_vote == V0 and cls.defeatBatch == 'zero':
-                    for c in low_candidates:
-                        CS.defeat(c, msg='Defeat batch(zero)')
-                else:
-                    low_candidate = breakTie(E, low_candidates, 'defeat')
-                    CS.defeat(low_candidate)
-                    low_candidates = [low_candidate]
-                for c in low_candidates:
-                    for b in (b for b in E.ballots if b.topRank == c.cid):
-                        if transfer(b, CS):
-                            b.topCand.vote += b.vote
-                    c.vote = V0
-                    E.logAction('transfer', "Transfer defeated: %s" % c)
+                low_candidate = breakTie(E, low_candidates, 'defeat')
+                CS.defeat(low_candidate)
+                for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
+                    if transfer(b, CS):
+                        b.topCand.vote += b.vote
+                low_candidate.vote = V0
+                E.logAction('transfer', "Transfer defeated: %s" % low_candidate)
 
         ##  C. Finish Count
         ##     Set all pending candidates to elected. If all seats are

@@ -40,7 +40,7 @@ class ElectionNameTest(unittest.TestCase):
         "meek responds to warren"
         Rule = electionRule('warren')
         Rule.options(dict(rule='warren'))
-        self.assertEqual(Rule.tag(), 'warren-generic-o9')
+        self.assertEqual(Rule.tag(), 'warren-o9')
         self.assertRaises(UsageError, Rule.options, dict(defeat_batch='whatever'))
 
 class ElectionCountTest(unittest.TestCase):
@@ -64,7 +64,7 @@ class ElectionCountTest(unittest.TestCase):
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount7(self):
-        "meek-generic stable state"
+        "meek stable state"
         E = self.doCount(dict(rule='meek', precision=7, omega=7), 'M135.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 

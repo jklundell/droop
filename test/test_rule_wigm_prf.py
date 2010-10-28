@@ -67,8 +67,9 @@ class ElectionCountTest(unittest.TestCase):
 
     def testElectionCount1(self):
         "try wigm-prf default"
-        E = self.doCount(dict(rule='wigm-prf'), '42.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
+        for batch in ('none', 'losers'):
+            E = self.doCount(dict(rule='wigm-prf', defeat_batch=batch), '42.blt')
+            self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount2(self):
         "try wigm-prf with integer quota"
