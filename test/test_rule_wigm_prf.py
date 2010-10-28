@@ -27,6 +27,7 @@ import droop
 from droop.election import Election
 from droop.profile import ElectionProfile
 from droop import electionRuleNames, electionRule
+from droop.common import UsageError
 
 class RuleBasicTest(unittest.TestCase):
     "make sure we're in the book"
@@ -44,6 +45,14 @@ class RuleBasicTest(unittest.TestCase):
         self.assertEqual(options['precision'], 4)
         self.assertEqual(used, set(('defeat_batch',)))
         self.assertEqual(ignored, set(('arithmetic', 'precision', 'display')))
+
+    def testDefeatBatch(self):
+        "wigm-prf rejects defeat_batch other than ('none', 'losers')"
+        Rule = electionRule('wigm-prf')
+        self.assertEqual(Rule.tag(), 'wigm-prf-none')
+        Rule.options(dict(defeat_batch='losers'))
+        self.assertEqual(Rule.tag(), 'wigm-prf-losers')
+        self.assertRaises(UsageError, Rule.options, dict(defeat_batch='zero'))
 
 
 class ElectionCountTest(unittest.TestCase):
