@@ -19,7 +19,6 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from droop.common import UsageError
 from electionrule import ElectionRule
 from droop.election import CandidateSet
 
@@ -30,57 +29,57 @@ class Rule(ElectionRule):
     '''
     Rule for counting PRF Reference WIGM elections
 
-    Parameters: defeat_batch
+    Parameters: batch defeat of sure losers selected by rule name
     '''
 
     #  options
     #
     ##     D.4. Arithmetic. Truncate, with no rounding, the result of each
     ##          multiplication or division to four decimal places.
-    defeatBatch = 'none'
-    precision = 4   # fixed-arithmetic precision in digits
-    name = 'wigm-prf'
+    ##
+    precision = 4       # fixed-arithmetic precision in digits
+    name = 'wigm-prf'   # default to single-defeat
+    defeatBatch = False
 
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
-        return cls.name
+        return ('wigm-prf', 'wigm-prf-batch')
 
     @classmethod
     def tag(cls):
         "return a tag string for unit tests"
-        return "%s-%s" % (cls.name, cls.defeatBatch)
+        return cls.name
 
     @classmethod
     def helps(cls, helps, name):
-        "create help string for wigm"
+        "create help string for wigm-prf"
         h =  "%s is the PR Foundation's Weighted Inclusive Gregory Method (WIGM) Reference STV.\n" % name
-        h += '\noptions:\n'
-        h += '  defeat_batch=(none*, losers): before surplus transfer, defeat sure losers\n'
-        h += '    *default\n'
+        if name.endswith('batch'):
+            h += '  (defeat sure losers)\n'
+        else:
+            h += '  (single defeat)\n'
+        h += '\noptions: none\n'
         helps[name] = h
 
     @classmethod
     def options(cls, options=dict(), used=set(), ignored=set()):
         "initialize election parameters"
 
+        cls.name = options.get('rule', cls.name)
+        cls.defeatBatch = cls.name.endswith('batch')
         options['arithmetic'] = 'fixed'
         options['precision'] = cls.precision
         options['display'] = None
-        ignored |= set(('arithmetic', 'precision', 'display'))
-
-        cls.defeatBatch = options.get('defeat_batch', 'none')
-        if cls.defeatBatch not in ('none', 'losers'):
-            raise UsageError('unknown defeat_batch %s; use none or losers' % cls.defeatBatch)
-        used |= set(('defeat_batch',))
+        ignored |= set(('arithmetic', 'precision', 'display', 'defeat_batch'))
 
         return options
 
     @classmethod
     def info(cls):
         "return an info string for the election report"
-        if cls.defeatBatch == 'losers':
-            return "PR Foundation WIGM Reference (batch defeat)"
+        if cls.defeatBatch:
+            return "PR Foundation WIGM Reference (defeat sure losers)"
         return "PR Foundation WIGM Reference (single defeat)"
 
     @classmethod
@@ -272,7 +271,7 @@ class Rule(ElectionRule):
             ##          the set. Test count complete (D.3). Transfer each ballot
             ##          assigned to a defeated candidate (D.2). Continue at step B.1.
             ##
-            if cls.defeatBatch == 'losers':
+            if cls.defeatBatch:
                 sureLosers = batchDefeat()
                 if sureLosers:
                     for c in sureLosers.byBallotOrder():

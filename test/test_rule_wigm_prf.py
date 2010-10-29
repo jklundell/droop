@@ -43,16 +43,15 @@ class RuleBasicTest(unittest.TestCase):
         options = Rule.options(dict(arithmetic='guarded'), used, ignored)
         self.assertEqual(options['arithmetic'], 'fixed')
         self.assertEqual(options['precision'], 4)
-        self.assertEqual(used, set(('defeat_batch',)))
-        self.assertEqual(ignored, set(('arithmetic', 'precision', 'display')))
+        self.assertEqual(used, set())
+        self.assertEqual(ignored, set(('arithmetic', 'precision', 'display', 'defeat_batch')))
 
     def testDefeatBatch(self):
-        "wigm-prf rejects defeat_batch other than ('none', 'losers')"
+        "tag is name of rule"
         Rule = electionRule('wigm-prf')
-        self.assertEqual(Rule.tag(), 'wigm-prf-none')
-        Rule.options(dict(defeat_batch='losers'))
-        self.assertEqual(Rule.tag(), 'wigm-prf-losers')
-        self.assertRaises(UsageError, Rule.options, dict(defeat_batch='zero'))
+        self.assertEqual(Rule.tag(), 'wigm-prf')
+        Rule.options(dict(rule='wigm-prf-batch'))
+        self.assertEqual(Rule.tag(), 'wigm-prf-batch')
 
 
 class ElectionCountTest(unittest.TestCase):
@@ -66,9 +65,9 @@ class ElectionCountTest(unittest.TestCase):
         return E
 
     def testElectionCount1(self):
-        "try wigm-prf default"
-        for batch in ('none', 'losers'):
-            E = self.doCount(dict(rule='wigm-prf', defeat_batch=batch), '42.blt')
+        "try wigm-prf variants"
+        for variant in ('wigm-prf', 'wigm-prf-batch'):
+            E = self.doCount(dict(rule=variant), '42.blt')
             self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount2(self):
