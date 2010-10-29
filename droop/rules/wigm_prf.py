@@ -22,8 +22,71 @@ This file is part of Droop.
 from electionrule import ElectionRule
 from droop.election import CandidateSet
 
-##  PRF Reference Rule: WIGM
-##
+'''
+PRF Reference Rule: WIGM
+
+A. Initialize Election
+   A.1. Set the quota (votes required for election) to the total number of
+        valid ballots, divided by one more than the number of seats to be
+        filled, plus 0.0001.
+   A.2. Set each candidate who is not withdrawn to hopeful.
+   A.3. Test count complete (D.3).
+   A.4. Set each ballot's weight to one, and assign it to its top-ranked
+        hopeful candidate.
+   A.5. Set the vote for each candidate to the total number of ballots
+        assigned to that candidate.
+
+B. Round
+   B.1. Elect winners. Set each hopeful candidate whose vote is greater than
+        or equal to the quota to pending (elected with surplus-transfer
+        pending). Set the surplus of each pending candidate to that candidate's
+        vote minus the quota. Test count complete (D.3).
+   B.2. Defeat sure losers (optional). Find the largest set of hopeful
+        candidates that meets all of the following conditions.
+        B.2.a. The number of hopeful candidates not in the set is greater
+               than or equal to the number seats to be filled minus pending and
+               elected candidates).
+        B.2.b. For each candidate in the set, each hopeful candidate with the
+               same vote or lower is also in the set.
+        B.2.c. The sum of the votes of the candidates in the set plus the sum
+               of all the current surpluses (B.1) is less than the lowest vote
+               of the hopeful candidates not in the set.
+        If the resulting set is not empty, defeat each candidate in the set
+        and test count complete (D.3), transfer each ballot assigned to a
+        defeated candidate (D.2), and continue at step B.1.
+   B.3. Transfer high surplus. Select the pending candidate, if any, with
+        the largest surplus (possibly zero), breaking ties per procedure D.1.
+        For each ballot assigned to that candidate, set its new weight to the
+        ballot's current weight multiplied by the candidate's surplus (B.1),
+        then divided by the candidate's total vote. Transfer the ballot (D.2).
+        If a surplus (possibly zero) is transferred, continue at step B.1.
+   B.4. Defeat low candidate. Defeat the hopeful candidate with the lowest
+        vote, breaking ties per procedure D.1. Test count complete (D.3).
+        Transfer each ballot assigned to the defeated candidate (D.2). Continue
+        at step B.1.
+
+C. Finish Count
+   Set all pending candidates to elected. If all seats are filled, defeat all
+   hopeful candidates; otherwise elect all hopeful candidates. Count is complete.
+
+D. General Procedures
+   D.1. Break ties. Ties arise in B.3 (choose candidate for surplus
+        transfer) and in B.4 (choose candidate for defeat). In each case,
+        choose the tied candidate who is earliest in a predetermined random
+        tiebreaking order.
+   D.2. Transfer ballots. Reassign each ballot to be transferred to its
+        highest-ranking hopeful candidate and add the current weight of the
+        ballot to the vote of that candidate. If the ballot ranks no such
+        candidate, or has a weight of zero, it is exhausted and no longer
+        participates in the count.
+   D.3. Test count complete. If the number of elected plus pending
+        candidates is equal to the number of seats to be filled, or the number
+        of elected plus pending plus hopeful candidates is equal to or less
+        than the number of seats to be filled, the count is complete; finish at
+        step C.
+   D.4. Arithmetic. Truncate, with no rounding, the result of each
+        multiplication or division to four decimal places.
+'''
 
 class Rule(ElectionRule):
     '''
@@ -104,10 +167,10 @@ class Rule(ElectionRule):
 
         def calcQuota(E):
             "Calculate quota."
-            ##  A. Initialize Election
-            ##     Set the quota q (votes required for election) to the total
-            ##     number of valid ballots divided by one more than the number of
-            ##     seats to be filled, adding 0.0001 to the result. ...
+            ##     A.1. Set the quota (votes required for election) to the total number of
+            ##          valid ballots, divided by one more than the number of seats to be
+            ##          filled, plus 0.0001.
+            ##
             return V(E.nBallots) / V(E.nSeats+1) + V.epsilon
 
         def transfer(ballot, CS):
@@ -131,10 +194,10 @@ class Rule(ElectionRule):
             Not all tiebreaking methods will care about 'purpose' or 'strength',
             but the requirement is enforced for consistency of interface.
             '''
-            ##     D.1. Break ties. Ties arise in B.4 (choose candidate for surplus
-            ##          transfer) and in B.5 (choose candidate for defeat). In each
-            ##          case, choose the tied candidate who is earliest in a
-            ##          predetermined random tiebreaking order.
+            ##     D.1. Break ties. Ties arise in B.3 (choose candidate for surplus
+            ##          transfer) and in B.4 (choose candidate for defeat). In each case,
+            ##          choose the tied candidate who is earliest in a predetermined random
+            ##          tiebreaking order.
             ##
             if len(tied) == 1:
                 return tied.pop()
@@ -146,23 +209,19 @@ class Rule(ElectionRule):
         def batchDefeat():
             "find the largest batch of sure losers"
 
-            ##     B.3. Optional: Defeat sure losers. Find the largest set of
-            ##          hopeful candidates that meets all of the following conditions.
-            ##
-            ##     B.3.a. The number of hopeful candidates not in the set is
-            ##            greater than or equal to the number seats to be filled minus
-            ##            pending and elected candidates).
-            ##
-            ##     B.3.b. For each candidate in the set, every hopeful candidate
-            ##            with the same vote v or lower is also in the set.
-            ##
-            ##     B.3.c. The sum of the votes v of the candidates in the set plus
-            ##            the sum of all the current surpluses s is less than the lowest
-            ##            vote v of the hopeful candidates not in the set.
-            ##
-            ##        If the resulting set is not empty, defeat each candidate in
-            ##        the set. Test count complete (D.3). Transfer each ballot
-            ##        assigned to a defeated candidate (D.2). Continue at step B.1.
+            ##     B.2. Defeat sure losers (optional). Find the largest set of hopeful
+            ##          candidates that meets all of the following conditions.
+            ##          B.2.a. The number of hopeful candidates not in the set is greater
+            ##                 than or equal to the number seats to be filled minus pending and
+            ##                 elected candidates).
+            ##          B.2.b. For each candidate in the set, each hopeful candidate with the
+            ##                 same vote or lower is also in the set.
+            ##          B.2.c. The sum of the votes of the candidates in the set plus the sum
+            ##                 of all the current surpluses (B.1) is less than the lowest vote
+            ##                 of the hopeful candidates not in the set.
+            ##          If the resulting set is not empty, defeat each candidate in the set
+            ##          and test count complete (D.3), transfer each ballot assigned to a
+            ##          defeated candidate (D.2), and continue at step B.1.
             ##
 
             #   calculate untransferred surplus
@@ -225,51 +284,46 @@ class Rule(ElectionRule):
         V0 = E.V0   # constant zero
 
         ##  A. Initialize Election
-        ##     Set the quota q (votes required for election) to the total
-        ##     number of valid ballots divided by one more than the number of
-        ##     seats to be filled, adding 0.0001 to the result. Set each
-        ##     candidate who is not withdrawn to hopeful. Test count complete
-        ##     (D.3). Set each ballot's weight w to one, and assign it to its
-        ##     top-ranked hopeful candidate.
-
-        #  calculate quota
-        #
+        ##     A.1. Set the quota (votes required for election) to the total number of
+        ##          valid ballots, divided by one more than the number of seats to be
+        ##          filled, plus 0.0001.
+        ##     A.2. Set each candidate who is not withdrawn to hopeful.
+        ##     A.3. Test count complete (D.3).
+        ##     A.4. Set each ballot's weight to one, and assign it to its top-ranked
+        ##          hopeful candidate.
+        ##     A.5. Set the vote for each candidate to the total number of ballots
+        ##          assigned to that candidate.
+        ##
         E.quota = calcQuota(E)
-
-        #  Calculate initial vote totals
-        #
         for b in E.ballots:
             b.topCand.vote += b.vote
 
         ##     D.3. Test count complete. If the number of elected plus pending
-        ##          candidates is equal to the number of seats to be filled, or the
-        ##          number of elected plus pending plus hopeful candidates is equal
-        ##          to or less than the number of seats to be filled, the count is
-        ##          complete; finish at step C.
+        ##          candidates is equal to the number of seats to be filled, or the number
+        ##          of elected plus pending plus hopeful candidates is equal to or less
+        ##          than the number of seats to be filled, the count is complete; finish at
+        ##          step C.
         ##
         while len(CS.hopeful) > E.seatsLeftToFill() > 0:
 
             ##  B. Round
             ##
-            ##     B.1. Count votes. Initialize the vote v for each candidate to 0.
-            ##          For each non-exhausted ballot, add the ballot's current weight w
-            ##          to the vote v for the ballot's currently assigned candidate.
-            ##
             E.newRound()
 
-            ##     B.2. Elect winners. Set each hopeful candidate whose vote v is
-            ##          greater than or equal to quota q to pending (elected with
-            ##          surplus-transfer pending). Set the surplus s of each pending
-            ##          candidate to v minus quota q. Test count complete (D.3).
+            ##     B.1. Elect winners. Set each hopeful candidate whose vote is greater than
+            ##          or equal to the quota to pending (elected with surplus-transfer
+            ##          pending). Set the surplus of each pending candidate to that candidate's
+            ##          vote minus the quota. Test count complete (D.3).
             ##
             for c in [c for c in CS.hopeful.byVote(reverse=True) if hasQuota(E, c)]:
                 CS.pend(c)      # elect with transfer pending
 
-            ##     B.3. Optional: Defeat sure losers.
+            ##     B.2. Defeat sure losers (optional). Find the largest set of hopeful
+            ##          candidates that meets all of the following conditions.
             ##          ...
-            ##          If the resulting set is not empty, defeat each candidate in
-            ##          the set. Test count complete (D.3). Transfer each ballot
-            ##          assigned to a defeated candidate (D.2). Continue at step B.1.
+            ##          If the resulting set is not empty, defeat each candidate in the set
+            ##          and test count complete (D.3), transfer each ballot assigned to a
+            ##          defeated candidate (D.2), and continue at step B.1.
             ##
             if cls.defeatBatch:
                 sureLosers = batchDefeat()
@@ -286,13 +340,12 @@ class Rule(ElectionRule):
                         E.logAction('transfer', "Transfer defeated: %s" % c)
                     continue
 
-            ##     B.4. Transfer high surplus. Select the pending candidate c, if
-            ##          any, with the largest surplus s (possibly zero), breaking ties
-            ##          per procedure D.1. For each ballot assigned to c, set its new
-            ##          weight w to the ballot's current weight w multiplied by c's
-            ##          surplus s, then divided by c's total vote v. Transfer the ballot
-            ##          (D.2). If a surplus (possibly zero) is transferred, continue at
-            ##          step B.1.
+            ##     B.3. Transfer high surplus. Select the pending candidate, if any, with
+            ##          the largest surplus (possibly zero), breaking ties per procedure D.1.
+            ##          For each ballot assigned to that candidate, set its new weight to the
+            ##          ballot's current weight multiplied by the candidate's surplus (B.1),
+            ##          then divided by the candidate's total vote. Transfer the ballot (D.2).
+            ##          If a surplus (possibly zero) is transferred, continue at step B.1.
             ##
             if CS.pending:
                 high_vote = max(c.vote for c in CS.pending)
@@ -308,10 +361,10 @@ class Rule(ElectionRule):
                 high_candidate.vote = E.quota
                 E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, V(surplus)))
 
-            ##     B.5. Defeat low candidate. Defeat the hopeful candidate c with
-            ##          the lowest vote v, breaking ties per procedure D.1. Test count
-            ##          complete (D.3). Transfer each ballot assigned to the defeated
-            ##          candidate (D.2). Continue at step B.1.
+            ##     B.4. Defeat low candidate. Defeat the hopeful candidate with the lowest
+            ##          vote, breaking ties per procedure D.1. Test count complete (D.3).
+            ##          Transfer each ballot assigned to the defeated candidate (D.2). Continue
+            ##          at step B.1.
             ##
             elif CS.hopeful:
                 #  find & defeat candidate with lowest vote
@@ -327,10 +380,10 @@ class Rule(ElectionRule):
                 E.logAction('transfer', "Transfer defeated: %s" % low_candidate)
 
         ##  C. Finish Count
-        ##     Set all pending candidates to elected. If all seats are
-        ##     filled, defeat all hopeful candidates; otherwise elect all
-        ##     hopeful candidates. Count is complete.
-        #
+        ##     Set all pending candidates to elected. If all seats are filled, defeat all
+        ##     hopeful candidates; otherwise elect all hopeful candidates. Count is complete.
+        ##
+        ##
         for c in CS.pending:
             CS.elect(c, msg='Elect pending')
         for c in list(CS.hopeful):
