@@ -55,10 +55,19 @@ class Rule(ElectionRule):
         return 'qpq'
 
     @classmethod
-    def tag(cls):
-        "return a tag string for unit tests"
+    def method(cls):
+        "underlying method: meek, wigm or qpq"
         return 'qpq'
 
+    @classmethod
+    def helps(cls, helps, name):
+        "create help string for QPQ"
+        h =  'Quota Preferential by Quotient.\n'
+        h += '\nThere are no options.\n'
+        h += '  arithmetic: guarded\n'
+        h += '  precision=9\n'
+        helps[name] = h
+        
     @classmethod
     def options(cls, options=dict(), used=set(), ignored=set()):
         "initialize election parameters"
@@ -75,22 +84,13 @@ class Rule(ElectionRule):
         return options
 
     @classmethod
-    def helps(cls, helps, name):
-        "create help string for scottish stv"
-        h =  'Quota Preferential by Quotient.\n'
-        h += '\nThere are no options.\n'
-        h += '  arithmetic: guarded\n'
-        h += '  precision=9\n'
-        helps[name] = h
-        
-    @classmethod
     def info(cls):
         "return an info string for the election report"
         return "QPQ"
         
     @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
+    def tag(cls):
+        "return a tag string for unit tests"
         return 'qpq'
 
     #########################

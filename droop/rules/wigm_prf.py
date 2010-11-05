@@ -110,9 +110,9 @@ class Rule(ElectionRule):
         return ('wigm-prf', 'wigm-prf-batch')
 
     @classmethod
-    def tag(cls):
-        "return a tag string for unit tests"
-        return cls.name
+    def method(cls):
+        "underlying method: meek, wigm or qpq"
+        return 'wigm'
 
     @classmethod
     def helps(cls, helps, name):
@@ -146,9 +146,9 @@ class Rule(ElectionRule):
         return "PR Foundation WIGM Reference (single defeat)"
 
     @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
-        return 'wigm'
+    def tag(cls):
+        "return a tag string for unit tests"
+        return cls.name
 
     #########################
     #

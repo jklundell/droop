@@ -41,9 +41,9 @@ class Rule(ElectionRule):
         return cls.name
 
     @classmethod
-    def tag(cls):
-        "return a tag string for unit tests"
-        return cls.name
+    def method(cls):
+        "underlying method: meek, wigm or qpq"
+        return 'wigm'
 
     @classmethod
     def helps(cls, helps, name):
@@ -83,9 +83,9 @@ class Rule(ElectionRule):
         return "Generic Weighted Inclusive Gregory Method (WIGM)"
 
     @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
-        return 'wigm'
+    def tag(cls):
+        "return a tag string for unit tests"
+        return cls.name
 
     #########################
     #

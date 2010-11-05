@@ -46,9 +46,9 @@ class Rule(ElectionRule):
         return cls.name
 
     @classmethod
-    def tag(cls):
-        "return a tag string for unit tests"
-        return "%s-o%s" % (cls.name, cls.omega)
+    def method(cls):
+        "underlying method: meek, wigm or qpq"
+        return 'meek'
 
     @classmethod
     def helps(cls, helps, name):
@@ -77,9 +77,9 @@ class Rule(ElectionRule):
         return "PR Foundation Meek Reference"
 
     @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
-        return 'meek'
+    def tag(cls):
+        "return a tag string for unit tests"
+        return "%s-o%s" % (cls.name, cls.omega)
 
     #########################
     #

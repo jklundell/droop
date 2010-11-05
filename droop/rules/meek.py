@@ -40,11 +40,9 @@ class Rule(ElectionRule):
         return ('meek', 'warren')
 
     @classmethod
-    def tag(cls):
-        "return a tag string for unit tests"
-        if cls.warren:
-            return 'warren-o%s' % cls.omega
-        return 'meek-o%s' % cls.omega
+    def method(cls):
+        "underlying method: meek, wigm or qpq"
+        return 'meek'
 
     @classmethod
     def helps(cls, helps, name):
@@ -96,9 +94,11 @@ class Rule(ElectionRule):
         return "%s Parametric (omega = 1/10^%d)" % (name, cls.omega)
 
     @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
-        return 'meek'
+    def tag(cls):
+        "return a tag string for unit tests"
+        if cls.warren:
+            return 'warren-o%s' % cls.omega
+        return 'meek-o%s' % cls.omega
 
     #########################
     #

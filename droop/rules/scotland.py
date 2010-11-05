@@ -135,10 +135,19 @@ class Rule(ElectionRule):
         return 'scotland'
 
     @classmethod
-    def tag(cls):
-        "return a tag string for unit tests"
-        return 'scotland'
+    def method(cls):
+        "underlying method: meek, wigm or qpq"
+        return 'wigm'
 
+    @classmethod
+    def helps(cls, helps, name):
+        "provide help string for Scottish STV"
+        h =  'Scottish STV is a variant on WIGM.\n'
+        h += '\nThere are no options.\n'
+        h += '  arithmetic: fixed\n'
+        h += '  precision=5\n'
+        helps[name] = h
+        
     @classmethod
     def options(cls, options=dict(), used=set(), ignored=set()):
         "initialize election parameters"
@@ -157,23 +166,14 @@ class Rule(ElectionRule):
         return options
 
     @classmethod
-    def helps(cls, helps, name):
-        "create help string for scottish stv"
-        h =  'Scottish STV is a variant on WIGM.\n'
-        h += '\nThere are no options.\n'
-        h += '  arithmetic: fixed\n'
-        h += '  precision=5\n'
-        helps[name] = h
-        
-    @classmethod
     def info(cls):
         "return an info string for the election report"
         return "Scottish STV"
         
     @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
-        return 'wigm'
+    def tag(cls):
+        "return a tag string for unit tests"
+        return 'scotland'
 
     #########################
     #
