@@ -145,8 +145,6 @@ class Rule(ElectionRule):
 
         #  Calculate initial quota
         #
-        E.tx = V0
-        E.ta = V0
         E.va = sum((b.multiplier for b in E.ballots if not b.exhausted), V0)
         E.quota = E.va / V(1 + E.nSeats) - E.tx  # quota [2.4]
 

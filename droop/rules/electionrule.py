@@ -61,7 +61,7 @@ class ElectionRule(object):  # pragma: no cover
     @classmethod
     def options(cls, options=dict(), used=set(), ignored=set()):
         '''
-        Handle initiallization of options.
+        Handle initialization of options.
         
         options: dict of options from command line, blt file, etc
         used: rules add the keys of options that they pay attention to
@@ -109,7 +109,7 @@ class ElectionRule(object):  # pragma: no cover
         '''
         Count the election E.
         
-        Note that count has no return value. Results are communicatd
+        Note that count has no return value. Results are communicated
         through the election object E, or, in the case of a terminal
         error, by raising an exception.
         
