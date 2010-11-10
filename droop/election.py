@@ -119,8 +119,8 @@ class Election(object):
         if self.rule.method() == 'meek':
             self.residual = self.V0
         elif self.rule.method() == 'qpq':
-            self.ta = None
-            self.tx = None
+            self.ta = self.V0
+            self.tx = self.V0
         self.CS = CandidateState(self)    # candidate state
         self.elected = CandidateSet()     # for communicating results
         self.eligible = CandidateSet()
@@ -130,7 +130,6 @@ class Election(object):
             self.CS.addCandidate(c, isWithdrawn=cid in self.electionProfile.withdrawn)
         self.rule.count(self)
         self.logAction('final', 'Count Complete')
-        # TODO: end-of-election Action?
         self.elected = self.CS.elected
 
     def logAction(self, action, msg):
