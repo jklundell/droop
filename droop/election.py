@@ -295,11 +295,14 @@ class Election(object):
 
         def report(self):
             "report an action"
+            E = self.E
+            s = E.rule.reportAction(self) # allow rule to override default report
+            if s is not None:
+                return s
             if self.action == 'log':
                 return "\t%s\n" % self.msg
             if self.action == 'round':
                 return "Round %d:\n" % self.round
-            E = self.E
             V = E.V
             CS = self.CS
             s = 'Action: %s\n' % (self.msg)

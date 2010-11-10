@@ -116,3 +116,13 @@ class ElectionRule(object):  # pragma: no cover
         (Called after option)
         '''
         pass
+
+    @classmethod
+    def reportAction(cls, action):
+        '''
+        Hook for rule-specific reporting of an action.
+        
+        To override the default report, return a string.
+        See Election.Action.report() for defaults.
+        '''
+        return None
