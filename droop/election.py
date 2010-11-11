@@ -392,7 +392,22 @@ class Election(object):
             return s
 
     class Ballot(object):
-        "one ballot"
+        '''
+        internal representation of one ballot
+        
+        The use of slots gives a more compact object, which significantly
+        reduces memory requirements for large elections.
+        
+        Similarly, ranking, from the election profile, is an array
+        of bytes or shorts (depending on candidate count), again
+        for memory efficiency.
+        
+        The ballot multiplier comes from the election profile, and is
+        a count of identical ballots.
+        
+        The ballot weight, initially 1, is the ballot's current weight
+        after possible reduction via surplus transfers.
+        '''
         
         __slots__ = ('E', 'multiplier', 'index', 'weight', 'residual', 'ranking')
         
@@ -406,7 +421,7 @@ class Election(object):
             self.ranking = ranking
 
         def advance(self):
-            "advance ballot index to next candidate"
+            "advance ballot index to next-ranked candidate"
             self.index += 1
 
         def restart(self, weight):

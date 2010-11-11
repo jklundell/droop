@@ -338,7 +338,7 @@ class ElectionProfile(object):
                 multiplier = int(tok)
             else:
                 raise ElectionProfileError('bad blt item "%s" near line %d; expected decimal number' % (tok, self.lineNumber))
-            if not multiplier:  # test end of ballot lines
+            if not multiplier:  # test end of ballot lines (multiplier of 0)
                 break
 
             ranking = list()
@@ -346,7 +346,7 @@ class ElectionProfile(object):
                 tok = blt.next()  # next ranked candidate or 0
                 if tok == '0':
                     break   # end of ballot
-                toks = tok.split('=')
+                toks = tok.split('=')  # handle equal ranking
                 ranking.append([self.getCid(c, len(self.ballotLines)+1) for c in toks])
 
             if ranking:                         # ignore empty ballots
@@ -356,7 +356,7 @@ class ElectionProfile(object):
                 elif ballot.ranking is not None:
                     self.ballotLines.append(ballot)
 
-            tok = blt.next()  # next multiplier or 0
+            tok = blt.next()  # next multiplier or 0 for end of ballots
             
         if len(ballotIDs) and len(ballotIDs) != len(self.ballotLines):
             raise ElectionProfileError('number of ballot IDs (%d) does not match number of ballots (%d)' % (len(ballotIDs), len(self.ballotLines)))
