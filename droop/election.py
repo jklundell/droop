@@ -457,7 +457,7 @@ class Candidate(object):
     '''
     a candidate
     
-    A Candidate object is immutable, and shared across Rounds.
+    A Candidate object is immutable, and shared across rounds and actions.
     '''
 
     def __init__(self, E, cid, ballotOrder, tieOrder, cname, cnick=None):

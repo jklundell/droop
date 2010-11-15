@@ -141,7 +141,7 @@ def usage(subject=None):
     u += '    rule name (%s)\n' % ','.join(droop.electionRuleNames())
     u += '    arithmetic class name (%s)\n' % ','.join(droop.values.arithmeticNames)
     u += '    profile=reps, to profile the count, running reps repetitions\n'
-    u += '    dump, to dump a csv of the rounds\n'
+    u += '    dump, to dump a csv of the election actions\n'
     u += '    rule- or arithmetic-specific options:\n'
     u += '      precision=n: decimal digits of precision (fixed, guarded)\n'
     u += '      guard=n: guard digits (guarded; default to guard=precision)\n'
