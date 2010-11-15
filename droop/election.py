@@ -111,7 +111,6 @@ class Election(object):
     def count(self):
         "count the election"
         self.round = 0                    # round number
-        self.rounds = []                  # per-round list of CandidateState for weak-tie-breaking
         self.actions = []                 # list of actions
         self.quota = self.V0
         self.surplus = self.V0
@@ -142,7 +141,6 @@ class Election(object):
 
     def newRound(self):
         "add a round"
-        self.rounds.append(self.CS.copy())  # CandidateState for weak-tie-breaking
         self.round += 1
         self.logAction('round', 'New Round')
 

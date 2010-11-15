@@ -222,8 +222,10 @@ class Rule(ElectionRule):
                 return tied.pop()
             names = ", ".join([c.name for c in tied])
             direction = 0 if reason.find('defeat') >= 0 else -1
+            # extract list of candidate states by round from list of actions
+            rounds = [action.CS for action in E.actions if action.action == 'round']
             for n in xrange(E.round-1, -1, -1):
-                CS = E.rounds[n]
+                CS = rounds[n]
                 tiedlist = tied.byVote(CS)
                 tiedlist = [c for c in tiedlist if CS.vote(c) == CS.vote(tiedlist[direction])]
                 if len(tiedlist) == 1:
