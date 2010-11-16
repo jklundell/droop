@@ -122,7 +122,6 @@ using fixed-point decimal arithmetic with five digits of precision.
 '''
 
 from electionrule import ElectionRule
-from droop.election import Candidate
 
 class Rule(ElectionRule):
     '''
@@ -228,7 +227,7 @@ class Rule(ElectionRule):
             for n in xrange(E.round-1, -1, -1):
                 tiedCids = [c.cid for c in tiedlist]
                 CSR = rounds[n] # candidate states in round n
-                tiedlist = Candidate.byVote([c for c in CSR if c.cid in tiedCids])
+                tiedlist = C.byVote([c for c in CSR if c.cid in tiedCids])
                 tiedlist = [c for c in tiedlist if c.vote == tiedlist[direction].vote]
                 if len(tiedlist) == 1:
                     t = tiedlist[0]
@@ -236,7 +235,7 @@ class Rule(ElectionRule):
                     for c in tied:
                         if c.cid == t.cid:
                             return c
-            t = Candidate.byTieOrder(tiedlist)[0]
+            t = C.byTieOrder(tiedlist)[0]
             E.logAction('tie', 'Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
             for c in tied:
                 if c.cid == t.cid:

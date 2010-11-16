@@ -472,6 +472,21 @@ class Candidates(set):
         else:
             E.log("Add eligible: %s" % c.name)
 
+    @staticmethod
+    def byBallotOrder(candidates, reverse=False):
+        "sort a list of candidates by ballot order"
+        return sorted(candidates, key=lambda c: c.order, reverse=reverse)
+
+    @staticmethod
+    def byVote(candidates, reverse=False):
+        "sort a list of candidates by vote order"
+        return sorted(candidates, key=lambda c: (c.vote, c.order), reverse=reverse)
+
+    @staticmethod
+    def byTieOrder(candidates, reverse=False):
+        "sort a list of candidates by tie-break order"
+        return sorted(candidates, key=lambda c: c.tieOrder, reverse=reverse)
+
     def select(self, state, order="none", reverse=False):
         "select and return list of candidates with specified state, optionally in specified order"
         if state == "eligible":
@@ -485,11 +500,11 @@ class Candidates(set):
         if order == "none":
             return candidates
         if order == "ballot":
-            return sorted(candidates, key=lambda c: c.order, reverse=reverse)
+            return self.byBallotOrder(candidates, reverse=reverse)
         if order == "tie":
-            return sorted(candidates, key=lambda c: c.tieOrder, reverse=reverse)
+            return self.byTieOrder(candidates, reverse=reverse)
         if order == "vote":
-            return sorted(candidates, key=lambda c: (c.vote, c.order), reverse=reverse)
+            return self.byVote(candidates, reverse=reverse)
         raise ValueError('unknown candidate sort order: %s' % order)
 
     def eligible(self, order="none", reverse=False):
@@ -543,21 +558,6 @@ class Candidate(object):
         self.kf = None              # current keep factor (meek)
         self.quotient = None        # current quotient (qpq)
         self.pending = False        # surplus-transfer pending (wigm)
-
-    @staticmethod
-    def byBallotOrder(candidates, reverse=False):
-        "sort a list of candidates by ballot order"
-        return sorted(candidates, key=lambda c: c.order, reverse=reverse)
-
-    @staticmethod
-    def byVote(candidates, reverse=False):
-        "sort a list of candidates by vote order"
-        return sorted(candidates, key=lambda c: (c.vote, c.order), reverse=reverse)
-
-    @staticmethod
-    def byTieOrder(candidates, reverse=False):
-        "sort a list of candidates by tie-break order"
-        return sorted(candidates, key=lambda c: c.tieOrder, reverse=reverse)
 
     @property
     def surplus(self):

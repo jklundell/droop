@@ -20,7 +20,6 @@ This file is part of Droop.
 '''
 
 from electionrule import ElectionRule
-from droop.election import Candidate
 
 '''
 PRF Reference Rule: WIGM
@@ -201,7 +200,7 @@ class Rule(ElectionRule):
             ##
             if len(tied) == 1:
                 return tied.pop()
-            t = Candidate.byTieOrder(tied)[0]
+            t = C.byTieOrder(tied)[0]
             names = ", ".join([c.name for c in tied])
             E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
@@ -328,11 +327,11 @@ class Rule(ElectionRule):
             if cls.defeatBatch:
                 sureLosers = batchDefeat()
                 if sureLosers:
-                    for c in Candidate.byBallotOrder(sureLosers):
+                    for c in C.byBallotOrder(sureLosers):
                         c.defeat(msg='Defeat sure loser')
                     if len(C.hopeful()) <= E.seatsLeftToFill():
                         break;
-                    for c in Candidate.byBallotOrder(sureLosers):
+                    for c in C.byBallotOrder(sureLosers):
                         for b in (b for b in E.ballots if b.topRank == c.cid):
                             if transfer(b):
                                 b.topCand.vote += b.vote

@@ -20,7 +20,6 @@ This file is part of Droop.
 '''
 
 from droop.common import UsageError
-from droop.election import Candidate
 from electionrule import ElectionRule
 
 class Rule(ElectionRule):
@@ -152,7 +151,7 @@ class Rule(ElectionRule):
             '''
             if len(tied) == 1:
                 return tied.pop()
-            t = Candidate.byTieOrder(tied)[0]
+            t = C.byTieOrder(tied)[0]
             names =  ", ".join([c.name for c in tied])
             E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t))
             return t
@@ -395,7 +394,7 @@ class Rule(ElectionRule):
             #     defeat a batch if possible
             #
             if iterationStatus == IS_batch:
-                for c in Candidate.byBallotOrder(batch):
+                for c in C.byBallotOrder(batch):
                     c.defeat(msg='Defeat certain loser')
                     c.kf = V0
                     c.vote = V0

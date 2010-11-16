@@ -42,7 +42,6 @@ This file is part of Droop.
 '''
 
 from electionrule import ElectionRule
-from droop.election import Candidate
 
 class Rule(ElectionRule):
     '''
@@ -111,7 +110,7 @@ class Rule(ElectionRule):
             if len(tied) == 1:
                 return tied.pop()
             names = ", ".join([c.name for c in tied])
-            t = Candidate.byTieOrder(tied)[0]
+            t = C.byTieOrder(tied)[0]
             E.logAction('tie', 'Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
             return t
 

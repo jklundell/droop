@@ -205,7 +205,6 @@ candidate in that round or in subsequent rounds for the office being counted. (2
 4-18-08; 2009-Or-102, 5, 10-2-09)
 '''
 from electionrule import ElectionRule
-from droop.election import Candidate
 
 class Rule(ElectionRule):
     '''
@@ -383,7 +382,7 @@ class Rule(ElectionRule):
                 if fixSpec and (vote + surplus) == sortedGroups[g+1][0].vote:
                     continue
                 losers = list(maybe)
-            return Candidate.byBallotOrder(losers)
+            return C.byBallotOrder(losers)
 
         def breakTie(tied, reason=None):
             '''
@@ -406,7 +405,7 @@ class Rule(ElectionRule):
             if len(tied) == 1:
                 return tied.pop()
             names = ", ".join([c.name for c in tied])
-            t = Candidate.byTieOrder(tied)[0]    # sort by tie-order before making choice
+            t = C.byTieOrder(tied)[0]    # sort by tie-order before making choice
             E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
             
