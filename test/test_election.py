@@ -23,7 +23,7 @@ This file is part of Droop.
 import unittest
 
 import common  # to set sys.path
-from droop.election import Candidate, CandidateSet
+from droop.election import Candidate
 
 if common.pyflakes: # satisfy pyflakes that we're using common
     pass
@@ -46,51 +46,6 @@ class CandidateTest(unittest.TestCase):
         c1 = Candidate(None, 1, 2, 2, 'abc', None, False)
         c2 = Candidate(None, 1, 3, 3, 'def', None, False)
         self.assertEqual(c1, c2, 'candidates are compared by ID')
-
-class CandidateSetTest(unittest.TestCase):
-    "test class CandidateSet"
-    
-    def testCSinit(self):
-        "create a CandidateSet and check it out"
-        cset = CandidateSet(set((1,2,3)))
-        self.assertTrue(len(cset) == 3, 'set with three members')
-        self.assertTrue(isinstance(cset, set))
-        self.assertTrue(isinstance(cset, CandidateSet))
-
-    def testCSunion(self):
-        "test CandidateSet union method"
-        cset1 = CandidateSet(set((1,2,3)))
-        cset2 = CandidateSet(set((2,3,4)))
-        cset = cset1 | cset2
-        self.assertTrue(len(cset) == 4, 'union set has four members')
-        self.assertTrue(isinstance(cset, set))
-        self.assertTrue(isinstance(cset, CandidateSet))
-
-    def testCSintersection(self):
-        "test CandidateSet intersection method"
-        cset1 = CandidateSet(set((1,2,3)))
-        cset2 = CandidateSet(set((2,3,4)))
-        cset = cset1 & cset2
-        self.assertTrue(len(cset) == 2, 'union set has two members')
-        self.assertTrue(isinstance(cset, set))
-        self.assertTrue(isinstance(cset, CandidateSet))
-
-    def testCSdifference(self):
-        "test CandidateSet difference method"
-        cset1 = CandidateSet(set((1,2,3)))
-        cset2 = CandidateSet(set((2,3,4)))
-        cset = cset1 - cset2
-        self.assertEqual(len(cset), 1, 'difference set has one member')
-        self.assertTrue(isinstance(cset, set))
-        self.assertTrue(isinstance(cset, CandidateSet))
-
-    def testCSadd(self):
-        "test add to set"
-        cset = CandidateSet(set((1,2,3)))
-        cset.add(4)
-        self.assertEqual(len(cset), 4, 'result set has four members')
-        self.assertTrue(isinstance(cset, set))
-        self.assertTrue(isinstance(cset, CandidateSet))
 
 if __name__ == '__main__':
     unittest.main()

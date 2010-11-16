@@ -20,7 +20,7 @@ This file is part of Droop.
 '''
 
 from electionrule import ElectionRule
-from droop.election import CandidateSet
+from droop.election import Candidate
 
 class Rule(ElectionRule):
     '''
@@ -146,7 +146,7 @@ class Rule(ElectionRule):
             '''
             if len(tied) == 1:
                 return tied.pop()
-            t = tied.byTieOrder()[0]
+            t = Candidate.byTieOrder(tied)[0]
             names = ", ".join([c.name for c in tied])
             E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
@@ -178,7 +178,7 @@ class Rule(ElectionRule):
             #
             if C.pending():
                 high_vote = max(c.vote for c in C.pending())
-                high_candidates = CandidateSet([c for c in C.pending() if c.vote == high_vote])
+                high_candidates = [c for c in C.pending() if c.vote == high_vote]
                 high_candidate = breakTie(E, high_candidates, 'surplus')
                 high_candidate.elect('Transfer high surplus')
                 surplus = high_candidate.vote - E.quota
@@ -195,7 +195,7 @@ class Rule(ElectionRule):
                 #  find & defeat candidate with lowest vote
                 #
                 low_vote = min(c.vote for c in C.hopeful())
-                low_candidates = CandidateSet([c for c in C.hopeful() if c.vote == low_vote])
+                low_candidates = [c for c in C.hopeful() if c.vote == low_vote]
                 if low_vote == V0 and cls.defeatBatch == 'zero':
                     for c in low_candidates:
                         c.defeat(msg='Defeat batch(zero)')

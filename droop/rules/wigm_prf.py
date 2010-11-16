@@ -20,7 +20,7 @@ This file is part of Droop.
 '''
 
 from electionrule import ElectionRule
-from droop.election import CandidateSet
+from droop.election import Candidate
 
 '''
 PRF Reference Rule: WIGM
@@ -201,7 +201,7 @@ class Rule(ElectionRule):
             ##
             if len(tied) == 1:
                 return tied.pop()
-            t = tied.byTieOrder()[0]
+            t = Candidate.byTieOrder(tied)[0]
             names = ", ".join([c.name for c in tied])
             E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
@@ -275,7 +275,7 @@ class Rule(ElectionRule):
             if maxg is not None:
                 for g in xrange(maxg+1):
                     batch.extend(sortedGroups[g])
-            return CandidateSet(batch)
+            return batch
 
         #  Local variables for convenience
         #
@@ -328,11 +328,11 @@ class Rule(ElectionRule):
             if cls.defeatBatch:
                 sureLosers = batchDefeat()
                 if sureLosers:
-                    for c in sureLosers.byBallotOrder():
+                    for c in Candidate.byBallotOrder(sureLosers):
                         c.defeat(msg='Defeat sure loser')
                     if len(C.hopeful()) <= E.seatsLeftToFill():
                         break;
-                    for c in sureLosers.byBallotOrder():
+                    for c in Candidate.byBallotOrder(sureLosers):
                         for b in (b for b in E.ballots if b.topRank == c.cid):
                             if transfer(b):
                                 b.topCand.vote += b.vote
@@ -349,7 +349,7 @@ class Rule(ElectionRule):
             ##
             if C.pending():
                 high_vote = max(c.vote for c in C.pending())
-                high_candidates = CandidateSet([c for c in C.pending() if c.vote == high_vote])
+                high_candidates = [c for c in C.pending() if c.vote == high_vote]
                 high_candidate = breakTie(E, high_candidates, 'surplus')
                 high_candidate.elect('Transfer high surplus')
                 surplus = high_candidate.vote - E.quota
@@ -370,7 +370,7 @@ class Rule(ElectionRule):
                 #  find & defeat candidate with lowest vote
                 #
                 low_vote = min(c.vote for c in C.hopeful())
-                low_candidates = CandidateSet([c for c in C.hopeful() if c.vote == low_vote])
+                low_candidates = [c for c in C.hopeful() if c.vote == low_vote]
                 low_candidate = breakTie(E, low_candidates, 'defeat')
                 low_candidate.defeat()
                 for b in (b for b in E.ballots if b.topRank == low_candidate.cid):

@@ -20,7 +20,7 @@ This file is part of Droop.
 '''
 
 from electionrule import ElectionRule
-from droop.election import CandidateSet
+from droop.election import Candidate
 
 class Rule(ElectionRule):
     '''
@@ -106,7 +106,7 @@ class Rule(ElectionRule):
             '''
             if len(tied) == 1:
                 return tied.pop()
-            t = tied.byTieOrder()[0]
+            t = Candidate.byTieOrder(tied)[0]
             names =  ", ".join([c.name for c in tied])
             E.logAction('tie', 'Break tie (defeat low candidate): [%s] -> %s' % (names, t))
             return t
@@ -250,7 +250,7 @@ class Rule(ElectionRule):
 
             if C.hopeful():
                 low_vote = V.min([c.vote for c in C.hopeful()])
-                low_candidates = CandidateSet([c for c in C.hopeful() if (low_vote + E.surplus) >= c.vote])
+                low_candidates = [c for c in C.hopeful() if (low_vote + E.surplus) >= c.vote]
                 low_candidate = breakTie(E, low_candidates)
                 if iterationStatus == 'omega':
                     low_candidate.defeat(msg='Defeat (surplus %s < omega)' % V(E.surplus))

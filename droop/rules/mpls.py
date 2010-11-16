@@ -205,7 +205,7 @@ candidate in that round or in subsequent rounds for the office being counted. (2
 4-18-08; 2009-Or-102, 5, 10-2-09)
 '''
 from electionrule import ElectionRule
-from droop.election import CandidateSet
+from droop.election import Candidate
 
 class Rule(ElectionRule):
     '''
@@ -383,7 +383,7 @@ class Rule(ElectionRule):
                 if fixSpec and (vote + surplus) == sortedGroups[g+1][0].vote:
                     continue
                 losers = list(maybe)
-            return CandidateSet(losers)
+            return Candidate.byBallotOrder(losers)
 
         def breakTie(tied, reason=None):
             '''
@@ -406,7 +406,7 @@ class Rule(ElectionRule):
             if len(tied) == 1:
                 return tied.pop()
             names = ", ".join([c.name for c in tied])
-            t = tied.byTieOrder()[0]    # sort by tie-order before making choice
+            t = Candidate.byTieOrder(tied)[0]    # sort by tie-order before making choice
             E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
             
@@ -478,7 +478,7 @@ class Rule(ElectionRule):
                         b.topCand.vote += b.vote
                 for c in certainLosers:
                     c.vote = V0
-                E.logAction('transfer', "Transfer defeated: %s" % certainLosers)
+                    E.logAction('transfer', "Transfer defeated: %s" % c)
 
                 ##     If no candidate can be defeated mathematically, the tabulation must continue
                 ##     as described in clause d. 
@@ -517,7 +517,7 @@ class Rule(ElectionRule):
             ##
             if C.pending():
                 high_vote = max(c.vote for c in C.pending())
-                high_candidates = CandidateSet([c for c in C.pending() if c.vote == high_vote])
+                high_candidates = [c for c in C.pending() if c.vote == high_vote]
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 high_candidate.elect()
                 surplus = high_candidate.vote - E.quota
@@ -544,7 +544,7 @@ class Rule(ElectionRule):
             #
             if C.hopeful():
                 low_vote = min(c.vote for c in C.hopeful())
-                low_candidates = CandidateSet([c for c in C.hopeful() if c.vote == low_vote])
+                low_candidates = [c for c in C.hopeful() if c.vote == low_vote]
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 low_candidate.defeat('Defeat low candidate')
                 for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
