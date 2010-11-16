@@ -316,7 +316,7 @@ class Rule(ElectionRule):
 
             #  sortedCands = hopeful candidates below threshold, sorted by vote
             #
-            sortedCands = C.hopeful("vote")
+            sortedCands = C.hopeful(order="vote")
 
             #   copy the sorted candidates list, 
             #   making each entry a list

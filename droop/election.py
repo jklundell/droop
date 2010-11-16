@@ -342,7 +342,7 @@ class Election(object):
             V = E.V
             C = E.C
             s = ''
-            candidates = C.eligible("ballot") # report in ballot order
+            candidates = C.eligible(order="ballot") # report in ballot order
             
             #  return a header line if requested
             #
@@ -472,8 +472,8 @@ class Candidates(set):
         else:
             E.log("Add eligible: %s" % c.name)
 
-    def select(self, state, order="ballot", reverse=False):
-        "select and return list of candidates with specified state, in specified order"
+    def select(self, state, order="none", reverse=False):
+        "select and return list of candidates with specified state, optionally in specified order"
         if state == "eligible":
             candidates = [c for c in self if c.state != "withdrawn"]
         elif state == "pending":
@@ -482,6 +482,8 @@ class Candidates(set):
             candidates = [c for c in self if c.state == "elected" and not c.pending]
         else:
             candidates = [c for c in self if c.state == state]
+        if order == "none":
+            return candidates
         if order == "ballot":
             return sorted(candidates, key=lambda c: c.order, reverse=reverse)
         if order == "tie":
@@ -490,31 +492,31 @@ class Candidates(set):
             return sorted(candidates, key=lambda c: (c.vote, c.order), reverse=reverse)
         raise ValueError('unknown candidate sort order: %s' % order)
 
-    def eligible(self, order="ballot", reverse=False):
+    def eligible(self, order="none", reverse=False):
         "select and return list of eligible candidates, in specified order"
         return self.select("eligible", order, reverse)
 
-    def withdrawn(self, order="ballot", reverse=False):
+    def withdrawn(self, order="none", reverse=False):
         "select and return list of eligible candidates, in specified order"
         return self.select("withdrawn", order, reverse)
 
-    def hopeful(self, order="ballot", reverse=False):
+    def hopeful(self, order="none", reverse=False):
         "select and return list of hopeful candidates, in specified order"
         return self.select("hopeful", order, reverse)
 
-    def elected(self, order="ballot", reverse=False):
+    def elected(self, order="none", reverse=False):
         "select and return list of withdrawn candidates, in specified order"
         return self.select("elected", order, reverse)
 
-    def defeated(self, order="ballot", reverse=False):
+    def defeated(self, order="none", reverse=False):
         "select and return list of defeated candidates, in specified order"
         return self.select("defeated", order, reverse)
 
-    def notpending(self, order="ballot", reverse=False):
+    def notpending(self, order="none", reverse=False):
         "select and return list of elected and not pending candidates, in specified order"
         return self.select("notpending", order, reverse)
 
-    def pending(self, order="ballot", reverse=False):
+    def pending(self, order="none", reverse=False):
         "select and return list of elected candidates pending transfer, in specified order"
         return self.select("pending", order, reverse)
 

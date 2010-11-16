@@ -168,7 +168,7 @@ class Rule(ElectionRule):
             #     where each group consists of the candidates tied at that vote
             #     (when there's no tie, a group will have one candidate)
             #
-            sortedCands = C.hopeful("vote")
+            sortedCands = C.hopeful(order="vote")
             sortedGroups = []
             group = []
             vote = V0
