@@ -125,8 +125,8 @@ class Rule(ElectionRule):
         ##     and each withdrawn candidate's keep factor to 0.
         ##     Set omega to 0.000001 (1/10^6).
 
-        CS = E.CS   # candidate state
-        for c in CS.hopeful:
+        C = E.C   # candidates
+        for c in C.hopeful():
             c.kf = V1    # initialize keep factors
         cls._omega = V(1) / V(10**cls.omega)
 
@@ -142,7 +142,7 @@ class Rule(ElectionRule):
         ##       or if the number of elected plus hopeful candidates 
         ##       is less than or equal to the number of seats.
 
-        while len(CS.hopeful) > E.seatsLeftToFill() > 0:
+        while len(C.hopeful()) > E.seatsLeftToFill() > 0:
 
             E.newRound()    # data structures for new round
 
@@ -160,7 +160,7 @@ class Rule(ElectionRule):
                 ##            and reduce w by the same amount, until no further candidate 
                 ##            remains on the ballot or until the ballot's weight w is 0.
 
-                for c in (CS.hopeful | CS.elected):
+                for c in (C.hopeful() + C.elected()):
                     c.vote = V0
                 E.residual = V0
                 for b in E.ballots:
@@ -189,22 +189,22 @@ class Rule(ElectionRule):
                 ##         divided by one more than the number of seats to be filled, 
                 ##         truncated to 9 decimal places, plus 0.000000001 (1/109).
 
-                E.votes = sum([c.vote for c in (CS.hopeful | CS.elected)], V0)
+                E.votes = sum([c.vote for c in (C.hopeful() + C.elected())], V0)
                 E.quota = E.votes // V(E.electionProfile.nSeats+1) + V.epsilon
                 
                 ##  B.2.c. Find winners. 
                 ##         Elect each hopeful candidate with a vote v 
                 ##         greater than or equal to the quota (v >= q).
 
-                for c in [c for c in CS.hopeful if c.vote >= E.quota]:
-                    CS.elect(c)
+                for c in [c for c in C.hopeful() if c.vote >= E.quota]:
+                    c.elect()
                     iterationStatus = 'elected'
                 
                 ##  B.2.d. Calculate the total surplus s, 
                 ##         as the sum of the individual surpluses (v - q) of the elected candidates
                 ##         but not less than 0.
 
-                E.surplus = sum([c.vote-E.quota for c in CS.elected], V0)
+                E.surplus = sum([c.vote-E.quota for c in C.elected()], V0)
                 if E.surplus < V0:  # unlikely but possible due to precision limits if omega too small
                     E.surplus = V0  # pragma: no cover
                 
@@ -233,7 +233,7 @@ class Rule(ElectionRule):
                 ##         current vote v (to 9 decimal places, rounded up). 
                 ##         Continue iteration at step B.2a.
 
-                for c in CS.elected:
+                for c in C.elected():
                     c.kf = V.div(V.mul(c.kf, E.quota, round='up'), c.vote, round='up')
 
             ##  B.2.e. (end of round if iteration resulted in an election)
@@ -248,14 +248,14 @@ class Rule(ElectionRule):
             ##       is less than or equal to v plus total surplus s.
             ##       Set the keep factor kf of c to 0.
 
-            if CS.hopeful:
-                low_vote = V.min([c.vote for c in CS.hopeful])
-                low_candidates = CandidateSet([c for c in CS.hopeful if (low_vote + E.surplus) >= c.vote])
+            if C.hopeful():
+                low_vote = V.min([c.vote for c in C.hopeful()])
+                low_candidates = CandidateSet([c for c in C.hopeful() if (low_vote + E.surplus) >= c.vote])
                 low_candidate = breakTie(E, low_candidates)
                 if iterationStatus == 'omega':
-                    CS.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(E.surplus))
+                    low_candidate.defeat(msg='Defeat (surplus %s < omega)' % V(E.surplus))
                 else:  # pragma: no cover
-                    CS.defeat(low_candidate, msg='Defeat (stable surplus %s)' % V(E.surplus))
+                    low_candidate.defeat(msg='Defeat (stable surplus %s)' % V(E.surplus))
                 low_candidate.vote = V0
                 low_candidate.kf = V0
 
@@ -263,23 +263,23 @@ class Rule(ElectionRule):
 
         ##  C. Count Complete
 
-        for c in list(CS.hopeful):
+        for c in list(C.hopeful()):
 
             ##  C.1. Elect remaining. 
             ##       If any seats are unfilled, elect remaining hopeful candidates.
 
-            if len(CS.elected) < E.electionProfile.nSeats:
-                CS.elect(c, msg='Elect remaining')
+            if len(C.elected()) < E.electionProfile.nSeats:
+                c.elect(msg='Elect remaining')
 
             ##  C.2. Defeat remaining. 
             ##       Otherwise defeat remaining hopeful candidates.
 
             else:
-                CS.defeat(c, msg='Defeat remaining')
+                c.defeat(msg='Defeat remaining')
                 c.kf = V0
                 c.vote = V0
 
         #  final vote count for reporting
-        E.votes = sum([c.vote for c in CS.elected], V0)
+        E.votes = sum([c.vote for c in C.elected()], V0)
         E.residual = V(E.nBallots) - E.votes
 

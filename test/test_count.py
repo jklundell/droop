@@ -50,14 +50,14 @@ class ElectionBasics(unittest.TestCase):
             self.assertTrue(E.rule.__name__ == 'Rule', 'bad rule class')
             self.assertTrue(len(options) >= 1, 'rule should set/leave at least one option')
             self.assertTrue(options.get('arithmetic', 'fixed') in ('fixed', 'integer', 'guarded', 'rational'), 'legal arithmetic')
-            self.assertEqual(E.candidates[1].name, "Castor")
-            self.assertEqual(str(E.candidates[1]), "Castor")
-            self.assertTrue(E.candidates[1] == 1)
-            self.assertTrue(E.candidates[1] == '1')
-            self.assertFalse(E.candidates[1] == None)
-            for c in E.candidates.values():
+            candidates = E.C
+            self.assertTrue("Castor" in [c.name for c in candidates])
+            self.assertTrue("Castor" in [str(c) for c in candidates])
+            self.assertTrue(1 in [c for c in candidates])
+            for c in candidates:
                 self.assertEqual(c.order, c.tieOrder)
             E.count()
+            print E.report() # JKL DEBUG
             self.assertEqual(len(E.elected), E.nSeats)
 
 class ElectionOptions(unittest.TestCase):

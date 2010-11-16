@@ -121,11 +121,11 @@ class Rule(ElectionRule):
                 return V(E.nBallots) / V(E.nSeats+1)
             return V(E.nBallots) / V(E.nSeats+1) + V.epsilon
         
-        def transfer(ballot, CS):
+        def transfer(ballot):
             '''
             Transfer ballot to next hopeful candidate.
             '''
-            while not ballot.exhausted and ballot.topCand not in CS.hopeful:
+            while not ballot.exhausted and ballot.topCand not in C.hopeful():
                 ballot.advance()
             return not ballot.exhausted
 
@@ -153,7 +153,7 @@ class Rule(ElectionRule):
 
         #  Local variables for convenience
         #
-        CS = E.CS   # candidate state
+        C = E.C     # candidates
         V = E.V     # arithmetic value class
         V0 = E.V0   # constant zero
         
@@ -166,46 +166,46 @@ class Rule(ElectionRule):
         for b in E.ballots:
             b.topCand.vote += b.vote
 
-        while len(CS.hopeful) > E.seatsLeftToFill() > 0:
+        while len(C.hopeful()) > E.seatsLeftToFill() > 0:
             E.newRound()
 
             #  elect new winners
             #
-            for c in [c for c in CS.hopeful.byVote(reverse=True) if hasQuota(E, c)]:
-                CS.pend(c)      # elect with transfer pending
+            for c in [c for c in C.hopeful(order="vote", reverse=True) if hasQuota(E, c)]:
+                c.pend()      # elect with transfer pending
 
             #  find & transfer highest surplus
             #
-            if CS.pending:
-                high_vote = max(c.vote for c in CS.pending)
-                high_candidates = CandidateSet([c for c in CS.pending if c.vote == high_vote])
+            if C.pending():
+                high_vote = max(c.vote for c in C.pending())
+                high_candidates = CandidateSet([c for c in C.pending() if c.vote == high_vote])
                 high_candidate = breakTie(E, high_candidates, 'surplus')
-                CS.elect(high_candidate, 'Transfer high surplus')
+                high_candidate.elect('Transfer high surplus')
                 surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = (b.weight * surplus) / high_candidate.vote
-                    if transfer(b, CS):
+                    if transfer(b):
                         b.topCand.vote += b.vote
                 high_candidate.vote = E.quota
                 E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, V(surplus)))
 
             #  if no surplus to transfer, defeat a candidate
             #
-            elif CS.hopeful:
+            elif C.hopeful():
                 #  find & defeat candidate with lowest vote
                 #
-                low_vote = min(c.vote for c in CS.hopeful)
-                low_candidates = CandidateSet([c for c in CS.hopeful if c.vote == low_vote])
+                low_vote = min(c.vote for c in C.hopeful())
+                low_candidates = CandidateSet([c for c in C.hopeful() if c.vote == low_vote])
                 if low_vote == V0 and cls.defeatBatch == 'zero':
                     for c in low_candidates:
-                        CS.defeat(c, msg='Defeat batch(zero)')
+                        c.defeat(msg='Defeat batch(zero)')
                 else:
                     low_candidate = breakTie(E, low_candidates, 'defeat')
-                    CS.defeat(low_candidate)
+                    low_candidate.defeat()
                     low_candidates = [low_candidate]
                 for c in low_candidates:
                     for b in (b for b in E.ballots if b.topRank == c.cid):
-                        if transfer(b, CS):
+                        if transfer(b):
                             b.topCand.vote += b.vote
                     c.vote = V0
                     E.logAction('transfer', "Transfer defeated: %s" % c)
@@ -214,10 +214,10 @@ class Rule(ElectionRule):
         #  Elect any pending candidates
         #  Elect or defeat remaining hopeful candidates
         #
-        for c in CS.pending:
-            CS.elect(c, msg='Elect pending')
-        for c in list(CS.hopeful):
-            if len(CS.elected) < E.nSeats:
-                CS.elect(c, msg='Elect remaining')
+        for c in C.pending():
+            c.elect(msg='Elect pending')
+        for c in list(C.hopeful()):
+            if len(C.elected()) < E.nSeats:
+                c.elect(msg='Elect remaining')
             else:
-                CS.defeat(c, msg='Defeat remaining')
+                c.defeat(msg='Defeat remaining')

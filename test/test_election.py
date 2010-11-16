@@ -33,18 +33,18 @@ class CandidateTest(unittest.TestCase):
     
     def testCandidateString(self):
         "candidate string is its cname"
-        c1 = Candidate(None, 1, 2, 2, 'abc')  # Election, cid, ballotOrder, tieOrder, cname
+        c1 = Candidate(None, 1, 2, 2, 'abc', None, False)  # Election, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn
         self.assertEqual(str(c1), 'abc', 'candidate string is its cname')
 
     def testCandidateHash(self):
         "candidate hash is its ID"
-        c1 = Candidate(None, 1, 2, 2, 'abc')  # Election, cid, order, cname
+        c1 = Candidate(None, 1, 2, 2, 'abc', None, False)
         self.assertEqual(hash(c1), 1, 'candidate hash is its ID')
 
     def testCandidateCompare(self):
         "compare candidates by ID"
-        c1 = Candidate(None, 1, 2, 2, 'abc')  # Election, cid, order, cname
-        c2 = Candidate(None, 1, 3, 3, 'def')  # Election, cid, order, cname
+        c1 = Candidate(None, 1, 2, 2, 'abc', None, False)
+        c2 = Candidate(None, 1, 3, 3, 'def', None, False)
         self.assertEqual(c1, c2, 'candidates are compared by ID')
 
 class CandidateSetTest(unittest.TestCase):

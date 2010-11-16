@@ -113,7 +113,7 @@ class Rule(ElectionRule):
         #
         def countComplete():
             "test for end of count"
-            return len(CS.hopeful) <= E.seatsLeftToFill() or E.seatsLeftToFill() <= 0
+            return len(C.hopeful()) <= E.seatsLeftToFill() or E.seatsLeftToFill() <= 0
 
         def hasQuota(E, candidate):
             '''
@@ -168,7 +168,7 @@ class Rule(ElectionRule):
             #     where each group consists of the candidates tied at that vote
             #     (when there's no tie, a group will have one candidate)
             #
-            sortedCands = CS.hopeful.byVote()
+            sortedCands = C.hopeful("vote")
             sortedGroups = []
             group = []
             vote = V0
@@ -195,7 +195,7 @@ class Rule(ElectionRule):
             #   the election is already complete and we wouldn't be here.
             #   
             vote = V0
-            maxDefeat = len(CS.hopeful) - E.seatsLeftToFill()
+            maxDefeat = len(C.hopeful()) - E.seatsLeftToFill()
             maxg = None
             ncand = 0
             for g in xrange(len(sortedGroups) - 1):
@@ -220,46 +220,8 @@ class Rule(ElectionRule):
         IS_elected = 'elected'
         IS_stable = 'stable'
 
-        def distributeVotes(kt):
+        def distributeVotes():
             "perform a Meek/Warren distribution of votes on all ballots"
-            candidate = E.candidate
-            E.residual = V0
-            for b in E.ballots:
-                multiplier = b.multiplier
-                b.residual = multiplier
-                b.weight = V1
-                for c in (candidate(cid) for cid in b.ranking):
-                    if c.kf:
-                        keep, b.weight = kt(c.kf, b.weight)
-                        c.vote += keep * multiplier
-                        b.residual -= keep * multiplier  # residual value of ballot
-                        if b.weight <= V0:
-                            break
-                E.residual += b.residual  # residual for round
-                
-            for b in E.ballotsEqual:
-                cset = [c.cid for c in (CS.hopeful | CS.elected)]
-                nrank = len(b.ranking)
-                multiplier = b.multiplier
-                b.residual = multiplier
-
-                def dist(i, weight):
-                    "distribute via recursive descent"
-                    cids = [cid for cid in b.ranking[i] if cid in cset]
-                    cweight = weight / V(len(cids))
-                    for cid in cids:
-                        c = candidate(cid)
-                        keep, weight = kt(c.kf, cweight)
-                        c.vote += keep * multiplier
-                        b.residual -= keep * multiplier  # residual value of ballot
-                        if weight and i < nrank:
-                            dist(i+1, weight)
-
-                dist(0, V1)
-                E.residual += b.residual  # residual for round
-
-        def iterate():
-            "Iterate until surplus is sufficiently low"
 
             def kw_warren(kf, weight):
                 "calculate keep and new weight for Warren"
@@ -279,8 +241,50 @@ class Rule(ElectionRule):
                 "calculate keep and new weight for NZ Schedule 1A"
                 return V.mul(weight, kf, round='up'), V.mul(weight, V1-kf, round='up')
 
-            kw_function = kw_warren if cls.warren else kw_meekOpenSTV
+            kt = kw_warren if cls.warren else kw_meekOpenSTV
             
+            for c in (C.hopeful() + C.elected()):
+                c.vote = V0
+            candidate = E.candidate
+            E.residual = V0
+            for b in E.ballots:
+                multiplier = b.multiplier
+                b.residual = multiplier
+                b.weight = V1
+                for c in (candidate(cid) for cid in b.ranking):
+                    if c.kf:
+                        keep, b.weight = kt(c.kf, b.weight)
+                        c.vote += keep * multiplier
+                        b.residual -= keep * multiplier  # residual value of ballot
+                        if b.weight <= V0:
+                            break
+                E.residual += b.residual  # residual for round
+                
+            for b in E.ballotsEqual:
+                cset = [c.cid for c in (C.hopeful() + C.elected())]
+                nrank = len(b.ranking)
+                multiplier = b.multiplier
+                b.residual = multiplier
+
+                def dist(i, weight):
+                    "distribute via recursive descent"
+                    cids = [cid for cid in b.ranking[i] if cid in cset]
+                    if cids:
+                        cweight = weight / V(len(cids))
+                        for cid in cids:
+                            c = candidate(cid)
+                            keep, weight = kt(c.kf, cweight)
+                            c.vote += keep * multiplier
+                            b.residual -= keep * multiplier  # residual value of ballot
+                            if weight and i < nrank:
+                                dist(i+1, weight)
+
+                dist(0, V1)
+                E.residual += b.residual  # residual for round
+
+        def iterate():
+            "Iterate until surplus is sufficiently low"
+
             iStatus = IS_none
             lastsurplus = V(E.nBallots)
             while True:
@@ -290,10 +294,8 @@ class Rule(ElectionRule):
                 #  distribute vote for each ballot
                 #  and add up vote for each candidate
                 #
-                for c in (CS.hopeful | CS.elected):
-                    c.vote = V0
-                distributeVotes(kw_function)
-                E.votes = sum([c.vote for c in (CS.hopeful | CS.elected)], V0)
+                distributeVotes()
+                E.votes = sum([c.vote for c in (C.hopeful() + C.elected())], V0)
 
                 #  D.3. update quota
                 #
@@ -301,13 +303,13 @@ class Rule(ElectionRule):
                 
                 #  D.4. find winners
                 #
-                for c in [c for c in CS.hopeful if hasQuota(E, c)]:
-                    CS.elect(c)
+                for c in [c for c in C.hopeful() if hasQuota(E, c)]:
+                    c.elect()
                     iStatus = IS_elected
                     
                 #  D.6. calculate total surplus
                 #
-                E.surplus = sum([c.vote-E.quota for c in CS.elected], V0)
+                E.surplus = sum([c.vote-E.quota for c in C.elected()], V0)
                 
                 #  D.7. test iteration complete
                 #
@@ -336,7 +338,7 @@ class Rule(ElectionRule):
                 #     full         up        OpenSTV MeekSTV
                 #      up          up        Hill & NZ Calculator & NZ Schedule 1A
                 #
-                for c in CS.elected:
+                for c in C.elected():
                     #c.kf = V.muldiv(c.kf, E.quota, c.vote, round='up')  # OpenSTV variant
                     c.kf = V.div(V.mul(c.kf, E.quota, round='up'), c.vote, round='up')  # NZ variant
             
@@ -359,8 +361,8 @@ class Rule(ElectionRule):
 
         E.votes = V(E.nBallots)
         E.quota = calcQuota(E)
-        CS = E.CS   # candidate state
-        for c in CS.hopeful:
+        C = E.C   # candidates
+        for c in C.hopeful():
             c.kf = V1    # initialize keep factors
         for b in (b for b in E.ballots if b.topCand): # count first-place votes for round 0 reporting
             b.topCand.vote += b.multiplier
@@ -380,7 +382,7 @@ class Rule(ElectionRule):
             if V.exact:
                 E.prog('%d' % E.round)
 
-            #  CS. iterate
+            #  C. iterate
             #     next round if iteration elected a candidate
             #
             iterationStatus, batch = iterate()
@@ -394,35 +396,38 @@ class Rule(ElectionRule):
             #
             if iterationStatus == IS_batch:
                 for c in batch.byBallotOrder():
-                    CS.defeat(c, msg='Defeat certain loser')
+                    c.defeat(msg='Defeat certain loser')
                     c.kf = V0
                     c.vote = V0
+                    distributeVotes()  # for reporting
                 continue
 
             #  find candidate(s) within surplus of lowest vote (effectively tied)
             #  defeat candidate with lowest vote, breaking tie if necessary
             #
-            if CS.hopeful:
-                low_vote = V.min([c.vote for c in CS.hopeful])
-                low_candidates = CandidateSet([c for c in CS.hopeful if (low_vote + E.surplus) >= c.vote])
+            if C.hopeful():
+                low_vote = V.min([c.vote for c in C.hopeful()])
+                low_candidates = CandidateSet([c for c in C.hopeful() if (low_vote + E.surplus) >= c.vote])
                 low_candidate = breakTie(E, low_candidates, 'defeat')
                 if iterationStatus == IS_omega:
-                    CS.defeat(low_candidate, msg='Defeat (surplus %s < omega)' % V(E.surplus))
+                    low_candidate.defeat(msg='Defeat (surplus %s < omega)' % V(E.surplus))
                 else:
-                    CS.defeat(low_candidate, msg='Defeat (stable surplus %s)' % V(E.surplus))
+                    low_candidate.defeat(msg='Defeat (stable surplus %s)' % V(E.surplus))
                 low_candidate.kf = V0
                 low_candidate.vote = V0
+                distributeVotes()  # for reporting
         
         #  Elect or defeat remaining hopeful candidates
         #
-        for c in list(CS.hopeful):
-            if len(CS.elected) < E.electionProfile.nSeats:
-                CS.elect(c, msg='Elect remaining')
+        for c in list(C.hopeful()):
+            if len(C.elected()) < E.electionProfile.nSeats:
+                c.elect(msg='Elect remaining')
             else:
-                CS.defeat(c, msg='Defeat remaining')
+                c.defeat(msg='Defeat remaining')
                 c.kf = V0
                 c.vote = V0
+            distributeVotes()  # for reporting
 
         #  final vote count for reporting
-        E.votes = sum([c.vote for c in CS.elected], V0)
+        E.votes = sum([c.vote for c in C.elected()], V0)
         E.residual = V(E.nBallots) - E.votes
