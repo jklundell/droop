@@ -418,7 +418,7 @@ class Rule(ElectionRule):
         
         #  Elect or defeat remaining hopeful candidates
         #
-        for c in list(C.hopeful()):
+        for c in C.hopeful():
             if len(C.elected()) < E.electionProfile.nSeats:
                 c.elect(msg='Elect remaining')
             else:

@@ -229,35 +229,44 @@ class Election(object):
         
         def __init__(self, E, action, msg):
             "create an action"
+            assert(action in (
+                'log',      # log an arbitrary string
+                'round',    # start a new round
+                'tie',      # break a tie
+                'elect',    # elect a candidate
+                'defeat',   # defeat a candidate
+                'iterate',  # terminate an iteration (meek)
+                'pend',     # elect a candidate pending surplus transfer (wigm)
+                'transfer', # transfer a surplus (wigm)
+                'final'     # end of count
+                ))
             self.E = E
             self.action = action
             self.msg = msg
             self.round = E.round
             if action == "log":
                 return
-            C = self.C = E.C.copy(E)
+            C = self.C = E.C.copy(E)    # save a copy of the Candidates state
             self.votes = sum([c.vote for c in C.eligible()], E.V0)
             self.quota = E.quota
             self.surplus = E.V(E.surplus)
             if E.rule.method() == 'meek':
-                self.residual = E.residual
+                self.residual = E.residual  # meek residual is the nontransferable portion
             elif E.rule.method() == 'wigm':
                 #
                 #  this is expensive in a big election, so we've done a little optimization
                 #
-                self.nt_votes = sum((b.vote for b in E.ballots if b.exhausted), E.V0)
-                self.h_votes = sum((c.vote for c in C.hopeful()), E.V0)
-                self.e_votes = sum((c.vote for c in C.elected()), E.V0)
-                self.p_votes = sum((c.vote for c in C.pending()), E.V0)
-                self.e_votes -= self.p_votes
-                total = self.e_votes + self.p_votes + self.h_votes + self.nt_votes
-                #  wigm residual is votes lost due to rounding
-                self.residual = E.V(E.nBallots) - total
+                self.nt_votes = sum((b.vote for b in E.ballots if b.exhausted), E.V0) # nontransferable votes
+                self.h_votes = sum((c.vote for c in C.hopeful()), E.V0)     # votes for hopeful candidates
+                self.e_votes = sum((c.vote for c in C.notpending()), E.V0)  # votes for elected (transfer not pending) candidates
+                self.p_votes = sum((c.vote for c in C.pending()), E.V0)     # votes for elected (transfer pending) candidates
+                total = self.e_votes + self.p_votes + self.h_votes + self.nt_votes  # vote total
+                self.residual = E.V(E.nBallots) - total                     # votes lost due to rounding error
             elif E.rule.method() == 'qpq':
-                self.votes = E.votes
-                self.ta = E.ta
-                self.tx = E.tx
-                self.surplus = '-'
+                self.votes = E.votes    # total votes
+                self.ta = E.ta          # candidates elected by active ballots
+                self.tx = E.tx          # candidates elected by inactive ballots
+                self.surplus = '-'      # qpq has no surplus
             
         def signature(self):
             "return an action signature"
@@ -268,7 +277,7 @@ class Election(object):
                 return ''
             E = self.E
             V = E.V
-            candidates = E.C.eligible(order="ballot") # report in ballot order
+            candidates = self.C.eligible(order="ballot") # report in ballot order
             tag = self.action[0]
             round = 'F' if self.action == 'final' else self.round
             r = [round, tag, V(self.quota)]

@@ -327,10 +327,10 @@ class Rule(ElectionRule):
         #  Fill any remaining seats [52]
         #
         if len(C.hopeful()) <= E.seatsLeftToFill():
-            for c in list(C.hopeful()):
+            for c in C.hopeful():
                 c.elect('Elect remaining candidates')
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #
-        for c in list(C.hopeful()):
+        for c in C.hopeful():
             c.defeat(msg='Defeat remaining candidates')

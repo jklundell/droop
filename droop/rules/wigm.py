@@ -215,7 +215,7 @@ class Rule(ElectionRule):
         #
         for c in C.pending():
             c.elect(msg='Elect pending')
-        for c in list(C.hopeful()):
+        for c in C.hopeful():
             if len(C.elected()) < E.nSeats:
                 c.elect(msg='Elect remaining')
             else:

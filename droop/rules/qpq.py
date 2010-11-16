@@ -158,7 +158,7 @@ class Rule(ElectionRule):
             E.newRound()
             if restart:
                 restart = False
-                for c in list(C.elected()):
+                for c in C.elected():
                     c.unelect()
                 for b in E.ballots:
                     b.restart(V0)
@@ -239,10 +239,10 @@ class Rule(ElectionRule):
         #  Fill any remaining seats
         #
         if len(C.hopeful()) <= E.seatsLeftToFill():
-            for c in list(C.hopeful()):
+            for c in C.hopeful():
                 c.elect('Elect remaining candidates')
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #
-        for c in list(C.hopeful()):
+        for c in C.hopeful():
             c.defeat(msg='Defeat remaining candidates')

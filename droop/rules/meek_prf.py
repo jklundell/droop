@@ -262,7 +262,7 @@ class Rule(ElectionRule):
 
         ##  C. Count Complete
 
-        for c in list(C.hopeful()):
+        for c in C.hopeful():
 
             ##  C.1. Elect remaining. 
             ##       If any seats are unfilled, elect remaining hopeful candidates.
