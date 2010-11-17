@@ -331,12 +331,13 @@ class Rule(ElectionRule):
                         c.defeat(msg='Defeat sure loser')
                     if len(C.hopeful()) <= E.seatsLeftToFill():
                         break;
-                    for c in C.byBallotOrder(sureLosers):
-                        for b in (b for b in E.ballots if b.topRank == c.cid):
-                            if transfer(b):
-                                b.topCand.vote += b.vote
+                    cids = [c.cid for c in sureLosers]
+                    for b in (b for b in E.ballots if b.topRank in cids):
+                        if transfer(b):
+                            b.topCand.vote += b.vote
+                    for c in sureLosers:
                         c.vote = V0
-                        E.logAction('transfer', "Transfer defeated: %s" % c)
+                    E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in sureLosers))
                     continue
 
             ##     B.3. Transfer high surplus. Select the pending candidate, if any, with

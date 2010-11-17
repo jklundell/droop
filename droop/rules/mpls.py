@@ -477,7 +477,7 @@ class Rule(ElectionRule):
                         b.topCand.vote += b.vote
                 for c in certainLosers:
                     c.vote = V0
-                    E.logAction('transfer', "Transfer defeated: %s" % c)
+                E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in certainLosers))
 
                 ##     If no candidate can be defeated mathematically, the tabulation must continue
                 ##     as described in clause d. 

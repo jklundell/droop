@@ -260,7 +260,8 @@ class Election(object):
                 self.h_votes = sum((c.vote for c in C.hopeful()), E.V0)     # votes for hopeful candidates
                 self.e_votes = sum((c.vote for c in C.notpending()), E.V0)  # votes for elected (transfer not pending) candidates
                 self.p_votes = sum((c.vote for c in C.pending()), E.V0)     # votes for elected (transfer pending) candidates
-                total = self.e_votes + self.p_votes + self.h_votes + self.nt_votes  # vote total
+                self.d_votes = sum((c.vote for c in C.defeated()), E.V0)    # votes for defeated candidates
+                total = self.e_votes + self.p_votes + self.h_votes + self.d_votes + self.nt_votes  # vote total
                 self.residual = E.V(E.nBallots) - total                     # votes lost due to rounding error
             elif E.rule.method() == 'qpq':
                 self.votes = E.votes    # total votes
@@ -284,7 +285,7 @@ class Election(object):
             if E.rule.method() == 'meek':
                 r.extend([V(self.votes), V(self.surplus), V(self.residual)])
             elif E.rule.method() == 'wigm':
-                votes = self.e_votes + self.p_votes + self.h_votes
+                votes = self.e_votes + self.p_votes + self.h_votes + self.d_votes
                 total = votes + self.nt_votes + self.residual
                 r.extend([V(total), V(votes), V(self.nt_votes), V(self.residual)])
             elif E.rule.method() == 'qpq':
@@ -335,9 +336,11 @@ class Election(object):
                 if self.p_votes:
                     s += '\tPending votes: %s\n' % V(self.p_votes)
                 s += '\tHopeful votes: %s\n' % V(self.h_votes)
+                if self.d_votes:
+                    s += '\tDefeated votes: %s\n' % V(self.d_votes)
                 s += '\tNontransferable votes: %s\n' % V(self.nt_votes)
                 s += '\tResidual: %s\n' % V(self.residual)
-                s += '\tTotal: %s\n' % V(self.e_votes + self.p_votes + self.h_votes + self.nt_votes + self.residual)
+                s += '\tTotal: %s\n' % V(self.e_votes + self.p_votes + self.h_votes + self.d_votes + self.nt_votes + self.residual)
                 s += '\tSurplus: %s\n' % V(self.surplus)
             elif E.rule.method() == 'qpq':
                 s += '\tCandidates elected by active ballots: %s\n' % self.ta
@@ -381,7 +384,7 @@ class Election(object):
                 if E.rule.method() == 'meek':
                     r = [round, V(self.quota), V(self.votes), V(self.surplus), V(self.residual)]
                 elif E.rule.method() == 'wigm':
-                    votes = self.e_votes + self.p_votes + self.h_votes
+                    votes = self.e_votes + self.p_votes + self.h_votes + self.d_votes
                     total = votes + self.nt_votes + self.residual
                     r = [round, V(self.quota), V(total), V(votes), V(self.nt_votes), V(self.residual)]
                 elif E.rule.method() == 'qpq':
