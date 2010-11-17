@@ -139,6 +139,8 @@ class Rule(ElectionRule):
         V0 = E.V0   # constant zero
         V1 = E.V1   # constant one
 
+        for c in C.hopeful():
+            c.tc = V0
         E.ta = V0
         E.tx = V0
 
@@ -179,22 +181,21 @@ class Rule(ElectionRule):
             #
             E.tx = V0
             E.va = V0
-            tc = dict()
             for c in C.hopeful():
                 c.vote = V0
-                tc[c] = V0
+                c.tc = V0
             for b in E.ballots:
                 if b.exhausted:
                     E.tx += b.weight * b.multiplier  # candidates elected by inactive ballots
                 else:
                     E.va += b.multiplier
-                    tc[b.topCand] += b.weight * b.multiplier
+                    b.topCand.tc += b.weight * b.multiplier
                     b.topCand.vote += b.multiplier  # vc [2.3]
 
             E.ta = V0  # for reporting
             for c in C.hopeful():
-                c.quotient = c.vote / (V1 + tc[c])
-                E.ta += tc[c]
+                c.quotient = c.vote / (V1 + c.tc)
+                E.ta += c.tc
             
             E.quota = E.va / V(1 + E.nSeats) - E.tx  # quota [2.4]
 
