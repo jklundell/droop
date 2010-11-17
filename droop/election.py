@@ -120,9 +120,6 @@ class Election(object):
         self.votes = self.V0
         if self.rule.method == 'meek':
             self.residual = self.V0
-        elif self.rule.method == 'qpq':
-            self.ta = self.V0
-            self.tx = self.V0
         for c in self.C:
             c.vote = self.V0
         self.rule.count()   ### count the election ###
@@ -359,12 +356,13 @@ class Election(object):
             #  return a header line if requested
             #
             if header:
+                h = ['R', 'Action', 'Quota']
                 if E.rule.method == 'meek':
-                    h = ['R', 'Quota', 'Votes', 'Surplus', 'Residual']
+                    h += ['Votes', 'Surplus', 'Residual']
                 elif E.rule.method == 'wigm':
-                    h = ['R', 'Quota', 'Total', 'Votes', 'Non-Transferable', 'Residual']
+                    h += ['Total', 'Votes', 'Non-Transferable', 'Residual']
                 elif E.rule.method == 'qpq':
-                    h = ['R', 'Quota']
+                    pass
 
                 for c in candidates:
                     h += ['%s.name' % c.cid]
@@ -378,17 +376,18 @@ class Election(object):
             #  dump a line of data
             #
             if self.action in ('round', 'log', 'iterate'):
-                r = [self.round, self.msg]
+                r = [self.round, self.action, self.msg]
             else:
                 round = 'F' if self.action == 'final' else self.round
+                r = [round, self.action, V(self.quota)]
                 if E.rule.method == 'meek':
-                    r = [round, V(self.quota), V(self.votes), V(self.surplus), V(self.residual)]
+                    r += [V(self.votes), V(self.surplus), V(self.residual)]
                 elif E.rule.method == 'wigm':
                     votes = self.e_votes + self.p_votes + self.h_votes + self.d_votes
                     total = votes + self.nt_votes + self.residual
-                    r = [round, V(self.quota), V(total), V(votes), V(self.nt_votes), V(self.residual)]
+                    r += [V(total), V(votes), V(self.nt_votes), V(self.residual)]
                 elif E.rule.method == 'qpq':
-                    r = [round, V(self.quota)]
+                    pass
 
                 for c in candidates:
                     r.append(c.name)

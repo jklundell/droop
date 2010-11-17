@@ -139,6 +139,9 @@ class Rule(ElectionRule):
         V0 = E.V0   # constant zero
         V1 = E.V1   # constant one
 
+        E.ta = V0
+        E.tx = V0
+
         #  Calculate initial quota
         #
         E.va = sum((b.multiplier for b in E.ballots if not b.exhausted), V0)
