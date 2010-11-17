@@ -38,10 +38,10 @@ class ElectionNameTest(unittest.TestCase):
 
     def testMeekWarren1(self):
         "meek responds to warren"
-        Rule = electionRule('warren')
-        Rule.options(dict(rule='warren'))
-        self.assertEqual(Rule.tag(), 'warren-o9')
-        self.assertRaises(UsageError, Rule.options, dict(defeat_batch='whatever'))
+        rule = electionRule('warren')(None)
+        rule.options(dict(rule='warren'))
+        self.assertEqual(rule.tag(), 'warren-o9')
+        self.assertRaises(UsageError, rule.options, dict(defeat_batch='whatever'))
 
 class ElectionCountTest(unittest.TestCase):
     "test some counts"
@@ -99,7 +99,7 @@ class ElectionDumpTest(unittest.TestCase):
         rulename = 'meek'
         for blt in blts:
             Rule = droop.electionRule(rulename)
-            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
+            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpRationalWarren(self):
         "try several counts & dumps with rational arithmetic"
@@ -107,7 +107,7 @@ class ElectionDumpTest(unittest.TestCase):
         rulename = 'warren'
         for blt in blts:
             Rule = droop.electionRule(rulename)
-            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
+            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpFixedVsGuardedMeek(self):
         "meek: guarded with guard=0 should match fixed"

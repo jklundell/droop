@@ -91,7 +91,7 @@ class ElectionDumpTest(unittest.TestCase):
         rulename = 'wigm'
         for blt in blts:
             Rule = droop.electionRule(rulename)
-            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (Rule.info(), blt))
+            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpFixedVsGuardedWigm(self):
         "wigm: guarded with guard=0 should match fixed"

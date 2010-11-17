@@ -35,10 +35,10 @@ class RuleBasicTest(unittest.TestCase):
 
     def testArithmetic(self):
         "wigm-prf uses fixed-4"
-        Rule = electionRule('wigm-prf')
+        rule = electionRule('wigm-prf')(None)
         used = set()
         ignored = set()
-        options = Rule.options(dict(arithmetic='guarded'), used, ignored)
+        options = rule.options(dict(rule='wigm-prf', arithmetic='guarded'), used, ignored)
         self.assertEqual(options['arithmetic'], 'fixed')
         self.assertEqual(options['precision'], 4)
         self.assertEqual(used, set())
@@ -46,10 +46,11 @@ class RuleBasicTest(unittest.TestCase):
 
     def testDefeatBatch(self):
         "tag is name of rule"
-        Rule = electionRule('wigm-prf')
-        self.assertEqual(Rule.tag(), 'wigm-prf')
-        Rule.options(dict(rule='wigm-prf-batch'))
-        self.assertEqual(Rule.tag(), 'wigm-prf-batch')
+        rule = electionRule('wigm-prf')(None)
+        rule.options(dict(rule='wigm-prf'))
+        self.assertEqual(rule.tag(), 'wigm-prf')
+        rule.options(dict(rule='wigm-prf-batch'))
+        self.assertEqual(rule.tag(), 'wigm-prf-batch')
 
 
 class ElectionCountTest(unittest.TestCase):

@@ -43,7 +43,7 @@ class TestBasic(unittest.TestCase):
 
     def testQpq(self):
         "qpq is is a qpq variant"
-        self.assertEqual(Rule.method(), 'qpq')
+        self.assertEqual(Rule.method, 'qpq')
 
 class TestQpq(unittest.TestCase):
     '''
@@ -61,7 +61,7 @@ class TestQpq(unittest.TestCase):
 
     def testElectionInit(self):
         "check that election is initialized"
-        self.assertTrue(self.E.rule == Rule, 'bad rule class')
+        self.assertTrue(self.E.rule.__class__.__name__ == 'Rule', 'bad rule class')
         self.assertEqual(len(self.options), 5, 'qpq should set five options')
         self.assertEqual(self.options['arithmetic'], 'guarded', 'qpq should set arithmetic=guarded')
         self.assertEqual(self.options['precision'], 9, 'qpq should set precision=9')

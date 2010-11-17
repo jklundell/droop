@@ -35,10 +35,10 @@ class RuleBasicTest(unittest.TestCase):
 
     def testArithmetic(self):
         "meek-prf uses fixed"
-        Rule = electionRule('meek-prf')
+        rule = electionRule('meek-prf')(None)
         used = set()
         ignored = set()
-        options = Rule.options(dict(arithmetic='guarded'), used, ignored)
+        options = rule.options(dict(arithmetic='guarded'), used, ignored)
         self.assertEqual(options['arithmetic'], 'fixed')
         self.assertEqual(options['precision'], 9)
         self.assertEqual(used, set())

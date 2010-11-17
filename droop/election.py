@@ -71,7 +71,7 @@ class Election(object):
         Rule = droop.electionRule(rulename)    # get rule class
         if Rule is None:
             raise ElectionError('unknown election rule: %s' % rulename)
-        self.rule = Rule
+        self.rule = Rule(self)
 
         # convert numeric options (precision, etc) to ints
         for key, value in options.iteritems():
@@ -118,14 +118,14 @@ class Election(object):
         self.quota = self.V0
         self.surplus = self.V0
         self.votes = self.V0
-        if self.rule.method() == 'meek':
+        if self.rule.method == 'meek':
             self.residual = self.V0
-        elif self.rule.method() == 'qpq':
+        elif self.rule.method == 'qpq':
             self.ta = self.V0
             self.tx = self.V0
         for c in self.C:
             c.vote = self.V0
-        self.rule.count(self)
+        self.rule.count()   ### count the election ###
         self.logAction('final', 'Count Complete')
         self.elected = self.C.elected()
 
@@ -198,7 +198,7 @@ class Election(object):
         s += "\tSeats: %d\n" % self.nSeats
         s += "\tBallots: %d\n" % self.nBallots
         s += "\tQuota: %s\n" % self.V(self.quota)
-        if self.rule.method() == 'meek':
+        if self.rule.method == 'meek':
             s += "\tOmega: %s\n" % self.rule._omega
         if self.electionProfile.source:
             s += "Source: %s\n" % self.electionProfile.source
@@ -250,9 +250,9 @@ class Election(object):
             self.votes = sum([c.vote for c in C.eligible()], E.V0)
             self.quota = E.quota
             self.surplus = E.V(E.surplus)
-            if E.rule.method() == 'meek':
+            if E.rule.method == 'meek':
                 self.residual = E.residual  # meek residual is the nontransferable portion
-            elif E.rule.method() == 'wigm':
+            elif E.rule.method == 'wigm':
                 #
                 #  this is expensive in a big election, so we've done a little optimization
                 #
@@ -263,7 +263,7 @@ class Election(object):
                 self.d_votes = sum((c.vote for c in C.defeated()), E.V0)    # votes for defeated candidates
                 total = self.e_votes + self.p_votes + self.h_votes + self.d_votes + self.nt_votes  # vote total
                 self.residual = E.V(E.nBallots) - total                     # votes lost due to rounding error
-            elif E.rule.method() == 'qpq':
+            elif E.rule.method == 'qpq':
                 self.votes = E.votes    # total votes
                 self.ta = E.ta          # candidates elected by active ballots
                 self.tx = E.tx          # candidates elected by inactive ballots
@@ -282,20 +282,20 @@ class Election(object):
             tag = self.action[0]
             round = 'F' if self.action == 'final' else self.round
             r = [round, tag, V(self.quota)]
-            if E.rule.method() == 'meek':
+            if E.rule.method == 'meek':
                 r.extend([V(self.votes), V(self.surplus), V(self.residual)])
-            elif E.rule.method() == 'wigm':
+            elif E.rule.method == 'wigm':
                 votes = self.e_votes + self.p_votes + self.h_votes + self.d_votes
                 total = votes + self.nt_votes + self.residual
                 r.extend([V(total), V(votes), V(self.nt_votes), V(self.residual)])
-            elif E.rule.method() == 'qpq':
+            elif E.rule.method == 'qpq':
                 pass
 
             for c in candidates:
                 r.append(c.nick)
                 r.append(c.code())
                 r.append(V(c.vote))
-                if E.rule.method() == 'meek': r.append(V(c.kf))
+                if E.rule.method == 'meek': r.append(V(c.kf))
 
             r = [str(item) for item in r]
             return ':'.join(r) + '\n'
@@ -325,13 +325,13 @@ class Election(object):
                 c0 = [c.name for c in C.defeated() if c.vote == E.V0]
                 if c0:
                     s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
-            if E.rule.method() == 'meek':
+            if E.rule.method == 'meek':
                 s += '\tQuota: %s\n' % V(self.quota)
                 s += '\tVotes: %s\n' % V(self.votes)
                 s += '\tResidual: %s\n' % V(self.residual)
                 s += '\tTotal: %s\n' % V((self.votes + self.residual))
                 s += '\tSurplus: %s\n' % V(self.surplus)
-            elif E.rule.method() == 'wigm':
+            elif E.rule.method == 'wigm':
                 s += '\tElected votes: %s\n' % V(self.e_votes)
                 if self.p_votes:
                     s += '\tPending votes: %s\n' % V(self.p_votes)
@@ -342,7 +342,7 @@ class Election(object):
                 s += '\tResidual: %s\n' % V(self.residual)
                 s += '\tTotal: %s\n' % V(self.e_votes + self.p_votes + self.h_votes + self.d_votes + self.nt_votes + self.residual)
                 s += '\tSurplus: %s\n' % V(self.surplus)
-            elif E.rule.method() == 'qpq':
+            elif E.rule.method == 'qpq':
                 s += '\tCandidates elected by active ballots: %s\n' % self.ta
                 s += '\tCandidates elected by inactive ballots: %s\n' % self.tx
             return s
@@ -359,18 +359,18 @@ class Election(object):
             #  return a header line if requested
             #
             if header:
-                if E.rule.method() == 'meek':
+                if E.rule.method == 'meek':
                     h = ['R', 'Quota', 'Votes', 'Surplus', 'Residual']
-                elif E.rule.method() == 'wigm':
+                elif E.rule.method == 'wigm':
                     h = ['R', 'Quota', 'Total', 'Votes', 'Non-Transferable', 'Residual']
-                elif E.rule.method() == 'qpq':
+                elif E.rule.method == 'qpq':
                     h = ['R', 'Quota']
 
                 for c in candidates:
                     h += ['%s.name' % c.cid]
                     h += ['%s.state' % c.cid]
                     h += ['%s.vote' % c.cid]
-                    if E.rule.method() == 'meek': h += ['%s.kf' % c.cid]
+                    if E.rule.method == 'meek': h += ['%s.kf' % c.cid]
                 h = [str(item) for item in h]
                 s += '\t'.join(h) + '\n'
                 return s
@@ -381,20 +381,20 @@ class Election(object):
                 r = [self.round, self.msg]
             else:
                 round = 'F' if self.action == 'final' else self.round
-                if E.rule.method() == 'meek':
+                if E.rule.method == 'meek':
                     r = [round, V(self.quota), V(self.votes), V(self.surplus), V(self.residual)]
-                elif E.rule.method() == 'wigm':
+                elif E.rule.method == 'wigm':
                     votes = self.e_votes + self.p_votes + self.h_votes + self.d_votes
                     total = votes + self.nt_votes + self.residual
                     r = [round, V(self.quota), V(total), V(votes), V(self.nt_votes), V(self.residual)]
-                elif E.rule.method() == 'qpq':
+                elif E.rule.method == 'qpq':
                     r = [round, V(self.quota)]
 
                 for c in candidates:
                     r.append(c.name)
                     r.append(c.code())
                     r.append(V(c.vote))
-                    if E.rule.method() == 'meek': r.append(V(c.kf))
+                    if E.rule.method == 'meek': r.append(V(c.kf))
 
             r = [str(item) for item in r]
             s += '\t'.join(r) + '\n'
@@ -608,7 +608,7 @@ class Candidate(object):
         if self.state == "withdrawn": return 'W'
         if self.state == "hopeful": return 'H'
         if self.state == "elected":
-            if self.E.rule.method() == 'wigm' and self.pending: return 'e'
+            if self.E.rule.method == 'wigm' and self.pending: return 'e'
             return 'E'
         if self.state == "defeated": return 'D'
         return '?'  # pragma: no cover

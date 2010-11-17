@@ -61,7 +61,7 @@ class RuleTest(unittest.TestCase):
         "method is meek or wigm or qpq for each rule"
         for name in electionRuleNames():
             Rule = electionRule(name)
-            method = Rule.method()
+            method = Rule.method
             self.assertTrue(method in ('meek','wigm','qpq'), 'bad method "%s"' % method)
 
     def testReportHelps(self):

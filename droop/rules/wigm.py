@@ -25,29 +25,19 @@ class Rule(ElectionRule):
     '''
     Rule for counting Generic WIGM elections
     
-    Parameters: arithmetic type, integer_quota, defeat_batch
+    Options: arithmetic type, integer_quota, defeat_batch
     '''
-    
-    #  options
-    #
-    integer_quota = False
-    defeatBatch = 'none'
-    name = 'wigm'
+    method = 'wigm' # underlying method
     
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
-        return cls.name
-
-    @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
-        return 'wigm'
+        return "wigm"
 
     @classmethod
     def helps(cls, helps, name):
         "create help string for wigm"
-        h =  '%s implements the Weighted Inclusive Gregory Method.\n' % cls.name
+        h =  '%s implements the Weighted Inclusive Gregory Method.\n' % name
         h += '\noptions:\n'
         h += '  (qx*, rational, fixed, integer): arithmetic\n'
         h += '  integer_quota=(false*, true): round quota up to next integer\n'
@@ -55,8 +45,11 @@ class Rule(ElectionRule):
         h += '    *default\n'
         helps[name] = h
         
-    @classmethod
-    def options(cls, options=dict(), used=set(), ignored=set()):
+    def __init__(self, E):
+        "initialize rule"
+        self.E = E
+
+    def options(self, options=dict(), used=set(), ignored=set()):
         "initialize election parameters"
         
         #  set defaults
@@ -70,29 +63,26 @@ class Rule(ElectionRule):
         #  integer_quota: use Droop quota rounded up to whole number
         #  defeat_batch=zero: defeat all hopeful candidates with zero votes after first surplus transfer
         #
-        cls.integer_quota = options.get('integer_quota', False)
-        cls.defeatBatch = options.get('defeat_batch', 'none')
+        self.integer_quota = options.get('integer_quota', False)
+        self.defeatBatch = options.get('defeat_batch', 'none')
 
         used |= set(('arithmetic', 'precision', 'guard', 'display', 'integer_quota', 'defeat_batch'))
         return options
     
-    @classmethod
-    def info(cls):
+    def info(self):
         "return an info string for the election report"
         return "Generic Weighted Inclusive Gregory Method (WIGM)"
 
-    @classmethod
-    def tag(cls):
+    def tag(self):
         "return a tag string for unit tests"
-        return cls.name
+        return "wigm"
 
     #########################
     #
     #   Main Election Counter
     #
     #########################
-    @classmethod
-    def count(cls, E):
+    def count(self):
         "count the election"
         
         #  local support functions
@@ -114,7 +104,7 @@ class Rule(ElectionRule):
             
             Round up if not using exact arithmetic.
             '''
-            if cls.integer_quota:
+            if self.integer_quota:
                 return V(1 + E.nBallots // (E.nSeats+1))
             if V.exact:
                 return V(E.nBallots) / V(E.nSeats+1)
@@ -152,6 +142,7 @@ class Rule(ElectionRule):
 
         #  Local variables for convenience
         #
+        E = self.E  # election object
         C = E.C     # candidates
         V = E.V     # arithmetic value class
         V0 = E.V0   # constant zero
@@ -195,7 +186,7 @@ class Rule(ElectionRule):
                 #
                 low_vote = min(c.vote for c in C.hopeful())
                 low_candidates = [c for c in C.hopeful() if c.vote == low_vote]
-                if low_vote == V0 and cls.defeatBatch == 'zero':
+                if low_vote == V0 and self.defeatBatch == 'zero':
                     for c in low_candidates:
                         c.defeat(msg='Defeat batch(zero)')
                 else:

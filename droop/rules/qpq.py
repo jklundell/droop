@@ -47,15 +47,11 @@ class Rule(ElectionRule):
     '''
     Rule for counting QPQ
     '''
+    method = 'qpq'  # underlying method
 
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
-        return 'qpq'
-
-    @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
         return 'qpq'
 
     @classmethod
@@ -67,8 +63,11 @@ class Rule(ElectionRule):
         h += '  precision=9\n'
         helps[name] = h
         
-    @classmethod
-    def options(cls, options=dict(), used=set(), ignored=set()):
+    def __init__(self, E):
+        "initialize rule"
+        self.E = E
+
+    def options(self, options=dict(), used=set(), ignored=set()):
         "initialize election parameters"
 
         #  initialize and return arithmetic
@@ -82,13 +81,11 @@ class Rule(ElectionRule):
         ignored |= set(('arithmetic', 'precision', 'guard', 'display'))
         return options
 
-    @classmethod
-    def info(cls):
+    def info(self):
         "return an info string for the election report"
         return "QPQ"
         
-    @classmethod
-    def tag(cls):
+    def tag(self):
         "return a tag string for unit tests"
         return 'qpq'
 
@@ -97,8 +94,7 @@ class Rule(ElectionRule):
     #   Main Election Counter
     #
     #########################
-    @classmethod
-    def count(cls, E):
+    def count(self):
         "count the election with QPQ"
 
         #  local support functions
@@ -137,6 +133,7 @@ class Rule(ElectionRule):
         #
         #########################
 
+        E = self.E  # election object
         C = E.C     # candidates
         V = E.V     # arithmetic value class
         V0 = E.V0   # constant zero

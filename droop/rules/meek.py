@@ -28,20 +28,12 @@ class Rule(ElectionRule):
     
     Parameter: arithmetic type
     '''
-    
-    omega = None          # in digits
-    defeatBatch = None    # default
-    warren = False
+    method = 'meek'     # underlying method
 
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
         return ('meek', 'warren')
-
-    @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
-        return 'meek'
 
     @classmethod
     def helps(cls, helps, name):
@@ -62,50 +54,50 @@ class Rule(ElectionRule):
         h += '  * default\n'
         helps[name] = h
         
-    @classmethod
-    def options(cls, options=dict(), used=set(), ignored=set()):
+    def __init__(self, E):
+        "initialize rule"
+        self.E = E
+
+    def options(self, options=dict(), used=set(), ignored=set()):
         "filter options"
         
         #  set defaults
         #
-        cls.warren = options.get('rule') == 'warren'
+        self.warren = options.get('rule') == 'warren'
         if options.setdefault('arithmetic', 'guarded') == 'guarded':
             options.setdefault('precision', 18)
             options.setdefault('guard', options['precision']//2)
-            cls.omega = options.get('omega', options['precision']//2)
+            self.omega = options.get('omega', options['precision']//2)
         elif options['arithmetic'] == 'fixed':
             options.setdefault('precision', 9)
-            cls.omega = options.get('omega', options['precision']*2//3)
+            self.omega = options.get('omega', options['precision']*2//3)
         elif options['arithmetic'] == 'rational':
-            cls.omega = options.get('omega', 10)
+            self.omega = options.get('omega', 10)
 
-        cls.defeatBatch = options.get('defeat_batch', 'safe')
-        if cls.defeatBatch not in ('none', 'safe'):
-            raise UsageError('unknown defeat_batch %s; use none or safe' % cls.defeatBatch)
+        self.defeatBatch = options.get('defeat_batch', 'safe')
+        if self.defeatBatch not in ('none', 'safe'):
+            raise UsageError('unknown defeat_batch %s; use none or safe' % self.defeatBatch)
 
         used |= set(('arithmetic', 'precision', 'omega', 'defeat_batch'))
         return options
 
-    @classmethod
-    def info(cls):
+    def info(self):
         "return an info string for the election report"
-        name = "Warren" if cls.warren else "Meek"
-        return "%s Parametric (omega = 1/10^%d)" % (name, cls.omega)
+        name = "Warren" if self.warren else "Meek"
+        return "%s Parametric (omega = 1/10^%d)" % (name, self.omega)
 
-    @classmethod
-    def tag(cls):
+    def tag(self):
         "return a tag string for unit tests"
-        if cls.warren:
-            return 'warren-o%s' % cls.omega
-        return 'meek-o%s' % cls.omega
+        if self.warren:
+            return 'warren-o%s' % self.omega
+        return 'meek-o%s' % self.omega
 
     #########################
     #
     #   Main Election Counter
     #
     #########################
-    @classmethod
-    def count(cls, E):
+    def count(self):
         "count the election"
         
         #  local support functions
@@ -159,7 +151,7 @@ class Rule(ElectionRule):
         def batchDefeat(surplus):
             "find a batch of candidates that can be defeated at the current surplus"
             
-            if cls.defeatBatch == 'none':
+            if self.defeatBatch == 'none':
                 return []
                 
             #   start with candidates sorted by vote
@@ -240,7 +232,7 @@ class Rule(ElectionRule):
                 "calculate keep and new weight for NZ Schedule 1A"
                 return V.mul(weight, kf, round='up'), V.mul(weight, V1-kf, round='up')
 
-            kt = kw_warren if cls.warren else kw_meekOpenSTV
+            kt = kw_warren if self.warren else kw_meekOpenSTV
             
             for c in (C.hopeful() + C.elected()):
                 c.vote = V0
@@ -319,7 +311,7 @@ class Rule(ElectionRule):
                 #
                 if iStatus == IS_elected:
                     return IS_elected, None
-                if E.surplus <= Rule._omega:
+                if E.surplus <= self._omega:
                     return IS_omega, None
                 if E.surplus >= lastsurplus:
                     E.log("Stable state detected (%s)" % E.surplus)
@@ -346,6 +338,7 @@ class Rule(ElectionRule):
         #   Initialize Count
         #
         #########################
+        E = self.E
         V = E.V    # arithmetic value class
         V0 = E.V0  # constant zero
         V1 = E.V1  # constant one
@@ -355,8 +348,8 @@ class Rule(ElectionRule):
         #  _omega will be 1/10**omega
         #
         assert V.name in ('rational', 'guarded', 'fixed')
-        cls.omega = int(cls.omega)
-        cls._omega = V1 / V(10**cls.omega)
+        self.omega = int(self.omega)
+        self._omega = V1 / V(10**self.omega)
 
         E.votes = V(E.nBallots)
         E.quota = calcQuota(E)

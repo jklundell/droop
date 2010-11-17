@@ -34,7 +34,7 @@ class Rule(ElectionRule):
         omega=6
     ...and no batch defeats.
     '''
-    
+    method = 'meek' # underlying method
     precision = 9   # fixed-arithmetic precision in digits
     omega = 6       # iteration terminator
     name = 'meek-prf'
@@ -43,11 +43,6 @@ class Rule(ElectionRule):
     def ruleNames(cls):
         "return supported rule name or names"
         return cls.name
-
-    @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
-        return 'meek'
 
     @classmethod
     def helps(cls, helps, name):
@@ -59,36 +54,36 @@ class Rule(ElectionRule):
         h += '    when surplus < 1/10^omega)\n'
         helps[name] = h
         
-    @classmethod
-    def options(cls, options=dict(), used=set(), ignored=set()):
+    def __init__(self, E):
+        "initialize rule"
+        self.E = E
+
+    def options(self, options=dict(), used=set(), ignored=set()):
         "override options"
 
         options['arithmetic'] = 'fixed'
-        options['precision'] = cls.precision
+        options['precision'] = self.precision
         options['display'] = None
-        options['omega'] = cls.omega
+        options['omega'] = self.omega
         ignored |= set(('arithmetic', 'precision', 'display', 'omega'))
         return options
 
-    @classmethod
-    def info(cls):
+    def info(self):
         "return an info string for the election report"
         return "PR Foundation Meek Reference"
 
-    @classmethod
-    def tag(cls):
+    def tag(self):
         "return a tag string for unit tests"
-        return "%s-o%s" % (cls.name, cls.omega)
+        return "%s-o%s" % (self.name, self.omega)
 
     #########################
     #
     #   Main Election Counter
     #
     #########################
-    @classmethod
-    def count(cls, E):
+    def count(self):
         "count the election"
-        
+
         ##  T. Breaking ties
         ##     Ties can arise in B.3, when selecting a candidate for defeat. 
         ##     Use the defined tiebreaking procedure to select for defeat one candidate 
@@ -115,6 +110,7 @@ class Rule(ElectionRule):
         #   Initialize Count
         #
         #########################
+        E = self.E # election object
         V = E.V    # arithmetic value class
         V0 = E.V0  # constant zero
         V1 = E.V1  # constant one
@@ -127,7 +123,7 @@ class Rule(ElectionRule):
         C = E.C   # candidates
         for c in C.hopeful():
             c.kf = V1    # initialize keep factors
-        cls._omega = V(1) / V(10**cls.omega)
+        self._omega = V(1) / V(10**self.omega)
 
         #  Calculate quota and count votes for round-0 reporting
         E.votes = V(E.nBallots)
@@ -215,7 +211,7 @@ class Rule(ElectionRule):
                 ##         continue at B.3.
 
                 if iterationStatus != 'elected':
-                    if E.surplus < Rule._omega:
+                    if E.surplus < self._omega:
                         iterationStatus = 'omega'
                     elif E.surplus >= lastsurplus:  # pragma: no cover
                         iterationStatus = 'stable'

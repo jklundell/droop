@@ -42,7 +42,8 @@ class MplsTestBasic(unittest.TestCase):
 
     def testMplsWigm(self):
         "mpls is is a wigm variant"
-        self.assertEqual(Rule.method(), 'wigm')
+        rule = electionRule('mpls')(None)
+        self.assertEqual(rule.method, 'wigm')
 
 class MplsTest(unittest.TestCase):
     '''
@@ -60,7 +61,7 @@ class MplsTest(unittest.TestCase):
 
     def testElectionInit(self):
         "check that election is initialized"
-        self.assertTrue(self.E.rule == Rule, 'bad rule class')
+        self.assertTrue(self.E.rule.__class__.__name__ == 'Rule', 'bad rule class')
         self.assertEqual(len(self.options), 4, 'mpls should set four options')
         self.assertEqual(self.options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
         self.assertEqual(self.options['precision'], 4, 'mpls should set precision=4')

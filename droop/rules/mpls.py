@@ -210,16 +210,12 @@ class Rule(ElectionRule):
     '''
     Rule for counting Minneapolis MN STV
     '''
+    method = 'wigm' # underlying method
 
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
         return 'mpls'
-
-    @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
-        return 'wigm'
 
     @classmethod
     def helps(cls, helps, name):
@@ -230,8 +226,11 @@ class Rule(ElectionRule):
         h += '  precision=4\n'
         helps[name] = h
         
-    @classmethod
-    def options(cls, options=dict(), used=set(), ignored=set()):
+    def __init__(self, E):
+        "initialize rule"
+        self.E = E
+
+    def options(self, options=dict(), used=set(), ignored=set()):
         "initialize election parameters"
 
         #  initialize and return arithmetic
@@ -247,13 +246,11 @@ class Rule(ElectionRule):
         ignored |= set(('arithmetic', 'precision', 'display'))
         return options
 
-    @classmethod
-    def info(cls):
+    def info(self):
         "return an info string for the election report"
         return "Minneapolis MN STV"
         
-    @classmethod
-    def tag(cls):
+    def tag(self):
         "return a tag string for unit tests"
         return 'mpls'
 
@@ -262,8 +259,7 @@ class Rule(ElectionRule):
     #   Main Election Counter
     #
     #########################
-    @classmethod
-    def count(cls, E):
+    def count(self):
         "count the election with Minneapolis STV rules"
 
         #  local support functions
@@ -415,6 +411,7 @@ class Rule(ElectionRule):
         #
         #########################
 
+        E = self.E
         C = E.C     # candidates
         V = E.V     # arithmetic value class
         V0 = E.V0   # constant zero

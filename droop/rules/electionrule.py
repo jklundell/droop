@@ -21,13 +21,14 @@ This file is part of Droop.
 
 class ElectionRule(object):  # pragma: no cover
     '''
-    ElectionRule is the parent class for all election rules.
-    It serves as an API container; there is no ElectionRule object.
+    ElectionRule is the parent class for all election rules,
+    and defines the election-rule external API.
     
     The methods are listed in (roughly) logical calling order.
     In particular, options is called before info, tag or count.
     '''
-    
+    method = None # one of ('meek', 'wigm', 'qpq'): underlying method for report formats
+
     @classmethod
     def ruleNames(cls):
         '''
@@ -37,15 +38,8 @@ class ElectionRule(object):  # pragma: no cover
         that are distinguished by name. 
         
         For example, the generic Meek rule returns ('meek', 'warren').
-        '''
-        return None
-
-    @classmethod
-    def method(cls):
-        '''
-        Return a string from ('meek', 'wigm', 'qpq')
-        that indicates the rule's underlying method;
-        used for determining certain report formats
+        
+        ruleNames is a class method, and is called before object instantiation.
         '''
         return None
 
@@ -55,11 +49,17 @@ class ElectionRule(object):  # pragma: no cover
         Add a help string for the named rule to the helps dict.
         
         name is one of the names returned by ruleNames().
+        
+        helps is a class method, and is called before object instantiation.
         '''
         return None
 
-    @classmethod
-    def options(cls, options=dict(), used=set(), ignored=set()):
+    def __init__(self, E):
+        '''
+        Initialize the election-rule object.
+        '''
+
+    def options(self, options=dict(), used=set(), ignored=set()):
         '''
         Handle initialization of options.
         
@@ -82,8 +82,7 @@ class ElectionRule(object):  # pragma: no cover
         '''
         return options
     
-    @classmethod
-    def info(cls):
+    def info(self):
         '''
         Return a brief info string (line fragment) for use 
         in droop.election.report's report heading.
@@ -92,8 +91,7 @@ class ElectionRule(object):  # pragma: no cover
         '''
         return None
 
-    @classmethod
-    def tag(cls):
+    def tag(self):
         '''
         Return a short string used by unit tests to tag file names
         to distinguish them from option-variants on the same rule.
@@ -104,21 +102,19 @@ class ElectionRule(object):  # pragma: no cover
         '''
         return None
 
-    @classmethod
-    def count(cls, E):
+    def count(self):
         '''
-        Count the election E.
+        Count the election self.E.
         
         Note that count has no return value. Results are communicated
-        through the election object E, or, in the case of a terminal
+        through the election object E, or, in the case of a terminating
         error, by raising an exception.
         
         (Called after option)
         '''
         pass
 
-    @classmethod
-    def reportAction(cls, action):
+    def reportAction(self, action):
         '''
         Hook for rule-specific reporting of an action.
         

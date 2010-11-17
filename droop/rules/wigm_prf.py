@@ -99,19 +99,13 @@ class Rule(ElectionRule):
     ##     D.4. Arithmetic. Truncate, with no rounding, the result of each
     ##          multiplication or division to four decimal places.
     ##
+    method = 'wigm'     # underlying method
     precision = 4       # fixed-arithmetic precision in digits
-    name = 'wigm-prf'   # default to single-defeat
-    defeatBatch = False
 
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
         return ('wigm-prf', 'wigm-prf-batch')
-
-    @classmethod
-    def method(cls):
-        "underlying method: meek, wigm or qpq"
-        return 'wigm'
 
     @classmethod
     def helps(cls, helps, name):
@@ -124,38 +118,38 @@ class Rule(ElectionRule):
         h += '\noptions: none\n'
         helps[name] = h
 
-    @classmethod
-    def options(cls, options=dict(), used=set(), ignored=set()):
+    def __init__(self, E):
+        "initialize rule"
+        self.E = E
+
+    def options(self, options=dict(), used=set(), ignored=set()):
         "initialize election parameters"
 
-        cls.name = options.get('rule', cls.name)
-        cls.defeatBatch = cls.name.endswith('batch')
+        self.name = options.get('rule')
+        self.defeatBatch = self.name.endswith('batch')
         options['arithmetic'] = 'fixed'
-        options['precision'] = cls.precision
+        options['precision'] = self.precision
         options['display'] = None
         ignored |= set(('arithmetic', 'precision', 'display', 'defeat_batch'))
 
         return options
 
-    @classmethod
-    def info(cls):
+    def info(self):
         "return an info string for the election report"
-        if cls.defeatBatch:
+        if self.defeatBatch:
             return "PR Foundation WIGM Reference (defeat sure losers)"
         return "PR Foundation WIGM Reference (single defeat)"
 
-    @classmethod
-    def tag(cls):
+    def tag(self):
         "return a tag string for unit tests"
-        return cls.name
+        return self.name
 
     #########################
     #
     #   Main Election Counter
     #
     #########################
-    @classmethod
-    def count(cls, E):
+    def count(self):
         "count the election"
 
         #  local support functions
@@ -278,6 +272,7 @@ class Rule(ElectionRule):
 
         #  Local variables for convenience
         #
+        E = self.E  # election object
         C = E.C     # candidates
         V = E.V     # arithmetic value class
         V0 = E.V0   # constant zero
@@ -324,7 +319,7 @@ class Rule(ElectionRule):
             ##          and test count complete (D.3), transfer each ballot assigned to a
             ##          defeated candidate (D.2), and continue at step B.1.
             ##
-            if cls.defeatBatch:
+            if self.defeatBatch:
                 sureLosers = batchDefeat()
                 if sureLosers:
                     for c in C.byBallotOrder(sureLosers):
