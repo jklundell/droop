@@ -349,7 +349,7 @@ class Election(object):
                 s += '\tTotal: %s\n' % V(self.e_votes + self.p_votes + self.h_votes + self.d_votes + self.nt_votes + self.residual)
                 s += '\tSurplus: %s\n' % V(self.surplus)
             elif E.rule.method == 'qpq':
-                pass
+                s += '\tQuota: %s\n' % V(self.quota)
             return s
             
         def dump(self, header=False):
