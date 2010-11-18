@@ -141,7 +141,6 @@ class Rule(ElectionRule):
 
         for c in C.hopeful():
             c.tc = V0
-        E.ta = V0
         E.tx = V0
 
         #  Calculate initial quota
@@ -192,10 +191,8 @@ class Rule(ElectionRule):
                     b.topCand.tc += b.weight * b.multiplier
                     b.topCand.vote += b.multiplier  # vc [2.3]
 
-            E.ta = V0  # for reporting
             for c in C.hopeful():
                 c.quotient = c.vote / (V1 + c.tc)
-                E.ta += c.tc
             
             E.quota = E.va / V(1 + E.nSeats) - E.tx  # quota [2.4]
 

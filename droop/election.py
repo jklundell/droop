@@ -262,8 +262,6 @@ class Election(object):
                 self.residual = E.V(E.nBallots) - total                     # votes lost due to rounding error
             elif E.rule.method == 'qpq':
                 self.votes = E.votes    # total votes
-                self.ta = E.ta          # candidates elected by active ballots
-                self.tx = E.tx          # candidates elected by inactive ballots
                 self.surplus = '-'      # qpq has no surplus
             
         def signature(self):
@@ -291,7 +289,10 @@ class Election(object):
             for c in candidates:
                 r.append(c.nick)
                 r.append(c.code())
-                r.append(V(c.vote))
+                if E.rule.method == 'qpq':
+                    r.append(V(c.quotient))
+                else:
+                    r.append(V(c.vote))
                 if E.rule.method == 'meek': r.append(V(c.kf))
 
             r = [str(item) for item in r]
@@ -311,17 +312,25 @@ class Election(object):
             C = self.C
             s = 'Action: %s\n' % (self.msg)
             if self.action in ('elect', 'defeat', 'pend', 'transfer'):
-                for c in C.notpending():
-                    s += '\tElected:  %s (%s)\n' % (c, V(c.vote))
-                for c in C.pending():
-                    s += '\tPending:  %s (%s)\n' % (c, V(c.vote))
-                for c in C.hopeful():
-                    s += '\tHopeful:  %s (%s)\n' % (c, V(c.vote))
-                for c in (c for c in C.defeated() if c.vote > E.V0):
-                    s += '\tDefeated: %s (%s)\n' % (c, V(c.vote))
-                c0 = [c.name for c in C.defeated() if c.vote == E.V0]
-                if c0:
-                    s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
+                if E.rule.method == 'qpq':
+                    for c in C.elected():
+                        s += '\tElected:  %s (%s)\n' % (c, V(c.quotient))
+                    for c in C.hopeful():
+                        s += '\tHopeful:  %s (%s)\n' % (c, V(c.quotient))
+                    for c in C.defeated():
+                        s += '\tDefeated:  %s (%s)\n' % (c, V(c.quotient))
+                else:
+                    for c in C.notpending():
+                        s += '\tElected:  %s (%s)\n' % (c, V(c.vote))
+                    for c in C.pending():
+                        s += '\tPending:  %s (%s)\n' % (c, V(c.vote))
+                    for c in C.hopeful():
+                        s += '\tHopeful:  %s (%s)\n' % (c, V(c.vote))
+                    for c in (c for c in C.defeated() if c.vote > E.V0):
+                        s += '\tDefeated: %s (%s)\n' % (c, V(c.vote))
+                    c0 = [c.name for c in C.defeated() if c.vote == E.V0]
+                    if c0:
+                        s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
             if E.rule.method == 'meek':
                 s += '\tQuota: %s\n' % V(self.quota)
                 s += '\tVotes: %s\n' % V(self.votes)
@@ -340,8 +349,7 @@ class Election(object):
                 s += '\tTotal: %s\n' % V(self.e_votes + self.p_votes + self.h_votes + self.d_votes + self.nt_votes + self.residual)
                 s += '\tSurplus: %s\n' % V(self.surplus)
             elif E.rule.method == 'qpq':
-                s += '\tCandidates elected by active ballots: %s\n' % self.ta
-                s += '\tCandidates elected by inactive ballots: %s\n' % self.tx
+                pass
             return s
             
         def dump(self, header=False):
@@ -367,7 +375,10 @@ class Election(object):
                 for c in candidates:
                     h += ['%s.name' % c.cid]
                     h += ['%s.state' % c.cid]
-                    h += ['%s.vote' % c.cid]
+                    if E.rule.method == 'qpq':
+                        h += ['%s.quotient' % c.cid]
+                    else:
+                        h += ['%s.vote' % c.cid]
                     if E.rule.method == 'meek': h += ['%s.kf' % c.cid]
                 h = [str(item) for item in h]
                 s += '\t'.join(h) + '\n'
@@ -392,7 +403,10 @@ class Election(object):
                 for c in candidates:
                     r.append(c.name)
                     r.append(c.code())
-                    r.append(V(c.vote))
+                    if E.rule.method == 'qpq':
+                        r.append(V(c.quotient))
+                    else:
+                        r.append(V(c.vote))
                     if E.rule.method == 'meek': r.append(V(c.kf))
 
             r = [str(item) for item in r]
