@@ -147,7 +147,7 @@ class ElectionRefTest(unittest.TestCase):
         E = self.doQpqCount('qpq1.blt')
         self.assertEqual(len(E.elected), 3)
         elected = [c.name for c in E.elected]
-        self.assertEqual(elected, ['a', 'b', 'c'])
+        self.assertEqual(elected, ['a', 'b', 'd'])
 
     def testQpq2(self):
         "test qpq2"

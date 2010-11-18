@@ -99,6 +99,16 @@ class Rule(ElectionRule):
 
         #  local support functions
         #
+        def calcQuota():
+            "Calculate quota"
+            #
+            #  2.4. ...The quota is defined to be 
+            #  va/(1 + s - tx), where va is the number of active ballots, s is the total number
+            #  of seats to be filled, and tx is the sum of the fractional numbers of candidates
+            #  that are deemed to have been elected by all the inactive ballots.
+            #
+            return E.va / (V(1 + E.nSeats) - E.tx)
+
         def breakTie(tied, reason=None):
             '''
             break a tie by lot
@@ -146,7 +156,7 @@ class Rule(ElectionRule):
         #  Calculate initial quota
         #
         E.va = sum((b.multiplier for b in E.ballots if not b.exhausted), V0)
-        E.quota = E.va / V(1 + E.nSeats) - E.tx  # quota [2.4]
+        E.quota = calcQuota()  # quota [2.4]
 
         #  2.2: each ballot has elected 0 candidates
         #
@@ -193,8 +203,8 @@ class Rule(ElectionRule):
 
             for c in C.hopeful():
                 c.quotient = c.vote / (V1 + c.tc)
-            
-            E.quota = E.va / V(1 + E.nSeats) - E.tx  # quota [2.4]
+
+            E.quota = calcQuota()  # quota [2.4]
 
             #  2.5a. If c is the candidate with the highest quotient, and that quotient is greater
             #  than the quota, then c is declared elected. In this case each of the vc ballots
