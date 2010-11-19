@@ -28,11 +28,12 @@ class Rule(ElectionRule):
     Options: arithmetic type, integer_quota, defeat_batch
     '''
     method = 'wigm' # underlying method
+    name = 'wigm'
     
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
-        return "wigm"
+        return cls.name
 
     @classmethod
     def helps(cls, helps, name):
@@ -75,7 +76,7 @@ class Rule(ElectionRule):
 
     def tag(self):
         "return a tag string for unit tests"
-        return "wigm"
+        return self.name
 
     #########################
     #

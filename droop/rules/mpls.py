@@ -211,11 +211,12 @@ class Rule(ElectionRule):
     Rule for counting Minneapolis MN STV
     '''
     method = 'wigm' # underlying method
+    name = 'mpls'
 
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
-        return 'mpls'
+        return cls.name
 
     @classmethod
     def helps(cls, helps, name):
@@ -252,7 +253,7 @@ class Rule(ElectionRule):
         
     def tag(self):
         "return a tag string for unit tests"
-        return 'mpls'
+        return self.name
 
     #########################
     #

@@ -171,7 +171,7 @@ class Election(object):
         sys.stdout.write(msg)
         sys.stdout.flush()
 
-    def json(self):
+    def json(self, intr=False):
         "dump election history as a JSON blob"
         import json as json_
         from fractions import Fraction
@@ -186,8 +186,38 @@ class Election(object):
                     return str(obj)
                 return json_.JSONEncoder.default(self, obj)
 
-        jlist = [action.adict for action in self.actions]
-        return json_.dumps(jlist, cls=ValueEncoder, sort_keys=True, indent=2)
+        jdict = dict(title=self.title,
+            droop_name=droop.common.droopName,
+            droop_version=droop.common.droopVersion,
+            rule_name=self.rule.name,
+            rule_info=self.rule.info(),
+            arithmetic_name=self.V.name,
+            arithmetic_info=self.V.info,
+            seats=self.nSeats,
+            nballots=self.nBallots,
+            quota=self.V(self.quota),
+            )
+        ignored = list()
+        for opt in self.options_all:
+            if opt in self.options_ignored or opt not in self.options_used:
+                ignored.append(opt)
+        if ignored:
+            jdict['options_ignored'] = sorted(ignored)
+        jdict['options_used'] = sorted(self.options_used)
+        if self.rule.method == 'meek':
+            jdict['omega'] = self.rule._omega
+        if self.electionProfile.source:
+            jdict['profile_source'] = self.electionProfile.source
+        if self.electionProfile.comment:
+            jdict['profile_comment'] = self.electionProfile.comment
+        if intr:    # pragma: no cover
+            jdict['intr'] = "count terminated prematurely by user interrupt"
+            self.log('** count interrupted; this round is incomplete **')
+        vreport = self.V.report()
+        if vreport:
+            jdict['arithmetic_report'] = vreport
+        jdict['actions'] = [action.adict for action in self.actions]
+        return json_.dumps(jdict, cls=ValueEncoder, sort_keys=True, indent=2)
 
     def report(self, intr=False):
         "report election by round:action"

@@ -114,7 +114,7 @@ def main(options=None):
     if options.get('dump', False):
         report += E.dump()
     if options.get('json', False):
-        report += E.json()
+        report += E.json(intr)
 
     if doProfile:
         p = pstats.Stats(profilefile)

@@ -128,11 +128,12 @@ class Rule(ElectionRule):
     Rule for counting Scottish STV
     '''
     method = 'wigm' # underlying method
+    name = 'scotland'
 
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
-        return 'scotland'
+        return cls.name
 
     @classmethod
     def helps(cls, helps, name):
@@ -169,7 +170,7 @@ class Rule(ElectionRule):
         
     def tag(self):
         "return a tag string for unit tests"
-        return 'scotland'
+        return self.name
 
     #########################
     #

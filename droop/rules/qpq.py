@@ -48,11 +48,12 @@ class Rule(ElectionRule):
     Rule for counting QPQ
     '''
     method = 'qpq'  # underlying method
+    name = 'qpq'
 
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
-        return 'qpq'
+        return cls.name
 
     @classmethod
     def helps(cls, helps, name):
@@ -87,7 +88,7 @@ class Rule(ElectionRule):
         
     def tag(self):
         "return a tag string for unit tests"
-        return 'qpq'
+        return self.name
 
     #########################
     #
