@@ -171,12 +171,11 @@ class Election(object):
         sys.stdout.write(msg)
         sys.stdout.flush()
 
-    def signature(self):
-        "return election signature (compact form of critical actions)"
-        s = ''
-        for action in self.actions:
-            s += action.signature()
-        return s
+    def json(self):
+        "dump election history as a JSON blob"
+        import json as json_
+        jlist = [action.adict for action in self.actions]
+        return json_.dumps(jlist, sort_keys=True, indent=4)
 
     def report(self, intr=False):
         "report election by round:action"
@@ -237,123 +236,94 @@ class Election(object):
                 ))
             self.E = E
             self.tag = tag
-            self.msg = msg
-            self.round = E.round
+            C = E.C
+            A = self.adict = dict(tag=tag, msg=msg, round=E.round)
             if tag == "log":
                 return
-            C = self.C = E.C.copy(E)    # save a copy of the Candidates state
-            self.votes = sum([c.vote for c in C.eligible()], E.V0)
-            self.quota = E.quota
-            self.surplus = E.V(E.surplus)
+            if tag == "round":
+                self.C = C.copy(E)    # save a copy of the Candidates state for weak tiebreaking
+            A['clist'] = [c.as_dict(ro=True, rw=True) for c in C]
+            A['votes'] = sum([c.vote for c in C.eligible()], E.V0)
+            A['quota'] = E.quota
             if E.rule.method == 'meek':
-                self.residual = E.residual  # meek residual is the nontransferable portion
+                A['residual'] = E.residual  # meek residual is the nontransferable portion
+                A['surplus'] = E.V(E.surplus)
             elif E.rule.method == 'wigm':
                 #
                 #  this is expensive in a big election, so we've done a little optimization
                 #
-                self.nt_votes = sum((b.vote for b in E.ballots if b.exhausted), E.V0) # nontransferable votes
-                self.h_votes = sum((c.vote for c in C.hopeful()), E.V0)     # votes for hopeful candidates
-                self.e_votes = sum((c.vote for c in C.notpending()), E.V0)  # votes for elected (transfer not pending) candidates
-                self.p_votes = sum((c.vote for c in C.pending()), E.V0)     # votes for elected (transfer pending) candidates
-                self.d_votes = sum((c.vote for c in C.defeated()), E.V0)    # votes for defeated candidates
-                total = self.e_votes + self.p_votes + self.h_votes + self.d_votes + self.nt_votes  # vote total
-                self.residual = E.V(E.nBallots) - total                     # votes lost due to rounding error
+                A['nt_votes'] = sum((b.vote for b in E.ballots if b.exhausted), E.V0) # nontransferable votes
+                A['h_votes'] = sum((c.vote for c in C.hopeful()), E.V0)     # votes for hopeful candidates
+                A['e_votes'] = sum((c.vote for c in C.notpending()), E.V0)  # votes for elected (transfer not pending) candidates
+                A['p_votes'] = sum((c.vote for c in C.pending()), E.V0)     # votes for elected (transfer pending) candidates
+                A['d_votes'] = sum((c.vote for c in C.defeated()), E.V0)    # votes for defeated candidates
+                total = A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes'] + A['nt_votes']  # vote total
+                A['residual'] = E.V(E.nBallots) - total                     # votes lost due to rounding error
+                A['surplus'] = E.V(E.surplus)
             elif E.rule.method == 'qpq':
-                self.votes = E.votes    # total votes
-                self.surplus = '-'      # qpq has no surplus
-            
-        def signature(self):
-            "return an action signature"
-
-            #  dump a line of data
-            #
-            if self.tag not in ('elect', 'defeat', 'pend', 'tie', 'final'):
-                return ''
-            E = self.E
-            V = E.V
-            candidates = self.C.eligible(order="ballot") # report in ballot order
-            tag1 = self.tag[0]
-            round = 'F' if self.tag == 'final' else self.round
-            r = [round, tag1, V(self.quota)]
-            if E.rule.method == 'meek':
-                r.extend([V(self.votes), V(self.surplus), V(self.residual)])
-            elif E.rule.method == 'wigm':
-                votes = self.e_votes + self.p_votes + self.h_votes + self.d_votes
-                total = votes + self.nt_votes + self.residual
-                r.extend([V(total), V(votes), V(self.nt_votes), V(self.residual)])
-            elif E.rule.method == 'qpq':
-                pass
-
-            for c in candidates:
-                r.append(c.nick)
-                r.append(c.code())
-                if E.rule.method == 'qpq':
-                    r.append(V(c.quotient))
-                else:
-                    r.append(V(c.vote))
-                if E.rule.method == 'meek': r.append(V(c.kf))
-
-            r = [str(item) for item in r]
-            return ':'.join(r) + '\n'
+                A['votes'] = E.votes    # total votes
+            self.adict = A
 
         def report(self):
             "report an action"
             E = self.E
-            if self.tag == 'log':
-                return "\t%s\n" % self.msg
+            A = self.adict
+            if A['tag'] == 'log':
+                return "\t%s\n" % A['msg']
             s = E.rule.reportAction(self) # allow rule to override default report
             if s is not None:
                 return s
-            if self.tag == 'round':
-                return "Round %d:\n" % self.round
+            if A['tag'] == 'round':
+                return "Round %d:\n" % A['round']
             V = E.V
-            C = self.C
-            s = 'Action: %s\n' % (self.msg)
-            if self.tag in ('elect', 'defeat', 'pend', 'transfer'):
+            clist = A['clist']
+            s = 'Action: %s\n' % (A['msg'])
+            if A['tag'] in ('elect', 'defeat', 'pend', 'transfer'):
                 if E.rule.method == 'qpq':
-                    for c in C.elected():
-                        s += '\tElected:  %s (%s)\n' % (c, V(c.quotient))
-                    for c in C.hopeful():
-                        s += '\tHopeful:  %s (%s)\n' % (c, V(c.quotient))
-                    for c in C.defeated():
-                        s += '\tDefeated:  %s (%s)\n' % (c, V(c.quotient))
+                    for c in [c for c in clist if c['state'] == 'elected']:
+                        s += '\tElected:  %s (%s)\n' % (c['name'], V(c['quotient']))
+                    for c in [c for c in clist if c['state'] == 'hopeful']:
+                        s += '\tHopeful:  %s (%s)\n' % (c['name'], V(c['quotient']))
+                    for c in [c for c in clist if c['state'] == 'defeated']:
+                        s += '\tDefeated: %s (%s)\n' % (c['name'], V(c['quotient']))
                 else:
-                    for c in C.notpending():
-                        s += '\tElected:  %s (%s)\n' % (c, V(c.vote))
-                    for c in C.pending():
-                        s += '\tPending:  %s (%s)\n' % (c, V(c.vote))
-                    for c in C.hopeful():
-                        s += '\tHopeful:  %s (%s)\n' % (c, V(c.vote))
-                    for c in (c for c in C.defeated() if c.vote > E.V0):
-                        s += '\tDefeated: %s (%s)\n' % (c, V(c.vote))
-                    c0 = [c.name for c in C.defeated() if c.vote == E.V0]
+                    for c in [c for c in clist if c['state'] == 'elected' and not c.get('pending', False)]:
+                        s += '\tElected:  %s (%s)\n' % (c['name'], V(c['vote']))
+                    for c in [c for c in clist if c['state'] == 'elected' and c.get('pending', False)]:
+                        s += '\tPending:  %s (%s)\n' % (c['name'], V(c['vote']))
+                    for c in [c for c in clist if c['state'] == 'hopeful']:
+                        s += '\tHopeful:  %s (%s)\n' % (c['name'], V(c['vote']))
+                    for c in [c for c in clist if c['state'] == 'defeated' and c['vote'] > E.V0]:
+                        s += '\tDefeated: %s (%s)\n' % (c['name'], V(c['vote']))
+                    c0 = [c['name'] for c in clist if c['state'] == 'defeated' and c['vote'] == E.V0]
                     if c0:
                         s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
             if E.rule.method == 'meek':
-                s += '\tQuota: %s\n' % V(self.quota)
-                s += '\tVotes: %s\n' % V(self.votes)
-                s += '\tResidual: %s\n' % V(self.residual)
-                s += '\tTotal: %s\n' % V((self.votes + self.residual))
-                s += '\tSurplus: %s\n' % V(self.surplus)
+                s += '\tQuota: %s\n' % V(A['quota'])
+                s += '\tVotes: %s\n' % V(A['votes'])
+                s += '\tResidual: %s\n' % V(A['residual'])
+                s += '\tTotal: %s\n' % V((A['votes'] + A['residual']))
+                s += '\tSurplus: %s\n' % V(A['surplus'])
             elif E.rule.method == 'wigm':
-                s += '\tElected votes: %s\n' % V(self.e_votes)
-                if self.p_votes:
-                    s += '\tPending votes: %s\n' % V(self.p_votes)
-                s += '\tHopeful votes: %s\n' % V(self.h_votes)
-                if self.d_votes:
-                    s += '\tDefeated votes: %s\n' % V(self.d_votes)
-                s += '\tNontransferable votes: %s\n' % V(self.nt_votes)
-                s += '\tResidual: %s\n' % V(self.residual)
-                s += '\tTotal: %s\n' % V(self.e_votes + self.p_votes + self.h_votes + self.d_votes + self.nt_votes + self.residual)
-                s += '\tSurplus: %s\n' % V(self.surplus)
+                s += '\tElected votes: %s\n' % V(A['e_votes'])
+                if A['p_votes']:
+                    s += '\tPending votes: %s\n' % V(A['p_votes'])
+                s += '\tHopeful votes: %s\n' % V(A['h_votes'])
+                if A['d_votes']:
+                    s += '\tDefeated votes: %s\n' % V(A['d_votes'])
+                s += '\tNontransferable votes: %s\n' % V(A['nt_votes'])
+                s += '\tResidual: %s\n' % V(A['residual'])
+                s += '\tTotal: %s\n' % V(A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes'] + A['nt_votes'] + A['residual'])
+                s += '\tSurplus: %s\n' % V(A['surplus'])
             elif E.rule.method == 'qpq':
-                s += '\tQuota: %s\n' % V(self.quota)
+                s += '\tQuota: %s\n' % V(A['quota'])
             return s
             
         def dump(self, header=False):
             "dump an action"
 
             E = self.E
+            A = self.adict
             V = E.V
             C = E.C
             s = ''
@@ -384,28 +354,33 @@ class Election(object):
             
             #  dump a line of data
             #
-            if self.tag in ('round', 'log', 'iterate'):
-                r = [self.round, self.tag, self.msg]
+            if A['tag'] in ('round', 'log', 'iterate'):
+                r = [A['round'], A['tag'], A['msg']]
             else:
-                round = 'F' if self.tag == 'final' else self.round
-                r = [round, self.tag, V(self.quota)]
+                round = 'F' if A['tag'] == 'final' else A['round']
+                r = [round, A['tag'], V(A['quota'])]
                 if E.rule.method == 'meek':
-                    r += [V(self.votes), V(self.surplus), V(self.residual)]
+                    r += [V(A['votes']), V(A['surplus']), V(A['residual'])]
                 elif E.rule.method == 'wigm':
-                    votes = self.e_votes + self.p_votes + self.h_votes + self.d_votes
-                    total = votes + self.nt_votes + self.residual
-                    r += [V(total), V(votes), V(self.nt_votes), V(self.residual)]
+                    votes = A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes']
+                    total = votes + A['nt_votes'] + A['residual']
+                    r += [V(total), V(votes), V(A['nt_votes']), V(A['residual'])]
                 elif E.rule.method == 'qpq':
                     pass
 
+                # TODO: this is wrong, since candidates is global instead of action-specific
+                bycid = dict()
+                for c in A['clist']:      # build a cid lookup table
+                    bycid[c['cid']] = c
                 for c in candidates:
+                    cdict = bycid[c.cid]
                     r.append(c.name)
-                    r.append(c.code())
+                    r.append(cdict['code'])
                     if E.rule.method == 'qpq':
-                        r.append(V(c.quotient))
+                        r.append(V(cdict['quotient']))
                     else:
-                        r.append(V(c.vote))
-                    if E.rule.method == 'meek': r.append(V(c.kf))
+                        r.append(V(cdict['vote']))
+                    if E.rule.method == 'meek': r.append(V(cdict['kf']))
 
             r = [str(item) for item in r]
             s += '\t'.join(r) + '\n'
@@ -586,7 +561,28 @@ class Candidate(object):
             self.vote = E.V0        # current vote total
         self.kf = None              # current keep factor (meek)
         self.quotient = None        # current quotient (qpq)
-        self.pending = False        # surplus-transfer pending (wigm)
+        self.pending = None         # surplus-transfer pending (wigm)
+
+    def as_dict(self, ro=False, rw=False):
+        "return as a dict suitable for JSON encoding"
+        cdict = dict()
+        if ro:
+            cdict['cid'] = self.cid
+            cdict['ballot_order'] = self.order
+            cdict['tie_order'] = self.tieOrder
+            cdict['name'] = self.name
+            cdict['nick'] = self.nick
+        if rw:
+            cdict['state'] = self.state
+            cdict['code'] = self.code()
+            cdict['vote'] = self.vote
+            if self.kf is not None:
+                cdict['kf'] = self.kf
+            if self.quotient is not None:
+                cdict['quotient'] = self.quotient
+            if self.pending is not None:
+                cdict['pending'] = self.pending
+        return cdict
 
     @property
     def surplus(self):

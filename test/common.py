@@ -30,9 +30,9 @@ from droop.profile import ElectionProfile
 
 pyflakes = True # dummy for pyflakes
 
-#  development aids: option to suppress inclusion of signature/dump/report compares in unit tests
+#  development aids: option to suppress inclusion of json/dump/report compares in unit tests
 #
-compare_signature = True  # complain about signature mismatches
+compare_json = True       # complain about json mismatches
 compare_dump = True       # complain about dump mismatches
 compare_report = True     # complain about report mismatches
 
@@ -50,14 +50,14 @@ def doDumpCompare(options, file, subdir=''):
     tag = '%s-%s-%s' % (base, E.rule.tag(), E.V.tag())
 
     def readFile(path):
-        "read a signature/dump/report file"
+        "read a json/dump/report file"
         f = open(path, 'r')
         data = f.read()
         f.close()
         return data
         
     def writeFile(path, data):
-        "write a signature/dump/report file"
+        "write a json/dump/report file"
         if not os.path.isdir(os.path.dirname(path)):
             os.makedirs(os.path.dirname(path))
         f = open(path, 'w')
@@ -82,20 +82,20 @@ def doDumpCompare(options, file, subdir=''):
         if compare_report:
             return False
 
-    #  same logic with signature
+    #  same logic with json
     #
-    sref = os.path.join(testdir, 'ref', 'sig', subdir, '%s.txt' % tag)
-    sout = os.path.join(testdir, 'out', 'sig', subdir, '%s.txt' % tag)
-    sig = E.signature()
-    if not os.path.isfile(sref):
-        writeFile(sref, sig)
-    sigref = readFile(sref)
-    if os.path.isfile(sout):
-        os.unlink(sout)
-    if sig != sigref:
-        writeFile(sout, sig)
-        if compare_signature:
-            return False
+#     sref = os.path.join(testdir, 'ref', 'sig', subdir, '%s.txt' % tag)
+#     sout = os.path.join(testdir, 'out', 'sig', subdir, '%s.txt' % tag)
+#     sig = E.json()
+#     if not os.path.isfile(sref):
+#         writeFile(sref, sig)
+#     sigref = readFile(sref)
+#     if os.path.isfile(sout):
+#         os.unlink(sout)
+#     if sig != sigref:
+#         writeFile(sout, sig)
+#         if compare_json:
+#             return False
 
     #  same logic with dump
     #
