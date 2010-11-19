@@ -218,7 +218,7 @@ class Rule(ElectionRule):
             names = ", ".join([c.name for c in tied])
             direction = 0 if reason.find('defeat') >= 0 else -1
             # extract list of candidate states by round from list of actions
-            rounds = [action.C for action in E.actions if action.action == 'round']
+            rounds = [action.C for action in E.actions if action.tag == 'round']
             tiedlist = list(tied)
             for n in xrange(E.round-1, -1, -1):
                 tiedCids = [c.cid for c in tiedlist]

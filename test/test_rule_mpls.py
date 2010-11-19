@@ -66,15 +66,15 @@ class MplsTest(unittest.TestCase):
         self.assertEqual(self.options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
         self.assertEqual(self.options['precision'], 4, 'mpls should set precision=4')
         self.assertEqual(self.options['display'], None, 'mpls should set display=None')
-        self.assertEqual(self.E.candidates[1].name, "Castor")
-        self.assertEqual(str(self.E.candidates[1]), "Castor")
-        self.assertTrue(self.E.candidates[1] == 1)
-        self.assertTrue(self.E.candidates[1] == '1')
-        self.assertFalse(self.E.candidates[1] == None)
+        self.assertEqual(self.E.C.byCid(1).name, "Castor")
+        self.assertEqual(str(self.E.C.byCid(1)), "Castor")
+        self.assertTrue(self.E.C.byCid(1) == 1)
+        self.assertTrue(self.E.C.byCid(1) == '1')
+        self.assertFalse(self.E.C.byCid(1) == None)
 
     def testElectionTieOrder(self):
         "test default tie order"
-        for c in self.E.candidates.values():
+        for c in self.E.C:
             self.assertEqual(c.order, c.tieOrder)
 
     def testElectionCount1(self):
@@ -101,7 +101,7 @@ class ElectionCountTest(unittest.TestCase):
         "check a different tiebreaking order"
         E = self.doCount(dict(rule='mpls'), '42t.blt')
         tieOrder = [0, 3, 2, 1]
-        for c in E.candidates.values():
+        for c in E.C:
             self.assertEqual(c.tieOrder, tieOrder[c.order])
 
     def testElectionCount2(self):

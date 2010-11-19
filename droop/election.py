@@ -90,7 +90,6 @@ class Election(object):
 
         #  create candidate objects for candidates in election profile
         #
-        self.candidates = dict()  # cid: Candidate
         self.C = Candidates()
         for cid in sorted(electionProfile.eligible | electionProfile.withdrawn):
             c = Candidate(self, cid, electionProfile.candidateOrder(cid), 
@@ -99,7 +98,6 @@ class Election(object):
                 electionProfile.nickName[cid],
                 cid in electionProfile.withdrawn)
             self.C.add(self, c)
-            self.candidates[cid] = c
 
         #  create a ballot object (ranking candidate IDs) from the profile rankings of candidate IDs
         #  withdrawn candidates have been removed already
@@ -166,7 +164,7 @@ class Election(object):
         
     def candidate(self, cid):
         "look up a candidate from a candidate ID"
-        return self.candidates[cid]
+        return self.C.byCid(cid)
         
     def prog(self, msg):
         "log to the console (immediate output)"
@@ -224,9 +222,9 @@ class Election(object):
     class Action(object):
         "one action"
         
-        def __init__(self, E, action, msg):
+        def __init__(self, E, tag, msg):
             "create an action"
-            assert(action in (
+            assert(tag in (
                 'log',      # log an arbitrary string
                 'round',    # start a new round
                 'tie',      # break a tie
@@ -238,10 +236,10 @@ class Election(object):
                 'final'     # end of count
                 ))
             self.E = E
-            self.action = action
+            self.tag = tag
             self.msg = msg
             self.round = E.round
-            if action == "log":
+            if tag == "log":
                 return
             C = self.C = E.C.copy(E)    # save a copy of the Candidates state
             self.votes = sum([c.vote for c in C.eligible()], E.V0)
@@ -269,14 +267,14 @@ class Election(object):
 
             #  dump a line of data
             #
-            if self.action not in ('elect', 'defeat', 'pend', 'tie', 'final'):
+            if self.tag not in ('elect', 'defeat', 'pend', 'tie', 'final'):
                 return ''
             E = self.E
             V = E.V
             candidates = self.C.eligible(order="ballot") # report in ballot order
-            tag = self.action[0]
-            round = 'F' if self.action == 'final' else self.round
-            r = [round, tag, V(self.quota)]
+            tag1 = self.tag[0]
+            round = 'F' if self.tag == 'final' else self.round
+            r = [round, tag1, V(self.quota)]
             if E.rule.method == 'meek':
                 r.extend([V(self.votes), V(self.surplus), V(self.residual)])
             elif E.rule.method == 'wigm':
@@ -301,17 +299,17 @@ class Election(object):
         def report(self):
             "report an action"
             E = self.E
-            if self.action == 'log':
+            if self.tag == 'log':
                 return "\t%s\n" % self.msg
             s = E.rule.reportAction(self) # allow rule to override default report
             if s is not None:
                 return s
-            if self.action == 'round':
+            if self.tag == 'round':
                 return "Round %d:\n" % self.round
             V = E.V
             C = self.C
             s = 'Action: %s\n' % (self.msg)
-            if self.action in ('elect', 'defeat', 'pend', 'transfer'):
+            if self.tag in ('elect', 'defeat', 'pend', 'transfer'):
                 if E.rule.method == 'qpq':
                     for c in C.elected():
                         s += '\tElected:  %s (%s)\n' % (c, V(c.quotient))
@@ -386,11 +384,11 @@ class Election(object):
             
             #  dump a line of data
             #
-            if self.action in ('round', 'log', 'iterate'):
-                r = [self.round, self.action, self.msg]
+            if self.tag in ('round', 'log', 'iterate'):
+                r = [self.round, self.tag, self.msg]
             else:
-                round = 'F' if self.action == 'final' else self.round
-                r = [round, self.action, V(self.quota)]
+                round = 'F' if self.tag == 'final' else self.round
+                r = [round, self.tag, V(self.quota)]
                 if E.rule.method == 'meek':
                     r += [V(self.votes), V(self.surplus), V(self.residual)]
                 elif E.rule.method == 'wigm':
@@ -465,7 +463,7 @@ class Election(object):
         @property
         def topCand(self):
             "return top candidate, or None if exhausted"
-            return self.E.candidates[self.ranking[self.index]] if self.index < len(self.ranking) else None
+            return self.E.C.byCid(self.ranking[self.index]) if self.index < len(self.ranking) else None
         
         @property
         def vote(self):
@@ -481,6 +479,7 @@ class Candidates(set):
     '''
     def __init__(self):
         "new Candidates"
+        self._byCid = dict()    # side table: cid -> Candidate
 
     def copy(self, E):
         "return a copy of ourself"
@@ -491,11 +490,16 @@ class Candidates(set):
 
     def add(self, E, c):
         "add a candidate"
+        self._byCid[c.cid] = c   # side table for lookup by candidate ID
         super(Candidates, self).add(c)
         if c.state == "withdrawn":
             E.log("Add withdrawn: %s" % c.name)
         else:
             E.log("Add eligible: %s" % c.name)
+
+    def byCid(self, cid):
+        "look up a candidate by candidate ID"
+        return self._byCid[cid]
 
     @staticmethod
     def byBallotOrder(candidates, reverse=False):
