@@ -174,8 +174,20 @@ class Election(object):
     def json(self):
         "dump election history as a JSON blob"
         import json as json_
+        from fractions import Fraction
+
+        class ValueEncoder(json_.JSONEncoder):
+            "provide JSON encoding for droop arithmetic object"
+            def default(self, obj):
+                "handle Rational objects that escape to Fraction"
+                if isinstance(obj, Fraction):
+                    return str(values.rational.Rational(obj))
+                if isinstance(obj, (values.fixed.Fixed, values.guarded.Guarded, values.rational.Rational)):
+                    return str(obj)
+                return json_.JSONEncoder.default(self, obj)
+
         jlist = [action.adict for action in self.actions]
-        return json_.dumps(jlist, sort_keys=True, indent=4)
+        return json_.dumps(jlist, cls=ValueEncoder, sort_keys=True, indent=2)
 
     def report(self, intr=False):
         "report election by round:action"
@@ -242,7 +254,7 @@ class Election(object):
                 return
             if tag == "round":
                 self.C = C.copy(E)    # save a copy of the Candidates state for weak tiebreaking
-            A['clist'] = [c.as_dict(ro=True, rw=True) for c in C]
+            A['clist'] = [c.as_dict(ro=True, rw=True) for c in C.select("all", order="ballot")]
             A['votes'] = sum([c.vote for c in C.eligible()], E.V0)
             A['quota'] = E.quota
             if E.rule.method == 'meek':
@@ -368,7 +380,6 @@ class Election(object):
                 elif E.rule.method == 'qpq':
                     pass
 
-                # TODO: this is wrong, since candidates is global instead of action-specific
                 bycid = dict()
                 for c in A['clist']:      # build a cid lookup table
                     bycid[c['cid']] = c
@@ -493,7 +504,9 @@ class Candidates(set):
 
     def select(self, state, order="none", reverse=False):
         "select and return list of candidates with specified state, optionally in specified order"
-        if state == "eligible":
+        if state == "all":
+            candidates = self
+        elif state == "eligible":
             candidates = [c for c in self if c.state != "withdrawn"]
         elif state == "pending":
             candidates = [c for c in self if c.state == "elected" and c.pending]

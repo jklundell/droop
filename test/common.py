@@ -84,18 +84,18 @@ def doDumpCompare(options, file, subdir=''):
 
     #  same logic with json
     #
-#     sref = os.path.join(testdir, 'ref', 'sig', subdir, '%s.txt' % tag)
-#     sout = os.path.join(testdir, 'out', 'sig', subdir, '%s.txt' % tag)
-#     sig = E.json()
-#     if not os.path.isfile(sref):
-#         writeFile(sref, sig)
-#     sigref = readFile(sref)
-#     if os.path.isfile(sout):
-#         os.unlink(sout)
-#     if sig != sigref:
-#         writeFile(sout, sig)
-#         if compare_json:
-#             return False
+    sref = os.path.join(testdir, 'ref', 'json', subdir, '%s.txt' % tag)
+    sout = os.path.join(testdir, 'out', 'json', subdir, '%s.txt' % tag)
+    json = E.json()
+    if not os.path.isfile(sref):
+        writeFile(sref, json)
+    jsonref = readFile(sref)
+    if os.path.isfile(sout):
+        os.unlink(sout)
+    if json != jsonref:
+        writeFile(sout, json)
+        if compare_json:
+            return False
 
     #  same logic with dump
     #
