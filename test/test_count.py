@@ -115,7 +115,6 @@ class ElectionDumpTest(unittest.TestCase):
         rulenames = droop.electionRuleNames()
         for blt in blts:
             for rulename in rulenames:
-                Rule = droop.electionRule(rulename)
                 self.assertTrue(doDumpCompare(dict(rule=rulename), blt), '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpRules(self):

@@ -23,7 +23,6 @@ This file is part of Droop.
 import unittest
 
 from common import testdir, doDumpCompare
-import droop
 from droop import electionRuleNames, electionRule
 from droop.election import Election
 from droop.profile import ElectionProfile
@@ -98,7 +97,6 @@ class ElectionDumpTest(unittest.TestCase):
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
         rulename = 'meek'
         for blt in blts:
-            Rule = droop.electionRule(rulename)
             self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpRationalWarren(self):
@@ -106,7 +104,6 @@ class ElectionDumpTest(unittest.TestCase):
         blts = ('42', '42t', '513', 'SC')  # SC-Vm-12 runs too long with warren+rational
         rulename = 'warren'
         for blt in blts:
-            Rule = droop.electionRule(rulename)
             self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpFixedVsGuardedMeek(self):

@@ -23,7 +23,6 @@ This file is part of Droop.
 import unittest
 
 from common import testdir, doDumpCompare
-import droop
 from droop.election import Election
 from droop.profile import ElectionProfile
 from droop import electionRuleNames
@@ -90,7 +89,6 @@ class ElectionDumpTest(unittest.TestCase):
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
         rulename = 'wigm'
         for blt in blts:
-            Rule = droop.electionRule(rulename)
             self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpFixedVsGuardedWigm(self):
