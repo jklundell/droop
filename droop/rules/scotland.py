@@ -218,12 +218,10 @@ class Rule(ElectionRule):
                 return tied.pop()
             names = ", ".join([c.name for c in tied])
             direction = 0 if reason.find('defeat') >= 0 else -1
-            # extract list of candidate states by round from list of actions
-            rounds = [action.C for action in E.actions if action.tag == 'round']
             tiedlist = list(tied)
             for n in xrange(E.round-1, -1, -1):
                 tiedCids = [c.cid for c in tiedlist]
-                CSR = rounds[n] # candidate states in round n
+                CSR = E.rounds[n] # candidate states in round n
                 tiedlist = C.byVote([c for c in CSR if c.cid in tiedCids])
                 tiedlist = [c for c in tiedlist if c.vote == tiedlist[direction].vote]
                 if len(tiedlist) == 1:
@@ -268,6 +266,7 @@ class Rule(ElectionRule):
         for b in E.ballots:
             b.topCand.vote += b.vote
 
+        E.logAction('begin', 'Begin Count')
         while True:
 
             #  elect candidates with quota [47]

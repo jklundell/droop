@@ -298,6 +298,7 @@ class Rule(ElectionRule):
         ##          than the number of seats to be filled, the count is complete; finish at
         ##          step C.
         ##
+        E.logAction('begin', 'Begin Count')
         while len(C.hopeful()) > E.seatsLeftToFill() > 0:
 
             ##  B. Round

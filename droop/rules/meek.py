@@ -367,6 +367,7 @@ class Rule(ElectionRule):
             for cid in b.topRank:
                 E.candidate(cid).vote += v
 
+        E.logAction('begin', 'Begin Count')
         while not countComplete():
 
             #  B. next round

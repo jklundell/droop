@@ -430,6 +430,7 @@ class Rule(ElectionRule):
         for b in E.ballots:
             b.topCand.vote += b.vote
 
+        E.logAction('begin', 'Begin Count')
         while True:
 
             ##     If the number of candidates whose vote total is equal to or greater than

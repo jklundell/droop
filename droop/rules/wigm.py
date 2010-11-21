@@ -157,6 +157,7 @@ class Rule(ElectionRule):
         for b in E.ballots:
             b.topCand.vote += b.vote
 
+        E.logAction('begin', 'Begin Count')
         while len(C.hopeful()) > E.seatsLeftToFill() > 0:
             E.newRound()
 

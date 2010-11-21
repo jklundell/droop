@@ -57,7 +57,6 @@ class ElectionBasics(unittest.TestCase):
             for c in candidates:
                 self.assertEqual(c.order, c.tieOrder)
             E.count()
-            print E.report() # JKL DEBUG
             self.assertEqual(len(E.elected), E.nSeats)
 
 class ElectionOptions(unittest.TestCase):

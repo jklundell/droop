@@ -152,6 +152,7 @@ class Rule(ElectionRule):
 
         for c in C.hopeful():
             c.tc = V0
+            c.quotient = V0
         E.tx = V0
 
         #  Calculate initial quota
@@ -165,6 +166,7 @@ class Rule(ElectionRule):
             b.weight = V0
 
         restart = True
+        E.logAction('begin', 'Begin Count')
         while (not countComplete()):
         
             E.newRound()

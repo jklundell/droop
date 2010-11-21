@@ -137,6 +137,7 @@ class Rule(ElectionRule):
         ##       or if the number of elected plus hopeful candidates 
         ##       is less than or equal to the number of seats.
 
+        E.logAction('begin', 'Begin Count')
         while len(C.hopeful()) > E.seatsLeftToFill() > 0:
 
             E.newRound()    # data structures for new round
