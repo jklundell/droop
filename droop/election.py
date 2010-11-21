@@ -182,15 +182,21 @@ class Election(object):
 
     def report(self, intr=False):
         "return the election record as a formatted report"
+        if intr:
+            self.log('** count interrupted; this round is incomplete **')
         return self.erecord.report(intr)
 
-    def dump(self):
+    def dump(self, intr=False):
         "return the election record as tab-separated fields"
+        if intr:
+            self.log('** count interrupted; this round is incomplete **')
         return self.erecord.dump()
 
     def json(self, intr=False):
         "return the election record as a JSON string"
-        return self.erecord.json(intr)
+        if intr:
+            self.log('** count interrupted; this round is incomplete **')
+        return self.erecord.json()
 
     class ElectionRecord(dict):
         "complete record of an election"
@@ -209,12 +215,14 @@ class Election(object):
             self['droop_version'] = droop.common.droopVersion
             self['rule_name'] = E.rule.name
             self['rule_info'] = E.rule.info()
+            self['method'] = E.rule.method
             self['arithmetic_name'] = E.V.name
             self['arithmetic_info'] = E.V.info
             self['seats'] = E.nSeats
             self['nballots'] = E.nBallots
             self['quota'] = E.V(E.quota)
-            self['cids'] = E.C.cidList()
+            self['cids'] = E.C.cidList("all")       # all CIDs
+            self['ecids'] = E.C.cidList("eligible") # eligible CIDs
             self['cdict'] = E.C.cDict()
             ignored = list()
             for opt in E.options_all:
@@ -223,7 +231,7 @@ class Election(object):
             if ignored:
                 self['options_ignored'] = sorted(ignored)
             self['options_used'] = sorted(E.options_used)
-            if E.rule.method == 'meek':
+            if self['method'] == 'meek':
                 self['omega'] = E.rule._omega
             if E.electionProfile.source:
                 self['profile_source'] = E.electionProfile.source
@@ -262,10 +270,10 @@ class Election(object):
             A['cstate'] = C.cState()  # variable candidate state
             A['votes'] = sum([c.vote for c in C.eligible()], E.V0)
             A['quota'] = E.quota
-            if E.rule.method == 'meek':
+            if self['method'] == 'meek':
                 A['residual'] = E.residual  # meek residual is the nontransferable portion
                 A['surplus'] = E.V(E.surplus)
-            elif E.rule.method == 'wigm':
+            elif self['method'] == 'wigm':
                 #
                 #  this is expensive in a big election, so we've done a little optimization
                 #
@@ -277,7 +285,7 @@ class Election(object):
                 total = A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes'] + A['nt_votes']  # vote total
                 A['residual'] = E.V(E.nBallots) - total                     # votes lost due to rounding error
                 A['surplus'] = E.V(E.surplus)
-            elif E.rule.method == 'qpq':
+            elif self['method'] == 'qpq':
                 A['votes'] = E.votes    # total votes
             self['actions'].append(A)
 
@@ -307,52 +315,55 @@ class Election(object):
             report += '\n'
             if intr:    # pragma: no cover
                 report += "\t** Count terminated prematurely by user interrupt **\n\n"
-                E.log('** count interrupted; this round is incomplete **')
             areport = self.get('arithmetic_report', None)
             if areport is not None:
                 report += areport
+            cids = self['cids']
+            cdict = self['cdict']
+            astrings = [report]
             for A in self['actions']:
                 if A['tag'] == 'log':
-                    report += "\t%s\n" % A['msg']
+                    astrings.append("\t%s\n" % A['msg'])
                     continue
-                s = E.rule.reportAction(self) # allow rule to override default report
-                if s is not None:
-                    report += s
+                ra = E.rule.reportAction(self) # allow rule to override default report
+                if ra is not None:
+                    astrings.append(ra)
                     continue
                 if A['tag'] == 'round':
-                    report += "Round %d:\n" % A['round']
+                    astrings.append("Round %d:\n" % A['round'])
                     continue
-                cids = E.C.cidList()
-                cdict = E.C.cDict()
                 cstate = A['cstate']
+                ecids = [cid for cid in cids if cstate[cid]['state'] == 'elected']
+                hcids = [cid for cid in cids if cstate[cid]['state'] == 'hopeful']
+                dcids = [cid for cid in cids if cstate[cid]['state'] == 'defeated']
                 s = 'Action: %s\n' % (A['msg'])
                 if A['tag'] in ('begin', 'elect', 'defeat', 'pend', 'transfer', 'end'):
-                    if E.rule.method == 'qpq':
-                        for cid in [cid for cid in cids if cstate[cid]['state'] == 'elected']:
+                    if self['method'] == 'qpq':
+                        for cid in ecids:
                             s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
-                        for cid in [cid for cid in cids if cstate[cid]['state'] == 'hopeful']:
+                        for cid in hcids:
                             s += '\tHopeful:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
-                        for cid in [cid for cid in cids if cstate[cid]['state'] == 'defeated']:
+                        for cid in dcids:
                             s += '\tDefeated: %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
                     else:
-                        for cid in [cid for cid in cids if cstate[cid]['state'] == 'elected' and not cstate[cid].get('pending', False)]:
+                        for cid in [cid for cid in ecids if not cstate[cid].get('pending')]:
                             s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['vote']))
-                        for cid in [cid for cid in cids if cstate[cid]['state'] == 'elected' and cstate[cid].get('pending', False)]:
+                        for cid in [cid for cid in ecids if cstate[cid].get('pending')]:
                             s += '\tPending:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['vote']))
-                        for cid in [cid for cid in cids if cstate[cid]['state'] == 'hopeful']:
+                        for cid in hcids:
                             s += '\tHopeful:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['vote']))
-                        for cid in [cid for cid in cids if cstate[cid]['state'] == 'defeated' and cstate[cid]['vote'] > E.V0]:
+                        for cid in [cid for cid in dcids if cstate[cid]['vote'] > E.V0]:
                             s += '\tDefeated: %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['vote']))
-                        c0 = [cdict[cid]['name'] for cid in cids if cstate[cid]['state'] == 'defeated' and cstate[cid]['vote'] == E.V0]
+                        c0 = [cdict[cid]['name'] for cid in dcids if cstate[cid]['vote'] == E.V0]
                         if c0:
                             s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
-                if E.rule.method == 'meek':
+                if self['method'] == 'meek':
                     s += '\tQuota: %s\n' % V(A['quota'])
                     s += '\tVotes: %s\n' % V(A['votes'])
                     s += '\tResidual: %s\n' % V(A['residual'])
                     s += '\tTotal: %s\n' % V((A['votes'] + A['residual']))
                     s += '\tSurplus: %s\n' % V(A['surplus'])
-                elif E.rule.method == 'wigm':
+                elif self['method'] == 'wigm':
                     s += '\tElected votes: %s\n' % V(A['e_votes'])
                     if A['p_votes']:
                         s += '\tPending votes: %s\n' % V(A['p_votes'])
@@ -363,41 +374,39 @@ class Election(object):
                     s += '\tResidual: %s\n' % V(A['residual'])
                     s += '\tTotal: %s\n' % V(A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes'] + A['nt_votes'] + A['residual'])
                     s += '\tSurplus: %s\n' % V(A['surplus'])
-                elif E.rule.method == 'qpq':
+                elif self['method'] == 'qpq':
                     s += '\tQuota: %s\n' % V(A['quota'])
-                report += s
-            return report
+                astrings.append(s)
+            return "".join(astrings)
             
         def dump(self):
             "dump a list of actions"
 
-            E = self.E
-            V = E.V
-            C = E.C
-            s = ''
-            candidates = C.eligible(order="ballot") # report in ballot order
+            V = self.E.V
+            ecids = self['ecids']
+            cdict = self['cdict']
             
             #  header line
             #
             h = ['R', 'Action', 'Quota']
-            if E.rule.method == 'meek':
+            if self['method'] == 'meek':
                 h += ['Votes', 'Surplus', 'Residual']
-            elif E.rule.method == 'wigm':
+            elif self['method'] == 'wigm':
                 h += ['Total', 'Votes', 'Non-Transferable', 'Residual']
-            elif E.rule.method == 'qpq':
+            elif self['method'] == 'qpq':
                 pass
 
-            for c in candidates:
-                h += ['%s.name' % c.cid]
-                h += ['%s.state' % c.cid]
-                if E.rule.method == 'qpq':
-                    h += ['%s.quotient' % c.cid]
+            for cid in ecids:
+                h += ['%s.name' % cid]
+                h += ['%s.state' % cid]
+                if self['method'] == 'qpq':
+                    h += ['%s.quotient' % cid]
                 else:
-                    h += ['%s.vote' % c.cid]
-                if E.rule.method == 'meek': h += ['%s.kf' % c.cid]
+                    h += ['%s.vote' % cid]
+                if self['method'] == 'meek': h += ['%s.kf' % cid]
             h = [str(item) for item in h]
-            s += '\t'.join(h) + '\n'
 
+            dumps = ['\t'.join(h) + '\n']
             cdict = self['cdict']
             for A in self['actions']:
                 #  dump a line of data
@@ -407,31 +416,31 @@ class Election(object):
                 else:
                     round = 'X' if A['tag'] == 'end' else A['round']
                     r = [round, A['tag'], V(A['quota'])]
-                    if E.rule.method == 'meek':
+                    if self['method'] == 'meek':
                         r += [V(A['votes']), V(A['surplus']), V(A['residual'])]
-                    elif E.rule.method == 'wigm':
+                    elif self['method'] == 'wigm':
                         votes = A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes']
                         total = votes + A['nt_votes'] + A['residual']
                         r += [V(total), V(votes), V(A['nt_votes']), V(A['residual'])]
-                    elif E.rule.method == 'qpq':
+                    elif self['method'] == 'qpq':
                         pass
     
                     cstate = A['cstate']
-                    for cid in [c.cid for c in candidates]:
+                    for cid in ecids:
                         r.append(cdict[cid]['name'])
                         r.append(cstate[cid]['code'])
-                        if E.rule.method == 'qpq':
+                        if self['method'] == 'qpq':
                             r.append(V(cstate[cid]['quotient']))
                         else:
                             r.append(V(cstate[cid]['vote']))
-                        if E.rule.method == 'meek': r.append(V(cstate[cid]['kf']))
+                        if self['method'] == 'meek': r.append(V(cstate[cid]['kf']))
     
                 r = [str(item) for item in r]
-                s += '\t'.join(r) + '\n'
-            return s
+                dumps.append('\t'.join(r) + '\n')
+            return "".join(dumps)
 
-        def json(self, intr=False):
-            "dump election history as a JSON blob"
+        def json(self):
+            "dump election history as a JSON-encoded string"
             import json as json_
             from fractions import Fraction
     
@@ -445,9 +454,6 @@ class Election(object):
                         return str(obj)
                     return json_.JSONEncoder.default(self, obj) # pragma: no cover
     
-            if intr:    # pragma: no cover
-                self['intr'] = "count terminated prematurely by user interrupt"
-                self.E.log('** count interrupted; this round is incomplete **')
             return json_.dumps(self, cls=ValueEncoder, sort_keys=True, indent=2)
 
     class Ballot(object):
@@ -540,13 +546,13 @@ class Candidates(set):
         "look up a candidate by candidate ID"
         return self._byCid[cid]
 
-    def cidList(self):
+    def cidList(self, state="all"):
         '''
         return a list of CIDs, in ballot order
         
         used for reporting
         '''
-        return [c.cid for c in self.select("all", order="ballot")]
+        return [c.cid for c in self.select(state, order="ballot")]
 
     def cDict(self):
         '''

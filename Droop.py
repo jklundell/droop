@@ -112,7 +112,7 @@ def main(options=None):
     if options.get('report', True):
         report += E.report(intr)
     if options.get('dump', False):
-        report += E.dump()
+        report += E.dump(intr)
     if options.get('json', False):
         report += E.json(intr)
 
