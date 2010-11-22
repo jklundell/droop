@@ -293,44 +293,39 @@ class Election(object):
             "report an action"
             E = self.E
             V = E.V
-            report = "\nElection: %s\n\n" % self['title']
-            report += "\tDroop package: %s v%s\n" % (self['droop_name'], self['droop_version'])
-            report += "\tRule: %s\n" % self['rule_info']
-            report += "\tArithmetic: %s\n" % self['arithmetic_info']
-            ignored = self.get('options_ignored', None)
-            if ignored is not None:
-                report += "\tIgnored options: %s\n" % ", ".join(ignored)
-            report += "\tSeats: %d\n" % self['seats']
-            report += "\tBallots: %d\n" % self['nballots']
-            report += "\tQuota: %s\n" % V(self['quota'])
-            omega = self.get('omega', None)
-            if omega is not None:
-                report += "\tOmega: %s\n" % omega
-            source = self.get('profile_source', None)
-            if source is not None:
-                report += "Source: %s\n" % source
-            comment = self.get('profile_comment', None)
-            if source is not None:
-                report += "{%s}\n" % comment
-            report += '\n'
+            s = "\nElection: %s\n\n" % self['title']
+            s += "\tDroop package: %s v%s\n" % (self['droop_name'], self['droop_version'])
+            s += "\tRule: %s\n" % self['rule_info']
+            s += "\tArithmetic: %s\n" % self['arithmetic_info']
+            if self.get('options_ignored') is not None:
+                s += "\tIgnored options: %s\n" % ", ".join(self.get('options_ignored'))
+            s += "\tSeats: %d\n" % self['seats']
+            s += "\tBallots: %d\n" % self['nballots']
+            s += "\tQuota: %s\n" % V(self['quota'])
+            if self.get('omega') is not None:
+                s += "\tOmega: %s\n" % self.get('omega')
+            if self.get('profile_source') is not None:
+                s += "Source: %s\n" % self.get('profile_source')
+            if self.get('profile_comment') is not None:
+                s += "{%s}\n" % self.get('profile_comment')
+            s += '\n'
             if intr:    # pragma: no cover
-                report += "\t** Count terminated prematurely by user interrupt **\n\n"
-            areport = self.get('arithmetic_report', None)
-            if areport is not None:
-                report += areport
+                s += "\t** Count terminated prematurely by user interrupt **\n\n"
+            if self.get('arithmetic_report') is not None:
+                s += self.get('arithmetic_report')
             cids = self['cids']
             cdict = self['cdict']
-            astrings = [report]
+            report = [s]
             for A in self['actions']:
                 if A['tag'] == 'log':
-                    astrings.append("\t%s\n" % A['msg'])
+                    report.append("\t%s\n" % A['msg'])
                     continue
                 ra = E.rule.reportAction(self) # allow rule to override default report
                 if ra is not None:
-                    astrings.append(ra)
+                    report.append(ra)
                     continue
                 if A['tag'] == 'round':
-                    astrings.append("Round %d:\n" % A['round'])
+                    report.append("Round %d:\n" % A['round'])
                     continue
                 cstate = A['cstate']
                 ecids = [cid for cid in cids if cstate[cid]['state'] == 'elected']
@@ -376,8 +371,8 @@ class Election(object):
                     s += '\tSurplus: %s\n' % V(A['surplus'])
                 elif self['method'] == 'qpq':
                     s += '\tQuota: %s\n' % V(A['quota'])
-                astrings.append(s)
-            return "".join(astrings)
+                report.append(s)
+            return "".join(report)
             
         def dump(self):
             "dump a list of actions"
@@ -425,15 +420,15 @@ class Election(object):
                     elif self['method'] == 'qpq':
                         pass
     
-                    cstate = A['cstate']
                     for cid in ecids:
+                        cstate = A['cstate'][cid]
                         r.append(cdict[cid]['name'])
-                        r.append(cstate[cid]['code'])
+                        r.append(cstate['code'])
                         if self['method'] == 'qpq':
-                            r.append(V(cstate[cid]['quotient']))
+                            r.append(V(cstate['quotient']))
                         else:
-                            r.append(V(cstate[cid]['vote']))
-                        if self['method'] == 'meek': r.append(V(cstate[cid]['kf']))
+                            r.append(V(cstate['vote']))
+                        if self['method'] == 'meek': r.append(V(cstate['kf']))
     
                 r = [str(item) for item in r]
                 dumps.append('\t'.join(r) + '\n')
