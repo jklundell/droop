@@ -39,24 +39,31 @@ class ElectionProfile(object):
     
     The public interface of ElectionProfile:
     
-    title: the title of the election from the ballot file
+    title: title string from the ballot file
+    source: source string from blt file
+    comment: comment string from blt file
     nSeats: the number of seats to be filled
     nBallots: the number of ballots (possibly greater than len(rankings) because of 
               ballot multipliers)
     eligible: the set of non-withdrawn candidate IDs 
     withdrawn: the set of withdrawn candidate IDs
-    candidateName(cid): maps candidate ID to candidate name
-    candidateOrder(cid): maps candidate ID to ballot order
-    ballotLines: a list of BallotLine objects, each with a:
+        eligible and withdrawn should be treated as frozenset (unordered and immutable)
+        though they may be implemented as any iterable.
+    ballotLines: a list of BallotLine objects with not equal rankings, each with a:
        multiplier: a repetition count >=1
        ranking: an array of candidate IDs
-    ballotLinesequal: a list of BallotLine objects, each with a:
+    ballotLinesequal: a list of BallotLine objects with at least one equal ranking, each with a:
        multiplier: a repetition count >=1
        ranking: tuple of tuples of candidate IDs
-    candidates and withdrawn should be treated as frozenset; that is, unordered and immutable,
-       though they may be implemented as any iterable.
-       
+    tieOrder[cid]: tiebreaking order, by CID
+    nickName[cid]: short name of candidate, by CID
+    options: list of election options from ballot file
+    candidateName[cid]  full name of candidate, by CID
+    candidateOrder[cid] ballot order of candidate, by CID
+
     All attributes should be treated as immutable.
+
+    Private attributes have a leading underscore and are not intended for external consumption
     '''
     
     def __init__(self, path=None, data=None):
@@ -69,8 +76,8 @@ class ElectionProfile(object):
         self.nBallots = 0
         self.eligible = set()
         self.withdrawn = set()
-        self._candidateName = dict()  # cid => candidate name
-        self._candidateOrder = dict() # cid -> ballot order
+        self.candidateName = dict()   # cid => candidate name
+        self.candidateOrder = dict()  # cid -> ballot order
         #
         #  ballotLines is a list of BallotLine objects for ballots with no equal rankings
         #    ranking is an array of cids
@@ -79,21 +86,24 @@ class ElectionProfile(object):
         #
         self.ballotLines = list()
         self.ballotLinesEqual = list()
-        self.lineNumber = 0           # line number during parsing
         self.tieOrder = dict()        # tiebreaking cid sequence: cid->order
-        self.nickCid = dict()         # nick to cid
         self.nickName = dict()        # cid to nick
         self.options = list()         # list of options for main counter
+        #
+        #  private attributes
+        #
+        self._nickCid = dict()        # nick to cid
+        self._lineNumber = 0          # line number during parsing
 
         if path:
-            data = self._bltPath(path)
+            data = self.bltRead(path)
         if not data:
             raise ElectionProfileError('no profile data')
-        self._bltData(data)
+        self.bltParse(data)
         self.__validate()
-        if not self.nickCid:          # create default nicknames: str(cid)
+        if not self._nickCid:         # create default nicknames: str(cid)
             for cid in xrange(1, self.nCand+1):
-                self.nickCid[str(cid)] = cid
+                self._nickCid[str(cid)] = cid
                 self.nickName[cid] = str(cid)
         if not self.tieOrder:         # create default tie-break order: cid
             for cid in xrange(1, self.nCand+1):
@@ -114,7 +124,7 @@ class ElectionProfile(object):
             else store the list (as a tuple)
             '''
             self.multiplier = multiplier
-            self.line = profile.lineNumber
+            self.line = profile._lineNumber
             equal_rank = False
             for rank in ranking:
                 for cid in set(rank):
@@ -160,10 +170,10 @@ class ElectionProfile(object):
         if self.nBallots != other.nBallots: return 'nBallots mismatch'
         if self.eligible != other.eligible: return 'eligible mismatch'
         if self.withdrawn != other.withdrawn: return 'withdrawn mismatch'
-        for cid in self._candidateName:
-            if self._candidateName[cid] != other._candidateName[cid]: return 'candidate name mismatch'
-        for cid in self._candidateOrder:
-            if self._candidateOrder[cid] != other._candidateOrder[cid]: return 'candidate order mismatch'
+        for cid in self.candidateName:
+            if self.candidateName[cid] != other.candidateName[cid]: return 'candidate name mismatch'
+        for cid in self.candidateOrder:
+            if self.candidateOrder[cid] != other.candidateOrder[cid]: return 'candidate order mismatch'
         if len(self.ballotLines) != len(other.ballotLines): return 'ballot-line count mismatch'
         if len(self.ballotLinesEqual) != len(other.ballotLinesEqual): return 'ballot-line (equal) count mismatch'
         for b, bo in zip(self.ballotLines, other.ballotLines):
@@ -174,16 +184,8 @@ class ElectionProfile(object):
             if b.ranking != bo.ranking: return 'ballot-line (equal) ranking mismatch'
         return False
 
-    def candidateName(self, cid):
-        "get name of candidate"
-        return self._candidateName[cid]
-        
-    def candidateOrder(self, cid):
-        "get ballot order of candidate"
-        return self._candidateOrder[cid]
-    
-    def _bltPath(self, path):
-        "open a path to a blt file"
+    def bltRead(self, path):
+        "open and read the ballot file"
         try:
             f = open(path, 'r')
             data = f.read()
@@ -207,8 +209,8 @@ class ElectionProfile(object):
         if isinstance(nick, int):
             if nick > 0 and nick <= self.nCand:
                 return nick
-        elif self.nickCid and nick in self.nickCid:
-            return self.nickCid[nick]
+        elif self._nickCid and nick in self._nickCid:
+            return self._nickCid[nick]
         if isinstance(loc, int):
             raise ElectionProfileError('bad blt: bad candidate ID %s near ballot %d' % (nick, loc))
         raise ElectionProfileError('bad blt: bad candidate ID %s in %s' % (nick, loc))
@@ -221,14 +223,14 @@ class ElectionProfile(object):
         '''
         if len(option_list) != self.nCand:
             raise ElectionProfileError('bad blt: [nick] nickname list must list each candidate exactly once')
-        self.nickCid = dict()
+        self._nickCid = dict()
         self.nickName = dict()
         cid = 0
         for nick in option_list:
             cid += 1
-            if nick in self.nickCid:
+            if nick in self._nickCid:
                 raise ElectionProfileError('bad blt: duplicate nickname: %s' % nick)
-            self.nickCid[nick] = cid
+            self._nickCid[nick] = cid
             self.nickName[cid] = nick
         
     def __bltOptionTie(self, option_name, option_list):
@@ -264,15 +266,19 @@ class ElectionProfile(object):
         else:
             raise ElectionProfileError('bad blt item "%s": unknown option' % option)
 
-    def _bltData(self, data):
-        "process a blt data blob, catching iteration exceptions"
+    def bltParse(self, data):
+        "parse a blt data blob, catching iteration exceptions"
         try:
-            self.__bltData(data)
+            self._bltParse(data)
         except StopIteration:
             raise ElectionProfileError('bad blt file: unexpected end-of-file')
 
-    def __bltData(self, data):
-        "process a blt blob"
+    def _bltParse(self, data):
+        '''
+        parse a blt blob
+        
+        the parsed result populates this ElectionProfile object
+        '''
 
         digits = re.compile(r'\d+$')
         sdigits = re.compile(r'-?\d+$')
@@ -337,7 +343,7 @@ class ElectionProfile(object):
             elif digits.match(tok):
                 multiplier = int(tok)
             else:
-                raise ElectionProfileError('bad blt item "%s" near line %d; expected decimal number' % (tok, self.lineNumber))
+                raise ElectionProfileError('bad blt item "%s" near line %d; expected decimal number' % (tok, self._lineNumber))
             if not multiplier:  # test end of ballot lines (multiplier of 0)
                 break
 
@@ -377,8 +383,8 @@ class ElectionProfile(object):
                 name += ' ' + blt.next()
             if cid not in self.withdrawn:
                 self.eligible.add(cid)
-            self._candidateName[cid] = name.strip('"')
-            self._candidateOrder[cid] = cid
+            self.candidateName[cid] = name.strip('"')
+            self.candidateOrder[cid] = cid
             
         #  election title
         #
@@ -434,9 +440,9 @@ class ElectionProfile(object):
         lines = blob.splitlines()
         inComment = 0
         inQuote = False
-        lineNumber = 0
+        self._lineNumber = 0
         for line in lines:
-            lineNumber += 1
+            self._lineNumber += 1
             tokens = line.split()
             for token in tokens:
                 if not inComment and token.startswith('"'):

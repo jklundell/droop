@@ -173,11 +173,11 @@ class ProfileTest(unittest.TestCase):
 
     def testInitBobName(self):
         "normal init: name of candidate"
-        self.assertEqual(ElectionProfile(data=self.p_42w)._candidateName[4], 'Bob')
+        self.assertEqual(ElectionProfile(data=self.p_42w).candidateName[4], 'Bob')
 
     def testInitBobOrder(self):
         "normal init: order of candidate"
-        self.assertEqual(ElectionProfile(data=self.p_42w)._candidateOrder[4], 4)
+        self.assertEqual(ElectionProfile(data=self.p_42w).candidateOrder[4], 4)
 
     def testBadNcand(self):
         "exception bad candidate format"
@@ -221,12 +221,12 @@ class ProfileTest(unittest.TestCase):
     def testCandidateName(self):
         "fetch a candidate name"
         p = ElectionProfile(data=p_42a)
-        self.assertEqual(p.candidateName(1), 'Castor')
+        self.assertEqual(p.candidateName[1], 'Castor')
 
     def testCandidateOrder(self):
         "fetch a candidate order"
         p = ElectionProfile(data=p_42a)
-        self.assertEqual(p.candidateOrder(1), 1)
+        self.assertEqual(p.candidateOrder[1], 1)
 
     def testBadFile(self):
         "exception: bad file name"
@@ -263,7 +263,7 @@ class OptionNickTest(unittest.TestCase):
         self.assertEqual(len(p1.nickName), 3)
         p2 = ElectionProfile(data=b2)
         self.assertEqual(len(p2.nickName), 3)
-        self.assertEqual(len(p2.nickCid), 3)
+        self.assertEqual(len(p2._nickCid), 3)
         for i in xrange(len(p1.ballotLines)):
             self.assertEqual(p1.ballotLines[i].multiplier, p2.ballotLines[i].multiplier)
             self.assertEqual(p1.ballotLines[i].ranking, p2.ballotLines[i].ranking)

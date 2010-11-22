@@ -93,9 +93,9 @@ class Election(object):
         #
         self.C = Candidates()
         for cid in sorted(electionProfile.eligible | electionProfile.withdrawn):
-            c = Candidate(self, cid, electionProfile.candidateOrder(cid), 
+            c = Candidate(self, cid, electionProfile.candidateOrder[cid], 
                 electionProfile.tieOrder[cid],
-                electionProfile.candidateName(cid),
+                electionProfile.candidateName[cid],
                 electionProfile.nickName[cid],
                 cid in electionProfile.withdrawn)
             self.C.add(self, c)
