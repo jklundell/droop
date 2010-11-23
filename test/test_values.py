@@ -156,6 +156,11 @@ class ValueTestFixed6(unittest.TestCase):
         self.assertTrue(x != y)
         self.assertEqual(str(x/y), '0.500000')
 
+    def testRepr(self):
+        "repr is the underlying _value"
+        A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=6))
+        self.assertEqual(repr(A(1)), 'Fixed(1000000,True)')
+
 class ValueTestFixed0(unittest.TestCase):
     "Fixed with precision=0 is Integer"
     p = 0
@@ -376,7 +381,7 @@ class ValueTestGuarded9(unittest.TestCase):
     def testRepr(self):
         "repr is the underlying _value"
         A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
-        self.assertEqual(repr(A(1)), '1000000000000000000')
+        self.assertEqual(repr(A(1)), 'Guarded(1000000000000000000,True)')
 
     def testNe(self):
         "not equal"

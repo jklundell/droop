@@ -178,18 +178,19 @@ See also: fixed, rational
             s = Guarded.__dfmt % (gv // self.__scaled, gvp // self.__scaledg, gvp % self.__scaledg)
         return s
 
-    def __repr__(self):
-        "represent ourself as str(_value)"
-        return str(self._value)
-
-    def __new__(cls, arg, setval=False):
+    def __init__(self, arg, setval=False):
         "create a new Guarded object"
-        guarded = super(Guarded, cls).__new__(cls)
-        if setval: guarded._value = arg           # direct-set value
-        elif isinstance(arg, (int,long)): guarded._value = arg * cls.__scale  # scale incoming integers
-        else: guarded._value = arg._value         # copy incoming Guarded
-        return guarded
+        if setval:
+            self._value = arg                   # direct-set value
+        elif isinstance(arg, (int,long)):
+            self._value = arg * self.__scale    # scale incoming integers
+        else:
+            self._value = arg._value            # copy incoming Guarded
         
+    def __repr__(self):
+        "repr"
+        return "Guarded(%s,True)" % self._value
+
     #  arithmetic operations
     #
     def __add__(self, other):
