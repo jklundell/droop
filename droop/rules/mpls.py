@@ -487,7 +487,7 @@ class Rule(ElectionRule):
 
                 if len(C.hopeful()) <= E.seatsLeftToFill():
                     break
-                continue  ## continue as described in clause a.
+                continue  ## continue as described in clause a. # pragma: no cover (optimized out)
 
             ##  167.70(1)(d)
             ##  d. The transfer value of each vote cast for an elected candidate 

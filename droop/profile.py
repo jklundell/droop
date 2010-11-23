@@ -456,7 +456,7 @@ class ElectionProfile(object):
                 if inComment:
                     if token.endswith('*/'):
                         inComment -= 1
-                    continue
+                    continue    # pragma: no cover (continue is optimized out)
                 # if not in quote or comment, # means comment to end-of-line
                 if not inQuote and token.startswith('#'):
                     break
