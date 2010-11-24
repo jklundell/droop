@@ -319,39 +319,30 @@ class Election(object):
                 if self.get('profile_comment') is not None:
                     s += "{%s}\n" % self.get('profile_comment')
                 s += '\n'
-                if intr:    # pragma: no cover
-                    s += "\t** Count terminated prematurely by user interrupt **\n\n"
                 report.append(s)
             E.rule.report(self, report, "headerappend")     # allow rule to append to header
             if self.get('arithmetic_report') is not None:
                 report.append(self.get('arithmetic_report'))
+            if intr:
+                s += "\t** Count terminated prematurely by user interrupt **\n\n"
             cids = self['cids']
             cdict = self['cdict']
-            if E.rule.report(self, report, "actions"):          # allow rule to report all actions
-                return "".join(report)
-            for A in self['actions']:
-                if E.rule.report(self, report, "action", A):    # allow rule to report this action
-                    continue
-                if A['tag'] == 'log':
-                    report.append("\t%s\n" % A['msg'])
-                    continue
-                if A['tag'] == 'round':
-                    report.append("Round %d:\n" % A['round'])
-                    continue
-                cstate = A['cstate']
-                ecids = [cid for cid in cids if cstate[cid]['state'] == 'elected']
-                hcids = [cid for cid in cids if cstate[cid]['state'] == 'hopeful']
-                dcids = [cid for cid in cids if cstate[cid]['state'] == 'defeated']
-                s = 'Action: %s\n' % (A['msg'])
-                if A['tag'] in ('begin', 'elect', 'defeat', 'pend', 'transfer', 'end'):
-                    if self['method'] == 'qpq':
-                        for cid in ecids:
-                            s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
-                        for cid in hcids:
-                            s += '\tHopeful:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
-                        for cid in dcids:
-                            s += '\tDefeated: %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
-                    else:
+            if not E.rule.report(self, report, "actions"):          # allow rule to report all actions
+                for A in self['actions']:
+                    if E.rule.report(self, report, "action", A):    # allow rule to report this action
+                        continue
+                    if A['tag'] == 'log':
+                        report.append("\t%s\n" % A['msg'])
+                        continue
+                    if A['tag'] == 'round':
+                        report.append("Round %d:\n" % A['round'])
+                        continue
+                    cstate = A['cstate']
+                    ecids = [cid for cid in cids if cstate[cid]['state'] == 'elected']
+                    hcids = [cid for cid in cids if cstate[cid]['state'] == 'hopeful']
+                    dcids = [cid for cid in cids if cstate[cid]['state'] == 'defeated']
+                    s = 'Action: %s\n' % (A['msg'])
+                    if A['tag'] in ('begin', 'elect', 'defeat', 'pend', 'transfer', 'end'):
                         for cid in [cid for cid in ecids if not cstate[cid].get('pending')]:
                             s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['vote']))
                         for cid in [cid for cid in ecids if cstate[cid].get('pending')]:
@@ -363,26 +354,24 @@ class Election(object):
                         c0 = [cdict[cid]['name'] for cid in dcids if cstate[cid]['vote'] == E.V0]
                         if c0:
                             s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
-                if self['method'] == 'meek':
-                    s += '\tQuota: %s\n' % V(A['quota'])
-                    s += '\tVotes: %s\n' % V(A['votes'])
-                    s += '\tResidual: %s\n' % V(A['residual'])
-                    s += '\tTotal: %s\n' % V((A['votes'] + A['residual']))
-                    s += '\tSurplus: %s\n' % V(A['surplus'])
-                elif self['method'] == 'wigm':
-                    s += '\tElected votes: %s\n' % V(A['e_votes'])
-                    if A['p_votes']:
-                        s += '\tPending votes: %s\n' % V(A['p_votes'])
-                    s += '\tHopeful votes: %s\n' % V(A['h_votes'])
-                    if A['d_votes']:
-                        s += '\tDefeated votes: %s\n' % V(A['d_votes'])
-                    s += '\tNontransferable votes: %s\n' % V(A['nt_votes'])
-                    s += '\tResidual: %s\n' % V(A['residual'])
-                    s += '\tTotal: %s\n' % V(A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes'] + A['nt_votes'] + A['residual'])
-                    s += '\tSurplus: %s\n' % V(A['surplus'])
-                elif self['method'] == 'qpq':
-                    s += '\tQuota: %s\n' % V(A['quota'])
-                report.append(s)
+                    if self['method'] == 'meek':
+                        s += '\tQuota: %s\n' % V(A['quota'])
+                        s += '\tVotes: %s\n' % V(A['votes'])
+                        s += '\tResidual: %s\n' % V(A['residual'])
+                        s += '\tTotal: %s\n' % V((A['votes'] + A['residual']))
+                        s += '\tSurplus: %s\n' % V(A['surplus'])
+                    elif self['method'] == 'wigm':
+                        s += '\tElected votes: %s\n' % V(A['e_votes'])
+                        if A['p_votes']:
+                            s += '\tPending votes: %s\n' % V(A['p_votes'])
+                        s += '\tHopeful votes: %s\n' % V(A['h_votes'])
+                        if A['d_votes']:
+                            s += '\tDefeated votes: %s\n' % V(A['d_votes'])
+                        s += '\tNontransferable votes: %s\n' % V(A['nt_votes'])
+                        s += '\tResidual: %s\n' % V(A['residual'])
+                        s += '\tTotal: %s\n' % V(A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes'] + A['nt_votes'] + A['residual'])
+                        s += '\tSurplus: %s\n' % V(A['surplus'])
+                    report.append(s)
             return "".join(report)
             
         def dump(self):

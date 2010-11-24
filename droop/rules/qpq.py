@@ -90,6 +90,26 @@ class Rule(ElectionRule):
         "return a tag string for unit tests"
         return self.name
 
+    def report(self, record, report, section, action=None):
+        "QPQ-specific action reporting"
+        if section == 'action' and action['tag'] in ('begin', 'tie', 'elect', 'defeat', 'transfer', 'end'):
+            V = self.E.V
+            s = 'Action: %s\n' % (action['msg'])
+            if action['tag'] != 'tie':
+                cids = record['cids']
+                cdict = record['cdict']
+                cstate = action['cstate']
+                for cid in [cid for cid in cids if cstate[cid]['state'] == 'elected']:
+                    s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
+                for cid in [cid for cid in cids if cstate[cid]['state'] == 'hopeful']:
+                    s += '\tHopeful:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
+                for cid in [cid for cid in cids if cstate[cid]['state'] == 'defeated']:
+                    s += '\tDefeated: %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
+            s += '\tQuota: %s\n' % V(action['quota'])
+            report.append(s)
+            return True
+        return False
+
     #########################
     #
     #   Main Election Counter
