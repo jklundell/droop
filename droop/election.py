@@ -299,33 +299,39 @@ class Election(object):
             "report an action"
             E = self.E
             V = E.V
-            s = "\nElection: %s\n\n" % self['title']
-            s += "\tDroop package: %s v%s\n" % (self['droop_name'], self['droop_version'])
-            s += "\tRule: %s\n" % self['rule_info']
-            s += "\tArithmetic: %s\n" % self['arithmetic_info']
-            if self.get('options_ignored') is not None:
-                s += "\tIgnored options: %s\n" % ", ".join(self.get('options_ignored'))
-            s += "\tSeats: %d\n" % self['seats']
-            s += "\tBallots: %d\n" % self['nballots']
-            s += "\tQuota: %s\n" % V(self['quota'])
-            if self.get('omega') is not None:
-                s += "\tOmega: %s\n" % self.get('omega')
-            if self.get('profile_source') is not None:
-                s += "Source: %s\n" % self.get('profile_source')
-            if self.get('profile_comment') is not None:
-                s += "{%s}\n" % self.get('profile_comment')
-            s += '\n'
-            if intr:    # pragma: no cover
-                s += "\t** Count terminated prematurely by user interrupt **\n\n"
+            report = []
+            if E.rule.report(self, report, "all"):  # allow rule to supply entire report
+                return "".join(report)
+            if not E.rule.report(self, report, "header"):   # allow rule to supply report header
+                s = "\nElection: %s\n\n" % self['title']
+                s += "\tDroop package: %s v%s\n" % (self['droop_name'], self['droop_version'])
+                s += "\tRule: %s\n" % self['rule_info']
+                s += "\tArithmetic: %s\n" % self['arithmetic_info']
+                if self.get('options_ignored') is not None:
+                    s += "\tIgnored options: %s\n" % ", ".join(self.get('options_ignored'))
+                s += "\tSeats: %d\n" % self['seats']
+                s += "\tBallots: %d\n" % self['nballots']
+                s += "\tQuota: %s\n" % V(self['quota'])
+                if self.get('omega') is not None:
+                    s += "\tOmega: %s\n" % self.get('omega')
+                if self.get('profile_source') is not None:
+                    s += "Source: %s\n" % self.get('profile_source')
+                if self.get('profile_comment') is not None:
+                    s += "{%s}\n" % self.get('profile_comment')
+                s += '\n'
+                if intr:    # pragma: no cover
+                    s += "\t** Count terminated prematurely by user interrupt **\n\n"
+                report.append(s)
+            E.rule.report(self, report, "headerappend")     # allow rule to append to header
             if self.get('arithmetic_report') is not None:
-                s += self.get('arithmetic_report')
+                report.append(self.get('arithmetic_report'))
             cids = self['cids']
             cdict = self['cdict']
-            report = [s]
-            ra = E.rule.reportActions(self) # allow rule to override default report of actions
-            if ra is not None:
-                return "".join(report, ra)
+            if E.rule.report(self, report, "actions"):          # allow rule to report all actions
+                return "".join(report)
             for A in self['actions']:
+                if E.rule.report(self, report, "action", A):    # allow rule to report this action
+                    continue
                 if A['tag'] == 'log':
                     report.append("\t%s\n" % A['msg'])
                     continue
