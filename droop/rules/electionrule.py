@@ -114,6 +114,14 @@ class ElectionRule(object):  # pragma: no cover
         '''
         pass
 
+    def action(self, record, action):
+        '''
+        Hook for rule-specific election action recording.
+        
+        See Election.ElectionRecord.action() for details.
+        '''
+        pass
+
     def report(self, record, report, section, action=None):
         '''
         Hook for rule-specific election reporting.

@@ -90,6 +90,10 @@ class Rule(ElectionRule):
         "return a tag string for unit tests"
         return self.name
 
+    def action(self, record, action):
+        "QPQ-specific action recording"
+        action['votes'] = self.E.votes    # total votes
+
     def report(self, record, report, section, action=None):
         "QPQ-specific action reporting"
         if section == 'action' and action['tag'] in ('begin', 'tie', 'elect', 'defeat', 'transfer', 'end'):

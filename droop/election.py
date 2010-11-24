@@ -291,8 +291,7 @@ class Election(object):
                 total = A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes'] + A['nt_votes']  # vote total
                 A['residual'] = E.V(E.nBallots) - total                     # votes lost due to rounding error
                 A['surplus'] = E.V(E.surplus)
-            elif self['method'] == 'qpq':
-                A['votes'] = E.votes    # total votes
+            E.rule.action(self, A)                  # give rule a chance at the action
             self['actions'].append(A)
 
         def report(self, intr=False):
