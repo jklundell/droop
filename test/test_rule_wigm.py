@@ -26,6 +26,7 @@ from common import testdir, doDumpCompare
 from droop.election import Election
 from droop.profile import ElectionProfile
 from droop import electionRuleNames
+from droop.common import UsageError
 
 class ElectionNameTest(unittest.TestCase):
     "make sure we're in the book"
@@ -50,7 +51,7 @@ class ElectionCountTest(unittest.TestCase):
 
     def testElectionCount2(self):
         "try wigm with integer quota"
-        E = self.doCount(dict(rule='wigm', integer_quota='true'), '42.blt')
+        E = self.doCount(dict(rule='wigm', integer_quota=True), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount3(self):
@@ -58,6 +59,14 @@ class ElectionCountTest(unittest.TestCase):
         E = self.doCount(dict(rule='wigm', precision='8'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
         self.assertEqual(E.V.precision, 8)
+
+    def testBadOptions(self):
+        "try wigm with bad options"
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        profile = ElectionProfile(data=b)
+        self.assertRaises(UsageError, Election, profile, dict(rule='wigm', integer_quota=2))
+        self.assertRaises(UsageError, Election, profile, dict(rule='wigm', defeat_batch="bad"))
+        pass
 
     def testNickReport(self):
         "using nicknames shouldn't alter dump or report"
@@ -73,6 +82,30 @@ class ElectionCountTest(unittest.TestCase):
         d2 = E.dump()
         self.assertEqual(r1, r2)
         self.assertEqual(d1, d2)
+
+    def testDefeatRemaining(self):
+        "count a profile that has hopeful candidates left over to defeat"
+        b = '''3 2  4 1 0  4 2 0  2 3 0  0 "Castor" "Pollux" "Helen" "test defeat-remaining"'''
+        E = Election(ElectionProfile(data=b), dict(rule='wigm'))
+        E.count()
+        elected = [c.name for c in E.elected]
+        self.assertEqual(elected, ['Castor', 'Pollux'])
+        defeated = [c.name for c in E.defeated]
+        self.assertEqual(defeated, ['Helen'])
+        report = E.report()
+        self.assertTrue(report.find('Defeat remaining'))
+
+    def testDefeatBatch(self):
+        "count a profile that has with defeat_batch option"
+        b = '''4 2  4 1 0  3 2 0  2 3 2 0  0 "Castor" "Pollux" "Helen" "George" "test defeat-batch"'''
+        E = Election(ElectionProfile(data=b), dict(rule='wigm', defeat_batch='zero'))
+        E.count()
+        elected = [c.name for c in E.elected]
+        self.assertEqual(elected, ['Castor', 'Pollux'])
+        defeated = [c.name for c in E.defeated]
+        self.assertEqual(defeated, ['Helen', 'George'])
+        report = E.report()
+        self.assertTrue(report.find('Defeat batch'))
 
 class ElectionDumpTest(unittest.TestCase):
     "compare some dumps"

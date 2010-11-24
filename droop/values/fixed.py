@@ -125,7 +125,9 @@ See also: guarded, rational
             self._value = arg._value         # copy incoming Fixed
 
     def __repr__(self):
-        "repr"
+        "repr()"
+        if self.precision == 0:             # treat integers specially
+            return str(self._value)
         return "Fixed(%s,True)" % self._value
 
     #  arithmetic operations

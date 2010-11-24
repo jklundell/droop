@@ -20,6 +20,7 @@ This file is part of Droop.
 '''
 
 from electionrule import ElectionRule
+from droop.common import UsageError
 
 class Rule(ElectionRule):
     '''
@@ -65,7 +66,11 @@ class Rule(ElectionRule):
         #  defeat_batch=zero: defeat all hopeful candidates with zero votes after first surplus transfer
         #
         self.integer_quota = options.get('integer_quota', False)
-        self.defeatBatch = options.get('defeat_batch', 'none')
+        if self.integer_quota not in (True, False):
+            raise UsageError('%s: integer_quota=%s; must be True or False' % (self.name, self.integer_quota))
+        self.defeat_batch = options.get('defeat_batch', 'none')
+        if self.defeat_batch not in ('none', 'zero'):
+            raise UsageError('%s: defeat_batch=%s; must be "none" or "zero"' % (self.name, self.defeat_batch))
 
         used |= set(('arithmetic', 'precision', 'guard', 'display', 'integer_quota', 'defeat_batch'))
         return options
@@ -188,7 +193,7 @@ class Rule(ElectionRule):
                 #
                 low_vote = min(c.vote for c in C.hopeful())
                 low_candidates = [c for c in C.hopeful() if c.vote == low_vote]
-                if low_vote == V0 and self.defeatBatch == 'zero':
+                if low_vote == V0 and self.defeat_batch == 'zero':
                     for c in low_candidates:
                         c.defeat(msg='Defeat batch(zero)')
                 else:

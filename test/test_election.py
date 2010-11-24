@@ -23,7 +23,7 @@ This file is part of Droop.
 import unittest
 
 import common  # to set sys.path
-from droop.election import Candidate
+from droop.election import Candidate, Candidates
 
 if common.pyflakes: # satisfy pyflakes that we're using common
     pass
@@ -46,6 +46,34 @@ class CandidateTest(unittest.TestCase):
         c1 = Candidate(None, 1, 2, 2, 'abc', None, False)
         c2 = Candidate(None, 1, 3, 3, 'def', None, False)
         self.assertEqual(c1, c2, 'candidates are compared by ID')
+
+class CandidatesTest(unittest.TestCase):
+    "test class Candidates"
+
+    def testCandidates(self):
+        "general test of Candidates API"
+        C = Candidates()
+        c1 = Candidate(None, 1, 1, 3, 'Able', None, False)   # Election, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn
+        c2 = Candidate(None, 2, 2, 2, 'Baker', None, False)
+        c3 = Candidate(None, 3, 3, 1, 'Charlie', None, False)
+        c1.vote = 1
+        c2.vote = 3
+        c3.vote = 2
+        C.add(c1)
+        C.add(c2)
+        C.add(c3)
+        C2 = C.copy()
+        self.assertEqual(C, C2)
+        self.assertEqual(C.byTieOrder([c1, c2, c3]), [c3, c2, c1])
+        self.assertEqual(C.byTieOrder([c1, c2, c3], reverse=True), [c1, c2, c3])
+        self.assertEqual(C.byBallotOrder([c1, c2, c3]), [c1, c2, c3])
+        self.assertEqual(C.byBallotOrder([c1, c2, c3], reverse=True), [c3, c2, c1])
+        self.assertEqual(C.byVote([c1, c2, c3]), [c1, c3, c2])
+        self.assertEqual(C.select('all', 'ballot'), [c1, c2, c3])
+        self.assertEqual(C.select('eligible', 'ballot', reverse=True), [c3, c2, c1])
+        self.assertEqual(C.select('eligible', 'tie'), [c3, c2, c1])
+        self.assertEqual(C.select('elected', 'ballot'), [])
+        self.assertRaises(ValueError, C.select, 'all', 'bad-order')
 
 if __name__ == '__main__':
     unittest.main()

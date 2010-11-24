@@ -80,6 +80,18 @@ class ElectionCountTest(unittest.TestCase):
         self.assertEqual(len(E.elected), E.nSeats)
         self.assertEqual(E.V.precision, 4)
 
+    def testDefeatRemaining(self):
+        "count a profile that has hopeful candidates left over to defeat"
+        b = '''3 2  4 1 0  4 2 0  2 3 0  0 "Castor" "Pollux" "Helen" "test defeat-remaining"'''
+        E = Election(ElectionProfile(data=b), dict(rule='wigm-prf'))
+        E.count()
+        elected = [c.name for c in E.elected]
+        self.assertEqual(elected, ['Castor', 'Pollux'])
+        defeated = [c.name for c in E.defeated]
+        self.assertEqual(defeated, ['Helen'])
+        report = E.report()
+        self.assertTrue(report.find('Defeat remaining'))
+
     def testNickReport(self):
         "using nicknames shouldn't alter dump or report"
         b1 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''

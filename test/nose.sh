@@ -11,9 +11,9 @@
 #
 NOSETESTS=nosetests
 if [ "$1" = "cover" ]; then
-	$NOSETESTS --with-coverage --cover-package=droop --cover-erase 
-elif [ "$1" = "cover" ]; then
-	$NOSETESTS --processes=4 -v
+	$NOSETESTS --with-coverage --cover-package=droop --cover-erase
+elif [ "$1" = "coverx" ]; then
+	$NOSETESTS --processes=4 --with-coverage --cover-package=droop --cover-erase
 else
 	$NOSETESTS --processes=4
 fi

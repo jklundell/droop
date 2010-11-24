@@ -156,7 +156,14 @@ class ValueTestFixed6(unittest.TestCase):
         self.assertTrue(x != y)
         self.assertEqual(str(x/y), '0.500000')
 
-    def testRepr(self):
+    def testSetvalFixed6(self):
+        "set a fixed value directly"
+        A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=6))
+        f = A(123456, True)
+        self.assertEqual(repr(A(f)), 'Fixed(123456,True)')
+        self.assertEqual(A(1000000,True), A(1))
+
+    def testReprFixed6(self):
         "repr is the underlying _value"
         A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=6))
         self.assertEqual(repr(A(1)), 'Fixed(1000000,True)')
@@ -175,6 +182,13 @@ class ValueTestFixed0(unittest.TestCase):
         self.assertEqual(self.A.name, 'integer')               # Fixed.name
         x = F(1)
         self.assertEqual(str(x), '1')
+
+    def testReprFixed0(self):
+        "repr is the underlying _value"
+        A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=self.p))
+        self.assertEqual(repr(A(1)), '1')
+        A = V.ArithmeticClass(options=dict(arithmetic='integer'))
+        self.assertEqual(repr(A(1)), '1')
 
 class ValueTestGuarded0(unittest.TestCase):
     "Guarded with guard=0 should match Fixed"

@@ -114,11 +114,11 @@ class ElectionRule(object):  # pragma: no cover
         '''
         pass
 
-    def reportAction(self, action):
+    def reportActions(self, action):
         '''
-        Hook for rule-specific reporting of an action.
+        Hook for rule-specific reporting of election actions.
         
         To override the default report, return a string.
-        See Election.Action.report() for defaults.
+        See Election.ElectionRecord.report() for details.
         '''
         return None

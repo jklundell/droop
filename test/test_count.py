@@ -35,7 +35,7 @@ class ElectionBasics(unittest.TestCase):
     test Election.__init__
     
     Create an Election instance from a simple profile 
-    and the Minneapolis rule and test its basic initialization,
+    and each rule and test its basic initialization,
     and that it elects the specified number of seats.
     '''
 
@@ -43,8 +43,8 @@ class ElectionBasics(unittest.TestCase):
         "basic test of each rule"
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
 
+        profile = ElectionProfile(data=b)
         for rulename in electionRuleNames():
-            profile = ElectionProfile(data=b)
             options = dict(rule=rulename)
             E = Election(profile, options)
             self.assertTrue(E.rule.__class__.__name__ == 'Rule', 'bad rule class')
@@ -58,6 +58,28 @@ class ElectionBasics(unittest.TestCase):
                 self.assertEqual(c.order, c.tieOrder)
             E.count()
             self.assertEqual(len(E.elected), E.nSeats)
+
+    def testReports(self):
+        "look at election outputs"
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+
+        profile = ElectionProfile(data=b)
+        rulename = electionRuleNames()[0]   # pick the first rule arbitrarily
+        E = Election(profile, dict(rule=rulename))
+        E.count()
+        self.assertEqual(E.report().find('interrupted'), -1)
+        self.assertTrue(E.report(intr=True).find('interrupted') > 0)
+        E = Election(profile, dict(rule=rulename))
+        E.count()
+        self.assertEqual(E.dump().find('interrupted'), -1)
+        self.assertTrue(E.dump(intr=True).find('interrupted') > 0)
+        E = Election(profile, dict(rule=rulename))
+        E.count()
+        self.assertEqual(E.json().find('interrupted'), -1)
+        self.assertTrue(E.json(intr=True).find('interrupted') > 0)
+        r = E.record()
+        self.assertTrue(r, dict)
+        self.assertEqual(r['actions'][-1]['tag'], 'log')
 
 class ElectionOptions(unittest.TestCase):
     "test options via [droop ...] in blt file"

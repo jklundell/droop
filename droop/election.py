@@ -88,17 +88,18 @@ class Election(object):
         self.erecord = self.ElectionRecord(self)
         self.round = 0  # round number
         self.rounds = list()    # list of rounds for weak tiebreaking
+        self.intr_logged = False
 
         #  create candidate objects for candidates in election profile
         #
-        self.C = Candidates()
+        self.C = Candidates(self)
         for cid in sorted(electionProfile.eligible | electionProfile.withdrawn):
             c = Candidate(self, cid, electionProfile.candidateOrder[cid], 
                 electionProfile.tieOrder[cid],
                 electionProfile.candidateName[cid],
                 electionProfile.nickName[cid],
                 cid in electionProfile.withdrawn)
-            self.C.add(self, c)
+            self.C.add(c)
 
         #  create a ballot object (ranking candidate IDs) from the profile rankings of candidate IDs
         #  withdrawn candidates have been removed already
@@ -124,6 +125,8 @@ class Election(object):
         self.rule.count()   ### count the election ###
         self.logAction('end', 'Count Complete')
         self.elected = self.C.elected()
+        self.defeated = self.C.defeated()
+        self.withdrawn = self.C.withdrawn()
 
     def logAction(self, action, msg):
         "record an action"
@@ -182,20 +185,23 @@ class Election(object):
 
     def report(self, intr=False):
         "return the election record as a formatted report"
-        if intr:
+        if intr and not self.intr_logged:
             self.log('** count interrupted; this round is incomplete **')
+            self.intr_logged = True
         return self.erecord.report(intr)
 
     def dump(self, intr=False):
         "return the election record as tab-separated fields"
-        if intr:
+        if intr and not self.intr_logged:
             self.log('** count interrupted; this round is incomplete **')
+            self.intr_logged = True
         return self.erecord.dump()
 
     def json(self, intr=False):
         "return the election record as a JSON string"
-        if intr:
+        if intr and not self.intr_logged:
             self.log('** count interrupted; this round is incomplete **')
+            self.intr_logged = True
         return self.erecord.json()
 
     class ElectionRecord(dict):
@@ -266,7 +272,7 @@ class Election(object):
                 if vreport:
                     self['arithmetic_report'] = vreport
             if tag == "round":
-                E.rounds.append(C.copy(E))    # save a copy of the Candidates state for weak tiebreaking
+                E.rounds.append(C.copy())    # save a copy of the Candidates state for weak tiebreaking
             A['cstate'] = C.cState()  # variable candidate state
             A['votes'] = sum([c.vote for c in C.eligible()], E.V0)
             A['quota'] = E.quota
@@ -316,13 +322,12 @@ class Election(object):
             cids = self['cids']
             cdict = self['cdict']
             report = [s]
+            ra = E.rule.reportActions(self) # allow rule to override default report of actions
+            if ra is not None:
+                return "".join(report, ra)
             for A in self['actions']:
                 if A['tag'] == 'log':
                     report.append("\t%s\n" % A['msg'])
-                    continue
-                ra = E.rule.reportAction(self) # allow rule to override default report
-                if ra is not None:
-                    report.append(ra)
                     continue
                 if A['tag'] == 'round':
                     report.append("Round %d:\n" % A['round'])
@@ -517,25 +522,27 @@ class Candidates(set):
     '''
     all candidates
     '''
-    def __init__(self):
+    def __init__(self, E=None):
         "new Candidates"
+        self.E = E              # Election
         self._byCid = dict()    # side table: cid -> Candidate
 
-    def copy(self, E):
+    def copy(self):
         "return a copy of ourself"
-        C = Candidates()
+        C = Candidates(self.E)
         for c in self:
             super(Candidates, C).add(copy.copy(c))
         return C
 
-    def add(self, E, c):
+    def add(self, c):
         "add a candidate"
-        self._byCid[c.cid] = c   # side table for lookup by candidate ID
+        self._byCid[c.cid] = c  # side table for lookup by candidate ID
         super(Candidates, self).add(c)
-        if c.state == "withdrawn":
-            E.log("Add withdrawn: %s" % c.name)
-        else:
-            E.log("Add eligible: %s" % c.name)
+        if self.E is not None:  # accommodate unit test
+            if c.state == "withdrawn":
+                self.E.log("Add withdrawn: %s" % c.name)
+            else:
+                self.E.log("Add eligible: %s" % c.name)
 
     def byCid(self, cid):
         "look up a candidate by candidate ID"
