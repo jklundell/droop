@@ -22,7 +22,7 @@ This file is part of Droop.
 import droop
 
 droopName = 'droop'
-droopVersion = '0.9'
+droopVersion = '0.10'
 droopAuthor = 'Jonathan Lundell'
 droopAuthorEmail = 'jlundell@prfound.org'
 droopURL = 'http://prfound.org'

@@ -92,7 +92,10 @@ def doDumpCompare(options, file, subdir=''):
     jsonref = readFile(sref)
     if os.path.isfile(sout):
         os.unlink(sout)
-    if json != jsonref:
+    # don't include version number in comparison
+    json0 = re.sub(r'"droop_version": "\d+\.\d+"', '"droop_version": "0.0"', json)
+    jsonref = re.sub(r'"droop_version": "\d+\.\d+"', '"droop_version": "0.0"', jsonref)
+    if json0 != jsonref:
         writeFile(sout, json)
         if compare_json:
             return False
