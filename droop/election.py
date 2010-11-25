@@ -78,7 +78,7 @@ class Election(object):
             if isinstance(value, str) and re.match(r'\d+$', value):
                 options[key] = int(value)
         self.options_all = set(options)
-        self.options_used = set(('rule', 'arithmetic'))
+        self.options_used = set(['rule'])
         self.options_ignored = set()
         self.options = self.rule.options(options, self.options_used, self.options_ignored)     # allow rule to process options
         self.V = values.ArithmeticClass(self.options, self.options_used, self.options_ignored) # then set arithmetic
