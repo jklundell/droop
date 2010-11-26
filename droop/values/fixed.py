@@ -55,7 +55,7 @@ class Fixed(object):
 number of digits of precision.
 
 Options:
-    precision=p   p digits of precision (default 9)
+    precision=p   p digits of precision (no default unless integer)
     precision=0   integer arithmetic
     display=d     d display digits (default p)
 
@@ -65,20 +65,18 @@ See also: guarded, rational
     #  initialize must be called before using the class
     #
     @classmethod
-    def initialize(cls, options=dict(), used=set(), ignored=set()):
+    def initialize(cls, options):
         "initialize class variables"
         
-        arithmetic = options.get('arithmetic', None)
+        arithmetic = options.getopt('arithmetic')
         if arithmetic not in ('fixed', 'integer'):
             raise UsageError('Fixed: unrecognized arithmetic type (%s)' % arithmetic)
 
         #  set precision
-        precision = options.setdefault('precision', 9)
         if arithmetic == 'integer':
-            precision = 0
-            ignored |= set(('precision', 'display'))
+            precision = options.setopt('precision', default=0, force=True)
         else:
-            used |= set(('precision', 'display'))
+            precision = options.getopt('precision') # precision must be set by rule
         cls.name = 'integer' if precision == 0 else 'fixed'
         try:
             cls.precision = int(precision)
@@ -88,7 +86,9 @@ See also: guarded, rational
             raise UsageError('Fixed: precision=%s; must be an int >= 0' % precision)
             
         #  set display precision
-        display = options.get('display', None) or cls.precision
+        if options.getopt('display') is None:   # don't override default set by rule
+            options.setopt('display', default=cls.precision)
+        display = options.getopt('display')
         try:
             display = int(display)
         except ValueError:

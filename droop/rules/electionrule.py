@@ -59,26 +59,9 @@ class ElectionRule(object):  # pragma: no cover
         Initialize the election-rule object.
         '''
 
-    def options(self, options=dict(), used=set(), ignored=set()):
+    def options(self):
         '''
         Handle initialization of options.
-        
-        options: dict of options from command line, blt file, etc
-        used: rules add the keys of options that they pay attention to
-        ignored: rules add the keys of options that they explicitly ignore
-        
-        After options have been processed by the active rule and 
-        arithmetic class, options, used & ignored are employed to
-        report specified but unused or ignored (overridden) options.
-        
-        'ignored' is generally used for options such as precision
-        that are specified by the rule itself, such as arithmetic
-        and precision in the Minneapolis STV rule.
-        
-        options will include at least one member: rule=name.
-        
-        An option is reported if it is specified and either not used
-        or ignored. See droop.election.report.
         '''
         return options
     

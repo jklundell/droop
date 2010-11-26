@@ -66,7 +66,7 @@ If p & g are sufficiently large, guarded arithmetic produces the same outcomes a
 arithmetic, but with considerably greater speed in most cases.
 
 Options:
-    precision=p   p digits of precision (default 9)
+    precision=p   p digits of precision (no default)
     guard=g       g guard digits (default p)
     display=d     d display digits (default p)
 
@@ -76,16 +76,14 @@ See also: fixed, rational
     #  initialize must be called before using the class
     #
     @classmethod
-    def initialize(cls, options=dict(), used=set(), ignored=set()):
+    def initialize(cls, options):
         "initialize class variables"
 
-        used |= set(('precision', 'guard', 'display'))
-
-        arithmetic = options.get('arithmetic', 'guarded')
+        arithmetic = options.getopt('arithmetic')
         if arithmetic != 'guarded':
             raise UsageError('Guarded: unrecognized arithmetic type (%s)' % arithmetic)
 
-        precision = options.get('precision', None) or 9
+        precision = options.getopt('precision') # default must be set by rule
         try:
             cls.precision = int(precision)
         except ValueError:
@@ -93,8 +91,9 @@ See also: fixed, rational
         if cls.precision < 0 or str(cls.precision) != str(precision):
             raise UsageError('Guarded: precision=%s; must be an int >= 0' % precision)
 
-        guard = options.get('guard', None)
-        if guard is None: guard = cls.precision
+        if options.getopt('guard') is None: # don't override default set by rule
+            options.setopt('guard', default=cls.precision)
+        guard = options.getopt('guard')
         try:
             cls.guard = int(guard)
         except ValueError:
@@ -102,8 +101,9 @@ See also: fixed, rational
         if cls.guard < 0 or str(cls.guard) != str(guard):
             raise UsageError('Guarded: guard=%s; must be an int >= 0' % guard)
 
-        display = options.get('display', None)
-        if display is None: display = cls.precision
+        if options.getopt('display') is None:   # don't override default set by rule
+            options.setopt('display', default=cls.precision)
+        display = options.getopt('display')
         try:
             cls.display = int(display)
         except ValueError:

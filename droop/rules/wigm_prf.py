@@ -122,21 +122,18 @@ class Rule(ElectionRule):
         "initialize rule"
         self.E = E
 
-    def options(self, options=dict(), used=set(), ignored=set()):
+    def options(self):
         "initialize election parameters"
 
-        self.name = options.get('rule')
-        self.defeatBatch = self.name.endswith('batch')
-        options['arithmetic'] = 'fixed'
-        options['precision'] = self.precision
-        options['display'] = None
-        ignored |= set(('arithmetic', 'precision', 'display', 'defeat_batch'))
-
-        return options
+        self.name = self.E.options.getopt('rule')
+        self.defeat_batch = self.name.endswith('batch')
+        self.E.options.setopt('arithmetic', default='fixed', force=True)
+        self.E.options.setopt('precision', default=self.precision, force=True)
+        self.E.options.setopt('display', default=self.precision, force=True)
 
     def info(self):
         "return an info string for the election report"
-        if self.defeatBatch:
+        if self.defeat_batch:
             return "PR Foundation WIGM Reference (defeat sure losers)"
         return "PR Foundation WIGM Reference (single defeat)"
 
@@ -320,7 +317,7 @@ class Rule(ElectionRule):
             ##          and test count complete (D.3), transfer each ballot assigned to a
             ##          defeated candidate (D.2), and continue at step B.1.
             ##
-            if self.defeatBatch:
+            if self.defeat_batch:
                 sureLosers = batchDefeat()
                 if sureLosers:
                     for c in C.byBallotOrder(sureLosers):

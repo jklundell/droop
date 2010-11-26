@@ -34,23 +34,21 @@ class RuleBasicTest(unittest.TestCase):
         self.assertTrue('wigm-prf' in electionRuleNames())
 
     def testArithmetic(self):
-        "wigm-prf uses fixed-4"
-        rule = electionRule('wigm-prf')(None)
-        used = set()
-        ignored = set()
-        options = rule.options(dict(rule='wigm-prf', arithmetic='guarded'), used, ignored)
-        self.assertEqual(options['arithmetic'], 'fixed')
-        self.assertEqual(options['precision'], 4)
-        self.assertEqual(used, set())
-        self.assertEqual(ignored, set(('arithmetic', 'precision', 'display', 'defeat_batch')))
+        "wigm-prf uses fixed"
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        E = Election(ElectionProfile(data=b), dict(rule='wigm-prf', arithmetic='guarded', abc=4))
+        self.assertEqual(E.options.getopt('arithmetic'), 'fixed')
+        self.assertEqual(E.options.getopt('precision'), 4)
+        self.assertEqual(E.options.overrides(), ['arithmetic'])
+        self.assertEqual(E.options.unused(), ['abc'])
 
     def testDefeatBatch(self):
         "tag is name of rule"
-        rule = electionRule('wigm-prf')(None)
-        rule.options(dict(rule='wigm-prf'))
-        self.assertEqual(rule.tag(), 'wigm-prf')
-        rule.options(dict(rule='wigm-prf-batch'))
-        self.assertEqual(rule.tag(), 'wigm-prf-batch')
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        E = Election(ElectionProfile(data=b), dict(rule='wigm-prf'))
+        self.assertEqual(E.rule.tag(), 'wigm-prf')
+        E = Election(ElectionProfile(data=b), dict(rule='wigm-prf-batch'))
+        self.assertEqual(E.rule.tag(), 'wigm-prf-batch')
 
 
 class ElectionCountTest(unittest.TestCase):

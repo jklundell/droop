@@ -68,19 +68,17 @@ class Rule(ElectionRule):
         "initialize rule"
         self.E = E
 
-    def options(self, options=dict(), used=set(), ignored=set()):
+    def options(self):
         "initialize election parameters"
 
         #  initialize and return arithmetic
         #
         #  (override arithmetic parameters)
         #
-        options['arithmetic'] = 'guarded'
-        options['precision'] = 9
-        options['guard'] = None
-        options['display'] = None
-        ignored |= set(('arithmetic', 'precision', 'guard', 'display'))
-        return options
+        self.E.options.setopt('arithmetic', default='guarded', force=True)
+        self.E.options.setopt('precision', default=9, force=True)
+        self.E.options.setopt('guard', default=9, force=True)
+        self.E.options.setopt('display', default=9, force=True)
 
     def info(self):
         "return an info string for the election report"

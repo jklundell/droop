@@ -24,6 +24,7 @@ import unittest
 
 import common  # to set sys.path
 from droop.common import UsageError
+from droop.common import Options
 from droop import values as V
 from droop.values.fixed import Fixed as F
 from droop.values.guarded import Guarded as G
@@ -39,84 +40,84 @@ class ValueTest(unittest.TestCase):
     #
     def testBadArithmetic(self):
         "try unknown arithmetic"
-        self.assertRaises(V.arithmeticValuesError, V.ArithmeticClass, dict(arithmetic='saywhat'))
+        self.assertRaises(V.arithmeticValuesError, V.ArithmeticClass, Options(dict(arithmetic='saywhat')))
 
     def testValueInitRationalDefault(self):
         "default class Guarded"
-        self.assertEqual(V.ArithmeticClass(), G)
+        self.assertEqual(V.ArithmeticClass(Options(dict(precision=8))), G)
 
     def testValueInitFixed(self):
         "class Fixed if arithmetic=fixed"
-        self.assertEqual(V.ArithmeticClass(dict(arithmetic='fixed')), F)
+        self.assertEqual(V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=8))), F)
 
     def testBadFixedA(self):
         "fixed called directly must be fixed or integer"
-        self.assertRaises(UsageError, F.initialize, dict(arithmetic='bill'))
+        self.assertRaises(UsageError, F.initialize, Options(dict(arithmetic='bill')))
 
     def testValueInitRational(self):
         "class Rational if arithmetic=rational"
-        self.assertEqual(V.ArithmeticClass(dict(arithmetic='rational')), R)
+        self.assertEqual(V.ArithmeticClass(Options(dict(arithmetic='rational'))), R)
 
     def testBadP1(self):
         "precision must be an int"
-        self.assertRaises(UsageError, V.ArithmeticClass, dict(precision=5.5))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(precision=5.5)))
 
     def testBadP2(self):
         "precision must be >= 0"
-        self.assertRaises(UsageError, V.ArithmeticClass, dict(precision=-1))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(precision=-1)))
 
     def testBadG1(self):
         "guard must be an int"
-        self.assertRaises(UsageError, V.ArithmeticClass, dict(precision=5, guard=5.5))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(precision=5, guard=5.5)))
 
     def testBadG2(self):
         "guard must be >= 0"
-        self.assertRaises(UsageError, V.ArithmeticClass, dict(precision=5, guard=-1))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(precision=5, guard=-1)))
 
     #  Fixed initialization
     #
     def testFixedIntegerP0(self):
         "fixed=integer yields precision 0"
-        V.ArithmeticClass(dict(arithmetic='integer'))
+        V.ArithmeticClass(Options(dict(arithmetic='integer')))
         self.assertEqual(F.precision, 0)
 
     def testBadFixedPx(self):
         "fixed precision must be numeric"
-        self.assertRaises(UsageError, F.initialize, dict(arithmetic='fixed', precision='abc'))
+        self.assertRaises(UsageError, F.initialize, Options(dict(arithmetic='fixed', precision='abc')))
 
     def testBadFixedDx(self):
         "fixed display must be numeric"
-        self.assertRaises(UsageError, F.initialize, dict(arithmetic='fixed', display='abc'))
+        self.assertRaises(UsageError, F.initialize, Options(dict(arithmetic='fixed', precision=9, display='abc')))
 
     def testBadFP1(self):
         "fixed precision must be an int"
-        self.assertRaises(UsageError, V.ArithmeticClass, dict(arithmetic='fixed', precision=5.5))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='fixed', precision=5.5)))
 
     def testBadFP2(self):
         "fixed precision must be >= 0"
-        self.assertRaises(UsageError, V.ArithmeticClass, dict(arithmetic='fixed', precision=-1))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='fixed', precision=-1)))
 
     def testFixedInteger(self):
         "fixed precision 0 means integer"
-        V.ArithmeticClass(dict(arithmetic='fixed', precision=0))
+        V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=0)))
         self.assertEqual(F.tag(), 'integer')
 
     def testFixedDisplay1(self):
         "fixed display must be <= precision"
-        V.ArithmeticClass(dict(arithmetic='fixed', precision=6, display=7))
+        V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=6, display=7)))
         self.assertEqual(F.display, 6)
         self.assertTrue(F.info.find('display') < 0)
 
     def testFixedDisplay2(self):
         "fixed display != precision gets a mention in info"
-        V.ArithmeticClass(dict(arithmetic='fixed', precision=6, display=5))
+        V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=6, display=5)))
         self.assertTrue(F.info.find('display') > 0)
 
     def testFixedDisplay3(self):
         "fixed display < precision rounds properly"
-        V.ArithmeticClass(dict(arithmetic='fixed', precision=6, display=6))
+        V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=6, display=6)))
         self.assertEqual(str(F(20)/F(3)), '6.666666')
-        V.ArithmeticClass(dict(arithmetic='fixed', precision=7, display=6))
+        V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=7, display=6)))
         self.assertEqual(str(F(20)/F(3)), '6.666667')
 
 class ValueTestFixed6(unittest.TestCase):
@@ -125,7 +126,7 @@ class ValueTestFixed6(unittest.TestCase):
     A = None
     def setUp(self):
         "initialize fixed point six places"
-        self.A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=self.p, guard=self.g))
+        self.A = V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=self.p, guard=self.g)))
         
     def testFixed6(self):
         "simple assertions"
@@ -158,14 +159,14 @@ class ValueTestFixed6(unittest.TestCase):
 
     def testSetvalFixed6(self):
         "set a fixed value directly"
-        A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=6))
+        A = V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=6)))
         f = A(123456, True)
         self.assertEqual(repr(A(f)), 'Fixed(123456,True)')
         self.assertEqual(A(1000000,True), A(1))
 
     def testReprFixed6(self):
         "repr is the underlying _value"
-        A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=6))
+        A = V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=6)))
         self.assertEqual(repr(A(1)), 'Fixed(1000000,True)')
 
 class ValueTestFixed0(unittest.TestCase):
@@ -175,7 +176,7 @@ class ValueTestFixed0(unittest.TestCase):
     A = None
     def setUp(self):
         "initialize fixed point 0 places"
-        self.A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=self.p, guard=self.g))
+        self.A = V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=self.p, guard=self.g)))
         
     def testFixed0(self):
         "simple assertions"
@@ -185,9 +186,9 @@ class ValueTestFixed0(unittest.TestCase):
 
     def testReprFixed0(self):
         "repr is the underlying _value"
-        A = V.ArithmeticClass(options=dict(arithmetic='fixed', precision=self.p))
+        A = V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=self.p)))
         self.assertEqual(repr(A(1)), '1')
-        A = V.ArithmeticClass(options=dict(arithmetic='integer'))
+        A = V.ArithmeticClass(Options(dict(arithmetic='integer')))
         self.assertEqual(repr(A(1)), '1')
 
 class ValueTestGuarded0(unittest.TestCase):
@@ -196,8 +197,8 @@ class ValueTestGuarded0(unittest.TestCase):
     g = 0
     def setUp(self):
         "initialize guarded and fixed to no guard"
-        F.initialize(options=dict(arithmetic='fixed', precision=self.p, guard=self.g))
-        G.initialize(options=dict(arithmetic='guarded', precision=self.p, guard=self.g))
+        F.initialize(Options(dict(arithmetic='fixed', precision=self.p, guard=self.g)))
+        G.initialize(Options(dict(arithmetic='guarded', precision=self.p, guard=self.g)))
 
     def testG0(self):
         "basic equalities"
@@ -225,8 +226,8 @@ class ValueTestGuardedRat(unittest.TestCase):
     g = 9
     def setUp(self):
         "initialize guarded and rational"
-        R.initialize(options=dict(arithmetic='rational', display=self.p))
-        G.initialize(options=dict(arithmetic='guarded', precision=self.p, guard=self.g))
+        R.initialize(Options(dict(arithmetic='rational', display=self.p)))
+        G.initialize(Options(dict(arithmetic='guarded', precision=self.p, guard=self.g)))
 
     def testGR(self):
         "basic equalities"
@@ -251,7 +252,7 @@ class ValueTestRounding(unittest.TestCase):
     g = 0
     def setUp(self):
         "initialize fixed class"
-        V.ArithmeticClass(options=dict(arithmetic='fixed', precision=self.p, guard=self.g))
+        V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=self.p, guard=self.g)))
         
     def testRoundFloor(self):
         "default rounding is truncation/floor"
@@ -286,45 +287,45 @@ class ValueTestGuarded9(unittest.TestCase):
 
     def testExact(self):
         "guarded is exact"
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=9)))
         self.assertEqual(A.exact, True)
 
     def testScale(self):
         "scale is a function of precision and guard"
         p = 9
         g = p
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=p))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=p)))
         self.assertEqual(A._Guarded__scale, 10**(p+g))
 
     def testGeps(self):
         "geps is a function of guard"
         p = 9
         g = p
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=p))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=p)))
         self.assertEqual(A._Guarded__geps, 10**g/2)
 
     def testBadPrecision(self):
         "test illegal precision"
-        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', precision=1.1))
-        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', precision=-1))
-        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', precision='abc'))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=1.1)))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=-1)))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision='abc')))
 
     def testBadGuard(self):
         "test illegal guard"
-        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', guard=1.1))
-        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', guard=-1))
-        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', guard='abc'))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, guard=1.1)))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, guard=-1)))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, guard='abc')))
 
     def testBadDisplay(self):
         "test illegal display"
-        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', display=1.1))
-        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', display=-1))
-        self.assertRaises(UsageError, V.ArithmeticClass, options=dict(arithmetic='guarded', display='abc'))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, display=1.1)))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, display=-1)))
+        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, display='abc')))
 
     def testDisplay(self):
         "display defaults to precision"
         p = 5
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=p))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=p)))
         self.assertEqual(A.display, p)
         self.assertEqual(str(A(20)/A(3)), '6.66667')
 
@@ -333,17 +334,17 @@ class ValueTestGuarded9(unittest.TestCase):
         p = 5
         g = 6
         d = p + g + 1
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded', precision=p, guard=g, display=d))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=p, guard=g, display=d)))
         self.assertEqual(A.display, p+g)
         self.assertEqual(str(A(20)/A(3)), '6.66666_666666')
 
     def testBadArithmetic(self):
         "test illegal arithmetic"
-        self.assertRaises(UsageError, G.initialize, options=dict(arithmetic='fixed'))
+        self.assertRaises(UsageError, G.initialize, Options(dict(arithmetic='fixed', precision=4)))
 
     def testUnaryOps(self):
         "test unary + and -"
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=4)))
         x = A(1)
         y = A(2)
         self.assertEqual(x-y, -x)
@@ -352,27 +353,27 @@ class ValueTestGuarded9(unittest.TestCase):
 
     def testDivInt(self):
         "test guarded/int"
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=9)))
         x = A(2)
         y = A(3)
         self.assertEqual(x/y, x/3)
 
     def testMulInt(self):
         "test guarded*int"
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=9)))
         x = A(2)
         y = A(3)
         self.assertEqual(x*y, x*3)
 
     def testNoHash(self):
         "test guarded/int"
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=9)))
         x = A(2)
         self.assertRaises(NotImplementedError, hash, x)
 
     def testMulDiv(self):
         "guarded muldiv"
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=9)))
         f13 = A(1)/A(3)
         f15 = A(1)/A(5)
         f17 = A(1)/A(7)
@@ -382,7 +383,7 @@ class ValueTestGuarded9(unittest.TestCase):
 
     def testMulDiv0(self):
         "guarded muldiv with g=0"
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded', guard=0))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=9, guard=0)))
         f13 = A(1)/A(3)
         f15 = A(1)/A(5)
         f17 = A(1)/A(7)
@@ -394,12 +395,12 @@ class ValueTestGuarded9(unittest.TestCase):
 
     def testRepr(self):
         "repr is the underlying _value"
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=9)))
         self.assertEqual(repr(A(1)), 'Guarded(1000000000000000000,True)')
 
     def testNe(self):
         "not equal"
-        A = V.ArithmeticClass(options=dict(arithmetic='guarded'))
+        A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=9)))
         self.assertFalse(A(1)!=A(1))
 
 class ValueTestRational(unittest.TestCase):

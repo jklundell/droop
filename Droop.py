@@ -58,18 +58,14 @@ def main(options=None):
 
     #  process options
     #
-    #  we know about (rule, path, profile)
+    #  we know about (path, profile)
     #  all the others are passed to the various consumers
     #
-    rulename = 'meek'   # default rule
     path = None         # ballot path must be specified
     doProfile = False   # performance profiling
     reps = 1            # repetitions (for profiling)
-    options.setdefault('rule', rulename)
     for opt,arg in options.items():
-        if opt == 'rule':       # rule=<election rule name> default: 'meek'
-            rulename = arg
-        elif opt == 'path':     # path=<path to ballot file>
+        if opt == 'path':     # path=<path to ballot file>
             path = arg
         elif opt == 'profile':  # profile=<number of repetitions>
             import cProfile
@@ -80,10 +76,6 @@ def main(options=None):
     if not path:
         raise droop.common.UsageError("no ballot file specfied")
     
-    if not rulename in droop.electionRuleNames():
-        rules = ' '.join(droop.electionRuleNames())
-        raise droop.common.UsageError("unknown rule '%s'; known rules:\n\t%s" % (rulename, rules))
-
     #  run the election
     #
     #    fetch the election profile
@@ -108,12 +100,14 @@ def main(options=None):
     except KeyboardInterrupt:
         intr = True
     global E  # if E isn't global, the profiled assignment of E isn't visible
+    E.options.setopt('dump', default=False)
+    E.options.setopt('json', default=False)
     report = ''
-    if options.get('report', True):
+    if E.options.setopt('report', default=True):
         report += E.report(intr)
-    if options.get('dump', False):
+    if E.options.getopt('dump'):
         report += E.dump(intr)
-    if options.get('json', False):
+    if E.options.getopt('json'):
         report += E.json(intr)
 
     if doProfile:
@@ -173,7 +167,7 @@ if __name__ == "__main__":
         sys.exit(0)
     path = None
     try:
-        options = droop.common.parseOptions(sys.argv[1:])
+        options = droop.common.Options.parse(sys.argv[1:])
         path = options.get('path')
         if path is None:
             print >>sys.stderr, "droop: must specify ballot file"

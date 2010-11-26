@@ -55,7 +55,7 @@ See also: fixed, guarded
 '''
 
     @classmethod
-    def initialize(cls, options=dict(), used=set(), ignored=set()):
+    def initialize(cls, options):
         '''
         initialize class Rational, a value class based on Fraction
         
@@ -65,11 +65,12 @@ See also: fixed, guarded
 
         #  initialize __str__ parameters
         #
-        cls.dp = options.get('display', None) or 12        # display precision
+        if options.getopt('display') is None:              # don't override default set by rule
+            options.setopt('display', default=12)
+        cls.dp = options.getopt('display')                 # display precision
         cls._dps = 10 ** cls.dp                            # display scaler
         cls._dpr = Fraction(1, cls._dps*2)                 # display rounder
         cls._dfmt = "%d.%0" + str(cls.dp) + "d" # %d.%0_d  # display format
-        used |= set(('display',))
 
     @classmethod
     def min(cls, vals):

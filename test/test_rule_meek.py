@@ -23,7 +23,7 @@ This file is part of Droop.
 import unittest
 
 from common import testdir, doDumpCompare
-from droop import electionRuleNames, electionRule
+from droop import electionRuleNames
 from droop.election import Election
 from droop.profile import ElectionProfile
 from droop.common import UsageError
@@ -37,10 +37,11 @@ class ElectionNameTest(unittest.TestCase):
 
     def testMeekWarren1(self):
         "meek responds to warren"
-        rule = electionRule('warren')(None)
-        rule.options(dict(rule='warren'))
-        self.assertEqual(rule.tag(), 'warren-o9')
-        self.assertRaises(UsageError, rule.options, dict(defeat_batch='whatever'))
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        profile = ElectionProfile(data=b)
+        E = Election(profile, dict(rule='warren'))
+        self.assertEqual(E.rule.tag(), 'warren-o9')
+        self.assertRaises(UsageError, Election, profile, dict(rule='warren', defeat_batch='whatever'))
 
 class ElectionCountTest(unittest.TestCase):
     "test some counts"

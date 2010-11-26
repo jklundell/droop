@@ -56,21 +56,21 @@ class MplsTest(unittest.TestCase):
         "initialize profile and rule"
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.Profile = ElectionProfile(data=b)
-        self.options = dict(rule='mpls')
-        self.E = Election(self.Profile, self.options)
+        self.E = Election(self.Profile, dict(rule='mpls'))
 
     def testElectionInit(self):
         "check that election is initialized"
-        self.assertTrue(self.E.rule.__class__.__name__ == 'Rule', 'bad rule class')
-        self.assertEqual(len(self.options), 4, 'mpls should set four options')
-        self.assertEqual(self.options['arithmetic'], 'fixed', 'mpls should set arithmetic=fixed')
-        self.assertEqual(self.options['precision'], 4, 'mpls should set precision=4')
-        self.assertEqual(self.options['display'], None, 'mpls should set display=None')
-        self.assertEqual(self.E.C.byCid(1).name, "Castor")
-        self.assertEqual(str(self.E.C.byCid(1)), "Castor")
-        self.assertTrue(self.E.C.byCid(1) == 1)
-        self.assertTrue(self.E.C.byCid(1) == '1')
-        self.assertFalse(self.E.C.byCid(1) == None)
+        E = self.E
+        self.assertTrue(E.rule.__class__.__name__ == 'Rule', 'bad rule class')
+        self.assertEqual(len(E.options.force), 3, 'mpls should force 3 options')
+        self.assertEqual(E.options.getopt('arithmetic'), 'fixed', 'mpls should set arithmetic=fixed')
+        self.assertEqual(E.options.getopt('precision'), 4, 'mpls should set precision=4')
+        self.assertEqual(E.options.getopt('display'), 4, 'mpls should set display=4')
+        self.assertEqual(E.C.byCid(1).name, "Castor")
+        self.assertEqual(str(E.C.byCid(1)), "Castor")
+        self.assertTrue(E.C.byCid(1) == 1)
+        self.assertTrue(E.C.byCid(1) == '1')
+        self.assertFalse(E.C.byCid(1) == None)
 
     def testElectionTieOrder(self):
         "test default tie order"

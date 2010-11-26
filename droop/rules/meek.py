@@ -19,7 +19,6 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from droop.common import UsageError
 from electionrule import ElectionRule
 
 class Rule(ElectionRule):
@@ -58,29 +57,25 @@ class Rule(ElectionRule):
         "initialize rule"
         self.E = E
 
-    def options(self, options=dict(), used=set(), ignored=set()):
-        "filter options"
-        
-        #  set defaults
-        #
-        self.name = options.get('rule', 'meek')
+    def options(self):
+        "Meek options"
+        self.name = self.E.options.getopt('rule')
         self.warren = self.name == 'warren'
-        if options.setdefault('arithmetic', 'guarded') == 'guarded':
-            options.setdefault('precision', 18)
-            options.setdefault('guard', options['precision']//2)
-            self.omega = options.get('omega', options['precision']//2)
-        elif options['arithmetic'] == 'fixed':
-            options.setdefault('precision', 9)
-            self.omega = options.get('omega', options['precision']*2//3)
-        elif options['arithmetic'] == 'rational':
-            self.omega = options.get('omega', 10)
+        options = self.E.options
 
-        self.defeatBatch = options.get('defeat_batch', 'safe')
-        if self.defeatBatch not in ('none', 'safe'):
-            raise UsageError('unknown defeat_batch %s; use none or safe' % self.defeatBatch)
+        arithmetic = options.setopt('arithmetic', default='guarded')
+        if arithmetic == 'guarded':
+            precision = options.setopt('precision', default=18)
+            options.setopt('guard', default=precision//2)
+            self.omega = options.setopt('omega', default=precision//2)
+        elif arithmetic == 'fixed':
+            precision = options.setopt('precision', default=9)
+            print "precision=%s type=%s" % (precision, type(precision)) # JKL DEBUG
+            self.omega = options.setopt('omega', default=precision*2//3)
+        elif arithmetic == 'rational':
+            self.omega = options.setopt('omega', default=10)
 
-        used |= set(('arithmetic', 'precision', 'omega', 'defeat_batch'))
-        return options
+        self.defeat_batch = options.setopt('defeat_batch', default='safe', allowed=('none','safe'))
 
     def info(self):
         "return an info string for the election report"
@@ -152,7 +147,7 @@ class Rule(ElectionRule):
         def batchDefeat(surplus):
             "find a batch of candidates that can be defeated at the current surplus"
             
-            if self.defeatBatch == 'none':
+            if self.defeat_batch == 'none':
                 return []
                 
             #   start with candidates sorted by vote

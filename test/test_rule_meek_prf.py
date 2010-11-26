@@ -35,14 +35,12 @@ class RuleBasicTest(unittest.TestCase):
 
     def testArithmetic(self):
         "meek-prf uses fixed"
-        rule = electionRule('meek-prf')(None)
-        used = set()
-        ignored = set()
-        options = rule.options(dict(arithmetic='guarded'), used, ignored)
-        self.assertEqual(options['arithmetic'], 'fixed')
-        self.assertEqual(options['precision'], 9)
-        self.assertEqual(used, set())
-        self.assertEqual(ignored, set(('arithmetic', 'precision', 'display', 'omega')))
+        b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        E = Election(ElectionProfile(data=b), dict(rule='meek-prf', arithmetic='guarded', omega=3, abc=4))
+        self.assertEqual(E.options.getopt('arithmetic'), 'fixed')
+        self.assertEqual(E.options.getopt('precision'), 9)
+        self.assertEqual(E.options.overrides(), ['arithmetic', 'omega'])
+        self.assertEqual(E.options.unused(), ['abc'])
 
 class ElectionCountTest(unittest.TestCase):
     "test some counts"

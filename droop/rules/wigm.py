@@ -20,7 +20,6 @@ This file is part of Droop.
 '''
 
 from electionrule import ElectionRule
-from droop.common import UsageError
 
 class Rule(ElectionRule):
     '''
@@ -51,29 +50,24 @@ class Rule(ElectionRule):
         "initialize rule"
         self.E = E
 
-    def options(self, options=dict(), used=set(), ignored=set()):
+    def options(self):
         "initialize election parameters"
-        
+
+        options = self.E.options
+
         #  set defaults
         #
-        if options.setdefault('arithmetic', 'guarded') == 'guarded':
-            options.setdefault('precision', 18)
-            options.setdefault('guard', options['precision']//2)
-        elif options['arithmetic'] == 'fixed':
-            options.setdefault('precision', 9)
+        if options.setopt('arithmetic', default='guarded') == 'guarded':
+            options.setopt('precision', default=18)
+            options.setopt('guard', default=options.getopt('precision')//2)
+        elif options.getopt('arithmetic') == 'fixed':
+            options.setopt('precision', default=9)
 
         #  integer_quota: use Droop quota rounded up to whole number
         #  defeat_batch=zero: defeat all hopeful candidates with zero votes after first surplus transfer
         #
-        self.integer_quota = options.get('integer_quota', False)
-        if self.integer_quota not in (True, False):
-            raise UsageError('%s: integer_quota=%s; must be True or False' % (self.name, self.integer_quota))
-        self.defeat_batch = options.get('defeat_batch', 'none')
-        if self.defeat_batch not in ('none', 'zero'):
-            raise UsageError('%s: defeat_batch=%s; must be "none" or "zero"' % (self.name, self.defeat_batch))
-
-        used |= set(('arithmetic', 'precision', 'guard', 'display', 'integer_quota', 'defeat_batch'))
-        return options
+        self.integer_quota = options.setopt('integer_quota', default=False, allowed=(True,False))
+        self.defeat_batch = options.setopt('defeat_batch', default='none', allowed=('none','zero'))
     
     def info(self):
         "return an info string for the election report"

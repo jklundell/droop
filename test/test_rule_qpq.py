@@ -56,22 +56,22 @@ class TestQpq(unittest.TestCase):
         "initialize profile and rule"
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.Profile = ElectionProfile(data=b)
-        self.options = dict(rule='qpq')
-        self.E = Election(self.Profile, self.options)
+        self.E = Election(self.Profile, dict(rule='qpq'))
 
     def testElectionInit(self):
         "check that election is initialized"
-        self.assertTrue(self.E.rule.__class__.__name__ == 'Rule', 'bad rule class')
-        self.assertEqual(len(self.options), 5, 'qpq should set five options')
-        self.assertEqual(self.options['arithmetic'], 'guarded', 'qpq should set arithmetic=guarded')
-        self.assertEqual(self.options['precision'], 9, 'qpq should set precision=9')
-        self.assertEqual(self.options['guard'], None, 'qpq should set guard=None')
-        self.assertEqual(self.options['display'], None, 'qpq should set display=None')
-        self.assertEqual(self.E.C.byCid(1).name, "Castor")
-        self.assertEqual(str(self.E.C.byCid(1)), "Castor")
-        self.assertTrue(self.E.C.byCid(1) == 1)
-        self.assertTrue(self.E.C.byCid(1) == '1')
-        self.assertFalse(self.E.C.byCid(1) == None)
+        E = self.E
+        self.assertTrue(E.rule.__class__.__name__ == 'Rule', 'bad rule class')
+        self.assertEqual(len(E.options.force), 4, 'qpq should force 4 options')
+        self.assertEqual(E.options.getopt('arithmetic'), 'guarded', 'qpq should set arithmetic=guarded')
+        self.assertEqual(E.options.getopt('precision'), 9, 'qpq should set precision=9')
+        self.assertEqual(E.options.getopt('guard'), 9, 'qpq should set guard=9')
+        self.assertEqual(E.options.getopt('display'), 9, 'qpq should set display=9')
+        self.assertEqual(E.C.byCid(1).name, "Castor")
+        self.assertEqual(str(E.C.byCid(1)), "Castor")
+        self.assertTrue(E.C.byCid(1) == 1)
+        self.assertTrue(E.C.byCid(1) == '1')
+        self.assertFalse(E.C.byCid(1) == None)
 
     def testElectionTieOrder(self):
         "test default tie order"

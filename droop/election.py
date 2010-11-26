@@ -31,10 +31,10 @@ Top-level structure:
   The options are used to override default Rule parameters, such as arithmetic.
 '''
 
-import sys, re, copy
+import sys, copy
 import values
 import droop
-from droop.common import ElectionError, parseOptions
+from droop.common import ElectionError, Options
 
 class Election(object):
     '''
@@ -61,27 +61,19 @@ class Election(object):
         if not electionProfile:
             raise ElectionError('no election profile specified')
 
-        for opt, value in parseOptions(electionProfile.options).items():
-            if opt not in options:
-                options[opt] = value
-
-        rulename = options.get('rule')
+        if isinstance(options, dict):
+            options = Options(options)
+        options.update(options.parse(electionProfile.options), file=True)
+        self.options = options
+        rulename = options.getopt('rule')
         if rulename is None:
             raise ElectionError('no election rule specified')
         Rule = droop.electionRule(rulename)    # get rule class
         if Rule is None:
             raise ElectionError('unknown election rule: %s' % rulename)
         self.rule = Rule(self)
-
-        # convert numeric options (precision, etc) to ints
-        for key, value in options.iteritems():
-            if isinstance(value, str) and re.match(r'\d+$', value):
-                options[key] = int(value)
-        self.options_all = set(options)
-        self.options_used = set(['rule'])
-        self.options_ignored = set()
-        self.options = self.rule.options(options, self.options_used, self.options_ignored)     # allow rule to process options
-        self.V = values.ArithmeticClass(self.options, self.options_used, self.options_ignored) # then set arithmetic
+        self.rule.options()     # allow rule to process options
+        self.V = values.ArithmeticClass(self.options) # then set arithmetic
         self.V0 = self.V(0)  # constant zero for efficiency
         self.V1 = self.V(1)  # constant one for efficiency
         self.electionProfile = electionProfile
@@ -230,13 +222,7 @@ class Election(object):
             self['cids'] = E.C.cidList("all")       # all CIDs
             self['ecids'] = E.C.cidList("eligible") # eligible CIDs
             self['cdict'] = E.C.cDict()
-            ignored = list()
-            for opt in E.options_all:
-                if opt in E.options_ignored or opt not in E.options_used:
-                    ignored.append(opt)
-            if ignored:
-                self['options_ignored'] = sorted(ignored)
-            self['options_used'] = sorted(E.options_used)
+            self['options'] = E.options.record()    # all options
             if self['method'] == 'meek':
                 self['omega'] = E.rule._omega
             if E.electionProfile.source:
@@ -306,8 +292,12 @@ class Election(object):
                 s += "\tDroop package: %s v%s\n" % (self['droop_name'], self['droop_version'])
                 s += "\tRule: %s\n" % self['rule_info']
                 s += "\tArithmetic: %s\n" % self['arithmetic_info']
-                if self.get('options_ignored') is not None:
-                    s += "\tIgnored options: %s\n" % ", ".join(self.get('options_ignored'))
+                unused = E.options.unused()
+                if unused:
+                    s += "\tUnused options: %s\n" % ", ".join(unused)
+                overrides = E.options.overrides()
+                if overrides:
+                    s += "\tOverridden options: %s\n" % ", ".join(overrides)
                 s += "\tSeats: %d\n" % self['seats']
                 s += "\tBallots: %d\n" % self['nballots']
                 s += "\tQuota: %s\n" % V(self['quota'])

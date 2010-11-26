@@ -26,18 +26,18 @@ arithmeticNames = ('fixed', 'integer', 'rational', 'guarded')
 class arithmeticValuesError(Exception):
     "election arithmetic value selection error"
 
-def ArithmeticClass(options=dict(), used=set(), ignored=set()):
+def ArithmeticClass(options):
     "initialize a value class and return it"
 
-    arithmetic = options.get('arithmetic', None) or 'guarded'
+    arithmetic = options.setopt('arithmetic', default='guarded')
     if arithmetic == 'rational':
-        rational.Rational.initialize(options, used, ignored)
+        rational.Rational.initialize(options)
         return rational.Rational
     if arithmetic in ('fixed', 'integer'):
-        fixed.Fixed.initialize(options, used, ignored)
+        fixed.Fixed.initialize(options)
         return fixed.Fixed
     if arithmetic in ('guarded'):
-        guarded.Guarded.initialize(options, used, ignored)
+        guarded.Guarded.initialize(options)
         return guarded.Guarded
     vals = ' '.join(arithmeticNames)
     raise arithmeticValuesError("unknown arithmetic %s\n\tuse: %s" % (arithmetic, vals))

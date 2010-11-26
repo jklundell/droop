@@ -58,15 +58,12 @@ class Rule(ElectionRule):
         "initialize rule"
         self.E = E
 
-    def options(self, options=dict(), used=set(), ignored=set()):
-        "override options"
-
-        options['arithmetic'] = 'fixed'
-        options['precision'] = self.precision
-        options['display'] = None
-        options['omega'] = self.omega
-        ignored |= set(('arithmetic', 'precision', 'display', 'omega'))
-        return options
+    def options(self):
+        "Meek-PRF forces all relevant options"
+        self.E.options.setopt('arithmetic', default='fixed', force=True)
+        self.E.options.setopt('precision', default=self.precision, force=True)
+        self.E.options.setopt('display', default=self.precision, force=True)
+        self.E.options.setopt('omega', default=self.omega, force=True)
 
     def info(self):
         "return an info string for the election report"
