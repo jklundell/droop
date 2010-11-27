@@ -77,16 +77,16 @@ class ElectionRecord(dict):
         E = self.E
         C = E.C
         A = dict(tag=tag, msg=msg, round=E.round)
-        if tag == "log":
+        if tag == 'log':
             self['actions'].append(A)
             return
-        if (tag == "begin" or tag == "round") and not self.filled:
+        if (tag == 'begin' or tag == 'round') and not self.filled:
             self._fill()
-        if tag == "end":
+        if tag == 'end':
             vreport = E.V.report()
             if vreport:
                 self['arithmetic_report'] = vreport
-        if tag == "round":
+        if tag == 'round':
             E.rounds.append(C.copy())    # save a copy of the Candidates state for weak tiebreaking
         A['cstate'] = C.cState()  # variable candidate state
         A['votes'] = sum([c.vote for c in C.eligible()], E.V0)
@@ -114,9 +114,9 @@ class ElectionRecord(dict):
         E = self.E
         V = E.V
         report = []
-        if E.rule.report(self, report, "all"):  # allow rule to supply entire report
+        if E.rule.report(self, report, 'all'):  # allow rule to supply entire report
             return "".join(report)
-        if not E.rule.report(self, report, "header"):   # allow rule to supply report header
+        if not E.rule.report(self, report, 'header'):   # allow rule to supply report header
             s = "\nElection: %s\n\n" % self['title']
             s += "\tDroop package: %s v%s\n" % (self['droop_name'], self['droop_version'])
             s += "\tRule: %s\n" % self['rule_info']
@@ -138,16 +138,16 @@ class ElectionRecord(dict):
                 s += "{%s}\n" % self.get('profile_comment')
             s += '\n'
             report.append(s)
-        E.rule.report(self, report, "headerappend")     # allow rule to append to header
+        E.rule.report(self, report, 'headerappend')     # allow rule to append to header
         if self.get('arithmetic_report') is not None:
             report.append(self.get('arithmetic_report'))
         if intr:
             s += "\t** Count terminated prematurely by user interrupt **\n\n"
         cids = self['cids']
         cdict = self['cdict']
-        if not E.rule.report(self, report, "actions"):          # allow rule to report all actions
+        if not E.rule.report(self, report, 'actions'):          # allow rule to report all actions
             for A in self['actions']:
-                if E.rule.report(self, report, "action", A):    # allow rule to report this action
+                if E.rule.report(self, report, 'action', A):    # allow rule to report this action
                     continue
                 if A['tag'] == 'log':
                     report.append("\t%s\n" % A['msg'])
