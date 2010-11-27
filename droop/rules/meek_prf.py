@@ -73,6 +73,20 @@ class Rule(ElectionRule):
         "return a tag string for unit tests"
         return "%s-o%s" % (self.name, self.omega)
 
+    def dump(self, line, action=None, cid=None, cstate=None):
+        "append rule-specific dump info"
+        V = self.E.V
+        if cid is None:
+            if action is None:  # header
+                line += ['Votes', 'Surplus', 'Residual']
+            else:
+                line += [V(action['votes']), V(action['surplus']), V(action['residual'])]
+        else:
+            if action is None:  # header
+                line += ['%s.vote' % cid, '%s.kf' % cid]
+            else:
+                line += [V(cstate['vote']), V(cstate['kf'])]
+
     #########################
     #
     #   Main Election Counter

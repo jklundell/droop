@@ -112,6 +112,17 @@ class Rule(ElectionRule):
             return True
         return False
 
+    def dump(self, line, action=None, cid=None, cstate=None):
+        "append rule-specific dump info"
+        V = self.E.V
+        if cid is None:
+            pass
+        else:
+            if action is None:  # header
+                line += ['%s.quotient' % cid]
+            else:
+                line += [V(cstate['quotient'])]
+
     #########################
     #
     #   Main Election Counter

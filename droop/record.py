@@ -32,8 +32,10 @@ class ElectionRecord(dict):
         self.filled = False
         self['actions'] = list()    # list of election actions
 
-    def fill(self):
-        "fill in the basic election info"
+    def _fill(self):
+        """
+        fill in the basic election info
+        """
         E = self.E
         self['title'] = E.title
         self['droop_name'] = droop.common.droopName
@@ -46,9 +48,9 @@ class ElectionRecord(dict):
         self['seats'] = E.nSeats
         self['nballots'] = E.nBallots
         self['quota'] = E.V(E.quota)
-        self['cids'] = E.C.cidList("all")       # all CIDs
-        self['ecids'] = E.C.cidList("eligible") # eligible CIDs
-        self['cdict'] = E.C.cDict()
+        self['cids'] = E.C.cidList('all')       # all CIDs
+        self['ecids'] = E.C.cidList('eligible') # eligible CIDs
+        self['cdict'] = E.C.cDict()             # candidate descriptors
         self['options'] = E.options.record()    # all options
         if self['method'] == 'meek':
             self['omega'] = E.rule._omega
@@ -79,7 +81,7 @@ class ElectionRecord(dict):
             self['actions'].append(A)
             return
         if (tag == "begin" or tag == "round") and not self.filled:
-            self.fill()
+            self._fill()
         if tag == "end":
             vreport = E.V.report()
             if vreport:
@@ -193,28 +195,20 @@ class ElectionRecord(dict):
     def dump(self):
         "dump a list of actions"
 
-        V = self.E.V
+        E = self.E
+        V = E.V
         ecids = self['ecids']
         cdict = self['cdict']
         
         #  header line
         #
         h = ['R', 'Action', 'Quota']
-        if self['method'] == 'meek':
-            h += ['Votes', 'Surplus', 'Residual']
-        elif self['method'] == 'wigm':
-            h += ['Total', 'Votes', 'Non-Transferable', 'Residual']
-        elif self['method'] == 'qpq':
-            pass
+        E.rule.dump(h)
 
         for cid in ecids:
             h += ['%s.name' % cid]
             h += ['%s.state' % cid]
-            if self['method'] == 'qpq':
-                h += ['%s.quotient' % cid]
-            else:
-                h += ['%s.vote' % cid]
-            if self['method'] == 'meek': h += ['%s.kf' % cid]
+            E.rule.dump(h, cid=cid)
         h = [str(item) for item in h]
 
         dumps = ['\t'.join(h) + '\n']
@@ -227,24 +221,13 @@ class ElectionRecord(dict):
             else:
                 round = 'X' if A['tag'] == 'end' else A['round']
                 r = [round, A['tag'], V(A['quota'])]
-                if self['method'] == 'meek':
-                    r += [V(A['votes']), V(A['surplus']), V(A['residual'])]
-                elif self['method'] == 'wigm':
-                    votes = A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes']
-                    total = votes + A['nt_votes'] + A['residual']
-                    r += [V(total), V(votes), V(A['nt_votes']), V(A['residual'])]
-                elif self['method'] == 'qpq':
-                    pass
+                E.rule.dump(r, action=A)
 
                 for cid in ecids:
                     cstate = A['cstate'][cid]
                     r.append(cdict[cid]['name'])
                     r.append(cstate['code'])
-                    if self['method'] == 'qpq':
-                        r.append(V(cstate['quotient']))
-                    else:
-                        r.append(V(cstate['vote']))
-                    if self['method'] == 'meek': r.append(V(cstate['kf']))
+                    E.rule.dump(r, action=A, cid=cid, cstate=cstate)
 
             r = [str(item) for item in r]
             dumps.append('\t'.join(r) + '\n')

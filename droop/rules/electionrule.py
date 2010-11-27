@@ -116,3 +116,11 @@ class ElectionRule(object):  # pragma: no cover
         See record.ElectionRecord.report() for details.
         '''
         return False
+
+    def dump(self, line, action=None, cid=None, cstate=None):
+        '''
+        Hook for rule-specific election dumping.
+        
+        See record.ElectionRecord.report() for details.
+        '''
+        pass

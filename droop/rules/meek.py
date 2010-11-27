@@ -70,7 +70,6 @@ class Rule(ElectionRule):
             self.omega = options.setopt('omega', default=precision//2)
         elif arithmetic == 'fixed':
             precision = options.setopt('precision', default=9)
-            print "precision=%s type=%s" % (precision, type(precision)) # JKL DEBUG
             self.omega = options.setopt('omega', default=precision*2//3)
         elif arithmetic == 'rational':
             self.omega = options.setopt('omega', default=10)
@@ -87,6 +86,20 @@ class Rule(ElectionRule):
         if self.warren:
             return 'warren-o%s' % self.omega
         return 'meek-o%s' % self.omega
+
+    def dump(self, line, action=None, cid=None, cstate=None):
+        "append rule-specific dump info"
+        V = self.E.V
+        if cid is None:
+            if action is None:  # header
+                line += ['Votes', 'Surplus', 'Residual']
+            else:
+                line += [V(action['votes']), V(action['surplus']), V(action['residual'])]
+        else:
+            if action is None:  # header
+                line += ['%s.vote' % cid, '%s.kf' % cid]
+            else:
+                line += [V(cstate['vote']), V(cstate['kf'])]
 
     #########################
     #
