@@ -23,7 +23,7 @@ This file is part of Droop.
 import unittest
 
 from common import testdir
-from droop import electionRuleNames, electionRule
+from droop import electionRuleNames
 from droop.election import Election
 from droop.profile import ElectionProfile
 

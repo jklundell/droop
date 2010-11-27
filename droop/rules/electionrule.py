@@ -58,12 +58,13 @@ class ElectionRule(object):  # pragma: no cover
         '''
         Initialize the election-rule object.
         '''
+        pass
 
     def options(self):
         '''
         Handle initialization of options.
         '''
-        return options
+        pass
     
     def info(self):
         '''
@@ -101,7 +102,7 @@ class ElectionRule(object):  # pragma: no cover
         '''
         Hook for rule-specific election action recording.
         
-        See Election.ElectionRecord.action() for details.
+        See record.ElectionRecord.action() for details.
         '''
         pass
 
@@ -112,6 +113,6 @@ class ElectionRule(object):  # pragma: no cover
         To override the default report section,
         append the secion to report and return True
         
-        See Election.ElectionRecord.report() for details.
+        See record.ElectionRecord.report() for details.
         '''
         return False

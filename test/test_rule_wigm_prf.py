@@ -25,7 +25,7 @@ import unittest
 from common import testdir
 from droop.election import Election
 from droop.profile import ElectionProfile
-from droop import electionRuleNames, electionRule
+from droop import electionRuleNames
 
 class RuleBasicTest(unittest.TestCase):
     "make sure we're in the book"
