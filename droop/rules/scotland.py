@@ -285,7 +285,7 @@ class Rule(ElectionRule):
 
             #  elect candidates with quota [47]
             #
-            for c in [c for c in C.hopeful(order="vote", reverse=True) if hasQuota(c)]:
+            for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]:
                 c.pend()      # elect with surplus transfer pending
             if countComplete():
                 break

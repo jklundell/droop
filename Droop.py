@@ -155,7 +155,7 @@ def usage(subject=None):
     return 'no help available on %s' % subject
 
     
-if __name__ == "__main__":
+if __name__ == '__main__':
     if len(sys.argv) < 2:
         print >>sys.stderr, usage()
         sys.exit(1)

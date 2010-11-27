@@ -326,7 +326,7 @@ class Rule(ElectionRule):
 
             #  sortedCands = hopeful candidates below threshold, sorted by vote
             #
-            sortedCands = C.hopeful(order="vote")
+            sortedCands = C.hopeful(order='vote')
 
             #   copy the sorted candidates list, 
             #   making each entry a list
@@ -452,7 +452,7 @@ class Rule(ElectionRule):
             ##     those candidates who are continuing candidates are elected 
             ##     and the tabulation is complete. 
             ##
-            for c in [c for c in C.hopeful(order="vote", reverse=True) if hasQuota(c)]:
+            for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]:
                 c.pend('Candidate at threshold')  # election pending
             if len(C.elected()) >= E.nSeats:
                 break

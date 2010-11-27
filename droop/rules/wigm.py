@@ -178,7 +178,7 @@ class Rule(ElectionRule):
 
             #  elect new winners
             #
-            for c in [c for c in C.hopeful(order="vote", reverse=True) if hasQuota(E, c)]:
+            for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(E, c)]:
                 c.pend()      # elect with transfer pending
 
             #  find & transfer highest surplus

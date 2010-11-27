@@ -280,7 +280,7 @@ class Candidates(set):
         self._byCid[c.cid] = c  # side table for lookup by candidate ID
         super(Candidates, self).add(c)
         if self.E is not None:  # accommodate unit test
-            if c.state == "withdrawn":
+            if c.state == 'withdrawn':
                 self.E.log("Add withdrawn: %s" % c.name)
             else:
                 self.E.log("Add eligible: %s" % c.name)
@@ -289,13 +289,13 @@ class Candidates(set):
         "look up a candidate by candidate ID"
         return self._byCid[cid]
 
-    def cidList(self, state="all"):
+    def cidList(self, state='all'):
         '''
         return a list of CIDs, in ballot order
         
         used for reporting
         '''
-        return [c.cid for c in self.select(state, order="ballot")]
+        return [c.cid for c in self.select(state, order='ballot')]
 
     def cDict(self):
         '''
@@ -305,7 +305,7 @@ class Candidates(set):
         used for reporting
         '''
         cdict = dict()
-        for c in self.select("all"):
+        for c in self.select('all'):
             cdict[c.cid] = c.as_dict(ro=True)
         return cdict
 
@@ -318,7 +318,7 @@ class Candidates(set):
         used for reporting
         '''
         cstate = dict()
-        for c in self.select("all"):
+        for c in self.select('all'):
             cstate[c.cid] = c.as_dict(rw=True)
         return cstate
 
@@ -337,55 +337,55 @@ class Candidates(set):
         "sort a list of candidates by tie-break order"
         return sorted(candidates, key=lambda c: c.tieOrder, reverse=reverse)
 
-    def select(self, state, order="none", reverse=False):
+    def select(self, state, order='none', reverse=False):
         "select and return list of candidates with specified state, optionally in specified order"
-        if state == "all":
+        if state == 'all':
             candidates = self
-        elif state == "eligible":
-            candidates = [c for c in self if c.state != "withdrawn"]
-        elif state == "pending":
-            candidates = [c for c in self if c.state == "elected" and c.pending]
-        elif state == "notpending":
-            candidates = [c for c in self if c.state == "elected" and not c.pending]
+        elif state == 'eligible':
+            candidates = [c for c in self if c.state != 'withdrawn']
+        elif state == 'pending':
+            candidates = [c for c in self if c.state == 'elected' and c.pending]
+        elif state == 'notpending':
+            candidates = [c for c in self if c.state == 'elected' and not c.pending]
         else:
             candidates = [c for c in self if c.state == state]
-        if order == "none":
+        if order == 'none':
             return candidates
-        if order == "ballot":
+        if order == 'ballot':
             return self.byBallotOrder(candidates, reverse=reverse)
-        if order == "tie":
+        if order == 'tie':
             return self.byTieOrder(candidates, reverse=reverse)
-        if order == "vote":
+        if order == 'vote':
             return self.byVote(candidates, reverse=reverse)
         raise ValueError('unknown candidate sort order: %s' % order)
 
-    def eligible(self, order="none", reverse=False):
+    def eligible(self, order='none', reverse=False):
         "select and return list of eligible candidates, in specified order"
-        return self.select("eligible", order, reverse)
+        return self.select('eligible', order, reverse)
 
-    def withdrawn(self, order="none", reverse=False):
+    def withdrawn(self, order='none', reverse=False):
         "select and return list of eligible candidates, in specified order"
-        return self.select("withdrawn", order, reverse)
+        return self.select('withdrawn', order, reverse)
 
-    def hopeful(self, order="none", reverse=False):
+    def hopeful(self, order='none', reverse=False):
         "select and return list of hopeful candidates, in specified order"
-        return self.select("hopeful", order, reverse)
+        return self.select('hopeful', order, reverse)
 
-    def elected(self, order="none", reverse=False):
+    def elected(self, order='none', reverse=False):
         "select and return list of withdrawn candidates, in specified order"
-        return self.select("elected", order, reverse)
+        return self.select('elected', order, reverse)
 
-    def defeated(self, order="none", reverse=False):
+    def defeated(self, order='none', reverse=False):
         "select and return list of defeated candidates, in specified order"
-        return self.select("defeated", order, reverse)
+        return self.select('defeated', order, reverse)
 
-    def notpending(self, order="none", reverse=False):
+    def notpending(self, order='none', reverse=False):
         "select and return list of elected and not pending candidates, in specified order"
-        return self.select("notpending", order, reverse)
+        return self.select('notpending', order, reverse)
 
-    def pending(self, order="none", reverse=False):
+    def pending(self, order='none', reverse=False):
         "select and return list of elected candidates pending transfer, in specified order"
-        return self.select("pending", order, reverse)
+        return self.select('pending', order, reverse)
 
 
 class Candidate(object):
@@ -402,7 +402,7 @@ class Candidate(object):
         self.name = cname           # candidate name
         self.nick = str(cid) if cnick is None else str(cnick)
         # mutable properties
-        self.state = "withdrawn" if isWithdrawn else "hopeful"  # withdrawn, hopeful, elected, etc
+        self.state = 'withdrawn' if isWithdrawn else 'hopeful'  # withdrawn, hopeful, elected, etc
         if E is None:
             self.vote = None        # in support of unit tests
         else:
@@ -444,7 +444,7 @@ class Candidate(object):
         Meek, QPQ: elect a candidate
         WIGM: move a candidate from pending to elected on surplus transfer
         '''
-        self.state = "elected"
+        self.state = 'elected'
         self.pending = False
         self.E.logAction('elect', "%s: %s" % (msg, self.name))
 
@@ -452,27 +452,27 @@ class Candidate(object):
         '''
         WIGM: set a candidate elected pending transfer
         '''
-        self.state = "elected"
+        self.state = 'elected'
         self.pending = True
         self.E.logAction('pend', "%s: %s" % (msg, self.name))
 
     def unelect(self):
         "QPQ: unelect a candidate (qpq restart)"
-        self.state = "hopeful"
+        self.state = 'hopeful'
 
     def defeat(self, msg='Defeat'):
         "defeat a candidate"
-        self.state = "defeated"
+        self.state = 'defeated'
         self.E.logAction('defeat', "%s: %s" % (msg, self.name))
 
     def code(self):
         "return a one-letter state code for a candidate"
-        if self.state == "withdrawn": return 'W'
-        if self.state == "hopeful": return 'H'
-        if self.state == "elected":
+        if self.state == 'withdrawn': return 'W'
+        if self.state == 'hopeful': return 'H'
+        if self.state == 'elected':
             if self.E.rule.method == 'wigm' and self.pending: return 'e'
             return 'E'
-        if self.state == "defeated": return 'D'
+        if self.state == 'defeated': return 'D'
         return '?'  # pragma: no cover
 
     def __str__(self):

@@ -239,7 +239,7 @@ class Rule(ElectionRule):
             #     where each group consists of the candidates tied at that vote
             #     (when there's no tie, a group will have one candidate)
             #
-            sortedCands = C.hopeful(order="vote")
+            sortedCands = C.hopeful(order='vote')
             sortedGroups = []
             group = []
             vote = V0
@@ -323,7 +323,7 @@ class Rule(ElectionRule):
             ##          pending). Set the surplus of each pending candidate to that candidate's
             ##          vote minus the quota. Test count complete (D.3).
             ##
-            for c in [c for c in C.hopeful(order="vote", reverse=True) if hasQuota(E, c)]:
+            for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(E, c)]:
                 c.pend()      # elect with transfer pending
 
             ##     B.2. Defeat sure losers (optional). Find the largest set of hopeful
