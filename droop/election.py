@@ -42,7 +42,7 @@ class Election(object):
     container for an election
     '''
     
-    def __init__(self, electionProfile, options=dict()):
+    def __init__(self, electionProfile, options=None):
         "create an election from the incoming election profile"
 
         #  before this, a rule has been specified and a profile created
@@ -62,6 +62,8 @@ class Election(object):
         if not electionProfile:
             raise ElectionError('no election profile specified')
 
+        if options is None:
+            options = dict()
         if isinstance(options, dict):
             options = Options(options)
         options.update(options.parse(electionProfile.options), file=True)
