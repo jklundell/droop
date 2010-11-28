@@ -82,11 +82,9 @@ class Rule(ElectionRule):
         V = self.E.V
         if cid is None:
             if action is None:  # header
-                line += ['Total', 'Votes', 'Non-Transferable', 'Residual']
+                line += ['Non-Transferable']
             else:
-                votes = action['e_votes'] + action['p_votes'] + action['h_votes'] + action['d_votes']
-                total = votes + action['nt_votes'] + action['residual']
-                line += [V(total), V(votes), V(action['nt_votes']), V(action['residual'])]
+                line += [V(action['nt_votes'])]
         else:
             if action is None:  # header
                 line += ['%s.vote' % cid]

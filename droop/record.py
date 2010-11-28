@@ -96,12 +96,6 @@ class ElectionRecord(dict):
             A['surplus'] = E.V(E.surplus)
         elif self['method'] == 'wigm':
             A['nt_votes'] = E.exhausted # nontransferable votes
-            A['h_votes'] = sum((c.vote for c in C.hopeful()), E.V0)     # votes for hopeful candidates
-            A['e_votes'] = sum((c.vote for c in C.notpending()), E.V0)  # votes for elected (transfer not pending) candidates
-            A['p_votes'] = sum((c.vote for c in C.pending()), E.V0)     # votes for elected (transfer pending) candidates
-            A['d_votes'] = sum((c.vote for c in C.defeated()), E.V0)    # votes for defeated candidates
-            total = A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes'] + A['nt_votes']  # vote total
-            A['residual'] = E.V(E.nBallots) - total                     # votes lost due to rounding error
             A['surplus'] = E.V(E.surplus)
         E.rule.action(self, A)                  # give rule a chance at the action
         self['actions'].append(A)
@@ -176,15 +170,21 @@ class ElectionRecord(dict):
                     s += '\tTotal: %s\n' % V((A['votes'] + A['residual']))
                     s += '\tSurplus: %s\n' % V(A['surplus'])
                 elif self['method'] == 'wigm':
-                    s += '\tElected votes: %s\n' % V(A['e_votes'])
-                    if A['p_votes']:
-                        s += '\tPending votes: %s\n' % V(A['p_votes'])
-                    s += '\tHopeful votes: %s\n' % V(A['h_votes'])
-                    if A['d_votes']:
-                        s += '\tDefeated votes: %s\n' % V(A['d_votes'])
+                    h_votes = sum([cstate[cid]['vote'] for cid in hcids], E.V0)
+                    d_votes = sum([cstate[cid]['vote'] for cid in dcids], E.V0)
+                    e_votes = sum([cstate[cid]['vote'] for cid in ecids if not cstate[cid]['pending']], E.V0)
+                    p_votes = sum([cstate[cid]['vote'] for cid in ecids if cstate[cid]['pending']], E.V0)
+                    total = e_votes + p_votes + h_votes + d_votes + A['nt_votes']  # vote total
+                    residual = V(self['nballots']) - total          # votes lost due to rounding error
+                    s += '\tElected votes: %s\n' % V(e_votes)
+                    if p_votes:
+                        s += '\tPending votes: %s\n' % V(p_votes)
+                    s += '\tHopeful votes: %s\n' % V(h_votes)
+                    if d_votes:
+                        s += '\tDefeated votes: %s\n' % V(d_votes)
                     s += '\tNontransferable votes: %s\n' % V(A['nt_votes'])
-                    s += '\tResidual: %s\n' % V(A['residual'])
-                    s += '\tTotal: %s\n' % V(A['e_votes'] + A['p_votes'] + A['h_votes'] + A['d_votes'] + A['nt_votes'] + A['residual'])
+                    s += '\tResidual: %s\n' % V(residual)
+                    s += '\tTotal: %s\n' % V(total + residual)
                     s += '\tSurplus: %s\n' % V(A['surplus'])
                 report.append(s)
         return "".join(report)
