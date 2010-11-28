@@ -222,7 +222,10 @@ class Rule(ElectionRule):
             '''
             while not ballot.exhausted and ballot.topCand not in C.hopeful():
                 ballot.advance()
-            return not ballot.exhausted
+            if ballot.exhausted:
+                E.exhausted += ballot.vote
+            else:
+                ballot.topCand.vote += ballot.vote
 
         def breakTie(tied, reason=None):
             '''
@@ -279,6 +282,7 @@ class Rule(ElectionRule):
         #
         for b in E.ballots:
             b.topCand.vote += b.vote
+        E.exhausted = V0  # track non-transferable votes
 
         E.logAction('begin', 'Begin Count')
         while True:
@@ -307,8 +311,7 @@ class Rule(ElectionRule):
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     # see http://www.votingmatters.org.uk/RES/eSTV-Eval.pdf section 7.1 #5
                     b.weight = V.muldiv(b.weight, surplus, high_candidate.vote, round='down')
-                    if transfer(b):
-                        b.topCand.vote += b.vote
+                    transfer(b)
                 high_candidate.vote = E.quota
                 E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, V(surplus)))
                 continue  # to next stage/round
@@ -321,8 +324,7 @@ class Rule(ElectionRule):
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 low_candidate.defeat('Defeat low candidate')
                 for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
-                    if transfer(b):
-                        b.topCand.vote += b.vote
+                    transfer(b)
                 low_candidate.vote = V0
                 E.logAction('transfer', "Transfer defeated: %s" % low_candidate)
 

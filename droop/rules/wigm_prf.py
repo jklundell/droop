@@ -183,7 +183,10 @@ class Rule(ElectionRule):
             "Transfer ballot to next hopeful candidate."
             while not ballot.exhausted and ballot.topCand not in C.hopeful():
                 ballot.advance()
-            return not ballot.exhausted
+            if ballot.exhausted:
+                E.exhausted += ballot.vote
+            else:
+                ballot.topCand.vote += ballot.vote
 
         def breakTie(E, tied, reason=None, strong=True):
             '''
@@ -304,6 +307,7 @@ class Rule(ElectionRule):
         E.quota = calcQuota(E)
         for b in E.ballots:
             b.topCand.vote += b.vote
+        E.exhausted = V0  # track non-transferable votes
 
         ##     D.3. Test count complete. If the number of elected plus pending
         ##          candidates is equal to the number of seats to be filled, or the number
@@ -342,8 +346,7 @@ class Rule(ElectionRule):
                         break;
                     cids = [c.cid for c in sureLosers]
                     for b in (b for b in E.ballots if b.topRank in cids):
-                        if transfer(b):
-                            b.topCand.vote += b.vote
+                        transfer(b)
                     for c in sureLosers:
                         c.vote = V0
                     E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in sureLosers))
@@ -365,8 +368,7 @@ class Rule(ElectionRule):
 
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = (b.weight * surplus) / high_candidate.vote
-                    if transfer(b):
-                        b.topCand.vote += b.vote
+                    transfer(b)
                 high_candidate.vote = E.quota
                 E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, V(surplus)))
 
@@ -383,8 +385,7 @@ class Rule(ElectionRule):
                 low_candidate = breakTie(E, low_candidates, 'defeat')
                 low_candidate.defeat()
                 for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
-                    if transfer(b):
-                        b.topCand.vote += b.vote
+                    transfer(b)
                 low_candidate.vote = V0
                 E.logAction('transfer', "Transfer defeated: %s" % low_candidate)
 

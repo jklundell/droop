@@ -95,10 +95,7 @@ class ElectionRecord(dict):
             A['residual'] = E.residual  # meek residual is the nontransferable portion
             A['surplus'] = E.V(E.surplus)
         elif self['method'] == 'wigm':
-            #
-            #  this is expensive in a big election, so we've done a little optimization
-            #
-            A['nt_votes'] = sum((b.vote for b in E.ballots if b.exhausted), E.V0) # nontransferable votes
+            A['nt_votes'] = E.exhausted # nontransferable votes
             A['h_votes'] = sum((c.vote for c in C.hopeful()), E.V0)     # votes for hopeful candidates
             A['e_votes'] = sum((c.vote for c in C.notpending()), E.V0)  # votes for elected (transfer not pending) candidates
             A['p_votes'] = sum((c.vote for c in C.pending()), E.V0)     # votes for elected (transfer pending) candidates
