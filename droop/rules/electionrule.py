@@ -98,7 +98,7 @@ class ElectionRule(object):  # pragma: no cover
         '''
         raise NotImplementedError
 
-    def action(self, record, action):
+    def action(self, record, action=None):
         '''
         Hook for rule-specific election action recording.
         

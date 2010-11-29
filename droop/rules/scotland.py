@@ -121,9 +121,9 @@ using fixed-point decimal arithmetic with five digits of precision.
     (2) Where the last vacancies can be filled under this rule, no further transfer shall be made.
 '''
 
-from electionrule import ElectionRule
+from electionmethods import MethodWIGM
 
-class Rule(ElectionRule):
+class Rule(MethodWIGM):
     '''
     Rule for counting Scottish STV
     '''
@@ -169,20 +169,6 @@ class Rule(ElectionRule):
     def tag(self):
         "return a tag string for unit tests"
         return self.name
-
-    def dump(self, line, action=None, cid=None, cstate=None):
-        "append rule-specific dump info"
-        V = self.E.V
-        if cid is None:
-            if action is None:  # header
-                line += ['Non-Transferable']
-            else:
-                line += [V(action['nt_votes'])]
-        else:
-            if action is None:  # header
-                line += ['%s.vote' % cid]
-            else:
-                line += [V(cstate['vote'])]
 
     #########################
     #

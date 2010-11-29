@@ -90,7 +90,8 @@ class Rule(ElectionRule):
 
     def action(self, record, action):
         "QPQ-specific action recording"
-        action['votes'] = self.E.votes    # total votes
+        if action is not None:
+            action['votes'] = self.E.votes    # total votes
 
     def report(self, record, report, section, action=None):
         "QPQ-specific action reporting"

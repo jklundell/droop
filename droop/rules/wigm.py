@@ -19,9 +19,9 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from electionrule import ElectionRule
+from electionmethods import MethodWIGM
 
-class Rule(ElectionRule):
+class Rule(MethodWIGM):
     '''
     Rule for counting Generic WIGM elections
     
@@ -76,20 +76,6 @@ class Rule(ElectionRule):
     def tag(self):
         "return a tag string for unit tests"
         return self.name
-
-    def dump(self, line, action=None, cid=None, cstate=None):
-        "append rule-specific dump info"
-        V = self.E.V
-        if cid is None:
-            if action is None:  # header
-                line += ['Non-Transferable']
-            else:
-                line += [V(action['nt_votes'])]
-        else:
-            if action is None:  # header
-                line += ['%s.vote' % cid]
-            else:
-                line += [V(cstate['vote'])]
 
     #########################
     #

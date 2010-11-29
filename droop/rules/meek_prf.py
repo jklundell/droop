@@ -19,9 +19,9 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from electionrule import ElectionRule
+from electionmethods import MethodMeek
 
-class Rule(ElectionRule):
+class Rule(MethodMeek):
     '''
     Rule for counting PR Foundation Meek Reference STV
     http://prfound.org/resources/reference/reference-meek-rule/
@@ -34,7 +34,6 @@ class Rule(ElectionRule):
         omega=6
     ...and no batch defeats.
     '''
-    method = 'meek' # underlying method
     precision = 9   # fixed-arithmetic precision in digits
     omega10 = 6     # iteration terminator omega = 1/10**omega10
     name = 'meek-prf'
@@ -72,20 +71,6 @@ class Rule(ElectionRule):
     def tag(self):
         "return a tag string for unit tests"
         return "%s-o%s" % (self.name, self.omega10)
-
-    def dump(self, line, action=None, cid=None, cstate=None):
-        "append rule-specific dump info"
-        V = self.E.V
-        if cid is None:
-            if action is None:  # header
-                line += ['Votes', 'Surplus', 'Residual']
-            else:
-                line += [V(action['votes']), V(action['surplus']), V(action['residual'])]
-        else:
-            if action is None:  # header
-                line += ['%s.vote' % cid, '%s.kf' % cid]
-            else:
-                line += [V(cstate['vote']), V(cstate['kf'])]
 
     #########################
     #

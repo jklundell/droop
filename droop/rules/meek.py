@@ -19,16 +19,14 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from electionrule import ElectionRule
+from electionmethods import MethodMeek
 
-class Rule(ElectionRule):
+class Rule(MethodMeek):
     '''
     Rule for counting Model Meek or Warren elections
     
     Parameter: arithmetic type
     '''
-    method = 'meek'     # underlying method
-
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
@@ -86,20 +84,6 @@ class Rule(ElectionRule):
         if self.warren:
             return 'warren-o%s' % self.omega10
         return 'meek-o%s' % self.omega10
-
-    def dump(self, line, action=None, cid=None, cstate=None):
-        "append rule-specific dump info"
-        V = self.E.V
-        if cid is None:
-            if action is None:  # header
-                line += ['Votes', 'Surplus', 'Residual']
-            else:
-                line += [V(action['votes']), V(action['surplus']), V(action['residual'])]
-        else:
-            if action is None:  # header
-                line += ['%s.vote' % cid, '%s.kf' % cid]
-            else:
-                line += [V(cstate['vote']), V(cstate['kf'])]
 
     #########################
     #

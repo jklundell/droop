@@ -58,6 +58,7 @@ class ElectionRecord(dict):
             self['profile_source'] = E.electionProfile.source
         if E.electionProfile.comment:
             self['profile_comment'] = E.electionProfile.comment
+        E.rule.action(self, None)               # give rule a chance
         self.filled = True
 
     def action(self, tag, msg):
@@ -91,12 +92,6 @@ class ElectionRecord(dict):
         A['cstate'] = C.cState()  # variable candidate state
         A['votes'] = sum([c.vote for c in C.eligible()], E.V0)
         A['quota'] = E.quota
-        if self['method'] == 'meek':
-            A['residual'] = E.residual  # meek residual is the nontransferable portion
-            A['surplus'] = E.V(E.surplus)
-        elif self['method'] == 'wigm':
-            A['nt_votes'] = E.exhausted # nontransferable votes
-            A['surplus'] = E.V(E.surplus)
         E.rule.action(self, A)                  # give rule a chance at the action
         self['actions'].append(A)
 
@@ -121,15 +116,13 @@ class ElectionRecord(dict):
             s += "\tSeats: %d\n" % self['seats']
             s += "\tBallots: %d\n" % self['nballots']
             s += "\tQuota: %s\n" % V(self['quota'])
-            if self.get('omega') is not None:
-                s += "\tOmega: %s\n" % self.get('omega')
-            if self.get('profile_source') is not None:
-                s += "Source: %s\n" % self.get('profile_source')
-            if self.get('profile_comment') is not None:
-                s += "{%s}\n" % self.get('profile_comment')
-            s += '\n'
             report.append(s)
-        E.rule.report(self, report, 'headerappend')     # allow rule to append to header
+            E.rule.report(self, report, 'headerappend')     # allow rule to append to header
+            if self.get('profile_source') is not None:
+                report.append("Source: %s\n" % self.get('profile_source'))
+            if self.get('profile_comment') is not None:
+                report.append("{%s}\n" % self.get('profile_comment'))
+            report.append("\n")
         if self.get('arithmetic_report') is not None:
             report.append(self.get('arithmetic_report'))
         if intr:
@@ -163,29 +156,6 @@ class ElectionRecord(dict):
                     c0 = [cdict[cid]['name'] for cid in dcids if cstate[cid]['vote'] == E.V0]
                     if c0:
                         s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
-                if self['method'] == 'meek':
-                    s += '\tQuota: %s\n' % V(A['quota'])
-                    s += '\tVotes: %s\n' % V(A['votes'])
-                    s += '\tResidual: %s\n' % V(A['residual'])
-                    s += '\tTotal: %s\n' % V((A['votes'] + A['residual']))
-                    s += '\tSurplus: %s\n' % V(A['surplus'])
-                elif self['method'] == 'wigm':
-                    h_votes = sum([cstate[cid]['vote'] for cid in hcids], E.V0)
-                    d_votes = sum([cstate[cid]['vote'] for cid in dcids], E.V0)
-                    e_votes = sum([cstate[cid]['vote'] for cid in ecids if not cstate[cid]['pending']], E.V0)
-                    p_votes = sum([cstate[cid]['vote'] for cid in ecids if cstate[cid]['pending']], E.V0)
-                    total = e_votes + p_votes + h_votes + d_votes + A['nt_votes']  # vote total
-                    residual = V(self['nballots']) - total          # votes lost due to rounding error
-                    s += '\tElected votes: %s\n' % V(e_votes)
-                    if p_votes:
-                        s += '\tPending votes: %s\n' % V(p_votes)
-                    s += '\tHopeful votes: %s\n' % V(h_votes)
-                    if d_votes:
-                        s += '\tDefeated votes: %s\n' % V(d_votes)
-                    s += '\tNontransferable votes: %s\n' % V(A['nt_votes'])
-                    s += '\tResidual: %s\n' % V(residual)
-                    s += '\tTotal: %s\n' % V(total + residual)
-                    s += '\tSurplus: %s\n' % V(A['surplus'])
                 report.append(s)
                 E.rule.report(self, report, 'actionappend', A)    # allow rule to append to this action
         return "".join(report)

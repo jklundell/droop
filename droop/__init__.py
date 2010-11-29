@@ -36,6 +36,11 @@ for importer, modname, ispkg in pkgutil.iter_modules(rules.__path__, rules.__nam
 #
 ruleClasses = []
 for rule in rules.electionrule.ElectionRule.__subclasses__():
+    if not rule.__name__.startswith('Method'):
+        ruleClasses.append(rule)
+for rule in rules.electionmethods.MethodMeek.__subclasses__():
+    ruleClasses.append(rule)
+for rule in rules.electionmethods.MethodWIGM.__subclasses__():
     ruleClasses.append(rule)
 
 #  ask each Rule for its names, and build a name->Rule dict
