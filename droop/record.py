@@ -52,8 +52,8 @@ class ElectionRecord(dict):
         self['ecids'] = E.C.cidList('eligible') # eligible CIDs
         self['cdict'] = E.C.cDict()             # candidate descriptors
         self['options'] = E.options.record()    # all options
-        if self['method'] == 'meek':
-            self['omega'] = E.rule._omega
+        if hasattr(E.rule, 'omega'):
+            self['omega'] = E.rule.omega
         if E.electionProfile.source:
             self['profile_source'] = E.electionProfile.source
         if E.electionProfile.comment:
@@ -187,6 +187,7 @@ class ElectionRecord(dict):
                     s += '\tTotal: %s\n' % V(total + residual)
                     s += '\tSurplus: %s\n' % V(A['surplus'])
                 report.append(s)
+                E.rule.report(self, report, 'actionappend', A)    # allow rule to append to this action
         return "".join(report)
         
     def dump(self):

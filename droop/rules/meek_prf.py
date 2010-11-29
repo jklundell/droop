@@ -36,7 +36,7 @@ class Rule(ElectionRule):
     '''
     method = 'meek' # underlying method
     precision = 9   # fixed-arithmetic precision in digits
-    omega = 6       # iteration terminator
+    omega10 = 6     # iteration terminator omega = 1/10**omega10
     name = 'meek-prf'
 
     @classmethod
@@ -63,7 +63,7 @@ class Rule(ElectionRule):
         self.E.options.setopt('arithmetic', default='fixed', force=True)
         self.E.options.setopt('precision', default=self.precision, force=True)
         self.E.options.setopt('display', default=self.precision, force=True)
-        self.E.options.setopt('omega', default=self.omega, force=True)
+        self.E.options.setopt('omega', default=self.omega10, force=True)
 
     def info(self):
         "return an info string for the election report"
@@ -71,7 +71,7 @@ class Rule(ElectionRule):
 
     def tag(self):
         "return a tag string for unit tests"
-        return "%s-o%s" % (self.name, self.omega)
+        return "%s-o%s" % (self.name, self.omega10)
 
     def dump(self, line, action=None, cid=None, cstate=None):
         "append rule-specific dump info"
@@ -134,7 +134,7 @@ class Rule(ElectionRule):
         C = E.C   # candidates
         for c in C.hopeful():
             c.kf = V1    # initialize keep factors
-        self._omega = V(1) / V(10**self.omega)
+        self.omega = V(1) / V(10**self.omega10)
 
         #  Calculate quota and count votes for round-0 reporting
         E.votes = V(E.nBallots)
@@ -223,7 +223,7 @@ class Rule(ElectionRule):
                 ##         continue at B.3.
 
                 if iterationStatus != 'elected':
-                    if E.surplus < self._omega:
+                    if E.surplus < self.omega:
                         iterationStatus = 'omega'
                     elif E.surplus >= lastsurplus:  # pragma: no cover
                         iterationStatus = 'stable'

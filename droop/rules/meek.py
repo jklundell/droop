@@ -67,25 +67,25 @@ class Rule(ElectionRule):
         if arithmetic == 'guarded':
             precision = options.setopt('precision', default=18)
             options.setopt('guard', default=precision//2)
-            self.omega = options.setopt('omega', default=precision//2)
+            self.omega10 = options.setopt('omega', default=precision//2)
         elif arithmetic == 'fixed':
             precision = options.setopt('precision', default=9)
-            self.omega = options.setopt('omega', default=precision*2//3)
+            self.omega10 = options.setopt('omega', default=precision*2//3)
         elif arithmetic == 'rational':
-            self.omega = options.setopt('omega', default=10)
+            self.omega10 = options.setopt('omega', default=10)
 
         self.defeat_batch = options.setopt('defeat_batch', default='safe', allowed=('none','safe'))
 
     def info(self):
         "return an info string for the election report"
         name = "Warren" if self.warren else "Meek"
-        return "%s Parametric (omega = 1/10^%d)" % (name, self.omega)
+        return "%s Parametric (omega = 1/10^%d)" % (name, self.omega10)
 
     def tag(self):
         "return a tag string for unit tests"
         if self.warren:
-            return 'warren-o%s' % self.omega
-        return 'meek-o%s' % self.omega
+            return 'warren-o%s' % self.omega10
+        return 'meek-o%s' % self.omega10
 
     def dump(self, line, action=None, cid=None, cstate=None):
         "append rule-specific dump info"
@@ -320,7 +320,7 @@ class Rule(ElectionRule):
                 #
                 if iStatus == IS_elected:
                     return IS_elected, None
-                if E.surplus <= self._omega:
+                if E.surplus <= self.omega:
                     return IS_omega, None
                 if E.surplus >= lastsurplus:
                     E.log("Stable state detected (%s)" % E.surplus)
@@ -352,13 +352,13 @@ class Rule(ElectionRule):
         V0 = E.V0  # constant zero
         V1 = E.V1  # constant one
 
-        #  set _omega
+        #  set omega
         #
-        #  _omega will be 1/10**omega
+        #  omega will be 1/10**omega10
         #
         assert V.name in ('rational', 'guarded', 'fixed')
-        self.omega = int(self.omega)
-        self._omega = V1 / V(10**self.omega)
+        self.omega10 = int(self.omega10)
+        self.omega = V1 / V(10**self.omega10)
 
         E.votes = V(E.nBallots)
         E.quota = calcQuota(E)
