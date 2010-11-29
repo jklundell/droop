@@ -41,7 +41,7 @@ class ElectionRule(object):  # pragma: no cover
         
         ruleNames is a class method, and is called before object instantiation.
         '''
-        return None
+        raise NotImplementedError
 
     @classmethod
     def helps(cls, helps, name):
@@ -52,7 +52,7 @@ class ElectionRule(object):  # pragma: no cover
         
         helps is a class method, and is called before object instantiation.
         '''
-        return None
+        raise NotImplementedError
 
     def __init__(self, E):
         '''
@@ -64,7 +64,7 @@ class ElectionRule(object):  # pragma: no cover
         '''
         Handle initialization of options.
         '''
-        pass
+        raise NotImplementedError
     
     def info(self):
         '''
@@ -73,7 +73,7 @@ class ElectionRule(object):  # pragma: no cover
         
         (Called after option)
         '''
-        return None
+        raise NotImplementedError
 
     def tag(self):
         '''
@@ -84,7 +84,7 @@ class ElectionRule(object):  # pragma: no cover
         
         (Called after option)
         '''
-        return None
+        raise NotImplementedError
 
     def count(self):
         '''
@@ -96,7 +96,7 @@ class ElectionRule(object):  # pragma: no cover
         
         (Called after option)
         '''
-        pass
+        raise NotImplementedError
 
     def action(self, record, action):
         '''
