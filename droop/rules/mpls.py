@@ -329,9 +329,9 @@ class Rule(ElectionRule):
             #
             sortedCands = C.hopeful(order='vote')
 
-            #   copy the sorted candidates list, 
+            #   copy the sorted candidates list to sortedGroups, 
             #   making each entry a list
-            #   where each list one or more candidates with the same vote
+            #   where each list contains one or more candidates with the same vote
             #
             group = []
             sortedGroups = []
