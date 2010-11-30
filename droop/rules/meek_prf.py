@@ -274,4 +274,3 @@ class Rule(MethodMeek):
         #  final vote count for reporting
         E.votes = sum([c.vote for c in C.elected()], V0)
         E.residual = V(E.nBallots) - E.votes
-

@@ -117,4 +117,3 @@ See also: fixed, guarded
         round is ignored
         '''
         return Fraction.__div__(Fraction.__mul__(arg1, arg2), arg3)
-

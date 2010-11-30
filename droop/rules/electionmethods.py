@@ -138,4 +138,3 @@ class MethodWIGM(ElectionRule):
                 line += ['%s.vote' % cid]
             else:
                 line += [V(cstate['vote'])]
-

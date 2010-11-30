@@ -116,4 +116,3 @@ def doDumpCompare(options, file, subdir=''):
             return False
 
     return True
-

@@ -342,7 +342,7 @@ class Candidates(set):
     def select(self, state, order='none', reverse=False):
         "select and return list of candidates with specified state, optionally in specified order"
         if state == 'all':
-            candidates = self
+            candidates = self   # set of all
         elif state == 'eligible':
             candidates = [c for c in self if c.state != 'withdrawn']
         elif state == 'pending':
@@ -350,7 +350,7 @@ class Candidates(set):
         elif state == 'notpending':
             candidates = [c for c in self if c.state == 'elected' and not c.pending]
         else:
-            candidates = [c for c in self if c.state == state]
+            candidates = [c for c in self if c.state == state]  # list of all
         if order == 'none':
             return candidates
         if order == 'ballot':

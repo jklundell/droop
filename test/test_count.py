@@ -98,14 +98,16 @@ class ElectionOptions(unittest.TestCase):
             b = '''3 2 [droop meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), dict())
             self.assertEqual(E.rule.method, 'meek')
+            E = Election(ElectionProfile(data=b), None)
+            self.assertEqual(E.rule.method, 'meek')
             b = '''3 2 [droop dump meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-            E = Election(ElectionProfile(data=b), dict())
+            E = Election(ElectionProfile(data=b), None)
             self.assertTrue(E.options.getopt('dump'))
             b = '''3 2 [droop dump=true meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-            E = Election(ElectionProfile(data=b), dict())
+            E = Election(ElectionProfile(data=b), None)
             self.assertTrue(E.options.getopt('dump'))
             b = '''3 2 [droop dump=false meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
-            E = Election(ElectionProfile(data=b), dict())
+            E = Election(ElectionProfile(data=b), None)
             self.assertFalse(E.options.getopt('dump'))
             # fake a path to test double-path logic
             b = '''3 2 [droop 42.blt 513.blt meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
