@@ -74,7 +74,7 @@ class Options(object):
         "get value of specfied option"
         optvalue = self.default.get(optname, None)          # find the default value
         optvalue = self.file_options.get(optname, optvalue) # ballot-file option overrides default
-        optvalue = self.cmd_options.get(optname, optvalue)  # command option overrided ballot file
+        optvalue = self.cmd_options.get(optname, optvalue)  # command option overrides ballot file
         optvalue = self.force.get(optname, optvalue)        # forced value overrides everything
         return optvalue
 

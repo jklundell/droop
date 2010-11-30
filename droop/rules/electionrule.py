@@ -111,7 +111,7 @@ class ElectionRule(object):  # pragma: no cover
         Hook for rule-specific election reporting.
         
         To override the default report section,
-        append the secion to report and return True
+        append the section to report and return True
         
         See record.ElectionRecord.report() for details.
         '''

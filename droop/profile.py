@@ -202,7 +202,7 @@ class ElectionProfile(object):
         Otherwise, it's a nickname; look it up and return the cid.
         
         loc is used for error messages if the nickname is unknown 
-        or theresulting cid is out of range
+        or the resulting cid is out of range
         '''
         if isinstance(nick, str) and re.match(r'\d+$', nick):
             nick = int(nick)
