@@ -48,7 +48,8 @@ class Options(object):
         self.force = dict()
         self.allowed = dict()
 
-    def normalize(self, item):
+    @staticmethod
+    def normalize(item):
         "normalize numeric options"
 
         # convert numeric options (precision, etc) to ints
@@ -61,13 +62,13 @@ class Options(object):
                     item[key] = int(value)
         return item
 
-    def update(self, name, value=None, file=False):
+    def update(self, name, value=None, file_options=False):
         "update command or file options"
         if isinstance(name, dict):
-            for key,val in name.items():
-                self.update(key, val, file)
+            for key, val in name.items():
+                self.update(key, val, file_options)
         else:
-            opts = self.file_options if file else self.cmd_options
+            opts = self.file_options if file_options else self.cmd_options
             opts[name] = self.normalize(value)
 
     def getopt(self, optname):
@@ -87,7 +88,8 @@ class Options(object):
         if allowed:
             self.allowed[optname] = allowed
             if optvalue not in allowed:
-                raise UsageError('%s=%s; must be one of [%s]' % (optname, optvalue, ",".join([str(x) for x in allowed])))
+                raise UsageError('%s=%s; must be one of [%s]' % (optname, optvalue,
+                    ",".join([str(x) for x in allowed])))
         return optvalue
 
     def unused(self):
@@ -102,7 +104,7 @@ class Options(object):
         overridden = list()
         opts = self.file_options.copy()
         opts.update(self.cmd_options)
-        for key,val in self.force.items():
+        for key, val in self.force.items():
             if key in opts and opts[key] != val:
                 overridden.append(key)
         return sorted(overridden)
@@ -115,7 +117,7 @@ class Options(object):
         effective.update(self.cmd_options)
         effective.update(self.force)
         return dict(cmd=self.cmd_options.copy(),
-            file=self.file_options.copy(),
+            file_options=self.file_options.copy(),
             default=self.default.copy(),
             force=self.force.copy(),
             allowed=self.allowed.copy(),

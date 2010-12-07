@@ -121,7 +121,7 @@ using fixed-point decimal arithmetic with five digits of precision.
     (2) Where the last vacancies can be filled under this rule, no further transfer shall be made.
 '''
 
-from electionmethods import MethodWIGM
+from droop.rules.electionmethods import MethodWIGM
 
 class Rule(MethodWIGM):
     '''

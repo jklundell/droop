@@ -18,9 +18,6 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
-
-from electionmethods import MethodWIGM
-
 '''
 PRF Reference Rule: WIGM
 
@@ -87,6 +84,8 @@ D. General Procedures
         multiplication or division to four decimal places.
 '''
 
+from droop.rules.electionmethods import MethodWIGM
+
 class Rule(MethodWIGM):
     '''
     Rule for counting PRF Reference WIGM elections
@@ -121,6 +120,8 @@ class Rule(MethodWIGM):
     def __init__(self, E):
         "initialize rule"
         self.E = E
+        self.defeat_batch = None
+        self.name = None
 
     def options(self):
         "initialize election parameters"
@@ -172,7 +173,7 @@ class Rule(MethodWIGM):
             else:
                 ballot.topCand.vote += ballot.vote
 
-        def breakTie(E, tied, reason=None, strong=True):
+        def breakTie(E, tied, reason=None):
             '''
             break a tie
 
@@ -180,12 +181,6 @@ class Rule(MethodWIGM):
             indicating whether the tie is being broken for the purpose
             of choosing a surplus to transfer, a winner,
             or a candidate to defeat.
-
-            Set strong to False to indicate that weak tiebreaking should be
-            attempted, if relevant. Otherwise the tie is treated as strong.
-
-            Not all tiebreaking methods will care about 'purpose' or 'strength',
-            but the requirement is enforced for consistency of interface.
             '''
             ##     D.1. Break ties. Ties arise in B.3 (choose candidate for surplus
             ##          transfer) and in B.4 (choose candidate for defeat). In each case,
@@ -327,7 +322,7 @@ class Rule(MethodWIGM):
                     for c in C.byBallotOrder(sureLosers):
                         c.defeat(msg='Defeat sure loser')
                     if len(C.hopeful()) <= E.seatsLeftToFill():
-                        break;
+                        break
                     cids = [c.cid for c in sureLosers]
                     for b in (b for b in E.ballots if b.topRank in cids):
                         transfer(b)

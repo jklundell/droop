@@ -19,7 +19,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from electionmethods import MethodMeek
+from droop.rules.electionmethods import MethodMeek
 
 class Rule(MethodMeek):
     '''
@@ -54,6 +54,11 @@ class Rule(MethodMeek):
     def __init__(self, E):
         "initialize rule"
         self.E = E
+        self.name = None
+        self.warren = False
+        self.omega = None
+        self.omega10 = None
+        self.defeat_batch = None
 
     def options(self):
         "Meek options"
@@ -120,7 +125,7 @@ class Rule(MethodMeek):
                 return E.votes / E.V(E.nSeats+1)
             return E.votes / E.V(E.nSeats+1) + E.V.epsilon
     
-        def breakTie(E, tied, reason=None, strong=True):
+        def breakTie(E, tied, reason=None):
             '''
             break a tie
             

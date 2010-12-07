@@ -41,7 +41,7 @@ This file is part of Droop.
     2.6.  Count ends when no hopeful candidates remain
 '''
 
-from electionrule import ElectionRule
+from droop.rules.electionrule import ElectionRule
 
 class Rule(ElectionRule):
     '''
@@ -88,7 +88,7 @@ class Rule(ElectionRule):
         "return a tag string for unit tests"
         return self.name
 
-    def action(self, record, action):
+    def action(self, record, action=None):
         "QPQ-specific action recording"
         if action is not None:
             action['votes'] = self.E.votes    # total votes

@@ -40,7 +40,7 @@ class ValueTest(unittest.TestCase):
     #
     def testBadArithmetic(self):
         "try unknown arithmetic"
-        self.assertRaises(V.arithmeticValuesError, V.ArithmeticClass, Options(dict(arithmetic='saywhat')))
+        self.assertRaises(V.ArithmeticValuesError, V.ArithmeticClass, Options(dict(arithmetic='saywhat')))
 
     def testValueInitRationalDefault(self):
         "default class Guarded"

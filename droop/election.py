@@ -32,9 +32,8 @@ Top-level structure:
 '''
 
 import sys, copy
-import values
 import droop
-import record
+import droop.record
 from droop.common import ElectionError, Options
 
 class Election(object):
@@ -66,7 +65,7 @@ class Election(object):
             options = dict()
         if isinstance(options, dict):
             options = Options(options)
-        options.update(options.parse(electionProfile.options), file=True)
+        options.update(options.parse(electionProfile.options), file_options=True)
         self.options = options
         rulename = options.getopt('rule')
         if rulename is None:
@@ -76,14 +75,21 @@ class Election(object):
             raise ElectionError('unknown election rule: %s' % rulename)
         self.rule = Rule(self)
         self.rule.options()     # allow rule to process options
-        self.V = values.ArithmeticClass(self.options) # then set arithmetic
+        self.V = droop.values.ArithmeticClass(self.options) # then set arithmetic
         self.V0 = self.V(0)  # constant zero for efficiency
         self.V1 = self.V(1)  # constant one for efficiency
         self.electionProfile = electionProfile
-        self.erecord = record.ElectionRecord(self)
+        self.erecord = droop.record.ElectionRecord(self)
         self.round = 0  # round number
         self.rounds = list()    # list of rounds for weak tiebreaking
         self.intr_logged = False
+
+        self.quota = None
+        self.surplus = None
+        self.votes = None
+        self.elected = None
+        self.defeated = None
+        self.withdrawn = None
 
         #  create candidate objects for candidates in election profile
         #
@@ -143,7 +149,7 @@ class Election(object):
         helps['rule'] =  'available rules: %s' % ','.join(droop.electionRuleNames())
         for name in droop.electionRuleNames():
             droop.ruleByName[name].helps(helps, name)
-        values.helps(helps)
+        droop.values.helps(helps)
         return helps
 
     @property
@@ -164,8 +170,9 @@ class Election(object):
     def candidate(self, cid):
         "look up a candidate from a candidate ID"
         return self.C.byCid(cid)
-        
-    def prog(self, msg):
+
+    @staticmethod
+    def prog(msg):
         "log to the console (immediate output)"
         sys.stdout.write(msg)
         sys.stdout.flush()
@@ -267,6 +274,7 @@ class Candidates(set):
     '''
     def __init__(self, E=None):
         "new Candidates"
+        super(Candidates, self).__init__()
         self.E = E              # Election
         self._byCid = dict()    # side table: cid -> Candidate
 
@@ -469,12 +477,16 @@ class Candidate(object):
 
     def code(self):
         "return a one-letter state code for a candidate"
-        if self.state == 'withdrawn': return 'W'
-        if self.state == 'hopeful': return 'H'
+        if self.state == 'withdrawn':
+            return 'W'
+        if self.state == 'hopeful':
+            return 'H'
         if self.state == 'elected':
-            if self.E.rule.method == 'wigm' and self.pending: return 'e'
+            if self.E.rule.method == 'wigm' and self.pending:
+                return 'e'
             return 'E'
-        if self.state == 'defeated': return 'D'
+        if self.state == 'defeated':
+            return 'D'
         return '?'  # pragma: no cover
 
     def __str__(self):

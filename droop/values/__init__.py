@@ -19,11 +19,11 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import rational, fixed, guarded
+from droop.values import fixed, guarded, rational
 
 arithmeticNames = ('fixed', 'integer', 'rational', 'guarded')
 
-class arithmeticValuesError(Exception):
+class ArithmeticValuesError(Exception):
     "election arithmetic value selection error"
 
 def ArithmeticClass(options):
@@ -40,7 +40,7 @@ def ArithmeticClass(options):
         guarded.Guarded.initialize(options)
         return guarded.Guarded
     vals = ' '.join(arithmeticNames)
-    raise arithmeticValuesError("unknown arithmetic %s\n\tuse: %s" % (arithmetic, vals))
+    raise ArithmeticValuesError("unknown arithmetic %s\n\tuse: %s" % (arithmetic, vals))
 
 def helps(helps):
     "build a help-string dictionary"

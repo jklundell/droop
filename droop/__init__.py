@@ -21,7 +21,7 @@ This file is part of Droop.
 '''
 
 import pkgutil
-import rules
+import droop.rules
 
 #  collect the names of all the rule modules in this directory
 #
@@ -29,18 +29,18 @@ import rules
 
 #  import everything in rules package
 #
-for importer, modname, ispkg in pkgutil.iter_modules(rules.__path__, rules.__name__ + '.'):
+for importer, modname, ispkg in pkgutil.iter_modules(droop.rules.__path__, droop.rules.__name__ + '.'):
     module = __import__(modname)
 
-#  find everything that subclasses rules._rule.ElectionRule
+#  find everything that subclasses droop.rules._rule.ElectionRule
 #
 ruleClasses = []
-for rule in rules.electionrule.ElectionRule.__subclasses__():
+for rule in droop.rules.electionrule.ElectionRule.__subclasses__():
     if not rule.__name__.startswith('Method'):
         ruleClasses.append(rule)
-for rule in rules.electionmethods.MethodMeek.__subclasses__():
+for rule in droop.rules.electionmethods.MethodMeek.__subclasses__():
     ruleClasses.append(rule)
-for rule in rules.electionmethods.MethodWIGM.__subclasses__():
+for rule in droop.rules.electionmethods.MethodWIGM.__subclasses__():
     ruleClasses.append(rule)
 
 #  ask each Rule for its names, and build a name->Rule dict
@@ -57,6 +57,6 @@ def electionRuleNames():
     "return all the rule names"
     return sorted(ruleByName.keys())
 
-def electionRule(name):
+def electionRule(rulename):
     "look up a Rule class by rule name"
-    return ruleByName.get(name)
+    return ruleByName.get(rulename)

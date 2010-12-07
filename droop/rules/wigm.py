@@ -19,7 +19,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from electionmethods import MethodWIGM
+from droop.rules.electionmethods import MethodWIGM
 
 class Rule(MethodWIGM):
     '''
@@ -49,6 +49,8 @@ class Rule(MethodWIGM):
     def __init__(self, E):
         "initialize rule"
         self.E = E
+        self.integer_quota = None
+        self.defeat_batch = None
 
     def options(self):
         "initialize election parameters"
@@ -66,8 +68,8 @@ class Rule(MethodWIGM):
         #  integer_quota: use Droop quota rounded up to whole number
         #  defeat_batch=zero: defeat all hopeful candidates with zero votes after first surplus transfer
         #
-        self.integer_quota = options.setopt('integer_quota', default=False, allowed=(True,False))
-        self.defeat_batch = options.setopt('defeat_batch', default='none', allowed=('none','zero'))
+        self.integer_quota = options.setopt('integer_quota', default=False, allowed=(True, False))
+        self.defeat_batch = options.setopt('defeat_batch', default='none', allowed=('none', 'zero'))
     
     def info(self):
         "return an info string for the election report"

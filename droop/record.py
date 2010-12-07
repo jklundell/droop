@@ -20,7 +20,6 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import values
 import droop
 
 class ElectionRecord(dict):
@@ -28,6 +27,7 @@ class ElectionRecord(dict):
     
     def __init__(self, E):
         "create the base of the election record"
+        super(ElectionRecord, self).__init__()
         self.E = E
         self.filled = False
         self['actions'] = list()    # list of election actions
@@ -211,8 +211,9 @@ class ElectionRecord(dict):
             def default(self, obj):
                 "handle Rational objects that escape to Fraction"
                 if isinstance(obj, Fraction):
-                    return str(values.rational.Rational(obj))
-                if isinstance(obj, (values.fixed.Fixed, values.guarded.Guarded, values.rational.Rational)):
+                    return str(droop.values.rational.Rational(obj))
+                if isinstance(obj, (droop.values.fixed.Fixed, droop.values.guarded.Guarded,
+                        droop.values.rational.Rational)):
                     return str(obj)
                 return json_.JSONEncoder.default(self, obj) # pragma: no cover
 

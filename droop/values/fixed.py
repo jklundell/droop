@@ -119,7 +119,7 @@ See also: guarded, rational
         "create a new Fixed object"
         if setval:
             self._value = arg                # use incoming value directly
-        elif isinstance(arg, (int,long)):
+        elif isinstance(arg, (int, long)):
             self._value = arg * self.__scale # scale incoming integers
         else:
             self._value = arg._value         # copy incoming Fixed
@@ -167,7 +167,7 @@ See also: guarded, rational
     def __mul__(self, other):
         "return self * other"
         v = Fixed(self)
-        if isinstance(other, (int,long)):
+        if isinstance(other, (int, long)):
             v._value *= other
             return v  # no scaling needed
         v._value *= other._value
@@ -177,7 +177,7 @@ See also: guarded, rational
     def __floordiv__(self, other):
         "return self // other"
         v = Fixed(self)
-        if isinstance(other, (int,long)):
+        if isinstance(other, (int, long)):
             v._value //= other
             return v
         v._value *= self.__scale

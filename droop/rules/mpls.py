@@ -204,7 +204,8 @@ undervote, overvote, or duplicate ranking is encountered, the ballot shall not c
 candidate in that round or in subsequent rounds for the office being counted. (2008-Or-028, 1,
 4-18-08; 2009-Or-102, 5, 10-2-09)
 '''
-from electionmethods import MethodWIGM
+
+from droop.rules.electionmethods import MethodWIGM
 
 class Rule(MethodWIGM):
     '''

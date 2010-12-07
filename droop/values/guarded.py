@@ -127,7 +127,8 @@ See also: fixed, rational
         #  __geps is used in the test for equality (see __cmp__ below)
         #
         cls.__geps = cls.__scaleg // 2
-        if cls.__geps == 0: cls.__geps = 1  # no less than an epsilon
+        if cls.__geps == 0:
+            cls.__geps = 1  # no less than an epsilon
 
         #  We keep statistics on how close our comparisons come to epsilon
         #
@@ -182,7 +183,7 @@ See also: fixed, rational
         "create a new Guarded object"
         if setval:
             self._value = arg                   # direct-set value
-        elif isinstance(arg, (int,long)):
+        elif isinstance(arg, (int, long)):
             self._value = arg * self.__scale    # scale incoming integers
         else:
             self._value = arg._value            # copy incoming Guarded
@@ -221,13 +222,13 @@ See also: fixed, rational
         
     def __mul__(self, other):
         "return self * other"
-        if isinstance(other, (int,long)):
+        if isinstance(other, (int, long)):
             return Guarded(self._value * other, True)
         return Guarded((self._value*other._value)//self.__scale, True)
         
     def __floordiv__(self, other):
         "return self // other"
-        if isinstance(other, (int,long)):
+        if isinstance(other, (int, long)):
             return Guarded(self._value // other, True)
         return Guarded((self._value * self.__scale) // other._value, True)
 

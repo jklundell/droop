@@ -48,8 +48,6 @@ from droop.profile import ElectionProfile, ElectionProfileError
 from droop.election import Election
 import droop.values
 
-E = None
-
 def main(options=None):
     "run an election"
 
@@ -61,10 +59,11 @@ def main(options=None):
     #  we know about (path, profile)
     #  all the others are passed to the various consumers
     #
+    E = None            # Election
     path = None         # ballot path must be specified
     doProfile = False   # performance profiling
     reps = 1            # repetitions (for profiling)
-    for opt,arg in options.items():
+    for opt, arg in options.items():
         if opt == 'path':     # path=<path to ballot file>
             path = arg
         elif opt == 'profile':  # profile=<number of repetitions>
@@ -85,7 +84,6 @@ def main(options=None):
     #
     def countElection(repeat=1):
         "encapsulate for optional profiling"
-        global E
         electionProfile = ElectionProfile(path=path)  # don't repeat the profile loading
         for i in xrange(repeat):
             E = Election(electionProfile, options)
@@ -99,22 +97,21 @@ def main(options=None):
             countElection(reps)
     except KeyboardInterrupt:
         intr = True
-    global E  # if E isn't global, the profiled assignment of E isn't visible
     E.options.setopt('dump', default=False)
     E.options.setopt('json', default=False)
-    report = ''
+    ereport = ''
     if E.options.setopt('report', default=True):
-        report += E.report(intr)
+        ereport += E.report(intr)
     if E.options.getopt('dump'):
-        report += E.dump(intr)
+        ereport += E.dump(intr)
     if E.options.getopt('json'):
-        report += E.json(intr)
+        ereport += E.json(intr)
 
     if doProfile:
         p = pstats.Stats(profilefile)
         p.strip_dirs().sort_stats('time').print_stats(50)
 
-    return report
+    return ereport
 
 #   provide a basic CLI
 #
@@ -157,7 +154,7 @@ def usage(subject=None):
     
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print >>sys.stderr, usage()
+        print >> sys.stderr, usage()
         sys.exit(1)
     if len(sys.argv) > 1 and sys.argv[1] == 'help':
         if len(sys.argv) > 2:
@@ -165,27 +162,27 @@ if __name__ == '__main__':
         else:
             print usage()
         sys.exit(0)
-    path = None
+    ballotpath = None
     try:
-        options = droop.common.Options.parse(sys.argv[1:])
-        path = options.get('path')
-        if path is None:
-            print >>sys.stderr, "droop: must specify ballot file"
+        eoptions = droop.common.Options.parse(sys.argv[1:])
+        ballotpath = eoptions.get('path')
+        if ballotpath is None:
+            print >> sys.stderr, "droop: must specify ballot file"
             sys.exit(1)
         try:
-            report = main(options)
+            report = main(eoptions)
         except ElectionProfileError as err:
-            print >>sys.stderr, "** droop: Election profile error: %s" % err
+            print >> sys.stderr, "** droop: Election profile error: %s" % err
             sys.exit(1)
-        except droop.values.arithmeticValuesError as err:
-            print >>sys.stderr, "** droop: %s" % err
+        except droop.values.ArithmeticValuesError as err:
+            print >> sys.stderr, "** droop: %s" % err
             sys.exit(1)
         except droop.common.ElectionError as err:
-            print >>sys.stderr, "** droop: Election error: %s" % err
+            print >> sys.stderr, "** droop: Election error: %s" % err
             sys.exit(1)
     except droop.common.UsageError as err:
-        print >>sys.stderr, "** droop: %s" % err
-        print >>sys.stderr, usage()
+        print >> sys.stderr, "** droop: %s" % err
+        print >> sys.stderr, usage()
         sys.exit(1)
     print report
     sys.exit(0)

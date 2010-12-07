@@ -19,7 +19,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from electionmethods import MethodMeek
+from droop.rules.electionmethods import MethodMeek
 
 class Rule(MethodMeek):
     '''
@@ -56,6 +56,7 @@ class Rule(MethodMeek):
     def __init__(self, E):
         "initialize rule"
         self.E = E
+        self.omega = None
 
     def options(self):
         "Meek-PRF forces all relevant options"
@@ -119,7 +120,7 @@ class Rule(MethodMeek):
         C = E.C   # candidates
         for c in C.hopeful():
             c.kf = V1    # initialize keep factors
-        self.omega = V(1) / V(10**self.omega10)
+        self.omega = E.V(1) / E.V(10**self.omega10)
 
         #  Calculate quota and count votes for round-0 reporting
         E.votes = V(E.nBallots)

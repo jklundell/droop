@@ -115,7 +115,7 @@ class ElectionRule(object):  # pragma: no cover
         
         See record.ElectionRecord.report() for details.
         '''
-        return False
+        pass
 
     def dump(self, line, action=None, cid=None, cstate=None):
         '''
