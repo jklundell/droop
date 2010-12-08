@@ -121,6 +121,7 @@ class ValueTest(unittest.TestCase):
         self.assertEqual(str(F(20)/F(3)), '6.666667')
 
 class ValueTestFixed6(unittest.TestCase):
+    "Fixed with precision=6"
     p = 6
     g = 0
     A = None
@@ -162,7 +163,7 @@ class ValueTestFixed6(unittest.TestCase):
         A = V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=6)))
         f = A(123456, True)
         self.assertEqual(repr(A(f)), 'Fixed(123456,True)')
-        self.assertEqual(A(1000000,True), A(1))
+        self.assertEqual(A(1000000, True), A(1))
 
     def testReprFixed6(self):
         "repr is the underlying _value"
@@ -213,12 +214,12 @@ class ValueTestGuarded0(unittest.TestCase):
         self.assertEqual(str(f1), str(g1))
         self.assertEqual(str(f1/f3), str(g1/g3))
         self.assertEqual(str(f2/f3), str(g2/g3))
-        self.assertEqual(F.mul(f2,f3,round='down'), G.mul(g2,g3,round='down'))
-        self.assertEqual(F.mul(f2,f3,round='up'), G.mul(g2,g3,round='up'))
-        self.assertEqual(F.div(f2,f3,round='down'), G.div(g2,g3,round='down'))
-        self.assertEqual(F.div(f2,f3,round='up'), G.div(g2,g3,round='up'))
-        self.assertEqual(F.muldiv(f2,f3,f7,round='down'), G.muldiv(g2,g3,g7,round='down'))
-        self.assertEqual(F.muldiv(f2,f3,f7,round='up'), G.muldiv(g2,g3,g7,round='up'))
+        self.assertEqual(F.mul(f2, f3, round='down'), G.mul(g2, g3, round='down'))
+        self.assertEqual(F.mul(f2, f3, round='up'), G.mul(g2, g3, round='up'))
+        self.assertEqual(F.div(f2, f3, round='down'), G.div(g2, g3, round='down'))
+        self.assertEqual(F.div(f2, f3, round='up'), G.div(g2, g3, round='up'))
+        self.assertEqual(F.muldiv(f2, f3, f7, round='down'), G.muldiv(g2, g3, g7, round='down'))
+        self.assertEqual(F.muldiv(f2, f3, f7, round='up'), G.muldiv(g2, g3, g7, round='up'))
 
 class ValueTestGuardedRat(unittest.TestCase):
     "Guarded should match Rational given equivalent display precision and enough guard"
@@ -242,9 +243,9 @@ class ValueTestGuardedRat(unittest.TestCase):
         self.assertEqual(str(R(r1)), str(g1))
         self.assertEqual(str(R(r1/r3)), str(g1/g3))
         self.assertEqual(str(R(r2/r3)), str(g2/g3))
-        self.assertEqual(str(R(R.mul(r2,r3))), str(G.mul(g2,g3)))
-        self.assertEqual(str(R(R.div(r2,r3))), str(G.div(g2,g3)))
-        self.assertEqual(str(R(R.muldiv(r2,r3,r7))), str(G.muldiv(g2,g3,g7)))
+        self.assertEqual(str(R(R.mul(r2, r3))), str(G.mul(g2, g3)))
+        self.assertEqual(str(R(R.div(r2, r3))), str(G.div(g2, g3)))
+        self.assertEqual(str(R(R.muldiv(r2, r3, r7))), str(G.muldiv(g2, g3, g7)))
 
 class ValueTestRounding(unittest.TestCase):
     "test rounding of fixed values"
@@ -260,27 +261,27 @@ class ValueTestRounding(unittest.TestCase):
 
     def testRoundDown(self):
         "down is same as default"
-        self.assertEqual(F.div(F(1),F(3),round='down')._value, 333)
+        self.assertEqual(F.div(F(1), F(3), round='down')._value, 333)
 
     def testRoundUp(self):
         "up is bigger by an epsilon"
-        self.assertEqual(F.div(F(1),F(3),round='up')._value, 334)
+        self.assertEqual(F.div(F(1), F(3), round='up')._value, 334)
 
     def testRoundDownExact(self):
         "no rounding if exact result"
-        self.assertEqual(F.div(F(2),F(4),round='down')._value, 500)
+        self.assertEqual(F.div(F(2), F(4), round='down')._value, 500)
 
     def testRoundUpExact(self):
         "up is bigger by an epsilon but not if exact result"
-        self.assertEqual(F.div(F(2),F(4),round='up')._value, 500)
+        self.assertEqual(F.div(F(2), F(4), round='up')._value, 500)
 
     def testRoundBad(self):
         "round= must be up or down"
-        self.assertRaises(ValueError, F.div, F(1),F(3),round='bad')
+        self.assertRaises(ValueError, F.div, F(1), F(3), round='bad')
 
     def testRoundNone(self):
         "round= must be present"
-        self.assertRaises(ValueError, F.div, F(1),F(3))
+        self.assertRaises(ValueError, F.div, F(1), F(3))
 
 class ValueTestGuarded9(unittest.TestCase):
     "guarded-specific unit tests"
@@ -320,7 +321,8 @@ class ValueTestGuarded9(unittest.TestCase):
         "test illegal display"
         self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, display=1.1)))
         self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, display=-1)))
-        self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, display='abc')))
+        self.assertRaises(UsageError, V.ArithmeticClass, 
+            Options(dict(arithmetic='guarded', precision=4, display='abc')))
 
     def testDisplay(self):
         "display defaults to precision"

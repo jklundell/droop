@@ -23,7 +23,8 @@ This file is part of Droop.
 import sys, os, re
 testdir = os.path.dirname(os.path.abspath(__file__))
 basedir = os.path.normpath(os.path.join(testdir, '..'))
-if basedir not in sys.path: sys.path.insert(0, os.path.normpath(basedir))
+if basedir not in sys.path:
+    sys.path.insert(0, os.path.normpath(basedir))
 
 from droop.election import Election
 from droop.profile import ElectionProfile
@@ -36,15 +37,15 @@ compare_json = True       # complain about json mismatches
 compare_dump = True       # complain about dump mismatches
 compare_report = True     # complain about report mismatches
 
-def doDumpCompare(options, file, subdir=''):
+def doDumpCompare(options, filename, subdir=''):
     '''
     helper: do a count and compare dump/report to reference
     '''
-    if not file.endswith('.blt'):
-        file += '.blt'
-    base, ext = os.path.splitext(file)
+    if not filename.endswith('.blt'):
+        filename += '.blt'
+    base, ext = os.path.splitext(filename)  # pylint: disable=W0612
         
-    blt = os.path.join(testdir, 'blt', subdir, file)
+    blt = os.path.join(testdir, 'blt', subdir, filename)
     E = Election(ElectionProfile(blt), options)
     E.count()
     tag = '%s-%s-%s' % (base, E.rule.tag(), E.V.tag())

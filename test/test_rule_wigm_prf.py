@@ -31,6 +31,7 @@ class RuleBasicTest(unittest.TestCase):
     "make sure we're in the book"
     
     def testElectionNames(self):
+        "wigm-prf is valid name"
         self.assertTrue('wigm-prf' in electionRuleNames())
 
     def testArithmetic(self):
@@ -54,7 +55,8 @@ class RuleBasicTest(unittest.TestCase):
 class ElectionCountTest(unittest.TestCase):
     "test some counts"
 
-    def doCount(self, options, blt):
+    @staticmethod
+    def doCount(options, blt):
         "run the count and return the Election"
         p = ElectionProfile(testdir + '/blt/' + blt)
         E = Election(p, options)

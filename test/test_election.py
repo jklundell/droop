@@ -33,7 +33,8 @@ class CandidateTest(unittest.TestCase):
     
     def testCandidateString(self):
         "candidate string is its cname"
-        c1 = Candidate(None, 1, 2, 2, 'abc', None, False)  # Election, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn
+        c1 = Candidate(None, 1, 2, 2, 'abc', None, False)
+                    # Election, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn
         self.assertEqual(str(c1), 'abc', 'candidate string is its cname')
 
     def testCandidateHash(self):
@@ -53,7 +54,8 @@ class CandidatesTest(unittest.TestCase):
     def testCandidates(self):
         "general test of Candidates API"
         C = Candidates()
-        c1 = Candidate(None, 1, 1, 3, 'Able', None, False)      # Election, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn
+        c1 = Candidate(None, 1, 1, 3, 'Able', None, False)
+                # Election, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn
         c2 = Candidate(None, 2, 2, 2, 'Baker', None, False)
         c3 = Candidate(None, 3, 3, 1, 'Charlie', None, False)
         c1.vote = 1
@@ -73,7 +75,8 @@ class CandidatesTest(unittest.TestCase):
         self.assertEqual(C.byBallotOrder([c1, c2, c3], reverse=True), [c3, c2, c1], "reverse ballot order")
         self.assertEqual(C.byVote([c1, c2, c3]), [c1, c3, c2], "vote order")
         self.assertEqual(C.select('all', 'ballot'), [c1, c2, c3], "all candidates, ballot order")
-        self.assertEqual(C.select('eligible', 'ballot', reverse=True), [c3, c2, c1], "eligible candidates, reverse ballot order")
+        self.assertEqual(C.select('eligible', 'ballot', reverse=True), [c3, c2, c1],
+            "eligible candidates, reverse ballot order")
         self.assertEqual(C.select('eligible', 'tie'), [c3, c2, c1], "eligible candidates, tie order")
         self.assertEqual(C.select('elected', 'ballot'), [c2, c3], "elected candidates, ballot order")
         self.assertEqual(C.notpending(), [c2], "elected-not-pending candidate")

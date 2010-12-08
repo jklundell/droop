@@ -49,7 +49,8 @@ class ElectionBasics(unittest.TestCase):
             E = Election(profile, options)
             self.assertTrue(E.rule.__class__.__name__ == 'Rule', 'bad rule class')
             self.assertTrue(len(options) >= 1, 'rule should set/leave at least one option')
-            self.assertTrue(E.options.getopt('arithmetic') in ('fixed', 'integer', 'guarded', 'rational'), 'legal arithmetic')
+            self.assertTrue(E.options.getopt('arithmetic') in ('fixed', 'integer', 'guarded', 'rational'),
+                'legal arithmetic')
             candidates = E.C
             self.assertTrue("Castor" in [c.name for c in candidates])
             self.assertTrue("Castor" in [str(c) for c in candidates])
@@ -87,12 +88,14 @@ class ElectionOptions(unittest.TestCase):
     def testDroopOptions(self):
         "test [droop ...]"
         if 'meek' in droop.electionRuleNames():
-            b = '''3 2 [droop arithmetic=fixed precision=4] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            b = '''3 2 [droop arithmetic=fixed precision=4] 4 1 2 0 2 3 0 0 
+                "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), dict(rule='meek'))
             self.assertEqual(E.V.precision, 4)
             E = Election(ElectionProfile(data=b), dict(rule='meek', precision=6))
             self.assertEqual(E.V.precision, 6)
-            b = '''3 2 [droop rational precision=4] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            b = '''3 2 [droop rational precision=4] 4 1 2 0 2 3 0 0 
+                "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), dict(rule='meek'))
             self.assertEqual(E.V.name, 'rational')
             b = '''3 2 [droop meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
@@ -103,14 +106,17 @@ class ElectionOptions(unittest.TestCase):
             b = '''3 2 [droop dump meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), None)
             self.assertTrue(E.options.getopt('dump'))
-            b = '''3 2 [droop dump=true meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            b = '''3 2 [droop dump=true meek] 4 1 2 0 2 3 0 0 
+                "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), None)
             self.assertTrue(E.options.getopt('dump'))
-            b = '''3 2 [droop dump=false meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            b = '''3 2 [droop dump=false meek] 4 1 2 0 2 3 0 0 
+                "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), None)
             self.assertFalse(E.options.getopt('dump'))
             # fake a path to test double-path logic
-            b = '''3 2 [droop 42.blt 513.blt meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+            b = '''3 2 [droop 42.blt 513.blt meek] 4 1 2 0 2 3 0 0 
+                "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             self.assertRaises(UsageError, Election, ElectionProfile(data=b), dict())
 
 class ElectionHelps(unittest.TestCase):
@@ -125,7 +131,8 @@ class ElectionHelps(unittest.TestCase):
 class ElectionDumpTest(unittest.TestCase):
     "compare some dumps"
 
-    def getDump(self, options, base):
+    @staticmethod
+    def getDump(options, base):
         "run a count and return the dump"
         blt = '%s/blt/%s.blt' % (testdir, base)
         E = Election(ElectionProfile(blt), options)

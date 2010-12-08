@@ -84,7 +84,8 @@ class TestScotland(unittest.TestCase):
 class ElectionCountTest(unittest.TestCase):
     "test some counts"
 
-    def doCount(self, options, blt):
+    @staticmethod
+    def doCount(options, blt):
         "run the count and return the Election"
         p = ElectionProfile(testdir + '/blt/' + blt)
         E = Election(p, options)

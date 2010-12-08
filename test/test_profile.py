@@ -325,7 +325,8 @@ class OptionDroopTest(unittest.TestCase):
         self.assertEqual(len(ElectionProfile(data=b0).options), 0)
         b1 = '''3 2 [droop arithmetic=fixed] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.assertEqual(len(ElectionProfile(data=b1).options), 1)
-        b2 = '''3 2 [droop arithmetic=fixed precision=6] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
+        b2 = '''3 2 [droop arithmetic=fixed precision=6] 4 1 2 0 2 3 0 0 
+            "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         p = ElectionProfile(data=b2)
         self.assertEqual(len(p.options), 2)
         self.assertEqual(p.options[0], 'arithmetic=fixed')

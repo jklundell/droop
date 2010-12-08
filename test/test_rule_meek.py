@@ -32,6 +32,7 @@ class ElectionNameTest(unittest.TestCase):
     "make sure we're in the book"
     
     def testElectionNames(self):
+        "meek & warren are valid names"
         self.assertTrue('meek' in electionRuleNames())
         self.assertTrue('warren' in electionRuleNames())
 
@@ -46,7 +47,8 @@ class ElectionNameTest(unittest.TestCase):
 class ElectionCountTest(unittest.TestCase):
     "test some counts"
 
-    def doCount(self, options, blt):
+    @staticmethod
+    def doCount(options, blt):
         "run the count and return the Election"
         p = ElectionProfile(testdir + '/blt/' + blt)
         E = Election(p, options)
@@ -86,7 +88,8 @@ class ElectionCountTest(unittest.TestCase):
 class ElectionDumpTest(unittest.TestCase):
     "compare some dumps"
 
-    def getDump(self, options, base):
+    @staticmethod
+    def getDump(options, base):
         "run a count and return the dump"
         blt = '%s/blt/%s.blt' % (testdir, base)
         E = Election(ElectionProfile(blt), options)
@@ -98,14 +101,16 @@ class ElectionDumpTest(unittest.TestCase):
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
         rulename = 'meek'
         for blt in blts:
-            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (rulename, blt))
+            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), 
+                '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpRationalWarren(self):
         "try several counts & dumps with rational arithmetic"
         blts = ('42', '42t', '513', 'SC')  # SC-Vm-12 runs too long with warren+rational
         rulename = 'warren'
         for blt in blts:
-            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), '%s %s.blt' % (rulename, blt))
+            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), 
+                '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpFixedVsGuardedMeek(self):
         "meek: guarded with guard=0 should match fixed"

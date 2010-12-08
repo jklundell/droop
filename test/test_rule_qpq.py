@@ -86,7 +86,8 @@ class TestQpq(unittest.TestCase):
 class ElectionCountTest(unittest.TestCase):
     "test some counts"
 
-    def doCount(self, options, blt):
+    @staticmethod
+    def doCount(options, blt):
         "run the count and return the Election"
         p = ElectionProfile(testdir + '/blt/' + blt)
         E = Election(p, options)
@@ -134,10 +135,11 @@ class ElectionCountTest(unittest.TestCase):
 
 class ElectionRefTest(unittest.TestCase):
     "test known results of reference elections"
-    
-    def doQpqCount(self, file):
+
+    @staticmethod    
+    def doQpqCount(filename):
         "each of five elections from the Woodall paper"
-        blt = os.path.join(testdir, 'blt', 'qpq', file)
+        blt = os.path.join(testdir, 'blt', 'qpq', filename)
         E = Election(ElectionProfile(blt), dict(rule='qpq'))
         E.count()
         return E

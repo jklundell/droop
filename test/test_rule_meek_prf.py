@@ -31,6 +31,7 @@ class RuleBasicTest(unittest.TestCase):
     "make sure we're in the book"
     
     def testElectionNames(self):
+        'meek-prf is a valid name'
         self.assertTrue('meek-prf' in electionRuleNames())
 
     def testArithmetic(self):
@@ -45,7 +46,8 @@ class RuleBasicTest(unittest.TestCase):
 class ElectionCountTest(unittest.TestCase):
     "test some counts"
 
-    def doCount(self, options, blt):
+    @staticmethod
+    def doCount(options, blt):
         "run the count and return the Election"
         p = ElectionProfile(testdir + '/blt/' + blt)
         E = Election(p, options)
@@ -80,7 +82,8 @@ class ElectionCountTest(unittest.TestCase):
 class ElectionDumpTest(unittest.TestCase):
     "compare some dumps"
 
-    def getDump(self, options, base):
+    @staticmethod
+    def getDump(options, base):
         "run a count and return the dump"
         blt = '%s/blt/%s.blt' % (testdir, base)
         E = Election(ElectionProfile(blt), options)
