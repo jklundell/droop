@@ -32,9 +32,12 @@ import droop.rules
 for importer, modname, ispkg in pkgutil.iter_modules(droop.rules.__path__, droop.rules.__name__ + '.'):
     module = __import__(modname)
 
-#  find everything that subclasses droop.rules._rule.ElectionRule
+#  find everything that subclasses droop.rules._rule.ElectionRule,
+#  directly or through a method class
+#  __subclasses__: see Python Standard Library 5.13: Built-in Types/Special Attributes
 #
 ruleClasses = []
+# pylint 0.22.0 doesn't know about __subclasses__  # pylint: disable=E1101
 for rule in droop.rules.electionrule.ElectionRule.__subclasses__():
     if not rule.__name__.startswith('Method'):
         ruleClasses.append(rule)

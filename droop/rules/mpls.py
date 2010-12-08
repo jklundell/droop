@@ -58,9 +58,10 @@ rule defer the election of a candidate until that candidate's surplus is to be t
 This variation is defensible, even desirable, but because it's a little unusual, the rule
 language should make more explicit the implication that votes can be transferred to candidates
 who already have a quota but are not yet elected per 167.70(1)(d).
-'''
 
-'''
+
+Election Code
+
 The relevant portions of the Minneapolis election code is reproduced below, and is also 
 distributed as comments marked with ## in the body of the implementation.
 

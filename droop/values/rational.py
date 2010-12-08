@@ -27,7 +27,6 @@ class Rational(Fraction):
     rational arithmetic with support functions
     
     '''
-    
     name = 'rational'
     info = 'rational arithmetic'
     exact = True             # clients that care about such things can look at V.exact
@@ -80,8 +79,8 @@ See also: fixed, guarded
     #  leave repr alone, but redefine str as decimal notation for readability
     def __str__(self):
         "represent Rational as fixed-decimal string"
-        if self._numerator == 0 or self._denominator == 1:
-            v = self._numerator * Rational._dps
+        if self._numerator == 0 or self._denominator == 1:  # pylint: disable=E1101
+            v = self._numerator * Rational._dps             # pylint: disable=E1101
         else:
             self += Rational._dpr  # add 1/2 of lsd for rounding
             v = self._numerator * Rational._dps / self._denominator
@@ -95,7 +94,7 @@ See also: fixed, guarded
     #  provide mul, div, muldiv for compatibility with non-exact arithmetic
     #
     @staticmethod
-    def mul(arg1, arg2, round=None):
+    def mul(arg1, arg2, round=None):   # pylint: disable=W0613,W0622
         '''
         return arg1 * arg2
         round is ignored       
@@ -103,7 +102,7 @@ See also: fixed, guarded
         return Fraction.__mul__(arg1, arg2)
         
     @staticmethod
-    def div(arg1, arg2, round=None):
+    def div(arg1, arg2, round=None):   # pylint: disable=W0613,W0622
         '''
         return arg1 / arg2
         round is ignored
@@ -111,7 +110,7 @@ See also: fixed, guarded
         return Fraction.__div__(arg1, arg2)
 
     @staticmethod
-    def muldiv(arg1, arg2, arg3, round=None):
+    def muldiv(arg1, arg2, arg3, round=None):   # pylint: disable=W0613,W0622
         '''
         return (arg1*arg2)/arg3
         round is ignored

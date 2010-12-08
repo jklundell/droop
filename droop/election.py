@@ -32,8 +32,7 @@ Top-level structure:
 '''
 
 import sys, copy
-import droop
-import droop.record
+import droop, droop.record, droop.values
 from droop.common import ElectionError, Options
 
 class Election(object):
@@ -120,7 +119,7 @@ class Election(object):
         self.surplus = self.V0
         self.votes = self.V0
         if self.rule.method == 'meek':
-            self.residual = self.V0
+            self.residual = self.V0 # pylint: disable=W0201
         for c in self.C:
             c.vote = self.V0
         self.rule.count()   ### count the election ###

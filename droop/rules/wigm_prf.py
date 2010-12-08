@@ -17,8 +17,8 @@ This file is part of Droop.
 
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
-'''
-'''
+
+
 PRF Reference Rule: WIGM
 
 A. Initialize Election

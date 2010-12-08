@@ -188,7 +188,7 @@ See also: guarded, rational
     __truediv__ = __floordiv__
 
     @classmethod
-    def mul(cls, arg1, arg2, round=None):
+    def mul(cls, arg1, arg2, round=None):   # pylint: disable=W0622
         '''
         return arg1 * arg2
         '''
@@ -202,7 +202,7 @@ See also: guarded, rational
         return v1
         
     @classmethod
-    def div(cls, arg1, arg2, round=None):
+    def div(cls, arg1, arg2, round=None):   # pylint: disable=W0622
         '''
         return arg1 / arg2
         '''
@@ -216,7 +216,7 @@ See also: guarded, rational
         return v1
 
     @classmethod
-    def muldiv(cls, arg1, arg2, arg3, round=None):
+    def muldiv(cls, arg1, arg2, arg3, round=None):   # pylint: disable=W0622
         '''
         return (arg1*arg2)/arg3
         

@@ -187,8 +187,8 @@ class ElectionRecord(dict):
             if A['tag'] in ('round', 'log', 'iterate'):
                 r = [A['round'], A['tag'], A['msg']]
             else:
-                round = 'X' if A['tag'] == 'end' else A['round']
-                r = [round, A['tag'], V(A['quota'])]
+                rnd = 'X' if A['tag'] == 'end' else A['round']
+                r = [rnd, A['tag'], V(A['quota'])]
                 E.rule.dump(r, action=A)
 
                 for cid in ecids:
@@ -208,7 +208,7 @@ class ElectionRecord(dict):
 
         class ValueEncoder(json_.JSONEncoder):
             "provide JSON encoding for droop arithmetic object"
-            def default(self, obj):
+            def default(self, obj): # pylint: disable=E0202
                 "handle Rational objects that escape to Fraction"
                 if isinstance(obj, Fraction):
                     return str(droop.values.rational.Rational(obj))

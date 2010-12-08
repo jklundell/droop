@@ -20,6 +20,8 @@ This file is part of Droop.
 '''
 from droop.rules.electionrule import ElectionRule
 
+# pylint: disable=W0223,E1101
+
 class MethodMeek(ElectionRule):
     '''
     MethodMeek is a convenience class for Meek-based rules.

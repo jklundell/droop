@@ -109,7 +109,7 @@ class ElectionProfile(object):
             for cid in xrange(1, self.nCand+1):
                 self.tieOrder[cid] = cid
 
-    class BallotLine(object):
+    class BallotLine(object):   # pylint doesn't see slots  # pylint: disable=R0903
         "one ballot line"
         
         __slots__ = ('multiplier', 'ranking', 'line')
@@ -167,7 +167,7 @@ class ElectionProfile(object):
                             (cid, bl.line))
                     d[cid] = cid
 
-    def compare(self, other):
+    def compare(self, other):   # pragma: no cover  # pylint: disable=R0911
         "compare this profile (self) to other (unittest support)"
         if self.title != other.title:
             return 'title mismatch'
@@ -201,7 +201,8 @@ class ElectionProfile(object):
                 return 'ballot-line (equal) ranking mismatch'
         return False
 
-    def bltRead(self, path):
+    @staticmethod
+    def bltRead(path):
         "open and read the ballot file"
         try:
             f = open(path, 'r')
@@ -296,7 +297,7 @@ class ElectionProfile(object):
         
         the parsed result populates this ElectionProfile object
         '''
-
+        # pylint 0.22.0 doesn't think there's a blt.next() # pylint: disable=E1101
         digits = re.compile(r'\d+$')
         sdigits = re.compile(r'-?\d+$')
 

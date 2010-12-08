@@ -85,7 +85,7 @@ def main(options=None):
     def countElection(repeat=1):
         "encapsulate for optional profiling"
         electionProfile = ElectionProfile(path=path)  # don't repeat the profile loading
-        for i in xrange(repeat):
+        for i in xrange(repeat):    # pylint: disable=W0612
             E = Election(electionProfile, options)
             E.count()
 

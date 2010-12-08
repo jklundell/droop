@@ -221,12 +221,12 @@ class Rule(MethodMeek):
                 "calculate keep and new weight for OpenSTV MeekSTV"
                 return V.mul(weight, kf, round='down'), V.mul(weight, V1-kf, round='down')
         
-            def kw_meekHill(kf, weight):    # pragma: no cover
+            def kw_meekHill(kf, weight):    # pragma: no cover  # pylint: disable=W0612
                 "calculate keep and new weight for Hill/NZ Calculator"
                 keep = V.mul(weight, kf, round='up')
                 return keep, (weight - keep)
         
-            def kw_meekNZ1A(kf, weight):    # pragma: no cover
+            def kw_meekNZ1A(kf, weight):    # pragma: no cover  # pylint: disable=W0612
                 "calculate keep and new weight for NZ Schedule 1A"
                 return V.mul(weight, kf, round='up'), V.mul(weight, V1-kf, round='up')
 
