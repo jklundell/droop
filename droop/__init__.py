@@ -21,7 +21,9 @@ This file is part of Droop.
 '''
 
 import pkgutil
-import droop.rules
+import droop.rules as rules
+import droop.values as values   # on behalf of our consumers
+import common, election, profile, record
 
 #  collect the names of all the rule modules in this directory
 #
@@ -29,21 +31,21 @@ import droop.rules
 
 #  import everything in rules package
 #
-for importer, modname, ispkg in pkgutil.iter_modules(droop.rules.__path__, droop.rules.__name__ + '.'):
+for importer, modname, ispkg in pkgutil.iter_modules(rules.__path__, rules.__name__ + '.'):
     module = __import__(modname)
 
-#  find everything that subclasses droop.rules._rule.ElectionRule,
+#  find everything that subclasses rules._rule.ElectionRule,
 #  directly or through a method class
 #  __subclasses__: see Python Standard Library 5.13: Built-in Types/Special Attributes
 #
 ruleClasses = []
 # pylint 0.22.0 doesn't know about __subclasses__  # pylint: disable=E1101
-for rule in droop.rules.electionrule.ElectionRule.__subclasses__():
+for rule in rules.electionrule.ElectionRule.__subclasses__():
     if not rule.__name__.startswith('Method'):
         ruleClasses.append(rule)
-for rule in droop.rules.electionmethods.MethodMeek.__subclasses__():
+for rule in rules.electionmethods.MethodMeek.__subclasses__():
     ruleClasses.append(rule)
-for rule in droop.rules.electionmethods.MethodWIGM.__subclasses__():
+for rule in rules.electionmethods.MethodWIGM.__subclasses__():
     ruleClasses.append(rule)
 
 #  ask each Rule for its names, and build a name->Rule dict

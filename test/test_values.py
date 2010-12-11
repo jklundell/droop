@@ -23,8 +23,7 @@ This file is part of Droop.
 import unittest
 
 import common  # to set sys.path
-from droop.common import UsageError
-from droop.common import Options
+from droop.common import UsageError, Options
 from droop import values as V
 from droop.values.fixed import Fixed as F
 from droop.values.guarded import Guarded as G

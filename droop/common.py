@@ -149,7 +149,7 @@ class Options(object):
                     options[optarg[0]] = True
                 else:
                     if path:
-                        raise droop.common.UsageError("multiple ballot files: %s and %s" % (path, optarg[0]))
+                        raise UsageError("multiple ballot files: %s and %s" % (path, optarg[0]))
                     path = optarg[0]
                     options['path'] = path
             else:

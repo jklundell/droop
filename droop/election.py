@@ -32,7 +32,7 @@ Top-level structure:
 '''
 
 import sys, copy
-import droop, droop.record, droop.values
+import droop
 from droop.common import ElectionError, Options
 
 class Election(object):

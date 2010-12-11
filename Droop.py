@@ -43,10 +43,9 @@ This file is part of Droop.
 '''
    
 import sys, os
-import droop.common
+import droop
 from droop.profile import ElectionProfile, ElectionProfileError
 from droop.election import Election
-import droop.values
 
 def main(options=None):
     "run an election"
@@ -59,7 +58,6 @@ def main(options=None):
     #  we know about (path, profile)
     #  all the others are passed to the various consumers
     #
-    E = None            # Election
     path = None         # ballot path must be specified
     doProfile = False   # performance profiling
     reps = 1            # repetitions (for profiling)
@@ -82,19 +80,19 @@ def main(options=None):
     #    count
     #    report
     #
-    def countElection(repeat=1):
+    def countElection(E, repeat=1):
         "encapsulate for optional profiling"
-        electionProfile = ElectionProfile(path=path)  # don't repeat the profile loading
         for i in xrange(repeat):    # pylint: disable=W0612
-            E = Election(electionProfile, options)
             E.count()
 
+    electionProfile = ElectionProfile(path=path)  # don't repeat the profile loading
+    E = Election(electionProfile, options)
     try:
         intr = False
         if doProfile:
-            cProfile.runctx('countElection(reps)', globals(), locals(), profilefile)
+            cProfile.runctx('countElection(E, reps)', globals(), locals(), profilefile)
         else:
-            countElection(reps)
+            countElection(E, reps)
     except KeyboardInterrupt:
         intr = True
     E.options.setopt('dump', default=False)

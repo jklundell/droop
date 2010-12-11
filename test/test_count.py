@@ -27,7 +27,6 @@ from common import testdir, doDumpCompare
 import droop
 from droop.election import Election
 from droop.profile import ElectionProfile
-from droop import electionRuleNames
 from droop.common import UsageError
 
 class ElectionBasics(unittest.TestCase):
@@ -44,7 +43,7 @@ class ElectionBasics(unittest.TestCase):
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
 
         profile = ElectionProfile(data=b)
-        for rulename in electionRuleNames():
+        for rulename in droop.electionRuleNames():
             options = dict(rule=rulename)
             E = Election(profile, options)
             self.assertTrue(E.rule.__class__.__name__ == 'Rule', 'bad rule class')
@@ -65,7 +64,7 @@ class ElectionBasics(unittest.TestCase):
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
 
         profile = ElectionProfile(data=b)
-        rulename = electionRuleNames()[0]   # pick the first rule arbitrarily
+        rulename = droop.electionRuleNames()[0]   # pick the first rule arbitrarily
         E = Election(profile, dict(rule=rulename))
         E.count()
         self.assertEqual(E.report().find('interrupted'), -1)
