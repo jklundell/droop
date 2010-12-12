@@ -20,9 +20,10 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
+from __future__ import absolute_import
 import unittest
 
-import common  # to set sys.path
+from . import common  # to set sys.path
 from droop import electionRuleNames, electionRule
 from droop.common import ElectionError
 from droop.election import Election

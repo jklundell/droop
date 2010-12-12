@@ -31,9 +31,12 @@ Top-level structure:
   The options are used to override default Rule parameters, such as arithmetic.
 '''
 
+from __future__ import absolute_import
 import sys, copy
-import droop
-from droop.common import ElectionError, Options
+from .common import ElectionError
+from .options import Options
+from . import electionRule, electionRuleNames, ruleByName
+from . import values, record
 
 class Election(object):
     '''
@@ -69,16 +72,16 @@ class Election(object):
         rulename = options.getopt('rule')
         if rulename is None:
             raise ElectionError('no election rule specified')
-        Rule = droop.electionRule(rulename)    # get rule class
+        Rule = electionRule(rulename)    # get rule class
         if Rule is None:
             raise ElectionError('unknown election rule: %s' % rulename)
         self.rule = Rule(self)
         self.rule.options()     # allow rule to process options
-        self.V = droop.values.ArithmeticClass(self.options) # then set arithmetic
+        self.V = values.ArithmeticClass(self.options) # then set arithmetic
         self.V0 = self.V(0)  # constant zero for efficiency
         self.V1 = self.V(1)  # constant one for efficiency
         self.electionProfile = electionProfile
-        self.erecord = droop.record.ElectionRecord(self)
+        self.erecord = record.ElectionRecord(self)
         self.round = 0  # round number
         self.rounds = list()    # list of rounds for weak tiebreaking
         self.intr_logged = False
@@ -145,10 +148,10 @@ class Election(object):
     def makehelp(cls):
         "build a dictionary of help strings on various subjects"
         helps = dict()
-        helps['rule'] =  'available rules: %s' % ','.join(droop.electionRuleNames())
-        for name in droop.electionRuleNames():
-            droop.ruleByName[name].helps(helps, name)
-        droop.values.helps(helps)
+        helps['rule'] =  'available rules: %s' % ','.join(electionRuleNames())
+        for name in electionRuleNames():
+            ruleByName[name].helps(helps, name)
+        values.helps(helps)
         return helps
 
     @property

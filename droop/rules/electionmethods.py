@@ -18,7 +18,9 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
-from droop.rules.electionrule import ElectionRule
+
+from __future__ import absolute_import
+from .electionrule import ElectionRule
 
 # pylint: disable=W0223,E1101
 

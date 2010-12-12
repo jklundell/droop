@@ -20,6 +20,7 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
+from __future__ import absolute_import
 import sys, os, re
 testdir = os.path.dirname(os.path.abspath(__file__))
 basedir = os.path.normpath(os.path.join(testdir, '..'))

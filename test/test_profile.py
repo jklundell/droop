@@ -20,9 +20,10 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
+from __future__ import absolute_import
 import unittest
 
-from common import testdir
+from .common import testdir
 from droop.profile import ElectionProfile, ElectionProfileError
 
 p_42 = '''3 2

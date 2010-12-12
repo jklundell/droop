@@ -84,7 +84,8 @@ D. General Procedures
         multiplication or division to four decimal places.
 '''
 
-from droop.rules.electionmethods import MethodWIGM
+from __future__ import absolute_import
+from .electionmethods import MethodWIGM
 
 class Rule(MethodWIGM):
     '''

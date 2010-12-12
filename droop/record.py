@@ -20,7 +20,9 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import droop
+from __future__ import absolute_import
+from . import common
+from . import values
 
 class ElectionRecord(dict):
     "complete record of an election"
@@ -38,8 +40,8 @@ class ElectionRecord(dict):
         """
         E = self.E
         self['title'] = E.title
-        self['droop_name'] = droop.common.droopName
-        self['droop_version'] = droop.common.droopVersion
+        self['droop_name'] = common.droopName
+        self['droop_version'] = common.droopVersion
         self['rule_name'] = E.rule.name
         self['rule_info'] = E.rule.info()
         self['method'] = E.rule.method
@@ -211,9 +213,8 @@ class ElectionRecord(dict):
             def default(self, obj): # pylint: disable=E0202
                 "handle Rational objects that escape to Fraction"
                 if isinstance(obj, Fraction):
-                    return str(droop.values.rational.Rational(obj))
-                if isinstance(obj, (droop.values.fixed.Fixed, droop.values.guarded.Guarded,
-                        droop.values.rational.Rational)):
+                    return str(values.rational.Rational(obj))
+                if isinstance(obj, (values.fixed.Fixed, values.guarded.Guarded, values.rational.Rational)):
                     return str(obj)
                 return json_.JSONEncoder.default(self, obj) # pragma: no cover
 

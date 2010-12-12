@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 '''
-droop common
+election test module init
 
 Copyright 2010 by Jonathan Lundell
 
@@ -19,18 +18,3 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
-
-droopName = 'droop'
-droopVersion = '0.10'
-droopAuthor = 'Jonathan Lundell'
-droopAuthorEmail = 'jlundell@prfound.org'
-droopURL = 'http://prfound.org'
-droopLicense = 'GNU General Public License version 3'
-droopDescription = 'Counting software for STV elections',
-droopLongDescription = 'Droop is a flexible counting package for STV elections.'
-
-class UsageError(Exception):
-    "command-line usage error"
-
-class ElectionError(Exception):
-    "error counting election"

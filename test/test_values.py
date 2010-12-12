@@ -20,10 +20,12 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
+from __future__ import absolute_import
 import unittest
 
-import common  # to set sys.path
-from droop.common import UsageError, Options
+from . import common  # to set sys.path
+from droop.common import UsageError
+from droop.options import Options
 from droop import values as V
 from droop.values.fixed import Fixed as F
 from droop.values.guarded import Guarded as G

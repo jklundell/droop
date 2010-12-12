@@ -20,10 +20,9 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+from __future__ import absolute_import
 import pkgutil
-import droop.rules as rules
-import droop.values as values   # on behalf of our consumers
-import common, election, profile, record
+from . import rules
 
 #  collect the names of all the rule modules in this directory
 #

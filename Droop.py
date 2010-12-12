@@ -162,7 +162,7 @@ if __name__ == '__main__':
         sys.exit(0)
     ballotpath = None
     try:
-        eoptions = droop.common.Options.parse(sys.argv[1:])
+        eoptions = droop.options.Options.parse(sys.argv[1:])
         ballotpath = eoptions.get('path')
         if ballotpath is None:
             print >> sys.stderr, "droop: must specify ballot file"
