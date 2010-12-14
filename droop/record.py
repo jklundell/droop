@@ -103,6 +103,9 @@ class ElectionRecord(dict):
         report = []
         if E.rule.report(self, report, 'all'):  # allow rule to supply entire report
             return "".join(report)
+        
+        #  report header
+        #
         if not E.rule.report(self, report, 'header'):   # allow rule to supply report header
             s = "\nElection: %s\n\n" % self['title']
             s += "\tDroop package: %s v%s\n" % (self['droop_name'], self['droop_version'])
@@ -118,19 +121,34 @@ class ElectionRecord(dict):
             s += "\tBallots: %d\n" % self['nballots']
             s += "\tQuota: %s\n" % self['quota']
             report.append(s)
-            E.rule.report(self, report, 'headerappend')     # allow rule to append to header
+            
+            #  allow rule to append to header
+            #
+            E.rule.report(self, report, 'headerappend')
+            
+            #  include profile source & comment from ballot file
+            #
             if self.get('profile_source') is not None:
                 report.append("Source: %s\n" % self.get('profile_source'))
             if self.get('profile_comment') is not None:
                 report.append("{%s}\n" % self.get('profile_comment'))
             report.append("\n")
+
+        #  report arithmetic
+        #
         if self.get('arithmetic_report') is not None:
             report.append(self.get('arithmetic_report'))
+        
+        #  report interrupted count
+        #
         if intr:
-            s += "\t** Count terminated prematurely by user interrupt **\n\n"
-        cids = self['cids']
-        cdict = self['cdict']
+            report.append("\t** Count terminated prematurely by user interrupt **\n\n")
+        
+        #  report actions
+        #
         if not E.rule.report(self, report, 'actions'):          # allow rule to report all actions
+            cids = self['cids']
+            cdict = self['cdict']
             for A in self['actions']:
                 if E.rule.report(self, report, 'action', A):    # allow rule to report this action
                     continue
@@ -158,7 +176,11 @@ class ElectionRecord(dict):
                     if c0:
                         s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
                 report.append(s)
+                
+                #  allow rule to append to this action
+                #
                 E.rule.report(self, report, 'actionappend', A)    # allow rule to append to this action
+
         return "".join(report)
         
     def dump(self):
