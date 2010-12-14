@@ -298,7 +298,7 @@ class Rule(MethodWIGM):
                     b.weight = V.muldiv(b.weight, surplus, high_candidate.vote, round='down')
                     transfer(b)
                 high_candidate.vote = E.quota
-                E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, V(surplus)))
+                E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, surplus))
                 continue  # to next stage/round
 
             #  defeat candidate(s) with lowest vote [50,51]

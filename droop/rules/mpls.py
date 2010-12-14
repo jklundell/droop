@@ -206,7 +206,8 @@ candidate in that round or in subsequent rounds for the office being counted. (2
 4-18-08; 2009-Or-102, 5, 10-2-09)
 '''
 
-from droop.rules.electionmethods import MethodWIGM
+from __future__ import absolute_import
+from .electionmethods import MethodWIGM
 
 class Rule(MethodWIGM):
     '''
@@ -526,7 +527,7 @@ class Rule(MethodWIGM):
                     b.weight = (b.weight * surplus) / high_candidate.vote
                     transfer(b)
                 high_candidate.vote = E.quota
-                E.logAction('transfer', "Transfer surplus: %s (%s)" % (high_candidate.name, V(surplus)))
+                E.logAction('transfer', "Transfer surplus: %s (%s)" % (high_candidate.name, surplus))
                 continue  ## continue as described in clause a.
 
             ##  167.70(1)(e)

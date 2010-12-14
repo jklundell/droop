@@ -42,7 +42,7 @@ class MethodMeek(ElectionRule):
             record['omega'] = self.omega
         else:
             action['residual'] = self.E.residual  # meek residual is the nontransferable portion
-            action['surplus'] = self.E.V(self.E.surplus)
+            action['surplus'] = self.E.surplus
 
     def report(self, record, report, section, action=None):
         '''
@@ -52,12 +52,11 @@ class MethodMeek(ElectionRule):
         if section == 'headerappend':
             report.append("\tOmega: %s\n" % record.get('omega'))
         elif section == 'actionappend':
-            V = self.E.V
-            s =  '\tQuota: %s\n' % V(action['quota'])
-            s += '\tVotes: %s\n' % V(action['votes'])
-            s += '\tResidual: %s\n' % V(action['residual'])
-            s += '\tTotal: %s\n' % V((action['votes'] + action['residual']))
-            s += '\tSurplus: %s\n' % V(action['surplus'])
+            s =  '\tQuota: %s\n' % action['quota']
+            s += '\tVotes: %s\n' % action['votes']
+            s += '\tResidual: %s\n' % action['residual']
+            s += '\tTotal: %s\n' % (action['votes'] + action['residual'])
+            s += '\tSurplus: %s\n' % action['surplus']
             report.append(s)
         else:
             return False
@@ -65,17 +64,16 @@ class MethodMeek(ElectionRule):
 
     def dump(self, line, action=None, cid=None, cstate=None):
         "append meek-specific dump info"
-        V = self.E.V
         if cid is None:
             if action is None:  # header
                 line += ['Votes', 'Surplus', 'Residual']
             else:
-                line += [V(action['votes']), V(action['surplus']), V(action['residual'])]
+                line += [action['votes'], action['surplus'], action['residual']]
         else:
             if action is None:  # header
                 line += ['%s.vote' % cid, '%s.kf' % cid]
             else:
-                line += [V(cstate['vote']), V(cstate['kf'])]
+                line += [cstate['vote'], cstate['kf']]
 
 class MethodWIGM(ElectionRule):
     '''
@@ -93,7 +91,7 @@ class MethodWIGM(ElectionRule):
         '''
         if action is not None:
             action['nt_votes'] = self.E.exhausted # nontransferable votes
-            action['surplus'] = self.E.V(self.E.surplus)
+            action['surplus'] = self.E.surplus
 
     def report(self, record, report, section, action=None):
         '''
@@ -102,7 +100,6 @@ class MethodWIGM(ElectionRule):
         '''
         if section == 'actionappend':
             E = self.E
-            V = E.V
             cids = record['cids']
             cstate = action['cstate']
             ecids = [cid for cid in cids if cstate[cid]['state'] == 'elected']
@@ -113,17 +110,17 @@ class MethodWIGM(ElectionRule):
             e_votes = sum([cstate[cid]['vote'] for cid in ecids if not cstate[cid]['pending']], E.V0)
             p_votes = sum([cstate[cid]['vote'] for cid in ecids if cstate[cid]['pending']], E.V0)
             total = e_votes + p_votes + h_votes + d_votes + action['nt_votes']  # vote total
-            residual = V(record['nballots']) - total          # votes lost due to rounding error
-            s =  '\tElected votes: %s\n' % V(e_votes)
+            residual = E.V(record['nballots']) - total          # votes lost due to rounding error
+            s =  '\tElected votes: %s\n' % e_votes
             if p_votes:
-                s += '\tPending votes: %s\n' % V(p_votes)
-            s += '\tHopeful votes: %s\n' % V(h_votes)
+                s += '\tPending votes: %s\n' % p_votes
+            s += '\tHopeful votes: %s\n' % h_votes
             if d_votes:
-                s += '\tDefeated votes: %s\n' % V(d_votes)
-            s += '\tNontransferable votes: %s\n' % V(action['nt_votes'])
-            s += '\tResidual: %s\n' % V(residual)
-            s += '\tTotal: %s\n' % V(total + residual)
-            s += '\tSurplus: %s\n' % V(action['surplus'])
+                s += '\tDefeated votes: %s\n' % d_votes
+            s += '\tNontransferable votes: %s\n' % action['nt_votes']
+            s += '\tResidual: %s\n' % residual
+            s += '\tTotal: %s\n' % (total + residual)
+            s += '\tSurplus: %s\n' % action['surplus']
             report.append(s)
         else:
             return False
@@ -131,14 +128,13 @@ class MethodWIGM(ElectionRule):
 
     def dump(self, line, action=None, cid=None, cstate=None):
         "append wigm-specific dump info"
-        V = self.E.V
         if cid is None:
             if action is None:  # header
                 line += ['Non-Transferable']
             else:
-                line += [V(action['nt_votes'])]
+                line += [action['nt_votes']]
         else:
             if action is None:  # header
                 line += ['%s.vote' % cid]
             else:
-                line += [V(cstate['vote'])]
+                line += [cstate['vote']]

@@ -178,7 +178,7 @@ class Rule(MethodWIGM):
                     b.weight = (b.weight * surplus) / high_candidate.vote
                     transfer(b)
                 high_candidate.vote = E.quota
-                E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, V(surplus)))
+                E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, surplus))
 
             #  if no surplus to transfer, defeat a candidate
             #

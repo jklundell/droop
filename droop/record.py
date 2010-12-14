@@ -49,7 +49,7 @@ class ElectionRecord(dict):
         self['arithmetic_info'] = E.V.info
         self['seats'] = E.nSeats
         self['nballots'] = E.nBallots
-        self['quota'] = E.V(E.quota)
+        self['quota'] = E.quota
         self['cids'] = E.C.cidList('all')       # all CIDs
         self['ecids'] = E.C.cidList('eligible') # eligible CIDs
         self['cdict'] = E.C.cDict()             # candidate descriptors
@@ -100,7 +100,6 @@ class ElectionRecord(dict):
     def report(self, intr=False):
         "report an action"
         E = self.E
-        V = E.V
         report = []
         if E.rule.report(self, report, 'all'):  # allow rule to supply entire report
             return "".join(report)
@@ -117,7 +116,7 @@ class ElectionRecord(dict):
                 s += "\tOverridden options: %s\n" % ", ".join(overrides)
             s += "\tSeats: %d\n" % self['seats']
             s += "\tBallots: %d\n" % self['nballots']
-            s += "\tQuota: %s\n" % V(self['quota'])
+            s += "\tQuota: %s\n" % self['quota']
             report.append(s)
             E.rule.report(self, report, 'headerappend')     # allow rule to append to header
             if self.get('profile_source') is not None:
@@ -148,13 +147,13 @@ class ElectionRecord(dict):
                 s = 'Action: %s\n' % (A['msg'])
                 if A['tag'] in ('begin', 'elect', 'defeat', 'pend', 'transfer', 'end'):
                     for cid in [cid for cid in ecids if not cstate[cid].get('pending')]:
-                        s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['vote']))
+                        s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['vote'])
                     for cid in [cid for cid in ecids if cstate[cid].get('pending')]:
-                        s += '\tPending:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['vote']))
+                        s += '\tPending:  %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['vote'])
                     for cid in hcids:
-                        s += '\tHopeful:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['vote']))
+                        s += '\tHopeful:  %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['vote'])
                     for cid in [cid for cid in dcids if cstate[cid]['vote'] > E.V0]:
-                        s += '\tDefeated: %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['vote']))
+                        s += '\tDefeated: %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['vote'])
                     c0 = [cdict[cid]['name'] for cid in dcids if cstate[cid]['vote'] == E.V0]
                     if c0:
                         s += '\tDefeated: %s (%s)\n' % (', '.join(c0), E.V0)
@@ -166,7 +165,6 @@ class ElectionRecord(dict):
         "dump a list of actions"
 
         E = self.E
-        V = E.V
         ecids = self['ecids']
         cdict = self['cdict']
         
@@ -190,7 +188,7 @@ class ElectionRecord(dict):
                 r = [A['round'], A['tag'], A['msg']]
             else:
                 rnd = 'X' if A['tag'] == 'end' else A['round']
-                r = [rnd, A['tag'], V(A['quota'])]
+                r = [rnd, A['tag'], A['quota']]
                 E.rule.dump(r, action=A)
 
                 for cid in ecids:

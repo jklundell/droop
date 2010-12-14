@@ -97,33 +97,31 @@ class Rule(ElectionRule):
     def report(self, record, report, section, action=None):
         "QPQ-specific action reporting"
         if section == 'action' and action['tag'] in ('begin', 'tie', 'elect', 'defeat', 'transfer', 'end'):
-            V = self.E.V
             s = 'Action: %s\n' % (action['msg'])
             if action['tag'] != 'tie':
                 cids = record['cids']
                 cdict = record['cdict']
                 cstate = action['cstate']
                 for cid in [cid for cid in cids if cstate[cid]['state'] == 'elected']:
-                    s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
+                    s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['quotient'])
                 for cid in [cid for cid in cids if cstate[cid]['state'] == 'hopeful']:
-                    s += '\tHopeful:  %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
+                    s += '\tHopeful:  %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['quotient'])
                 for cid in [cid for cid in cids if cstate[cid]['state'] == 'defeated']:
-                    s += '\tDefeated: %s (%s)\n' % (cdict[cid]['name'], V(cstate[cid]['quotient']))
-            s += '\tQuota: %s\n' % V(action['quota'])
+                    s += '\tDefeated: %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['quotient'])
+            s += '\tQuota: %s\n' % action['quota']
             report.append(s)
             return True
         return False
 
     def dump(self, line, action=None, cid=None, cstate=None):
         "append rule-specific dump info"
-        V = self.E.V
         if cid is None:
             pass
         else:
             if action is None:  # header
                 line += ['%s.quotient' % cid]
             else:
-                line += [V(cstate['quotient'])]
+                line += [cstate['quotient']]
 
     #########################
     #
@@ -269,7 +267,7 @@ class Rule(ElectionRule):
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = new_weight
                     transfer(b)
-                E.logAction('transfer', "Transfer elected: %s (%s)" % (high_candidate, V(high_quotient)))
+                E.logAction('transfer', "Transfer elected: %s (%s)" % (high_candidate, high_quotient))
             else:
                 low_quotient = min(c.quotient for c in C.hopeful())
                 low_candidates = [c for c in C.hopeful() if c.quotient == low_quotient]

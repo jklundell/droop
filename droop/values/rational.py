@@ -75,8 +75,12 @@ See also: fixed, guarded
     def min(cls, vals):
         "find minimum value in a list"
         return min(vals)
- 
-    #  leave repr alone, but redefine str as decimal notation for readability
+
+    def __new__(cls, numerator=0, denominator=1):
+        "create a new Rational object"
+        self = Fraction.__new__(cls, numerator, denominator)
+        return self
+
     def __str__(self):
         "represent Rational as fixed-decimal string"
         if self._numerator == 0 or self._denominator == 1:  # pylint: disable=E1101
@@ -84,8 +88,24 @@ See also: fixed, guarded
         else:
             self += Rational._dpr  # add 1/2 of lsd for rounding
             v = self._numerator * Rational._dps / self._denominator
-        return Rational._dfmt % (v//Rational._dps, v%Rational._dps)
+        return Rational._dfmt % (v // Rational._dps, v % Rational._dps)
     
+    def __repr__(self): # pragma: no cover
+        """repr(self)"""
+        return ('Rational(%s, %s)' % (self._numerator, self._denominator))  # pylint: disable=E1101
+
+    def __copy__(self): # pragma: no cover
+        "borrowed from Fraction"
+        if type(self) == Rational:
+            return self     # I'm immutable; therefore I am my own clone
+        return self.__class__(self._numerator, self._denominator)   # pylint: disable=E1101
+
+    def __deepcopy__(self, memo):   # pragma: no cover
+        "borrowed from Fraction"
+        if type(self) == Rational:
+            return self     # My components are also immutable
+        return self.__class__(self._numerator, self._denominator)   # pylint: disable=E1101
+
     @staticmethod
     def report():
         "Report Rational arithmetic statistics"
@@ -99,7 +119,7 @@ See also: fixed, guarded
         return arg1 * arg2
         round is ignored       
         '''
-        return Fraction.__mul__(arg1, arg2)
+        return Rational.__mul__(arg1, arg2)
         
     @staticmethod
     def div(arg1, arg2, round=None):   # pylint: disable=W0613,W0622
@@ -107,7 +127,7 @@ See also: fixed, guarded
         return arg1 / arg2
         round is ignored
         '''
-        return Fraction.__div__(arg1, arg2)
+        return Rational.__div__(arg1, arg2)
 
     @staticmethod
     def muldiv(arg1, arg2, arg3, round=None):   # pylint: disable=W0613,W0622
@@ -115,4 +135,26 @@ See also: fixed, guarded
         return (arg1*arg2)/arg3
         round is ignored
         '''
-        return Fraction.__div__(Fraction.__mul__(arg1, arg2), arg3)
+        return Rational.__div__(Rational.__mul__(arg1, arg2), arg3)
+
+# create wrappers for Rational methods that return Rational (not Fraction) objects
+#
+def _wrap_method(method):
+    "wrap a Fraction method in Rational"
+    fraction_method = getattr(Fraction, method)
+    def x(*args):
+        "call Fraction and change result to Rational"
+        v = fraction_method(*args)
+        v.__class__ = Rational
+        return v
+    x.func_name = method    # pylint: disable=W0612
+    setattr(Rational, method, x)
+
+for name in "pos neg abs trunc".split():
+    _wrap_method("__%s__" % name)   # wrap method, eg __pos__
+
+for name in "add sub mul div truediv floordiv mod pow".split():
+    _wrap_method("__%s__" % name)   # wrap method, eg __add__
+    _wrap_method("__r%s__" % name)  # wrap reversed-argument method, eg __radd__
+
+del _wrap_method

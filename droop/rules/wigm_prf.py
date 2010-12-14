@@ -350,7 +350,7 @@ class Rule(MethodWIGM):
                     b.weight = (b.weight * surplus) / high_candidate.vote
                     transfer(b)
                 high_candidate.vote = E.quota
-                E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, V(surplus)))
+                E.logAction('transfer', "Surplus transferred: %s (%s)" % (high_candidate, surplus))
 
             ##     B.4. Defeat low candidate. Defeat the hopeful candidate with the lowest
             ##          vote, breaking ties per procedure D.1. Test count complete (D.3).

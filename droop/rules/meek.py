@@ -402,9 +402,9 @@ class Rule(MethodMeek):
                 low_candidates = [c for c in C.hopeful() if (low_vote + E.surplus) >= c.vote]
                 low_candidate = breakTie(E, low_candidates, 'defeat')
                 if iterationStatus == IS_omega:
-                    low_candidate.defeat(msg='Defeat (surplus %s < omega)' % V(E.surplus))
+                    low_candidate.defeat(msg='Defeat (surplus %s < omega)' % E.surplus)
                 else:
-                    low_candidate.defeat(msg='Defeat (stable surplus %s)' % V(E.surplus))
+                    low_candidate.defeat(msg='Defeat (stable surplus %s)' % E.surplus)
                 low_candidate.kf = V0
                 low_candidate.vote = V0
                 distributeVotes()  # for reporting

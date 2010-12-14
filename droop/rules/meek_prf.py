@@ -214,7 +214,7 @@ class Rule(MethodMeek):
                         iterationStatus = 'omega'
                     elif E.surplus >= lastsurplus:  # pragma: no cover
                         iterationStatus = 'stable'
-                        E.log("Stable state detected (%s)" % V(E.surplus))
+                        E.log("Stable state detected (%s)" % E.surplus)
                 if iterationStatus != 'iterate':
                     break  # iteration complete
 
@@ -247,9 +247,9 @@ class Rule(MethodMeek):
                 low_candidates = [c for c in C.hopeful() if (low_vote + E.surplus) >= c.vote]
                 low_candidate = breakTie(E, low_candidates)
                 if iterationStatus == 'omega':
-                    low_candidate.defeat(msg='Defeat (surplus %s < omega)' % V(E.surplus))
+                    low_candidate.defeat(msg='Defeat (surplus %s < omega)' % E.surplus)
                 else:  # pragma: no cover
-                    low_candidate.defeat(msg='Defeat (stable surplus %s)' % V(E.surplus))
+                    low_candidate.defeat(msg='Defeat (stable surplus %s)' % E.surplus)
                 low_candidate.vote = V0
                 low_candidate.kf = V0
 
