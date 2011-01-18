@@ -75,8 +75,9 @@ class ValueTest(unittest.TestCase):
         "guard must be >= 0"
         self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(precision=5, guard=-1)))
 
-    #  Fixed initialization
-    #
+class ValueTestFixed(unittest.TestCase):
+    "test Fixed initialization"
+    
     def testFixedIntegerP0(self):
         "fixed=integer yields precision 0"
         V.ArithmeticClass(Options(dict(arithmetic='integer')))
@@ -409,6 +410,7 @@ class ValueTestGuarded9(unittest.TestCase):
 class ValueTestRational(unittest.TestCase):
     "rational-specific unit tests"
 
+    R.initialize(Options(dict()))
     f13 = R(1)/R(3)
     f15 = R(1)/R(5)
     f17 = R(1)/R(7)

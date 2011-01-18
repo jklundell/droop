@@ -35,6 +35,7 @@ class Rational(Fraction):
     _dps = None  # display scale factor
     _dpr = None  # display rounding constant
     _dfmt = None # display format string
+    __default_denominator = None    # earlier versions of Fraction require 1 rather than None
     
     @classmethod
     def tag(cls):
@@ -70,14 +71,26 @@ See also: fixed, guarded
         cls._dps = 10 ** cls.dp                            # display scaler
         cls._dpr = Fraction(1, cls._dps*2)                 # display rounder
         cls._dfmt = "%d.%0" + str(cls.dp) + "d" # %d.%0_d  # display format
+        #
+        #  later versions of Fraction have a default denominator of None rather than 1,
+        #  and more flexible conversion rules. However, earlier versions raise TypeError
+        #  when called with denominator=None. Here we detect that condition and set the
+        #  appropriate default.
+        #
+        try:
+            Fraction(1, None)
+        except TypeError:
+            cls.__default_denominator = 1
 
     @classmethod
     def min(cls, vals):
         "find minimum value in a list"
         return min(vals)
 
-    def __new__(cls, numerator=0, denominator=1):
+    def __new__(cls, numerator=0, denominator=None):
         "create a new Rational object"
+        if denominator is None:
+            denominator = cls.__default_denominator
         self = Fraction.__new__(cls, numerator, denominator)
         return self
 
@@ -143,10 +156,8 @@ def _wrap_method(method):
     "wrap a Fraction method in Rational"
     fraction_method = getattr(Fraction, method)
     def x(*args):
-        "call Fraction and change result to Rational"
-        v = fraction_method(*args)
-        v.__class__ = Rational
-        return v
+        "call Fraction method and change result to Rational"
+        return Rational(fraction_method(*args))
     x.func_name = method    # pylint: disable=W0612
     setattr(Rational, method, x)
 
