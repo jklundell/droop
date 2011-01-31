@@ -153,11 +153,11 @@ class Rule(MethodWIGM):
 
         #  local support functions
         #
-        def hasQuota(E, candidate):
+        def hasQuota(candidate):
             "Determine whether a candidate has a quota."
             return candidate.vote >= E.quota
 
-        def calcQuota(E):
+        def calcQuota():
             "Calculate quota."
             ##     A.1. Set the quota (votes required for election) to the total number of
             ##          valid ballots, divided by one more than the number of seats to be
@@ -178,7 +178,7 @@ class Rule(MethodWIGM):
             '''
             break a tie
 
-            purpose must be 'surplus' or 'elect' or 'defeat',
+            reason must be 'surplus' or 'elect' or 'defeat',
             indicating whether the tie is being broken for the purpose
             of choosing a surplus to transfer, a winner,
             or a candidate to defeat.
@@ -284,7 +284,7 @@ class Rule(MethodWIGM):
         ##     A.5. Set the vote for each candidate to the total number of ballots
         ##          assigned to that candidate.
         ##
-        E.quota = calcQuota(E)
+        E.quota = calcQuota()
         for b in E.ballots:
             b.topCand.vote += b.vote
         E.exhausted = V0  # track non-transferable votes
@@ -307,7 +307,7 @@ class Rule(MethodWIGM):
             ##          pending). Set the surplus of each pending candidate to that candidate's
             ##          vote minus the quota. Test count complete (D.3).
             ##
-            for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(E, c)]:
+            for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]:
                 c.pend()      # elect with transfer pending
 
             ##     B.2. Defeat sure losers (optional). Find the largest set of hopeful

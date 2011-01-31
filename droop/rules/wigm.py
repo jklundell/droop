@@ -90,7 +90,7 @@ class Rule(MethodWIGM):
         
         #  local support functions
         #
-        def hasQuota(E, candidate):
+        def hasQuota(candidate):
             '''
             Determine whether a candidate has a quota.
             
@@ -101,7 +101,7 @@ class Rule(MethodWIGM):
                 return candidate.vote > E.quota
             return candidate.vote >= E.quota
     
-        def calcQuota(E):
+        def calcQuota():
             '''
             Calculate quota.
             
@@ -128,7 +128,7 @@ class Rule(MethodWIGM):
             '''
             break a tie
             
-            purpose must be 'surplus' or 'elect' or 'defeat', 
+            reason must be 'surplus' or 'elect' or 'defeat', 
             indicating whether the tie is being broken for the purpose 
             of choosing a surplus to transfer, a winner, 
             or a candidate to defeat. 
@@ -149,7 +149,7 @@ class Rule(MethodWIGM):
         
         #  calculate quota
         #
-        E.quota = calcQuota(E)
+        E.quota = calcQuota()
 
         #  Calculate initial vote totals
         #
@@ -163,7 +163,7 @@ class Rule(MethodWIGM):
 
             #  elect new winners
             #
-            for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(E, c)]:
+            for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]:
                 c.pend()      # elect with transfer pending
 
             #  find & transfer highest surplus

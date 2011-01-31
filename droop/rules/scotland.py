@@ -187,7 +187,7 @@ class Rule(MethodWIGM):
             '''
             return candidate.vote >= E.quota
 
-        def calcQuota(E):
+        def calcQuota():
             '''
             Calculate quota. [46]
             '''
@@ -261,7 +261,7 @@ class Rule(MethodWIGM):
 
         #  Calculate quota per [46]
         #
-        E.quota = calcQuota(E)
+        E.quota = calcQuota()
 
         #  count first-preference votes [45]
         #

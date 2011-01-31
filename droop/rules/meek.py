@@ -105,7 +105,7 @@ class Rule(MethodMeek):
             "test for end of count"
             return len(C.hopeful()) <= E.seatsLeftToFill() or E.seatsLeftToFill() <= 0
 
-        def hasQuota(E, candidate):
+        def hasQuota(candidate):
             '''
             Determine whether a candidate has a quota (ie, is elected).
             
@@ -116,7 +116,7 @@ class Rule(MethodMeek):
                 return candidate.vote > E.quota
             return candidate.vote >= E.quota
     
-        def calcQuota(E):
+        def calcQuota():
             '''
             Calculate quota.
             
@@ -289,11 +289,11 @@ class Rule(MethodMeek):
 
                 #  D.3. update quota
                 #
-                E.quota = calcQuota(E)
+                E.quota = calcQuota()
                 
                 #  D.4. find winners
                 #
-                for c in [c for c in C.hopeful() if hasQuota(E, c)]:
+                for c in [c for c in C.hopeful() if hasQuota(c)]:
                     c.elect()
                     iStatus = IS_elected
                     
@@ -351,7 +351,7 @@ class Rule(MethodMeek):
         self.omega = V1 / V(10**self.omega10)
 
         E.votes = V(E.nBallots)
-        E.quota = calcQuota(E)
+        E.quota = calcQuota()
         C = E.C   # candidates
         for c in C.hopeful():
             c.kf = V1    # initialize keep factors

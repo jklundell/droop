@@ -272,7 +272,7 @@ class Rule(MethodWIGM):
             '''
             return candidate.vote >= E.quota
 
-        def calcQuota(E):
+        def calcQuota():
             '''
             Calculate quota. [167.20(Threshold)]
             '''
@@ -423,7 +423,7 @@ class Rule(MethodWIGM):
 
         #  Calculate quota per 167.20(Threshold)
         #
-        E.quota = calcQuota(E)
+        E.quota = calcQuota()
 
         #  make initial vote count
         #
