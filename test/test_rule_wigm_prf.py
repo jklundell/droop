@@ -71,11 +71,6 @@ class ElectionCountTest(unittest.TestCase):
             self.assertEqual(len(E.elected), E.nSeats)
 
     def testElectionCount2(self):
-        "try wigm-prf with integer quota"
-        E = self.doCount(dict(rule='wigm-prf', integer_quota='true'), '42.blt')
-        self.assertEqual(len(E.elected), E.nSeats)
-
-    def testElectionCount3(self):
         "try wigm-prf with alternative precision; should stick at default precision"
         E = self.doCount(dict(rule='wigm-prf', precision='8'), '42.blt')
         self.assertEqual(len(E.elected), E.nSeats)
