@@ -125,11 +125,21 @@ class Election(object):
             self.residual = self.V0 # pylint: disable=W0201
         for c in self.C:
             c.vote = self.V0
+        ##
         self.rule.count()   ### count the election ###
+        ##
         self.logAction('end', 'Count Complete')
         self.elected = self.C.elected()
         self.defeated = self.C.defeated()
         self.withdrawn = self.C.withdrawn()
+        self.postCheck()    # post-election sanity check
+
+    def postCheck(self):
+        "post-election sanity check"
+        nElected = len(self.elected)
+        nEligible = len(self.C.eligible())
+        assert(nElected == self.nSeats or
+               nElected < self.nSeats and nElected == nEligible)
 
     def logAction(self, action, msg):
         "record an action"
