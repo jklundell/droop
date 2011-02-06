@@ -275,7 +275,7 @@ class Rule(MethodWIGM):
             #  elect candidates with quota [47]
             #
             for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]:
-                c.pend()      # elect with surplus transfer pending
+                c.elect(pending=True)      # elect with surplus transfer pending
             if countComplete():
                 break
 
@@ -291,7 +291,7 @@ class Rule(MethodWIGM):
                 high_vote = max(c.vote for c in C.pending())
                 high_candidates = [c for c in C.pending() if c.vote == high_vote]
                 high_candidate = breakTie(high_candidates, 'largest surplus')
-                high_candidate.elect('Transfer high surplus')
+                high_candidate.unpend('Transfer high surplus')
                 surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     # see http://www.votingmatters.org.uk/RES/eSTV-Eval.pdf section 7.1 #5
@@ -320,7 +320,7 @@ class Rule(MethodWIGM):
 
         #  Finalize any elected transfer-pending candidates
         for c in C.pending():
-            c.elect('Elect pending candidates')
+            c.unpend()
         
         #  Fill any remaining seats [52]
         #

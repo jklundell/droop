@@ -308,7 +308,7 @@ class Rule(MethodWIGM):
             ##          vote minus the quota. Test count complete (D.3).
             ##
             for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]:
-                c.pend()      # elect with transfer pending
+                c.elect(pending=True)      # elect with transfer pending
 
             ##     B.2. Defeat sure losers (optional). Find the largest set of hopeful
             ##          candidates that meets all of the following conditions.
@@ -343,7 +343,7 @@ class Rule(MethodWIGM):
                 high_vote = max(c.vote for c in C.pending())
                 high_candidates = [c for c in C.pending() if c.vote == high_vote]
                 high_candidate = breakTie(E, high_candidates, 'surplus')
-                high_candidate.elect('Transfer high surplus')
+                high_candidate.unpend('Transfer high surplus')
                 surplus = high_candidate.vote - E.quota
 
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
@@ -375,7 +375,7 @@ class Rule(MethodWIGM):
         ##
         ##
         for c in C.pending():
-            c.elect(msg='Elect pending')
+            c.unpend()
         for c in C.hopeful():
             if len(C.elected()) < E.nSeats:
                 c.elect(msg='Elect remaining')

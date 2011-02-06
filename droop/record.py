@@ -73,7 +73,7 @@ class ElectionRecord(dict):
             'elect',    # elect a candidate
             'defeat',   # defeat a candidate
             'iterate',  # terminate an iteration (meek)
-            'pend',     # elect a candidate pending surplus transfer (wigm)
+            'unpend',   # set pending false (wigm)
             'transfer', # transfer a surplus (wigm)
             'end'       # end of count
             ))

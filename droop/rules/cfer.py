@@ -715,10 +715,7 @@ class Rule(MethodWIGM):
             ##  the threshold.
             ##
             for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]:
-                if hasSurplus(c):
-                    c.pend()      # elect with transfer pending
-                else:
-                    c.elect()
+                c.elect(pending=hasSurplus(c))  # elect, note transfer pending
 
             ##    (e) If the number of elected candidates is equal to the number of
             ##  offices to be filled, all continuing candidates shall be declared
@@ -726,7 +723,7 @@ class Rule(MethodWIGM):
             ##
             if len(C.elected()) >= E.nSeats:
                 for c in C.pending():
-                    c.elect(msg='Elect pending')
+                    c.unpend()
                 for c in C.hopeful():
                     c.defeat(msg='Defeat remaining')
                 break
@@ -763,7 +760,7 @@ class Rule(MethodWIGM):
                 ##  the threshold.
                 ##
                 for c in C.pending():
-                    c.elect('Transfer surplus')
+                    c.unpend('Transfer surplus')
                     surplus = c.vote - E.quota
     
                     for b in (b for b in E.ballots if b.topRank == c.cid):

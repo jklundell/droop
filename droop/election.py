@@ -461,22 +461,26 @@ class Candidate(object):
         s = self.vote - self.E.quota
         return self.E.V0 if s < self.E.V0 else s
         
-    def elect(self, msg='Elect'):
+    def elect(self, msg=None, pending=False):
         '''
         Meek, QPQ: elect a candidate
-        WIGM: move a candidate from pending to elected on surplus transfer
+        WIGM: elect a candidate, optionally pending surplus transfer
         '''
         self.state = 'elected'
-        self.pending = False
+        if msg is None:
+            msg = 'Elect, transfer pending' if pending else 'Elect'
+        self.pending = pending
         self.E.logAction('elect', "%s: %s" % (msg, self.name))
 
-    def pend(self, msg='Elect, transfer pending'):
+    def unpend(self, msg=None):
         '''
-        WIGM: set a candidate elected pending transfer
+        WIGM: clear the transfer-pending flag
         '''
-        self.state = 'elected'
-        self.pending = True
-        self.E.logAction('pend', "%s: %s" % (msg, self.name))
+        assert(self.state == 'elected')
+        assert(self.pending)
+        self.pending = False
+        if msg:
+            self.E.logAction('unpend', "%s: %s" % (msg, self.name))
 
     def unelect(self):
         "QPQ: unelect a candidate (qpq restart)"

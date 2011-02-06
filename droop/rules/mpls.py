@@ -444,7 +444,7 @@ class Rule(MethodWIGM):
             ##     and the tabulation is complete. 
             ##
             for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]:
-                c.pend('Candidate at threshold')  # election pending
+                c.elect('Candidate at threshold', pending=True)  # election pending
             if len(C.elected()) >= E.nSeats:
                 break
 
@@ -521,7 +521,7 @@ class Rule(MethodWIGM):
                 high_vote = max(c.vote for c in C.pending())
                 high_candidates = [c for c in C.pending() if c.vote == high_vote]
                 high_candidate = breakTie(high_candidates, 'largest surplus')
-                high_candidate.elect()
+                high_candidate.unpend('Elect and transfer surplus')
                 surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = (b.weight * surplus) / high_candidate.vote
@@ -577,7 +577,7 @@ class Rule(MethodWIGM):
         ##  167.70(1)(a)
         #   Elect continuing candidates with votes >= threshold
         for c in C.pending():
-            c.elect('Elect candidates with threshold votes')
+            c.unpend('Elect candidates with threshold votes')
 
         ##  167.70(1)(f)
         ##  f. ...
