@@ -19,6 +19,17 @@ This file is part of Droop.
 
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
+
+
+    This is an approximation of the STV rule used by the Academy for
+    best-picture nominations. Some references:
+    http://www.thewrap.com/deal-central/column-post/revealed-how-oscar-nominee-ballots-are-counted-12279
+    http://oscarvotes123.blogspot.com/
+    http://insidemovies.ew.com/2011/01/27/oscar-voter-ballot-reader-poll-results/
+    
+    According to these references, the quota is recalculated on each round,
+    and, at least after the first surplus distribution, candidates with less
+    than 1% of the vote are defeated.
 '''
 import sys, os
 import Droop
