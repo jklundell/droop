@@ -14,6 +14,6 @@ The primary motivation for `Droop` is to provide a framework for implementing ST
 * The framework and rule implementations are readily embedded as an STV counting engine in third-party software.
 * All IO treated as UTF-8.
 
-See DroopArchitecture for an overview of `Droop`'s structure.
+See Droop Architecture in the wiki for an overview of `Droop`'s structure.
 
-Currently (v0.11), the unit tests run correctly on OS X 10.6.6 (with Python 2.6.1 and 2.7.1) and RHEL5 (Python 2.6.5).
+Currently (v0.11), the unit tests run correctly on OS X 10.6.6 (with Python 2.6.1 and 2.7.1) and RHEL5 (Python 2.6.5), as copied here from Google Code: <https://code.google.com/archive/p/droop>.
