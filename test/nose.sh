@@ -9,11 +9,14 @@
 #  http://nedbatchelder.com/code/coverage/
 #  http://bitbucket.org/ned/coveragepy/issues
 #
-NOSETESTS=nosetests
+#NOSETESTS=/usr/local/bin/nosetests # nose
+#NOSETESTS=nose2
+NOSETESTS=pytest
+
 if [ "$1" = "cover" ]; then
-	$NOSETESTS --with-coverage --cover-package=droop --cover-erase
+	$NOSETESTS --process-timeout=30 --with-coverage --cover-package=droop --cover-erase
 elif [ "$1" = "coverx" ]; then
-	$NOSETESTS --processes=4 --with-coverage --cover-package=droop --cover-erase
+	$NOSETESTS --processes=4 --process-timeout=30 --with-coverage --cover-package=droop --cover-erase
 else
-	$NOSETESTS --processes=4
+	$NOSETESTS --processes=4 --process-timeout=30
 fi
