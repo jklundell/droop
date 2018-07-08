@@ -26,7 +26,7 @@ This file is part of Droop.
     http://www.thewrap.com/deal-central/column-post/revealed-how-oscar-nominee-ballots-are-counted-12279
     http://oscarvotes123.blogspot.com/
     http://insidemovies.ew.com/2011/01/27/oscar-voter-ballot-reader-poll-results/
-    
+
     According to these references, the quota is recalculated on each round,
     and, at least after the first surplus distribution, candidates with less
     than 1% of the vote are defeated.

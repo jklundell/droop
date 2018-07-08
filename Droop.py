@@ -41,8 +41,9 @@ This file is part of Droop.
      guard=<guard for guarded, in digits>
      dp=<display precision (digits) for rational>
 '''
-   
-import sys, os
+
+import sys
+import os
 import droop
 from droop.profile import ElectionProfile, ElectionProfileError
 from droop.election import Election
@@ -72,7 +73,7 @@ def main(options=None):
             profilefile = "profile.out"
     if not path:
         raise droop.common.UsageError("no ballot file specfied")
-    
+
     #  run the election
     #
     #    fetch the election profile
@@ -121,11 +122,11 @@ me = os.path.basename(__file__)
 
 def usage(subject=None):
     "usage and help"
-    
+
     helps = Election.makehelp()
     helpers = sorted(helps.keys())
 
-    u =  '\n%s v%s\n' % (droop.common.droopName, droop.common.droopVersion)
+    u = '\n%s v%s\n' % (droop.common.droopName, droop.common.droopVersion)
     u += '\nUsage:\n'
     u += '%s options ballotfile\n' % me
     u += '  options:\n'
@@ -149,7 +150,7 @@ def usage(subject=None):
         return '\n%s' % helps[subject]
     return 'no help available on %s' % subject
 
-    
+
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print >> sys.stderr, usage()

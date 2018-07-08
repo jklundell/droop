@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.election package
 
 Copyright 2010 by Jonathan Lundell
@@ -34,8 +34,8 @@ from droop.common import UsageError
 class ElectionBasics(unittest.TestCase):
     '''
     test Election.__init__
-    
-    Create an Election instance from a simple profile 
+
+    Create an Election instance from a simple profile
     and each rule and test its basic initialization,
     and that it elects the specified number of seats.
     '''
@@ -89,13 +89,13 @@ class ElectionOptions(unittest.TestCase):
     def testDroopOptions(self):
         "test [droop ...]"
         if 'meek' in droop.electionRuleNames():
-            b = '''3 2 [droop arithmetic=fixed precision=4] 4 1 2 0 2 3 0 0 
+            b = '''3 2 [droop arithmetic=fixed precision=4] 4 1 2 0 2 3 0 0
                 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), dict(rule='meek'))
             self.assertEqual(E.V.precision, 4)
             E = Election(ElectionProfile(data=b), dict(rule='meek', precision=6))
             self.assertEqual(E.V.precision, 6)
-            b = '''3 2 [droop rational precision=4] 4 1 2 0 2 3 0 0 
+            b = '''3 2 [droop rational precision=4] 4 1 2 0 2 3 0 0
                 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), dict(rule='meek'))
             self.assertEqual(E.V.name, 'rational')
@@ -107,16 +107,16 @@ class ElectionOptions(unittest.TestCase):
             b = '''3 2 [droop dump meek] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), None)
             self.assertTrue(E.options.getopt('dump'))
-            b = '''3 2 [droop dump=true meek] 4 1 2 0 2 3 0 0 
+            b = '''3 2 [droop dump=true meek] 4 1 2 0 2 3 0 0
                 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), None)
             self.assertTrue(E.options.getopt('dump'))
-            b = '''3 2 [droop dump=false meek] 4 1 2 0 2 3 0 0 
+            b = '''3 2 [droop dump=false meek] 4 1 2 0 2 3 0 0
                 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             E = Election(ElectionProfile(data=b), None)
             self.assertFalse(E.options.getopt('dump'))
             # fake a path to test double-path logic
-            b = '''3 2 [droop 42.blt 513.blt meek] 4 1 2 0 2 3 0 0 
+            b = '''3 2 [droop 42.blt 513.blt meek] 4 1 2 0 2 3 0 0
                 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
             self.assertRaises(UsageError, Election, ElectionProfile(data=b), dict())
 

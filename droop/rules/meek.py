@@ -25,7 +25,7 @@ from .electionmethods import MethodMeek
 class Rule(MethodMeek):
     '''
     Rule for counting Model Meek or Warren elections
-    
+
     Parameter: arithmetic type
     '''
     @classmethod
@@ -36,7 +36,7 @@ class Rule(MethodMeek):
     @classmethod
     def helps(cls, helps, name):
         "add help strings for meek and warren"
-        h =  '%s is an iterative election rule.\n' % name
+        h = '%s is an iterative election rule.\n' % name
         h += '\noptions:\n'
         h += '  arithmetic: (guarded*, rational, fixed)\n'
         h += '  precision=significant precision (not counting guard) if guarded or fixed\n'
@@ -51,7 +51,7 @@ class Rule(MethodMeek):
         h += '  defeat_batch=(safe*, none)\n'
         h += '  * default\n'
         helps[name] = h
-        
+
     def __init__(self, E):
         "initialize rule"
         self.E = E
@@ -78,7 +78,7 @@ class Rule(MethodMeek):
         elif arithmetic == 'rational':
             self.omega10 = options.setopt('omega', default=10)
 
-        self.defeat_batch = options.setopt('defeat_batch', default='safe', allowed=('none','safe'))
+        self.defeat_batch = options.setopt('defeat_batch', default='safe', allowed=('none', 'safe'))
 
     def info(self):
         "return an info string for the election report"
@@ -98,7 +98,7 @@ class Rule(MethodMeek):
     #########################
     def count(self):
         "count the election"
-        
+
         #  local support functions
         #
         def countComplete():
@@ -108,51 +108,51 @@ class Rule(MethodMeek):
         def hasQuota(candidate):
             '''
             Determine whether a candidate has a quota (ie, is elected).
-            
+
             If using exact arithmetic, then: vote > quota
             Otherwise: vote >= quota, since quota has been rounded up
             '''
             if E.V.exact:
                 return candidate.vote > E.quota
             return candidate.vote >= E.quota
-    
+
         def calcQuota():
             '''
             Calculate quota.
-            
+
             Round up if not using exact arithmetic.
             '''
             if E.V.exact:
                 return E.votes / E.V(E.nSeats+1)
             return E.votes / E.V(E.nSeats+1) + E.V.epsilon
-    
+
         def breakTie(E, tied, reason=None):
             '''
             break a tie
-            
-            reason is 'surplus' or 'elect' or 'defeat', 
-            indicating whether the tie is being broken for the purpose 
-            of choosing a surplus to transfer, a winner, 
-            or a candidate to defeat. 
-            
+
+            reason is 'surplus' or 'elect' or 'defeat',
+            indicating whether the tie is being broken for the purpose
+            of choosing a surplus to transfer, a winner,
+            or a candidate to defeat.
+
             the tiebreaking method: candidates are randomly ordered,
-            and the order of entry in the ballot file 
+            and the order of entry in the ballot file
             or the profile =tie order is the tiebreaking order:
             choose the first candidate in that order.
             '''
             if len(tied) == 1:
                 return tied.pop()
             t = C.byTieOrder(tied)[0]
-            names =  ", ".join([c.name for c in tied])
+            names = ", ".join([c.name for c in tied])
             E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t))
             return t
 
         def batchDefeat(surplus):
             "find a batch of candidates that can be defeated at the current surplus"
-            
+
             if self.defeat_batch == 'none':
                 return []
-                
+
             #   start with candidates sorted by vote
             #   build a sorted list of groups
             #     where each group consists of the candidates tied at that vote
@@ -173,7 +173,7 @@ class Rule(MethodMeek):
             if group:
                 sortedGroups.append(group)
 
-            #   Scan the groups to find the biggest set of lowest-vote 
+            #   Scan the groups to find the biggest set of lowest-vote
             #   'sure-loser' candidates such that:
             #     * we leave enough hopeful candidates to fill the remaining seats
             #     * we don't break up tied groups of candidates
@@ -183,7 +183,7 @@ class Rule(MethodMeek):
             #   We never defeat the last group, because that would mean
             #   defeating all the hopeful candidates, and if that's possible,
             #   the election is already complete and we wouldn't be here.
-            #   
+            #
             vote = V0
             maxDefeat = len(C.hopeful()) - E.seatsLeftToFill()
             maxg = None
@@ -217,23 +217,23 @@ class Rule(MethodMeek):
                 "calculate keep and new weight for Warren"
                 keep = kf if kf < weight else weight
                 return (kf if kf < weight else weight), (weight - keep)
-                
+
             def kw_meekOpenSTV(kf, weight):
                 "calculate keep and new weight for OpenSTV MeekSTV"
                 return V.mul(weight, kf, round='down'), V.mul(weight, V1-kf, round='down')
-        
+
             def kw_meekHill(kf, weight):    # pragma: no cover  # pylint: disable=W0612
                 "calculate keep and new weight for Hill/NZ Calculator"
                 keep = V.mul(weight, kf, round='up')
                 return keep, (weight - keep)
-        
+
             def kw_meekNZ1A(kf, weight):    # pragma: no cover  # pylint: disable=W0612
                 "calculate keep and new weight for NZ Schedule 1A"
                 return V.mul(weight, kf, round='up'), V.mul(weight, V1-kf, round='up')
 
             kt = kw_warren if self.warren else kw_meekOpenSTV
-            
-            for c in (C.hopeful() + C.elected()):
+
+            for c in C.hopeful() + C.elected():
                 c.vote = V0
             candidate = E.candidate
             E.residual = V0
@@ -249,16 +249,16 @@ class Rule(MethodMeek):
                         if b.weight <= V0:
                             break
                 E.residual += b.residual  # residual for round
-                
+
             for b in E.ballotsEqual:
-                cset = [c.cid for c in (C.hopeful() + C.elected())]
+                cset = [c.cid for c in C.hopeful() + C.elected()]
                 nrank = len(b.ranking)
                 multiplier = b.multiplier
                 b.residual = multiplier
 
                 def dist(i, weight):
                     "distribute via recursive descent"
-                    cids = [cid for cid in b.ranking[i] if cid in cset]
+                    cids = [cid for cid in b.ranking[i] if cid in cset] # pylint: disable=cell-var-from-loop
                     if cids:
                         cweight = weight / V(len(cids))
                         for cid in cids:
@@ -266,7 +266,7 @@ class Rule(MethodMeek):
                             keep, weight = kt(c.kf, cweight)
                             c.vote += keep * multiplier
                             b.residual -= keep * multiplier  # residual value of ballot
-                            if weight and i < nrank:
+                            if weight and i < nrank: # pylint: disable=cell-var-from-loop
                                 dist(i+1, weight)
 
                 dist(0, V1)
@@ -285,22 +285,22 @@ class Rule(MethodMeek):
                 #  and add up vote for each candidate
                 #
                 distributeVotes()
-                E.votes = sum([c.vote for c in (C.hopeful() + C.elected())], V0)
+                E.votes = sum([c.vote for c in C.hopeful() + C.elected()], V0)
 
                 #  D.3. update quota
                 #
                 E.quota = calcQuota()
-                
+
                 #  D.4. find winners
                 #
                 for c in [c for c in C.hopeful() if hasQuota(c)]:
                     c.elect()
                     iStatus = IS_elected
-                    
+
                 #  D.6. calculate total surplus
                 #
                 E.surplus = sum([c.vote-E.quota for c in C.elected()], V0)
-                
+
                 #  D.7. test iteration complete
                 #
                 #  case 1: a candidate was elected
@@ -331,7 +331,7 @@ class Rule(MethodMeek):
                 for c in C.elected():
                     #c.kf = V.muldiv(c.kf, E.quota, c.vote, round='up')  # OpenSTV variant
                     c.kf = V.div(V.mul(c.kf, E.quota, round='up'), c.vote, round='up')  # NZ variant
-            
+
         #########################
         #
         #   Initialize Count
@@ -408,7 +408,7 @@ class Rule(MethodMeek):
                 low_candidate.kf = V0
                 low_candidate.vote = V0
                 distributeVotes()  # for reporting
-        
+
         #  Elect or defeat remaining hopeful candidates
         #
         for c in C.hopeful():

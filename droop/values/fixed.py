@@ -34,14 +34,14 @@ class Fixed(object):
     exact = False
     quasi_exact = False
     epsilon = None      # smallest value > 0
-    
+
     precision = None    # precision in decimal digits
     display = None      # display precision, in decimal digits
     __scale = None      # scale factor
     __dfmt = None       # display format
     __scaled = None     # display scale factor
     __scaledr = None    # display rounding
-    
+
     @classmethod
     def tag(cls):
         "return a tag for unit test"
@@ -68,7 +68,7 @@ See also: guarded, rational
     @classmethod
     def initialize(cls, options):
         "initialize class variables"
-        
+
         arithmetic = options.getopt('arithmetic')
         if arithmetic not in ('fixed', 'integer'):
             raise UsageError('Fixed: unrecognized arithmetic type (%s)' % arithmetic)
@@ -85,7 +85,7 @@ See also: guarded, rational
             raise UsageError('Fixed: precision=%s; must be an int >= 0' % precision)
         if cls.precision < 0 or str(cls.precision) != str(precision):
             raise UsageError('Fixed: precision=%s; must be an int >= 0' % precision)
-            
+
         #  set display precision
         if options.getopt('display') is None:   # don't override default set by rule
             options.setopt('display', default=cls.precision)
@@ -101,7 +101,7 @@ See also: guarded, rational
         cls.__scaled = 10 ** cls.display
         cls.__scaledd = 10 ** (cls.precision - cls.display)
         cls.__scaledr = cls.__scaledd // 2
-        
+
         cls.epsilon = cls(0)
         cls.epsilon._value = 1
 
@@ -144,7 +144,7 @@ See also: guarded, rational
         v = Fixed(other)
         v._value = self._value - v._value
         return v
-        
+
     def __neg__(self):
         "return negated self"
         v = Fixed(self)
@@ -164,7 +164,7 @@ See also: guarded, rational
         v = Fixed(self)
         v._value = abs(v._value)
         return v
-        
+
     def __mul__(self, other):
         "return self * other"
         v = Fixed(self)
@@ -174,7 +174,7 @@ See also: guarded, rational
         v._value *= other._value
         v._value //= self.__scale
         return v
-        
+
     def __floordiv__(self, other):
         "return self // other"
         v = Fixed(self)
@@ -201,7 +201,7 @@ See also: guarded, rational
         if rem and round == 'up':
             v1._value += 1
         return v1
-        
+
     @classmethod
     def div(cls, arg1, arg2, round=None):   # pylint: disable=W0622
         '''
@@ -220,7 +220,7 @@ See also: guarded, rational
     def muldiv(cls, arg1, arg2, arg3, round=None):   # pylint: disable=W0622
         '''
         return (arg1*arg2)/arg3
-        
+
         a*b/c retains the full precision of a*b.
         '''
         v1 = cls(arg1)
@@ -255,7 +255,7 @@ See also: guarded, rational
     def min(cls, vals):
         "find minimum value in a list"
         return min(vals)
- 
+
     def __str__(self):
         '''
         stringify a fixed value

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.election package
 
 Copyright 2010 by Jonathan Lundell
@@ -31,7 +31,7 @@ if common.pyflakes: # satisfy pyflakes that we're using common
 
 class CandidateTest(unittest.TestCase):
     "test class Candidate"
-    
+
     def testCandidateString(self):
         "candidate string is its cname"
         c1 = Candidate(None, 1, 2, 2, 'abc', None, False)

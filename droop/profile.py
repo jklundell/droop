@@ -32,21 +32,21 @@ class ElectionProfileError(Exception):
 class ElectionProfile(object):
     '''
     Election profile
-    
+
     Given a path to a blt-format ballot file, or such a file's contents,
     create and return an election profile instance.
-    
+
     The resulting election profile is passed to Election for counting.
-    
+
     The public interface of ElectionProfile:
-    
+
     title: title string from the ballot file
     source: source string from blt file
     comment: comment string from blt file
     nSeats: the number of seats to be filled
-    nBallots: the number of ballots (possibly greater than len(rankings) because of 
+    nBallots: the number of ballots (possibly greater than len(rankings) because of
               ballot multipliers)
-    eligible: the set of non-withdrawn candidate IDs 
+    eligible: the set of non-withdrawn candidate IDs
     withdrawn: the set of withdrawn candidate IDs
         eligible and withdrawn should be treated as frozenset (unordered and immutable)
         though they may be implemented as any iterable.
@@ -66,7 +66,7 @@ class ElectionProfile(object):
 
     Private attributes have a leading underscore and are not intended for external consumption
     '''
-    
+
     def __init__(self, path=None, data=None):
         "initialize profile"
         self.title = None
@@ -112,13 +112,13 @@ class ElectionProfile(object):
 
     class BallotLine(object):   # pylint doesn't see slots  # pylint: disable=R0903
         "one ballot line"
-        
+
         __slots__ = ('multiplier', 'ranking', 'line')
-        
+
         def __init__(self, profile, multiplier, ranking):
             '''
             create a ballot-line object
-            
+
             ranking is a list of lists of cids
             remove any withdrawn candidates
             if all the cid-lists are singletons, store an array
@@ -134,7 +134,7 @@ class ElectionProfile(object):
                 if len(rank) > 1:
                     equal_rank = True
             ranking = [rank for rank in ranking if len(rank)]   # strip empty ranks
-            if len(ranking) == 0:
+            if not ranking:
                 self.ranking = None     # empty ballot line
             elif equal_rank:
                 profile.nBallots += multiplier
@@ -142,8 +142,8 @@ class ElectionProfile(object):
             else:
                 profile.nBallots += multiplier
                 ranking = [rank[0] for rank in ranking] # possibly empty
-                self.ranking = array.array('B' if profile.nCand<=256 else 'H', ranking)
-            
+                self.ranking = array.array('B' if profile.nCand <= 256 else 'H', ranking)
+
     def __validate(self):
         "check profile for internal consistency"
         if not self.nSeats or self.nSeats > len(self.eligible):
@@ -216,11 +216,11 @@ class ElectionProfile(object):
     def getCid(self, nick, loc):
         '''
         convert a nick (or cid) to a cid, and validate the cid
-        
+
         If nick is an int (or a decimal string), validate and return it.
         Otherwise, it's a nickname; look it up and return the cid.
-        
-        loc is used for error messages if the nickname is unknown 
+
+        loc is used for error messages if the nickname is unknown
         or the resulting cid is out of range
         '''
         if isinstance(nick, str) and re.match(r'\d+$', nick):
@@ -237,7 +237,7 @@ class ElectionProfile(object):
     def __bltOptionNick(self, option_list):
         '''
         process a blt [nick option line
-        
+
         we require a list of exactly nCand unique nicknames
         '''
         if len(option_list) != self.nCand:
@@ -251,7 +251,7 @@ class ElectionProfile(object):
                 raise ElectionProfileError('bad blt: duplicate nickname: %s' % nick)
             self._nickCid[nick] = cid
             self.nickName[cid] = nick
-        
+
     def __bltOptionTie(self, option_list):
         "process a blt [tie option line"
         self.tieOrder = dict()
@@ -295,7 +295,7 @@ class ElectionProfile(object):
     def _bltParse(self, data):
         '''
         parse a blt blob
-        
+
         the parsed result populates this ElectionProfile object
         '''
         # pylint 0.22.0 doesn't think there's a blt.next() # pylint: disable=E1101
@@ -303,7 +303,7 @@ class ElectionProfile(object):
         sdigits = re.compile(r'-?\d+$')
 
         blt = self.__bltBlob(data)  # fetch a token at a time
-        
+
         #  number of candidates, eligible or withdrawn
         #
         tok = blt.next().lstrip(codecs.BOM_UTF8) # strip utf-8 BOM from first token
@@ -348,7 +348,7 @@ class ElectionProfile(object):
         #
         self.ballotLines = list()
         ballotIDs = set()
-        
+
         while True:
             if tok.startswith('('):
                 bid = tok
@@ -383,8 +383,8 @@ class ElectionProfile(object):
                     self.ballotLines.append(ballot)
 
             tok = blt.next()  # next multiplier or 0 for end of ballots
-            
-        if len(ballotIDs) and len(ballotIDs) != len(self.ballotLines):
+
+        if ballotIDs and len(ballotIDs) != len(self.ballotLines):
             raise ElectionProfileError('number of ballot IDs (%d) does not match number of ballots (%d)' % \
                 (len(ballotIDs), len(self.ballotLines)))
 
@@ -408,7 +408,7 @@ class ElectionProfile(object):
                 self.eligible.add(cid)
             self.candidateName[cid] = name.strip('"')
             self.candidateOrder[cid] = cid
-            
+
         #  election title
         #
         tok = blt.next()
@@ -421,7 +421,7 @@ class ElectionProfile(object):
         except StopIteration:
             raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % s)
         self.title = s.strip('"').strip(' ')
-        
+
         #  optional election-source string
         #
         try:
@@ -457,7 +457,7 @@ class ElectionProfile(object):
     def __bltBlob(self, blob):
         '''
         parse a blt blob into tokens
-        
+
         skip /* comments */ and # comments (if not in quoted strings)
         '''
         lines = blob.splitlines()

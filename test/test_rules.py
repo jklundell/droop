@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.rules package
 
 Copyright 2010 by Jonathan Lundell
@@ -34,7 +34,7 @@ if common.pyflakes: # satisfy pyflakes that we're using common
 
 class RuleInitTest(unittest.TestCase):
     "test rules.__init__"
-    
+
     def testRuleNames(self):
         "check the list of rule names"
         self.assertTrue(len(electionRuleNames()) >= 1, 'at least one rule name')
@@ -57,7 +57,7 @@ class RuleInitTest(unittest.TestCase):
 
 class RuleTest(unittest.TestCase):
     "test rules class methods"
-    
+
     def testMethod(self):
         "method is meek or wigm or qpq for each rule"
         for name in electionRuleNames():

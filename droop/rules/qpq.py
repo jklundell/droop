@@ -22,7 +22,7 @@ This file is part of Droop.
     Quota Preferential by Quotient (QPQ)
 
     Procedure (from Woodall paper http://www.votingmatters.org.uk/ISSUE17/I17P1.PDF)
-    
+
     2.1.  Set each candidate to hopeful
     2.2.  Each ballot has elected 0 candidates
     Round:
@@ -64,7 +64,7 @@ class Rule(ElectionRule):
         h += '  arithmetic: guarded\n'
         h += '  precision=9\n'
         helps[name] = h
-        
+
     def __init__(self, E):
         "initialize rule"
         self.E = E
@@ -84,7 +84,7 @@ class Rule(ElectionRule):
     def info(self):
         "return an info string for the election report"
         return "QPQ"
-        
+
     def tag(self):
         "return a tag string for unit tests"
         return self.name
@@ -136,7 +136,7 @@ class Rule(ElectionRule):
         def calcQuota():
             "Calculate quota"
             #
-            #  2.4. ...The quota is defined to be 
+            #  2.4. ...The quota is defined to be
             #  va/(1 + s - tx), where va is the number of active ballots, s is the total number
             #  of seats to be filled, and tx is the sum of the fractional numbers of candidates
             #  that are deemed to have been elected by all the inactive ballots.
@@ -201,7 +201,7 @@ class Rule(ElectionRule):
         restart = True
         E.logAction('begin', 'Begin Count')
         while (not countComplete()):
-        
+
             E.newRound()
             if restart:
                 restart = False
@@ -211,15 +211,15 @@ class Rule(ElectionRule):
                     b.restart(V0)
                     transfer(b)
 
-            #  2.3. At the start of each stage, the quotients of all the hopeful candidates 
+            #  2.3. At the start of each stage, the quotients of all the hopeful candidates
             #  are calculated, as follows. The ballots contributing to a particular hopeful
             #  candidate c are those ballots on which c is the topmost hopeful candidate.
-            #  The quotient assigned to c is defined to be qc = vc/(1+tc), where vc is the 
+            #  The quotient assigned to c is defined to be qc = vc/(1+tc), where vc is the
             #  number of ballots contributing to c, and tc is the sum of all the fractional
             #  numbers of candidates that those ballots have so far elected.
             #
-            #  2.4. A ballot is active if it includes the name of a hopeful candidate 
-            #  (and is a valid ballot), and inactive otherwise. The quota is defined to be 
+            #  2.4. A ballot is active if it includes the name of a hopeful candidate
+            #  (and is a valid ballot), and inactive otherwise. The quota is defined to be
             #  va/(1 + s - tx), where va is the number of active ballots, s is the total number
             #  of seats to be filled, and tx is the sum of the fractional numbers of candidates
             #  that are deemed to have been elected by all the inactive ballots.
@@ -253,7 +253,7 @@ class Rule(ElectionRule):
             #  then the count ends; otherwise it proceeds to the next stage, from paragraph 2.3.
             #
             #  2.5b. If no candidate has a quotient greater than the quota, then the candidate with
-            #  the smallest quotient is declared excluded. No change is made to the number of 
+            #  the smallest quotient is declared excluded. No change is made to the number of
             #  candidates elected by any ballot. If all but s candidates are now excluded, then all
             #  remaining hopeful candidates are declared elected and the count ends; otherwise the
             #  count proceeds to the next stage, from paragraph 2.3.

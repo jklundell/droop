@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.rules package
 
 Copyright 2010 by Jonathan Lundell
@@ -32,7 +32,7 @@ from droop.rules.mpls import Rule
 
 class MplsTestBasic(unittest.TestCase):
     "test rules.__init__"
-    
+
     def testRuleNameMpls(self):
         "check the list of names for mpls"
         self.assertTrue('mpls' in electionRuleNames(), 'one of the rule names is mpls')
@@ -48,11 +48,11 @@ class MplsTestBasic(unittest.TestCase):
 
 class MplsTest(unittest.TestCase):
     '''
-    Create an Election instance from a simple profile 
+    Create an Election instance from a simple profile
     and the Minneapolis rule and test its basic initialization,
     and that it elects the specified number of seats.
     '''
-    
+
     def setUp(self):
         "initialize profile and rule"
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''

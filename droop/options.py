@@ -76,8 +76,9 @@ class Options(object):
         if allowed:
             self.allowed[optname] = allowed
             if optvalue not in allowed:
-                raise UsageError('%s=%s; must be one of [%s]' % (optname, optvalue,
-                    ",".join([str(x) for x in allowed])))
+                raise UsageError('%s=%s; must be one of [%s]' %
+                                 (optname, optvalue,
+                                  ",".join([str(x) for x in allowed])))
         return optvalue
 
     def unused(self):
@@ -105,17 +106,17 @@ class Options(object):
         effective.update(self.cmd_options)
         effective.update(self.force)
         return dict(cmd=self.cmd_options.copy(),
-            file_options=self.file_options.copy(),
-            default=self.default.copy(),
-            force=self.force.copy(),
-            allowed=self.allowed.copy(),
-            options=effective)
+                    file_options=self.file_options.copy(),
+                    default=self.default.copy(),
+                    force=self.force.copy(),
+                    allowed=self.allowed.copy(),
+                    options=effective)
 
     @staticmethod
     def parse(opts):
         '''
         parse a list of name=value (or bare name) options into a dictionary
-        
+
         parse() has special knowledge of certain options that occur without a value
             (report, dump, json) are report types and the bare name implies True
             a known arithmetic name implies "arithmetic=name"
@@ -143,7 +144,7 @@ class Options(object):
             else:
                 if optarg[1].lower() in ('false', 'no'):
                     options[optarg[0]] = False
-                elif optarg[1].lower() in ('true' , 'yes'):
+                elif optarg[1].lower() in ('true', 'yes'):
                     options[optarg[0]] = True
                 else:
                     options[optarg[0]] = optarg[1]

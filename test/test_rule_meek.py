@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.election package
 
 Copyright 2010 by Jonathan Lundell
@@ -31,7 +31,7 @@ from droop.common import UsageError
 
 class ElectionNameTest(unittest.TestCase):
     "make sure we're in the book"
-    
+
     def testElectionNames(self):
         "meek & warren are valid names"
         self.assertTrue('meek' in electionRuleNames())
@@ -102,7 +102,7 @@ class ElectionDumpTest(unittest.TestCase):
         blts = ('42', '42t', '513', 'SC', 'SC-Vm-12')
         rulename = 'meek'
         for blt in blts:
-            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), 
+            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt),
                 '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpRationalWarren(self):
@@ -110,7 +110,7 @@ class ElectionDumpTest(unittest.TestCase):
         blts = ('42', '42t', '513', 'SC')  # SC-Vm-12 runs too long with warren+rational
         rulename = 'warren'
         for blt in blts:
-            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt), 
+            self.assertTrue(doDumpCompare(dict(rule=rulename, arithmetic='rational'), blt),
                 '%s %s.blt' % (rulename, blt))
 
     def testElectionDumpFixedVsGuardedMeek(self):

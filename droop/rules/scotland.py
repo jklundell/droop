@@ -26,45 +26,45 @@ Scottish STV is a variation on WIGM,
 using fixed-point decimal arithmetic with five digits of precision.
 
 45. First stage
-    (1) The returning officer shall sort the valid ballot papers into parcels according to the 
+    (1) The returning officer shall sort the valid ballot papers into parcels according to the
         candidates for whom first preference votes are given.
     (2) The returning officer shall then-
         (a) count the number of ballot papers in each parcel;
         (b) credit the candidate receiving the first preference vote with one vote for each ballot paper; and
-        (c) record those numbers. 
+        (c) record those numbers.
     (3) The returning officer shall also ascertain and record the total number of valid ballot papers.
 
 46. The quota
-    (1) The returning officer shall divide the total number of valid ballot papers for the 
-        electoral ward by a number exceeding by one the number of councillors to be elected 
+    (1) The returning officer shall divide the total number of valid ballot papers for the
+        electoral ward by a number exceeding by one the number of councillors to be elected
         at the election for that electoral ward.
-    (2) The result of the division under paragraph (1) (ignoring any decimal places), increased by one, 
-        is the number of votes needed to secure the return of a candidate as a councillor 
+    (2) The result of the division under paragraph (1) (ignoring any decimal places), increased by one,
+        is the number of votes needed to secure the return of a candidate as a councillor
         (in these rules referred to as the "quota").
 
 47. Return of councillors
-    (1) Where, at any stage of the count, the number of votes for a candidate equals or exceeds the quota, 
+    (1) Where, at any stage of the count, the number of votes for a candidate equals or exceeds the quota,
         the candidate is deemed to be elected.
     (2) A candidate is returned as a councillor when declared to be elected in accordance with rule 55(a).
 
 48. Transfer of ballot papers
-    (1) Where, at the end of any stage of the count, the number of votes credited to any candidate 
-        exceeds the quota and, subject to rules 49 and 52, one or more vacancies remain to be filled, 
-        the returning officer shall sort the ballot papers received by that candidate into further parcels 
+    (1) Where, at the end of any stage of the count, the number of votes credited to any candidate
+        exceeds the quota and, subject to rules 49 and 52, one or more vacancies remain to be filled,
+        the returning officer shall sort the ballot papers received by that candidate into further parcels
         so that they are grouped-
         (a) according to the next available preference given on those papers; and
         (b) where no such preference is given, as a parcel of non-transferable papers.
-    (2) The returning officer shall, in accordance with this rule and rule 49, transfer each parcel 
-        of ballot papers referred to in paragraph (1)(a) to the continuing candidate for whom the next 
-        available preference is given on those papers and shall credit such continuing candidates with 
+    (2) The returning officer shall, in accordance with this rule and rule 49, transfer each parcel
+        of ballot papers referred to in paragraph (1)(a) to the continuing candidate for whom the next
+        available preference is given on those papers and shall credit such continuing candidates with
         an additional number of votes calculated in accordance with paragraph (3).
-    (3) The vote on each ballot paper transferred under paragraph (2) shall have a value ("the transfer value") 
+    (3) The vote on each ballot paper transferred under paragraph (2) shall have a value ("the transfer value")
         calculated as follows-
         Where
             A divided by B
-            A = the value which is calculated by multiplying the surplus of the transferring candidate 
+            A = the value which is calculated by multiplying the surplus of the transferring candidate
                 by the value of the ballot paper when received by that candidate; and
-            B = the total number of votes credited to that candidate, the calculation being made 
+            B = the total number of votes credited to that candidate, the calculation being made
                 to five decimal places (any remainder being ignored).
     (4) For the purposes of paragraph (3)-
         (a) "transferring candidate" means the candidate from whom the ballot paper is being transferred; and
@@ -73,50 +73,50 @@ using fixed-point decimal arithmetic with five digits of precision.
             (ii) in all other cases, the transfer value of the ballot paper when received by the transferring candidate.
 
 49. Transfer of ballot papers - supplementary provisions
-    (1) If, at the end of any stage of the count, the number of votes credited to two or more candidates 
+    (1) If, at the end of any stage of the count, the number of votes credited to two or more candidates
         exceeds the quota the returning officer shall-
         (a) first sort the ballot papers of the candidate with the highest surplus; and
         (b) then transfer the transferable papers of that candidate.
-    (2) If the surpluses determined in respect of two or more candidates are equal, the transferable papers 
-        of the candidate who had the highest number of votes at the end of the most recent preceding stage 
+    (2) If the surpluses determined in respect of two or more candidates are equal, the transferable papers
+        of the candidate who had the highest number of votes at the end of the most recent preceding stage
         at which they had unequal numbers of votes shall be transferred first.
-    (3) If the numbers of votes credited to two or more candidates were equal at all stages of the count, 
+    (3) If the numbers of votes credited to two or more candidates were equal at all stages of the count,
         the returning officer shall decide, by lot, which candidate's transferable papers are to be transferred first.
 
 50. Exclusion of candidates
     (1) If, one or more vacancies remain to be filled and-
-        (a) the returning officer has transferred all ballot papers which are required by rule 48 
-            or this rule to be transferred; or 
+        (a) the returning officer has transferred all ballot papers which are required by rule 48
+            or this rule to be transferred; or
         (b) there are no ballot papers to be transferred under rule 48 or this rule,
-            the returning officer shall exclude from the election at that stage the candidate with the then 
+            the returning officer shall exclude from the election at that stage the candidate with the then
             lowest number of votes.
-    (2) The returning officer shall sort the ballot papers for the candidate excluded under paragraph (1) 
+    (2) The returning officer shall sort the ballot papers for the candidate excluded under paragraph (1)
         into parcels so that they are grouped-
         (a) according to the next available preference given on those papers; and
         (b) where no such preference is given, as a parcel of non-transferable papers.
-    (3) The returning officer shall, in accordance with this article, transfer each parcel of ballot papers 
-        referred to in paragraph (2)(a) to the continuing candidate for whom the next available preference 
-        is given on those papers and shall credit such continuing candidates with an additional number of votes 
+    (3) The returning officer shall, in accordance with this article, transfer each parcel of ballot papers
+        referred to in paragraph (2)(a) to the continuing candidate for whom the next available preference
+        is given on those papers and shall credit such continuing candidates with an additional number of votes
         calculated in accordance with paragraph (4).
-    (4) The vote on each ballot paper transferred under paragraph (3) shall have a transfer value of one 
-        unless the vote was transferred to the excluded candidate in which case it shall have the same 
+    (4) The vote on each ballot paper transferred under paragraph (3) shall have a transfer value of one
+        unless the vote was transferred to the excluded candidate in which case it shall have the same
         transfer value as when transferred to the candidate excluded under paragraph (1).
     (5) This rule is subject to rule 52.
 
 51. Exclusion of candidates - supplementary provisions
-    (1) If, when a candidate has to be excluded under rule 50- 
-        (a) two or more candidates each have the same number of votes; and 
+    (1) If, when a candidate has to be excluded under rule 50-
+        (a) two or more candidates each have the same number of votes; and
         (b) no other candidate has fewer votes,
-        paragraph (2) applies. 
+        paragraph (2) applies.
     (2) Where this paragraph applies-
-        (a) regard shall be had to the total number of votes credited to those candidates 
-            at the end of the most recently preceding stage of the count at which they had an unequal number 
+        (a) regard shall be had to the total number of votes credited to those candidates
+            at the end of the most recently preceding stage of the count at which they had an unequal number
             of votes and the candidate with the lowest number of votes at that stage shall be excluded; and
-        (b) where the number of votes credited to those candidates was equal at all stages, 
+        (b) where the number of votes credited to those candidates was equal at all stages,
             the returning officer shall decide, by lot, which of those candidates is to be excluded.
 
 52. Filling of last vacancies
-    (1) Where the number of continuing candidates is equal to the number of vacancies remaining unfilled, 
+    (1) Where the number of continuing candidates is equal to the number of vacancies remaining unfilled,
         the continuing candidates are deemed to be elected.
     (2) Where the last vacancies can be filled under this rule, no further transfer shall be made.
 '''
@@ -144,7 +144,7 @@ class Rule(MethodWIGM):
         h += '  arithmetic: fixed\n'
         h += '  precision=5\n'
         helps[name] = h
-        
+
     def __init__(self, E):
         "initialize rule"
         self.E = E
@@ -166,7 +166,7 @@ class Rule(MethodWIGM):
     def info(self):
         "return an info string for the election report"
         return "Scottish STV"
-        
+
     def tag(self):
         "return a tag string for unit tests"
         return self.name
@@ -192,13 +192,13 @@ class Rule(MethodWIGM):
             Calculate quota. [46]
             '''
             ## 46. The quota
-            ##     (1) The returning officer shall divide the total number of valid ballot papers for the 
-            ##         electoral ward by a number exceeding by one the number of councillors to be elected 
+            ##     (1) The returning officer shall divide the total number of valid ballot papers for the
+            ##         electoral ward by a number exceeding by one the number of councillors to be elected
             ##         at the election for that electoral ward.
-            ##     (2) The result of the division under paragraph (1) (ignoring any decimal places), increased by one, 
-            ##         is the number of votes needed to secure the return of a candidate as a councillor 
+            ##     (2) The result of the division under paragraph (1) (ignoring any decimal places), increased by one,
+            ##         is the number of votes needed to secure the return of a candidate as a councillor
             ##         (in these rules referred to as the "quota").
-            
+
             return V(E.nBallots // (E.nSeats + 1) + 1)
 
         def transfer(ballot):
@@ -321,7 +321,7 @@ class Rule(MethodWIGM):
         #  Finalize any elected transfer-pending candidates
         for c in C.pending():
             c.unpend()
-        
+
         #  Fill any remaining seats [52]
         #
         if len(C.hopeful()) <= E.seatsLeftToFill():

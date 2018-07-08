@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.rules package
 
 Copyright 2010 by Jonathan Lundell
@@ -33,7 +33,7 @@ from droop.rules.qpq import Rule
 
 class TestBasic(unittest.TestCase):
     "test rules.__init__"
-    
+
     def testRuleName(self):
         "check the list of names for qpq"
         self.assertTrue('qpq' in electionRuleNames(), 'one of the rule names is qpq')
@@ -48,11 +48,11 @@ class TestBasic(unittest.TestCase):
 
 class TestQpq(unittest.TestCase):
     '''
-    Create an Election instance from a simple profile 
+    Create an Election instance from a simple profile
     and the QPQ rule and test its basic initialization,
     and that it elects the specified number of seats.
     '''
-    
+
     def setUp(self):
         "initialize profile and rule"
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
@@ -137,14 +137,14 @@ class ElectionCountTest(unittest.TestCase):
 class ElectionRefTest(unittest.TestCase):
     "test known results of reference elections"
 
-    @staticmethod    
+    @staticmethod
     def doQpqCount(filename):
         "each of five elections from the Woodall paper"
         blt = os.path.join(testdir, 'blt', 'qpq', filename)
         E = Election(ElectionProfile(blt), dict(rule='qpq'))
         E.count()
         return E
-        
+
     def testQpq1(self):
         "test qpq1"
         E = self.doQpqCount('qpq1.blt')

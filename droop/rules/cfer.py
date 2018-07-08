@@ -477,7 +477,7 @@ class Rule(MethodWIGM):
     @classmethod
     def helps(cls, helps, name):
         "create help string for cfer"
-        h =  "%s is CfER STV\n" % name
+        h = "%s is CfER STV\n" % name
         if name.endswith('batch'):
             h += '  (batch defeat)\n'
         else:
@@ -565,7 +565,7 @@ class Rule(MethodWIGM):
             reason must be 'surplus' or 'elect' or 'defeat',
             indicating whether the tie is being broken for the purpose
             of choosing a surplus to transfer, a winner, or a candidate to defeat.
-            
+
             Note that we are using the tie-breaking order from the election profile
             rather than the in-person 15651(a) mechanism.
             '''
@@ -594,7 +594,7 @@ class Rule(MethodWIGM):
             ##  of the returns by the election board or upon a recount by a court,
             ##  for candidates voted for wholly within one county or city.
             ##
-            assert(reason == 'defeat') # the only valid reason is 'defeat'
+            assert reason == 'defeat' # the only valid reason is 'defeat'
             if len(tied) == 1:
                 return tied.pop()
             t = C.byTieOrder(tied)[0]
@@ -659,7 +659,7 @@ class Rule(MethodWIGM):
                 #         together, we needn't worry about order of election
                 #  (3)(C) if defeat-set votes plus surplus can't elect best continuing
                 #         candidate, we won't disturb order of election
-                #  (3)(D) relax (C) when we see that the high candidate in the defeat set 
+                #  (3)(D) relax (C) when we see that the high candidate in the defeat set
                 #         would be defeated next per (h)
                 #
                 if ((nElected + 1) == E.nSeats) or \
@@ -704,7 +704,7 @@ class Rule(MethodWIGM):
             ##  complete.
             ##
             if E.round == 1:
-                if len(C.hopeful()) <=  E.nSeats:
+                if len(C.hopeful()) <= E.nSeats:
                     for c in C.hopeful():
                         c.elect(msg='Elect all')
                     break
@@ -762,7 +762,7 @@ class Rule(MethodWIGM):
                 for c in C.pending():
                     c.unpend('Transfer surplus')
                     surplus = c.vote - E.quota
-    
+
                     for b in (b for b in E.ballots if b.topRank == c.cid):
                         b.weight = (b.weight * surplus) / c.vote
                         transfer(b)
@@ -814,6 +814,6 @@ class Rule(MethodWIGM):
                 for c in defeats:
                     c.vote = V0
                 E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in defeats))
-                
+
             ##    (j) The tabulation continues with a new round, starting with
             ##  subdivision (b).

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.election package
 
 Copyright 2010 by Jonathan Lundell
@@ -31,7 +31,7 @@ from droop.common import UsageError
 
 class ElectionNameTest(unittest.TestCase):
     "make sure we're in the book"
-    
+
     def testElectionNames(self):
         "wigm is a valid name"
         self.assertTrue('wigm' in electionRuleNames())

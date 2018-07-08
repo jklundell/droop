@@ -25,7 +25,7 @@ from fractions import Fraction
 class Rational(Fraction):
     '''
     rational arithmetic with support functions
-    
+
     '''
     name = 'rational'
     info = 'rational arithmetic'
@@ -36,7 +36,7 @@ class Rational(Fraction):
     _dpr = None  # display rounding constant
     _dfmt = None # display format string
     __default_denominator = None    # earlier versions of Fraction require 1 rather than None
-    
+
     @classmethod
     def tag(cls):
         "return a tag for unit test"
@@ -58,7 +58,7 @@ See also: fixed, guarded
     def initialize(cls, options):
         '''
         initialize class Rational, a value class based on Fraction
-        
+
         options:
             display is the display precision (fixed-decimal with dp places); defaults to 12
         '''
@@ -102,7 +102,7 @@ See also: fixed, guarded
             self += Rational._dpr  # add 1/2 of lsd for rounding
             v = self._numerator * Rational._dps / self._denominator
         return Rational._dfmt % (v // Rational._dps, v % Rational._dps)
-    
+
     def __repr__(self): # pragma: no cover
         """repr(self)"""
         return ('Rational(%s, %s)' % (self._numerator, self._denominator))  # pylint: disable=E1101
@@ -130,10 +130,10 @@ See also: fixed, guarded
     def mul(arg1, arg2, round=None):   # pylint: disable=W0613,W0622
         '''
         return arg1 * arg2
-        round is ignored       
+        round is ignored
         '''
         return Rational.__mul__(arg1, arg2)
-        
+
     @staticmethod
     def div(arg1, arg2, round=None):   # pylint: disable=W0613,W0622
         '''

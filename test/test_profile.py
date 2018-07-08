@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.profile module
 
 Copyright 2010 by Jonathan Lundell
@@ -41,7 +41,7 @@ p_42u = '''3 2 4 1 2 0 2 3 0 0 "Cåstor" "Pøllux" "Hélen" "Pøllux and Hélen 
 
 class ProfileTest(unittest.TestCase):
     "test profile-class initialization"
-    
+
     def testNoData(self):
         "exception if no profile data supplied"
         self.assertRaises(ElectionProfileError, ElectionProfile)
@@ -252,7 +252,7 @@ class ProfileTest(unittest.TestCase):
 
 class OptionNickTest(unittest.TestCase):
     "test blt option [nick...]"
-    
+
     def testNick1(self):
         "test basic nicknames"
         b0 = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
@@ -284,7 +284,7 @@ class OptionNickTest(unittest.TestCase):
 
 class OptionTieTest(unittest.TestCase):
     "test blt option [tie...]"
-    
+
     def testTiedOrder(self):
         "test tied order"
         b = '''3 2 [tie 3 2 1 ] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
@@ -326,7 +326,7 @@ class OptionDroopTest(unittest.TestCase):
         self.assertEqual(len(ElectionProfile(data=b0).options), 0)
         b1 = '''3 2 [droop arithmetic=fixed] 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         self.assertEqual(len(ElectionProfile(data=b1).options), 1)
-        b2 = '''3 2 [droop arithmetic=fixed precision=6] 4 1 2 0 2 3 0 0 
+        b2 = '''3 2 [droop arithmetic=fixed precision=6] 4 1 2 0 2 3 0 0
             "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
         p = ElectionProfile(data=b2)
         self.assertEqual(len(p.options), 2)
@@ -335,7 +335,7 @@ class OptionDroopTest(unittest.TestCase):
 
 class BallotIDTest(unittest.TestCase):
     "test ballot IDs"
-    
+
     def testBallotID1(self):
         "test basic ballot ID parsing"
         b = '''3 2 (id1) 1 2 0 (id2) 1 2 0 (id3 ) 1 2 0 ( id4) 1 2 0 ( id5 ) 3 0 (id6) 3 0 0 "A" "B" "C" "Title"'''
@@ -359,7 +359,7 @@ class BallotIDTest(unittest.TestCase):
 
 class BallotEqualRankTest(unittest.TestCase):
     "test ballots with equal rankings"
-    
+
     def testBallotEQ1(self):
         "verify profile with no equal rankings"
         b = '''3 2 4 1 2 0 2 3 0 0 "Castor" "Pollux" "Helen" "Pollux and Helen should tie"'''
@@ -415,7 +415,7 @@ class BallotEqualRankTest(unittest.TestCase):
 
 class Utf8Test(unittest.TestCase):
     "test utf-8 blt input"
-    
+
     def testUTF1(self):
         "utf-8 names, title"
         self.assertEqual(ElectionProfile(data=p_42u).nSeats, 2)

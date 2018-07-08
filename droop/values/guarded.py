@@ -25,20 +25,20 @@ from ..common import UsageError
 
 class Guarded(object):
     '''
-    guarded-precision fixed-point decimal arithmetic 
-    
-    Note that because of approximate equality, Guarded numbers will not behave quite normally. 
+    guarded-precision fixed-point decimal arithmetic
+
+    Note that because of approximate equality, Guarded numbers will not behave quite normally.
     Equality is not transitive, and two "equal" values do not necessarily hash to the same value.
-    
+
     This is acceptable for our purposes, but may not be generally desirable.
     '''
-    
+
     __slots__ = '_value'
     name = 'guarded'
     info = None
     exact = True
     quasi_exact = True
-    
+
     precision = None
     guard = None
     display = None
@@ -124,7 +124,7 @@ See also: fixed, rational
         cls.__scaled = 10 ** cls.display
         if (cls.display > cls.precision):
             cls.__scaledg = 10 ** (cls.display - cls.precision)
-        
+
         #  __geps is used in the test for equality (see __cmp__ below)
         #
         cls.__geps = cls.__scaleg // 2
@@ -159,7 +159,7 @@ See also: fixed, rational
         else:
             cls.quasi_exact = True
             cls.exact = True
-        
+
     def __str__(self):
         '''
         stringify a guarded value
@@ -167,7 +167,7 @@ See also: fixed, rational
         '''
         v = self._value
         #
-        #  gv trims off the digits we aren't going to display at all. 
+        #  gv trims off the digits we aren't going to display at all.
         #  normally that's the guard digits, but it could be more if display<precision
         #    or less if display>precision
         gv = (v + self.__scaledr) // self.__scaledd
@@ -188,7 +188,7 @@ See also: fixed, rational
             self._value = arg * self.__scale    # scale incoming integers
         else:
             self._value = arg._value            # copy incoming Guarded
-        
+
     def __repr__(self):
         "repr"
         return "Guarded(%s,True)" % self._value
@@ -204,7 +204,7 @@ See also: fixed, rational
         "subtract other from self"
         v = Guarded(other)
         return Guarded(self._value - v._value, True)
-        
+
     def __neg__(self):
         "return negated self"
         return Guarded(-self._value, True)
@@ -220,13 +220,13 @@ See also: fixed, rational
     def __abs__(self):
         "absolute value"
         return Guarded(abs(self._value), True)
-        
+
     def __mul__(self, other):
         "return self * other"
         if isinstance(other, (int, long)):
             return Guarded(self._value * other, True)
         return Guarded((self._value*other._value)//self.__scale, True)
-        
+
     def __floordiv__(self, other):
         "return self // other"
         if isinstance(other, (int, long)):
@@ -255,7 +255,7 @@ See also: fixed, rational
             if rem and round == 'up':
                 v1._value += 1
         return v1
-        
+
     @classmethod
     def div(cls, arg1, arg2, round=None):   # pylint: disable=W0622
         '''
@@ -276,7 +276,7 @@ See also: fixed, rational
     def muldiv(cls, arg1, arg2, arg3, round=None):   # pylint: disable=W0622
         '''
         return (arg1*arg2)/arg3
-        
+
         a*b/c retains the full precision of a*b.
         round is ignored if guard > 0
         '''
@@ -326,7 +326,7 @@ See also: fixed, rational
             if val._value < min_._value:
                 min_ = val
         return min_
- 
+
     @classmethod
     def report(cls):
         "Report arithmetic statistics"

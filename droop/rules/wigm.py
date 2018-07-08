@@ -25,12 +25,12 @@ from .electionmethods import MethodWIGM
 class Rule(MethodWIGM):
     '''
     Rule for counting Generic WIGM elections
-    
+
     Options: arithmetic type, integer_quota, defeat_batch
     '''
     method = 'wigm' # underlying method
     name = 'wigm'
-    
+
     @classmethod
     def ruleNames(cls):
         "return supported rule name or names"
@@ -46,7 +46,7 @@ class Rule(MethodWIGM):
         h += '  defeat_batch=(none*, zero): after surplus transfer, defeat candidates with no first choices\n'
         h += '    *default\n'
         helps[name] = h
-        
+
     def __init__(self, E):
         "initialize rule"
         self.E = E
@@ -71,7 +71,7 @@ class Rule(MethodWIGM):
         #
         self.integer_quota = options.setopt('integer_quota', default=False, allowed=(True, False))
         self.defeat_batch = options.setopt('defeat_batch', default='none', allowed=('none', 'zero'))
-    
+
     def info(self):
         "return an info string for the election report"
         return "Generic Weighted Inclusive Gregory Method (WIGM)"
@@ -87,24 +87,24 @@ class Rule(MethodWIGM):
     #########################
     def count(self):
         "count the election"
-        
+
         #  local support functions
         #
         def hasQuota(candidate):
             '''
             Determine whether a candidate has a quota.
-            
+
             If using exact arithmetic, then: vote > quota
             Otherwise: vote >= quota, since quota has been rounded up
             '''
             if E.V.exact:
                 return candidate.vote > E.quota
             return candidate.vote >= E.quota
-    
+
         def calcQuota():
             '''
             Calculate quota.
-            
+
             Round up if not using exact arithmetic.
             '''
             if self.integer_quota:
@@ -112,7 +112,7 @@ class Rule(MethodWIGM):
             if V.exact:
                 return V(E.nBallots) / V(E.nSeats+1)
             return V(E.nBallots) / V(E.nSeats+1) + V.epsilon
-        
+
         def transfer(ballot):
             '''
             Transfer ballot to next hopeful candidate.
@@ -127,11 +127,11 @@ class Rule(MethodWIGM):
         def breakTie(E, tied, reason=None):
             '''
             break a tie
-            
-            reason must be 'surplus' or 'elect' or 'defeat', 
-            indicating whether the tie is being broken for the purpose 
-            of choosing a surplus to transfer, a winner, 
-            or a candidate to defeat. 
+
+            reason must be 'surplus' or 'elect' or 'defeat',
+            indicating whether the tie is being broken for the purpose
+            of choosing a surplus to transfer, a winner,
+            or a candidate to defeat.
             '''
             if len(tied) == 1:
                 return tied.pop()
@@ -146,7 +146,7 @@ class Rule(MethodWIGM):
         C = E.C     # candidates
         V = E.V     # arithmetic value class
         V0 = E.V0   # constant zero
-        
+
         #  calculate quota
         #
         E.quota = calcQuota()

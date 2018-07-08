@@ -24,8 +24,8 @@ This file is part of Droop.
 from setuptools import setup, find_packages
 import droop.common
 
-setup(name = droop.common.droopName, 
-    version = droop.common.droopVersion, 
+setup(name = droop.common.droopName,
+    version = droop.common.droopVersion,
     author = droop.common.droopAuthor,
     author_email = droop.common.droopAuthorEmail,
     url = droop.common.droopURL,

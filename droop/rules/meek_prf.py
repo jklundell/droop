@@ -26,7 +26,7 @@ class Rule(MethodMeek):
     '''
     Rule for counting PR Foundation Meek Reference STV
     http://prfound.org/resources/reference/reference-meek-rule/
-    
+
     Parameters: none
 
     Meek-PRF enforces these options:
@@ -53,7 +53,7 @@ class Rule(MethodMeek):
         h += '  omega=%d (iteration limit such that an interation is terminated\n' % cls.precision
         h += '    when surplus < 1/10^omega)\n'
         helps[name] = h
-        
+
     def __init__(self, E):
         "initialize rule"
         self.E = E
@@ -83,16 +83,16 @@ class Rule(MethodMeek):
         "count the election"
 
         ##  T. Breaking ties
-        ##     Ties can arise in B.3, when selecting a candidate for defeat. 
-        ##     Use the defined tiebreaking procedure to select for defeat one candidate 
+        ##     Ties can arise in B.3, when selecting a candidate for defeat.
+        ##     Use the defined tiebreaking procedure to select for defeat one candidate
         ##     from the group of tied candidates.
 
         def breakTie(E, tied):
             '''
             break a tie for defeating low candidate
-            
+
             the tiebreaking method: candidates are randomly ordered,
-            and the order of entry in the ballot file 
+            and the order of entry in the ballot file
             or the profile =tie order is the tiebreaking order:
             choose the first candidate in that order.
             '''
@@ -113,8 +113,8 @@ class Rule(MethodMeek):
         V0 = E.V0  # constant zero
         V1 = E.V1  # constant one
 
-        ##  A. Set each candidate to hopeful or withdrawn. 
-        ##     Set each hopeful candidate's keep factor kf to 1, 
+        ##  A. Set each candidate to hopeful or withdrawn.
+        ##     Set each hopeful candidate's keep factor kf to 1,
         ##     and each withdrawn candidate's keep factor to 0.
         ##     Set omega to 0.000001 (1/10^6).
 
@@ -130,9 +130,9 @@ class Rule(MethodMeek):
             b.topCand.vote += b.multiplier
 
         ##  B. Rounds
-        ##  B.1. Test count complete. 
-        ##       Proceed to step C if all seats are filled, 
-        ##       or if the number of elected plus hopeful candidates 
+        ##  B.1. Test count complete.
+        ##       Proceed to step C if all seats are filled,
+        ##       or if the number of elected plus hopeful candidates
         ##       is less than or equal to the number of seats.
 
         E.logAction('begin', 'Begin Count')
@@ -146,12 +146,12 @@ class Rule(MethodMeek):
             lastsurplus = V(E.nBallots)
             while True:
 
-                ##  B.2.a. Distribute votes. 
-                ##         For each ballot: set ballot weight w to 1, and then for each candidate, 
-                ##         in order of rank on that ballot: 
-                ##            add w multiplied by the keep factor kf of the candidate 
-                ##            (to 9 decimal places, rounded up) to that candidate's vote v, 
-                ##            and reduce w by the same amount, until no further candidate 
+                ##  B.2.a. Distribute votes.
+                ##         For each ballot: set ballot weight w to 1, and then for each candidate,
+                ##         in order of rank on that ballot:
+                ##            add w multiplied by the keep factor kf of the candidate
+                ##            (to 9 decimal places, rounded up) to that candidate's vote v,
+                ##            and reduce w by the same amount, until no further candidate
                 ##            remains on the ballot or until the ballot's weight w is 0.
 
                 for c in (C.hopeful() + C.elected()):
@@ -166,7 +166,7 @@ class Rule(MethodMeek):
                         #
                         #  kv = w*kf rounded up * m     keep vote
                         #  w -= w*kf rounded up         new weight
-                        # 
+                        #
                         if c.kf:
                             keep_weight = V.mul(b.weight, c.kf, round='up')
                             keep_value = keep_weight * b.multiplier
@@ -178,35 +178,35 @@ class Rule(MethodMeek):
                                 break
                     E.residual += b.residual    # track residual for round
 
-                ##  B.2.b. Update quota. 
-                ##         Set quota q to the sum of the vote v for all candidates (step B.2a), 
-                ##         divided by one more than the number of seats to be filled, 
+                ##  B.2.b. Update quota.
+                ##         Set quota q to the sum of the vote v for all candidates (step B.2a),
+                ##         divided by one more than the number of seats to be filled,
                 ##         truncated to 9 decimal places, plus 0.000000001 (1/109).
 
                 E.votes = sum([c.vote for c in (C.hopeful() + C.elected())], V0)
                 E.quota = E.votes // V(E.electionProfile.nSeats+1) + V.epsilon
-                
-                ##  B.2.c. Find winners. 
-                ##         Elect each hopeful candidate with a vote v 
+
+                ##  B.2.c. Find winners.
+                ##         Elect each hopeful candidate with a vote v
                 ##         greater than or equal to the quota (v >= q).
 
                 for c in [c for c in C.hopeful() if c.vote >= E.quota]:
                     c.elect()
                     iterationStatus = 'elected'
-                
-                ##  B.2.d. Calculate the total surplus s, 
+
+                ##  B.2.d. Calculate the total surplus s,
                 ##         as the sum of the individual surpluses (v - q) of the elected candidates
                 ##         but not less than 0.
 
                 E.surplus = sum([c.vote-E.quota for c in C.elected()], V0)
                 if E.surplus < V0:  # unlikely but possible due to precision limits if omega too small
                     E.surplus = V0  # pragma: no cover
-                
-                ##  B.2.e. Test for iteration finished. 
-                ##         If step B.2c elected a candidate, continue at B.1. 
-                ##         Otherwise, if the total surplus s is less than omega, 
-                ##         or (except for the first iteration) if the total surplus s 
-                ##         is greater than or equal to the surplus s in the previous iteration, 
+
+                ##  B.2.e. Test for iteration finished.
+                ##         If step B.2c elected a candidate, continue at B.1.
+                ##         Otherwise, if the total surplus s is less than omega,
+                ##         or (except for the first iteration) if the total surplus s
+                ##         is greater than or equal to the surplus s in the previous iteration,
                 ##         continue at B.3.
 
                 if iterationStatus != 'elected':
@@ -219,12 +219,12 @@ class Rule(MethodMeek):
                     break  # iteration complete
 
                 lastsurplus = E.surplus
-                    
-                ##  B.2.f. Update keep factors. 
-                ##         Set the keep factor kf of each elected candidate to the candidate's 
-                ##         current keep factor kf, multiplied by the current quota q 
-                ##         (to 9 decimal places, rounded up), and then divided by the candidate's 
-                ##         current vote v (to 9 decimal places, rounded up). 
+
+                ##  B.2.f. Update keep factors.
+                ##         Set the keep factor kf of each elected candidate to the candidate's
+                ##         current keep factor kf, multiplied by the current quota q
+                ##         (to 9 decimal places, rounded up), and then divided by the candidate's
+                ##         current vote v (to 9 decimal places, rounded up).
                 ##         Continue iteration at step B.2a.
 
                 for c in C.elected():
@@ -235,10 +235,10 @@ class Rule(MethodMeek):
             if iterationStatus == 'elected':
                 continue
 
-            ##  B.3. Defeat low candidate. 
-            ##       Defeat the hopeful candidate c with the lowest vote v, 
-            ##       breaking any tie per procedure T, 
-            ##       where each candidate c' is tied with c if vote v' for c' 
+            ##  B.3. Defeat low candidate.
+            ##       Defeat the hopeful candidate c with the lowest vote v,
+            ##       breaking any tie per procedure T,
+            ##       where each candidate c' is tied with c if vote v' for c'
             ##       is less than or equal to v plus total surplus s.
             ##       Set the keep factor kf of c to 0.
 
@@ -253,19 +253,19 @@ class Rule(MethodMeek):
                 low_candidate.vote = V0
                 low_candidate.kf = V0
 
-            ##  B.4. Continue. Proceed to the next round at step B.1.            
+            ##  B.4. Continue. Proceed to the next round at step B.1.
 
         ##  C. Count Complete
 
         for c in C.hopeful():
 
-            ##  C.1. Elect remaining. 
+            ##  C.1. Elect remaining.
             ##       If any seats are unfilled, elect remaining hopeful candidates.
 
             if len(C.elected()) < E.electionProfile.nSeats:
                 c.elect(msg='Elect remaining')
 
-            ##  C.2. Defeat remaining. 
+            ##  C.2. Defeat remaining.
             ##       Otherwise defeat remaining hopeful candidates.
 
             else:

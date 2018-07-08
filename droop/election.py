@@ -21,18 +21,19 @@ This file is part of Droop.
 
 Top-level structure:
 
-  A driver program (for example Droop.py, the CLI) 
+  A driver program (for example Droop.py, the CLI)
     1. creates an ElectionProfile from a ballot file,
-    2. imports a Rule, 
+    2. imports a Rule,
     3. creates an Election(Rule, ElectionProfile, options),
     4. counts the election with Election.count(), and
     5. generates a report with Election.report().
-  
+
   The options are used to override default Rule parameters, such as arithmetic.
 '''
 
 from __future__ import absolute_import
-import sys, copy
+import sys
+import copy
 from .common import ElectionError
 from .options import Options
 from . import electionRule, electionRuleNames, ruleByName
@@ -42,7 +43,7 @@ class Election(object):
     '''
     container for an election
     '''
-    
+
     def __init__(self, electionProfile, options=None):
         "create an election from the incoming election profile"
 
@@ -97,11 +98,11 @@ class Election(object):
         #
         self.C = Candidates(self)
         for cid in sorted(electionProfile.eligible | electionProfile.withdrawn):
-            c = Candidate(self, cid, electionProfile.candidateOrder[cid], 
-                electionProfile.tieOrder[cid],
-                electionProfile.candidateName[cid],
-                electionProfile.nickName[cid],
-                cid in electionProfile.withdrawn)
+            c = Candidate(self, cid, electionProfile.candidateOrder[cid],
+                          electionProfile.tieOrder[cid],
+                          electionProfile.candidateName[cid],
+                          electionProfile.nickName[cid],
+                          cid in electionProfile.withdrawn)
             self.C.add(c)
 
         #  create a ballot object (ranking candidate IDs) from the profile rankings of candidate IDs
@@ -158,7 +159,7 @@ class Election(object):
     def makehelp(cls):
         "build a dictionary of help strings on various subjects"
         helps = dict()
-        helps['rule'] =  'available rules: %s' % ','.join(electionRuleNames())
+        helps['rule'] = 'available rules: %s' % ','.join(electionRuleNames())
         for name in electionRuleNames():
             ruleByName[name].helps(helps, name)
         values.helps(helps)
@@ -173,12 +174,12 @@ class Election(object):
     def nSeats(self):
         "number of seats"
         return self.electionProfile.nSeats
-        
+
     @property
     def nBallots(self):
         "number of ballots"
         return self.electionProfile.nBallots
-        
+
     def candidate(self, cid):
         "look up a candidate from a candidate ID"
         return self.C.byCid(cid)
@@ -221,23 +222,23 @@ class Election(object):
     class Ballot(object):
         '''
         internal representation of one ballot
-        
+
         The use of slots gives a more compact object, which significantly
         reduces memory requirements for large elections.
-        
+
         Similarly, ranking, from the election profile, is an array
         of bytes or shorts (depending on candidate count), again
         for memory efficiency.
-        
+
         The ballot multiplier comes from the election profile, and is
         a count of identical ballots.
-        
+
         The ballot weight, initially 1, is the ballot's current weight
         after possible reduction via surplus transfers.
         '''
-        
+
         __slots__ = ('E', 'multiplier', 'index', 'weight', 'residual', 'ranking')
-        
+
         def __init__(self, E, multiplier=1, ranking=None):
             "create a ballot"
             self.E = E
@@ -261,24 +262,24 @@ class Election(object):
         def exhausted(self):
             "is ballot exhausted?"
             return self.index >= len(self.ranking)    # detect end-of-ranking
-        
+
         @property
         def topRank(self):
             "return top rank (CID or tuple), or None if exhausted"
             return self.ranking[self.index] if self.index < len(self.ranking) else None
-        
+
         @property
         def topCand(self):
             "return top candidate, or None if exhausted"
             return self.E.C.byCid(self.ranking[self.index]) if self.index < len(self.ranking) else None
-        
+
         @property
         def vote(self):
             "return total vote of this ballot"
             if self.multiplier == self.E.V1:
                 return self.weight  # faster
             return self.weight * self.multiplier
-            
+
 
 class Candidates(set):
     '''
@@ -314,7 +315,7 @@ class Candidates(set):
     def cidList(self, state='all'):
         '''
         return a list of CIDs, in ballot order
-        
+
         used for reporting
         '''
         return [c.cid for c in self.select(state, order='ballot')]
@@ -323,7 +324,7 @@ class Candidates(set):
         '''
         return dict of candidate static info, keyed by CID
         variant state is not included (see cState())
-        
+
         used for reporting
         '''
         cdict = dict()
@@ -336,7 +337,7 @@ class Candidates(set):
         return a dict of candidate state, keyed by CID
         invariant state is not included (see cDict())
         withdrawn candidates have an abbreviated state (see c.as_dict())
-        
+
         used for reporting
         '''
         cstate = dict()
@@ -460,7 +461,7 @@ class Candidate(object):
         "return candidate's current surplus vote"
         s = self.vote - self.E.quota
         return self.E.V0 if s < self.E.V0 else s
-        
+
     def elect(self, msg=None, pending=False):
         '''
         Meek, QPQ: elect a candidate
@@ -476,8 +477,8 @@ class Candidate(object):
         '''
         WIGM: clear the transfer-pending flag
         '''
-        assert(self.state == 'elected')
-        assert(self.pending)
+        assert self.state == 'elected'
+        assert self.pending
         self.pending = False
         if msg:
             self.E.logAction('unpend', "%s: %s" % (msg, self.name))

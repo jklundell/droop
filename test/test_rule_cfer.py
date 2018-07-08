@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.election package
 
 Copyright 2010 by Jonathan Lundell
@@ -30,7 +30,7 @@ from droop import electionRuleNames
 
 class RuleBasicTest(unittest.TestCase):
     "make sure we're in the book"
-    
+
     def testElectionNames(self):
         "valid name"
         self.assertTrue('cfer' in electionRuleNames())

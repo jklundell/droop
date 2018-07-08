@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.value package
 
 Copyright 2010 by Jonathan Lundell
@@ -36,7 +36,7 @@ if common.pyflakes: # satisfy pyflakes that we're using common
 
 class ValueTest(unittest.TestCase):
     "test value-class initialization"
-    
+
     #  general initialization
     #
     def testBadArithmetic(self):
@@ -77,7 +77,7 @@ class ValueTest(unittest.TestCase):
 
 class ValueTestFixed(unittest.TestCase):
     "test Fixed initialization"
-    
+
     def testFixedIntegerP0(self):
         "fixed=integer yields precision 0"
         V.ArithmeticClass(Options(dict(arithmetic='integer')))
@@ -130,7 +130,7 @@ class ValueTestFixed6(unittest.TestCase):
     def setUp(self):
         "initialize fixed point six places"
         self.A = V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=self.p, guard=self.g)))
-        
+
     def testFixed6(self):
         "simple assertions"
         self.assertEqual(self.A.name, 'fixed')               # Fixed.name
@@ -180,7 +180,7 @@ class ValueTestFixed0(unittest.TestCase):
     def setUp(self):
         "initialize fixed point 0 places"
         self.A = V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=self.p, guard=self.g)))
-        
+
     def testFixed0(self):
         "simple assertions"
         self.assertEqual(self.A.name, 'integer')               # Fixed.name
@@ -256,7 +256,7 @@ class ValueTestRounding(unittest.TestCase):
     def setUp(self):
         "initialize fixed class"
         V.ArithmeticClass(Options(dict(arithmetic='fixed', precision=self.p, guard=self.g)))
-        
+
     def testRoundFloor(self):
         "default rounding is truncation/floor"
         self.assertEqual((F(1)/F(3))._value, 333)
@@ -323,7 +323,7 @@ class ValueTestGuarded9(unittest.TestCase):
         "test illegal display"
         self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, display=1.1)))
         self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, display=-1)))
-        self.assertRaises(UsageError, V.ArithmeticClass, 
+        self.assertRaises(UsageError, V.ArithmeticClass,
             Options(dict(arithmetic='guarded', precision=4, display='abc')))
 
     def testDisplay(self):
@@ -418,11 +418,11 @@ class ValueTestRational(unittest.TestCase):
     def testRat1(self):
         "no loss of precision"
         self.assertEqual(self.f13 * R(3), R(1))
-        
+
     def testMulDiv(self):
         "rational muldiv is the same as multiply followed by divide"
         self.assertEqual(R.muldiv(self.f13, self.f15, self.f17), self.f13*self.f15/self.f17)
-    
+
 class ValueTestHelps(unittest.TestCase):
     "test the helps function"
     def testHelps(self):

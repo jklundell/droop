@@ -28,7 +28,7 @@ class MethodMeek(ElectionRule):
     '''
     MethodMeek is a convenience class for Meek-based rules.
     It supplies generic Meek record handlers.
-    
+
     A rule can subclass MethodMeek instead of ElectionRule to use these handlers.
     '''
     method = "meek"
@@ -52,7 +52,7 @@ class MethodMeek(ElectionRule):
         if section == 'headerappend':
             report.append("\tOmega: %s\n" % record.get('omega'))
         elif section == 'actionappend':
-            s =  '\tQuota: %s\n' % action['quota']
+            s = '\tQuota: %s\n' % action['quota']
             s += '\tVotes: %s\n' % action['votes']
             s += '\tResidual: %s\n' % action['residual']
             s += '\tTotal: %s\n' % (action['votes'] + action['residual'])
@@ -79,7 +79,7 @@ class MethodWIGM(ElectionRule):
     '''
     MethodWIGM is a convenience class for WIGM-based rules.
     It supplies generic WIGM record handlers.
-    
+
     A rule can subclass MethodWIGM instead of ElectionRule to use these handlers.
     '''
     method = "wigm"
@@ -111,7 +111,7 @@ class MethodWIGM(ElectionRule):
             p_votes = sum([cstate[cid]['vote'] for cid in ecids if cstate[cid]['pending']], E.V0)
             total = e_votes + p_votes + h_votes + d_votes + action['nt_votes']  # vote total
             residual = E.V(record['nballots']) - total          # votes lost due to rounding error
-            s =  '\tElected votes: %s\n' % e_votes
+            s = '\tElected votes: %s\n' % e_votes
             if p_votes:
                 s += '\tPending votes: %s\n' % p_votes
             s += '\tHopeful votes: %s\n' % h_votes

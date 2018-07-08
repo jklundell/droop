@@ -33,7 +33,7 @@ Implementation notes:
 1. There is a specification error in 167.20(Mathematically impossible to be elected),
 where a candidate that could tie with the next highest candidate is erroneously deemed
 "impossible to be elected". The implementation uses actual mathematical certainty,
-rather than the erroneous specification, and logs a complaint if the condition arises. 
+rather than the erroneous specification, and logs a complaint if the condition arises.
 This should be fixed in the ordinance.
 
 2. The tiebreaking rule requires the presence of the City Council. In their absence,
@@ -62,7 +62,7 @@ who already have a quota but are not yet elected per 167.70(1)(d).
 
 Election Code
 
-The relevant portions of the Minneapolis election code is reproduced below, and is also 
+The relevant portions of the Minneapolis election code is reproduced below, and is also
 distributed as comments marked with ## in the body of the implementation.
 
 
@@ -85,7 +85,7 @@ Exhausted ballot  means a ballot that cannot be advanced under section 167.60(a)
 Highest continuing ranking  means the ranking on a voter's ballot with the lowest numerical value
 for a continuing candidate.
 
-Mathematically impossible to be elected  means either: 
+Mathematically impossible to be elected  means either:
    (1) The candidate could never win because his or her current vote total plus all votes that could
    possibly be transferred to him or her in future rounds (from candidates with fewer votes, tied
    candidates, and surplus votes) would not be enough to surpass the candidate with the next higher
@@ -229,7 +229,7 @@ class Rule(MethodWIGM):
         h += '  arithmetic: fixed\n'
         h += '  precision=4\n'
         helps[name] = h
-        
+
     def __init__(self, E):
         "initialize rule"
         self.E = E
@@ -251,7 +251,7 @@ class Rule(MethodWIGM):
     def info(self):
         "return an info string for the election report"
         return "Minneapolis MN STV"
-        
+
     def tag(self):
         "return a tag string for unit tests"
         return self.name
@@ -276,9 +276,9 @@ class Rule(MethodWIGM):
             '''
             Calculate quota. [167.20(Threshold)]
             '''
-            ##  167.20(Threshold) 
-            ##  Threshold = (Total votes cast)/(Seats to be elected + 1) +1, 
-            ##  with any fractions disregarded. 
+            ##  167.20(Threshold)
+            ##  Threshold = (Total votes cast)/(Seats to be elected + 1) +1,
+            ##  with any fractions disregarded.
 
             return V(E.nBallots // (E.nSeats + 1) + 1)
 
@@ -291,9 +291,9 @@ class Rule(MethodWIGM):
             ##  to the next continuing candidate on that ballot. ...
             ##
             ##  167.70(1)(e)
-            ##  ... Votes for a defeated candidate are transferred at their transfer value to each 
-            ##  ballot's next-ranked continuing candidate. 
-   
+            ##  ... Votes for a defeated candidate are transferred at their transfer value to each
+            ##  ballot's next-ranked continuing candidate.
+
             while not ballot.exhausted and ballot.topCand not in (C.hopeful() + C.pending()):
                 ballot.advance()
             if ballot.exhausted:
@@ -305,20 +305,20 @@ class Rule(MethodWIGM):
             '''
             Find the group of candidates that cannot be elected per 167.20
             '''
-            ## 167.20. Mathematically impossible to be elected means either: 
-            ##         (1) The candidate could never win because his or her current vote total 
-            ##             plus all votes that could possibly be transferred to him or her 
-            ##             in future rounds (from candidates with fewer votes, tied candidates, 
-            ##             and surplus votes) would not be enough to surpass the candidate 
+            ## 167.20. Mathematically impossible to be elected means either:
+            ##         (1) The candidate could never win because his or her current vote total
+            ##             plus all votes that could possibly be transferred to him or her
+            ##             in future rounds (from candidates with fewer votes, tied candidates,
+            ##             and surplus votes) would not be enough to surpass the candidate
             ##             with the next higher current vote total; or
-            ##         (2) The candidate has a lower current vote total than a candidate 
+            ##         (2) The candidate has a lower current vote total than a candidate
             ##             who is described by (1).
 
             #  sortedCands = hopeful candidates below threshold, sorted by vote
             #
             sortedCands = C.hopeful(order='vote')
 
-            #   copy the sorted candidates list to sortedGroups, 
+            #   copy the sorted candidates list to sortedGroups,
             #   making each entry a list
             #   where each list contains one or more candidates with the same vote
             #
@@ -336,7 +336,7 @@ class Rule(MethodWIGM):
             if group:
                 sortedGroups.append(group)
 
-            #   Scan the groups to find the biggest set of lowest-vote 
+            #   Scan the groups to find the biggest set of lowest-vote
             #   'certain-loser' candidates such that:
             #     * we leave enough hopeful candidates to fill the remaining seats
             #     * we don't break up tied groups of candidates
@@ -346,7 +346,7 @@ class Rule(MethodWIGM):
             #   We never defeat the last group, because that would mean
             #   defeating all the hopeful candidates, and if that's possible,
             #   the election is already complete and we wouldn't be here.
-            #   
+            #
             vote = V0
             losers = []
             maybe = []
@@ -369,7 +369,7 @@ class Rule(MethodWIGM):
                 #   a candidate in the next-higher group
                 #
                 #   167.20 has a mistaken definition of mathematical
-                #   impossibility, so log a complaint in the case where 
+                #   impossibility, so log a complaint in the case where
                 #   we deviate from the erroneous specification
                 #
                 if (vote + surplus) == sortedGroups[g+1][0].vote:
@@ -389,18 +389,18 @@ class Rule(MethodWIGM):
             '''
             break a tie by lot [167.70(1)(e)]
             '''
-            ##  167.70(f) ...In the case of a tie between two (2) continuing candidates, 
-            ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2, 
-            ##     Section 12, and the candidate chosen by lot must be defeated. 
-            ##     The result of the tie resolution must be recorded and reused in the event 
+            ##  167.70(f) ...In the case of a tie between two (2) continuing candidates,
+            ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2,
+            ##     Section 12, and the candidate chosen by lot must be defeated.
+            ##     The result of the tie resolution must be recorded and reused in the event
             ##     of a recount.
             ##
             ##     Minneapolis Charter Chapter 2, Section 12. In Case of Tie Vote.
-            ##     When two or more candidates for any elective city office shall receive 
-            ##     an equal number of votes at the general city election or at a special election, 
-            ##     the election shall be determined as between those candidates by 
-            ##     the casting of lots in the presence of the City Council 
-            ##     at such time and in such manner as the City Council shall direct. 
+            ##     When two or more candidates for any elective city office shall receive
+            ##     an equal number of votes at the general city election or at a special election,
+            ##     the election shall be determined as between those candidates by
+            ##     the casting of lots in the presence of the City Council
+            ##     at such time and in such manner as the City Council shall direct.
             ##     (As amended 83-Or-139, Sec 1, 6-10-83; Charter Amend. No. 161, Sec 6, ref. of 11-7-06)
 
             if len(tied) == 1:
@@ -409,7 +409,7 @@ class Rule(MethodWIGM):
             t = C.byTieOrder(tied)[0]    # sort by tie-order before making choice
             E.logAction('tie', 'Break tie (%s): [%s] -> %s' % (reason, names, t.name))
             return t
-            
+
         #########################
         #
         #   COUNT THE ELECTION
@@ -428,7 +428,7 @@ class Rule(MethodWIGM):
         #  make initial vote count
         #
         ##  167.70(1)(a)
-        ##  a. The number of votes cast for each candidate for the current round 
+        ##  a. The number of votes cast for each candidate for the current round
         ##     must be counted.
         ##
         for b in E.ballots:
@@ -439,9 +439,9 @@ class Rule(MethodWIGM):
         while True:
 
             ##     If the number of candidates whose vote total is equal to or greater than
-            ##     the threshold is equal to the number of seats to be filled, 
-            ##     those candidates who are continuing candidates are elected 
-            ##     and the tabulation is complete. 
+            ##     the threshold is equal to the number of seats to be filled,
+            ##     those candidates who are continuing candidates are elected
+            ##     and the tabulation is complete.
             ##
             for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]:
                 c.elect('Candidate at threshold', pending=True)  # election pending
@@ -449,22 +449,22 @@ class Rule(MethodWIGM):
                 break
 
             ##     If the number of candidates whose vote total is equal to or greater than
-            ##     the threshold is not equal to the number of seats to be filled, 
+            ##     the threshold is not equal to the number of seats to be filled,
             ##     a new round begins and the tabulation must continue as described in clause b.
 
             E.newRound()
 
             ##  167.70(1)(b)
-            ##  b. Surplus votes for any candidates whose vote total is equal to 
+            ##  b. Surplus votes for any candidates whose vote total is equal to
             ##     or greater than the threshold must be calculated.
             ##
             E.surplus = sum([c.surplus for c in C.pending()], V0)
 
             ##  167.70(1)(c)
-            ##  c. After any surplus votes are calculated but not yet transferred, 
-            ##     all candidates for whom it is mathematically impossible to be elected 
-            ##     must be defeated simultaneously. 
-            ##     Votes for the defeated candidates must be transferred to each ballot's 
+            ##  c. After any surplus votes are calculated but not yet transferred,
+            ##     all candidates for whom it is mathematically impossible to be elected
+            ##     must be defeated simultaneously.
+            ##     Votes for the defeated candidates must be transferred to each ballot's
             ##     next-ranked continuing candidate.
 
             #  fixSpec=True instructs the function to use the correct definition
@@ -483,9 +483,9 @@ class Rule(MethodWIGM):
                 E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in certainLosers))
 
                 ##     If no candidate can be defeated mathematically, the tabulation must continue
-                ##     as described in clause d. 
+                ##     as described in clause d.
                 ##     Otherwise, the tabulation must continue as described in clause a.
-                
+
                 #   By implication, the test for tabulation-complete given in 167.70(1)(f)
                 #   must be performed here; otherwise too many candidates can be defeated.
 
@@ -494,28 +494,28 @@ class Rule(MethodWIGM):
                 continue  ## continue as described in clause a. # pragma: no cover (optimized out)
 
             ##  167.70(1)(d)
-            ##  d. The transfer value of each vote cast for an elected candidate 
-            ##     must be transferred to the next continuing candidate on that ballot. 
+            ##  d. The transfer value of each vote cast for an elected candidate
+            ##     must be transferred to the next continuing candidate on that ballot.
             ##     The candidate with the largest surplus is declared elected and that candidate's
-            ##     surplus is transferred. 
-            ##     A tie between two (2) or more candidates must immediately and publicly 
-            ##     be resolved by lot by the chief election official at the ranked-choice 
-            ##     voting tabulation center. 
-            ##     The surplus of the candidate chosen by lot must be transferred 
-            ##     before other transfers are made. 
-            ##     The result of the tie resolution must be recorded and reused in the event 
-            ##     of a recount. 
-            ##     If no candidate has a surplus, the tabulation must continue 
-            ##     as described in clause e. 
+            ##     surplus is transferred.
+            ##     A tie between two (2) or more candidates must immediately and publicly
+            ##     be resolved by lot by the chief election official at the ranked-choice
+            ##     voting tabulation center.
+            ##     The surplus of the candidate chosen by lot must be transferred
+            ##     before other transfers are made.
+            ##     The result of the tie resolution must be recorded and reused in the event
+            ##     of a recount.
+            ##     If no candidate has a surplus, the tabulation must continue
+            ##     as described in clause e.
             ##     Otherwise, the tabulation must continue as described in clause a.
 
             #  elect candidate with largest surplus
             #  and transfer largest surplus
             #
             ## 167.20(Surplus fraction of a vote)
-            ##     Surplus fraction of a vote = 
-            ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate), 
-            ##     calculated to four (4) decimal places, ignoring any remainder. 
+            ##     Surplus fraction of a vote =
+            ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate),
+            ##     calculated to four (4) decimal places, ignoring any remainder.
             ##
             if C.pending():
                 high_vote = max(c.vote for c in C.pending())
@@ -531,13 +531,13 @@ class Rule(MethodWIGM):
                 continue  ## continue as described in clause a.
 
             ##  167.70(1)(e)
-            ##  e. If there are no transferable surplus votes, 
-            ##     the candidate with the fewest votes is defeated. 
-            ##     Votes for a defeated candidate are transferred at their transfer value 
-            ##     to each ballot's next-ranked continuing candidate. 
-            ##     Ties between candidates with the fewest votes must be decided by lot, 
-            ##     and the candidate chosen by lot must be defeated. 
-            ##     The result of the tie resolution must be recorded and reused 
+            ##  e. If there are no transferable surplus votes,
+            ##     the candidate with the fewest votes is defeated.
+            ##     Votes for a defeated candidate are transferred at their transfer value
+            ##     to each ballot's next-ranked continuing candidate.
+            ##     Ties between candidates with the fewest votes must be decided by lot,
+            ##     and the candidate chosen by lot must be defeated.
+            ##     The result of the tie resolution must be recorded and reused
             ##     in the event of a recount.
 
             #  find candidate(s) with lowest vote
@@ -554,19 +554,19 @@ class Rule(MethodWIGM):
                 E.logAction('transfer', "Transfer defeated: %s" % low_candidate.name)
 
             ##  167.70(1)(f)
-            ##  f. The procedures in clauses a. to e. must be repeated 
-            ##     until the number of candidates whose vote total is equal to or greater than 
-            ##     the threshold is equal to the number of seats to be filled, 
-            ##     or until the number of continuing candidates is equal to the number of offices 
-            ##     yet to be elected. 
+            ##  f. The procedures in clauses a. to e. must be repeated
+            ##     until the number of candidates whose vote total is equal to or greater than
+            ##     the threshold is equal to the number of seats to be filled,
+            ##     or until the number of continuing candidates is equal to the number of offices
+            ##     yet to be elected.
 
             if len(C.hopeful()) <= E.seatsLeftToFill():
                 break
 
-            ##     In the case of a tie between two (2) continuing candidates, 
-            ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2, 
-            ##     Section 12, and the candidate chosen by lot must be defeated. 
-            ##     The result of the tie resolution must be recorded and reused in the event 
+            ##     In the case of a tie between two (2) continuing candidates,
+            ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2,
+            ##     Section 12, and the candidate chosen by lot must be defeated.
+            ##     The result of the tie resolution must be recorded and reused in the event
             ##     of a recount.
 
             # Note: this will happen, if necessary, at the next defeat-lowest step e above
@@ -581,7 +581,7 @@ class Rule(MethodWIGM):
 
         ##  167.70(1)(f)
         ##  f. ...
-        ##     If the number of continuing candidates is equal to the number of offices 
+        ##     If the number of continuing candidates is equal to the number of offices
         ##     yet to be elected, any remaining continuing candidates must be declared elected.
         #
         #  Note: implemented as "less than or equal to"

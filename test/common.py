@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-''' 
+'''
 Unit test for droop.election package
 
 Copyright 2010 by Jonathan Lundell
@@ -45,7 +45,7 @@ def doDumpCompare(options, filename, subdir=''):
     if not filename.endswith('.blt'):
         filename += '.blt'
     base, ext = os.path.splitext(filename)  # pylint: disable=W0612
-        
+
     blt = os.path.join(testdir, 'blt', subdir, filename)
     E = Election(ElectionProfile(blt), options)
     E.count()
@@ -57,7 +57,7 @@ def doDumpCompare(options, filename, subdir=''):
         data = f.read()
         f.close()
         return data
-        
+
     def writeFile(path, data):
         "write a json/dump/report file"
         if not os.path.isdir(os.path.dirname(path)):
@@ -65,7 +65,7 @@ def doDumpCompare(options, filename, subdir=''):
         f = open(path, 'w')
         f.write(data)
         f.close()
-        
+
     #  first do report
     #
     rref = os.path.join(testdir, 'ref', 'report', subdir, '%s.txt' % tag)
