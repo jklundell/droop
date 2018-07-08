@@ -17,7 +17,7 @@ This file is part of Droop.
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Droop.  If , see <http://www.gnu.org/licenses/>.
+    along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
 from __future__ import absolute_import
@@ -83,7 +83,7 @@ class ElectionRecord(dict):
         if tag == 'log':
             self['actions'].append(A)
             return
-        if (tag == 'begin' or tag == 'round') and  self.filled:
+        if (tag == 'begin' or tag == 'round') and not self.filled:
             self._fill()
         if tag == 'end':
             vreport = E.V.report()
@@ -106,7 +106,7 @@ class ElectionRecord(dict):
 
         #  report header
         #
-        if  E.rule.report(self, report, 'header'):   # allow rule to supply report header
+        if not E.rule.report(self, report, 'header'):   # allow rule to supply report header
             s = "\nElection: %s\n\n" % self['title']
             s += "\tDroop package: %s v%s\n" % (self['droop_name'], self['droop_version'])
             s += "\tRule: %s\n" % self['rule_info']
@@ -128,15 +128,15 @@ class ElectionRecord(dict):
 
             #  include profile source & comment from ballot file
             #
-            if self.get('profile_source') is  None:
+            if self.get('profile_source') is not None:
                 report.append("Source: %s\n" % self.get('profile_source'))
-            if self.get('profile_comment') is  None:
+            if self.get('profile_comment') is not None:
                 report.append("{%s}\n" % self.get('profile_comment'))
             report.append("\n")
 
         #  report arithmetic
         #
-        if self.get('arithmetic_report') is  None:
+        if self.get('arithmetic_report') is not None:
             report.append(self.get('arithmetic_report'))
 
         #  report interrupted count
@@ -146,7 +146,7 @@ class ElectionRecord(dict):
 
         #  report actions
         #
-        if  E.rule.report(self, report, 'actions'):          # allow rule to report all actions
+        if not E.rule.report(self, report, 'actions'):          # allow rule to report all actions
             cids = self['cids']
             cdict = self['cdict']
             for A in self['actions']:
@@ -164,7 +164,7 @@ class ElectionRecord(dict):
                 dcids = [cid for cid in cids if cstate[cid]['state'] == 'defeated']
                 s = 'Action: %s\n' % (A['msg'])
                 if A['tag'] in ('begin', 'elect', 'defeat', 'pend', 'transfer', 'end'):
-                    for cid in [cid for cid in ecids if  cstate[cid].get('pending')]:
+                    for cid in [cid for cid in ecids if not cstate[cid].get('pending')]:
                         s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['vote'])
                     for cid in [cid for cid in ecids if cstate[cid].get('pending')]:
                         s += '\tPending:  %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['vote'])
