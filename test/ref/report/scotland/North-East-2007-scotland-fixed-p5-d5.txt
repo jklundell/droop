@@ -1,0 +1,385 @@
+
+Election: NORTH EAST
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 8363
+	Quota: 1673.00000
+
+	Add eligible: Gilbert Davidson
+	Add eligible: John France
+	Add eligible: Gerald Leonard
+	Add eligible: Stewart MacDonald
+	Add eligible: John C MacPherson
+	Add eligible: Catherine McMaster
+	Add eligible: Andy McPake
+	Add eligible: Joanne Reilly
+	Add eligible: George Savage
+	Add eligible: Grant R Thoms
+Action: Begin Count
+	Hopeful:  Gilbert Davidson (2272.00000)
+	Hopeful:  John France (485.00000)
+	Hopeful:  Gerald Leonard (1475.00000)
+	Hopeful:  Stewart MacDonald (186.00000)
+	Hopeful:  John C MacPherson (228.00000)
+	Hopeful:  Catherine McMaster (1040.00000)
+	Hopeful:  Andy McPake (129.00000)
+	Hopeful:  Joanne Reilly (350.00000)
+	Hopeful:  George Savage (100.00000)
+	Hopeful:  Grant R Thoms (2098.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8363.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8363.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Gilbert Davidson
+	Pending:  Gilbert Davidson (2272.00000)
+	Hopeful:  John France (485.00000)
+	Hopeful:  Gerald Leonard (1475.00000)
+	Hopeful:  Stewart MacDonald (186.00000)
+	Hopeful:  John C MacPherson (228.00000)
+	Hopeful:  Catherine McMaster (1040.00000)
+	Hopeful:  Andy McPake (129.00000)
+	Hopeful:  Joanne Reilly (350.00000)
+	Hopeful:  George Savage (100.00000)
+	Hopeful:  Grant R Thoms (2098.00000)
+	Elected votes: 0.00000
+	Pending votes: 2272.00000
+	Hopeful votes: 6091.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8363.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Grant R Thoms
+	Pending:  Gilbert Davidson (2272.00000)
+	Pending:  Grant R Thoms (2098.00000)
+	Hopeful:  John France (485.00000)
+	Hopeful:  Gerald Leonard (1475.00000)
+	Hopeful:  Stewart MacDonald (186.00000)
+	Hopeful:  John C MacPherson (228.00000)
+	Hopeful:  Catherine McMaster (1040.00000)
+	Hopeful:  Andy McPake (129.00000)
+	Hopeful:  Joanne Reilly (350.00000)
+	Hopeful:  George Savage (100.00000)
+	Elected votes: 0.00000
+	Pending votes: 4370.00000
+	Hopeful votes: 3993.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8363.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Gilbert Davidson
+	Elected votes: 2272.00000
+	Pending votes: 2098.00000
+	Hopeful votes: 3993.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8363.00000
+	Surplus: 1024.00000
+Action: Surplus transferred: Gilbert Davidson (599.00000)
+	Elected:  Gilbert Davidson (1673.00000)
+	Pending:  Grant R Thoms (2098.00000)
+	Hopeful:  John France (496.60016)
+	Hopeful:  Gerald Leonard (1819.57748)
+	Hopeful:  Stewart MacDonald (196.01832)
+	Hopeful:  John C MacPherson (240.39108)
+	Hopeful:  Catherine McMaster (1123.31024)
+	Hopeful:  Andy McPake (134.80008)
+	Hopeful:  Joanne Reilly (365.02748)
+	Hopeful:  George Savage (102.10912)
+	Elected votes: 1673.00000
+	Pending votes: 2098.00000
+	Hopeful votes: 4477.83396
+	Nontransferable votes: 114.15612
+	Residual: 0.00992
+	Total: 8363.00000
+	Surplus: 1024.00000
+Action: Elect, transfer pending: Gerald Leonard
+	Elected:  Gilbert Davidson (1673.00000)
+	Pending:  Gerald Leonard (1819.57748)
+	Pending:  Grant R Thoms (2098.00000)
+	Hopeful:  John France (496.60016)
+	Hopeful:  Stewart MacDonald (196.01832)
+	Hopeful:  John C MacPherson (240.39108)
+	Hopeful:  Catherine McMaster (1123.31024)
+	Hopeful:  Andy McPake (134.80008)
+	Hopeful:  Joanne Reilly (365.02748)
+	Hopeful:  George Savage (102.10912)
+	Elected votes: 1673.00000
+	Pending votes: 3917.57748
+	Hopeful votes: 2658.25648
+	Nontransferable votes: 114.15612
+	Residual: 0.00992
+	Total: 8363.00000
+	Surplus: 1024.00000
+Round 2:
+Action: Transfer high surplus: Grant R Thoms
+	Elected votes: 3771.00000
+	Pending votes: 1819.57748
+	Hopeful votes: 2658.25648
+	Nontransferable votes: 114.15612
+	Residual: 0.00992
+	Total: 8363.00000
+	Surplus: 571.57748
+Action: Surplus transferred: Grant R Thoms (425.00000)
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Pending:  Gerald Leonard (1819.57748)
+	Hopeful:  John France (516.65459)
+	Hopeful:  Stewart MacDonald (238.15288)
+	Hopeful:  John C MacPherson (280.09480)
+	Hopeful:  Catherine McMaster (1167.47050)
+	Hopeful:  Andy McPake (171.46525)
+	Hopeful:  Joanne Reilly (431.47044)
+	Hopeful:  George Savage (120.54299)
+	Elected votes: 3346.00000
+	Pending votes: 1819.57748
+	Hopeful votes: 2925.85145
+	Nontransferable votes: 271.55301
+	Residual: 0.01806
+	Total: 8363.00000
+	Surplus: 571.57748
+Round 3:
+Action: Transfer high surplus: Gerald Leonard
+	Elected votes: 5165.57748
+	Hopeful votes: 2925.85145
+	Nontransferable votes: 271.55301
+	Residual: 0.01806
+	Total: 8363.00000
+	Surplus: 146.57748
+Action: Surplus transferred: Gerald Leonard (146.57748)
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (518.66459)
+	Hopeful:  Stewart MacDonald (240.48508)
+	Hopeful:  John C MacPherson (284.75483)
+	Hopeful:  Catherine McMaster (1273.35852)
+	Hopeful:  Andy McPake (172.74593)
+	Hopeful:  Joanne Reilly (434.24348)
+	Hopeful:  George Savage (121.45464)
+	Elected votes: 5019.00000
+	Hopeful votes: 3045.70707
+	Nontransferable votes: 298.25625
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 146.57748
+Round 4:
+Action: Defeat low candidate: George Savage
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (518.66459)
+	Hopeful:  Stewart MacDonald (240.48508)
+	Hopeful:  John C MacPherson (284.75483)
+	Hopeful:  Catherine McMaster (1273.35852)
+	Hopeful:  Andy McPake (172.74593)
+	Hopeful:  Joanne Reilly (434.24348)
+	Defeated: George Savage (121.45464)
+	Elected votes: 5019.00000
+	Hopeful votes: 2924.25243
+	Defeated votes: 121.45464
+	Nontransferable votes: 298.25625
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Action: Transfer defeated: George Savage
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (538.52017)
+	Hopeful:  Stewart MacDonald (254.17042)
+	Hopeful:  John C MacPherson (302.57796)
+	Hopeful:  Catherine McMaster (1283.96071)
+	Hopeful:  Andy McPake (178.59029)
+	Hopeful:  Joanne Reilly (454.51421)
+	Defeated: George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 3012.33376
+	Nontransferable votes: 331.62956
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Andy McPake
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (538.52017)
+	Hopeful:  Stewart MacDonald (254.17042)
+	Hopeful:  John C MacPherson (302.57796)
+	Hopeful:  Catherine McMaster (1283.96071)
+	Hopeful:  Joanne Reilly (454.51421)
+	Defeated: Andy McPake (178.59029)
+	Defeated: George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 2833.74347
+	Defeated votes: 178.59029
+	Nontransferable votes: 331.62956
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Andy McPake
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (543.60694)
+	Hopeful:  Stewart MacDonald (283.09200)
+	Hopeful:  John C MacPherson (311.50734)
+	Hopeful:  Catherine McMaster (1306.66165)
+	Hopeful:  Joanne Reilly (509.06803)
+	Defeated: Andy McPake, George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 2953.93596
+	Nontransferable votes: 390.02736
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Stewart MacDonald
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (543.60694)
+	Hopeful:  John C MacPherson (311.50734)
+	Hopeful:  Catherine McMaster (1306.66165)
+	Hopeful:  Joanne Reilly (509.06803)
+	Defeated: Stewart MacDonald (283.09200)
+	Defeated: Andy McPake, George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 2670.84396
+	Defeated votes: 283.09200
+	Nontransferable votes: 390.02736
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Stewart MacDonald
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (574.67306)
+	Hopeful:  John C MacPherson (367.02448)
+	Hopeful:  Catherine McMaster (1343.60780)
+	Hopeful:  Joanne Reilly (547.13570)
+	Defeated: Stewart MacDonald, Andy McPake, George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 2832.44104
+	Nontransferable votes: 511.52228
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: John C MacPherson
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (574.67306)
+	Hopeful:  Catherine McMaster (1343.60780)
+	Hopeful:  Joanne Reilly (547.13570)
+	Defeated: John C MacPherson (367.02448)
+	Defeated: Stewart MacDonald, Andy McPake, George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 2465.41656
+	Defeated votes: 367.02448
+	Nontransferable votes: 511.52228
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Action: Transfer defeated: John C MacPherson
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (629.07777)
+	Hopeful:  Catherine McMaster (1413.42547)
+	Hopeful:  Joanne Reilly (592.17378)
+	Defeated: Stewart MacDonald, John C MacPherson, Andy McPake, George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 2634.67702
+	Nontransferable votes: 709.28630
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Round 8:
+Action: Defeat low candidate: Joanne Reilly
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (629.07777)
+	Hopeful:  Catherine McMaster (1413.42547)
+	Defeated: Joanne Reilly (592.17378)
+	Defeated: Stewart MacDonald, John C MacPherson, Andy McPake, George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 2042.50324
+	Defeated votes: 592.17378
+	Nontransferable votes: 709.28630
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Joanne Reilly
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  John France (691.05522)
+	Hopeful:  Catherine McMaster (1531.63226)
+	Defeated: Stewart MacDonald, John C MacPherson, Andy McPake, Joanne Reilly, George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 2222.68748
+	Nontransferable votes: 1121.27584
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Round 9:
+Action: Defeat low candidate: John France
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  Catherine McMaster (1531.63226)
+	Defeated: John France (691.05522)
+	Defeated: Stewart MacDonald, John C MacPherson, Andy McPake, Joanne Reilly, George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 1531.63226
+	Defeated votes: 691.05522
+	Nontransferable votes: 1121.27584
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Action: Transfer defeated: John France
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Grant R Thoms (1673.00000)
+	Hopeful:  Catherine McMaster (1691.19783)
+	Defeated: John France, Stewart MacDonald, John C MacPherson, Andy McPake, Joanne Reilly, George Savage (0.00000)
+	Elected votes: 5019.00000
+	Hopeful votes: 1691.19783
+	Nontransferable votes: 1652.76549
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Catherine McMaster
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Catherine McMaster (1691.19783)
+	Elected:  Grant R Thoms (1673.00000)
+	Defeated: John France, Stewart MacDonald, John C MacPherson, Andy McPake, Joanne Reilly, George Savage (0.00000)
+	Elected votes: 6710.19783
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1652.76549
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Gilbert Davidson (1673.00000)
+	Elected:  Gerald Leonard (1673.00000)
+	Elected:  Catherine McMaster (1691.19783)
+	Elected:  Grant R Thoms (1673.00000)
+	Defeated: John France, Stewart MacDonald, John C MacPherson, Andy McPake, Joanne Reilly, George Savage (0.00000)
+	Elected votes: 6710.19783
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1652.76549
+	Residual: 0.03668
+	Total: 8363.00000
+	Surplus: 0.00000

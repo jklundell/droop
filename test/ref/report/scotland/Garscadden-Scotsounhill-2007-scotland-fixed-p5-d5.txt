@@ -1,0 +1,383 @@
+
+Election: GARSCADDEN-SCOTSTOUNHILL
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 10160
+	Quota: 2033.00000
+
+	Add eligible: Charlotte Ahmed
+	Add eligible: Liz Cameron
+	Add eligible: Sue England
+	Add eligible: Robert Findlay
+	Add eligible: Graeme Hendry
+	Add eligible: Peter Lavelle
+	Add eligible: Jean McFadden
+	Add eligible: James Paris
+	Add eligible: Paul Rooney
+	Add eligible: Matthew T Smith
+Action: Begin Count
+	Hopeful:  Charlotte Ahmed (318.00000)
+	Hopeful:  Liz Cameron (2744.00000)
+	Hopeful:  Sue England (402.00000)
+	Hopeful:  Robert Findlay (191.00000)
+	Hopeful:  Graeme Hendry (2333.00000)
+	Hopeful:  Peter Lavelle (145.00000)
+	Hopeful:  Jean McFadden (1115.00000)
+	Hopeful:  James Paris (483.00000)
+	Hopeful:  Paul Rooney (1895.00000)
+	Hopeful:  Matthew T Smith (534.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 10160.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Liz Cameron
+	Pending:  Liz Cameron (2744.00000)
+	Hopeful:  Charlotte Ahmed (318.00000)
+	Hopeful:  Sue England (402.00000)
+	Hopeful:  Robert Findlay (191.00000)
+	Hopeful:  Graeme Hendry (2333.00000)
+	Hopeful:  Peter Lavelle (145.00000)
+	Hopeful:  Jean McFadden (1115.00000)
+	Hopeful:  James Paris (483.00000)
+	Hopeful:  Paul Rooney (1895.00000)
+	Hopeful:  Matthew T Smith (534.00000)
+	Elected votes: 0.00000
+	Pending votes: 2744.00000
+	Hopeful votes: 7416.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Graeme Hendry
+	Pending:  Liz Cameron (2744.00000)
+	Pending:  Graeme Hendry (2333.00000)
+	Hopeful:  Charlotte Ahmed (318.00000)
+	Hopeful:  Sue England (402.00000)
+	Hopeful:  Robert Findlay (191.00000)
+	Hopeful:  Peter Lavelle (145.00000)
+	Hopeful:  Jean McFadden (1115.00000)
+	Hopeful:  James Paris (483.00000)
+	Hopeful:  Paul Rooney (1895.00000)
+	Hopeful:  Matthew T Smith (534.00000)
+	Elected votes: 0.00000
+	Pending votes: 5077.00000
+	Hopeful votes: 5083.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 10160.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Liz Cameron
+	Elected votes: 2744.00000
+	Pending votes: 2333.00000
+	Hopeful votes: 5083.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 10160.00000
+	Surplus: 1011.00000
+Action: Surplus transferred: Liz Cameron (711.00000)
+	Elected:  Liz Cameron (2033.00000)
+	Pending:  Graeme Hendry (2333.00000)
+	Hopeful:  Charlotte Ahmed (338.98791)
+	Hopeful:  Sue England (426.09723)
+	Hopeful:  Robert Findlay (201.10529)
+	Hopeful:  Peter Lavelle (156.14173)
+	Hopeful:  Jean McFadden (1450.80656)
+	Hopeful:  James Paris (508.65189)
+	Hopeful:  Paul Rooney (2007.45374)
+	Hopeful:  Matthew T Smith (544.36440)
+	Elected votes: 2033.00000
+	Pending votes: 2333.00000
+	Hopeful votes: 5633.60875
+	Nontransferable votes: 160.38909
+	Residual: 0.00216
+	Total: 10160.00000
+	Surplus: 1011.00000
+Round 2:
+Action: Transfer high surplus: Graeme Hendry
+	Elected votes: 4366.00000
+	Hopeful votes: 5633.60875
+	Nontransferable votes: 160.38909
+	Residual: 0.00216
+	Total: 10160.00000
+	Surplus: 300.00000
+Action: Surplus transferred: Graeme Hendry (300.00000)
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Hopeful:  Charlotte Ahmed (375.37605)
+	Hopeful:  Sue England (464.02833)
+	Hopeful:  Robert Findlay (205.60559)
+	Hopeful:  Peter Lavelle (177.10027)
+	Hopeful:  Jean McFadden (1478.57984)
+	Hopeful:  James Paris (544.13997)
+	Hopeful:  Paul Rooney (2026.22642)
+	Hopeful:  Matthew T Smith (557.47956)
+	Elected votes: 4066.00000
+	Hopeful votes: 5828.53603
+	Nontransferable votes: 265.43895
+	Residual: 0.02502
+	Total: 10160.00000
+	Surplus: 300.00000
+Round 3:
+Action: Defeat low candidate: Peter Lavelle
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Hopeful:  Charlotte Ahmed (375.37605)
+	Hopeful:  Sue England (464.02833)
+	Hopeful:  Robert Findlay (205.60559)
+	Hopeful:  Jean McFadden (1478.57984)
+	Hopeful:  James Paris (544.13997)
+	Hopeful:  Paul Rooney (2026.22642)
+	Hopeful:  Matthew T Smith (557.47956)
+	Defeated: Peter Lavelle (177.10027)
+	Elected votes: 4066.00000
+	Hopeful votes: 5651.43576
+	Defeated votes: 177.10027
+	Nontransferable votes: 265.43895
+	Residual: 0.02502
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Peter Lavelle
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Hopeful:  Charlotte Ahmed (414.52473)
+	Hopeful:  Sue England (500.63052)
+	Hopeful:  Robert Findlay (214.37707)
+	Hopeful:  Jean McFadden (1500.87697)
+	Hopeful:  James Paris (563.36227)
+	Hopeful:  Paul Rooney (2037.20131)
+	Hopeful:  Matthew T Smith (558.86530)
+	Defeated: Peter Lavelle (0.00000)
+	Elected votes: 4066.00000
+	Hopeful votes: 5789.83817
+	Nontransferable votes: 304.13681
+	Residual: 0.02502
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Paul Rooney
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Pending:  Paul Rooney (2037.20131)
+	Hopeful:  Charlotte Ahmed (414.52473)
+	Hopeful:  Sue England (500.63052)
+	Hopeful:  Robert Findlay (214.37707)
+	Hopeful:  Jean McFadden (1500.87697)
+	Hopeful:  James Paris (563.36227)
+	Hopeful:  Matthew T Smith (558.86530)
+	Defeated: Peter Lavelle (0.00000)
+	Elected votes: 4066.00000
+	Pending votes: 2037.20131
+	Hopeful votes: 3752.63686
+	Nontransferable votes: 304.13681
+	Residual: 0.02502
+	Total: 10160.00000
+	Surplus: 0.00000
+Round 4:
+Action: Transfer high surplus: Paul Rooney
+	Elected votes: 6103.20131
+	Hopeful votes: 3752.63686
+	Nontransferable votes: 304.13681
+	Residual: 0.02502
+	Total: 10160.00000
+	Surplus: 4.20131
+Action: Surplus transferred: Paul Rooney (4.20131)
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Charlotte Ahmed (414.65545)
+	Hopeful:  Sue England (500.75500)
+	Hopeful:  Robert Findlay (214.44336)
+	Hopeful:  Jean McFadden (1503.21324)
+	Hopeful:  James Paris (563.50687)
+	Hopeful:  Matthew T Smith (558.95996)
+	Defeated: Peter Lavelle (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 3755.53388
+	Nontransferable votes: 305.43402
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 4.20131
+Round 5:
+Action: Defeat low candidate: Robert Findlay
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Charlotte Ahmed (414.65545)
+	Hopeful:  Sue England (500.75500)
+	Hopeful:  Jean McFadden (1503.21324)
+	Hopeful:  James Paris (563.50687)
+	Hopeful:  Matthew T Smith (558.95996)
+	Defeated: Robert Findlay (214.44336)
+	Defeated: Peter Lavelle (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 3541.09052
+	Defeated votes: 214.44336
+	Nontransferable votes: 305.43402
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Robert Findlay
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Charlotte Ahmed (421.81874)
+	Hopeful:  Sue England (517.01581)
+	Hopeful:  Jean McFadden (1523.85790)
+	Hopeful:  James Paris (576.44955)
+	Hopeful:  Matthew T Smith (652.28827)
+	Defeated: Robert Findlay, Peter Lavelle (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 3691.43027
+	Nontransferable votes: 369.53763
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Charlotte Ahmed
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Sue England (517.01581)
+	Hopeful:  Jean McFadden (1523.85790)
+	Hopeful:  James Paris (576.44955)
+	Hopeful:  Matthew T Smith (652.28827)
+	Defeated: Charlotte Ahmed (421.81874)
+	Defeated: Robert Findlay, Peter Lavelle (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 3269.61153
+	Defeated votes: 421.81874
+	Nontransferable votes: 369.53763
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Charlotte Ahmed
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Sue England (640.34862)
+	Hopeful:  Jean McFadden (1576.39059)
+	Hopeful:  James Paris (614.21967)
+	Hopeful:  Matthew T Smith (659.83524)
+	Defeated: Charlotte Ahmed, Robert Findlay, Peter Lavelle (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 3490.79412
+	Nontransferable votes: 570.17378
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: James Paris
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Sue England (640.34862)
+	Hopeful:  Jean McFadden (1576.39059)
+	Hopeful:  Matthew T Smith (659.83524)
+	Defeated: James Paris (614.21967)
+	Defeated: Charlotte Ahmed, Robert Findlay, Peter Lavelle (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 2876.57445
+	Defeated votes: 614.21967
+	Nontransferable votes: 570.17378
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Transfer defeated: James Paris
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Sue England (820.90265)
+	Hopeful:  Jean McFadden (1681.40191)
+	Hopeful:  Matthew T Smith (746.16689)
+	Defeated: Charlotte Ahmed, Robert Findlay, Peter Lavelle, James Paris (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 3248.47145
+	Nontransferable votes: 812.49645
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Round 8:
+Action: Defeat low candidate: Matthew T Smith
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Sue England (820.90265)
+	Hopeful:  Jean McFadden (1681.40191)
+	Defeated: Matthew T Smith (746.16689)
+	Defeated: Charlotte Ahmed, Robert Findlay, Peter Lavelle, James Paris (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 2502.30456
+	Defeated votes: 746.16689
+	Nontransferable votes: 812.49645
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Matthew T Smith
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Sue England (960.71529)
+	Hopeful:  Jean McFadden (1770.91268)
+	Defeated: Charlotte Ahmed, Robert Findlay, Peter Lavelle, James Paris, Matthew T Smith (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 2731.62797
+	Nontransferable votes: 1329.33993
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Round 9:
+Action: Defeat low candidate: Sue England
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Jean McFadden (1770.91268)
+	Defeated: Sue England (960.71529)
+	Defeated: Charlotte Ahmed, Robert Findlay, Peter Lavelle, James Paris, Matthew T Smith (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 1770.91268
+	Defeated votes: 960.71529
+	Nontransferable votes: 1329.33993
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Sue England
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Paul Rooney (2033.00000)
+	Hopeful:  Jean McFadden (2013.69510)
+	Defeated: Charlotte Ahmed, Sue England, Robert Findlay, Peter Lavelle, James Paris, Matthew T Smith (0.00000)
+	Elected votes: 6099.00000
+	Hopeful votes: 2013.69510
+	Nontransferable votes: 2047.27280
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Jean McFadden
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Jean McFadden (2013.69510)
+	Elected:  Paul Rooney (2033.00000)
+	Defeated: Charlotte Ahmed, Sue England, Robert Findlay, Peter Lavelle, James Paris, Matthew T Smith (0.00000)
+	Elected votes: 8112.69510
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2047.27280
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Liz Cameron (2033.00000)
+	Elected:  Graeme Hendry (2033.00000)
+	Elected:  Jean McFadden (2013.69510)
+	Elected:  Paul Rooney (2033.00000)
+	Defeated: Charlotte Ahmed, Sue England, Robert Findlay, Peter Lavelle, James Paris, Matthew T Smith (0.00000)
+	Elected votes: 8112.69510
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2047.27280
+	Residual: 0.03210
+	Total: 10160.00000
+	Surplus: 0.00000

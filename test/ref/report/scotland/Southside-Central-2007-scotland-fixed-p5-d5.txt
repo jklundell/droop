@@ -1,0 +1,332 @@
+
+Election: SOUTHSIDE CENTRAL
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 8738
+	Quota: 1748.00000
+
+	Add eligible: Danny Alderslowe
+	Add eligible: Jahangir Hanif
+	Add eligible: Rosie Kane
+	Add eligible: John B Marshall
+	Add eligible: Katy McCloskey
+	Add eligible: Jill McGowan
+	Add eligible: Anne Marie Millar
+	Add eligible: Hanif Raja
+	Add eligible: James Scanlon
+Action: Begin Count
+	Hopeful:  Danny Alderslowe (812.00000)
+	Hopeful:  Jahangir Hanif (2392.00000)
+	Hopeful:  Rosie Kane (327.00000)
+	Hopeful:  John B Marshall (423.00000)
+	Hopeful:  Katy McCloskey (533.00000)
+	Hopeful:  Jill McGowan (456.00000)
+	Hopeful:  Anne Marie Millar (1869.00000)
+	Hopeful:  Hanif Raja (554.00000)
+	Hopeful:  James Scanlon (1372.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8738.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8738.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Jahangir Hanif
+	Pending:  Jahangir Hanif (2392.00000)
+	Hopeful:  Danny Alderslowe (812.00000)
+	Hopeful:  Rosie Kane (327.00000)
+	Hopeful:  John B Marshall (423.00000)
+	Hopeful:  Katy McCloskey (533.00000)
+	Hopeful:  Jill McGowan (456.00000)
+	Hopeful:  Anne Marie Millar (1869.00000)
+	Hopeful:  Hanif Raja (554.00000)
+	Hopeful:  James Scanlon (1372.00000)
+	Elected votes: 0.00000
+	Pending votes: 2392.00000
+	Hopeful votes: 6346.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8738.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Anne Marie Millar
+	Pending:  Jahangir Hanif (2392.00000)
+	Pending:  Anne Marie Millar (1869.00000)
+	Hopeful:  Danny Alderslowe (812.00000)
+	Hopeful:  Rosie Kane (327.00000)
+	Hopeful:  John B Marshall (423.00000)
+	Hopeful:  Katy McCloskey (533.00000)
+	Hopeful:  Jill McGowan (456.00000)
+	Hopeful:  Hanif Raja (554.00000)
+	Hopeful:  James Scanlon (1372.00000)
+	Elected votes: 0.00000
+	Pending votes: 4261.00000
+	Hopeful votes: 4477.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8738.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Jahangir Hanif
+	Elected votes: 2392.00000
+	Pending votes: 1869.00000
+	Hopeful votes: 4477.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8738.00000
+	Surplus: 765.00000
+Action: Surplus transferred: Jahangir Hanif (644.00000)
+	Elected:  Jahangir Hanif (1748.00000)
+	Pending:  Anne Marie Millar (1869.00000)
+	Hopeful:  Danny Alderslowe (895.99976)
+	Hopeful:  Rosie Kane (453.26887)
+	Hopeful:  John B Marshall (441.84610)
+	Hopeful:  Katy McCloskey (590.88445)
+	Hopeful:  Jill McGowan (522.23058)
+	Hopeful:  Hanif Raja (613.49983)
+	Hopeful:  James Scanlon (1392.73071)
+	Elected votes: 1748.00000
+	Pending votes: 1869.00000
+	Hopeful votes: 4910.46030
+	Nontransferable votes: 210.53786
+	Residual: 0.00184
+	Total: 8738.00000
+	Surplus: 765.00000
+Round 2:
+Action: Transfer high surplus: Anne Marie Millar
+	Elected votes: 3617.00000
+	Hopeful votes: 4910.46030
+	Nontransferable votes: 210.53786
+	Residual: 0.00184
+	Total: 8738.00000
+	Surplus: 121.00000
+Action: Surplus transferred: Anne Marie Millar (121.00000)
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Hopeful:  Danny Alderslowe (900.01364)
+	Hopeful:  Rosie Kane (456.95905)
+	Hopeful:  John B Marshall (443.33512)
+	Hopeful:  Katy McCloskey (596.19313)
+	Hopeful:  Jill McGowan (526.82712)
+	Hopeful:  Hanif Raja (651.56695)
+	Hopeful:  James Scanlon (1429.50303)
+	Elected votes: 3496.00000
+	Hopeful votes: 5004.39804
+	Nontransferable votes: 237.59918
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 121.00000
+Round 3:
+Action: Defeat low candidate: John B Marshall
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Hopeful:  Danny Alderslowe (900.01364)
+	Hopeful:  Rosie Kane (456.95905)
+	Hopeful:  Katy McCloskey (596.19313)
+	Hopeful:  Jill McGowan (526.82712)
+	Hopeful:  Hanif Raja (651.56695)
+	Hopeful:  James Scanlon (1429.50303)
+	Defeated: John B Marshall (443.33512)
+	Elected votes: 3496.00000
+	Hopeful votes: 4561.06292
+	Defeated votes: 443.33512
+	Nontransferable votes: 237.59918
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 0.00000
+Action: Transfer defeated: John B Marshall
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Hopeful:  Danny Alderslowe (967.97708)
+	Hopeful:  Rosie Kane (473.43468)
+	Hopeful:  Katy McCloskey (705.70912)
+	Hopeful:  Jill McGowan (537.71173)
+	Hopeful:  Hanif Raja (668.31181)
+	Hopeful:  James Scanlon (1448.23571)
+	Defeated: John B Marshall (0.00000)
+	Elected votes: 3496.00000
+	Hopeful votes: 4801.38013
+	Nontransferable votes: 440.61709
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Rosie Kane
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Hopeful:  Danny Alderslowe (967.97708)
+	Hopeful:  Katy McCloskey (705.70912)
+	Hopeful:  Jill McGowan (537.71173)
+	Hopeful:  Hanif Raja (668.31181)
+	Hopeful:  James Scanlon (1448.23571)
+	Defeated: Rosie Kane (473.43468)
+	Defeated: John B Marshall (0.00000)
+	Elected votes: 3496.00000
+	Hopeful votes: 4327.94545
+	Defeated votes: 473.43468
+	Nontransferable votes: 440.61709
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Rosie Kane
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Hopeful:  Danny Alderslowe (1072.90392)
+	Hopeful:  Katy McCloskey (761.39304)
+	Hopeful:  Jill McGowan (644.28024)
+	Hopeful:  Hanif Raja (690.61304)
+	Hopeful:  James Scanlon (1473.22926)
+	Defeated: Rosie Kane, John B Marshall (0.00000)
+	Elected votes: 3496.00000
+	Hopeful votes: 4642.41950
+	Nontransferable votes: 599.57772
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Jill McGowan
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Hopeful:  Danny Alderslowe (1072.90392)
+	Hopeful:  Katy McCloskey (761.39304)
+	Hopeful:  Hanif Raja (690.61304)
+	Hopeful:  James Scanlon (1473.22926)
+	Defeated: Jill McGowan (644.28024)
+	Defeated: Rosie Kane, John B Marshall (0.00000)
+	Elected votes: 3496.00000
+	Hopeful votes: 3998.13926
+	Defeated votes: 644.28024
+	Nontransferable votes: 599.57772
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Jill McGowan
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Hopeful:  Danny Alderslowe (1284.48650)
+	Hopeful:  Katy McCloskey (831.81800)
+	Hopeful:  Hanif Raja (748.55785)
+	Hopeful:  James Scanlon (1537.95931)
+	Defeated: Rosie Kane, John B Marshall, Jill McGowan (0.00000)
+	Elected votes: 3496.00000
+	Hopeful votes: 4402.82166
+	Nontransferable votes: 839.17556
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Hanif Raja
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Hopeful:  Danny Alderslowe (1284.48650)
+	Hopeful:  Katy McCloskey (831.81800)
+	Hopeful:  James Scanlon (1537.95931)
+	Defeated: Hanif Raja (748.55785)
+	Defeated: Rosie Kane, John B Marshall, Jill McGowan (0.00000)
+	Elected votes: 3496.00000
+	Hopeful votes: 3654.26381
+	Defeated votes: 748.55785
+	Nontransferable votes: 839.17556
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Hanif Raja
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Hopeful:  Danny Alderslowe (1326.90501)
+	Hopeful:  Katy McCloskey (865.60513)
+	Hopeful:  James Scanlon (1915.26430)
+	Defeated: Rosie Kane, John B Marshall, Jill McGowan, Hanif Raja (0.00000)
+	Elected votes: 3496.00000
+	Hopeful votes: 4107.77444
+	Nontransferable votes: 1134.22278
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: James Scanlon
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Pending:  James Scanlon (1915.26430)
+	Hopeful:  Danny Alderslowe (1326.90501)
+	Hopeful:  Katy McCloskey (865.60513)
+	Defeated: Rosie Kane, John B Marshall, Jill McGowan, Hanif Raja (0.00000)
+	Elected votes: 3496.00000
+	Pending votes: 1915.26430
+	Hopeful votes: 2192.51014
+	Nontransferable votes: 1134.22278
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 0.00000
+Round 7:
+Action: Transfer high surplus: James Scanlon
+	Elected votes: 5411.26430
+	Hopeful votes: 2192.51014
+	Nontransferable votes: 1134.22278
+	Residual: 0.00278
+	Total: 8738.00000
+	Surplus: 167.26430
+Action: Surplus transferred: James Scanlon (167.26430)
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Elected:  James Scanlon (1748.00000)
+	Hopeful:  Danny Alderslowe (1344.66149)
+	Hopeful:  Katy McCloskey (888.59196)
+	Defeated: Rosie Kane, John B Marshall, Jill McGowan, Hanif Raja (0.00000)
+	Elected votes: 5244.00000
+	Hopeful votes: 2233.25345
+	Nontransferable votes: 1260.73485
+	Residual: 0.01170
+	Total: 8738.00000
+	Surplus: 167.26430
+Round 8:
+Action: Defeat low candidate: Katy McCloskey
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Elected:  James Scanlon (1748.00000)
+	Hopeful:  Danny Alderslowe (1344.66149)
+	Defeated: Katy McCloskey (888.59196)
+	Defeated: Rosie Kane, John B Marshall, Jill McGowan, Hanif Raja (0.00000)
+	Elected votes: 5244.00000
+	Hopeful votes: 1344.66149
+	Defeated votes: 888.59196
+	Nontransferable votes: 1260.73485
+	Residual: 0.01170
+	Total: 8738.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Katy McCloskey
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Elected:  James Scanlon (1748.00000)
+	Hopeful:  Danny Alderslowe (1772.63755)
+	Defeated: Rosie Kane, John B Marshall, Katy McCloskey, Jill McGowan, Hanif Raja (0.00000)
+	Elected votes: 5244.00000
+	Hopeful votes: 1772.63755
+	Nontransferable votes: 1721.35075
+	Residual: 0.01170
+	Total: 8738.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Danny Alderslowe
+	Elected:  Danny Alderslowe (1772.63755)
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Elected:  James Scanlon (1748.00000)
+	Defeated: Rosie Kane, John B Marshall, Katy McCloskey, Jill McGowan, Hanif Raja (0.00000)
+	Elected votes: 7016.63755
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1721.35075
+	Residual: 0.01170
+	Total: 8738.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Danny Alderslowe (1772.63755)
+	Elected:  Jahangir Hanif (1748.00000)
+	Elected:  Anne Marie Millar (1748.00000)
+	Elected:  James Scanlon (1748.00000)
+	Defeated: Rosie Kane, John B Marshall, Katy McCloskey, Jill McGowan, Hanif Raja (0.00000)
+	Elected votes: 7016.63755
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1721.35075
+	Residual: 0.01170
+	Total: 8738.00000
+	Surplus: 0.00000

@@ -1,0 +1,94 @@
+
+Election: Pollux and Helen should tie
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 2
+	Ballots: 6
+	Quota: 3.00000
+
+	Add eligible: Castor
+	Add eligible: Pollux
+	Add eligible: Helen
+Action: Begin Count
+	Hopeful:  Castor (4.00000)
+	Hopeful:  Pollux (0.00000)
+	Hopeful:  Helen (2.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 6.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Castor
+	Pending:  Castor (4.00000)
+	Hopeful:  Pollux (0.00000)
+	Hopeful:  Helen (2.00000)
+	Elected votes: 0.00000
+	Pending votes: 4.00000
+	Hopeful votes: 2.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Castor
+	Elected votes: 4.00000
+	Hopeful votes: 2.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 1.00000
+Action: Surplus transferred: Castor (1.00000)
+	Elected:  Castor (3.00000)
+	Hopeful:  Pollux (1.00000)
+	Hopeful:  Helen (2.00000)
+	Elected votes: 3.00000
+	Hopeful votes: 3.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 1.00000
+Round 2:
+Action: Defeat low candidate: Pollux
+	Elected:  Castor (3.00000)
+	Hopeful:  Helen (2.00000)
+	Defeated: Pollux (1.00000)
+	Elected votes: 3.00000
+	Hopeful votes: 2.00000
+	Defeated votes: 1.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Pollux
+	Elected:  Castor (3.00000)
+	Hopeful:  Helen (2.00000)
+	Defeated: Pollux (0.00000)
+	Elected votes: 3.00000
+	Hopeful votes: 2.00000
+	Nontransferable votes: 1.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Helen
+	Elected:  Castor (3.00000)
+	Elected:  Helen (2.00000)
+	Defeated: Pollux (0.00000)
+	Elected votes: 5.00000
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Castor (3.00000)
+	Elected:  Helen (2.00000)
+	Defeated: Pollux (0.00000)
+	Elected votes: 5.00000
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000

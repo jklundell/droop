@@ -1,0 +1,88 @@
+
+Election: Dave Kadlecek: #2 different winners for 2 & 3 seats: CE vs AD+B (q=333.33.../250)
+
+	Droop package: droop v0.11
+	Rule: CfER (single defeat)
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 2
+	Ballots: 1000
+	Quota: 333.33334
+
+	Add eligible: A
+	Add eligible: B
+	Add withdrawn: C
+	Add eligible: D
+	Add withdrawn: E
+Action: Begin Count
+	Hopeful:  A (332.00000)
+	Hopeful:  B (170.00000)
+	Hopeful:  D (498.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 1000.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 1000.00000
+	Surplus: 0.00000
+Round 1:
+Action: Elect, transfer pending: D
+	Pending:  D (498.00000)
+	Hopeful:  A (332.00000)
+	Hopeful:  B (170.00000)
+	Elected votes: 0.00000
+	Pending votes: 498.00000
+	Hopeful votes: 502.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 1000.00000
+	Surplus: 0.00000
+Action: Transfer surplus: D
+	Elected votes: 498.00000
+	Hopeful votes: 502.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 1000.00000
+	Surplus: 0.00000
+Action: Surplus transferred: D (164.66666)
+	Elected:  D (333.33334)
+	Hopeful:  A (332.00000)
+	Hopeful:  B (170.00000)
+	Elected votes: 333.33334
+	Hopeful votes: 502.00000
+	Nontransferable votes: 164.66370
+	Residual: 0.00296
+	Total: 1000.00000
+	Surplus: 0.00000
+Round 2:
+Action: Defeat: B
+	Elected:  D (333.33334)
+	Hopeful:  A (332.00000)
+	Defeated: B (170.00000)
+	Elected votes: 333.33334
+	Hopeful votes: 332.00000
+	Defeated votes: 170.00000
+	Nontransferable votes: 164.66370
+	Residual: 0.00296
+	Total: 1000.00000
+	Surplus: 0.00000
+Action: Elect remaining: A
+	Elected:  A (332.00000)
+	Elected:  D (333.33334)
+	Defeated: B (170.00000)
+	Elected votes: 665.33334
+	Hopeful votes: 0.00000
+	Defeated votes: 170.00000
+	Nontransferable votes: 164.66370
+	Residual: 0.00296
+	Total: 1000.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  A (332.00000)
+	Elected:  D (333.33334)
+	Defeated: B (170.00000)
+	Elected votes: 665.33334
+	Hopeful votes: 0.00000
+	Defeated votes: 170.00000
+	Nontransferable votes: 164.66370
+	Residual: 0.00296
+	Total: 1000.00000
+	Surplus: 0.00000

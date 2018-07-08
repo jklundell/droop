@@ -1,0 +1,45 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote	11.name	11.state	11.vote
+0	log	Add eligible: Mick Eyre
+0	log	Add eligible: Walter Hamilton
+0	log	Add eligible: Wheatley Harris
+0	log	Add eligible: David Jackson
+0	log	Add eligible: Gordon Kirker
+0	log	Add eligible: Catherine Maguire
+0	log	Add eligible: Tom McKeown
+0	log	Add eligible: John F McLaughlin
+0	log	Add eligible: Euan McLeod
+0	log	Add eligible: George Ryan
+0	log	Add eligible: Alex White
+0	begin	1761.00000	0.00000	Mick Eyre	H	163.00000	Walter Hamilton	H	268.00000	Wheatley Harris	H	458.00000	David Jackson	H	420.00000	Gordon Kirker	H	190.00000	Catherine Maguire	H	227.00000	Tom McKeown	H	1861.00000	John F McLaughlin	H	1896.00000	Euan McLeod	H	1369.00000	George Ryan	H	1386.00000	Alex White	H	565.00000
+0	elect	1761.00000	0.00000	Mick Eyre	H	163.00000	Walter Hamilton	H	268.00000	Wheatley Harris	H	458.00000	David Jackson	H	420.00000	Gordon Kirker	H	190.00000	Catherine Maguire	H	227.00000	Tom McKeown	H	1861.00000	John F McLaughlin	e	1896.00000	Euan McLeod	H	1369.00000	George Ryan	H	1386.00000	Alex White	H	565.00000
+0	elect	1761.00000	0.00000	Mick Eyre	H	163.00000	Walter Hamilton	H	268.00000	Wheatley Harris	H	458.00000	David Jackson	H	420.00000	Gordon Kirker	H	190.00000	Catherine Maguire	H	227.00000	Tom McKeown	e	1861.00000	John F McLaughlin	e	1896.00000	Euan McLeod	H	1369.00000	George Ryan	H	1386.00000	Alex White	H	565.00000
+1	round	New Round
+1	unpend	1761.00000	0.00000	Mick Eyre	H	163.00000	Walter Hamilton	H	268.00000	Wheatley Harris	H	458.00000	David Jackson	H	420.00000	Gordon Kirker	H	190.00000	Catherine Maguire	H	227.00000	Tom McKeown	e	1861.00000	John F McLaughlin	E	1896.00000	Euan McLeod	H	1369.00000	George Ryan	H	1386.00000	Alex White	H	565.00000
+1	transfer	1761.00000	43.36080	Mick Eyre	H	172.82560	Walter Hamilton	H	271.91600	Wheatley Harris	H	477.65120	David Jackson	H	433.81280	Gordon Kirker	H	191.49520	Catherine Maguire	H	241.59600	Tom McKeown	e	1861.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1382.17200	George Ryan	H	1394.04560	Alex White	H	572.12000
+2	round	New Round
+2	unpend	1761.00000	43.36080	Mick Eyre	H	172.82560	Walter Hamilton	H	271.91600	Wheatley Harris	H	477.65120	David Jackson	H	433.81280	Gordon Kirker	H	191.49520	Catherine Maguire	H	241.59600	Tom McKeown	E	1861.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1382.17200	George Ryan	H	1394.04560	Alex White	H	572.12000
+2	transfer	1761.00000	67.10946	Mick Eyre	H	174.11512	Walter Hamilton	H	272.66822	Wheatley Harris	H	482.48690	David Jackson	H	436.33811	Gordon Kirker	H	192.24742	Catherine Maguire	H	243.85266	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1428.70218	George Ryan	H	1410.00341	Alex White	H	573.46325
+3	round	New Round
+3	defeat	1761.00000	67.10946	Mick Eyre	D	174.11512	Walter Hamilton	H	272.66822	Wheatley Harris	H	482.48690	David Jackson	H	436.33811	Gordon Kirker	H	192.24742	Catherine Maguire	H	243.85266	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1428.70218	George Ryan	H	1410.00341	Alex White	H	573.46325
+3	transfer	1761.00000	106.94131	Mick Eyre	D	0.00000	Walter Hamilton	H	285.50647	Wheatley Harris	H	535.92329	David Jackson	H	450.24624	Gordon Kirker	H	196.44355	Catherine Maguire	H	265.76079	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1442.86149	George Ryan	H	1421.41314	Alex White	H	575.89045
+4	round	New Round
+4	defeat	1761.00000	106.94131	Mick Eyre	D	0.00000	Walter Hamilton	H	285.50647	Wheatley Harris	H	535.92329	David Jackson	H	450.24624	Gordon Kirker	D	196.44355	Catherine Maguire	H	265.76079	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1442.86149	George Ryan	H	1421.41314	Alex White	H	575.89045
+4	transfer	1761.00000	158.54717	Mick Eyre	D	0.00000	Walter Hamilton	H	316.70260	Wheatley Harris	H	544.29808	David Jackson	H	458.56730	Gordon Kirker	D	0.00000	Catherine Maguire	H	269.97439	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1454.21881	George Ryan	H	1434.53807	Alex White	H	644.14031
+5	round	New Round
+5	defeat	1761.00000	158.54717	Mick Eyre	D	0.00000	Walter Hamilton	H	316.70260	Wheatley Harris	H	544.29808	David Jackson	H	458.56730	Gordon Kirker	D	0.00000	Catherine Maguire	D	269.97439	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1454.21881	George Ryan	H	1434.53807	Alex White	H	644.14031
+5	transfer	1761.00000	247.42259	Mick Eyre	D	0.00000	Walter Hamilton	H	326.11233	Wheatley Harris	H	594.85940	David Jackson	H	515.32419	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1483.96839	George Ryan	H	1454.21513	Alex White	H	659.08470
+6	round	New Round
+6	defeat	1761.00000	247.42259	Mick Eyre	D	0.00000	Walter Hamilton	D	326.11233	Wheatley Harris	H	594.85940	David Jackson	H	515.32419	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1483.96839	George Ryan	H	1454.21513	Alex White	H	659.08470
+6	transfer	1761.00000	403.20203	Mick Eyre	D	0.00000	Walter Hamilton	D	0.00000	Wheatley Harris	H	628.82126	David Jackson	H	539.16112	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1502.57557	George Ryan	H	1472.57245	Alex White	H	734.65430
+7	round	New Round
+7	defeat	1761.00000	403.20203	Mick Eyre	D	0.00000	Walter Hamilton	D	0.00000	Wheatley Harris	H	628.82126	David Jackson	D	539.16112	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1502.57557	George Ryan	H	1472.57245	Alex White	H	734.65430
+7	transfer	1761.00000	648.88675	Mick Eyre	D	0.00000	Walter Hamilton	D	0.00000	Wheatley Harris	H	671.76057	David Jackson	D	0.00000	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1582.99977	George Ryan	H	1528.85349	Alex White	H	848.48615
+8	round	New Round
+8	defeat	1761.00000	648.88675	Mick Eyre	D	0.00000	Walter Hamilton	D	0.00000	Wheatley Harris	D	671.76057	David Jackson	D	0.00000	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1582.99977	George Ryan	H	1528.85349	Alex White	H	848.48615
+8	transfer	1761.00000	1079.51844	Mick Eyre	D	0.00000	Walter Hamilton	D	0.00000	Wheatley Harris	D	0.00000	David Jackson	D	0.00000	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1720.33550	George Ryan	H	1593.31451	Alex White	H	887.81828
+9	round	New Round
+9	defeat	1761.00000	1079.51844	Mick Eyre	D	0.00000	Walter Hamilton	D	0.00000	Wheatley Harris	D	0.00000	David Jackson	D	0.00000	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1720.33550	George Ryan	H	1593.31451	Alex White	D	887.81828
+9	transfer	1761.00000	1767.15207	Mick Eyre	D	0.00000	Walter Hamilton	D	0.00000	Wheatley Harris	D	0.00000	David Jackson	D	0.00000	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	H	1825.59775	George Ryan	H	1688.23691	Alex White	D	0.00000
+9	elect	1761.00000	1767.15207	Mick Eyre	D	0.00000	Walter Hamilton	D	0.00000	Wheatley Harris	D	0.00000	David Jackson	D	0.00000	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	E	1825.59775	George Ryan	H	1688.23691	Alex White	D	0.00000
+9	elect	1761.00000	1767.15207	Mick Eyre	D	0.00000	Walter Hamilton	D	0.00000	Wheatley Harris	D	0.00000	David Jackson	D	0.00000	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	E	1825.59775	George Ryan	E	1688.23691	Alex White	D	0.00000
+X	end	1761.00000	1767.15207	Mick Eyre	D	0.00000	Walter Hamilton	D	0.00000	Wheatley Harris	D	0.00000	David Jackson	D	0.00000	Gordon Kirker	D	0.00000	Catherine Maguire	D	0.00000	Tom McKeown	E	1761.00000	John F McLaughlin	E	1761.00000	Euan McLeod	E	1825.59775	George Ryan	E	1688.23691	Alex White	D	0.00000

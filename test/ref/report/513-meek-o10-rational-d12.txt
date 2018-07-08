@@ -1,0 +1,79 @@
+
+Election: Pollux and Helen should tie
+
+	Droop package: droop v0.11
+	Rule: Meek Parametric (omega = 1/10^10)
+	Arithmetic: rational arithmetic
+	Seats: 2
+	Ballots: 9
+	Quota: 3.000000000000
+	Omega: 0.000000000100
+
+	Add eligible: Castor
+	Add eligible: Pollux
+	Add eligible: Helen
+Action: Begin Count
+	Hopeful:  Castor (5.000000000000)
+	Hopeful:  Pollux (1.000000000000)
+	Hopeful:  Helen (3.000000000000)
+	Quota: 3.000000000000
+	Votes: 9.000000000000
+	Residual: 0.000000000000
+	Total: 9.000000000000
+	Surplus: 0.000000000000
+Round 1:
+Action: Elect: Castor
+	Elected:  Castor (5.000000000000)
+	Hopeful:  Pollux (1.000000000000)
+	Hopeful:  Helen (3.000000000000)
+	Quota: 3.000000000000
+	Votes: 9.000000000000
+	Residual: 0.000000000000
+	Total: 9.000000000000
+	Surplus: 0.000000000000
+Action: Iterate (elected)
+	Quota: 3.000000000000
+	Votes: 9.000000000000
+	Residual: 0.000000000000
+	Total: 9.000000000000
+	Surplus: 2.000000000000
+Round 2:
+Action: Iterate (omega)
+	Quota: 3.000000000000
+	Votes: 9.000000000000
+	Residual: 0.000000000000
+	Total: 9.000000000000
+	Surplus: 0.000000000000
+Action: Break tie (defeat): [Pollux, Helen] -> Pollux
+	Quota: 3.000000000000
+	Votes: 9.000000000000
+	Residual: 0.000000000000
+	Total: 9.000000000000
+	Surplus: 0.000000000000
+Action: Defeat (surplus 0.000000000000 < omega): Pollux
+	Elected:  Castor (3.000000000000)
+	Hopeful:  Helen (3.000000000000)
+	Defeated: Pollux (3.000000000000)
+	Quota: 3.000000000000
+	Votes: 9.000000000000
+	Residual: 0.000000000000
+	Total: 9.000000000000
+	Surplus: 0.000000000000
+Action: Elect remaining: Helen
+	Elected:  Castor (3.000000000000)
+	Elected:  Helen (3.000000000000)
+	Defeated: Pollux (0.000000000000)
+	Quota: 3.000000000000
+	Votes: 6.000000000000
+	Residual: 3.000000000000
+	Total: 9.000000000000
+	Surplus: 0.000000000000
+Action: Count Complete
+	Elected:  Castor (3.000000000000)
+	Elected:  Helen (3.000000000000)
+	Defeated: Pollux (0.000000000000)
+	Quota: 3.000000000000
+	Votes: 6.000000000000
+	Residual: 3.000000000000
+	Total: 9.000000000000
+	Surplus: 0.000000000000

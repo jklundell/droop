@@ -1,0 +1,40 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote
+0	log	Add eligible: Danny Alderslowe
+0	log	Add eligible: Jahangir Hanif
+0	log	Add eligible: Rosie Kane
+0	log	Add eligible: John B Marshall
+0	log	Add eligible: Katy McCloskey
+0	log	Add eligible: Jill McGowan
+0	log	Add eligible: Anne Marie Millar
+0	log	Add eligible: Hanif Raja
+0	log	Add eligible: James Scanlon
+0	begin	1748.00000	0.00000	Danny Alderslowe	H	812.00000	Jahangir Hanif	H	2392.00000	Rosie Kane	H	327.00000	John B Marshall	H	423.00000	Katy McCloskey	H	533.00000	Jill McGowan	H	456.00000	Anne Marie Millar	H	1869.00000	Hanif Raja	H	554.00000	James Scanlon	H	1372.00000
+0	elect	1748.00000	0.00000	Danny Alderslowe	H	812.00000	Jahangir Hanif	e	2392.00000	Rosie Kane	H	327.00000	John B Marshall	H	423.00000	Katy McCloskey	H	533.00000	Jill McGowan	H	456.00000	Anne Marie Millar	H	1869.00000	Hanif Raja	H	554.00000	James Scanlon	H	1372.00000
+0	elect	1748.00000	0.00000	Danny Alderslowe	H	812.00000	Jahangir Hanif	e	2392.00000	Rosie Kane	H	327.00000	John B Marshall	H	423.00000	Katy McCloskey	H	533.00000	Jill McGowan	H	456.00000	Anne Marie Millar	e	1869.00000	Hanif Raja	H	554.00000	James Scanlon	H	1372.00000
+1	round	New Round
+1	unpend	1748.00000	0.00000	Danny Alderslowe	H	812.00000	Jahangir Hanif	E	2392.00000	Rosie Kane	H	327.00000	John B Marshall	H	423.00000	Katy McCloskey	H	533.00000	Jill McGowan	H	456.00000	Anne Marie Millar	e	1869.00000	Hanif Raja	H	554.00000	James Scanlon	H	1372.00000
+1	transfer	1748.00000	210.53786	Danny Alderslowe	H	895.99976	Jahangir Hanif	E	1748.00000	Rosie Kane	H	453.26887	John B Marshall	H	441.84610	Katy McCloskey	H	590.88445	Jill McGowan	H	522.23058	Anne Marie Millar	e	1869.00000	Hanif Raja	H	613.49983	James Scanlon	H	1392.73071
+2	round	New Round
+2	unpend	1748.00000	210.53786	Danny Alderslowe	H	895.99976	Jahangir Hanif	E	1748.00000	Rosie Kane	H	453.26887	John B Marshall	H	441.84610	Katy McCloskey	H	590.88445	Jill McGowan	H	522.23058	Anne Marie Millar	E	1869.00000	Hanif Raja	H	613.49983	James Scanlon	H	1392.73071
+2	transfer	1748.00000	237.59918	Danny Alderslowe	H	900.01364	Jahangir Hanif	E	1748.00000	Rosie Kane	H	456.95905	John B Marshall	H	443.33512	Katy McCloskey	H	596.19313	Jill McGowan	H	526.82712	Anne Marie Millar	E	1748.00000	Hanif Raja	H	651.56695	James Scanlon	H	1429.50303
+3	round	New Round
+3	defeat	1748.00000	237.59918	Danny Alderslowe	H	900.01364	Jahangir Hanif	E	1748.00000	Rosie Kane	H	456.95905	John B Marshall	D	443.33512	Katy McCloskey	H	596.19313	Jill McGowan	H	526.82712	Anne Marie Millar	E	1748.00000	Hanif Raja	H	651.56695	James Scanlon	H	1429.50303
+3	transfer	1748.00000	440.61709	Danny Alderslowe	H	967.97708	Jahangir Hanif	E	1748.00000	Rosie Kane	H	473.43468	John B Marshall	D	0.00000	Katy McCloskey	H	705.70912	Jill McGowan	H	537.71173	Anne Marie Millar	E	1748.00000	Hanif Raja	H	668.31181	James Scanlon	H	1448.23571
+4	round	New Round
+4	defeat	1748.00000	440.61709	Danny Alderslowe	H	967.97708	Jahangir Hanif	E	1748.00000	Rosie Kane	D	473.43468	John B Marshall	D	0.00000	Katy McCloskey	H	705.70912	Jill McGowan	H	537.71173	Anne Marie Millar	E	1748.00000	Hanif Raja	H	668.31181	James Scanlon	H	1448.23571
+4	transfer	1748.00000	599.57772	Danny Alderslowe	H	1072.90392	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	H	761.39304	Jill McGowan	H	644.28024	Anne Marie Millar	E	1748.00000	Hanif Raja	H	690.61304	James Scanlon	H	1473.22926
+5	round	New Round
+5	defeat	1748.00000	599.57772	Danny Alderslowe	H	1072.90392	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	H	761.39304	Jill McGowan	D	644.28024	Anne Marie Millar	E	1748.00000	Hanif Raja	H	690.61304	James Scanlon	H	1473.22926
+5	transfer	1748.00000	839.17556	Danny Alderslowe	H	1284.48650	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	H	831.81800	Jill McGowan	D	0.00000	Anne Marie Millar	E	1748.00000	Hanif Raja	H	748.55785	James Scanlon	H	1537.95931
+6	round	New Round
+6	defeat	1748.00000	839.17556	Danny Alderslowe	H	1284.48650	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	H	831.81800	Jill McGowan	D	0.00000	Anne Marie Millar	E	1748.00000	Hanif Raja	D	748.55785	James Scanlon	H	1537.95931
+6	transfer	1748.00000	1134.22278	Danny Alderslowe	H	1326.90501	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	H	865.60513	Jill McGowan	D	0.00000	Anne Marie Millar	E	1748.00000	Hanif Raja	D	0.00000	James Scanlon	H	1915.26430
+6	elect	1748.00000	1134.22278	Danny Alderslowe	H	1326.90501	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	H	865.60513	Jill McGowan	D	0.00000	Anne Marie Millar	E	1748.00000	Hanif Raja	D	0.00000	James Scanlon	e	1915.26430
+7	round	New Round
+7	unpend	1748.00000	1134.22278	Danny Alderslowe	H	1326.90501	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	H	865.60513	Jill McGowan	D	0.00000	Anne Marie Millar	E	1748.00000	Hanif Raja	D	0.00000	James Scanlon	E	1915.26430
+7	transfer	1748.00000	1260.73485	Danny Alderslowe	H	1344.66149	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	H	888.59196	Jill McGowan	D	0.00000	Anne Marie Millar	E	1748.00000	Hanif Raja	D	0.00000	James Scanlon	E	1748.00000
+8	round	New Round
+8	defeat	1748.00000	1260.73485	Danny Alderslowe	H	1344.66149	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	D	888.59196	Jill McGowan	D	0.00000	Anne Marie Millar	E	1748.00000	Hanif Raja	D	0.00000	James Scanlon	E	1748.00000
+8	transfer	1748.00000	1721.35075	Danny Alderslowe	H	1772.63755	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	D	0.00000	Jill McGowan	D	0.00000	Anne Marie Millar	E	1748.00000	Hanif Raja	D	0.00000	James Scanlon	E	1748.00000
+8	elect	1748.00000	1721.35075	Danny Alderslowe	E	1772.63755	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	D	0.00000	Jill McGowan	D	0.00000	Anne Marie Millar	E	1748.00000	Hanif Raja	D	0.00000	James Scanlon	E	1748.00000
+X	end	1748.00000	1721.35075	Danny Alderslowe	E	1772.63755	Jahangir Hanif	E	1748.00000	Rosie Kane	D	0.00000	John B Marshall	D	0.00000	Katy McCloskey	D	0.00000	Jill McGowan	D	0.00000	Anne Marie Millar	E	1748.00000	Hanif Raja	D	0.00000	James Scanlon	E	1748.00000

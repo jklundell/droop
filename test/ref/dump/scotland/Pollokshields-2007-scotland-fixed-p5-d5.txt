@@ -1,0 +1,39 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote
+0	log	Add eligible: Ali Ashraf
+0	log	Add eligible: Karin Currie
+0	log	Add eligible: Khalil Malik
+0	log	Add eligible: David Meikle
+0	log	Add eligible: Isabel Nelson
+0	log	Add eligible: Irfan Rabbani
+0	log	Add eligible: Ian A Ruffell
+0	log	Add eligible: Muhammad Shoaib
+0	log	Add eligible: Fatima Uygun
+0	begin	2392.00000	0.00000	Ali Ashraf	H	184.00000	Karin Currie	H	438.00000	Khalil Malik	H	2057.00000	David Meikle	H	1435.00000	Isabel Nelson	H	863.00000	Irfan Rabbani	H	2575.00000	Ian A Ruffell	H	1043.00000	Muhammad Shoaib	H	592.00000	Fatima Uygun	H	380.00000
+0	elect	2392.00000	0.00000	Ali Ashraf	H	184.00000	Karin Currie	H	438.00000	Khalil Malik	H	2057.00000	David Meikle	H	1435.00000	Isabel Nelson	H	863.00000	Irfan Rabbani	e	2575.00000	Ian A Ruffell	H	1043.00000	Muhammad Shoaib	H	592.00000	Fatima Uygun	H	380.00000
+1	round	New Round
+1	unpend	2392.00000	0.00000	Ali Ashraf	H	184.00000	Karin Currie	H	438.00000	Khalil Malik	H	2057.00000	David Meikle	H	1435.00000	Isabel Nelson	H	863.00000	Irfan Rabbani	E	2575.00000	Ian A Ruffell	H	1043.00000	Muhammad Shoaib	H	592.00000	Fatima Uygun	H	380.00000
+1	transfer	2392.00000	79.01872	Ali Ashraf	H	188.76102	Karin Currie	H	441.48194	Khalil Malik	H	2082.01312	David Meikle	H	1445.09052	Isabel Nelson	H	883.96270	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1060.97818	Muhammad Shoaib	H	605.50140	Fatima Uygun	H	388.17190
+2	round	New Round
+2	defeat	2392.00000	79.01872	Ali Ashraf	D	188.76102	Karin Currie	H	441.48194	Khalil Malik	H	2082.01312	David Meikle	H	1445.09052	Isabel Nelson	H	883.96270	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1060.97818	Muhammad Shoaib	H	605.50140	Fatima Uygun	H	388.17190
+2	transfer	2392.00000	124.65826	Ali Ashraf	D	0.00000	Karin Currie	H	453.62406	Khalil Malik	H	2123.64750	David Meikle	H	1452.44582	Isabel Nelson	H	893.46012	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1096.75984	Muhammad Shoaib	H	611.71458	Fatima Uygun	H	418.66932
+3	round	New Round
+3	defeat	2392.00000	124.65826	Ali Ashraf	D	0.00000	Karin Currie	H	453.62406	Khalil Malik	H	2123.64750	David Meikle	H	1452.44582	Isabel Nelson	H	893.46012	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1096.75984	Muhammad Shoaib	H	611.71458	Fatima Uygun	D	418.66932
+3	transfer	2392.00000	227.28748	Ali Ashraf	D	0.00000	Karin Currie	H	472.05042	Khalil Malik	H	2256.35294	David Meikle	H	1460.73006	Isabel Nelson	H	918.66814	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1206.32316	Muhammad Shoaib	H	633.56730	Fatima Uygun	D	0.00000
+4	round	New Round
+4	defeat	2392.00000	227.28748	Ali Ashraf	D	0.00000	Karin Currie	D	472.05042	Khalil Malik	H	2256.35294	David Meikle	H	1460.73006	Isabel Nelson	H	918.66814	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1206.32316	Muhammad Shoaib	H	633.56730	Fatima Uygun	D	0.00000
+4	transfer	2392.00000	332.77974	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	H	2309.70824	David Meikle	H	1593.22748	Isabel Nelson	H	1001.44980	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1280.96270	Muhammad Shoaib	H	656.85154	Fatima Uygun	D	0.00000
+5	round	New Round
+5	defeat	2392.00000	332.77974	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	H	2309.70824	David Meikle	H	1593.22748	Isabel Nelson	H	1001.44980	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1280.96270	Muhammad Shoaib	D	656.85154	Fatima Uygun	D	0.00000
+5	transfer	2392.00000	587.46454	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	H	2624.74834	David Meikle	H	1610.72490	Isabel Nelson	H	1030.65782	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1321.38390	Muhammad Shoaib	D	0.00000	Fatima Uygun	D	0.00000
+5	elect	2392.00000	587.46454	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	e	2624.74834	David Meikle	H	1610.72490	Isabel Nelson	H	1030.65782	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1321.38390	Muhammad Shoaib	D	0.00000	Fatima Uygun	D	0.00000
+6	round	New Round
+6	unpend	2392.00000	587.46454	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	E	2624.74834	David Meikle	H	1610.72490	Isabel Nelson	H	1030.65782	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1321.38390	Muhammad Shoaib	D	0.00000	Fatima Uygun	D	0.00000
+6	transfer	2392.00000	705.29174	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	E	2392.00000	David Meikle	H	1632.34590	Isabel Nelson	H	1070.55020	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1374.77932	Muhammad Shoaib	D	0.00000	Fatima Uygun	D	0.00000
+7	round	New Round
+7	defeat	2392.00000	705.29174	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	E	2392.00000	David Meikle	H	1632.34590	Isabel Nelson	D	1070.55020	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1374.77932	Muhammad Shoaib	D	0.00000	Fatima Uygun	D	0.00000
+7	transfer	2392.00000	1108.21148	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	E	2392.00000	David Meikle	H	1839.53040	Isabel Nelson	D	0.00000	Irfan Rabbani	E	2392.00000	Ian A Ruffell	H	1835.22528	Muhammad Shoaib	D	0.00000	Fatima Uygun	D	0.00000
+8	round	New Round
+8	defeat	2392.00000	1108.21148	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	E	2392.00000	David Meikle	H	1839.53040	Isabel Nelson	D	0.00000	Irfan Rabbani	E	2392.00000	Ian A Ruffell	D	1835.22528	Muhammad Shoaib	D	0.00000	Fatima Uygun	D	0.00000
+8	transfer	2392.00000	2565.02778	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	E	2392.00000	David Meikle	H	2217.93938	Isabel Nelson	D	0.00000	Irfan Rabbani	E	2392.00000	Ian A Ruffell	D	0.00000	Muhammad Shoaib	D	0.00000	Fatima Uygun	D	0.00000
+8	elect	2392.00000	2565.02778	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	E	2392.00000	David Meikle	E	2217.93938	Isabel Nelson	D	0.00000	Irfan Rabbani	E	2392.00000	Ian A Ruffell	D	0.00000	Muhammad Shoaib	D	0.00000	Fatima Uygun	D	0.00000
+X	end	2392.00000	2565.02778	Ali Ashraf	D	0.00000	Karin Currie	D	0.00000	Khalil Malik	E	2392.00000	David Meikle	E	2217.93938	Isabel Nelson	D	0.00000	Irfan Rabbani	E	2392.00000	Ian A Ruffell	D	0.00000	Muhammad Shoaib	D	0.00000	Fatima Uygun	D	0.00000

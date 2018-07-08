@@ -1,0 +1,273 @@
+
+Election: LANGSIDE
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 3
+	Ballots: 9334
+	Quota: 2334.00000
+
+	Add eligible: Paul Coleshill
+	Add eligible: James Dornan
+	Add eligible: Martin Frain
+	Add eligible: Archie Graham
+	Add eligible: Margaret McCafferty
+	Add eligible: Neil Sloan McDonald
+	Add eligible: Russell Munn
+	Add eligible: James Nesbitt
+Action: Begin Count
+	Hopeful:  Paul Coleshill (1207.00000)
+	Hopeful:  James Dornan (2522.00000)
+	Hopeful:  Martin Frain (467.00000)
+	Hopeful:  Archie Graham (2222.00000)
+	Hopeful:  Margaret McCafferty (853.00000)
+	Hopeful:  Neil Sloan McDonald (891.00000)
+	Hopeful:  Russell Munn (993.00000)
+	Hopeful:  James Nesbitt (179.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 9334.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9334.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: James Dornan
+	Pending:  James Dornan (2522.00000)
+	Hopeful:  Paul Coleshill (1207.00000)
+	Hopeful:  Martin Frain (467.00000)
+	Hopeful:  Archie Graham (2222.00000)
+	Hopeful:  Margaret McCafferty (853.00000)
+	Hopeful:  Neil Sloan McDonald (891.00000)
+	Hopeful:  Russell Munn (993.00000)
+	Hopeful:  James Nesbitt (179.00000)
+	Elected votes: 0.00000
+	Pending votes: 2522.00000
+	Hopeful votes: 6812.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9334.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: James Dornan
+	Elected votes: 2522.00000
+	Hopeful votes: 6812.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9334.00000
+	Surplus: 188.00000
+Action: Surplus transferred: James Dornan (188.00000)
+	Elected:  James Dornan (2334.00000)
+	Hopeful:  Paul Coleshill (1243.37552)
+	Hopeful:  Martin Frain (492.41814)
+	Hopeful:  Archie Graham (2241.15678)
+	Hopeful:  Margaret McCafferty (859.41044)
+	Hopeful:  Neil Sloan McDonald (924.61754)
+	Hopeful:  Russell Munn (1003.43560)
+	Hopeful:  James Nesbitt (187.34848)
+	Elected votes: 2334.00000
+	Hopeful votes: 6951.76250
+	Nontransferable votes: 48.22738
+	Residual: 0.01012
+	Total: 9334.00000
+	Surplus: 188.00000
+Round 2:
+Action: Defeat low candidate: James Nesbitt
+	Elected:  James Dornan (2334.00000)
+	Hopeful:  Paul Coleshill (1243.37552)
+	Hopeful:  Martin Frain (492.41814)
+	Hopeful:  Archie Graham (2241.15678)
+	Hopeful:  Margaret McCafferty (859.41044)
+	Hopeful:  Neil Sloan McDonald (924.61754)
+	Hopeful:  Russell Munn (1003.43560)
+	Defeated: James Nesbitt (187.34848)
+	Elected votes: 2334.00000
+	Hopeful votes: 6764.41402
+	Defeated votes: 187.34848
+	Nontransferable votes: 48.22738
+	Residual: 0.01012
+	Total: 9334.00000
+	Surplus: 0.00000
+Action: Transfer defeated: James Nesbitt
+	Elected:  James Dornan (2334.00000)
+	Hopeful:  Paul Coleshill (1264.64270)
+	Hopeful:  Martin Frain (541.80342)
+	Hopeful:  Archie Graham (2255.75310)
+	Hopeful:  Margaret McCafferty (868.41044)
+	Hopeful:  Neil Sloan McDonald (974.30098)
+	Hopeful:  Russell Munn (1008.73376)
+	Defeated: James Nesbitt (0.00000)
+	Elected votes: 2334.00000
+	Hopeful votes: 6913.64440
+	Nontransferable votes: 86.34548
+	Residual: 0.01012
+	Total: 9334.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: Martin Frain
+	Elected:  James Dornan (2334.00000)
+	Hopeful:  Paul Coleshill (1264.64270)
+	Hopeful:  Archie Graham (2255.75310)
+	Hopeful:  Margaret McCafferty (868.41044)
+	Hopeful:  Neil Sloan McDonald (974.30098)
+	Hopeful:  Russell Munn (1008.73376)
+	Defeated: Martin Frain (541.80342)
+	Defeated: James Nesbitt (0.00000)
+	Elected votes: 2334.00000
+	Hopeful votes: 6371.84098
+	Defeated votes: 541.80342
+	Nontransferable votes: 86.34548
+	Residual: 0.01012
+	Total: 9334.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Martin Frain
+	Elected:  James Dornan (2334.00000)
+	Hopeful:  Paul Coleshill (1338.22062)
+	Hopeful:  Archie Graham (2330.10740)
+	Hopeful:  Margaret McCafferty (902.23038)
+	Hopeful:  Neil Sloan McDonald (1154.51296)
+	Hopeful:  Russell Munn (1024.62824)
+	Defeated: Martin Frain, James Nesbitt (0.00000)
+	Elected votes: 2334.00000
+	Hopeful votes: 6749.69960
+	Nontransferable votes: 250.29028
+	Residual: 0.01012
+	Total: 9334.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Margaret McCafferty
+	Elected:  James Dornan (2334.00000)
+	Hopeful:  Paul Coleshill (1338.22062)
+	Hopeful:  Archie Graham (2330.10740)
+	Hopeful:  Neil Sloan McDonald (1154.51296)
+	Hopeful:  Russell Munn (1024.62824)
+	Defeated: Margaret McCafferty (902.23038)
+	Defeated: Martin Frain, James Nesbitt (0.00000)
+	Elected votes: 2334.00000
+	Hopeful votes: 5847.46922
+	Defeated votes: 902.23038
+	Nontransferable votes: 250.29028
+	Residual: 0.01012
+	Total: 9334.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Margaret McCafferty
+	Elected:  James Dornan (2334.00000)
+	Hopeful:  Paul Coleshill (1405.48780)
+	Hopeful:  Archie Graham (2917.64176)
+	Hopeful:  Neil Sloan McDonald (1214.55652)
+	Hopeful:  Russell Munn (1052.07548)
+	Defeated: Martin Frain, Margaret McCafferty, James Nesbitt (0.00000)
+	Elected votes: 2334.00000
+	Hopeful votes: 6589.76156
+	Nontransferable votes: 410.22832
+	Residual: 0.01012
+	Total: 9334.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Archie Graham
+	Elected:  James Dornan (2334.00000)
+	Pending:  Archie Graham (2917.64176)
+	Hopeful:  Paul Coleshill (1405.48780)
+	Hopeful:  Neil Sloan McDonald (1214.55652)
+	Hopeful:  Russell Munn (1052.07548)
+	Defeated: Martin Frain, Margaret McCafferty, James Nesbitt (0.00000)
+	Elected votes: 2334.00000
+	Pending votes: 2917.64176
+	Hopeful votes: 3672.11980
+	Nontransferable votes: 410.22832
+	Residual: 0.01012
+	Total: 9334.00000
+	Surplus: 0.00000
+Round 5:
+Action: Transfer high surplus: Archie Graham
+	Elected votes: 5251.64176
+	Hopeful votes: 3672.11980
+	Nontransferable votes: 410.22832
+	Residual: 0.01012
+	Total: 9334.00000
+	Surplus: 583.64176
+Action: Surplus transferred: Archie Graham (583.64176)
+	Elected:  James Dornan (2334.00000)
+	Elected:  Archie Graham (2334.00000)
+	Hopeful:  Paul Coleshill (1547.51043)
+	Hopeful:  Neil Sloan McDonald (1310.02929)
+	Hopeful:  Russell Munn (1088.99408)
+	Defeated: Martin Frain, Margaret McCafferty, James Nesbitt (0.00000)
+	Elected votes: 4668.00000
+	Hopeful votes: 3946.53380
+	Nontransferable votes: 719.43012
+	Residual: 0.03608
+	Total: 9334.00000
+	Surplus: 583.64176
+Round 6:
+Action: Defeat low candidate: Russell Munn
+	Elected:  James Dornan (2334.00000)
+	Elected:  Archie Graham (2334.00000)
+	Hopeful:  Paul Coleshill (1547.51043)
+	Hopeful:  Neil Sloan McDonald (1310.02929)
+	Defeated: Russell Munn (1088.99408)
+	Defeated: Martin Frain, Margaret McCafferty, James Nesbitt (0.00000)
+	Elected votes: 4668.00000
+	Hopeful votes: 2857.53972
+	Defeated votes: 1088.99408
+	Nontransferable votes: 719.43012
+	Residual: 0.03608
+	Total: 9334.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Russell Munn
+	Elected:  James Dornan (2334.00000)
+	Elected:  Archie Graham (2334.00000)
+	Hopeful:  Paul Coleshill (1961.06802)
+	Hopeful:  Neil Sloan McDonald (1463.69381)
+	Defeated: Martin Frain, Margaret McCafferty, Russell Munn, James Nesbitt (0.00000)
+	Elected votes: 4668.00000
+	Hopeful votes: 3424.76183
+	Nontransferable votes: 1241.20209
+	Residual: 0.03608
+	Total: 9334.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: Neil Sloan McDonald
+	Elected:  James Dornan (2334.00000)
+	Elected:  Archie Graham (2334.00000)
+	Hopeful:  Paul Coleshill (1961.06802)
+	Defeated: Neil Sloan McDonald (1463.69381)
+	Defeated: Martin Frain, Margaret McCafferty, Russell Munn, James Nesbitt (0.00000)
+	Elected votes: 4668.00000
+	Hopeful votes: 1961.06802
+	Defeated votes: 1463.69381
+	Nontransferable votes: 1241.20209
+	Residual: 0.03608
+	Total: 9334.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Neil Sloan McDonald
+	Elected:  James Dornan (2334.00000)
+	Elected:  Archie Graham (2334.00000)
+	Hopeful:  Paul Coleshill (2683.52730)
+	Defeated: Martin Frain, Margaret McCafferty, Neil Sloan McDonald, Russell Munn, James Nesbitt (0.00000)
+	Elected votes: 4668.00000
+	Hopeful votes: 2683.52730
+	Nontransferable votes: 1982.43662
+	Residual: 0.03608
+	Total: 9334.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Paul Coleshill
+	Elected:  Paul Coleshill (2683.52730)
+	Elected:  James Dornan (2334.00000)
+	Elected:  Archie Graham (2334.00000)
+	Defeated: Martin Frain, Margaret McCafferty, Neil Sloan McDonald, Russell Munn, James Nesbitt (0.00000)
+	Elected votes: 7351.52730
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1982.43662
+	Residual: 0.03608
+	Total: 9334.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Paul Coleshill (2683.52730)
+	Elected:  James Dornan (2334.00000)
+	Elected:  Archie Graham (2334.00000)
+	Defeated: Martin Frain, Margaret McCafferty, Neil Sloan McDonald, Russell Munn, James Nesbitt (0.00000)
+	Elected votes: 7351.52730
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1982.43662
+	Residual: 0.03608
+	Total: 9334.00000
+	Surplus: 0.00000

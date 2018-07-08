@@ -1,0 +1,36 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote
+0	log	Add eligible: Kay Allan
+0	log	Add eligible: Charlie Baillie
+0	log	Add eligible: Eamonn Coyle
+0	log	Add eligible: Stephen Curran
+0	log	Add eligible: Colin Deans
+0	log	Add eligible: Robert McElroy
+0	log	Add eligible: Jim McNally
+0	log	Add eligible: Gordon Morgan
+0	log	Add eligible: Robert W Stewart
+0	begin	2164.00000	0.00000	Kay Allan	H	579.00000	Charlie Baillie	H	211.00000	Eamonn Coyle	H	172.00000	Stephen Curran	H	1856.00000	Colin Deans	H	2101.00000	Robert McElroy	H	1342.00000	Jim McNally	H	1475.00000	Gordon Morgan	H	357.00000	Robert W Stewart	H	561.00000
+1	round	New Round
+1	defeat	2164.00000	0.00000	Kay Allan	H	579.00000	Charlie Baillie	H	211.00000	Eamonn Coyle	D	172.00000	Stephen Curran	H	1856.00000	Colin Deans	H	2101.00000	Robert McElroy	H	1342.00000	Jim McNally	H	1475.00000	Gordon Morgan	H	357.00000	Robert W Stewart	H	561.00000
+1	transfer	2164.00000	39.00000	Kay Allan	H	602.00000	Charlie Baillie	H	217.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1873.00000	Colin Deans	H	2133.00000	Robert McElroy	H	1345.00000	Jim McNally	H	1487.00000	Gordon Morgan	H	388.00000	Robert W Stewart	H	570.00000
+2	round	New Round
+2	defeat	2164.00000	39.00000	Kay Allan	H	602.00000	Charlie Baillie	D	217.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1873.00000	Colin Deans	H	2133.00000	Robert McElroy	H	1345.00000	Jim McNally	H	1487.00000	Gordon Morgan	H	388.00000	Robert W Stewart	H	570.00000
+2	transfer	2164.00000	100.00000	Kay Allan	H	619.00000	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1894.00000	Colin Deans	H	2178.00000	Robert McElroy	H	1390.00000	Jim McNally	H	1493.00000	Gordon Morgan	H	403.00000	Robert W Stewart	H	577.00000
+2	elect	2164.00000	100.00000	Kay Allan	H	619.00000	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1894.00000	Colin Deans	e	2178.00000	Robert McElroy	H	1390.00000	Jim McNally	H	1493.00000	Gordon Morgan	H	403.00000	Robert W Stewart	H	577.00000
+3	round	New Round
+3	unpend	2164.00000	100.00000	Kay Allan	H	619.00000	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1894.00000	Colin Deans	E	2178.00000	Robert McElroy	H	1390.00000	Jim McNally	H	1493.00000	Gordon Morgan	H	403.00000	Robert W Stewart	H	577.00000
+3	transfer	2164.00000	103.98040	Kay Allan	H	621.24700	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1895.40598	Colin Deans	E	2164.00000	Robert McElroy	H	1391.23264	Jim McNally	H	1494.43808	Gordon Morgan	H	404.86822	Robert W Stewart	H	578.81044
+4	round	New Round
+4	defeat	2164.00000	103.98040	Kay Allan	H	621.24700	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1895.40598	Colin Deans	E	2164.00000	Robert McElroy	H	1391.23264	Jim McNally	H	1494.43808	Gordon Morgan	D	404.86822	Robert W Stewart	H	578.81044
+4	transfer	2164.00000	251.69944	Kay Allan	H	716.73492	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1939.56648	Colin Deans	E	2164.00000	Robert McElroy	H	1407.31610	Jim McNally	H	1557.54722	Gordon Morgan	D	0.00000	Robert W Stewart	H	617.11860
+5	round	New Round
+5	defeat	2164.00000	251.69944	Kay Allan	H	716.73492	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1939.56648	Colin Deans	E	2164.00000	Robert McElroy	H	1407.31610	Jim McNally	H	1557.54722	Gordon Morgan	D	0.00000	Robert W Stewart	D	617.11860
+5	transfer	2164.00000	431.41206	Kay Allan	H	894.43470	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1980.69488	Colin Deans	E	2164.00000	Robert McElroy	H	1522.57290	Jim McNally	H	1660.86822	Gordon Morgan	D	0.00000	Robert W Stewart	D	0.00000
+6	round	New Round
+6	defeat	2164.00000	431.41206	Kay Allan	D	894.43470	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	1980.69488	Colin Deans	E	2164.00000	Robert McElroy	H	1522.57290	Jim McNally	H	1660.86822	Gordon Morgan	D	0.00000	Robert W Stewart	D	0.00000
+6	transfer	2164.00000	907.78104	Kay Allan	D	0.00000	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	2156.00946	Colin Deans	E	2164.00000	Robert McElroy	H	1625.97736	Jim McNally	H	1800.21490	Gordon Morgan	D	0.00000	Robert W Stewart	D	0.00000
+7	round	New Round
+7	defeat	2164.00000	907.78104	Kay Allan	D	0.00000	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	2156.00946	Colin Deans	E	2164.00000	Robert McElroy	D	1625.97736	Jim McNally	H	1800.21490	Gordon Morgan	D	0.00000	Robert W Stewart	D	0.00000
+7	transfer	2164.00000	2093.05220	Kay Allan	D	0.00000	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	H	2334.34330	Colin Deans	E	2164.00000	Robert McElroy	D	0.00000	Jim McNally	H	2062.58726	Gordon Morgan	D	0.00000	Robert W Stewart	D	0.00000
+7	elect	2164.00000	2093.05220	Kay Allan	D	0.00000	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	E	2334.34330	Colin Deans	E	2164.00000	Robert McElroy	D	0.00000	Jim McNally	H	2062.58726	Gordon Morgan	D	0.00000	Robert W Stewart	D	0.00000
+7	elect	2164.00000	2093.05220	Kay Allan	D	0.00000	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	E	2334.34330	Colin Deans	E	2164.00000	Robert McElroy	D	0.00000	Jim McNally	E	2062.58726	Gordon Morgan	D	0.00000	Robert W Stewart	D	0.00000
+X	end	2164.00000	2093.05220	Kay Allan	D	0.00000	Charlie Baillie	D	0.00000	Eamonn Coyle	D	0.00000	Stephen Curran	E	2334.34330	Colin Deans	E	2164.00000	Robert McElroy	D	0.00000	Jim McNally	E	2062.58726	Gordon Morgan	D	0.00000	Robert W Stewart	D	0.00000

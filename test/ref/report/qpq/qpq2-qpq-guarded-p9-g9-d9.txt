@@ -1,0 +1,94 @@
+
+Election: QPQ election 2
+
+	Droop package: droop v0.11
+	Rule: QPQ
+	Arithmetic: guarded-precision fixed-point decimal arithmetic (9+9 places)
+	Seats: 3
+	Ballots: 100
+	Quota: 25.000000000
+
+	maxDiff: 0  (s/b << geps)
+	geps:    500000000
+	minDiff: 1714285714285714477  (s/b >> geps)
+	guard:   1000000000
+	prec:    1000000000000000000
+
+	Add eligible: a
+	Add eligible: b
+	Add eligible: c
+	Add eligible: d
+	Add eligible: e
+Action: Begin Count
+	Hopeful:  a (0.000000000)
+	Hopeful:  b (0.000000000)
+	Hopeful:  c (0.000000000)
+	Hopeful:  d (0.000000000)
+	Hopeful:  e (0.000000000)
+	Quota: 25.000000000
+Round 1:
+Action: Elect high quotient: a
+	Elected:  a (35.000000000)
+	Hopeful:  b (25.000000000)
+	Hopeful:  c (20.000000000)
+	Hopeful:  d (15.000000000)
+	Hopeful:  e (5.000000000)
+	Quota: 25.000000000
+Action: Transfer elected: a (35.000000000)
+	Elected:  a (35.000000000)
+	Hopeful:  b (25.000000000)
+	Hopeful:  c (20.000000000)
+	Hopeful:  d (15.000000000)
+	Hopeful:  e (5.000000000)
+	Quota: 25.000000000
+Round 2:
+Action: Elect high quotient: b
+	Elected:  a (35.000000000)
+	Elected:  b (28.000000000)
+	Hopeful:  c (24.500000000)
+	Hopeful:  d (15.000000000)
+	Hopeful:  e (5.000000000)
+	Quota: 24.629629630
+Action: Transfer elected: b (28.000000000)
+	Elected:  a (35.000000000)
+	Elected:  b (28.000000000)
+	Hopeful:  c (24.500000000)
+	Hopeful:  d (15.000000000)
+	Hopeful:  e (5.000000000)
+	Quota: 24.629629630
+Round 3:
+Action: Elect high quotient: c
+	Elected:  a (35.000000000)
+	Elected:  b (28.000000000)
+	Elected:  c (26.000000000)
+	Hopeful:  d (15.000000000)
+	Hopeful:  e (5.000000000)
+	Quota: 24.285714286
+Action: Transfer elected: c (26.000000000)
+	Elected:  a (35.000000000)
+	Elected:  b (28.000000000)
+	Elected:  c (26.000000000)
+	Hopeful:  d (15.000000000)
+	Hopeful:  e (5.000000000)
+	Quota: 24.285714286
+Action: Defeat remaining candidates: d
+	Elected:  a (35.000000000)
+	Elected:  b (28.000000000)
+	Elected:  c (26.000000000)
+	Hopeful:  e (5.000000000)
+	Defeated: d (15.000000000)
+	Quota: 24.285714286
+Action: Defeat remaining candidates: e
+	Elected:  a (35.000000000)
+	Elected:  b (28.000000000)
+	Elected:  c (26.000000000)
+	Defeated: d (15.000000000)
+	Defeated: e (5.000000000)
+	Quota: 24.285714286
+Action: Count Complete
+	Elected:  a (35.000000000)
+	Elected:  b (28.000000000)
+	Elected:  c (26.000000000)
+	Defeated: d (15.000000000)
+	Defeated: e (5.000000000)
+	Quota: 24.285714286

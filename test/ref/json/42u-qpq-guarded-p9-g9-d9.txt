@@ -1,0 +1,370 @@
+{
+  "actions": [
+    {
+      "msg": "Add eligible: C\u00e5stor", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: P\u00f8ll\u00fcx", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: H\u00e9len", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }
+      }, 
+      "msg": "Begin Count", 
+      "quota": "2.000000000", 
+      "round": 0, 
+      "tag": "begin", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "2.000000000", 
+      "round": 1, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "4.000000000", 
+          "state": "elected", 
+          "vote": "4.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: C\u00e5stor", 
+      "quota": "2.000000000", 
+      "round": 1, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "4.000000000", 
+          "state": "elected", 
+          "vote": "4.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: C\u00e5stor (4.000000000)", 
+      "quota": "2.000000000", 
+      "round": 1, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "4.000000000", 
+          "state": "elected", 
+          "vote": "4.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "2.000000000", 
+      "round": 2, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "4.000000000", 
+          "state": "elected", 
+          "vote": "4.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }
+      }, 
+      "msg": "Break tie by lot (smallest quotient): [P\u00f8ll\u00fcx, H\u00e9len] -> P\u00f8ll\u00fcx", 
+      "quota": "2.000000000", 
+      "round": 2, 
+      "tag": "tie", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "4.000000000", 
+          "state": "elected", 
+          "vote": "4.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "2.000000000", 
+          "state": "defeated", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }
+      }, 
+      "msg": "Defeat low quotient: P\u00f8ll\u00fcx", 
+      "quota": "2.000000000", 
+      "round": 2, 
+      "tag": "defeat", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "4.000000000", 
+          "state": "elected", 
+          "vote": "4.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "2.000000000", 
+          "state": "defeated", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }
+      }, 
+      "msg": "Transfer defeated: P\u00f8ll\u00fcx", 
+      "quota": "2.000000000", 
+      "round": 2, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "4.000000000", 
+          "state": "elected", 
+          "vote": "4.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "2.000000000", 
+          "state": "defeated", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "2.000000000", 
+          "state": "elected", 
+          "vote": "2.000000000"
+        }
+      }, 
+      "msg": "Elect remaining candidates: H\u00e9len", 
+      "quota": "2.000000000", 
+      "round": 2, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "4.000000000", 
+          "state": "elected", 
+          "vote": "4.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "2.000000000", 
+          "state": "defeated", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "2.000000000", 
+          "state": "elected", 
+          "vote": "2.000000000"
+        }
+      }, 
+      "msg": "Count Complete", 
+      "quota": "2.000000000", 
+      "round": 2, 
+      "tag": "end", 
+      "votes": "0.000000000"
+    }
+  ], 
+  "arithmetic_info": "guarded-precision fixed-point decimal arithmetic (9+9 places)", 
+  "arithmetic_name": "guarded", 
+  "arithmetic_report": "\tmaxDiff: 0  (s/b << geps)\n\tgeps:    500000000\n\tminDiff: 2000000000000000000  (s/b >> geps)\n\tguard:   1000000000\n\tprec:    1000000000000000000\n\n", 
+  "cdict": {
+    "1": {
+      "ballot_order": 1, 
+      "cid": 1, 
+      "name": "C\u00e5stor", 
+      "nick": "1", 
+      "tie_order": 1
+    }, 
+    "2": {
+      "ballot_order": 2, 
+      "cid": 2, 
+      "name": "P\u00f8ll\u00fcx", 
+      "nick": "2", 
+      "tie_order": 2
+    }, 
+    "3": {
+      "ballot_order": 3, 
+      "cid": 3, 
+      "name": "H\u00e9len", 
+      "nick": "3", 
+      "tie_order": 3
+    }
+  }, 
+  "cids": [
+    1, 
+    2, 
+    3
+  ], 
+  "droop_name": "droop", 
+  "droop_version": "0.11", 
+  "ecids": [
+    1, 
+    2, 
+    3
+  ], 
+  "method": "qpq", 
+  "nballots": 6, 
+  "options": {
+    "allowed": {}, 
+    "cmd": {
+      "rule": "qpq"
+    }, 
+    "default": {
+      "arithmetic": "guarded", 
+      "display": 9, 
+      "guard": 9, 
+      "precision": 9
+    }, 
+    "file_options": {}, 
+    "force": {
+      "arithmetic": "guarded", 
+      "display": 9, 
+      "guard": 9, 
+      "precision": 9
+    }, 
+    "options": {
+      "arithmetic": "guarded", 
+      "display": 9, 
+      "guard": 9, 
+      "precision": 9, 
+      "rule": "qpq"
+    }
+  }, 
+  "quota": "2.000000000", 
+  "rule_info": "QPQ", 
+  "rule_name": "qpq", 
+  "seats": 2, 
+  "title": "P\u00f8ll\u00fcx and H\u00e9len should tie"
+}

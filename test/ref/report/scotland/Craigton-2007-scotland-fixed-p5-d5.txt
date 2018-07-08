@@ -1,0 +1,344 @@
+
+Election: CRAIGTON
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 11052
+	Quota: 2211.00000
+
+	Add eligible: Ruth Black
+	Add eligible: Scott R Coghill
+	Add eligible: Mark Dingwall
+	Add eligible: Iris Gibson
+	Add eligible: Matthew John Kerr
+	Add eligible: Gordon Macdiarmid
+	Add eligible: Gordon Masterton
+	Add eligible: Wullie McGartland
+	Add eligible: Scott Alexander Petty
+	Add eligible: Alistair Watson
+Action: Begin Count
+	Hopeful:  Ruth Black (1220.00000)
+	Hopeful:  Scott R Coghill (457.00000)
+	Hopeful:  Mark Dingwall (225.00000)
+	Hopeful:  Iris Gibson (2729.00000)
+	Hopeful:  Matthew John Kerr (1920.00000)
+	Hopeful:  Gordon Macdiarmid (1328.00000)
+	Hopeful:  Gordon Masterton (315.00000)
+	Hopeful:  Wullie McGartland (224.00000)
+	Hopeful:  Scott Alexander Petty (569.00000)
+	Hopeful:  Alistair Watson (2065.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 11052.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Iris Gibson
+	Pending:  Iris Gibson (2729.00000)
+	Hopeful:  Ruth Black (1220.00000)
+	Hopeful:  Scott R Coghill (457.00000)
+	Hopeful:  Mark Dingwall (225.00000)
+	Hopeful:  Matthew John Kerr (1920.00000)
+	Hopeful:  Gordon Macdiarmid (1328.00000)
+	Hopeful:  Gordon Masterton (315.00000)
+	Hopeful:  Wullie McGartland (224.00000)
+	Hopeful:  Scott Alexander Petty (569.00000)
+	Hopeful:  Alistair Watson (2065.00000)
+	Elected votes: 0.00000
+	Pending votes: 2729.00000
+	Hopeful votes: 8323.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 11052.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Iris Gibson
+	Elected votes: 2729.00000
+	Hopeful votes: 8323.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 11052.00000
+	Surplus: 518.00000
+Action: Surplus transferred: Iris Gibson (518.00000)
+	Elected:  Iris Gibson (2211.00000)
+	Hopeful:  Ruth Black (1315.66424)
+	Hopeful:  Scott R Coghill (500.65630)
+	Hopeful:  Mark Dingwall (234.30069)
+	Hopeful:  Matthew John Kerr (1972.95699)
+	Hopeful:  Gordon Macdiarmid (1350.39758)
+	Hopeful:  Gordon Masterton (366.81813)
+	Hopeful:  Wullie McGartland (247.53644)
+	Hopeful:  Scott Alexander Petty (594.81416)
+	Hopeful:  Alistair Watson (2096.69827)
+	Elected votes: 2211.00000
+	Hopeful votes: 8679.84280
+	Nontransferable votes: 161.14869
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 518.00000
+Round 2:
+Action: Defeat low candidate: Mark Dingwall
+	Elected:  Iris Gibson (2211.00000)
+	Hopeful:  Ruth Black (1315.66424)
+	Hopeful:  Scott R Coghill (500.65630)
+	Hopeful:  Matthew John Kerr (1972.95699)
+	Hopeful:  Gordon Macdiarmid (1350.39758)
+	Hopeful:  Gordon Masterton (366.81813)
+	Hopeful:  Wullie McGartland (247.53644)
+	Hopeful:  Scott Alexander Petty (594.81416)
+	Hopeful:  Alistair Watson (2096.69827)
+	Defeated: Mark Dingwall (234.30069)
+	Elected votes: 2211.00000
+	Hopeful votes: 8445.54211
+	Defeated votes: 234.30069
+	Nontransferable votes: 161.14869
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Mark Dingwall
+	Elected:  Iris Gibson (2211.00000)
+	Hopeful:  Ruth Black (1324.80310)
+	Hopeful:  Scott R Coghill (508.17478)
+	Hopeful:  Matthew John Kerr (1992.33661)
+	Hopeful:  Gordon Macdiarmid (1357.96701)
+	Hopeful:  Gordon Masterton (390.57737)
+	Hopeful:  Wullie McGartland (256.48549)
+	Hopeful:  Scott Alexander Petty (698.71226)
+	Hopeful:  Alistair Watson (2103.88808)
+	Defeated: Mark Dingwall (0.00000)
+	Elected votes: 2211.00000
+	Hopeful votes: 8632.94470
+	Nontransferable votes: 208.04679
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: Wullie McGartland
+	Elected:  Iris Gibson (2211.00000)
+	Hopeful:  Ruth Black (1324.80310)
+	Hopeful:  Scott R Coghill (508.17478)
+	Hopeful:  Matthew John Kerr (1992.33661)
+	Hopeful:  Gordon Macdiarmid (1357.96701)
+	Hopeful:  Gordon Masterton (390.57737)
+	Hopeful:  Scott Alexander Petty (698.71226)
+	Hopeful:  Alistair Watson (2103.88808)
+	Defeated: Wullie McGartland (256.48549)
+	Defeated: Mark Dingwall (0.00000)
+	Elected votes: 2211.00000
+	Hopeful votes: 8376.45921
+	Defeated votes: 256.48549
+	Nontransferable votes: 208.04679
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Wullie McGartland
+	Elected:  Iris Gibson (2211.00000)
+	Hopeful:  Ruth Black (1382.63626)
+	Hopeful:  Scott R Coghill (525.59136)
+	Hopeful:  Matthew John Kerr (2007.85509)
+	Hopeful:  Gordon Macdiarmid (1371.34663)
+	Hopeful:  Gordon Masterton (414.42452)
+	Hopeful:  Scott Alexander Petty (702.66131)
+	Hopeful:  Alistair Watson (2132.59637)
+	Defeated: Mark Dingwall, Wullie McGartland (0.00000)
+	Elected votes: 2211.00000
+	Hopeful votes: 8537.11154
+	Nontransferable votes: 303.87995
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Gordon Masterton
+	Elected:  Iris Gibson (2211.00000)
+	Hopeful:  Ruth Black (1382.63626)
+	Hopeful:  Scott R Coghill (525.59136)
+	Hopeful:  Matthew John Kerr (2007.85509)
+	Hopeful:  Gordon Macdiarmid (1371.34663)
+	Hopeful:  Scott Alexander Petty (702.66131)
+	Hopeful:  Alistair Watson (2132.59637)
+	Defeated: Gordon Masterton (414.42452)
+	Defeated: Mark Dingwall, Wullie McGartland (0.00000)
+	Elected votes: 2211.00000
+	Hopeful votes: 8122.68702
+	Defeated votes: 414.42452
+	Nontransferable votes: 303.87995
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Gordon Masterton
+	Elected:  Iris Gibson (2211.00000)
+	Hopeful:  Ruth Black (1462.07581)
+	Hopeful:  Scott R Coghill (631.58635)
+	Hopeful:  Matthew John Kerr (2035.13281)
+	Hopeful:  Gordon Macdiarmid (1387.48549)
+	Hopeful:  Scott Alexander Petty (727.40656)
+	Hopeful:  Alistair Watson (2161.44352)
+	Defeated: Mark Dingwall, Gordon Masterton, Wullie McGartland (0.00000)
+	Elected votes: 2211.00000
+	Hopeful votes: 8405.13054
+	Nontransferable votes: 435.86095
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Scott R Coghill
+	Elected:  Iris Gibson (2211.00000)
+	Hopeful:  Ruth Black (1462.07581)
+	Hopeful:  Matthew John Kerr (2035.13281)
+	Hopeful:  Gordon Macdiarmid (1387.48549)
+	Hopeful:  Scott Alexander Petty (727.40656)
+	Hopeful:  Alistair Watson (2161.44352)
+	Defeated: Scott R Coghill (631.58635)
+	Defeated: Mark Dingwall, Gordon Masterton, Wullie McGartland (0.00000)
+	Elected votes: 2211.00000
+	Hopeful votes: 7773.54419
+	Defeated votes: 631.58635
+	Nontransferable votes: 435.86095
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Scott R Coghill
+	Elected:  Iris Gibson (2211.00000)
+	Hopeful:  Ruth Black (1557.60327)
+	Hopeful:  Matthew John Kerr (2123.87806)
+	Hopeful:  Gordon Macdiarmid (1430.76321)
+	Hopeful:  Scott Alexander Petty (797.84611)
+	Hopeful:  Alistair Watson (2226.18877)
+	Defeated: Scott R Coghill, Mark Dingwall, Gordon Masterton, Wullie McGartland (0.00000)
+	Elected votes: 2211.00000
+	Hopeful votes: 8136.27942
+	Nontransferable votes: 704.71207
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Alistair Watson
+	Elected:  Iris Gibson (2211.00000)
+	Pending:  Alistair Watson (2226.18877)
+	Hopeful:  Ruth Black (1557.60327)
+	Hopeful:  Matthew John Kerr (2123.87806)
+	Hopeful:  Gordon Macdiarmid (1430.76321)
+	Hopeful:  Scott Alexander Petty (797.84611)
+	Defeated: Scott R Coghill, Mark Dingwall, Gordon Masterton, Wullie McGartland (0.00000)
+	Elected votes: 2211.00000
+	Pending votes: 2226.18877
+	Hopeful votes: 5910.09065
+	Nontransferable votes: 704.71207
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 0.00000
+Round 6:
+Action: Transfer high surplus: Alistair Watson
+	Elected votes: 4437.18877
+	Hopeful votes: 5910.09065
+	Nontransferable votes: 704.71207
+	Residual: 0.00851
+	Total: 11052.00000
+	Surplus: 15.18877
+Action: Surplus transferred: Alistair Watson (15.18877)
+	Elected:  Iris Gibson (2211.00000)
+	Elected:  Alistair Watson (2211.00000)
+	Hopeful:  Ruth Black (1559.21831)
+	Hopeful:  Matthew John Kerr (2127.54039)
+	Hopeful:  Gordon Macdiarmid (1435.98271)
+	Hopeful:  Scott Alexander Petty (798.34157)
+	Defeated: Scott R Coghill, Mark Dingwall, Gordon Masterton, Wullie McGartland (0.00000)
+	Elected votes: 4422.00000
+	Hopeful votes: 5921.08298
+	Nontransferable votes: 708.90137
+	Residual: 0.01565
+	Total: 11052.00000
+	Surplus: 15.18877
+Round 7:
+Action: Defeat low candidate: Scott Alexander Petty
+	Elected:  Iris Gibson (2211.00000)
+	Elected:  Alistair Watson (2211.00000)
+	Hopeful:  Ruth Black (1559.21831)
+	Hopeful:  Matthew John Kerr (2127.54039)
+	Hopeful:  Gordon Macdiarmid (1435.98271)
+	Defeated: Scott Alexander Petty (798.34157)
+	Defeated: Scott R Coghill, Mark Dingwall, Gordon Masterton, Wullie McGartland (0.00000)
+	Elected votes: 4422.00000
+	Hopeful votes: 5122.74141
+	Defeated votes: 798.34157
+	Nontransferable votes: 708.90137
+	Residual: 0.01565
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Scott Alexander Petty
+	Elected:  Iris Gibson (2211.00000)
+	Elected:  Alistair Watson (2211.00000)
+	Hopeful:  Ruth Black (1641.67804)
+	Hopeful:  Matthew John Kerr (2177.84347)
+	Hopeful:  Gordon Macdiarmid (1493.13008)
+	Defeated: Scott R Coghill, Mark Dingwall, Gordon Masterton, Wullie McGartland, Scott Alexander Petty (0.00000)
+	Elected votes: 4422.00000
+	Hopeful votes: 5312.65159
+	Nontransferable votes: 1317.33276
+	Residual: 0.01565
+	Total: 11052.00000
+	Surplus: 0.00000
+Round 8:
+Action: Defeat low candidate: Gordon Macdiarmid
+	Elected:  Iris Gibson (2211.00000)
+	Elected:  Alistair Watson (2211.00000)
+	Hopeful:  Ruth Black (1641.67804)
+	Hopeful:  Matthew John Kerr (2177.84347)
+	Defeated: Gordon Macdiarmid (1493.13008)
+	Defeated: Scott R Coghill, Mark Dingwall, Gordon Masterton, Wullie McGartland, Scott Alexander Petty (0.00000)
+	Elected votes: 4422.00000
+	Hopeful votes: 3819.52151
+	Defeated votes: 1493.13008
+	Nontransferable votes: 1317.33276
+	Residual: 0.01565
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Gordon Macdiarmid
+	Elected:  Iris Gibson (2211.00000)
+	Elected:  Alistair Watson (2211.00000)
+	Hopeful:  Ruth Black (1734.66778)
+	Hopeful:  Matthew John Kerr (3083.26864)
+	Defeated: Scott R Coghill, Mark Dingwall, Gordon Macdiarmid, Gordon Masterton, Wullie McGartland, Scott Alexander Petty (0.00000)
+	Elected votes: 4422.00000
+	Hopeful votes: 4817.93642
+	Nontransferable votes: 1812.04793
+	Residual: 0.01565
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Ruth Black
+	Elected:  Ruth Black (1734.66778)
+	Elected:  Iris Gibson (2211.00000)
+	Elected:  Alistair Watson (2211.00000)
+	Hopeful:  Matthew John Kerr (3083.26864)
+	Defeated: Scott R Coghill, Mark Dingwall, Gordon Macdiarmid, Gordon Masterton, Wullie McGartland, Scott Alexander Petty (0.00000)
+	Elected votes: 6156.66778
+	Hopeful votes: 3083.26864
+	Nontransferable votes: 1812.04793
+	Residual: 0.01565
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Matthew John Kerr
+	Elected:  Ruth Black (1734.66778)
+	Elected:  Iris Gibson (2211.00000)
+	Elected:  Matthew John Kerr (3083.26864)
+	Elected:  Alistair Watson (2211.00000)
+	Defeated: Scott R Coghill, Mark Dingwall, Gordon Macdiarmid, Gordon Masterton, Wullie McGartland, Scott Alexander Petty (0.00000)
+	Elected votes: 9239.93642
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1812.04793
+	Residual: 0.01565
+	Total: 11052.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Ruth Black (1734.66778)
+	Elected:  Iris Gibson (2211.00000)
+	Elected:  Matthew John Kerr (3083.26864)
+	Elected:  Alistair Watson (2211.00000)
+	Defeated: Scott R Coghill, Mark Dingwall, Gordon Macdiarmid, Gordon Masterton, Wullie McGartland, Scott Alexander Petty (0.00000)
+	Elected votes: 9239.93642
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1812.04793
+	Residual: 0.01565
+	Total: 11052.00000
+	Surplus: 0.00000

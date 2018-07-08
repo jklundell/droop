@@ -1,0 +1,312 @@
+
+Election: POLLOKSHIELDS
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 3
+	Ballots: 9567
+	Quota: 2392.00000
+
+	Add eligible: Ali Ashraf
+	Add eligible: Karin Currie
+	Add eligible: Khalil Malik
+	Add eligible: David Meikle
+	Add eligible: Isabel Nelson
+	Add eligible: Irfan Rabbani
+	Add eligible: Ian A Ruffell
+	Add eligible: Muhammad Shoaib
+	Add eligible: Fatima Uygun
+Action: Begin Count
+	Hopeful:  Ali Ashraf (184.00000)
+	Hopeful:  Karin Currie (438.00000)
+	Hopeful:  Khalil Malik (2057.00000)
+	Hopeful:  David Meikle (1435.00000)
+	Hopeful:  Isabel Nelson (863.00000)
+	Hopeful:  Irfan Rabbani (2575.00000)
+	Hopeful:  Ian A Ruffell (1043.00000)
+	Hopeful:  Muhammad Shoaib (592.00000)
+	Hopeful:  Fatima Uygun (380.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 9567.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Irfan Rabbani
+	Pending:  Irfan Rabbani (2575.00000)
+	Hopeful:  Ali Ashraf (184.00000)
+	Hopeful:  Karin Currie (438.00000)
+	Hopeful:  Khalil Malik (2057.00000)
+	Hopeful:  David Meikle (1435.00000)
+	Hopeful:  Isabel Nelson (863.00000)
+	Hopeful:  Ian A Ruffell (1043.00000)
+	Hopeful:  Muhammad Shoaib (592.00000)
+	Hopeful:  Fatima Uygun (380.00000)
+	Elected votes: 0.00000
+	Pending votes: 2575.00000
+	Hopeful votes: 6992.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Irfan Rabbani
+	Elected votes: 2575.00000
+	Hopeful votes: 6992.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9567.00000
+	Surplus: 183.00000
+Action: Surplus transferred: Irfan Rabbani (183.00000)
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  Ali Ashraf (188.76102)
+	Hopeful:  Karin Currie (441.48194)
+	Hopeful:  Khalil Malik (2082.01312)
+	Hopeful:  David Meikle (1445.09052)
+	Hopeful:  Isabel Nelson (883.96270)
+	Hopeful:  Ian A Ruffell (1060.97818)
+	Hopeful:  Muhammad Shoaib (605.50140)
+	Hopeful:  Fatima Uygun (388.17190)
+	Elected votes: 2392.00000
+	Hopeful votes: 7095.96078
+	Nontransferable votes: 79.01872
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 183.00000
+Round 2:
+Action: Defeat low candidate: Ali Ashraf
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  Karin Currie (441.48194)
+	Hopeful:  Khalil Malik (2082.01312)
+	Hopeful:  David Meikle (1445.09052)
+	Hopeful:  Isabel Nelson (883.96270)
+	Hopeful:  Ian A Ruffell (1060.97818)
+	Hopeful:  Muhammad Shoaib (605.50140)
+	Hopeful:  Fatima Uygun (388.17190)
+	Defeated: Ali Ashraf (188.76102)
+	Elected votes: 2392.00000
+	Hopeful votes: 6907.19976
+	Defeated votes: 188.76102
+	Nontransferable votes: 79.01872
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Ali Ashraf
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  Karin Currie (453.62406)
+	Hopeful:  Khalil Malik (2123.64750)
+	Hopeful:  David Meikle (1452.44582)
+	Hopeful:  Isabel Nelson (893.46012)
+	Hopeful:  Ian A Ruffell (1096.75984)
+	Hopeful:  Muhammad Shoaib (611.71458)
+	Hopeful:  Fatima Uygun (418.66932)
+	Defeated: Ali Ashraf (0.00000)
+	Elected votes: 2392.00000
+	Hopeful votes: 7050.32124
+	Nontransferable votes: 124.65826
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: Fatima Uygun
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  Karin Currie (453.62406)
+	Hopeful:  Khalil Malik (2123.64750)
+	Hopeful:  David Meikle (1452.44582)
+	Hopeful:  Isabel Nelson (893.46012)
+	Hopeful:  Ian A Ruffell (1096.75984)
+	Hopeful:  Muhammad Shoaib (611.71458)
+	Defeated: Fatima Uygun (418.66932)
+	Defeated: Ali Ashraf (0.00000)
+	Elected votes: 2392.00000
+	Hopeful votes: 6631.65192
+	Defeated votes: 418.66932
+	Nontransferable votes: 124.65826
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Fatima Uygun
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  Karin Currie (472.05042)
+	Hopeful:  Khalil Malik (2256.35294)
+	Hopeful:  David Meikle (1460.73006)
+	Hopeful:  Isabel Nelson (918.66814)
+	Hopeful:  Ian A Ruffell (1206.32316)
+	Hopeful:  Muhammad Shoaib (633.56730)
+	Defeated: Ali Ashraf, Fatima Uygun (0.00000)
+	Elected votes: 2392.00000
+	Hopeful votes: 6947.69202
+	Nontransferable votes: 227.28748
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Karin Currie
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  Khalil Malik (2256.35294)
+	Hopeful:  David Meikle (1460.73006)
+	Hopeful:  Isabel Nelson (918.66814)
+	Hopeful:  Ian A Ruffell (1206.32316)
+	Hopeful:  Muhammad Shoaib (633.56730)
+	Defeated: Karin Currie (472.05042)
+	Defeated: Ali Ashraf, Fatima Uygun (0.00000)
+	Elected votes: 2392.00000
+	Hopeful votes: 6475.64160
+	Defeated votes: 472.05042
+	Nontransferable votes: 227.28748
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Karin Currie
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  Khalil Malik (2309.70824)
+	Hopeful:  David Meikle (1593.22748)
+	Hopeful:  Isabel Nelson (1001.44980)
+	Hopeful:  Ian A Ruffell (1280.96270)
+	Hopeful:  Muhammad Shoaib (656.85154)
+	Defeated: Ali Ashraf, Karin Currie, Fatima Uygun (0.00000)
+	Elected votes: 2392.00000
+	Hopeful votes: 6842.19976
+	Nontransferable votes: 332.77974
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Muhammad Shoaib
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  Khalil Malik (2309.70824)
+	Hopeful:  David Meikle (1593.22748)
+	Hopeful:  Isabel Nelson (1001.44980)
+	Hopeful:  Ian A Ruffell (1280.96270)
+	Defeated: Muhammad Shoaib (656.85154)
+	Defeated: Ali Ashraf, Karin Currie, Fatima Uygun (0.00000)
+	Elected votes: 2392.00000
+	Hopeful votes: 6185.34822
+	Defeated votes: 656.85154
+	Nontransferable votes: 332.77974
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Muhammad Shoaib
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  Khalil Malik (2624.74834)
+	Hopeful:  David Meikle (1610.72490)
+	Hopeful:  Isabel Nelson (1030.65782)
+	Hopeful:  Ian A Ruffell (1321.38390)
+	Defeated: Ali Ashraf, Karin Currie, Muhammad Shoaib, Fatima Uygun (0.00000)
+	Elected votes: 2392.00000
+	Hopeful votes: 6587.51496
+	Nontransferable votes: 587.46454
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Khalil Malik
+	Elected:  Irfan Rabbani (2392.00000)
+	Pending:  Khalil Malik (2624.74834)
+	Hopeful:  David Meikle (1610.72490)
+	Hopeful:  Isabel Nelson (1030.65782)
+	Hopeful:  Ian A Ruffell (1321.38390)
+	Defeated: Ali Ashraf, Karin Currie, Muhammad Shoaib, Fatima Uygun (0.00000)
+	Elected votes: 2392.00000
+	Pending votes: 2624.74834
+	Hopeful votes: 3962.76662
+	Nontransferable votes: 587.46454
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 6:
+Action: Transfer high surplus: Khalil Malik
+	Elected votes: 5016.74834
+	Hopeful votes: 3962.76662
+	Nontransferable votes: 587.46454
+	Residual: 0.02050
+	Total: 9567.00000
+	Surplus: 232.74834
+Action: Surplus transferred: Khalil Malik (232.74834)
+	Elected:  Khalil Malik (2392.00000)
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  David Meikle (1632.34590)
+	Hopeful:  Isabel Nelson (1070.55020)
+	Hopeful:  Ian A Ruffell (1374.77932)
+	Defeated: Ali Ashraf, Karin Currie, Muhammad Shoaib, Fatima Uygun (0.00000)
+	Elected votes: 4784.00000
+	Hopeful votes: 4077.67542
+	Nontransferable votes: 705.29174
+	Residual: 0.03284
+	Total: 9567.00000
+	Surplus: 232.74834
+Round 7:
+Action: Defeat low candidate: Isabel Nelson
+	Elected:  Khalil Malik (2392.00000)
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  David Meikle (1632.34590)
+	Hopeful:  Ian A Ruffell (1374.77932)
+	Defeated: Isabel Nelson (1070.55020)
+	Defeated: Ali Ashraf, Karin Currie, Muhammad Shoaib, Fatima Uygun (0.00000)
+	Elected votes: 4784.00000
+	Hopeful votes: 3007.12522
+	Defeated votes: 1070.55020
+	Nontransferable votes: 705.29174
+	Residual: 0.03284
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Isabel Nelson
+	Elected:  Khalil Malik (2392.00000)
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  David Meikle (1839.53040)
+	Hopeful:  Ian A Ruffell (1835.22528)
+	Defeated: Ali Ashraf, Karin Currie, Isabel Nelson, Muhammad Shoaib, Fatima Uygun (0.00000)
+	Elected votes: 4784.00000
+	Hopeful votes: 3674.75568
+	Nontransferable votes: 1108.21148
+	Residual: 0.03284
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 8:
+Action: Defeat low candidate: Ian A Ruffell
+	Elected:  Khalil Malik (2392.00000)
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  David Meikle (1839.53040)
+	Defeated: Ian A Ruffell (1835.22528)
+	Defeated: Ali Ashraf, Karin Currie, Isabel Nelson, Muhammad Shoaib, Fatima Uygun (0.00000)
+	Elected votes: 4784.00000
+	Hopeful votes: 1839.53040
+	Defeated votes: 1835.22528
+	Nontransferable votes: 1108.21148
+	Residual: 0.03284
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Ian A Ruffell
+	Elected:  Khalil Malik (2392.00000)
+	Elected:  Irfan Rabbani (2392.00000)
+	Hopeful:  David Meikle (2217.93938)
+	Defeated: Ali Ashraf, Karin Currie, Isabel Nelson, Ian A Ruffell, Muhammad Shoaib, Fatima Uygun (0.00000)
+	Elected votes: 4784.00000
+	Hopeful votes: 2217.93938
+	Nontransferable votes: 2565.02778
+	Residual: 0.03284
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: David Meikle
+	Elected:  Khalil Malik (2392.00000)
+	Elected:  David Meikle (2217.93938)
+	Elected:  Irfan Rabbani (2392.00000)
+	Defeated: Ali Ashraf, Karin Currie, Isabel Nelson, Ian A Ruffell, Muhammad Shoaib, Fatima Uygun (0.00000)
+	Elected votes: 7001.93938
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2565.02778
+	Residual: 0.03284
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Khalil Malik (2392.00000)
+	Elected:  David Meikle (2217.93938)
+	Elected:  Irfan Rabbani (2392.00000)
+	Defeated: Ali Ashraf, Karin Currie, Isabel Nelson, Ian A Ruffell, Muhammad Shoaib, Fatima Uygun (0.00000)
+	Elected votes: 7001.93938
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2565.02778
+	Residual: 0.03284
+	Total: 9567.00000
+	Surplus: 0.00000

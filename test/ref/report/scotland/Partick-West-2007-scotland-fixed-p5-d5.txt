@@ -1,0 +1,301 @@
+
+Election: PARTICK WEST
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 12744
+	Quota: 2549.00000
+
+	Add eligible: George Aytoun Atkinson
+	Add eligible: Stuart Clay
+	Add eligible: Aileen Colleran
+	Add eligible: Irene Graham
+	Add eligible: Andrew Gray
+	Add eligible: Christopher Mason
+	Add eligible: Kenny McLean
+	Add eligible: Jimmy Ross
+	Add eligible: Richard Alan Sullivan
+Action: Begin Count
+	Hopeful:  George Aytoun Atkinson (265.00000)
+	Hopeful:  Stuart Clay (1594.00000)
+	Hopeful:  Aileen Colleran (2099.00000)
+	Hopeful:  Irene Graham (1699.00000)
+	Hopeful:  Andrew Gray (240.00000)
+	Hopeful:  Christopher Mason (2259.00000)
+	Hopeful:  Kenny McLean (2811.00000)
+	Hopeful:  Jimmy Ross (373.00000)
+	Hopeful:  Richard Alan Sullivan (1404.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 12744.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 12744.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Kenny McLean
+	Pending:  Kenny McLean (2811.00000)
+	Hopeful:  George Aytoun Atkinson (265.00000)
+	Hopeful:  Stuart Clay (1594.00000)
+	Hopeful:  Aileen Colleran (2099.00000)
+	Hopeful:  Irene Graham (1699.00000)
+	Hopeful:  Andrew Gray (240.00000)
+	Hopeful:  Christopher Mason (2259.00000)
+	Hopeful:  Jimmy Ross (373.00000)
+	Hopeful:  Richard Alan Sullivan (1404.00000)
+	Elected votes: 0.00000
+	Pending votes: 2811.00000
+	Hopeful votes: 9933.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 12744.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Kenny McLean
+	Elected votes: 2811.00000
+	Hopeful votes: 9933.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 12744.00000
+	Surplus: 262.00000
+Action: Surplus transferred: Kenny McLean (262.00000)
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  George Aytoun Atkinson (268.63480)
+	Hopeful:  Stuart Clay (1652.43640)
+	Hopeful:  Aileen Colleran (2115.31000)
+	Hopeful:  Irene Graham (1716.89440)
+	Hopeful:  Andrew Gray (253.14120)
+	Hopeful:  Christopher Mason (2300.94000)
+	Hopeful:  Jimmy Ross (402.82400)
+	Hopeful:  Richard Alan Sullivan (1419.37800)
+	Elected votes: 2549.00000
+	Hopeful votes: 10129.55880
+	Nontransferable votes: 65.42640
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 262.00000
+Round 2:
+Action: Defeat low candidate: Andrew Gray
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  George Aytoun Atkinson (268.63480)
+	Hopeful:  Stuart Clay (1652.43640)
+	Hopeful:  Aileen Colleran (2115.31000)
+	Hopeful:  Irene Graham (1716.89440)
+	Hopeful:  Christopher Mason (2300.94000)
+	Hopeful:  Jimmy Ross (402.82400)
+	Hopeful:  Richard Alan Sullivan (1419.37800)
+	Defeated: Andrew Gray (253.14120)
+	Elected votes: 2549.00000
+	Hopeful votes: 9876.41760
+	Defeated votes: 253.14120
+	Nontransferable votes: 65.42640
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Andrew Gray
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  George Aytoun Atkinson (271.00760)
+	Hopeful:  Stuart Clay (1744.81680)
+	Hopeful:  Aileen Colleran (2128.58960)
+	Hopeful:  Irene Graham (1732.73320)
+	Hopeful:  Christopher Mason (2325.68560)
+	Hopeful:  Jimmy Ross (465.20440)
+	Hopeful:  Richard Alan Sullivan (1419.84400)
+	Defeated: Andrew Gray (0.00000)
+	Elected votes: 2549.00000
+	Hopeful votes: 10087.88120
+	Nontransferable votes: 107.10400
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: George Aytoun Atkinson
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  Stuart Clay (1744.81680)
+	Hopeful:  Aileen Colleran (2128.58960)
+	Hopeful:  Irene Graham (1732.73320)
+	Hopeful:  Christopher Mason (2325.68560)
+	Hopeful:  Jimmy Ross (465.20440)
+	Hopeful:  Richard Alan Sullivan (1419.84400)
+	Defeated: George Aytoun Atkinson (271.00760)
+	Defeated: Andrew Gray (0.00000)
+	Elected votes: 2549.00000
+	Hopeful votes: 9816.87360
+	Defeated votes: 271.00760
+	Nontransferable votes: 107.10400
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 0.00000
+Action: Transfer defeated: George Aytoun Atkinson
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  Stuart Clay (1789.56240)
+	Hopeful:  Aileen Colleran (2150.68280)
+	Hopeful:  Irene Graham (1741.82640)
+	Hopeful:  Christopher Mason (2354.96520)
+	Hopeful:  Jimmy Ross (472.57720)
+	Hopeful:  Richard Alan Sullivan (1516.14880)
+	Defeated: George Aytoun Atkinson, Andrew Gray (0.00000)
+	Elected votes: 2549.00000
+	Hopeful votes: 10025.76280
+	Nontransferable votes: 169.22240
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Jimmy Ross
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  Stuart Clay (1789.56240)
+	Hopeful:  Aileen Colleran (2150.68280)
+	Hopeful:  Irene Graham (1741.82640)
+	Hopeful:  Christopher Mason (2354.96520)
+	Hopeful:  Richard Alan Sullivan (1516.14880)
+	Defeated: Jimmy Ross (472.57720)
+	Defeated: George Aytoun Atkinson, Andrew Gray (0.00000)
+	Elected votes: 2549.00000
+	Hopeful votes: 9553.18560
+	Defeated votes: 472.57720
+	Nontransferable votes: 169.22240
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Jimmy Ross
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  Stuart Clay (1963.33080)
+	Hopeful:  Aileen Colleran (2199.26720)
+	Hopeful:  Irene Graham (1785.97000)
+	Hopeful:  Christopher Mason (2411.06600)
+	Hopeful:  Richard Alan Sullivan (1529.10600)
+	Defeated: George Aytoun Atkinson, Andrew Gray, Jimmy Ross (0.00000)
+	Elected votes: 2549.00000
+	Hopeful votes: 9888.74000
+	Nontransferable votes: 306.24520
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Richard Alan Sullivan
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  Stuart Clay (1963.33080)
+	Hopeful:  Aileen Colleran (2199.26720)
+	Hopeful:  Irene Graham (1785.97000)
+	Hopeful:  Christopher Mason (2411.06600)
+	Defeated: Richard Alan Sullivan (1529.10600)
+	Defeated: George Aytoun Atkinson, Andrew Gray, Jimmy Ross (0.00000)
+	Elected votes: 2549.00000
+	Hopeful votes: 8359.63400
+	Defeated votes: 1529.10600
+	Nontransferable votes: 306.24520
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Richard Alan Sullivan
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  Stuart Clay (2175.33840)
+	Hopeful:  Aileen Colleran (2275.01280)
+	Hopeful:  Irene Graham (1866.71560)
+	Hopeful:  Christopher Mason (2910.75120)
+	Defeated: George Aytoun Atkinson, Andrew Gray, Jimmy Ross, Richard Alan Sullivan (0.00000)
+	Elected votes: 2549.00000
+	Hopeful votes: 9227.81800
+	Nontransferable votes: 967.16720
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Christopher Mason
+	Elected:  Kenny McLean (2549.00000)
+	Pending:  Christopher Mason (2910.75120)
+	Hopeful:  Stuart Clay (2175.33840)
+	Hopeful:  Aileen Colleran (2275.01280)
+	Hopeful:  Irene Graham (1866.71560)
+	Defeated: George Aytoun Atkinson, Andrew Gray, Jimmy Ross, Richard Alan Sullivan (0.00000)
+	Elected votes: 2549.00000
+	Pending votes: 2910.75120
+	Hopeful votes: 6317.06680
+	Nontransferable votes: 967.16720
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 0.00000
+Round 6:
+Action: Transfer high surplus: Christopher Mason
+	Elected votes: 5459.75120
+	Hopeful votes: 6317.06680
+	Nontransferable votes: 967.16720
+	Residual: 0.01480
+	Total: 12744.00000
+	Surplus: 361.75120
+Action: Surplus transferred: Christopher Mason (361.75120)
+	Elected:  Christopher Mason (2549.00000)
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  Stuart Clay (2304.71570)
+	Hopeful:  Aileen Colleran (2316.49150)
+	Hopeful:  Irene Graham (1920.15992)
+	Defeated: George Aytoun Atkinson, Andrew Gray, Jimmy Ross, Richard Alan Sullivan (0.00000)
+	Elected votes: 5098.00000
+	Hopeful votes: 6541.36712
+	Nontransferable votes: 1104.61340
+	Residual: 0.01948
+	Total: 12744.00000
+	Surplus: 361.75120
+Round 7:
+Action: Defeat low candidate: Irene Graham
+	Elected:  Christopher Mason (2549.00000)
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  Stuart Clay (2304.71570)
+	Hopeful:  Aileen Colleran (2316.49150)
+	Defeated: Irene Graham (1920.15992)
+	Defeated: George Aytoun Atkinson, Andrew Gray, Jimmy Ross, Richard Alan Sullivan (0.00000)
+	Elected votes: 5098.00000
+	Hopeful votes: 4621.20720
+	Defeated votes: 1920.15992
+	Nontransferable votes: 1104.61340
+	Residual: 0.01948
+	Total: 12744.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Irene Graham
+	Elected:  Christopher Mason (2549.00000)
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  Stuart Clay (2531.20856)
+	Hopeful:  Aileen Colleran (3522.28506)
+	Defeated: George Aytoun Atkinson, Irene Graham, Andrew Gray, Jimmy Ross, Richard Alan Sullivan (0.00000)
+	Elected votes: 5098.00000
+	Hopeful votes: 6053.49362
+	Nontransferable votes: 1592.48690
+	Residual: 0.01948
+	Total: 12744.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Stuart Clay
+	Elected:  Stuart Clay (2531.20856)
+	Elected:  Christopher Mason (2549.00000)
+	Elected:  Kenny McLean (2549.00000)
+	Hopeful:  Aileen Colleran (3522.28506)
+	Defeated: George Aytoun Atkinson, Irene Graham, Andrew Gray, Jimmy Ross, Richard Alan Sullivan (0.00000)
+	Elected votes: 7629.20856
+	Hopeful votes: 3522.28506
+	Nontransferable votes: 1592.48690
+	Residual: 0.01948
+	Total: 12744.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Aileen Colleran
+	Elected:  Stuart Clay (2531.20856)
+	Elected:  Aileen Colleran (3522.28506)
+	Elected:  Christopher Mason (2549.00000)
+	Elected:  Kenny McLean (2549.00000)
+	Defeated: George Aytoun Atkinson, Irene Graham, Andrew Gray, Jimmy Ross, Richard Alan Sullivan (0.00000)
+	Elected votes: 11151.49362
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1592.48690
+	Residual: 0.01948
+	Total: 12744.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Stuart Clay (2531.20856)
+	Elected:  Aileen Colleran (3522.28506)
+	Elected:  Christopher Mason (2549.00000)
+	Elected:  Kenny McLean (2549.00000)
+	Defeated: George Aytoun Atkinson, Irene Graham, Andrew Gray, Jimmy Ross, Richard Alan Sullivan (0.00000)
+	Elected votes: 11151.49362
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1592.48690
+	Residual: 0.01948
+	Total: 12744.00000
+	Surplus: 0.00000

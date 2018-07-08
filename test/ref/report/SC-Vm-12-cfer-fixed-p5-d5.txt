@@ -1,0 +1,160 @@
+
+Election: Voting matters example (Issue 12, 'The computational accuracy using the Meek algorithm')
+
+	Droop package: droop v0.11
+	Rule: CfER (single defeat)
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 3
+	Ballots: 4003
+	Quota: 1000.75001
+
+	Add eligible: A
+	Add eligible: B
+	Add eligible: X
+	Add eligible: Y
+	Add eligible: Z
+Action: Begin Count
+	Hopeful:  A (1001.00000)
+	Hopeful:  B (1001.00000)
+	Hopeful:  X (667.00000)
+	Hopeful:  Y (667.00000)
+	Hopeful:  Z (667.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 4003.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 4003.00000
+	Surplus: 0.00000
+Round 1:
+Action: Elect, transfer pending: B
+	Pending:  B (1001.00000)
+	Hopeful:  A (1001.00000)
+	Hopeful:  X (667.00000)
+	Hopeful:  Y (667.00000)
+	Hopeful:  Z (667.00000)
+	Elected votes: 0.00000
+	Pending votes: 1001.00000
+	Hopeful votes: 3002.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 4003.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: A
+	Pending:  A (1001.00000)
+	Pending:  B (1001.00000)
+	Hopeful:  X (667.00000)
+	Hopeful:  Y (667.00000)
+	Hopeful:  Z (667.00000)
+	Elected votes: 0.00000
+	Pending votes: 2002.00000
+	Hopeful votes: 2001.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 4003.00000
+	Surplus: 0.00000
+Action: Transfer surplus: A
+	Elected votes: 1001.00000
+	Pending votes: 1001.00000
+	Hopeful votes: 2001.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 4003.00000
+	Surplus: 0.00000
+Action: Surplus transferred: A (0.24999)
+	Elected:  A (1000.75001)
+	Pending:  B (1001.00000)
+	Hopeful:  X (667.08016)
+	Hopeful:  Y (667.08016)
+	Hopeful:  Z (667.07992)
+	Elected votes: 1000.75001
+	Pending votes: 1001.00000
+	Hopeful votes: 2001.24024
+	Nontransferable votes: 0.00000
+	Residual: 0.00975
+	Total: 4003.00000
+	Surplus: 0.00000
+Action: Transfer surplus: B
+	Elected votes: 2001.75001
+	Hopeful votes: 2001.24024
+	Nontransferable votes: 0.00000
+	Residual: 0.00975
+	Total: 4003.00000
+	Surplus: 0.00000
+Action: Surplus transferred: B (0.24999)
+	Elected:  A (1000.75001)
+	Elected:  B (1000.75001)
+	Hopeful:  X (667.16056)
+	Hopeful:  Y (667.16008)
+	Hopeful:  Z (667.15984)
+	Elected votes: 2001.50002
+	Hopeful votes: 2001.48048
+	Nontransferable votes: 0.00000
+	Residual: 0.01950
+	Total: 4003.00000
+	Surplus: 0.00000
+Round 2:
+Action: Defeat: Z
+	Elected:  A (1000.75001)
+	Elected:  B (1000.75001)
+	Hopeful:  X (667.16056)
+	Hopeful:  Y (667.16008)
+	Defeated: Z (667.15984)
+	Elected votes: 2001.50002
+	Hopeful votes: 1334.32064
+	Defeated votes: 667.15984
+	Nontransferable votes: 0.00000
+	Residual: 0.01950
+	Total: 4003.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Z
+	Elected:  A (1000.75001)
+	Elected:  B (1000.75001)
+	Hopeful:  X (667.16056)
+	Hopeful:  Y (667.16008)
+	Defeated: Z (0.00000)
+	Elected votes: 2001.50002
+	Hopeful votes: 1334.32064
+	Nontransferable votes: 667.15984
+	Residual: 0.01950
+	Total: 4003.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat: Y
+	Elected:  A (1000.75001)
+	Elected:  B (1000.75001)
+	Hopeful:  X (667.16056)
+	Defeated: Y (667.16008)
+	Defeated: Z (0.00000)
+	Elected votes: 2001.50002
+	Hopeful votes: 667.16056
+	Defeated votes: 667.16008
+	Nontransferable votes: 667.15984
+	Residual: 0.01950
+	Total: 4003.00000
+	Surplus: 0.00000
+Action: Elect remaining: X
+	Elected:  A (1000.75001)
+	Elected:  B (1000.75001)
+	Elected:  X (667.16056)
+	Defeated: Y (667.16008)
+	Defeated: Z (0.00000)
+	Elected votes: 2668.66058
+	Hopeful votes: 0.00000
+	Defeated votes: 667.16008
+	Nontransferable votes: 667.15984
+	Residual: 0.01950
+	Total: 4003.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  A (1000.75001)
+	Elected:  B (1000.75001)
+	Elected:  X (667.16056)
+	Defeated: Y (667.16008)
+	Defeated: Z (0.00000)
+	Elected votes: 2668.66058
+	Hopeful votes: 0.00000
+	Defeated votes: 667.16008
+	Nontransferable votes: 667.15984
+	Residual: 0.01950
+	Total: 4003.00000
+	Surplus: 0.00000

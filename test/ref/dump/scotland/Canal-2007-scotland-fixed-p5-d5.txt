@@ -1,0 +1,45 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote	11.name	11.state	11.vote
+0	log	Add eligible: Brian Brown
+0	log	Add eligible: James Cruickshank
+0	log	Add eligible: Norman Fraser
+0	log	Add eligible: Ellen Hurcombe
+0	log	Add eligible: David E Ledgerwood
+0	log	Add eligible: Jim MacKechnie
+0	log	Add eligible: Haleema Malik
+0	log	Add eligible: Billy McAllister
+0	log	Add eligible: Angela McCormick
+0	log	Add eligible: Kirsteen Redpath
+0	log	Add eligible: Kieran Wild 
+0	begin	1725.00000	0.00000	Brian Brown	H	193.00000	James Cruickshank	H	94.00000	Norman Fraser	H	587.00000	Ellen Hurcombe	H	1961.00000	David E Ledgerwood	H	338.00000	Jim MacKechnie	H	1055.00000	Haleema Malik	H	579.00000	Billy McAllister	H	2514.00000	Angela McCormick	H	425.00000	Kirsteen Redpath	H	175.00000	Kieran Wild 	H	703.00000
+0	elect	1725.00000	0.00000	Brian Brown	H	193.00000	James Cruickshank	H	94.00000	Norman Fraser	H	587.00000	Ellen Hurcombe	H	1961.00000	David E Ledgerwood	H	338.00000	Jim MacKechnie	H	1055.00000	Haleema Malik	H	579.00000	Billy McAllister	e	2514.00000	Angela McCormick	H	425.00000	Kirsteen Redpath	H	175.00000	Kieran Wild 	H	703.00000
+0	elect	1725.00000	0.00000	Brian Brown	H	193.00000	James Cruickshank	H	94.00000	Norman Fraser	H	587.00000	Ellen Hurcombe	e	1961.00000	David E Ledgerwood	H	338.00000	Jim MacKechnie	H	1055.00000	Haleema Malik	H	579.00000	Billy McAllister	e	2514.00000	Angela McCormick	H	425.00000	Kirsteen Redpath	H	175.00000	Kieran Wild 	H	703.00000
+1	round	New Round
+1	unpend	1725.00000	0.00000	Brian Brown	H	193.00000	James Cruickshank	H	94.00000	Norman Fraser	H	587.00000	Ellen Hurcombe	e	1961.00000	David E Ledgerwood	H	338.00000	Jim MacKechnie	H	1055.00000	Haleema Malik	H	579.00000	Billy McAllister	E	2514.00000	Angela McCormick	H	425.00000	Kirsteen Redpath	H	175.00000	Kieran Wild 	H	703.00000
+1	transfer	1725.00000	306.62168	Brian Brown	H	214.65496	James Cruickshank	H	119.10720	Norman Fraser	H	651.65104	Ellen Hurcombe	e	1961.00000	David E Ledgerwood	H	358.71344	Jim MacKechnie	H	1118.39568	Haleema Malik	H	608.50096	Billy McAllister	E	1725.00000	Angela McCormick	H	544.25920	Kirsteen Redpath	H	222.38984	Kieran Wild 	H	793.69976
+2	round	New Round
+2	unpend	1725.00000	306.62168	Brian Brown	H	214.65496	James Cruickshank	H	119.10720	Norman Fraser	H	651.65104	Ellen Hurcombe	E	1961.00000	David E Ledgerwood	H	358.71344	Jim MacKechnie	H	1118.39568	Haleema Malik	H	608.50096	Billy McAllister	E	1725.00000	Angela McCormick	H	544.25920	Kirsteen Redpath	H	222.38984	Kieran Wild 	H	793.69976
+2	transfer	1725.00000	359.69162	Brian Brown	H	217.54312	James Cruickshank	H	120.79196	Norman Fraser	H	658.75110	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	H	361.96262	Jim MacKechnie	H	1247.76118	Haleema Malik	H	631.96726	Billy McAllister	E	1725.00000	Angela McCormick	H	553.40504	Kirsteen Redpath	H	224.31528	Kieran Wild 	H	797.79132
+3	round	New Round
+3	defeat	1725.00000	359.69162	Brian Brown	H	217.54312	James Cruickshank	D	120.79196	Norman Fraser	H	658.75110	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	H	361.96262	Jim MacKechnie	H	1247.76118	Haleema Malik	H	631.96726	Billy McAllister	E	1725.00000	Angela McCormick	H	553.40504	Kirsteen Redpath	H	224.31528	Kieran Wild 	H	797.79132
+3	transfer	1725.00000	397.77830	Brian Brown	H	225.10102	James Cruickshank	D	0.00000	Norman Fraser	H	673.63414	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	H	368.51714	Jim MacKechnie	H	1263.49790	Haleema Malik	H	637.40144	Billy McAllister	E	1725.00000	Angela McCormick	H	567.60530	Kirsteen Redpath	H	231.26018	Kieran Wild 	H	809.18508
+4	round	New Round
+4	defeat	1725.00000	397.77830	Brian Brown	D	225.10102	James Cruickshank	D	0.00000	Norman Fraser	H	673.63414	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	H	368.51714	Jim MacKechnie	H	1263.49790	Haleema Malik	H	637.40144	Billy McAllister	E	1725.00000	Angela McCormick	H	567.60530	Kirsteen Redpath	H	231.26018	Kieran Wild 	H	809.18508
+4	transfer	1725.00000	470.45200	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	H	693.62622	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	H	451.01656	Jim MacKechnie	H	1274.78914	Haleema Malik	H	644.14946	Billy McAllister	E	1725.00000	Angela McCormick	H	584.23974	Kirsteen Redpath	H	235.82938	Kieran Wild 	H	819.87800
+5	round	New Round
+5	defeat	1725.00000	470.45200	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	H	693.62622	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	H	451.01656	Jim MacKechnie	H	1274.78914	Haleema Malik	H	644.14946	Billy McAllister	E	1725.00000	Angela McCormick	H	584.23974	Kirsteen Redpath	D	235.82938	Kieran Wild 	H	819.87800
+5	transfer	1725.00000	530.16858	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	H	711.88496	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	H	453.95808	Jim MacKechnie	H	1288.97472	Haleema Malik	H	653.40482	Billy McAllister	E	1725.00000	Angela McCormick	H	648.09588	Kirsteen Redpath	D	0.00000	Kieran Wild 	H	887.49346
+6	round	New Round
+6	defeat	1725.00000	530.16858	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	H	711.88496	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	453.95808	Jim MacKechnie	H	1288.97472	Haleema Malik	H	653.40482	Billy McAllister	E	1725.00000	Angela McCormick	H	648.09588	Kirsteen Redpath	D	0.00000	Kieran Wild 	H	887.49346
+6	transfer	1725.00000	762.11570	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	H	814.39906	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	0.00000	Jim MacKechnie	H	1333.51654	Haleema Malik	H	673.70736	Billy McAllister	E	1725.00000	Angela McCormick	H	660.29276	Kirsteen Redpath	D	0.00000	Kieran Wild 	H	929.94908
+7	round	New Round
+7	defeat	1725.00000	762.11570	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	H	814.39906	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	0.00000	Jim MacKechnie	H	1333.51654	Haleema Malik	H	673.70736	Billy McAllister	E	1725.00000	Angela McCormick	D	660.29276	Kirsteen Redpath	D	0.00000	Kieran Wild 	H	929.94908
+7	transfer	1725.00000	1074.05740	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	H	861.99984	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	0.00000	Jim MacKechnie	H	1393.66368	Haleema Malik	H	729.06384	Billy McAllister	E	1725.00000	Angela McCormick	D	0.00000	Kirsteen Redpath	D	0.00000	Kieran Wild 	H	1115.19574
+8	round	New Round
+8	defeat	1725.00000	1074.05740	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	H	861.99984	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	0.00000	Jim MacKechnie	H	1393.66368	Haleema Malik	D	729.06384	Billy McAllister	E	1725.00000	Angela McCormick	D	0.00000	Kirsteen Redpath	D	0.00000	Kieran Wild 	H	1115.19574
+8	transfer	1725.00000	1418.68054	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	H	905.53514	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	0.00000	Jim MacKechnie	H	1692.04846	Haleema Malik	D	0.00000	Billy McAllister	E	1725.00000	Angela McCormick	D	0.00000	Kirsteen Redpath	D	0.00000	Kieran Wild 	H	1157.71636
+9	round	New Round
+9	defeat	1725.00000	1418.68054	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	D	905.53514	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	0.00000	Jim MacKechnie	H	1692.04846	Haleema Malik	D	0.00000	Billy McAllister	E	1725.00000	Angela McCormick	D	0.00000	Kirsteen Redpath	D	0.00000	Kieran Wild 	H	1157.71636
+9	transfer	1725.00000	1762.68058	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	D	0.00000	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	0.00000	Jim MacKechnie	H	1876.32130	Haleema Malik	D	0.00000	Billy McAllister	E	1725.00000	Angela McCormick	D	0.00000	Kirsteen Redpath	D	0.00000	Kieran Wild 	H	1534.97862
+9	elect	1725.00000	1762.68058	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	D	0.00000	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	0.00000	Jim MacKechnie	E	1876.32130	Haleema Malik	D	0.00000	Billy McAllister	E	1725.00000	Angela McCormick	D	0.00000	Kirsteen Redpath	D	0.00000	Kieran Wild 	H	1534.97862
+9	elect	1725.00000	1762.68058	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	D	0.00000	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	0.00000	Jim MacKechnie	E	1876.32130	Haleema Malik	D	0.00000	Billy McAllister	E	1725.00000	Angela McCormick	D	0.00000	Kirsteen Redpath	D	0.00000	Kieran Wild 	E	1534.97862
+X	end	1725.00000	1762.68058	Brian Brown	D	0.00000	James Cruickshank	D	0.00000	Norman Fraser	D	0.00000	Ellen Hurcombe	E	1725.00000	David E Ledgerwood	D	0.00000	Jim MacKechnie	E	1876.32130	Haleema Malik	D	0.00000	Billy McAllister	E	1725.00000	Angela McCormick	D	0.00000	Kirsteen Redpath	D	0.00000	Kieran Wild 	E	1534.97862

@@ -1,0 +1,391 @@
+{
+  "actions": [
+    {
+      "msg": "Add eligible: Castor", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Pollux", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Helen", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000"
+        }
+      }, 
+      "msg": "Begin Count", 
+      "quota": "2.000000000000", 
+      "residual": "0.000000000000", 
+      "round": 0, 
+      "surplus": "0.000000000000", 
+      "tag": "begin", 
+      "votes": "6.000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "2.000000000000", 
+      "residual": "0.000000000000", 
+      "round": 1, 
+      "surplus": "0.000000000000", 
+      "tag": "round", 
+      "votes": "6.000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "1.000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "4.000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000"
+        }
+      }, 
+      "msg": "Elect: Castor", 
+      "quota": "2.000000000000", 
+      "residual": "0.000000000000", 
+      "round": 1, 
+      "surplus": "0.000000000000", 
+      "tag": "elect", 
+      "votes": "6.000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "1.000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "4.000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000"
+        }
+      }, 
+      "msg": "Iterate (elected)", 
+      "quota": "2.000000000000", 
+      "residual": "0.000000000000", 
+      "round": 1, 
+      "surplus": "2.000000000000", 
+      "tag": "iterate", 
+      "votes": "6.000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "1.000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "4.000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "2.000000000000", 
+      "residual": "0.000000000000", 
+      "round": 2, 
+      "surplus": "2.000000000000", 
+      "tag": "round", 
+      "votes": "6.000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.500000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2.000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000"
+        }
+      }, 
+      "msg": "Iterate (omega)", 
+      "quota": "2.000000000000", 
+      "residual": "0.000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000", 
+      "tag": "iterate", 
+      "votes": "6.000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.500000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2.000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000"
+        }
+      }, 
+      "msg": "Break tie (defeat): [Pollux, Helen] -> Pollux", 
+      "quota": "2.000000000000", 
+      "residual": "0.000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000", 
+      "tag": "tie", 
+      "votes": "6.000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.500000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2.000000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "kf": "1.000000000000", 
+          "state": "defeated", 
+          "vote": "2.000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000"
+        }
+      }, 
+      "msg": "Defeat (surplus 0.000000000000 < omega): Pollux", 
+      "quota": "2.000000000000", 
+      "residual": "0.000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000", 
+      "tag": "defeat", 
+      "votes": "6.000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.500000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2.000000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "kf": "0.000000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "kf": "1.000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2.000000000000"
+        }
+      }, 
+      "msg": "Elect remaining: Helen", 
+      "quota": "2.000000000000", 
+      "residual": "2.000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000", 
+      "tag": "elect", 
+      "votes": "4.000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.500000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2.000000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "kf": "0.000000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "kf": "1.000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2.000000000000"
+        }
+      }, 
+      "msg": "Count Complete", 
+      "quota": "2.000000000000", 
+      "residual": "2.000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000", 
+      "tag": "end", 
+      "votes": "4.000000000000"
+    }
+  ], 
+  "arithmetic_info": "rational arithmetic", 
+  "arithmetic_name": "rational", 
+  "cdict": {
+    "1": {
+      "ballot_order": 1, 
+      "cid": 1, 
+      "name": "Castor", 
+      "nick": "1", 
+      "tie_order": 1
+    }, 
+    "2": {
+      "ballot_order": 2, 
+      "cid": 2, 
+      "name": "Pollux", 
+      "nick": "2", 
+      "tie_order": 2
+    }, 
+    "3": {
+      "ballot_order": 3, 
+      "cid": 3, 
+      "name": "Helen", 
+      "nick": "3", 
+      "tie_order": 3
+    }
+  }, 
+  "cids": [
+    1, 
+    2, 
+    3
+  ], 
+  "droop_name": "droop", 
+  "droop_version": "0.11", 
+  "ecids": [
+    1, 
+    2, 
+    3
+  ], 
+  "method": "meek", 
+  "nballots": 6, 
+  "omega": "0.000000000100", 
+  "options": {
+    "allowed": {
+      "defeat_batch": [
+        "none", 
+        "safe"
+      ]
+    }, 
+    "cmd": {
+      "arithmetic": "rational", 
+      "rule": "meek"
+    }, 
+    "default": {
+      "arithmetic": "guarded", 
+      "defeat_batch": "safe", 
+      "display": 12, 
+      "omega": 10
+    }, 
+    "file_options": {}, 
+    "force": {}, 
+    "options": {
+      "arithmetic": "rational", 
+      "defeat_batch": "safe", 
+      "display": 12, 
+      "omega": 10, 
+      "rule": "meek"
+    }
+  }, 
+  "quota": "2.000000000000", 
+  "rule_info": "Meek Parametric (omega = 1/10^10)", 
+  "rule_name": "meek", 
+  "seats": 2, 
+  "title": "Pollux and Helen should tie"
+}

@@ -1,0 +1,44 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote
+0	log	Add eligible: Paul Carey
+0	log	Add eligible: Eileen Margaret Cartner Duke
+0	log	Add eligible: Mike Dyer
+0	log	Add eligible: Jonathan Findlay
+0	log	Add eligible: Bobby Howie
+0	log	Add eligible: Bill Kidd
+0	log	Add eligible: Alan Lee
+0	log	Add eligible: Susan McCourt
+0	log	Add eligible: Esther Nixon
+0	log	Add eligible: Steven Purcell
+0	begin	1737.00000	0.00000	Paul Carey	H	2284.00000	Eileen Margaret Cartner Duke	H	260.00000	Mike Dyer	H	148.00000	Jonathan Findlay	H	1102.00000	Bobby Howie	H	177.00000	Bill Kidd	H	1869.00000	Alan Lee	H	349.00000	Susan McCourt	H	412.00000	Esther Nixon	H	223.00000	Steven Purcell	H	1856.00000
+0	elect	1737.00000	0.00000	Paul Carey	e	2284.00000	Eileen Margaret Cartner Duke	H	260.00000	Mike Dyer	H	148.00000	Jonathan Findlay	H	1102.00000	Bobby Howie	H	177.00000	Bill Kidd	H	1869.00000	Alan Lee	H	349.00000	Susan McCourt	H	412.00000	Esther Nixon	H	223.00000	Steven Purcell	H	1856.00000
+0	elect	1737.00000	0.00000	Paul Carey	e	2284.00000	Eileen Margaret Cartner Duke	H	260.00000	Mike Dyer	H	148.00000	Jonathan Findlay	H	1102.00000	Bobby Howie	H	177.00000	Bill Kidd	e	1869.00000	Alan Lee	H	349.00000	Susan McCourt	H	412.00000	Esther Nixon	H	223.00000	Steven Purcell	H	1856.00000
+0	elect	1737.00000	0.00000	Paul Carey	e	2284.00000	Eileen Margaret Cartner Duke	H	260.00000	Mike Dyer	H	148.00000	Jonathan Findlay	H	1102.00000	Bobby Howie	H	177.00000	Bill Kidd	e	1869.00000	Alan Lee	H	349.00000	Susan McCourt	H	412.00000	Esther Nixon	H	223.00000	Steven Purcell	e	1856.00000
+1	round	New Round
+1	unpend	1737.00000	0.00000	Paul Carey	E	2284.00000	Eileen Margaret Cartner Duke	H	260.00000	Mike Dyer	H	148.00000	Jonathan Findlay	H	1102.00000	Bobby Howie	H	177.00000	Bill Kidd	e	1869.00000	Alan Lee	H	349.00000	Susan McCourt	H	412.00000	Esther Nixon	H	223.00000	Steven Purcell	e	1856.00000
+1	transfer	1737.00000	172.91178	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	283.23053	Mike Dyer	H	175.06237	Jonathan Findlay	H	1374.77911	Bobby Howie	H	184.18470	Bill Kidd	e	1869.00000	Alan Lee	H	364.56685	Susan McCourt	H	419.66368	Esther Nixon	H	243.59614	Steven Purcell	e	1856.00000
+2	round	New Round
+2	unpend	1737.00000	172.91178	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	283.23053	Mike Dyer	H	175.06237	Jonathan Findlay	H	1374.77911	Bobby Howie	H	184.18470	Bill Kidd	E	1869.00000	Alan Lee	H	364.56685	Susan McCourt	H	419.66368	Esther Nixon	H	243.59614	Steven Purcell	e	1856.00000
+2	transfer	1737.00000	223.47570	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	300.67367	Mike Dyer	H	186.92653	Jonathan Findlay	H	1385.01901	Bobby Howie	H	188.28066	Bill Kidd	E	1737.00000	Alan Lee	H	379.96201	Susan McCourt	H	425.73700	Esther Nixon	H	259.90936	Steven Purcell	e	1856.00000
+3	round	New Round
+3	unpend	1737.00000	223.47570	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	300.67367	Mike Dyer	H	186.92653	Jonathan Findlay	H	1385.01901	Bobby Howie	H	188.28066	Bill Kidd	E	1737.00000	Alan Lee	H	379.96201	Susan McCourt	H	425.73700	Esther Nixon	H	259.90936	Steven Purcell	E	1856.00000
+3	transfer	1737.00000	259.50552	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	305.09726	Mike Dyer	H	191.41423	Jonathan Findlay	H	1445.34652	Bobby Howie	H	190.13985	Bill Kidd	E	1737.00000	Alan Lee	H	385.28314	Susan McCourt	H	428.55784	Esther Nixon	H	263.62774	Steven Purcell	E	1737.00000
+4	round	New Round
+4	defeat	1737.00000	259.50552	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	305.09726	Mike Dyer	H	191.41423	Jonathan Findlay	H	1445.34652	Bobby Howie	D	190.13985	Bill Kidd	E	1737.00000	Alan Lee	H	385.28314	Susan McCourt	H	428.55784	Esther Nixon	H	263.62774	Steven Purcell	E	1737.00000
+4	transfer	1737.00000	310.56017	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	319.17117	Mike Dyer	H	197.86887	Jonathan Findlay	H	1455.71518	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	H	400.61766	Susan McCourt	H	517.95996	Esther Nixon	H	267.07909	Steven Purcell	E	1737.00000
+5	round	New Round
+5	defeat	1737.00000	310.56017	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	319.17117	Mike Dyer	D	197.86887	Jonathan Findlay	H	1455.71518	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	H	400.61766	Susan McCourt	H	517.95996	Esther Nixon	H	267.07909	Steven Purcell	E	1737.00000
+5	transfer	1737.00000	373.13485	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	361.95837	Mike Dyer	D	0.00000	Jonathan Findlay	H	1476.02210	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	H	415.48161	Susan McCourt	H	520.72142	Esther Nixon	H	321.65375	Steven Purcell	E	1737.00000
+6	round	New Round
+6	defeat	1737.00000	373.13485	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	361.95837	Mike Dyer	D	0.00000	Jonathan Findlay	H	1476.02210	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	H	415.48161	Susan McCourt	H	520.72142	Esther Nixon	D	321.65375	Steven Purcell	E	1737.00000
+6	transfer	1737.00000	526.14416	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	H	428.04551	Mike Dyer	D	0.00000	Jonathan Findlay	H	1524.87540	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	H	454.82112	Susan McCourt	H	535.08591	Esther Nixon	D	0.00000	Steven Purcell	E	1737.00000
+7	round	New Round
+7	defeat	1737.00000	526.14416	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	D	428.04551	Mike Dyer	D	0.00000	Jonathan Findlay	H	1524.87540	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	H	454.82112	Susan McCourt	H	535.08591	Esther Nixon	D	0.00000	Steven Purcell	E	1737.00000
+7	transfer	1737.00000	728.66287	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	D	0.00000	Mike Dyer	D	0.00000	Jonathan Findlay	H	1589.53779	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	H	592.32585	Susan McCourt	H	558.44559	Esther Nixon	D	0.00000	Steven Purcell	E	1737.00000
+8	round	New Round
+8	defeat	1737.00000	728.66287	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	D	0.00000	Mike Dyer	D	0.00000	Jonathan Findlay	H	1589.53779	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	H	592.32585	Susan McCourt	D	558.44559	Esther Nixon	D	0.00000	Steven Purcell	E	1737.00000
+8	transfer	1737.00000	1073.62578	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	D	0.00000	Mike Dyer	D	0.00000	Jonathan Findlay	H	1640.21076	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	H	755.13556	Susan McCourt	D	0.00000	Esther Nixon	D	0.00000	Steven Purcell	E	1737.00000
+9	round	New Round
+9	defeat	1737.00000	1073.62578	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	D	0.00000	Mike Dyer	D	0.00000	Jonathan Findlay	H	1640.21076	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	D	755.13556	Susan McCourt	D	0.00000	Esther Nixon	D	0.00000	Steven Purcell	E	1737.00000
+9	transfer	1737.00000	1632.92813	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	D	0.00000	Mike Dyer	D	0.00000	Jonathan Findlay	H	1836.04397	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	D	0.00000	Susan McCourt	D	0.00000	Esther Nixon	D	0.00000	Steven Purcell	E	1737.00000
+9	elect	1737.00000	1632.92813	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	D	0.00000	Mike Dyer	D	0.00000	Jonathan Findlay	E	1836.04397	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	D	0.00000	Susan McCourt	D	0.00000	Esther Nixon	D	0.00000	Steven Purcell	E	1737.00000
+X	end	1737.00000	1632.92813	Paul Carey	E	1737.00000	Eileen Margaret Cartner Duke	D	0.00000	Mike Dyer	D	0.00000	Jonathan Findlay	E	1836.04397	Bobby Howie	D	0.00000	Bill Kidd	E	1737.00000	Alan Lee	D	0.00000	Susan McCourt	D	0.00000	Esther Nixon	D	0.00000	Steven Purcell	E	1737.00000

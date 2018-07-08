@@ -1,0 +1,289 @@
+
+Election: MARYHILL-KELVIN
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 9901
+	Quota: 1981.00000
+
+	Add eligible: Alex Dingwall
+	Add eligible: John Lawson
+	Add eligible: Mary Paris
+	Add eligible: Brian Clifford Pope
+	Add eligible: Mohammed Razaq
+	Add eligible: Daryl L Tayar
+	Add eligible: Paul Wilcox
+	Add eligible: Robert Winter
+Action: Begin Count
+	Hopeful:  Alex Dingwall (2561.00000)
+	Hopeful:  John Lawson (255.00000)
+	Hopeful:  Mary Paris (1602.00000)
+	Hopeful:  Brian Clifford Pope (943.00000)
+	Hopeful:  Mohammed Razaq (1546.00000)
+	Hopeful:  Daryl L Tayar (705.00000)
+	Hopeful:  Paul Wilcox (341.00000)
+	Hopeful:  Robert Winter (1948.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 9901.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9901.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Alex Dingwall
+	Pending:  Alex Dingwall (2561.00000)
+	Hopeful:  John Lawson (255.00000)
+	Hopeful:  Mary Paris (1602.00000)
+	Hopeful:  Brian Clifford Pope (943.00000)
+	Hopeful:  Mohammed Razaq (1546.00000)
+	Hopeful:  Daryl L Tayar (705.00000)
+	Hopeful:  Paul Wilcox (341.00000)
+	Hopeful:  Robert Winter (1948.00000)
+	Elected votes: 0.00000
+	Pending votes: 2561.00000
+	Hopeful votes: 7340.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9901.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Alex Dingwall
+	Elected votes: 2561.00000
+	Hopeful votes: 7340.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9901.00000
+	Surplus: 580.00000
+Action: Surplus transferred: Alex Dingwall (580.00000)
+	Elected:  Alex Dingwall (1981.00000)
+	Hopeful:  John Lawson (319.99689)
+	Hopeful:  Mary Paris (1692.58800)
+	Hopeful:  Brian Clifford Pope (978.10285)
+	Hopeful:  Mohammed Razaq (1591.97341)
+	Hopeful:  Daryl L Tayar (781.77333)
+	Hopeful:  Paul Wilcox (402.14690)
+	Hopeful:  Robert Winter (1989.67048)
+	Elected votes: 1981.00000
+	Hopeful votes: 7756.25186
+	Nontransferable votes: 163.73781
+	Residual: 0.01033
+	Total: 9901.00000
+	Surplus: 580.00000
+Action: Elect, transfer pending: Robert Winter
+	Elected:  Alex Dingwall (1981.00000)
+	Pending:  Robert Winter (1989.67048)
+	Hopeful:  John Lawson (319.99689)
+	Hopeful:  Mary Paris (1692.58800)
+	Hopeful:  Brian Clifford Pope (978.10285)
+	Hopeful:  Mohammed Razaq (1591.97341)
+	Hopeful:  Daryl L Tayar (781.77333)
+	Hopeful:  Paul Wilcox (402.14690)
+	Elected votes: 1981.00000
+	Pending votes: 1989.67048
+	Hopeful votes: 5766.58138
+	Nontransferable votes: 163.73781
+	Residual: 0.01033
+	Total: 9901.00000
+	Surplus: 580.00000
+Round 2:
+Action: Transfer high surplus: Robert Winter
+	Elected votes: 3970.67048
+	Hopeful votes: 5766.58138
+	Nontransferable votes: 163.73781
+	Residual: 0.01033
+	Total: 9901.00000
+	Surplus: 8.67048
+Action: Surplus transferred: Robert Winter (8.67048)
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Hopeful:  John Lawson (320.17493)
+	Hopeful:  Mary Paris (1693.33221)
+	Hopeful:  Brian Clifford Pope (978.29676)
+	Hopeful:  Mohammed Razaq (1596.91475)
+	Hopeful:  Daryl L Tayar (782.09884)
+	Hopeful:  Paul Wilcox (402.46414)
+	Elected votes: 3962.00000
+	Hopeful votes: 5773.28163
+	Nontransferable votes: 165.69168
+	Residual: 0.02669
+	Total: 9901.00000
+	Surplus: 8.67048
+Round 3:
+Action: Defeat low candidate: John Lawson
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Hopeful:  Mary Paris (1693.33221)
+	Hopeful:  Brian Clifford Pope (978.29676)
+	Hopeful:  Mohammed Razaq (1596.91475)
+	Hopeful:  Daryl L Tayar (782.09884)
+	Hopeful:  Paul Wilcox (402.46414)
+	Defeated: John Lawson (320.17493)
+	Elected votes: 3962.00000
+	Hopeful votes: 5453.10670
+	Defeated votes: 320.17493
+	Nontransferable votes: 165.69168
+	Residual: 0.02669
+	Total: 9901.00000
+	Surplus: 0.00000
+Action: Transfer defeated: John Lawson
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Hopeful:  Mary Paris (1728.81275)
+	Hopeful:  Brian Clifford Pope (985.80196)
+	Hopeful:  Mohammed Razaq (1631.74855)
+	Hopeful:  Daryl L Tayar (863.43104)
+	Hopeful:  Paul Wilcox (473.06274)
+	Defeated: John Lawson (0.00000)
+	Elected votes: 3962.00000
+	Hopeful votes: 5682.85704
+	Nontransferable votes: 256.11627
+	Residual: 0.02669
+	Total: 9901.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Paul Wilcox
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Hopeful:  Mary Paris (1728.81275)
+	Hopeful:  Brian Clifford Pope (985.80196)
+	Hopeful:  Mohammed Razaq (1631.74855)
+	Hopeful:  Daryl L Tayar (863.43104)
+	Defeated: Paul Wilcox (473.06274)
+	Defeated: John Lawson (0.00000)
+	Elected votes: 3962.00000
+	Hopeful votes: 5209.79430
+	Defeated votes: 473.06274
+	Nontransferable votes: 256.11627
+	Residual: 0.02669
+	Total: 9901.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Paul Wilcox
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Hopeful:  Mary Paris (1808.80045)
+	Hopeful:  Brian Clifford Pope (994.84019)
+	Hopeful:  Mohammed Razaq (1710.74944)
+	Hopeful:  Daryl L Tayar (981.18276)
+	Defeated: John Lawson, Paul Wilcox (0.00000)
+	Elected votes: 3962.00000
+	Hopeful votes: 5495.57284
+	Nontransferable votes: 443.40047
+	Residual: 0.02669
+	Total: 9901.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Daryl L Tayar
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Hopeful:  Mary Paris (1808.80045)
+	Hopeful:  Brian Clifford Pope (994.84019)
+	Hopeful:  Mohammed Razaq (1710.74944)
+	Defeated: Daryl L Tayar (981.18276)
+	Defeated: John Lawson, Paul Wilcox (0.00000)
+	Elected votes: 3962.00000
+	Hopeful votes: 4514.39008
+	Defeated votes: 981.18276
+	Nontransferable votes: 443.40047
+	Residual: 0.02669
+	Total: 9901.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Daryl L Tayar
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Hopeful:  Mary Paris (2212.73796)
+	Hopeful:  Brian Clifford Pope (1058.47774)
+	Hopeful:  Mohammed Razaq (1855.15467)
+	Defeated: John Lawson, Daryl L Tayar, Paul Wilcox (0.00000)
+	Elected votes: 3962.00000
+	Hopeful votes: 5126.37037
+	Nontransferable votes: 812.60294
+	Residual: 0.02669
+	Total: 9901.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Mary Paris
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Pending:  Mary Paris (2212.73796)
+	Hopeful:  Brian Clifford Pope (1058.47774)
+	Hopeful:  Mohammed Razaq (1855.15467)
+	Defeated: John Lawson, Daryl L Tayar, Paul Wilcox (0.00000)
+	Elected votes: 3962.00000
+	Pending votes: 2212.73796
+	Hopeful votes: 2913.63241
+	Nontransferable votes: 812.60294
+	Residual: 0.02669
+	Total: 9901.00000
+	Surplus: 0.00000
+Round 6:
+Action: Transfer high surplus: Mary Paris
+	Elected votes: 6174.73796
+	Hopeful votes: 2913.63241
+	Nontransferable votes: 812.60294
+	Residual: 0.02669
+	Total: 9901.00000
+	Surplus: 231.73796
+Action: Surplus transferred: Mary Paris (231.73796)
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Mary Paris (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Hopeful:  Brian Clifford Pope (1114.98231)
+	Hopeful:  Mohammed Razaq (1906.08014)
+	Defeated: John Lawson, Daryl L Tayar, Paul Wilcox (0.00000)
+	Elected votes: 5943.00000
+	Hopeful votes: 3021.06245
+	Nontransferable votes: 936.88550
+	Residual: 0.05205
+	Total: 9901.00000
+	Surplus: 231.73796
+Round 7:
+Action: Defeat low candidate: Brian Clifford Pope
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Mary Paris (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Hopeful:  Mohammed Razaq (1906.08014)
+	Defeated: Brian Clifford Pope (1114.98231)
+	Defeated: John Lawson, Daryl L Tayar, Paul Wilcox (0.00000)
+	Elected votes: 5943.00000
+	Hopeful votes: 1906.08014
+	Defeated votes: 1114.98231
+	Nontransferable votes: 936.88550
+	Residual: 0.05205
+	Total: 9901.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Brian Clifford Pope
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Mary Paris (1981.00000)
+	Elected:  Robert Winter (1981.00000)
+	Hopeful:  Mohammed Razaq (2103.00378)
+	Defeated: John Lawson, Brian Clifford Pope, Daryl L Tayar, Paul Wilcox (0.00000)
+	Elected votes: 5943.00000
+	Hopeful votes: 2103.00378
+	Nontransferable votes: 1854.94417
+	Residual: 0.05205
+	Total: 9901.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Mohammed Razaq
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Mary Paris (1981.00000)
+	Elected:  Mohammed Razaq (2103.00378)
+	Elected:  Robert Winter (1981.00000)
+	Defeated: John Lawson, Brian Clifford Pope, Daryl L Tayar, Paul Wilcox (0.00000)
+	Elected votes: 8046.00378
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1854.94417
+	Residual: 0.05205
+	Total: 9901.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Alex Dingwall (1981.00000)
+	Elected:  Mary Paris (1981.00000)
+	Elected:  Mohammed Razaq (2103.00378)
+	Elected:  Robert Winter (1981.00000)
+	Defeated: John Lawson, Brian Clifford Pope, Daryl L Tayar, Paul Wilcox (0.00000)
+	Elected votes: 8046.00378
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1854.94417
+	Residual: 0.05205
+	Total: 9901.00000
+	Surplus: 0.00000

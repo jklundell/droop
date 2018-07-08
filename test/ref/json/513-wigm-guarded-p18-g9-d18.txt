@@ -1,0 +1,395 @@
+{
+  "actions": [
+    {
+      "msg": "Add eligible: Castor", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Pollux", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Helen", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "5.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1.000000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "Begin Count", 
+      "nt_votes": "0.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 0, 
+      "surplus": "0.000000000000000000", 
+      "tag": "begin", 
+      "votes": "9.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "5.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1.000000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "0.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 1, 
+      "surplus": "0.000000000000000000", 
+      "tag": "round", 
+      "votes": "9.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "5.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1.000000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "Elect, transfer pending: Castor", 
+      "nt_votes": "0.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 1, 
+      "surplus": "0.000000000000000000", 
+      "tag": "elect", 
+      "votes": "9.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "5.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1.000000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "Transfer high surplus: Castor", 
+      "nt_votes": "0.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 1, 
+      "surplus": "0.000000000000000000", 
+      "tag": "unpend", 
+      "votes": "9.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "Surplus transferred: Castor (2.000000000000000000)", 
+      "nt_votes": "0.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 1, 
+      "surplus": "0.000000000000000000", 
+      "tag": "transfer", 
+      "votes": "9.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "0.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000000000", 
+      "tag": "round", 
+      "votes": "9.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "Break tie (defeat): [Pollux, Helen] -> Pollux", 
+      "nt_votes": "0.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000000000", 
+      "tag": "tie", 
+      "votes": "9.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.000000000000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "3.000000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "Defeat: Pollux", 
+      "nt_votes": "0.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000000000", 
+      "tag": "defeat", 
+      "votes": "9.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.000000000000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.000000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "Transfer defeated: Pollux", 
+      "nt_votes": "3.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000000000", 
+      "tag": "transfer", 
+      "votes": "6.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.000000000000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.000000000000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "Elect remaining: Helen", 
+      "nt_votes": "3.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000000000", 
+      "tag": "elect", 
+      "votes": "6.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.000000000000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.000000000000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.000000000000000000"
+        }
+      }, 
+      "msg": "Count Complete", 
+      "nt_votes": "3.000000000000000000", 
+      "quota": "3.000000000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000000000", 
+      "tag": "end", 
+      "votes": "6.000000000000000000"
+    }
+  ], 
+  "arithmetic_info": "guarded-precision fixed-point decimal arithmetic (18+9 places)", 
+  "arithmetic_name": "guarded", 
+  "arithmetic_report": "\tmaxDiff: 0  (s/b << geps)\n\tgeps:    500000000\n\tminDiff: 2000000000000000000000000000  (s/b >> geps)\n\tguard:   1000000000\n\tprec:    1000000000000000000000000000\n\n", 
+  "cdict": {
+    "1": {
+      "ballot_order": 1, 
+      "cid": 1, 
+      "name": "Castor", 
+      "nick": "1", 
+      "tie_order": 1
+    }, 
+    "2": {
+      "ballot_order": 2, 
+      "cid": 2, 
+      "name": "Pollux", 
+      "nick": "2", 
+      "tie_order": 2
+    }, 
+    "3": {
+      "ballot_order": 3, 
+      "cid": 3, 
+      "name": "Helen", 
+      "nick": "3", 
+      "tie_order": 3
+    }
+  }, 
+  "cids": [
+    1, 
+    2, 
+    3
+  ], 
+  "droop_name": "droop", 
+  "droop_version": "0.11", 
+  "ecids": [
+    1, 
+    2, 
+    3
+  ], 
+  "method": "wigm", 
+  "nballots": 9, 
+  "options": {
+    "allowed": {
+      "defeat_batch": [
+        "none", 
+        "zero"
+      ], 
+      "integer_quota": [
+        true, 
+        false
+      ]
+    }, 
+    "cmd": {
+      "rule": "wigm"
+    }, 
+    "default": {
+      "arithmetic": "guarded", 
+      "defeat_batch": "none", 
+      "display": 18, 
+      "guard": 9, 
+      "integer_quota": false, 
+      "precision": 18
+    }, 
+    "file_options": {}, 
+    "force": {}, 
+    "options": {
+      "arithmetic": "guarded", 
+      "defeat_batch": "none", 
+      "display": 18, 
+      "guard": 9, 
+      "integer_quota": false, 
+      "precision": 18, 
+      "rule": "wigm"
+    }
+  }, 
+  "quota": "3.000000000000000000", 
+  "rule_info": "Generic Weighted Inclusive Gregory Method (WIGM)", 
+  "rule_name": "wigm", 
+  "seats": 2, 
+  "title": "Pollux and Helen should tie"
+}

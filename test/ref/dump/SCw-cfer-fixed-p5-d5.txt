@@ -1,0 +1,51 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote	11.name	11.state	11.vote	12.name	12.state	12.vote	13.name	13.state	13.vote
+0	log	Add eligible: Budd Dickinson
+0	log	Add eligible: Kirit Mookerjee
+0	log	Add eligible: Tom Sevigny
+0	log	Add withdrawn: Pat LaMarche
+0	log	Add eligible: Michael Piacsek
+0	log	Add eligible: Write-In 2
+0	log	Add eligible: Rebecca Rotzler
+0	log	Add eligible: Kristen Olsen
+0	log	Add eligible: Jason Jones
+0	log	Add eligible: Write-In 1
+0	log	Add eligible: Steve Greenfield
+0	log	Add eligible: Jimmy Leas
+0	log	Add eligible: Steve Kramer
+0	begin	18.80001	0.00000	Budd Dickinson	H	13.00000	Kirit Mookerjee	H	4.00000	Tom Sevigny	H	14.00000	Michael Piacsek	H	4.00000	Write-In 2	H	0.00000	Rebecca Rotzler	H	35.00000	Kristen Olsen	H	2.00000	Jason Jones	H	1.00000	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	H	21.00000
+1	round	New Round
+1	elect	18.80001	0.00000	Budd Dickinson	H	13.00000	Kirit Mookerjee	H	4.00000	Tom Sevigny	H	14.00000	Michael Piacsek	H	4.00000	Write-In 2	H	0.00000	Rebecca Rotzler	e	35.00000	Kristen Olsen	H	2.00000	Jason Jones	H	1.00000	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	H	21.00000
+1	elect	18.80001	0.00000	Budd Dickinson	H	13.00000	Kirit Mookerjee	H	4.00000	Tom Sevigny	H	14.00000	Michael Piacsek	H	4.00000	Write-In 2	H	0.00000	Rebecca Rotzler	e	35.00000	Kristen Olsen	H	2.00000	Jason Jones	H	1.00000	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	e	21.00000
+1	unpend	18.80001	0.00000	Budd Dickinson	H	13.00000	Kirit Mookerjee	H	4.00000	Tom Sevigny	H	14.00000	Michael Piacsek	H	4.00000	Write-In 2	H	0.00000	Rebecca Rotzler	E	35.00000	Kristen Olsen	H	2.00000	Jason Jones	H	1.00000	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	e	21.00000
+1	transfer	18.80001	0.00000	Budd Dickinson	H	13.92570	Kirit Mookerjee	H	4.46285	Tom Sevigny	H	14.46285	Michael Piacsek	H	4.92570	Write-In 2	H	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	e	21.00000
+1	unpend	18.80001	0.00000	Budd Dickinson	H	13.92570	Kirit Mookerjee	H	4.46285	Tom Sevigny	H	14.46285	Michael Piacsek	H	4.92570	Write-In 2	H	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	21.00000
+1	transfer	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	H	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	18.80001
+2	round	New Round
+2	tie	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	H	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	18.80001
+2	defeat	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	18.80001
+2	transfer	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	18.80001
+3	round	New Round
+3	tie	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	H	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	18.80001
+3	defeat	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	D	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	18.80001
+3	transfer	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	D	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	18.80001
+4	round	New Round
+4	tie	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	D	0.00000	Steve Greenfield	H	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	18.80001
+4	defeat	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	18.80001
+4	transfer	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	H	0.00000	Steve Kramer	E	18.80001
+5	round	New Round
+5	defeat	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+5	transfer	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	H	1.46285	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+6	round	New Round
+6	defeat	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	14.95980	Jason Jones	D	1.46285	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+6	transfer	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	H	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	16.42265	Jason Jones	D	0.00000	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+7	round	New Round
+7	defeat	18.80001	0.00000	Budd Dickinson	H	14.55426	Kirit Mookerjee	D	4.88189	Tom Sevigny	H	15.09141	Michael Piacsek	H	5.44950	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	16.42265	Jason Jones	D	0.00000	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+7	transfer	18.80001	0.56761	Budd Dickinson	H	15.65902	Kirit Mookerjee	D	0.00000	Tom Sevigny	H	16.09141	Michael Piacsek	H	6.55426	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	17.52741	Jason Jones	D	0.00000	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+8	round	New Round
+8	defeat	18.80001	0.56761	Budd Dickinson	H	15.65902	Kirit Mookerjee	D	0.00000	Tom Sevigny	H	16.09141	Michael Piacsek	D	6.55426	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	17.52741	Jason Jones	D	0.00000	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+8	transfer	18.80001	2.03046	Budd Dickinson	H	18.28758	Kirit Mookerjee	D	0.00000	Tom Sevigny	H	18.09141	Michael Piacsek	D	0.00000	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	H	17.99026	Jason Jones	D	0.00000	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+9	round	New Round
+9	defeat	18.80001	2.03046	Budd Dickinson	H	18.28758	Kirit Mookerjee	D	0.00000	Tom Sevigny	H	18.09141	Michael Piacsek	D	0.00000	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	D	17.99026	Jason Jones	D	0.00000	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+9	elect	18.80001	2.03046	Budd Dickinson	E	18.28758	Kirit Mookerjee	D	0.00000	Tom Sevigny	H	18.09141	Michael Piacsek	D	0.00000	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	D	17.99026	Jason Jones	D	0.00000	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+9	elect	18.80001	2.03046	Budd Dickinson	E	18.28758	Kirit Mookerjee	D	0.00000	Tom Sevigny	E	18.09141	Michael Piacsek	D	0.00000	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	D	17.99026	Jason Jones	D	0.00000	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001
+X	end	18.80001	2.03046	Budd Dickinson	E	18.28758	Kirit Mookerjee	D	0.00000	Tom Sevigny	E	18.09141	Michael Piacsek	D	0.00000	Write-In 2	D	0.00000	Rebecca Rotzler	E	18.80001	Kristen Olsen	D	17.99026	Jason Jones	D	0.00000	Write-In 1	D	0.00000	Steve Greenfield	D	0.00000	Jimmy Leas	D	0.00000	Steve Kramer	E	18.80001

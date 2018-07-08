@@ -1,0 +1,7280 @@
+{
+  "actions": [
+    {
+      "msg": "Add eligible: Budd Dickinson", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Kirit Mookerjee", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Tom Sevigny", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add withdrawn: Pat LaMarche", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Michael Piacsek", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Write-In 2", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Rebecca Rotzler", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Kristen Olsen", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Jason Jones", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Write-In 1", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Steve Greenfield", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Jimmy Leas", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Steve Kramer", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }
+      }, 
+      "msg": "Begin Count", 
+      "quota": "18.800000000", 
+      "round": 0, 
+      "tag": "begin", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 1, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Rebecca Rotzler", 
+      "quota": "18.800000000", 
+      "round": 1, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Rebecca Rotzler (35.000000000)", 
+      "quota": "18.800000000", 
+      "round": 1, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 2, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Steve Kramer", 
+      "quota": "18.800000000", 
+      "round": 2, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Steve Kramer (21.388888889)", 
+      "quota": "18.800000000", 
+      "round": 2, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 3, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Break tie by lot (smallest quotient): [Write-In 2, Write-In 1, Steve Greenfield, Jimmy Leas] -> Write-In 2", 
+      "quota": "18.800000000", 
+      "round": 3, 
+      "tag": "tie", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Defeat low quotient: Write-In 2", 
+      "quota": "18.800000000", 
+      "round": 3, 
+      "tag": "defeat", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer defeated: Write-In 2", 
+      "quota": "18.800000000", 
+      "round": 3, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 4, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Rebecca Rotzler", 
+      "quota": "18.800000000", 
+      "round": 4, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Rebecca Rotzler (35.000000000)", 
+      "quota": "18.800000000", 
+      "round": 4, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 5, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Steve Kramer", 
+      "quota": "18.800000000", 
+      "round": 5, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Steve Kramer (21.388888889)", 
+      "quota": "18.800000000", 
+      "round": 5, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 6, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Break tie by lot (smallest quotient): [Write-In 1, Steve Greenfield, Jimmy Leas] -> Write-In 1", 
+      "quota": "18.800000000", 
+      "round": 6, 
+      "tag": "tie", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Defeat low quotient: Write-In 1", 
+      "quota": "18.800000000", 
+      "round": 6, 
+      "tag": "defeat", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer defeated: Write-In 1", 
+      "quota": "18.800000000", 
+      "round": 6, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 7, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Rebecca Rotzler", 
+      "quota": "18.800000000", 
+      "round": 7, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Rebecca Rotzler (35.000000000)", 
+      "quota": "18.800000000", 
+      "round": 7, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 8, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Steve Kramer", 
+      "quota": "18.800000000", 
+      "round": 8, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Steve Kramer (21.388888889)", 
+      "quota": "18.800000000", 
+      "round": 8, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 9, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Break tie by lot (smallest quotient): [Steve Greenfield, Jimmy Leas] -> Steve Greenfield", 
+      "quota": "18.800000000", 
+      "round": 9, 
+      "tag": "tie", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Defeat low quotient: Steve Greenfield", 
+      "quota": "18.800000000", 
+      "round": 9, 
+      "tag": "defeat", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer defeated: Steve Greenfield", 
+      "quota": "18.800000000", 
+      "round": 9, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 10, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Rebecca Rotzler", 
+      "quota": "18.800000000", 
+      "round": 10, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Rebecca Rotzler (35.000000000)", 
+      "quota": "18.800000000", 
+      "round": 10, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 11, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Steve Kramer", 
+      "quota": "18.800000000", 
+      "round": 11, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Steve Kramer (21.388888889)", 
+      "quota": "18.800000000", 
+      "round": 11, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 12, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Defeat low quotient: Jimmy Leas", 
+      "quota": "18.800000000", 
+      "round": 12, 
+      "tag": "defeat", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer defeated: Jimmy Leas", 
+      "quota": "18.800000000", 
+      "round": 12, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 13, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Rebecca Rotzler", 
+      "quota": "18.800000000", 
+      "round": 13, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Rebecca Rotzler (35.000000000)", 
+      "quota": "18.800000000", 
+      "round": 13, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "2.000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.000000000", 
+          "state": "hopeful", 
+          "vote": "1.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 14, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Steve Kramer", 
+      "quota": "18.800000000", 
+      "round": 14, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Steve Kramer (21.388888889)", 
+      "quota": "18.800000000", 
+      "round": 14, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "H", 
+          "quotient": "1.944444444", 
+          "state": "hopeful", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 15, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Defeat low quotient: Jason Jones", 
+      "quota": "18.800000000", 
+      "round": 15, 
+      "tag": "defeat", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer defeated: Jason Jones", 
+      "quota": "18.800000000", 
+      "round": 15, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "7.403846154", 
+          "state": "hopeful", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "16.666666667", 
+          "state": "hopeful", 
+          "vote": "30.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 16, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "3.000000000", 
+          "state": "hopeful", 
+          "vote": "3.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Rebecca Rotzler", 
+      "quota": "18.800000000", 
+      "round": 16, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "3.000000000", 
+          "state": "hopeful", 
+          "vote": "3.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Rebecca Rotzler (35.000000000)", 
+      "quota": "18.800000000", 
+      "round": 16, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "3.000000000", 
+          "state": "hopeful", 
+          "vote": "3.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "21.000000000", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 17, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "17.500000000", 
+          "state": "hopeful", 
+          "vote": "32.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Steve Kramer", 
+      "quota": "18.800000000", 
+      "round": 17, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "17.500000000", 
+          "state": "hopeful", 
+          "vote": "32.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Steve Kramer (21.388888889)", 
+      "quota": "18.800000000", 
+      "round": 17, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.189189189", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "14.583333333", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.861111111", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "17.500000000", 
+          "state": "hopeful", 
+          "vote": "32.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 18, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "17.500000000", 
+          "state": "hopeful", 
+          "vote": "32.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Defeat low quotient: Kirit Mookerjee", 
+      "quota": "18.800000000", 
+      "round": 18, 
+      "tag": "defeat", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "17.500000000", 
+          "state": "hopeful", 
+          "vote": "32.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "Transfer defeated: Kirit Mookerjee", 
+      "quota": "18.800000000", 
+      "round": 18, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.699029126", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.041666667", 
+          "state": "hopeful", 
+          "vote": "21.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "8.402777778", 
+          "state": "hopeful", 
+          "vote": "11.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "35.000000000", 
+          "state": "elected", 
+          "vote": "35.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "17.500000000", 
+          "state": "hopeful", 
+          "vote": "32.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "21.388888889", 
+          "state": "elected", 
+          "vote": "22.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 19, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "15.000000000", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "3.000000000", 
+          "state": "hopeful", 
+          "vote": "3.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "23.000000000", 
+          "state": "hopeful", 
+          "vote": "23.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Rebecca Rotzler", 
+      "quota": "18.800000000", 
+      "round": 19, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "15.000000000", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "3.000000000", 
+          "state": "hopeful", 
+          "vote": "3.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "23.000000000", 
+          "state": "hopeful", 
+          "vote": "23.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Rebecca Rotzler (36.000000000)", 
+      "quota": "18.800000000", 
+      "round": 19, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "13.000000000", 
+          "state": "hopeful", 
+          "vote": "13.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "15.000000000", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.000000000", 
+          "state": "hopeful", 
+          "vote": "4.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "3.000000000", 
+          "state": "hopeful", 
+          "vote": "3.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "23.000000000", 
+          "state": "hopeful", 
+          "vote": "23.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 20, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.210526316", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "15.567567568", 
+          "state": "hopeful", 
+          "vote": "16.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.864864865", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.000000000", 
+          "state": "hopeful", 
+          "vote": "33.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "23.684210526", 
+          "state": "elected", 
+          "vote": "25.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Steve Kramer", 
+      "quota": "18.800000000", 
+      "round": 20, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.210526316", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "15.567567568", 
+          "state": "hopeful", 
+          "vote": "16.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.864864865", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.000000000", 
+          "state": "hopeful", 
+          "vote": "33.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "23.684210526", 
+          "state": "elected", 
+          "vote": "25.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Steve Kramer (23.684210526)", 
+      "quota": "18.800000000", 
+      "round": 20, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.210526316", 
+          "state": "hopeful", 
+          "vote": "15.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "15.567567568", 
+          "state": "hopeful", 
+          "vote": "16.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "4.864864865", 
+          "state": "hopeful", 
+          "vote": "5.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.000000000", 
+          "state": "hopeful", 
+          "vote": "33.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "23.684210526", 
+          "state": "elected", 
+          "vote": "25.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 21, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "16.507177033", 
+          "state": "hopeful", 
+          "vote": "23.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "17.172593235", 
+          "state": "hopeful", 
+          "vote": "22.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.127962085", 
+          "state": "hopeful", 
+          "vote": "34.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "23.684210526", 
+          "state": "elected", 
+          "vote": "25.000000000"
+        }
+      }, 
+      "msg": "Defeat low quotient: Michael Piacsek", 
+      "quota": "18.716094033", 
+      "round": 21, 
+      "tag": "defeat", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "16.507177033", 
+          "state": "hopeful", 
+          "vote": "23.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "17.172593235", 
+          "state": "hopeful", 
+          "vote": "22.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.127962085", 
+          "state": "hopeful", 
+          "vote": "34.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "23.684210526", 
+          "state": "elected", 
+          "vote": "25.000000000"
+        }
+      }, 
+      "msg": "Transfer defeated: Michael Piacsek", 
+      "quota": "18.716094033", 
+      "round": 21, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "16.507177033", 
+          "state": "hopeful", 
+          "vote": "23.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "17.172593235", 
+          "state": "hopeful", 
+          "vote": "22.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.127962085", 
+          "state": "hopeful", 
+          "vote": "34.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "23.684210526", 
+          "state": "elected", 
+          "vote": "25.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.716094033", 
+      "round": 22, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.000000000", 
+          "state": "hopeful", 
+          "vote": "16.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "3.000000000", 
+          "state": "hopeful", 
+          "vote": "3.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "25.000000000", 
+          "state": "hopeful", 
+          "vote": "25.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Rebecca Rotzler", 
+      "quota": "18.800000000", 
+      "round": 22, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.000000000", 
+          "state": "hopeful", 
+          "vote": "16.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "3.000000000", 
+          "state": "hopeful", 
+          "vote": "3.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "25.000000000", 
+          "state": "hopeful", 
+          "vote": "25.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Rebecca Rotzler (36.000000000)", 
+      "quota": "18.800000000", 
+      "round": 22, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "14.000000000", 
+          "state": "hopeful", 
+          "vote": "14.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.000000000", 
+          "state": "hopeful", 
+          "vote": "16.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "3.000000000", 
+          "state": "hopeful", 
+          "vote": "3.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "H", 
+          "pending": false, 
+          "quotient": "25.000000000", 
+          "state": "hopeful", 
+          "vote": "25.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 23, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.157894737", 
+          "state": "hopeful", 
+          "vote": "16.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.540540541", 
+          "state": "hopeful", 
+          "vote": "17.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.268656716", 
+          "state": "hopeful", 
+          "vote": "34.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "25.578947368", 
+          "state": "elected", 
+          "vote": "27.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Steve Kramer", 
+      "quota": "18.800000000", 
+      "round": 23, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.157894737", 
+          "state": "hopeful", 
+          "vote": "16.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.540540541", 
+          "state": "hopeful", 
+          "vote": "17.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.268656716", 
+          "state": "hopeful", 
+          "vote": "34.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "25.578947368", 
+          "state": "elected", 
+          "vote": "27.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Steve Kramer (25.578947368)", 
+      "quota": "18.800000000", 
+      "round": 23, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "15.157894737", 
+          "state": "hopeful", 
+          "vote": "16.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "16.540540541", 
+          "state": "hopeful", 
+          "vote": "17.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.268656716", 
+          "state": "hopeful", 
+          "vote": "34.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "25.578947368", 
+          "state": "elected", 
+          "vote": "27.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.800000000", 
+      "round": 24, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.879699248", 
+          "state": "elected", 
+          "vote": "31.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "18.441106719", 
+          "state": "hopeful", 
+          "vote": "24.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.419057932", 
+          "state": "hopeful", 
+          "vote": "35.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "25.578947368", 
+          "state": "elected", 
+          "vote": "27.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Budd Dickinson", 
+      "quota": "18.581138488", 
+      "round": 24, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.879699248", 
+          "state": "elected", 
+          "vote": "31.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "18.441106719", 
+          "state": "hopeful", 
+          "vote": "24.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.419057932", 
+          "state": "hopeful", 
+          "vote": "35.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "25.578947368", 
+          "state": "elected", 
+          "vote": "27.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Budd Dickinson (18.879699248)", 
+      "quota": "18.581138488", 
+      "round": 24, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.879699248", 
+          "state": "elected", 
+          "vote": "31.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "18.441106719", 
+          "state": "hopeful", 
+          "vote": "24.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.419057932", 
+          "state": "hopeful", 
+          "vote": "35.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "25.578947368", 
+          "state": "elected", 
+          "vote": "27.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "18.581138488", 
+      "round": 25, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.879699248", 
+          "state": "elected", 
+          "vote": "31.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.626554612", 
+          "state": "elected", 
+          "vote": "42.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.465266102", 
+          "state": "hopeful", 
+          "vote": "39.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "25.578947368", 
+          "state": "elected", 
+          "vote": "27.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: Tom Sevigny", 
+      "quota": "18.548546936", 
+      "round": 25, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.879699248", 
+          "state": "elected", 
+          "vote": "31.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.626554612", 
+          "state": "elected", 
+          "vote": "42.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "H", 
+          "quotient": "18.465266102", 
+          "state": "hopeful", 
+          "vote": "39.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "25.578947368", 
+          "state": "elected", 
+          "vote": "27.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: Tom Sevigny (18.626554612)", 
+      "quota": "18.548546936", 
+      "round": 25, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.879699248", 
+          "state": "elected", 
+          "vote": "31.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.626554612", 
+          "state": "elected", 
+          "vote": "42.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "D", 
+          "quotient": "18.465266102", 
+          "state": "defeated", 
+          "vote": "39.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "25.578947368", 
+          "state": "elected", 
+          "vote": "27.000000000"
+        }
+      }, 
+      "msg": "Defeat remaining candidates: Kristen Olsen", 
+      "quota": "18.548546936", 
+      "round": 25, 
+      "tag": "defeat", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.879699248", 
+          "state": "elected", 
+          "vote": "31.000000000"
+        }, 
+        "2": {
+          "code": "D", 
+          "quotient": "7.403846154", 
+          "state": "defeated", 
+          "vote": "9.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "18.626554612", 
+          "state": "elected", 
+          "vote": "42.000000000"
+        }, 
+        "4": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "5": {
+          "code": "D", 
+          "quotient": "9.519934906", 
+          "state": "defeated", 
+          "vote": "13.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "7": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "36.000000000", 
+          "state": "elected", 
+          "vote": "36.000000000"
+        }, 
+        "8": {
+          "code": "D", 
+          "quotient": "18.465266102", 
+          "state": "defeated", 
+          "vote": "39.000000000"
+        }, 
+        "9": {
+          "code": "D", 
+          "quotient": "1.944444444", 
+          "state": "defeated", 
+          "vote": "2.000000000"
+        }, 
+        "10": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "11": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "12": {
+          "code": "D", 
+          "quotient": "0.000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000"
+        }, 
+        "13": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "25.578947368", 
+          "state": "elected", 
+          "vote": "27.000000000"
+        }
+      }, 
+      "msg": "Count Complete", 
+      "quota": "18.548546936", 
+      "round": 25, 
+      "tag": "end", 
+      "votes": "0.000000000"
+    }
+  ], 
+  "arithmetic_info": "guarded-precision fixed-point decimal arithmetic (9+9 places)", 
+  "arithmetic_name": "guarded", 
+  "arithmetic_report": "\tmaxDiff: 0  (s/b << geps)\n\tgeps:    500000000\n\tminDiff: 78007676156472848  (s/b >> geps)\n\tguard:   1000000000\n\tprec:    1000000000000000000\n\n", 
+  "cdict": {
+    "1": {
+      "ballot_order": 1, 
+      "cid": 1, 
+      "name": "Budd Dickinson", 
+      "nick": "1", 
+      "tie_order": 1
+    }, 
+    "2": {
+      "ballot_order": 2, 
+      "cid": 2, 
+      "name": "Kirit Mookerjee", 
+      "nick": "2", 
+      "tie_order": 2
+    }, 
+    "3": {
+      "ballot_order": 3, 
+      "cid": 3, 
+      "name": "Tom Sevigny", 
+      "nick": "3", 
+      "tie_order": 3
+    }, 
+    "4": {
+      "ballot_order": 4, 
+      "cid": 4, 
+      "name": "Pat LaMarche", 
+      "nick": "4", 
+      "tie_order": 4
+    }, 
+    "5": {
+      "ballot_order": 5, 
+      "cid": 5, 
+      "name": "Michael Piacsek", 
+      "nick": "5", 
+      "tie_order": 5
+    }, 
+    "6": {
+      "ballot_order": 6, 
+      "cid": 6, 
+      "name": "Write-In 2", 
+      "nick": "6", 
+      "tie_order": 6
+    }, 
+    "7": {
+      "ballot_order": 7, 
+      "cid": 7, 
+      "name": "Rebecca Rotzler", 
+      "nick": "7", 
+      "tie_order": 7
+    }, 
+    "8": {
+      "ballot_order": 8, 
+      "cid": 8, 
+      "name": "Kristen Olsen", 
+      "nick": "8", 
+      "tie_order": 8
+    }, 
+    "9": {
+      "ballot_order": 9, 
+      "cid": 9, 
+      "name": "Jason Jones", 
+      "nick": "9", 
+      "tie_order": 9
+    }, 
+    "10": {
+      "ballot_order": 10, 
+      "cid": 10, 
+      "name": "Write-In 1", 
+      "nick": "10", 
+      "tie_order": 10
+    }, 
+    "11": {
+      "ballot_order": 11, 
+      "cid": 11, 
+      "name": "Steve Greenfield", 
+      "nick": "11", 
+      "tie_order": 11
+    }, 
+    "12": {
+      "ballot_order": 12, 
+      "cid": 12, 
+      "name": "Jimmy Leas", 
+      "nick": "12", 
+      "tie_order": 12
+    }, 
+    "13": {
+      "ballot_order": 13, 
+      "cid": 13, 
+      "name": "Steve Kramer", 
+      "nick": "13", 
+      "tie_order": 13
+    }
+  }, 
+  "cids": [
+    1, 
+    2, 
+    3, 
+    4, 
+    5, 
+    6, 
+    7, 
+    8, 
+    9, 
+    10, 
+    11, 
+    12, 
+    13
+  ], 
+  "droop_name": "droop", 
+  "droop_version": "0.11", 
+  "ecids": [
+    1, 
+    2, 
+    3, 
+    5, 
+    6, 
+    7, 
+    8, 
+    9, 
+    10, 
+    11, 
+    12, 
+    13
+  ], 
+  "method": "qpq", 
+  "nballots": 94, 
+  "options": {
+    "allowed": {}, 
+    "cmd": {
+      "rule": "qpq"
+    }, 
+    "default": {
+      "arithmetic": "guarded", 
+      "display": 9, 
+      "guard": 9, 
+      "precision": 9
+    }, 
+    "file_options": {}, 
+    "force": {
+      "arithmetic": "guarded", 
+      "display": 9, 
+      "guard": 9, 
+      "precision": 9
+    }, 
+    "options": {
+      "arithmetic": "guarded", 
+      "display": 9, 
+      "guard": 9, 
+      "precision": 9, 
+      "rule": "qpq"
+    }
+  }, 
+  "quota": "18.800000000", 
+  "rule_info": "QPQ", 
+  "rule_name": "qpq", 
+  "seats": 4, 
+  "title": "GPUS Steering Committee Election 2005-07-24"
+}

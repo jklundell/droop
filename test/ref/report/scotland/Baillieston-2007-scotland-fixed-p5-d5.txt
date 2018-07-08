@@ -1,0 +1,397 @@
+
+Election: BAILLIESTON Ward
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 10376
+	Quota: 2076.00000
+
+	Add eligible: George Clark
+	Add eligible: Jim Coleman
+	Add eligible: Ian Dickie
+	Add eligible: Douglas Hay
+	Add eligible: Michael Kayes
+	Add eligible: Robert MacBean
+	Add eligible: John Mason
+	Add eligible: David McDonald
+	Add eligible: Jim McVicar
+	Add eligible: Raymond Morrison
+	Add eligible: Marjory Watt
+Action: Begin Count
+	Hopeful:  George Clark (678.00000)
+	Hopeful:  Jim Coleman (2689.00000)
+	Hopeful:  Ian Dickie (216.00000)
+	Hopeful:  Douglas Hay (1342.00000)
+	Hopeful:  Michael Kayes (466.00000)
+	Hopeful:  Robert MacBean (739.00000)
+	Hopeful:  John Mason (3199.00000)
+	Hopeful:  David McDonald (250.00000)
+	Hopeful:  Jim McVicar (224.00000)
+	Hopeful:  Raymond Morrison (181.00000)
+	Hopeful:  Marjory Watt (392.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 10376.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: John Mason
+	Pending:  John Mason (3199.00000)
+	Hopeful:  George Clark (678.00000)
+	Hopeful:  Jim Coleman (2689.00000)
+	Hopeful:  Ian Dickie (216.00000)
+	Hopeful:  Douglas Hay (1342.00000)
+	Hopeful:  Michael Kayes (466.00000)
+	Hopeful:  Robert MacBean (739.00000)
+	Hopeful:  David McDonald (250.00000)
+	Hopeful:  Jim McVicar (224.00000)
+	Hopeful:  Raymond Morrison (181.00000)
+	Hopeful:  Marjory Watt (392.00000)
+	Elected votes: 0.00000
+	Pending votes: 3199.00000
+	Hopeful votes: 7177.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Jim Coleman
+	Pending:  Jim Coleman (2689.00000)
+	Pending:  John Mason (3199.00000)
+	Hopeful:  George Clark (678.00000)
+	Hopeful:  Ian Dickie (216.00000)
+	Hopeful:  Douglas Hay (1342.00000)
+	Hopeful:  Michael Kayes (466.00000)
+	Hopeful:  Robert MacBean (739.00000)
+	Hopeful:  David McDonald (250.00000)
+	Hopeful:  Jim McVicar (224.00000)
+	Hopeful:  Raymond Morrison (181.00000)
+	Hopeful:  Marjory Watt (392.00000)
+	Elected votes: 0.00000
+	Pending votes: 5888.00000
+	Hopeful votes: 4488.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 10376.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: John Mason
+	Elected votes: 3199.00000
+	Pending votes: 2689.00000
+	Hopeful votes: 4488.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 10376.00000
+	Surplus: 1736.00000
+Action: Surplus transferred: John Mason (1123.00000)
+	Elected:  John Mason (2076.00000)
+	Pending:  Jim Coleman (2689.00000)
+	Hopeful:  George Clark (715.91232)
+	Hopeful:  Ian Dickie (220.91456)
+	Hopeful:  Douglas Hay (1405.53824)
+	Hopeful:  Michael Kayes (509.52896)
+	Hopeful:  Robert MacBean (773.40192)
+	Hopeful:  David McDonald (917.32704)
+	Hopeful:  Jim McVicar (252.43424)
+	Hopeful:  Raymond Morrison (205.92384)
+	Hopeful:  Marjory Watt (430.96544)
+	Elected votes: 2076.00000
+	Pending votes: 2689.00000
+	Hopeful votes: 5431.94656
+	Nontransferable votes: 179.03040
+	Residual: 0.02304
+	Total: 10376.00000
+	Surplus: 1736.00000
+Round 2:
+Action: Transfer high surplus: Jim Coleman
+	Elected votes: 4765.00000
+	Hopeful votes: 5431.94656
+	Nontransferable votes: 179.03040
+	Residual: 0.02304
+	Total: 10376.00000
+	Surplus: 613.00000
+Action: Surplus transferred: Jim Coleman (613.00000)
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (725.71460)
+	Hopeful:  Ian Dickie (227.52540)
+	Hopeful:  Douglas Hay (1708.95300)
+	Hopeful:  Michael Kayes (532.78088)
+	Hopeful:  Robert MacBean (873.47636)
+	Hopeful:  David McDonald (923.48196)
+	Hopeful:  Jim McVicar (260.86876)
+	Hopeful:  Raymond Morrison (212.30672)
+	Hopeful:  Marjory Watt (442.13548)
+	Elected votes: 4152.00000
+	Hopeful votes: 5907.24316
+	Nontransferable votes: 316.71824
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 613.00000
+Round 3:
+Action: Defeat low candidate: Raymond Morrison
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (725.71460)
+	Hopeful:  Ian Dickie (227.52540)
+	Hopeful:  Douglas Hay (1708.95300)
+	Hopeful:  Michael Kayes (532.78088)
+	Hopeful:  Robert MacBean (873.47636)
+	Hopeful:  David McDonald (923.48196)
+	Hopeful:  Jim McVicar (260.86876)
+	Hopeful:  Marjory Watt (442.13548)
+	Defeated: Raymond Morrison (212.30672)
+	Elected votes: 4152.00000
+	Hopeful votes: 5694.93644
+	Defeated votes: 212.30672
+	Nontransferable votes: 316.71824
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Raymond Morrison
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (735.34672)
+	Hopeful:  Ian Dickie (234.80648)
+	Hopeful:  Douglas Hay (1724.14592)
+	Hopeful:  Michael Kayes (553.86892)
+	Hopeful:  Robert MacBean (883.26648)
+	Hopeful:  David McDonald (949.86928)
+	Hopeful:  Jim McVicar (285.92188)
+	Hopeful:  Marjory Watt (484.24296)
+	Defeated: Raymond Morrison (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 5851.46864
+	Nontransferable votes: 372.49276
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Ian Dickie
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (735.34672)
+	Hopeful:  Douglas Hay (1724.14592)
+	Hopeful:  Michael Kayes (553.86892)
+	Hopeful:  Robert MacBean (883.26648)
+	Hopeful:  David McDonald (949.86928)
+	Hopeful:  Jim McVicar (285.92188)
+	Hopeful:  Marjory Watt (484.24296)
+	Defeated: Ian Dickie (234.80648)
+	Defeated: Raymond Morrison (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 5616.66216
+	Defeated votes: 234.80648
+	Nontransferable votes: 372.49276
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Ian Dickie
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (833.55784)
+	Hopeful:  Douglas Hay (1737.77656)
+	Hopeful:  Michael Kayes (565.09688)
+	Hopeful:  Robert MacBean (893.44120)
+	Hopeful:  David McDonald (955.97552)
+	Hopeful:  Jim McVicar (296.14984)
+	Hopeful:  Marjory Watt (498.82196)
+	Defeated: Ian Dickie, Raymond Morrison (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 5780.81980
+	Nontransferable votes: 443.14160
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Jim McVicar
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (833.55784)
+	Hopeful:  Douglas Hay (1737.77656)
+	Hopeful:  Michael Kayes (565.09688)
+	Hopeful:  Robert MacBean (893.44120)
+	Hopeful:  David McDonald (955.97552)
+	Hopeful:  Marjory Watt (498.82196)
+	Defeated: Jim McVicar (296.14984)
+	Defeated: Ian Dickie, Raymond Morrison (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 5484.66996
+	Defeated votes: 296.14984
+	Nontransferable votes: 443.14160
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Jim McVicar
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (850.71584)
+	Hopeful:  Douglas Hay (1772.56804)
+	Hopeful:  Michael Kayes (635.22244)
+	Hopeful:  Robert MacBean (912.79212)
+	Hopeful:  David McDonald (984.52220)
+	Hopeful:  Marjory Watt (523.48900)
+	Defeated: Ian Dickie, Jim McVicar, Raymond Morrison (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 5679.30964
+	Nontransferable votes: 544.65176
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Marjory Watt
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (850.71584)
+	Hopeful:  Douglas Hay (1772.56804)
+	Hopeful:  Michael Kayes (635.22244)
+	Hopeful:  Robert MacBean (912.79212)
+	Hopeful:  David McDonald (984.52220)
+	Defeated: Marjory Watt (523.48900)
+	Defeated: Ian Dickie, Jim McVicar, Raymond Morrison (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 5155.82064
+	Defeated votes: 523.48900
+	Nontransferable votes: 544.65176
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Marjory Watt
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (930.17436)
+	Hopeful:  Douglas Hay (1854.04464)
+	Hopeful:  Michael Kayes (672.24052)
+	Hopeful:  Robert MacBean (963.52900)
+	Hopeful:  David McDonald (1046.57928)
+	Defeated: Ian Dickie, Jim McVicar, Raymond Morrison, Marjory Watt (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 5466.56780
+	Nontransferable votes: 757.39360
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: Michael Kayes
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (930.17436)
+	Hopeful:  Douglas Hay (1854.04464)
+	Hopeful:  Robert MacBean (963.52900)
+	Hopeful:  David McDonald (1046.57928)
+	Defeated: Michael Kayes (672.24052)
+	Defeated: Ian Dickie, Jim McVicar, Raymond Morrison, Marjory Watt (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 4794.32728
+	Defeated votes: 672.24052
+	Nontransferable votes: 757.39360
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Michael Kayes
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  George Clark (970.31552)
+	Hopeful:  Douglas Hay (1941.27236)
+	Hopeful:  Robert MacBean (1013.61396)
+	Hopeful:  David McDonald (1177.06120)
+	Defeated: Ian Dickie, Michael Kayes, Jim McVicar, Raymond Morrison, Marjory Watt (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 5102.26304
+	Nontransferable votes: 1121.69836
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Round 8:
+Action: Defeat low candidate: George Clark
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  Douglas Hay (1941.27236)
+	Hopeful:  Robert MacBean (1013.61396)
+	Hopeful:  David McDonald (1177.06120)
+	Defeated: George Clark (970.31552)
+	Defeated: Ian Dickie, Michael Kayes, Jim McVicar, Raymond Morrison, Marjory Watt (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 4131.94752
+	Defeated votes: 970.31552
+	Nontransferable votes: 1121.69836
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Transfer defeated: George Clark
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  Douglas Hay (2072.69152)
+	Hopeful:  Robert MacBean (1058.80688)
+	Hopeful:  David McDonald (1266.89292)
+	Defeated: George Clark, Ian Dickie, Michael Kayes, Jim McVicar, Raymond Morrison, Marjory Watt (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 4398.39132
+	Nontransferable votes: 1825.57008
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Round 9:
+Action: Defeat low candidate: Robert MacBean
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  Douglas Hay (2072.69152)
+	Hopeful:  David McDonald (1266.89292)
+	Defeated: Robert MacBean (1058.80688)
+	Defeated: George Clark, Ian Dickie, Michael Kayes, Jim McVicar, Raymond Morrison, Marjory Watt (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 3339.58444
+	Defeated votes: 1058.80688
+	Nontransferable votes: 1825.57008
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Robert MacBean
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  Douglas Hay (2659.50560)
+	Hopeful:  David McDonald (1325.69940)
+	Defeated: George Clark, Ian Dickie, Michael Kayes, Robert MacBean, Jim McVicar, Raymond Morrison, Marjory Watt (0.00000)
+	Elected votes: 4152.00000
+	Hopeful votes: 3985.20500
+	Nontransferable votes: 2238.75640
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Douglas Hay
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  Douglas Hay (2659.50560)
+	Elected:  John Mason (2076.00000)
+	Hopeful:  David McDonald (1325.69940)
+	Defeated: George Clark, Ian Dickie, Michael Kayes, Robert MacBean, Jim McVicar, Raymond Morrison, Marjory Watt (0.00000)
+	Elected votes: 6811.50560
+	Hopeful votes: 1325.69940
+	Nontransferable votes: 2238.75640
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: David McDonald
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  Douglas Hay (2659.50560)
+	Elected:  John Mason (2076.00000)
+	Elected:  David McDonald (1325.69940)
+	Defeated: George Clark, Ian Dickie, Michael Kayes, Robert MacBean, Jim McVicar, Raymond Morrison, Marjory Watt (0.00000)
+	Elected votes: 8137.20500
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2238.75640
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Jim Coleman (2076.00000)
+	Elected:  Douglas Hay (2659.50560)
+	Elected:  John Mason (2076.00000)
+	Elected:  David McDonald (1325.69940)
+	Defeated: George Clark, Ian Dickie, Michael Kayes, Robert MacBean, Jim McVicar, Raymond Morrison, Marjory Watt (0.00000)
+	Elected votes: 8137.20500
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2238.75640
+	Residual: 0.03860
+	Total: 10376.00000
+	Surplus: 0.00000

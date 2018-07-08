@@ -1,0 +1,37 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote
+0	log	Add eligible: George Aytoun Atkinson
+0	log	Add eligible: Stuart Clay
+0	log	Add eligible: Aileen Colleran
+0	log	Add eligible: Irene Graham
+0	log	Add eligible: Andrew Gray
+0	log	Add eligible: Christopher Mason
+0	log	Add eligible: Kenny McLean
+0	log	Add eligible: Jimmy Ross
+0	log	Add eligible: Richard Alan Sullivan
+0	begin	2549.00000	0.00000	George Aytoun Atkinson	H	265.00000	Stuart Clay	H	1594.00000	Aileen Colleran	H	2099.00000	Irene Graham	H	1699.00000	Andrew Gray	H	240.00000	Christopher Mason	H	2259.00000	Kenny McLean	H	2811.00000	Jimmy Ross	H	373.00000	Richard Alan Sullivan	H	1404.00000
+0	elect	2549.00000	0.00000	George Aytoun Atkinson	H	265.00000	Stuart Clay	H	1594.00000	Aileen Colleran	H	2099.00000	Irene Graham	H	1699.00000	Andrew Gray	H	240.00000	Christopher Mason	H	2259.00000	Kenny McLean	e	2811.00000	Jimmy Ross	H	373.00000	Richard Alan Sullivan	H	1404.00000
+1	round	New Round
+1	unpend	2549.00000	0.00000	George Aytoun Atkinson	H	265.00000	Stuart Clay	H	1594.00000	Aileen Colleran	H	2099.00000	Irene Graham	H	1699.00000	Andrew Gray	H	240.00000	Christopher Mason	H	2259.00000	Kenny McLean	E	2811.00000	Jimmy Ross	H	373.00000	Richard Alan Sullivan	H	1404.00000
+1	transfer	2549.00000	65.42640	George Aytoun Atkinson	H	268.63480	Stuart Clay	H	1652.43640	Aileen Colleran	H	2115.31000	Irene Graham	H	1716.89440	Andrew Gray	H	253.14120	Christopher Mason	H	2300.94000	Kenny McLean	E	2549.00000	Jimmy Ross	H	402.82400	Richard Alan Sullivan	H	1419.37800
+2	round	New Round
+2	defeat	2549.00000	65.42640	George Aytoun Atkinson	H	268.63480	Stuart Clay	H	1652.43640	Aileen Colleran	H	2115.31000	Irene Graham	H	1716.89440	Andrew Gray	D	253.14120	Christopher Mason	H	2300.94000	Kenny McLean	E	2549.00000	Jimmy Ross	H	402.82400	Richard Alan Sullivan	H	1419.37800
+2	transfer	2549.00000	107.10400	George Aytoun Atkinson	H	271.00760	Stuart Clay	H	1744.81680	Aileen Colleran	H	2128.58960	Irene Graham	H	1732.73320	Andrew Gray	D	0.00000	Christopher Mason	H	2325.68560	Kenny McLean	E	2549.00000	Jimmy Ross	H	465.20440	Richard Alan Sullivan	H	1419.84400
+3	round	New Round
+3	defeat	2549.00000	107.10400	George Aytoun Atkinson	D	271.00760	Stuart Clay	H	1744.81680	Aileen Colleran	H	2128.58960	Irene Graham	H	1732.73320	Andrew Gray	D	0.00000	Christopher Mason	H	2325.68560	Kenny McLean	E	2549.00000	Jimmy Ross	H	465.20440	Richard Alan Sullivan	H	1419.84400
+3	transfer	2549.00000	169.22240	George Aytoun Atkinson	D	0.00000	Stuart Clay	H	1789.56240	Aileen Colleran	H	2150.68280	Irene Graham	H	1741.82640	Andrew Gray	D	0.00000	Christopher Mason	H	2354.96520	Kenny McLean	E	2549.00000	Jimmy Ross	H	472.57720	Richard Alan Sullivan	H	1516.14880
+4	round	New Round
+4	defeat	2549.00000	169.22240	George Aytoun Atkinson	D	0.00000	Stuart Clay	H	1789.56240	Aileen Colleran	H	2150.68280	Irene Graham	H	1741.82640	Andrew Gray	D	0.00000	Christopher Mason	H	2354.96520	Kenny McLean	E	2549.00000	Jimmy Ross	D	472.57720	Richard Alan Sullivan	H	1516.14880
+4	transfer	2549.00000	306.24520	George Aytoun Atkinson	D	0.00000	Stuart Clay	H	1963.33080	Aileen Colleran	H	2199.26720	Irene Graham	H	1785.97000	Andrew Gray	D	0.00000	Christopher Mason	H	2411.06600	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	H	1529.10600
+5	round	New Round
+5	defeat	2549.00000	306.24520	George Aytoun Atkinson	D	0.00000	Stuart Clay	H	1963.33080	Aileen Colleran	H	2199.26720	Irene Graham	H	1785.97000	Andrew Gray	D	0.00000	Christopher Mason	H	2411.06600	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	D	1529.10600
+5	transfer	2549.00000	967.16720	George Aytoun Atkinson	D	0.00000	Stuart Clay	H	2175.33840	Aileen Colleran	H	2275.01280	Irene Graham	H	1866.71560	Andrew Gray	D	0.00000	Christopher Mason	H	2910.75120	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	D	0.00000
+5	elect	2549.00000	967.16720	George Aytoun Atkinson	D	0.00000	Stuart Clay	H	2175.33840	Aileen Colleran	H	2275.01280	Irene Graham	H	1866.71560	Andrew Gray	D	0.00000	Christopher Mason	e	2910.75120	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	D	0.00000
+6	round	New Round
+6	unpend	2549.00000	967.16720	George Aytoun Atkinson	D	0.00000	Stuart Clay	H	2175.33840	Aileen Colleran	H	2275.01280	Irene Graham	H	1866.71560	Andrew Gray	D	0.00000	Christopher Mason	E	2910.75120	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	D	0.00000
+6	transfer	2549.00000	1104.61340	George Aytoun Atkinson	D	0.00000	Stuart Clay	H	2304.71570	Aileen Colleran	H	2316.49150	Irene Graham	H	1920.15992	Andrew Gray	D	0.00000	Christopher Mason	E	2549.00000	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	D	0.00000
+7	round	New Round
+7	defeat	2549.00000	1104.61340	George Aytoun Atkinson	D	0.00000	Stuart Clay	H	2304.71570	Aileen Colleran	H	2316.49150	Irene Graham	D	1920.15992	Andrew Gray	D	0.00000	Christopher Mason	E	2549.00000	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	D	0.00000
+7	transfer	2549.00000	1592.48690	George Aytoun Atkinson	D	0.00000	Stuart Clay	H	2531.20856	Aileen Colleran	H	3522.28506	Irene Graham	D	0.00000	Andrew Gray	D	0.00000	Christopher Mason	E	2549.00000	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	D	0.00000
+7	elect	2549.00000	1592.48690	George Aytoun Atkinson	D	0.00000	Stuart Clay	E	2531.20856	Aileen Colleran	H	3522.28506	Irene Graham	D	0.00000	Andrew Gray	D	0.00000	Christopher Mason	E	2549.00000	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	D	0.00000
+7	elect	2549.00000	1592.48690	George Aytoun Atkinson	D	0.00000	Stuart Clay	E	2531.20856	Aileen Colleran	E	3522.28506	Irene Graham	D	0.00000	Andrew Gray	D	0.00000	Christopher Mason	E	2549.00000	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	D	0.00000
+X	end	2549.00000	1592.48690	George Aytoun Atkinson	D	0.00000	Stuart Clay	E	2531.20856	Aileen Colleran	E	3522.28506	Irene Graham	D	0.00000	Andrew Gray	D	0.00000	Christopher Mason	E	2549.00000	Kenny McLean	E	2549.00000	Jimmy Ross	D	0.00000	Richard Alan Sullivan	D	0.00000

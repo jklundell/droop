@@ -1,0 +1,15 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	4.name	4.state	4.vote
+0	log	Add eligible: A
+0	log	Add eligible: B
+0	log	Add withdrawn: C
+0	log	Add eligible: D
+0	log	Add withdrawn: E
+0	begin	333.33334	0.00000	A	H	332.00000	B	H	170.00000	D	H	498.00000
+1	round	New Round
+1	elect	333.33334	0.00000	A	H	332.00000	B	H	170.00000	D	e	498.00000
+1	unpend	333.33334	0.00000	A	H	332.00000	B	H	170.00000	D	E	498.00000
+1	transfer	333.33334	164.66370	A	H	332.00000	B	H	170.00000	D	E	333.33334
+2	round	New Round
+2	defeat	333.33334	164.66370	A	H	332.00000	B	D	170.00000	D	E	333.33334
+2	elect	333.33334	164.66370	A	E	332.00000	B	D	170.00000	D	E	333.33334
+X	end	333.33334	164.66370	A	E	332.00000	B	D	170.00000	D	E	333.33334

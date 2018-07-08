@@ -1,0 +1,385 @@
+
+Election: LINN
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 9567
+	Quota: 1914.00000
+
+	Add eligible: Esme H Clark
+	Add eligible: Margot Clark
+	Add eligible: Sadie Docherty
+	Add eligible: Chris Lang
+	Add eligible: Harry McArthur
+	Add eligible: John McKenzie
+	Add eligible: David Ritchie
+	Add eligible: Alan Stewart
+	Add eligible: Chloe Helen Stewart
+	Add eligible: Gordon Thomson
+	Add eligible: Frank Young
+Action: Begin Count
+	Hopeful:  Esme H Clark (898.00000)
+	Hopeful:  Margot Clark (1284.00000)
+	Hopeful:  Sadie Docherty (1782.00000)
+	Hopeful:  Chris Lang (219.00000)
+	Hopeful:  Harry McArthur (165.00000)
+	Hopeful:  John McKenzie (1381.00000)
+	Hopeful:  David Ritchie (2043.00000)
+	Hopeful:  Alan Stewart (955.00000)
+	Hopeful:  Chloe Helen Stewart (296.00000)
+	Hopeful:  Gordon Thomson (149.00000)
+	Hopeful:  Frank Young (395.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 9567.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: David Ritchie
+	Pending:  David Ritchie (2043.00000)
+	Hopeful:  Esme H Clark (898.00000)
+	Hopeful:  Margot Clark (1284.00000)
+	Hopeful:  Sadie Docherty (1782.00000)
+	Hopeful:  Chris Lang (219.00000)
+	Hopeful:  Harry McArthur (165.00000)
+	Hopeful:  John McKenzie (1381.00000)
+	Hopeful:  Alan Stewart (955.00000)
+	Hopeful:  Chloe Helen Stewart (296.00000)
+	Hopeful:  Gordon Thomson (149.00000)
+	Hopeful:  Frank Young (395.00000)
+	Elected votes: 0.00000
+	Pending votes: 2043.00000
+	Hopeful votes: 7524.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: David Ritchie
+	Elected votes: 2043.00000
+	Hopeful votes: 7524.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9567.00000
+	Surplus: 129.00000
+Action: Surplus transferred: David Ritchie (129.00000)
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (905.13482)
+	Hopeful:  Margot Clark (1302.94200)
+	Hopeful:  Sadie Docherty (1789.19796)
+	Hopeful:  Chris Lang (224.61946)
+	Hopeful:  Harry McArthur (166.83106)
+	Hopeful:  John McKenzie (1389.27134)
+	Hopeful:  Alan Stewart (961.44028)
+	Hopeful:  Chloe Helen Stewart (310.77476)
+	Hopeful:  Gordon Thomson (156.82936)
+	Hopeful:  Frank Young (409.77476)
+	Elected votes: 1914.00000
+	Hopeful votes: 7616.81580
+	Nontransferable votes: 36.17922
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 129.00000
+Round 2:
+Action: Defeat low candidate: Gordon Thomson
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (905.13482)
+	Hopeful:  Margot Clark (1302.94200)
+	Hopeful:  Sadie Docherty (1789.19796)
+	Hopeful:  Chris Lang (224.61946)
+	Hopeful:  Harry McArthur (166.83106)
+	Hopeful:  John McKenzie (1389.27134)
+	Hopeful:  Alan Stewart (961.44028)
+	Hopeful:  Chloe Helen Stewart (310.77476)
+	Hopeful:  Frank Young (409.77476)
+	Defeated: Gordon Thomson (156.82936)
+	Elected votes: 1914.00000
+	Hopeful votes: 7459.98644
+	Defeated votes: 156.82936
+	Nontransferable votes: 36.17922
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Gordon Thomson
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (906.45052)
+	Hopeful:  Margot Clark (1311.32084)
+	Hopeful:  Sadie Docherty (1798.70308)
+	Hopeful:  Chris Lang (229.80888)
+	Hopeful:  Harry McArthur (170.02048)
+	Hopeful:  John McKenzie (1395.65018)
+	Hopeful:  Alan Stewart (970.56656)
+	Hopeful:  Chloe Helen Stewart (328.78500)
+	Hopeful:  Frank Young (469.48978)
+	Defeated: Gordon Thomson (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 7580.79532
+	Nontransferable votes: 72.19970
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: Harry McArthur
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (906.45052)
+	Hopeful:  Margot Clark (1311.32084)
+	Hopeful:  Sadie Docherty (1798.70308)
+	Hopeful:  Chris Lang (229.80888)
+	Hopeful:  John McKenzie (1395.65018)
+	Hopeful:  Alan Stewart (970.56656)
+	Hopeful:  Chloe Helen Stewart (328.78500)
+	Hopeful:  Frank Young (469.48978)
+	Defeated: Harry McArthur (170.02048)
+	Defeated: Gordon Thomson (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 7410.77484
+	Defeated votes: 170.02048
+	Nontransferable votes: 72.19970
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Harry McArthur
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (961.76622)
+	Hopeful:  Margot Clark (1318.44712)
+	Hopeful:  Sadie Docherty (1807.82936)
+	Hopeful:  Chris Lang (239.06144)
+	Hopeful:  John McKenzie (1417.83960)
+	Hopeful:  Alan Stewart (980.69284)
+	Hopeful:  Chloe Helen Stewart (338.97442)
+	Hopeful:  Frank Young (478.67920)
+	Defeated: Harry McArthur, Gordon Thomson (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 7543.29020
+	Nontransferable votes: 109.70482
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Chris Lang
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (961.76622)
+	Hopeful:  Margot Clark (1318.44712)
+	Hopeful:  Sadie Docherty (1807.82936)
+	Hopeful:  John McKenzie (1417.83960)
+	Hopeful:  Alan Stewart (980.69284)
+	Hopeful:  Chloe Helen Stewart (338.97442)
+	Hopeful:  Frank Young (478.67920)
+	Defeated: Chris Lang (239.06144)
+	Defeated: Harry McArthur, Gordon Thomson (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 7304.22876
+	Defeated votes: 239.06144
+	Nontransferable votes: 109.70482
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Chris Lang
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (991.39762)
+	Hopeful:  Margot Clark (1350.20480)
+	Hopeful:  Sadie Docherty (1826.01878)
+	Hopeful:  John McKenzie (1433.90274)
+	Hopeful:  Alan Stewart (990.00854)
+	Hopeful:  Chloe Helen Stewart (359.36350)
+	Hopeful:  Frank Young (498.31060)
+	Defeated: Chris Lang, Harry McArthur, Gordon Thomson (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 7449.20658
+	Nontransferable votes: 203.78844
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Chloe Helen Stewart
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (991.39762)
+	Hopeful:  Margot Clark (1350.20480)
+	Hopeful:  Sadie Docherty (1826.01878)
+	Hopeful:  John McKenzie (1433.90274)
+	Hopeful:  Alan Stewart (990.00854)
+	Hopeful:  Frank Young (498.31060)
+	Defeated: Chloe Helen Stewart (359.36350)
+	Defeated: Chris Lang, Harry McArthur, Gordon Thomson (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 7089.84308
+	Defeated votes: 359.36350
+	Nontransferable votes: 203.78844
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Chloe Helen Stewart
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (1005.34472)
+	Hopeful:  Margot Clark (1458.48808)
+	Hopeful:  Sadie Docherty (1849.71332)
+	Hopeful:  John McKenzie (1459.28158)
+	Hopeful:  Alan Stewart (1001.51366)
+	Hopeful:  Frank Young (547.47784)
+	Defeated: Chris Lang, Harry McArthur, Chloe Helen Stewart, Gordon Thomson (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 7321.81920
+	Nontransferable votes: 331.17582
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Frank Young
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (1005.34472)
+	Hopeful:  Margot Clark (1458.48808)
+	Hopeful:  Sadie Docherty (1849.71332)
+	Hopeful:  John McKenzie (1459.28158)
+	Hopeful:  Alan Stewart (1001.51366)
+	Defeated: Frank Young (547.47784)
+	Defeated: Chris Lang, Harry McArthur, Chloe Helen Stewart, Gordon Thomson (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 6774.34136
+	Defeated votes: 547.47784
+	Nontransferable votes: 331.17582
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Frank Young
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Esme H Clark (1015.91298)
+	Hopeful:  Margot Clark (1532.33962)
+	Hopeful:  Sadie Docherty (1896.91298)
+	Hopeful:  John McKenzie (1514.35496)
+	Hopeful:  Alan Stewart (1078.47100)
+	Defeated: Chris Lang, Harry McArthur, Chloe Helen Stewart, Gordon Thomson, Frank Young (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 7037.99154
+	Nontransferable votes: 615.00348
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: Esme H Clark
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Margot Clark (1532.33962)
+	Hopeful:  Sadie Docherty (1896.91298)
+	Hopeful:  John McKenzie (1514.35496)
+	Hopeful:  Alan Stewart (1078.47100)
+	Defeated: Esme H Clark (1015.91298)
+	Defeated: Chris Lang, Harry McArthur, Chloe Helen Stewart, Gordon Thomson, Frank Young (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 6022.07856
+	Defeated votes: 1015.91298
+	Nontransferable votes: 615.00348
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Esme H Clark
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Margot Clark (1866.00174)
+	Hopeful:  Sadie Docherty (1947.35496)
+	Hopeful:  John McKenzie (1530.60752)
+	Hopeful:  Alan Stewart (1105.84984)
+	Defeated: Esme H Clark, Chris Lang, Harry McArthur, Chloe Helen Stewart, Gordon Thomson, Frank Young (0.00000)
+	Elected votes: 1914.00000
+	Hopeful votes: 6449.81406
+	Nontransferable votes: 1203.18096
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Sadie Docherty
+	Elected:  David Ritchie (1914.00000)
+	Pending:  Sadie Docherty (1947.35496)
+	Hopeful:  Margot Clark (1866.00174)
+	Hopeful:  John McKenzie (1530.60752)
+	Hopeful:  Alan Stewart (1105.84984)
+	Defeated: Esme H Clark, Chris Lang, Harry McArthur, Chloe Helen Stewart, Gordon Thomson, Frank Young (0.00000)
+	Elected votes: 1914.00000
+	Pending votes: 1947.35496
+	Hopeful votes: 4502.45910
+	Nontransferable votes: 1203.18096
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 0.00000
+Round 8:
+Action: Transfer high surplus: Sadie Docherty
+	Elected votes: 3861.35496
+	Hopeful votes: 4502.45910
+	Nontransferable votes: 1203.18096
+	Residual: 0.00498
+	Total: 9567.00000
+	Surplus: 33.35496
+Action: Surplus transferred: Sadie Docherty (33.35496)
+	Elected:  Sadie Docherty (1914.00000)
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Margot Clark (1868.39022)
+	Hopeful:  John McKenzie (1547.18432)
+	Hopeful:  Alan Stewart (1111.65708)
+	Defeated: Esme H Clark, Chris Lang, Harry McArthur, Chloe Helen Stewart, Gordon Thomson, Frank Young (0.00000)
+	Elected votes: 3828.00000
+	Hopeful votes: 4527.23162
+	Nontransferable votes: 1211.74700
+	Residual: 0.02138
+	Total: 9567.00000
+	Surplus: 33.35496
+Round 9:
+Action: Defeat low candidate: Alan Stewart
+	Elected:  Sadie Docherty (1914.00000)
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Margot Clark (1868.39022)
+	Hopeful:  John McKenzie (1547.18432)
+	Defeated: Alan Stewart (1111.65708)
+	Defeated: Esme H Clark, Chris Lang, Harry McArthur, Chloe Helen Stewart, Gordon Thomson, Frank Young (0.00000)
+	Elected votes: 3828.00000
+	Hopeful votes: 3415.57454
+	Defeated votes: 1111.65708
+	Nontransferable votes: 1211.74700
+	Residual: 0.02138
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Alan Stewart
+	Elected:  Sadie Docherty (1914.00000)
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  Margot Clark (2008.75096)
+	Hopeful:  John McKenzie (2174.90506)
+	Defeated: Esme H Clark, Chris Lang, Harry McArthur, Alan Stewart, Chloe Helen Stewart, Gordon Thomson, Frank Young (0.00000)
+	Elected votes: 3828.00000
+	Hopeful votes: 4183.65602
+	Nontransferable votes: 1555.32260
+	Residual: 0.02138
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Margot Clark
+	Elected:  Margot Clark (2008.75096)
+	Elected:  Sadie Docherty (1914.00000)
+	Elected:  David Ritchie (1914.00000)
+	Hopeful:  John McKenzie (2174.90506)
+	Defeated: Esme H Clark, Chris Lang, Harry McArthur, Alan Stewart, Chloe Helen Stewart, Gordon Thomson, Frank Young (0.00000)
+	Elected votes: 5836.75096
+	Hopeful votes: 2174.90506
+	Nontransferable votes: 1555.32260
+	Residual: 0.02138
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: John McKenzie
+	Elected:  Margot Clark (2008.75096)
+	Elected:  Sadie Docherty (1914.00000)
+	Elected:  John McKenzie (2174.90506)
+	Elected:  David Ritchie (1914.00000)
+	Defeated: Esme H Clark, Chris Lang, Harry McArthur, Alan Stewart, Chloe Helen Stewart, Gordon Thomson, Frank Young (0.00000)
+	Elected votes: 8011.65602
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1555.32260
+	Residual: 0.02138
+	Total: 9567.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Margot Clark (2008.75096)
+	Elected:  Sadie Docherty (1914.00000)
+	Elected:  John McKenzie (2174.90506)
+	Elected:  David Ritchie (1914.00000)
+	Defeated: Esme H Clark, Chris Lang, Harry McArthur, Alan Stewart, Chloe Helen Stewart, Gordon Thomson, Frank Young (0.00000)
+	Elected votes: 8011.65602
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1555.32260
+	Residual: 0.02138
+	Total: 9567.00000
+	Surplus: 0.00000

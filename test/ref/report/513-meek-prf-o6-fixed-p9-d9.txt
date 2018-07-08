@@ -1,0 +1,61 @@
+
+Election: Pollux and Helen should tie
+
+	Droop package: droop v0.11
+	Rule: PR Foundation Meek Reference
+	Arithmetic: fixed-point decimal arithmetic (9 places)
+	Seats: 2
+	Ballots: 9
+	Quota: 3.000000001
+	Omega: 0.000001000
+
+	Add eligible: Castor
+	Add eligible: Pollux
+	Add eligible: Helen
+Action: Begin Count
+	Hopeful:  Castor (5.000000000)
+	Hopeful:  Pollux (1.000000000)
+	Hopeful:  Helen (3.000000000)
+	Quota: 3.000000001
+	Votes: 9.000000000
+	Residual: 0.000000000
+	Total: 9.000000000
+	Surplus: 0.000000000
+Round 1:
+Action: Elect: Castor
+	Elected:  Castor (5.000000000)
+	Hopeful:  Pollux (1.000000000)
+	Hopeful:  Helen (3.000000000)
+	Quota: 3.000000001
+	Votes: 9.000000000
+	Residual: 0.000000000
+	Total: 9.000000000
+	Surplus: 0.000000000
+Round 2:
+Action: Defeat (surplus 0.000000004 < omega): Pollux
+	Elected:  Castor (3.000000005)
+	Hopeful:  Helen (3.000000000)
+	Defeated: Pollux (2.999999995)
+	Quota: 3.000000001
+	Votes: 9.000000000
+	Residual: 0.000000000
+	Total: 9.000000000
+	Surplus: 0.000000004
+Action: Elect remaining: Helen
+	Elected:  Castor (3.000000005)
+	Elected:  Helen (3.000000000)
+	Defeated: Pollux (0.000000000)
+	Quota: 3.000000001
+	Votes: 6.000000005
+	Residual: 0.000000000
+	Total: 6.000000005
+	Surplus: 0.000000004
+Action: Count Complete
+	Elected:  Castor (3.000000005)
+	Elected:  Helen (3.000000000)
+	Defeated: Pollux (0.000000000)
+	Quota: 3.000000001
+	Votes: 6.000000005
+	Residual: 2.999999995
+	Total: 9.000000000
+	Surplus: 0.000000004

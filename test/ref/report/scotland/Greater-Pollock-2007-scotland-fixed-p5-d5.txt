@@ -1,0 +1,305 @@
+
+Election: GREATER POLLOK
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 8682
+	Quota: 1737.00000
+
+	Add eligible: Keith Baldassara
+	Add eligible: Fleming Carswell
+	Add eligible: Patricia Duffy
+	Add eligible: Alex Glass
+	Add eligible: Tommy Morrison
+	Add eligible: Rory O'Brien
+	Add eligible: William O'Rourke
+	Add eligible: Caroline Scott
+	Add eligible: Alice Sheridan
+Action: Begin Count
+	Hopeful:  Keith Baldassara (591.00000)
+	Hopeful:  Fleming Carswell (393.00000)
+	Hopeful:  Patricia Duffy (2173.00000)
+	Hopeful:  Alex Glass (1637.00000)
+	Hopeful:  Tommy Morrison (1180.00000)
+	Hopeful:  Rory O'Brien (549.00000)
+	Hopeful:  William O'Rourke (1296.00000)
+	Hopeful:  Caroline Scott (233.00000)
+	Hopeful:  Alice Sheridan (630.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8682.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8682.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Patricia Duffy
+	Pending:  Patricia Duffy (2173.00000)
+	Hopeful:  Keith Baldassara (591.00000)
+	Hopeful:  Fleming Carswell (393.00000)
+	Hopeful:  Alex Glass (1637.00000)
+	Hopeful:  Tommy Morrison (1180.00000)
+	Hopeful:  Rory O'Brien (549.00000)
+	Hopeful:  William O'Rourke (1296.00000)
+	Hopeful:  Caroline Scott (233.00000)
+	Hopeful:  Alice Sheridan (630.00000)
+	Elected votes: 0.00000
+	Pending votes: 2173.00000
+	Hopeful votes: 6509.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8682.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Patricia Duffy
+	Elected votes: 2173.00000
+	Hopeful votes: 6509.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8682.00000
+	Surplus: 436.00000
+Action: Surplus transferred: Patricia Duffy (436.00000)
+	Elected:  Patricia Duffy (1737.00000)
+	Hopeful:  Keith Baldassara (637.54848)
+	Hopeful:  Fleming Carswell (431.32224)
+	Hopeful:  Alex Glass (1680.94016)
+	Hopeful:  Tommy Morrison (1201.26784)
+	Hopeful:  Rory O'Brien (572.67552)
+	Hopeful:  William O'Rourke (1313.05440)
+	Hopeful:  Caroline Scott (275.33504)
+	Hopeful:  Alice Sheridan (693.80352)
+	Elected votes: 1737.00000
+	Hopeful votes: 6805.94720
+	Nontransferable votes: 139.04352
+	Residual: 0.00928
+	Total: 8682.00000
+	Surplus: 436.00000
+Round 2:
+Action: Defeat low candidate: Caroline Scott
+	Elected:  Patricia Duffy (1737.00000)
+	Hopeful:  Keith Baldassara (637.54848)
+	Hopeful:  Fleming Carswell (431.32224)
+	Hopeful:  Alex Glass (1680.94016)
+	Hopeful:  Tommy Morrison (1201.26784)
+	Hopeful:  Rory O'Brien (572.67552)
+	Hopeful:  William O'Rourke (1313.05440)
+	Hopeful:  Alice Sheridan (693.80352)
+	Defeated: Caroline Scott (275.33504)
+	Elected votes: 1737.00000
+	Hopeful votes: 6530.61216
+	Defeated votes: 275.33504
+	Nontransferable votes: 139.04352
+	Residual: 0.00928
+	Total: 8682.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Caroline Scott
+	Elected:  Patricia Duffy (1737.00000)
+	Hopeful:  Keith Baldassara (661.16640)
+	Hopeful:  Fleming Carswell (502.95296)
+	Hopeful:  Alex Glass (1701.94656)
+	Hopeful:  Tommy Morrison (1219.47168)
+	Hopeful:  Rory O'Brien (592.08320)
+	Hopeful:  William O'Rourke (1327.65952)
+	Hopeful:  Alice Sheridan (725.02976)
+	Defeated: Caroline Scott (0.00000)
+	Elected votes: 1737.00000
+	Hopeful votes: 6730.31008
+	Nontransferable votes: 214.68064
+	Residual: 0.00928
+	Total: 8682.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: Fleming Carswell
+	Elected:  Patricia Duffy (1737.00000)
+	Hopeful:  Keith Baldassara (661.16640)
+	Hopeful:  Alex Glass (1701.94656)
+	Hopeful:  Tommy Morrison (1219.47168)
+	Hopeful:  Rory O'Brien (592.08320)
+	Hopeful:  William O'Rourke (1327.65952)
+	Hopeful:  Alice Sheridan (725.02976)
+	Defeated: Fleming Carswell (502.95296)
+	Defeated: Caroline Scott (0.00000)
+	Elected votes: 1737.00000
+	Hopeful votes: 6227.35712
+	Defeated votes: 502.95296
+	Nontransferable votes: 214.68064
+	Residual: 0.00928
+	Total: 8682.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Fleming Carswell
+	Elected:  Patricia Duffy (1737.00000)
+	Hopeful:  Keith Baldassara (693.78432)
+	Hopeful:  Alex Glass (1801.36704)
+	Hopeful:  Tommy Morrison (1258.67872)
+	Hopeful:  Rory O'Brien (674.30944)
+	Hopeful:  William O'Rourke (1355.66592)
+	Hopeful:  Alice Sheridan (771.84512)
+	Defeated: Fleming Carswell, Caroline Scott (0.00000)
+	Elected votes: 1737.00000
+	Hopeful votes: 6555.65056
+	Nontransferable votes: 389.34016
+	Residual: 0.00928
+	Total: 8682.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Alex Glass
+	Elected:  Patricia Duffy (1737.00000)
+	Pending:  Alex Glass (1801.36704)
+	Hopeful:  Keith Baldassara (693.78432)
+	Hopeful:  Tommy Morrison (1258.67872)
+	Hopeful:  Rory O'Brien (674.30944)
+	Hopeful:  William O'Rourke (1355.66592)
+	Hopeful:  Alice Sheridan (771.84512)
+	Defeated: Fleming Carswell, Caroline Scott (0.00000)
+	Elected votes: 1737.00000
+	Pending votes: 1801.36704
+	Hopeful votes: 4754.28352
+	Nontransferable votes: 389.34016
+	Residual: 0.00928
+	Total: 8682.00000
+	Surplus: 0.00000
+Round 4:
+Action: Transfer high surplus: Alex Glass
+	Elected votes: 3538.36704
+	Hopeful votes: 4754.28352
+	Nontransferable votes: 389.34016
+	Residual: 0.00928
+	Total: 8682.00000
+	Surplus: 64.36704
+Action: Surplus transferred: Alex Glass (64.36704)
+	Elected:  Patricia Duffy (1737.00000)
+	Elected:  Alex Glass (1737.00000)
+	Hopeful:  Keith Baldassara (695.72820)
+	Hopeful:  Tommy Morrison (1290.71610)
+	Hopeful:  Rory O'Brien (675.72446)
+	Hopeful:  William O'Rourke (1368.70070)
+	Hopeful:  Alice Sheridan (773.94624)
+	Defeated: Fleming Carswell, Caroline Scott (0.00000)
+	Elected votes: 3474.00000
+	Hopeful votes: 4804.81570
+	Nontransferable votes: 403.16851
+	Residual: 0.01579
+	Total: 8682.00000
+	Surplus: 64.36704
+Round 5:
+Action: Defeat low candidate: Rory O'Brien
+	Elected:  Patricia Duffy (1737.00000)
+	Elected:  Alex Glass (1737.00000)
+	Hopeful:  Keith Baldassara (695.72820)
+	Hopeful:  Tommy Morrison (1290.71610)
+	Hopeful:  William O'Rourke (1368.70070)
+	Hopeful:  Alice Sheridan (773.94624)
+	Defeated: Rory O'Brien (675.72446)
+	Defeated: Fleming Carswell, Caroline Scott (0.00000)
+	Elected votes: 3474.00000
+	Hopeful votes: 4129.09124
+	Defeated votes: 675.72446
+	Nontransferable votes: 403.16851
+	Residual: 0.01579
+	Total: 8682.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Rory O'Brien
+	Elected:  Patricia Duffy (1737.00000)
+	Elected:  Alex Glass (1737.00000)
+	Hopeful:  Keith Baldassara (739.93844)
+	Hopeful:  Tommy Morrison (1389.81806)
+	Hopeful:  William O'Rourke (1410.69227)
+	Hopeful:  Alice Sheridan (812.20257)
+	Defeated: Fleming Carswell, Rory O'Brien, Caroline Scott (0.00000)
+	Elected votes: 3474.00000
+	Hopeful votes: 4352.65134
+	Nontransferable votes: 855.33287
+	Residual: 0.01579
+	Total: 8682.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Keith Baldassara
+	Elected:  Patricia Duffy (1737.00000)
+	Elected:  Alex Glass (1737.00000)
+	Hopeful:  Tommy Morrison (1389.81806)
+	Hopeful:  William O'Rourke (1410.69227)
+	Hopeful:  Alice Sheridan (812.20257)
+	Defeated: Keith Baldassara (739.93844)
+	Defeated: Fleming Carswell, Rory O'Brien, Caroline Scott (0.00000)
+	Elected votes: 3474.00000
+	Hopeful votes: 3612.71290
+	Defeated votes: 739.93844
+	Nontransferable votes: 855.33287
+	Residual: 0.01579
+	Total: 8682.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Keith Baldassara
+	Elected:  Patricia Duffy (1737.00000)
+	Elected:  Alex Glass (1737.00000)
+	Hopeful:  Tommy Morrison (1527.20045)
+	Hopeful:  William O'Rourke (1494.87285)
+	Hopeful:  Alice Sheridan (1022.69195)
+	Defeated: Keith Baldassara, Fleming Carswell, Rory O'Brien, Caroline Scott (0.00000)
+	Elected votes: 3474.00000
+	Hopeful votes: 4044.76525
+	Nontransferable votes: 1163.21896
+	Residual: 0.01579
+	Total: 8682.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: Alice Sheridan
+	Elected:  Patricia Duffy (1737.00000)
+	Elected:  Alex Glass (1737.00000)
+	Hopeful:  Tommy Morrison (1527.20045)
+	Hopeful:  William O'Rourke (1494.87285)
+	Defeated: Alice Sheridan (1022.69195)
+	Defeated: Keith Baldassara, Fleming Carswell, Rory O'Brien, Caroline Scott (0.00000)
+	Elected votes: 3474.00000
+	Hopeful votes: 3022.07330
+	Defeated votes: 1022.69195
+	Nontransferable votes: 1163.21896
+	Residual: 0.01579
+	Total: 8682.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Alice Sheridan
+	Elected:  Patricia Duffy (1737.00000)
+	Elected:  Alex Glass (1737.00000)
+	Hopeful:  Tommy Morrison (1725.84237)
+	Hopeful:  William O'Rourke (1690.86280)
+	Defeated: Keith Baldassara, Fleming Carswell, Rory O'Brien, Caroline Scott, Alice Sheridan (0.00000)
+	Elected votes: 3474.00000
+	Hopeful votes: 3416.70517
+	Nontransferable votes: 1791.27904
+	Residual: 0.01579
+	Total: 8682.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Tommy Morrison
+	Elected:  Patricia Duffy (1737.00000)
+	Elected:  Alex Glass (1737.00000)
+	Elected:  Tommy Morrison (1725.84237)
+	Hopeful:  William O'Rourke (1690.86280)
+	Defeated: Keith Baldassara, Fleming Carswell, Rory O'Brien, Caroline Scott, Alice Sheridan (0.00000)
+	Elected votes: 5199.84237
+	Hopeful votes: 1690.86280
+	Nontransferable votes: 1791.27904
+	Residual: 0.01579
+	Total: 8682.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: William O'Rourke
+	Elected:  Patricia Duffy (1737.00000)
+	Elected:  Alex Glass (1737.00000)
+	Elected:  Tommy Morrison (1725.84237)
+	Elected:  William O'Rourke (1690.86280)
+	Defeated: Keith Baldassara, Fleming Carswell, Rory O'Brien, Caroline Scott, Alice Sheridan (0.00000)
+	Elected votes: 6890.70517
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1791.27904
+	Residual: 0.01579
+	Total: 8682.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Patricia Duffy (1737.00000)
+	Elected:  Alex Glass (1737.00000)
+	Elected:  Tommy Morrison (1725.84237)
+	Elected:  William O'Rourke (1690.86280)
+	Defeated: Keith Baldassara, Fleming Carswell, Rory O'Brien, Caroline Scott, Alice Sheridan (0.00000)
+	Elected votes: 6890.70517
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1791.27904
+	Residual: 0.01579
+	Total: 8682.00000
+	Surplus: 0.00000

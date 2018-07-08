@@ -1,0 +1,136 @@
+
+Election: Voting matters example (Issue 12, 'The computational accuracy using the Meek algorithm')
+
+	Droop package: droop v0.11
+	Rule: QPQ
+	Arithmetic: guarded-precision fixed-point decimal arithmetic (9+9 places)
+	Seats: 3
+	Ballots: 4003
+	Quota: 1000.750000000
+
+	maxDiff: 0  (s/b << geps)
+	geps:    500000000
+	minDiff: 119952067106052008  (s/b >> geps)
+	guard:   1000000000
+	prec:    1000000000000000000
+
+	Add eligible: A
+	Add eligible: B
+	Add eligible: X
+	Add eligible: Y
+	Add eligible: Z
+Action: Begin Count
+	Hopeful:  A (0.000000000)
+	Hopeful:  B (0.000000000)
+	Hopeful:  X (0.000000000)
+	Hopeful:  Y (0.000000000)
+	Hopeful:  Z (0.000000000)
+	Quota: 1000.750000000
+Round 1:
+Action: Break tie by lot (largest quotient): [A, B] -> A
+	Quota: 1000.750000000
+Action: Elect high quotient: A
+	Elected:  A (1001.000000000)
+	Hopeful:  B (1001.000000000)
+	Hopeful:  X (667.000000000)
+	Hopeful:  Y (667.000000000)
+	Hopeful:  Z (667.000000000)
+	Quota: 1000.750000000
+Action: Transfer elected: A (1001.000000000)
+	Elected:  A (1001.000000000)
+	Hopeful:  B (1001.000000000)
+	Hopeful:  X (667.000000000)
+	Hopeful:  Y (667.000000000)
+	Hopeful:  Z (667.000000000)
+	Quota: 1000.750000000
+Round 2:
+Action: Elect high quotient: B
+	Elected:  A (1001.000000000)
+	Elected:  B (1001.000000000)
+	Hopeful:  X (750.374812594)
+	Hopeful:  Y (750.374812594)
+	Hopeful:  Z (750.374812594)
+	Quota: 1000.750000000
+Action: Transfer elected: B (1001.000000000)
+	Elected:  A (1001.000000000)
+	Elected:  B (1001.000000000)
+	Hopeful:  X (750.374812594)
+	Hopeful:  Y (750.374812594)
+	Hopeful:  Z (750.374812594)
+	Quota: 1000.750000000
+Round 3:
+Action: Defeat low quotient: Z
+	Elected:  A (1001.000000000)
+	Elected:  B (1001.000000000)
+	Hopeful:  X (800.800000000)
+	Hopeful:  Y (800.559952038)
+	Defeated: Z (800.439712058)
+	Quota: 1000.750000000
+Action: Transfer defeated: Z
+	Elected:  A (1001.000000000)
+	Elected:  B (1001.000000000)
+	Hopeful:  X (800.800000000)
+	Hopeful:  Y (800.559952038)
+	Defeated: Z (800.439712058)
+	Quota: 1000.750000000
+Round 4:
+Action: Break tie by lot (largest quotient): [A, B] -> A
+	Quota: 834.000000000
+Action: Elect high quotient: A
+	Elected:  A (1001.000000000)
+	Hopeful:  B (1001.000000000)
+	Hopeful:  X (667.000000000)
+	Hopeful:  Y (667.000000000)
+	Defeated: Z (800.439712058)
+	Quota: 834.000000000
+Action: Transfer elected: A (1001.000000000)
+	Elected:  A (1001.000000000)
+	Hopeful:  B (1001.000000000)
+	Hopeful:  X (667.000000000)
+	Hopeful:  Y (667.000000000)
+	Defeated: Z (800.439712058)
+	Quota: 834.000000000
+Round 5:
+Action: Elect high quotient: B
+	Elected:  A (1001.000000000)
+	Elected:  B (1001.000000000)
+	Hopeful:  X (750.374812594)
+	Hopeful:  Y (750.374812594)
+	Defeated: Z (800.439712058)
+	Quota: 818.851266685
+Action: Transfer elected: B (1001.000000000)
+	Elected:  A (1001.000000000)
+	Elected:  B (1001.000000000)
+	Hopeful:  X (750.374812594)
+	Hopeful:  Y (750.374812594)
+	Defeated: Z (800.439712058)
+	Quota: 818.851266685
+Round 6:
+Action: Elect high quotient: X
+	Elected:  A (1001.000000000)
+	Elected:  B (1001.000000000)
+	Elected:  X (800.800000000)
+	Hopeful:  Y (800.559952038)
+	Defeated: Z (800.439712058)
+	Quota: 800.680047933
+Action: Transfer elected: X (800.800000000)
+	Elected:  A (1001.000000000)
+	Elected:  B (1001.000000000)
+	Elected:  X (800.800000000)
+	Hopeful:  Y (800.559952038)
+	Defeated: Z (800.439712058)
+	Quota: 800.680047933
+Action: Defeat remaining candidates: Y
+	Elected:  A (1001.000000000)
+	Elected:  B (1001.000000000)
+	Elected:  X (800.800000000)
+	Defeated: Y (800.559952038)
+	Defeated: Z (800.439712058)
+	Quota: 800.680047933
+Action: Count Complete
+	Elected:  A (1001.000000000)
+	Elected:  B (1001.000000000)
+	Elected:  X (800.800000000)
+	Defeated: Y (800.559952038)
+	Defeated: Z (800.439712058)
+	Quota: 800.680047933

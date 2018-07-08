@@ -1,0 +1,14 @@
+R	Action	Quota	1.name	1.state	1.quotient	2.name	2.state	2.quotient	3.name	3.state	3.quotient
+0	log	Add eligible: Castor
+0	log	Add eligible: Pollux
+0	log	Add eligible: Helen
+0	begin	3.000000000	Castor	H	0.000000000	Pollux	H	0.000000000	Helen	H	0.000000000
+1	round	New Round
+1	elect	3.000000000	Castor	E	5.000000000	Pollux	H	1.000000000	Helen	H	3.000000000
+1	transfer	3.000000000	Castor	E	5.000000000	Pollux	H	1.000000000	Helen	H	3.000000000
+2	round	New Round
+2	tie	3.000000000	Castor	E	5.000000000	Pollux	H	3.000000000	Helen	H	3.000000000
+2	defeat	3.000000000	Castor	E	5.000000000	Pollux	D	3.000000000	Helen	H	3.000000000
+2	transfer	3.000000000	Castor	E	5.000000000	Pollux	D	3.000000000	Helen	H	3.000000000
+2	elect	3.000000000	Castor	E	5.000000000	Pollux	D	3.000000000	Helen	E	3.000000000
+X	end	3.000000000	Castor	E	5.000000000	Pollux	D	3.000000000	Helen	E	3.000000000

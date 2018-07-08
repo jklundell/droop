@@ -1,0 +1,1521 @@
+{
+  "actions": [
+    {
+      "msg": "Add eligible: Paul Coleshill", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: James Dornan", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Martin Frain", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Archie Graham", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Margaret McCafferty", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Neil Sloan McDonald", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Russell Munn", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: James Nesbitt", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1207.00000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2522.00000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "467.00000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2222.00000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "853.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "891.00000"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "993.00000"
+        }, 
+        "8": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "179.00000"
+        }
+      }, 
+      "msg": "Begin Count", 
+      "nt_votes": "0.00000", 
+      "quota": "2334.00000", 
+      "round": 0, 
+      "surplus": "0.00000", 
+      "tag": "begin", 
+      "votes": "9334.00000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1207.00000"
+        }, 
+        "2": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "2522.00000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "467.00000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2222.00000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "853.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "891.00000"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "993.00000"
+        }, 
+        "8": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "179.00000"
+        }
+      }, 
+      "msg": "Elect, transfer pending: James Dornan", 
+      "nt_votes": "0.00000", 
+      "quota": "2334.00000", 
+      "round": 0, 
+      "surplus": "0.00000", 
+      "tag": "elect", 
+      "votes": "9334.00000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1207.00000"
+        }, 
+        "2": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "2522.00000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "467.00000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2222.00000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "853.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "891.00000"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "993.00000"
+        }, 
+        "8": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "179.00000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "0.00000", 
+      "quota": "2334.00000", 
+      "round": 1, 
+      "surplus": "0.00000", 
+      "tag": "round", 
+      "votes": "9334.00000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1207.00000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2522.00000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "467.00000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2222.00000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "853.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "891.00000"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "993.00000"
+        }, 
+        "8": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "179.00000"
+        }
+      }, 
+      "msg": "Transfer high surplus: James Dornan", 
+      "nt_votes": "0.00000", 
+      "quota": "2334.00000", 
+      "round": 1, 
+      "surplus": "188.00000", 
+      "tag": "unpend", 
+      "votes": "9334.00000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1243.37552"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "492.41814"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2241.15678"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "859.41044"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "924.61754"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1003.43560"
+        }, 
+        "8": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "187.34848"
+        }
+      }, 
+      "msg": "Surplus transferred: James Dornan (188.00000)", 
+      "nt_votes": "48.22738", 
+      "quota": "2334.00000", 
+      "round": 1, 
+      "surplus": "188.00000", 
+      "tag": "transfer", 
+      "votes": "9285.76250"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1243.37552"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "492.41814"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2241.15678"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "859.41044"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "924.61754"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1003.43560"
+        }, 
+        "8": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "187.34848"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "48.22738", 
+      "quota": "2334.00000", 
+      "round": 2, 
+      "surplus": "188.00000", 
+      "tag": "round", 
+      "votes": "9285.76250"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1243.37552"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "492.41814"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2241.15678"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "859.41044"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "924.61754"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1003.43560"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "187.34848"
+        }
+      }, 
+      "msg": "Defeat low candidate: James Nesbitt", 
+      "nt_votes": "48.22738", 
+      "quota": "2334.00000", 
+      "round": 2, 
+      "surplus": "0.00000", 
+      "tag": "defeat", 
+      "votes": "9285.76250"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1264.64270"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "541.80342"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2255.75310"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "868.41044"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "974.30098"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1008.73376"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Transfer defeated: James Nesbitt", 
+      "nt_votes": "86.34548", 
+      "quota": "2334.00000", 
+      "round": 2, 
+      "surplus": "0.00000", 
+      "tag": "transfer", 
+      "votes": "9247.64440"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1264.64270"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "541.80342"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2255.75310"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "868.41044"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "974.30098"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1008.73376"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "86.34548", 
+      "quota": "2334.00000", 
+      "round": 3, 
+      "surplus": "0.00000", 
+      "tag": "round", 
+      "votes": "9247.64440"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1264.64270"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "541.80342"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2255.75310"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "868.41044"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "974.30098"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1008.73376"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Defeat low candidate: Martin Frain", 
+      "nt_votes": "86.34548", 
+      "quota": "2334.00000", 
+      "round": 3, 
+      "surplus": "0.00000", 
+      "tag": "defeat", 
+      "votes": "9247.64440"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1338.22062"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2330.10740"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "902.23038"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1154.51296"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1024.62824"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Transfer defeated: Martin Frain", 
+      "nt_votes": "250.29028", 
+      "quota": "2334.00000", 
+      "round": 3, 
+      "surplus": "0.00000", 
+      "tag": "transfer", 
+      "votes": "9083.69960"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1338.22062"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2330.10740"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "902.23038"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1154.51296"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1024.62824"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "250.29028", 
+      "quota": "2334.00000", 
+      "round": 4, 
+      "surplus": "0.00000", 
+      "tag": "round", 
+      "votes": "9083.69960"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1338.22062"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2330.10740"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "902.23038"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1154.51296"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1024.62824"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Defeat low candidate: Margaret McCafferty", 
+      "nt_votes": "250.29028", 
+      "quota": "2334.00000", 
+      "round": 4, 
+      "surplus": "0.00000", 
+      "tag": "defeat", 
+      "votes": "9083.69960"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1405.48780"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2917.64176"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1214.55652"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1052.07548"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Transfer defeated: Margaret McCafferty", 
+      "nt_votes": "410.22832", 
+      "quota": "2334.00000", 
+      "round": 4, 
+      "surplus": "0.00000", 
+      "tag": "transfer", 
+      "votes": "8923.76156"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1405.48780"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "2917.64176"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1214.55652"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1052.07548"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Elect, transfer pending: Archie Graham", 
+      "nt_votes": "410.22832", 
+      "quota": "2334.00000", 
+      "round": 4, 
+      "surplus": "0.00000", 
+      "tag": "elect", 
+      "votes": "8923.76156"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1405.48780"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "2917.64176"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1214.55652"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1052.07548"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "410.22832", 
+      "quota": "2334.00000", 
+      "round": 5, 
+      "surplus": "0.00000", 
+      "tag": "round", 
+      "votes": "8923.76156"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1405.48780"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2917.64176"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1214.55652"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1052.07548"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Transfer high surplus: Archie Graham", 
+      "nt_votes": "410.22832", 
+      "quota": "2334.00000", 
+      "round": 5, 
+      "surplus": "583.64176", 
+      "tag": "unpend", 
+      "votes": "8923.76156"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1547.51043"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1310.02929"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1088.99408"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Surplus transferred: Archie Graham (583.64176)", 
+      "nt_votes": "719.43012", 
+      "quota": "2334.00000", 
+      "round": 5, 
+      "surplus": "583.64176", 
+      "tag": "transfer", 
+      "votes": "8614.53380"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1547.51043"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1310.02929"
+        }, 
+        "7": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1088.99408"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "719.43012", 
+      "quota": "2334.00000", 
+      "round": 6, 
+      "surplus": "583.64176", 
+      "tag": "round", 
+      "votes": "8614.53380"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1547.51043"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1310.02929"
+        }, 
+        "7": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "1088.99408"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Defeat low candidate: Russell Munn", 
+      "nt_votes": "719.43012", 
+      "quota": "2334.00000", 
+      "round": 6, 
+      "surplus": "0.00000", 
+      "tag": "defeat", 
+      "votes": "8614.53380"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1961.06802"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1463.69381"
+        }, 
+        "7": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Transfer defeated: Russell Munn", 
+      "nt_votes": "1241.20209", 
+      "quota": "2334.00000", 
+      "round": 6, 
+      "surplus": "0.00000", 
+      "tag": "transfer", 
+      "votes": "8092.76183"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1961.06802"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1463.69381"
+        }, 
+        "7": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "1241.20209", 
+      "quota": "2334.00000", 
+      "round": 7, 
+      "surplus": "0.00000", 
+      "tag": "round", 
+      "votes": "8092.76183"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1961.06802"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "1463.69381"
+        }, 
+        "7": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Defeat low candidate: Neil Sloan McDonald", 
+      "nt_votes": "1241.20209", 
+      "quota": "2334.00000", 
+      "round": 7, 
+      "surplus": "0.00000", 
+      "tag": "defeat", 
+      "votes": "8092.76183"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2683.52730"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "7": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Transfer defeated: Neil Sloan McDonald", 
+      "nt_votes": "1982.43662", 
+      "quota": "2334.00000", 
+      "round": 7, 
+      "surplus": "0.00000", 
+      "tag": "transfer", 
+      "votes": "7351.52730"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2683.52730"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "7": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Elect remaining candidates: Paul Coleshill", 
+      "nt_votes": "1982.43662", 
+      "quota": "2334.00000", 
+      "round": 7, 
+      "surplus": "0.00000", 
+      "tag": "elect", 
+      "votes": "7351.52730"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2683.52730"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "2334.00000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "6": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "7": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }, 
+        "8": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.00000"
+        }
+      }, 
+      "msg": "Count Complete", 
+      "nt_votes": "1982.43662", 
+      "quota": "2334.00000", 
+      "round": 7, 
+      "surplus": "0.00000", 
+      "tag": "end", 
+      "votes": "7351.52730"
+    }
+  ], 
+  "arithmetic_info": "fixed-point decimal arithmetic (5 places)", 
+  "arithmetic_name": "fixed", 
+  "cdict": {
+    "1": {
+      "ballot_order": 1, 
+      "cid": 1, 
+      "name": "Paul Coleshill", 
+      "nick": "1", 
+      "tie_order": 1
+    }, 
+    "2": {
+      "ballot_order": 2, 
+      "cid": 2, 
+      "name": "James Dornan", 
+      "nick": "2", 
+      "tie_order": 2
+    }, 
+    "3": {
+      "ballot_order": 3, 
+      "cid": 3, 
+      "name": "Martin Frain", 
+      "nick": "3", 
+      "tie_order": 3
+    }, 
+    "4": {
+      "ballot_order": 4, 
+      "cid": 4, 
+      "name": "Archie Graham", 
+      "nick": "4", 
+      "tie_order": 4
+    }, 
+    "5": {
+      "ballot_order": 5, 
+      "cid": 5, 
+      "name": "Margaret McCafferty", 
+      "nick": "5", 
+      "tie_order": 5
+    }, 
+    "6": {
+      "ballot_order": 6, 
+      "cid": 6, 
+      "name": "Neil Sloan McDonald", 
+      "nick": "6", 
+      "tie_order": 6
+    }, 
+    "7": {
+      "ballot_order": 7, 
+      "cid": 7, 
+      "name": "Russell Munn", 
+      "nick": "7", 
+      "tie_order": 7
+    }, 
+    "8": {
+      "ballot_order": 8, 
+      "cid": 8, 
+      "name": "James Nesbitt", 
+      "nick": "8", 
+      "tie_order": 8
+    }
+  }, 
+  "cids": [
+    1, 
+    2, 
+    3, 
+    4, 
+    5, 
+    6, 
+    7, 
+    8
+  ], 
+  "droop_name": "droop", 
+  "droop_version": "0.11", 
+  "ecids": [
+    1, 
+    2, 
+    3, 
+    4, 
+    5, 
+    6, 
+    7, 
+    8
+  ], 
+  "method": "wigm", 
+  "nballots": 9334, 
+  "options": {
+    "allowed": {}, 
+    "cmd": {
+      "rule": "scotland"
+    }, 
+    "default": {
+      "arithmetic": "fixed", 
+      "display": 5, 
+      "precision": 5
+    }, 
+    "file_options": {}, 
+    "force": {
+      "arithmetic": "fixed", 
+      "display": 5, 
+      "precision": 5
+    }, 
+    "options": {
+      "arithmetic": "fixed", 
+      "display": 5, 
+      "precision": 5, 
+      "rule": "scotland"
+    }
+  }, 
+  "quota": "2334.00000", 
+  "rule_info": "Scottish STV", 
+  "rule_name": "scotland", 
+  "seats": 3, 
+  "title": "LANGSIDE"
+}

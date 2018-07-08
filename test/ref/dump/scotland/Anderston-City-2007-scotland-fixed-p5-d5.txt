@@ -1,0 +1,37 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote
+0	log	Add eligible: Nina Baker
+0	log	Add eligible: Erin Boyle
+0	log	Add eligible: Philip Braat
+0	log	Add eligible: Dave Holladay
+0	log	Add eligible: Akhtar Khan
+0	log	Add eligible: Ann Laird
+0	log	Add eligible: Craig MacKay
+0	log	Add eligible: Gordon Matheson
+0	log	Add eligible: Peter Murray
+0	begin	1381.00000	0.00000	Nina Baker	H	880.00000	Erin Boyle	H	486.00000	Philip Braat	H	1291.00000	Dave Holladay	H	145.00000	Akhtar Khan	H	285.00000	Ann Laird	H	806.00000	Craig MacKay	H	1632.00000	Gordon Matheson	H	1177.00000	Peter Murray	H	198.00000
+0	elect	1381.00000	0.00000	Nina Baker	H	880.00000	Erin Boyle	H	486.00000	Philip Braat	H	1291.00000	Dave Holladay	H	145.00000	Akhtar Khan	H	285.00000	Ann Laird	H	806.00000	Craig MacKay	e	1632.00000	Gordon Matheson	H	1177.00000	Peter Murray	H	198.00000
+1	round	New Round
+1	unpend	1381.00000	0.00000	Nina Baker	H	880.00000	Erin Boyle	H	486.00000	Philip Braat	H	1291.00000	Dave Holladay	H	145.00000	Akhtar Khan	H	285.00000	Ann Laird	H	806.00000	Craig MacKay	E	1632.00000	Gordon Matheson	H	1177.00000	Peter Murray	H	198.00000
+1	transfer	1381.00000	73.20404	Nina Baker	H	927.98248	Erin Boyle	H	495.99635	Philip Braat	H	1306.68658	Dave Holladay	H	150.84402	Akhtar Khan	H	317.29590	Ann Laird	H	836.91179	Craig MacKay	E	1381.00000	Gordon Matheson	H	1194.99343	Peter Murray	H	215.07069
+2	round	New Round
+2	defeat	1381.00000	73.20404	Nina Baker	H	927.98248	Erin Boyle	H	495.99635	Philip Braat	H	1306.68658	Dave Holladay	D	150.84402	Akhtar Khan	H	317.29590	Ann Laird	H	836.91179	Craig MacKay	E	1381.00000	Gordon Matheson	H	1194.99343	Peter Murray	H	215.07069
+2	transfer	1381.00000	98.74194	Nina Baker	H	974.67417	Erin Boyle	H	511.45772	Philip Braat	H	1318.99416	Dave Holladay	D	0.00000	Akhtar Khan	H	319.91106	Ann Laird	H	866.68074	Craig MacKay	E	1381.00000	Gordon Matheson	H	1200.14722	Peter Murray	H	228.37827
+3	round	New Round
+3	defeat	1381.00000	98.74194	Nina Baker	H	974.67417	Erin Boyle	H	511.45772	Philip Braat	H	1318.99416	Dave Holladay	D	0.00000	Akhtar Khan	H	319.91106	Ann Laird	H	866.68074	Craig MacKay	E	1381.00000	Gordon Matheson	H	1200.14722	Peter Murray	D	228.37827
+3	transfer	1381.00000	161.97153	Nina Baker	H	1033.51892	Erin Boyle	H	515.76530	Philip Braat	H	1328.76311	Dave Holladay	D	0.00000	Akhtar Khan	H	367.75508	Ann Laird	H	890.37243	Craig MacKay	E	1381.00000	Gordon Matheson	H	1220.83891	Peter Murray	D	0.00000
+4	round	New Round
+4	defeat	1381.00000	161.97153	Nina Baker	H	1033.51892	Erin Boyle	H	515.76530	Philip Braat	H	1328.76311	Dave Holladay	D	0.00000	Akhtar Khan	D	367.75508	Ann Laird	H	890.37243	Craig MacKay	E	1381.00000	Gordon Matheson	H	1220.83891	Peter Murray	D	0.00000
+4	transfer	1381.00000	276.04368	Nina Baker	H	1163.43655	Erin Boyle	H	524.84183	Philip Braat	H	1366.14649	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	H	929.13992	Craig MacKay	E	1381.00000	Gordon Matheson	H	1259.37681	Peter Murray	D	0.00000
+5	round	New Round
+5	defeat	1381.00000	276.04368	Nina Baker	H	1163.43655	Erin Boyle	D	524.84183	Philip Braat	H	1366.14649	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	H	929.13992	Craig MacKay	E	1381.00000	Gordon Matheson	H	1259.37681	Peter Murray	D	0.00000
+5	transfer	1381.00000	508.34980	Nina Baker	H	1247.97372	Erin Boyle	D	0.00000	Philip Braat	H	1421.06923	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	H	1050.13919	Craig MacKay	E	1381.00000	Gordon Matheson	H	1291.45334	Peter Murray	D	0.00000
+5	elect	1381.00000	508.34980	Nina Baker	H	1247.97372	Erin Boyle	D	0.00000	Philip Braat	e	1421.06923	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	H	1050.13919	Craig MacKay	E	1381.00000	Gordon Matheson	H	1291.45334	Peter Murray	D	0.00000
+6	round	New Round
+6	unpend	1381.00000	508.34980	Nina Baker	H	1247.97372	Erin Boyle	D	0.00000	Philip Braat	E	1421.06923	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	H	1050.13919	Craig MacKay	E	1381.00000	Gordon Matheson	H	1291.45334	Peter Murray	D	0.00000
+6	transfer	1381.00000	519.91821	Nina Baker	H	1251.77919	Erin Boyle	D	0.00000	Philip Braat	E	1381.00000	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	H	1054.23531	Craig MacKay	E	1381.00000	Gordon Matheson	H	1312.04255	Peter Murray	D	0.00000
+7	round	New Round
+7	defeat	1381.00000	519.91821	Nina Baker	H	1251.77919	Erin Boyle	D	0.00000	Philip Braat	E	1381.00000	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	D	1054.23531	Craig MacKay	E	1381.00000	Gordon Matheson	H	1312.04255	Peter Murray	D	0.00000
+7	transfer	1381.00000	856.59414	Nina Baker	H	1736.42172	Erin Boyle	D	0.00000	Philip Braat	E	1381.00000	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	D	0.00000	Craig MacKay	E	1381.00000	Gordon Matheson	H	1544.95940	Peter Murray	D	0.00000
+7	elect	1381.00000	856.59414	Nina Baker	E	1736.42172	Erin Boyle	D	0.00000	Philip Braat	E	1381.00000	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	D	0.00000	Craig MacKay	E	1381.00000	Gordon Matheson	H	1544.95940	Peter Murray	D	0.00000
+7	elect	1381.00000	856.59414	Nina Baker	E	1736.42172	Erin Boyle	D	0.00000	Philip Braat	E	1381.00000	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	D	0.00000	Craig MacKay	E	1381.00000	Gordon Matheson	E	1544.95940	Peter Murray	D	0.00000
+X	end	1381.00000	856.59414	Nina Baker	E	1736.42172	Erin Boyle	D	0.00000	Philip Braat	E	1381.00000	Dave Holladay	D	0.00000	Akhtar Khan	D	0.00000	Ann Laird	D	0.00000	Craig MacKay	E	1381.00000	Gordon Matheson	E	1544.95940	Peter Murray	D	0.00000

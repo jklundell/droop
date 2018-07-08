@@ -1,0 +1,267 @@
+
+Election: GPUS Steering Committee Election 2005-07-24
+
+	Droop package: droop v0.11
+	Rule: Meek Parametric (omega = 1/10^9)
+	Arithmetic: guarded-precision fixed-point decimal arithmetic (18+9 places)
+	Seats: 4
+	Ballots: 94
+	Quota: 18.800000000000000000
+	Omega: 0.000000001000000000
+
+	maxDiff: 0  (s/b << geps)
+	geps:    500000000
+	minDiff: 3500452171284119089130919  (s/b >> geps)
+	guard:   1000000000
+	prec:    1000000000000000000000000000
+
+	Add eligible: Budd Dickinson
+	Add eligible: Kirit Mookerjee
+	Add eligible: Tom Sevigny
+	Add withdrawn: Pat LaMarche
+	Add eligible: Michael Piacsek
+	Add eligible: Write-In 2
+	Add eligible: Rebecca Rotzler
+	Add eligible: Kristen Olsen
+	Add eligible: Jason Jones
+	Add eligible: Write-In 1
+	Add eligible: Steve Greenfield
+	Add eligible: Jimmy Leas
+	Add eligible: Steve Kramer
+Action: Begin Count
+	Hopeful:  Budd Dickinson (13.000000000000000000)
+	Hopeful:  Kirit Mookerjee (4.000000000000000000)
+	Hopeful:  Tom Sevigny (14.000000000000000000)
+	Hopeful:  Michael Piacsek (4.000000000000000000)
+	Hopeful:  Write-In 2 (0.000000000000000000)
+	Hopeful:  Rebecca Rotzler (35.000000000000000000)
+	Hopeful:  Kristen Olsen (2.000000000000000000)
+	Hopeful:  Jason Jones (1.000000000000000000)
+	Hopeful:  Write-In 1 (0.000000000000000000)
+	Hopeful:  Steve Greenfield (0.000000000000000000)
+	Hopeful:  Jimmy Leas (0.000000000000000000)
+	Hopeful:  Steve Kramer (21.000000000000000000)
+	Quota: 18.800000000000000000
+	Votes: 94.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 94.000000000000000000
+	Surplus: 0.000000000000000000
+Round 1:
+Action: Elect: Rebecca Rotzler
+	Elected:  Rebecca Rotzler (35.000000000000000000)
+	Hopeful:  Budd Dickinson (13.000000000000000000)
+	Hopeful:  Kirit Mookerjee (4.000000000000000000)
+	Hopeful:  Tom Sevigny (14.000000000000000000)
+	Hopeful:  Michael Piacsek (4.000000000000000000)
+	Hopeful:  Write-In 2 (0.000000000000000000)
+	Hopeful:  Kristen Olsen (2.000000000000000000)
+	Hopeful:  Jason Jones (1.000000000000000000)
+	Hopeful:  Write-In 1 (0.000000000000000000)
+	Hopeful:  Steve Greenfield (0.000000000000000000)
+	Hopeful:  Jimmy Leas (0.000000000000000000)
+	Hopeful:  Steve Kramer (21.000000000000000000)
+	Quota: 18.800000000000000000
+	Votes: 94.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 94.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Elect: Steve Kramer
+	Elected:  Rebecca Rotzler (35.000000000000000000)
+	Elected:  Steve Kramer (21.000000000000000000)
+	Hopeful:  Budd Dickinson (13.000000000000000000)
+	Hopeful:  Kirit Mookerjee (4.000000000000000000)
+	Hopeful:  Tom Sevigny (14.000000000000000000)
+	Hopeful:  Michael Piacsek (4.000000000000000000)
+	Hopeful:  Write-In 2 (0.000000000000000000)
+	Hopeful:  Kristen Olsen (2.000000000000000000)
+	Hopeful:  Jason Jones (1.000000000000000000)
+	Hopeful:  Write-In 1 (0.000000000000000000)
+	Hopeful:  Steve Greenfield (0.000000000000000000)
+	Hopeful:  Jimmy Leas (0.000000000000000000)
+	Quota: 18.800000000000000000
+	Votes: 94.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 94.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Iterate (elected)
+	Quota: 18.800000000000000000
+	Votes: 94.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 94.000000000000000000
+	Surplus: 18.400000000000000000
+Round 2:
+Action: Iterate (batch)
+	Quota: 18.800000000000000000
+	Votes: 94.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 94.000000000000000000
+	Surplus: 0.639455782312925170
+Action: Defeat certain loser: Kirit Mookerjee
+	Elected:  Rebecca Rotzler (19.025088435374149660)
+	Elected:  Steve Kramer (19.214367346938775510)
+	Hopeful:  Budd Dickinson (14.554285714285714286)
+	Hopeful:  Tom Sevigny (14.978884353741496599)
+	Hopeful:  Michael Piacsek (4.978884353741496599)
+	Hopeful:  Write-In 2 (0.000000000000000000)
+	Hopeful:  Kristen Olsen (14.960000000000000000)
+	Hopeful:  Jason Jones (1.462857142857142857)
+	Hopeful:  Write-In 1 (0.000000000000000000)
+	Hopeful:  Steve Greenfield (0.000000000000000000)
+	Hopeful:  Jimmy Leas (0.000000000000000000)
+	Defeated: Kirit Mookerjee (4.825632653061224490)
+	Quota: 18.800000000000000000
+	Votes: 94.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 94.000000000000000000
+	Surplus: 0.639455782312925170
+Action: Defeat certain loser: Michael Piacsek
+	Elected:  Rebecca Rotzler (19.731047619047619048)
+	Elected:  Steve Kramer (21.419210884353741497)
+	Hopeful:  Budd Dickinson (14.707537414965986395)
+	Hopeful:  Tom Sevigny (15.978884353741496599)
+	Hopeful:  Write-In 2 (0.000000000000000000)
+	Hopeful:  Kristen Olsen (15.471346938775510204)
+	Hopeful:  Jason Jones (1.462857142857142857)
+	Hopeful:  Write-In 1 (0.000000000000000000)
+	Hopeful:  Steve Greenfield (0.000000000000000000)
+	Hopeful:  Jimmy Leas (0.000000000000000000)
+	Defeated: Michael Piacsek (5.132136054421768707)
+	Defeated: Kirit Mookerjee (0.000000000000000000)
+	Quota: 18.800000000000000000
+	Votes: 93.903020408163265306
+	Residual: 0.096979591836734694
+	Total: 94.000000000000000000
+	Surplus: 0.639455782312925170
+Action: Defeat certain loser: Write-In 2
+	Elected:  Rebecca Rotzler (19.843591836734693878)
+	Elected:  Steve Kramer (23.209687074829931973)
+	Hopeful:  Budd Dickinson (16.215782312925170068)
+	Hopeful:  Tom Sevigny (17.083646258503401361)
+	Hopeful:  Kristen Olsen (15.934204081632653061)
+	Hopeful:  Jason Jones (1.462857142857142857)
+	Hopeful:  Write-In 1 (0.000000000000000000)
+	Hopeful:  Steve Greenfield (0.000000000000000000)
+	Hopeful:  Jimmy Leas (0.000000000000000000)
+	Defeated: Kirit Mookerjee, Michael Piacsek, Write-In 2 (0.000000000000000000)
+	Quota: 18.800000000000000000
+	Votes: 93.749768707482993197
+	Residual: 0.250231292517006803
+	Total: 94.000000000000000000
+	Surplus: 0.639455782312925170
+Action: Defeat certain loser: Jason Jones
+	Elected:  Rebecca Rotzler (19.843591836734693878)
+	Elected:  Steve Kramer (23.209687074829931973)
+	Hopeful:  Budd Dickinson (16.215782312925170068)
+	Hopeful:  Tom Sevigny (17.083646258503401361)
+	Hopeful:  Kristen Olsen (15.934204081632653061)
+	Hopeful:  Write-In 1 (0.000000000000000000)
+	Hopeful:  Steve Greenfield (0.000000000000000000)
+	Hopeful:  Jimmy Leas (0.000000000000000000)
+	Defeated: Jason Jones (1.462857142857142857)
+	Defeated: Kirit Mookerjee, Michael Piacsek, Write-In 2 (0.000000000000000000)
+	Quota: 18.800000000000000000
+	Votes: 93.749768707482993197
+	Residual: 0.250231292517006803
+	Total: 94.000000000000000000
+	Surplus: 0.639455782312925170
+Action: Defeat certain loser: Write-In 1
+	Elected:  Rebecca Rotzler (19.843591836734693878)
+	Elected:  Steve Kramer (23.209687074829931973)
+	Hopeful:  Budd Dickinson (16.215782312925170068)
+	Hopeful:  Tom Sevigny (17.083646258503401361)
+	Hopeful:  Kristen Olsen (16.397061224489795918)
+	Hopeful:  Steve Greenfield (1.000000000000000000)
+	Hopeful:  Jimmy Leas (0.000000000000000000)
+	Defeated: Kirit Mookerjee, Michael Piacsek, Write-In 2, Jason Jones, Write-In 1 (0.000000000000000000)
+	Quota: 18.800000000000000000
+	Votes: 93.749768707482993197
+	Residual: 0.250231292517006803
+	Total: 94.000000000000000000
+	Surplus: 0.639455782312925170
+Action: Defeat certain loser: Steve Greenfield
+	Elected:  Rebecca Rotzler (19.843591836734693878)
+	Elected:  Steve Kramer (23.209687074829931973)
+	Hopeful:  Budd Dickinson (16.215782312925170068)
+	Hopeful:  Tom Sevigny (17.083646258503401361)
+	Hopeful:  Kristen Olsen (16.397061224489795918)
+	Hopeful:  Jimmy Leas (0.000000000000000000)
+	Defeated: Steve Greenfield (1.000000000000000000)
+	Defeated: Kirit Mookerjee, Michael Piacsek, Write-In 2, Jason Jones, Write-In 1 (0.000000000000000000)
+	Quota: 18.800000000000000000
+	Votes: 93.749768707482993197
+	Residual: 0.250231292517006803
+	Total: 94.000000000000000000
+	Surplus: 0.639455782312925170
+Action: Defeat certain loser: Jimmy Leas
+	Elected:  Rebecca Rotzler (19.843591836734693878)
+	Elected:  Steve Kramer (23.209687074829931973)
+	Hopeful:  Budd Dickinson (16.215782312925170068)
+	Hopeful:  Tom Sevigny (17.083646258503401361)
+	Hopeful:  Kristen Olsen (17.397061224489795918)
+	Defeated: Kirit Mookerjee, Michael Piacsek, Write-In 2, Jason Jones, Write-In 1, Steve Greenfield, Jimmy Leas (0.000000000000000000)
+	Quota: 18.800000000000000000
+	Votes: 93.749768707482993197
+	Residual: 0.250231292517006803
+	Total: 94.000000000000000000
+	Surplus: 0.639455782312925170
+Round 3:
+Action: Elect: Kristen Olsen
+	Elected:  Rebecca Rotzler (18.684677967421106723)
+	Elected:  Kristen Olsen (19.114416802381060344)
+	Elected:  Steve Kramer (18.695435061523253458)
+	Hopeful:  Budd Dickinson (18.573866032798740444)
+	Hopeful:  Tom Sevigny (18.214355015092532201)
+	Defeated: Kirit Mookerjee, Michael Piacsek, Write-In 2, Jason Jones, Write-In 1, Steve Greenfield, Jimmy Leas (0.000000000000000000)
+	Quota: 18.656550175843338634
+	Votes: 93.282750879216693170
+	Residual: 0.717249120783306830
+	Total: 94.000000000000000000
+	Surplus: 1.002765430585896458
+Action: Iterate (elected)
+	Quota: 18.656550175843338634
+	Votes: 93.282750879216693170
+	Residual: 0.717249120783306830
+	Total: 94.000000000000000000
+	Surplus: 0.524879303795404623
+Round 4:
+Action: Elect: Budd Dickinson
+	Elected:  Budd Dickinson (18.618004092760788303)
+	Elected:  Rebecca Rotzler (18.697849827667023634)
+	Elected:  Kristen Olsen (18.679588248855435094)
+	Elected:  Steve Kramer (18.701879620663269912)
+	Hopeful:  Tom Sevigny (18.236863761452951560)
+	Defeated: Kirit Mookerjee, Michael Piacsek, Write-In 2, Jason Jones, Write-In 1, Steve Greenfield, Jimmy Leas (0.000000000000000000)
+	Quota: 18.586837110279893701
+	Votes: 92.934185551399468503
+	Residual: 1.065814448600531497
+	Total: 94.000000000000000000
+	Surplus: 0.524879303795404623
+Action: Iterate (elected)
+	Quota: 18.586837110279893701
+	Votes: 92.934185551399468503
+	Residual: 1.065814448600531497
+	Total: 94.000000000000000000
+	Surplus: 0.349973348826942140
+Action: Defeat remaining: Tom Sevigny
+	Elected:  Budd Dickinson (18.618004092760788303)
+	Elected:  Rebecca Rotzler (18.697849827667023634)
+	Elected:  Kristen Olsen (18.679588248855435094)
+	Elected:  Steve Kramer (18.701879620663269912)
+	Defeated: Tom Sevigny (18.236863761452951560)
+	Defeated: Kirit Mookerjee, Michael Piacsek, Write-In 2, Jason Jones, Write-In 1, Steve Greenfield, Jimmy Leas (0.000000000000000000)
+	Quota: 18.586837110279893701
+	Votes: 92.934185551399468503
+	Residual: 1.065814448600531497
+	Total: 94.000000000000000000
+	Surplus: 0.349973348826942140
+Action: Count Complete
+	Elected:  Budd Dickinson (27.462701239982971403)
+	Elected:  Rebecca Rotzler (19.181982473605502157)
+	Elected:  Kristen Olsen (19.098709473206725035)
+	Elected:  Steve Kramer (26.617456906187994056)
+	Defeated: Kirit Mookerjee, Tom Sevigny, Michael Piacsek, Write-In 2, Jason Jones, Write-In 1, Steve Greenfield, Jimmy Leas (0.000000000000000000)
+	Quota: 18.586837110279893701
+	Votes: 92.360850092983192650
+	Residual: 1.639149907016807350
+	Total: 94.000000000000000000
+	Surplus: 0.349973348826942140

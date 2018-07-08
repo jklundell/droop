@@ -1,0 +1,313 @@
+
+Election: SPRINGBURN Ward
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 3
+	Ballots: 5410
+	Quota: 1353.00000
+
+	Add eligible: Margaret Bean
+	Add eligible: Graham Campbell
+	Add eligible: Graeme Dickson
+	Add eligible: Phil Greene
+	Add eligible: Patrick McAleer
+	Add eligible: Robert G C Sawers
+	Add eligible: Kenny Smith
+	Add eligible: Allan Stewart
+	Add eligible: John H Stuart
+	Add eligible: James Todd
+Action: Begin Count
+	Hopeful:  Margaret Bean (135.00000)
+	Hopeful:  Graham Campbell (339.00000)
+	Hopeful:  Graeme Dickson (173.00000)
+	Hopeful:  Phil Greene (1300.00000)
+	Hopeful:  Patrick McAleer (134.00000)
+	Hopeful:  Robert G C Sawers (85.00000)
+	Hopeful:  Kenny Smith (135.00000)
+	Hopeful:  Allan Stewart (1752.00000)
+	Hopeful:  John H Stuart (168.00000)
+	Hopeful:  James Todd (1189.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 5410.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 5410.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Allan Stewart
+	Pending:  Allan Stewart (1752.00000)
+	Hopeful:  Margaret Bean (135.00000)
+	Hopeful:  Graham Campbell (339.00000)
+	Hopeful:  Graeme Dickson (173.00000)
+	Hopeful:  Phil Greene (1300.00000)
+	Hopeful:  Patrick McAleer (134.00000)
+	Hopeful:  Robert G C Sawers (85.00000)
+	Hopeful:  Kenny Smith (135.00000)
+	Hopeful:  John H Stuart (168.00000)
+	Hopeful:  James Todd (1189.00000)
+	Elected votes: 0.00000
+	Pending votes: 1752.00000
+	Hopeful votes: 3658.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 5410.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Allan Stewart
+	Elected votes: 1752.00000
+	Hopeful votes: 3658.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 5410.00000
+	Surplus: 399.00000
+Action: Surplus transferred: Allan Stewart (399.00000)
+	Elected:  Allan Stewart (1353.00000)
+	Hopeful:  Margaret Bean (139.78233)
+	Hopeful:  Graham Campbell (351.75288)
+	Hopeful:  Graeme Dickson (176.41595)
+	Hopeful:  Phil Greene (1327.09987)
+	Hopeful:  Patrick McAleer (140.14871)
+	Hopeful:  Robert G C Sawers (86.82184)
+	Hopeful:  Kenny Smith (137.50503)
+	Hopeful:  John H Stuart (176.88147)
+	Hopeful:  James Todd (1437.68116)
+	Elected votes: 1353.00000
+	Hopeful votes: 3974.08924
+	Nontransferable votes: 82.89372
+	Residual: 0.01704
+	Total: 5410.00000
+	Surplus: 399.00000
+Action: Elect, transfer pending: James Todd
+	Elected:  Allan Stewart (1353.00000)
+	Pending:  James Todd (1437.68116)
+	Hopeful:  Margaret Bean (139.78233)
+	Hopeful:  Graham Campbell (351.75288)
+	Hopeful:  Graeme Dickson (176.41595)
+	Hopeful:  Phil Greene (1327.09987)
+	Hopeful:  Patrick McAleer (140.14871)
+	Hopeful:  Robert G C Sawers (86.82184)
+	Hopeful:  Kenny Smith (137.50503)
+	Hopeful:  John H Stuart (176.88147)
+	Elected votes: 1353.00000
+	Pending votes: 1437.68116
+	Hopeful votes: 2536.40808
+	Nontransferable votes: 82.89372
+	Residual: 0.01704
+	Total: 5410.00000
+	Surplus: 399.00000
+Round 2:
+Action: Transfer high surplus: James Todd
+	Elected votes: 2790.68116
+	Hopeful votes: 2536.40808
+	Nontransferable votes: 82.89372
+	Residual: 0.01704
+	Total: 5410.00000
+	Surplus: 84.68116
+Action: Surplus transferred: James Todd (84.68116)
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Hopeful:  Margaret Bean (143.25032)
+	Hopeful:  Graham Campbell (358.57632)
+	Hopeful:  Graeme Dickson (178.54502)
+	Hopeful:  Phil Greene (1336.33636)
+	Hopeful:  Patrick McAleer (143.75895)
+	Hopeful:  Robert G C Sawers (88.39636)
+	Hopeful:  Kenny Smith (138.78505)
+	Hopeful:  John H Stuart (183.03308)
+	Elected votes: 2706.00000
+	Hopeful votes: 2570.68146
+	Nontransferable votes: 133.29616
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 84.68116
+Round 3:
+Action: Defeat low candidate: Robert G C Sawers
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Hopeful:  Margaret Bean (143.25032)
+	Hopeful:  Graham Campbell (358.57632)
+	Hopeful:  Graeme Dickson (178.54502)
+	Hopeful:  Phil Greene (1336.33636)
+	Hopeful:  Patrick McAleer (143.75895)
+	Hopeful:  Kenny Smith (138.78505)
+	Hopeful:  John H Stuart (183.03308)
+	Defeated: Robert G C Sawers (88.39636)
+	Elected votes: 2706.00000
+	Hopeful votes: 2482.28510
+	Defeated votes: 88.39636
+	Nontransferable votes: 133.29616
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Robert G C Sawers
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Hopeful:  Margaret Bean (144.60926)
+	Hopeful:  Graham Campbell (362.87082)
+	Hopeful:  Graeme Dickson (203.47722)
+	Hopeful:  Phil Greene (1340.90962)
+	Hopeful:  Patrick McAleer (150.77236)
+	Hopeful:  Kenny Smith (151.84395)
+	Hopeful:  John H Stuart (186.33312)
+	Defeated: Robert G C Sawers (0.00000)
+	Elected votes: 2706.00000
+	Hopeful votes: 2540.81635
+	Nontransferable votes: 163.16127
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Margaret Bean
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Hopeful:  Graham Campbell (362.87082)
+	Hopeful:  Graeme Dickson (203.47722)
+	Hopeful:  Phil Greene (1340.90962)
+	Hopeful:  Patrick McAleer (150.77236)
+	Hopeful:  Kenny Smith (151.84395)
+	Hopeful:  John H Stuart (186.33312)
+	Defeated: Margaret Bean (144.60926)
+	Defeated: Robert G C Sawers (0.00000)
+	Elected votes: 2706.00000
+	Hopeful votes: 2396.20709
+	Defeated votes: 144.60926
+	Nontransferable votes: 163.16127
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Margaret Bean
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Hopeful:  Graham Campbell (410.14226)
+	Hopeful:  Graeme Dickson (209.51745)
+	Hopeful:  Phil Greene (1374.08557)
+	Hopeful:  Patrick McAleer (162.73399)
+	Hopeful:  Kenny Smith (154.90285)
+	Hopeful:  John H Stuart (187.20642)
+	Defeated: Margaret Bean, Robert G C Sawers (0.00000)
+	Elected votes: 2706.00000
+	Hopeful votes: 2498.58854
+	Nontransferable votes: 205.38908
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Phil Greene
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Pending:  Phil Greene (1374.08557)
+	Hopeful:  Graham Campbell (410.14226)
+	Hopeful:  Graeme Dickson (209.51745)
+	Hopeful:  Patrick McAleer (162.73399)
+	Hopeful:  Kenny Smith (154.90285)
+	Hopeful:  John H Stuart (187.20642)
+	Defeated: Margaret Bean, Robert G C Sawers (0.00000)
+	Elected votes: 2706.00000
+	Pending votes: 1374.08557
+	Hopeful votes: 1124.50297
+	Nontransferable votes: 205.38908
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000
+Action: Defeat remaining candidates: Graham Campbell
+	Elected:  Phil Greene (1374.08557)
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Hopeful:  Graeme Dickson (209.51745)
+	Hopeful:  Patrick McAleer (162.73399)
+	Hopeful:  Kenny Smith (154.90285)
+	Hopeful:  John H Stuart (187.20642)
+	Defeated: Graham Campbell (410.14226)
+	Defeated: Margaret Bean, Robert G C Sawers (0.00000)
+	Elected votes: 4080.08557
+	Hopeful votes: 714.36071
+	Defeated votes: 410.14226
+	Nontransferable votes: 205.38908
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000
+Action: Defeat remaining candidates: Graeme Dickson
+	Elected:  Phil Greene (1374.08557)
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Hopeful:  Patrick McAleer (162.73399)
+	Hopeful:  Kenny Smith (154.90285)
+	Hopeful:  John H Stuart (187.20642)
+	Defeated: Graham Campbell (410.14226)
+	Defeated: Graeme Dickson (209.51745)
+	Defeated: Margaret Bean, Robert G C Sawers (0.00000)
+	Elected votes: 4080.08557
+	Hopeful votes: 504.84326
+	Defeated votes: 619.65971
+	Nontransferable votes: 205.38908
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000
+Action: Defeat remaining candidates: Patrick McAleer
+	Elected:  Phil Greene (1374.08557)
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Hopeful:  Kenny Smith (154.90285)
+	Hopeful:  John H Stuart (187.20642)
+	Defeated: Graham Campbell (410.14226)
+	Defeated: Graeme Dickson (209.51745)
+	Defeated: Patrick McAleer (162.73399)
+	Defeated: Margaret Bean, Robert G C Sawers (0.00000)
+	Elected votes: 4080.08557
+	Hopeful votes: 342.10927
+	Defeated votes: 782.39370
+	Nontransferable votes: 205.38908
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000
+Action: Defeat remaining candidates: Kenny Smith
+	Elected:  Phil Greene (1374.08557)
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Hopeful:  John H Stuart (187.20642)
+	Defeated: Graham Campbell (410.14226)
+	Defeated: Graeme Dickson (209.51745)
+	Defeated: Patrick McAleer (162.73399)
+	Defeated: Kenny Smith (154.90285)
+	Defeated: Margaret Bean, Robert G C Sawers (0.00000)
+	Elected votes: 4080.08557
+	Hopeful votes: 187.20642
+	Defeated votes: 937.29655
+	Nontransferable votes: 205.38908
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000
+Action: Defeat remaining candidates: John H Stuart
+	Elected:  Phil Greene (1374.08557)
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Defeated: Graham Campbell (410.14226)
+	Defeated: Graeme Dickson (209.51745)
+	Defeated: Patrick McAleer (162.73399)
+	Defeated: Kenny Smith (154.90285)
+	Defeated: John H Stuart (187.20642)
+	Defeated: Margaret Bean, Robert G C Sawers (0.00000)
+	Elected votes: 4080.08557
+	Hopeful votes: 0.00000
+	Defeated votes: 1124.50297
+	Nontransferable votes: 205.38908
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Phil Greene (1374.08557)
+	Elected:  Allan Stewart (1353.00000)
+	Elected:  James Todd (1353.00000)
+	Defeated: Graham Campbell (410.14226)
+	Defeated: Graeme Dickson (209.51745)
+	Defeated: Patrick McAleer (162.73399)
+	Defeated: Kenny Smith (154.90285)
+	Defeated: John H Stuart (187.20642)
+	Defeated: Margaret Bean, Robert G C Sawers (0.00000)
+	Elected votes: 4080.08557
+	Hopeful votes: 0.00000
+	Defeated votes: 1124.50297
+	Nontransferable votes: 205.38908
+	Residual: 0.02238
+	Total: 5410.00000
+	Surplus: 0.00000

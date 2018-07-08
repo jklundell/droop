@@ -1,0 +1,43 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote
+0	log	Add eligible: Gary Barton
+0	log	Add eligible: Alasdair Duke - Wardrop
+0	log	Add eligible: Fiacra Fullerton
+0	log	Add eligible: Scott Gillespie
+0	log	Add eligible: Paul Graham
+0	log	Add eligible: Danny Houston
+0	log	Add eligible: Kenny Murray
+0	log	Add eligible: George Redmond
+0	log	Add eligible: Ruth Simpson
+0	log	Add eligible: Alison E Thewliss
+0	begin	1300.00000	0.00000	Gary Barton	H	128.00000	Alasdair Duke - Wardrop	H	219.00000	Fiacra Fullerton	H	302.00000	Scott Gillespie	H	245.00000	Paul Graham	H	231.00000	Danny Houston	H	195.00000	Kenny Murray	H	126.00000	George Redmond	H	1982.00000	Ruth Simpson	H	628.00000	Alison E Thewliss	H	1143.00000
+0	elect	1300.00000	0.00000	Gary Barton	H	128.00000	Alasdair Duke - Wardrop	H	219.00000	Fiacra Fullerton	H	302.00000	Scott Gillespie	H	245.00000	Paul Graham	H	231.00000	Danny Houston	H	195.00000	Kenny Murray	H	126.00000	George Redmond	e	1982.00000	Ruth Simpson	H	628.00000	Alison E Thewliss	H	1143.00000
+1	round	New Round
+1	unpend	1300.00000	0.00000	Gary Barton	H	128.00000	Alasdair Duke - Wardrop	H	219.00000	Fiacra Fullerton	H	302.00000	Scott Gillespie	H	245.00000	Paul Graham	H	231.00000	Danny Houston	H	195.00000	Kenny Murray	H	126.00000	George Redmond	E	1982.00000	Ruth Simpson	H	628.00000	Alison E Thewliss	H	1143.00000
+1	transfer	1300.00000	158.62549	Gary Barton	H	130.40863	Alasdair Duke - Wardrop	H	224.84953	Fiacra Fullerton	H	325.39812	Scott Gillespie	H	250.84953	Paul Graham	H	245.79587	Danny Houston	H	217.36585	Kenny Murray	H	134.94634	George Redmond	E	1300.00000	Ruth Simpson	H	1035.05847	Alison E Thewliss	H	1175.68855
+2	round	New Round
+2	defeat	1300.00000	158.62549	Gary Barton	D	130.40863	Alasdair Duke - Wardrop	H	224.84953	Fiacra Fullerton	H	325.39812	Scott Gillespie	H	250.84953	Paul Graham	H	245.79587	Danny Houston	H	217.36585	Kenny Murray	H	134.94634	George Redmond	E	1300.00000	Ruth Simpson	H	1035.05847	Alison E Thewliss	H	1175.68855
+2	transfer	1300.00000	195.31367	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	H	235.19362	Fiacra Fullerton	H	349.74221	Scott Gillespie	H	257.84953	Paul Graham	H	252.79587	Danny Houston	H	220.36585	Kenny Murray	H	140.29043	George Redmond	E	1300.00000	Ruth Simpson	H	1050.74665	Alison E Thewliss	H	1196.68855
+3	round	New Round
+3	defeat	1300.00000	195.31367	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	H	235.19362	Fiacra Fullerton	H	349.74221	Scott Gillespie	H	257.84953	Paul Graham	H	252.79587	Danny Houston	H	220.36585	Kenny Murray	D	140.29043	George Redmond	E	1300.00000	Ruth Simpson	H	1050.74665	Alison E Thewliss	H	1196.68855
+3	transfer	1300.00000	236.06639	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	H	251.22589	Fiacra Fullerton	H	373.77448	Scott Gillespie	H	260.53771	Paul Graham	H	257.82814	Danny Houston	H	225.70994	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1072.12301	Alison E Thewliss	H	1221.72082
+4	round	New Round
+4	defeat	1300.00000	236.06639	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	H	251.22589	Fiacra Fullerton	H	373.77448	Scott Gillespie	H	260.53771	Paul Graham	H	257.82814	Danny Houston	D	225.70994	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1072.12301	Alison E Thewliss	H	1221.72082
+4	transfer	1300.00000	319.32455	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	H	264.91407	Fiacra Fullerton	H	382.49493	Scott Gillespie	H	348.69906	Paul Graham	H	265.20450	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1086.94027	Alison E Thewliss	H	1231.40900
+5	round	New Round
+5	defeat	1300.00000	319.32455	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	264.91407	Fiacra Fullerton	H	382.49493	Scott Gillespie	H	348.69906	Paul Graham	H	265.20450	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1086.94027	Alison E Thewliss	H	1231.40900
+5	transfer	1300.00000	379.73318	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	H	420.83902	Scott Gillespie	H	371.04315	Paul Graham	H	329.26904	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1115.34890	Alison E Thewliss	H	1282.75309
+6	round	New Round
+6	defeat	1300.00000	379.73318	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	H	420.83902	Scott Gillespie	H	371.04315	Paul Graham	D	329.26904	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1115.34890	Alison E Thewliss	H	1282.75309
+6	transfer	1300.00000	493.61498	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	H	446.24765	Scott Gillespie	H	409.10769	Paul Graham	D	0.00000	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1189.88661	Alison E Thewliss	H	1360.12945
+6	elect	1300.00000	493.61498	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	H	446.24765	Scott Gillespie	H	409.10769	Paul Graham	D	0.00000	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1189.88661	Alison E Thewliss	e	1360.12945
+7	round	New Round
+7	unpend	1300.00000	493.61498	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	H	446.24765	Scott Gillespie	H	409.10769	Paul Graham	D	0.00000	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1189.88661	Alison E Thewliss	E	1360.12945
+7	transfer	1300.00000	525.21759	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	H	461.35742	Scott Gillespie	H	412.58571	Paul Graham	D	0.00000	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1199.81406	Alison E Thewliss	E	1300.00000
+8	round	New Round
+8	defeat	1300.00000	525.21759	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	H	461.35742	Scott Gillespie	D	412.58571	Paul Graham	D	0.00000	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1199.81406	Alison E Thewliss	E	1300.00000
+8	transfer	1300.00000	841.22427	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	H	485.84120	Scott Gillespie	D	0.00000	Paul Graham	D	0.00000	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1271.90931	Alison E Thewliss	E	1300.00000
+9	round	New Round
+9	defeat	1300.00000	841.22427	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	D	485.84120	Scott Gillespie	D	0.00000	Paul Graham	D	0.00000	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1271.90931	Alison E Thewliss	E	1300.00000
+9	transfer	1300.00000	1205.10743	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	D	0.00000	Scott Gillespie	D	0.00000	Paul Graham	D	0.00000	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	H	1393.86735	Alison E Thewliss	E	1300.00000
+9	elect	1300.00000	1205.10743	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	D	0.00000	Scott Gillespie	D	0.00000	Paul Graham	D	0.00000	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	E	1393.86735	Alison E Thewliss	E	1300.00000
+X	end	1300.00000	1205.10743	Gary Barton	D	0.00000	Alasdair Duke - Wardrop	D	0.00000	Fiacra Fullerton	D	0.00000	Scott Gillespie	D	0.00000	Paul Graham	D	0.00000	Danny Houston	D	0.00000	Kenny Murray	D	0.00000	George Redmond	E	1300.00000	Ruth Simpson	E	1393.86735	Alison E Thewliss	E	1300.00000

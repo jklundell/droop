@@ -1,0 +1,58 @@
+
+Election: Pollux and Helen should tie
+
+	Droop package: droop v0.11
+	Rule: QPQ
+	Arithmetic: guarded-precision fixed-point decimal arithmetic (9+9 places)
+	Seats: 2
+	Ballots: 9
+	Quota: 3.000000000
+
+	maxDiff: 0  (s/b << geps)
+	geps:    500000000
+	minDiff: 2000000000000000000  (s/b >> geps)
+	guard:   1000000000
+	prec:    1000000000000000000
+
+	Add eligible: Castor
+	Add eligible: Pollux
+	Add eligible: Helen
+Action: Begin Count
+	Hopeful:  Castor (0.000000000)
+	Hopeful:  Pollux (0.000000000)
+	Hopeful:  Helen (0.000000000)
+	Quota: 3.000000000
+Round 1:
+Action: Elect high quotient: Castor
+	Elected:  Castor (5.000000000)
+	Hopeful:  Pollux (1.000000000)
+	Hopeful:  Helen (3.000000000)
+	Quota: 3.000000000
+Action: Transfer elected: Castor (5.000000000)
+	Elected:  Castor (5.000000000)
+	Hopeful:  Pollux (1.000000000)
+	Hopeful:  Helen (3.000000000)
+	Quota: 3.000000000
+Round 2:
+Action: Break tie by lot (smallest quotient): [Pollux, Helen] -> Pollux
+	Quota: 3.000000000
+Action: Defeat low quotient: Pollux
+	Elected:  Castor (5.000000000)
+	Hopeful:  Helen (3.000000000)
+	Defeated: Pollux (3.000000000)
+	Quota: 3.000000000
+Action: Transfer defeated: Pollux
+	Elected:  Castor (5.000000000)
+	Hopeful:  Helen (3.000000000)
+	Defeated: Pollux (3.000000000)
+	Quota: 3.000000000
+Action: Elect remaining candidates: Helen
+	Elected:  Castor (5.000000000)
+	Elected:  Helen (3.000000000)
+	Defeated: Pollux (3.000000000)
+	Quota: 3.000000000
+Action: Count Complete
+	Elected:  Castor (5.000000000)
+	Elected:  Helen (3.000000000)
+	Defeated: Pollux (3.000000000)
+	Quota: 3.000000000

@@ -1,0 +1,385 @@
+
+Election: DRUMCHAPEL-ANNIESLAND
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 8680
+	Quota: 1737.00000
+
+	Add eligible: Paul Carey
+	Add eligible: Eileen Margaret Cartner Duke
+	Add eligible: Mike Dyer
+	Add eligible: Jonathan Findlay
+	Add eligible: Bobby Howie
+	Add eligible: Bill Kidd
+	Add eligible: Alan Lee
+	Add eligible: Susan McCourt
+	Add eligible: Esther Nixon
+	Add eligible: Steven Purcell
+Action: Begin Count
+	Hopeful:  Paul Carey (2284.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (260.00000)
+	Hopeful:  Mike Dyer (148.00000)
+	Hopeful:  Jonathan Findlay (1102.00000)
+	Hopeful:  Bobby Howie (177.00000)
+	Hopeful:  Bill Kidd (1869.00000)
+	Hopeful:  Alan Lee (349.00000)
+	Hopeful:  Susan McCourt (412.00000)
+	Hopeful:  Esther Nixon (223.00000)
+	Hopeful:  Steven Purcell (1856.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8680.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Paul Carey
+	Pending:  Paul Carey (2284.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (260.00000)
+	Hopeful:  Mike Dyer (148.00000)
+	Hopeful:  Jonathan Findlay (1102.00000)
+	Hopeful:  Bobby Howie (177.00000)
+	Hopeful:  Bill Kidd (1869.00000)
+	Hopeful:  Alan Lee (349.00000)
+	Hopeful:  Susan McCourt (412.00000)
+	Hopeful:  Esther Nixon (223.00000)
+	Hopeful:  Steven Purcell (1856.00000)
+	Elected votes: 0.00000
+	Pending votes: 2284.00000
+	Hopeful votes: 6396.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Bill Kidd
+	Pending:  Paul Carey (2284.00000)
+	Pending:  Bill Kidd (1869.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (260.00000)
+	Hopeful:  Mike Dyer (148.00000)
+	Hopeful:  Jonathan Findlay (1102.00000)
+	Hopeful:  Bobby Howie (177.00000)
+	Hopeful:  Alan Lee (349.00000)
+	Hopeful:  Susan McCourt (412.00000)
+	Hopeful:  Esther Nixon (223.00000)
+	Hopeful:  Steven Purcell (1856.00000)
+	Elected votes: 0.00000
+	Pending votes: 4153.00000
+	Hopeful votes: 4527.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Steven Purcell
+	Pending:  Paul Carey (2284.00000)
+	Pending:  Bill Kidd (1869.00000)
+	Pending:  Steven Purcell (1856.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (260.00000)
+	Hopeful:  Mike Dyer (148.00000)
+	Hopeful:  Jonathan Findlay (1102.00000)
+	Hopeful:  Bobby Howie (177.00000)
+	Hopeful:  Alan Lee (349.00000)
+	Hopeful:  Susan McCourt (412.00000)
+	Hopeful:  Esther Nixon (223.00000)
+	Elected votes: 0.00000
+	Pending votes: 6009.00000
+	Hopeful votes: 2671.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8680.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Paul Carey
+	Elected votes: 2284.00000
+	Pending votes: 3725.00000
+	Hopeful votes: 2671.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8680.00000
+	Surplus: 798.00000
+Action: Surplus transferred: Paul Carey (547.00000)
+	Elected:  Paul Carey (1737.00000)
+	Pending:  Bill Kidd (1869.00000)
+	Pending:  Steven Purcell (1856.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (283.23053)
+	Hopeful:  Mike Dyer (175.06237)
+	Hopeful:  Jonathan Findlay (1374.77911)
+	Hopeful:  Bobby Howie (184.18470)
+	Hopeful:  Alan Lee (364.56685)
+	Hopeful:  Susan McCourt (419.66368)
+	Hopeful:  Esther Nixon (243.59614)
+	Elected votes: 1737.00000
+	Pending votes: 3725.00000
+	Hopeful votes: 3045.08338
+	Nontransferable votes: 172.91178
+	Residual: 0.00484
+	Total: 8680.00000
+	Surplus: 798.00000
+Round 2:
+Action: Transfer high surplus: Bill Kidd
+	Elected votes: 3606.00000
+	Pending votes: 1856.00000
+	Hopeful votes: 3045.08338
+	Nontransferable votes: 172.91178
+	Residual: 0.00484
+	Total: 8680.00000
+	Surplus: 251.00000
+Action: Surplus transferred: Bill Kidd (132.00000)
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Pending:  Steven Purcell (1856.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (300.67367)
+	Hopeful:  Mike Dyer (186.92653)
+	Hopeful:  Jonathan Findlay (1385.01901)
+	Hopeful:  Bobby Howie (188.28066)
+	Hopeful:  Alan Lee (379.96201)
+	Hopeful:  Susan McCourt (425.73700)
+	Hopeful:  Esther Nixon (259.90936)
+	Elected votes: 3474.00000
+	Pending votes: 1856.00000
+	Hopeful votes: 3126.50824
+	Nontransferable votes: 223.47570
+	Residual: 0.01606
+	Total: 8680.00000
+	Surplus: 251.00000
+Round 3:
+Action: Transfer high surplus: Steven Purcell
+	Elected votes: 5330.00000
+	Hopeful votes: 3126.50824
+	Nontransferable votes: 223.47570
+	Residual: 0.01606
+	Total: 8680.00000
+	Surplus: 119.00000
+Action: Surplus transferred: Steven Purcell (119.00000)
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (305.09726)
+	Hopeful:  Mike Dyer (191.41423)
+	Hopeful:  Jonathan Findlay (1445.34652)
+	Hopeful:  Bobby Howie (190.13985)
+	Hopeful:  Alan Lee (385.28314)
+	Hopeful:  Susan McCourt (428.55784)
+	Hopeful:  Esther Nixon (263.62774)
+	Elected votes: 5211.00000
+	Hopeful votes: 3209.46658
+	Nontransferable votes: 259.50552
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 119.00000
+Round 4:
+Action: Defeat low candidate: Bobby Howie
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (305.09726)
+	Hopeful:  Mike Dyer (191.41423)
+	Hopeful:  Jonathan Findlay (1445.34652)
+	Hopeful:  Alan Lee (385.28314)
+	Hopeful:  Susan McCourt (428.55784)
+	Hopeful:  Esther Nixon (263.62774)
+	Defeated: Bobby Howie (190.13985)
+	Elected votes: 5211.00000
+	Hopeful votes: 3019.32673
+	Defeated votes: 190.13985
+	Nontransferable votes: 259.50552
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Bobby Howie
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (319.17117)
+	Hopeful:  Mike Dyer (197.86887)
+	Hopeful:  Jonathan Findlay (1455.71518)
+	Hopeful:  Alan Lee (400.61766)
+	Hopeful:  Susan McCourt (517.95996)
+	Hopeful:  Esther Nixon (267.07909)
+	Defeated: Bobby Howie (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 3158.41193
+	Nontransferable votes: 310.56017
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Mike Dyer
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (319.17117)
+	Hopeful:  Jonathan Findlay (1455.71518)
+	Hopeful:  Alan Lee (400.61766)
+	Hopeful:  Susan McCourt (517.95996)
+	Hopeful:  Esther Nixon (267.07909)
+	Defeated: Mike Dyer (197.86887)
+	Defeated: Bobby Howie (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 2960.54306
+	Defeated votes: 197.86887
+	Nontransferable votes: 310.56017
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Mike Dyer
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (361.95837)
+	Hopeful:  Jonathan Findlay (1476.02210)
+	Hopeful:  Alan Lee (415.48161)
+	Hopeful:  Susan McCourt (520.72142)
+	Hopeful:  Esther Nixon (321.65375)
+	Defeated: Mike Dyer, Bobby Howie (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 3095.83725
+	Nontransferable votes: 373.13485
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Esther Nixon
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (361.95837)
+	Hopeful:  Jonathan Findlay (1476.02210)
+	Hopeful:  Alan Lee (415.48161)
+	Hopeful:  Susan McCourt (520.72142)
+	Defeated: Esther Nixon (321.65375)
+	Defeated: Mike Dyer, Bobby Howie (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 2774.18350
+	Defeated votes: 321.65375
+	Nontransferable votes: 373.13485
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Esther Nixon
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Eileen Margaret Cartner Duke (428.04551)
+	Hopeful:  Jonathan Findlay (1524.87540)
+	Hopeful:  Alan Lee (454.82112)
+	Hopeful:  Susan McCourt (535.08591)
+	Defeated: Mike Dyer, Bobby Howie, Esther Nixon (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 2942.82794
+	Nontransferable votes: 526.14416
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: Eileen Margaret Cartner Duke
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Jonathan Findlay (1524.87540)
+	Hopeful:  Alan Lee (454.82112)
+	Hopeful:  Susan McCourt (535.08591)
+	Defeated: Eileen Margaret Cartner Duke (428.04551)
+	Defeated: Mike Dyer, Bobby Howie, Esther Nixon (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 2514.78243
+	Defeated votes: 428.04551
+	Nontransferable votes: 526.14416
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Eileen Margaret Cartner Duke
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Jonathan Findlay (1589.53779)
+	Hopeful:  Alan Lee (592.32585)
+	Hopeful:  Susan McCourt (558.44559)
+	Defeated: Eileen Margaret Cartner Duke, Mike Dyer, Bobby Howie, Esther Nixon (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 2740.30923
+	Nontransferable votes: 728.66287
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Round 8:
+Action: Defeat low candidate: Susan McCourt
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Jonathan Findlay (1589.53779)
+	Hopeful:  Alan Lee (592.32585)
+	Defeated: Susan McCourt (558.44559)
+	Defeated: Eileen Margaret Cartner Duke, Mike Dyer, Bobby Howie, Esther Nixon (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 2181.86364
+	Defeated votes: 558.44559
+	Nontransferable votes: 728.66287
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Susan McCourt
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Jonathan Findlay (1640.21076)
+	Hopeful:  Alan Lee (755.13556)
+	Defeated: Eileen Margaret Cartner Duke, Mike Dyer, Bobby Howie, Susan McCourt, Esther Nixon (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 2395.34632
+	Nontransferable votes: 1073.62578
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Round 9:
+Action: Defeat low candidate: Alan Lee
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Jonathan Findlay (1640.21076)
+	Defeated: Alan Lee (755.13556)
+	Defeated: Eileen Margaret Cartner Duke, Mike Dyer, Bobby Howie, Susan McCourt, Esther Nixon (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 1640.21076
+	Defeated votes: 755.13556
+	Nontransferable votes: 1073.62578
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Alan Lee
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Hopeful:  Jonathan Findlay (1836.04397)
+	Defeated: Eileen Margaret Cartner Duke, Mike Dyer, Bobby Howie, Alan Lee, Susan McCourt, Esther Nixon (0.00000)
+	Elected votes: 5211.00000
+	Hopeful votes: 1836.04397
+	Nontransferable votes: 1632.92813
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Jonathan Findlay
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Jonathan Findlay (1836.04397)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Defeated: Eileen Margaret Cartner Duke, Mike Dyer, Bobby Howie, Alan Lee, Susan McCourt, Esther Nixon (0.00000)
+	Elected votes: 7047.04397
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1632.92813
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Paul Carey (1737.00000)
+	Elected:  Jonathan Findlay (1836.04397)
+	Elected:  Bill Kidd (1737.00000)
+	Elected:  Steven Purcell (1737.00000)
+	Defeated: Eileen Margaret Cartner Duke, Mike Dyer, Bobby Howie, Alan Lee, Susan McCourt, Esther Nixon (0.00000)
+	Elected votes: 7047.04397
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1632.92813
+	Residual: 0.02790
+	Total: 8680.00000
+	Surplus: 0.00000

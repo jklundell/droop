@@ -1,0 +1,543 @@
+{
+  "actions": [
+    {
+      "msg": "Add eligible: A", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: B", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: C", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: D", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "5.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.500000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "1.500000000000000000"
+        }
+      }, 
+      "msg": "Begin Count", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 0, 
+      "surplus": "0.000000000000000000", 
+      "tag": "begin", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "5.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.500000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "1.500000000000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 1, 
+      "surplus": "0.000000000000000000", 
+      "tag": "round", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "1.000000000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "5.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.500000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "1.500000000000000000"
+        }
+      }, 
+      "msg": "Elect: A", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 1, 
+      "surplus": "0.000000000000000000", 
+      "tag": "elect", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "1.000000000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "5.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.500000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "1.500000000000000000"
+        }
+      }, 
+      "msg": "Iterate (elected)", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 1, 
+      "surplus": "1.333333333333333333", 
+      "tag": "iterate", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "1.000000000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "5.000000000000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.500000000000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.000000000000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "1.500000000000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 2, 
+      "surplus": "1.333333333333333333", 
+      "tag": "round", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.733333333333333333", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.666666666666666667"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "3.166666666666666667"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.666666666666666667"
+        }, 
+        "4": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "1.500000000000000000"
+        }
+      }, 
+      "msg": "Iterate (omega)", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000000000", 
+      "tag": "iterate", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.733333333333333333", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.666666666666666667"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "3.166666666666666667"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "2.666666666666666667"
+        }, 
+        "4": {
+          "code": "D", 
+          "kf": "1.000000000000000000", 
+          "state": "defeated", 
+          "vote": "1.500000000000000000"
+        }
+      }, 
+      "msg": "Defeat (surplus 0.000000000000000000 < omega): D", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 2, 
+      "surplus": "0.000000000000000000", 
+      "tag": "defeat", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.733333333333333333", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.666666666666666667"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "3.166666666666666667"
+        }, 
+        "3": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "4.166666666666666667"
+        }, 
+        "4": {
+          "code": "D", 
+          "kf": "0.000000000000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 3, 
+      "surplus": "0.000000000000000000", 
+      "tag": "round", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.733333333333333333", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.666666666666666667"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "3.166666666666666667"
+        }, 
+        "3": {
+          "code": "E", 
+          "kf": "1.000000000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "4.166666666666666667"
+        }, 
+        "4": {
+          "code": "D", 
+          "kf": "0.000000000000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000000000000"
+        }
+      }, 
+      "msg": "Elect: C", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 3, 
+      "surplus": "0.000000000000000000", 
+      "tag": "elect", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.733333333333333333", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.666666666666666667"
+        }, 
+        "2": {
+          "code": "H", 
+          "kf": "1.000000000000000000", 
+          "state": "hopeful", 
+          "vote": "3.166666666666666667"
+        }, 
+        "3": {
+          "code": "E", 
+          "kf": "1.000000000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "4.166666666666666667"
+        }, 
+        "4": {
+          "code": "D", 
+          "kf": "0.000000000000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000000000000"
+        }
+      }, 
+      "msg": "Iterate (elected)", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 3, 
+      "surplus": "0.500000000000000000", 
+      "tag": "iterate", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.733333333333333333", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.666666666666666667"
+        }, 
+        "2": {
+          "code": "D", 
+          "kf": "1.000000000000000000", 
+          "state": "defeated", 
+          "vote": "3.166666666666666667"
+        }, 
+        "3": {
+          "code": "E", 
+          "kf": "1.000000000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "4.166666666666666667"
+        }, 
+        "4": {
+          "code": "D", 
+          "kf": "0.000000000000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000000000000"
+        }
+      }, 
+      "msg": "Defeat remaining: B", 
+      "quota": "3.666666666666666667", 
+      "residual": "0.000000000000000000", 
+      "round": 3, 
+      "surplus": "0.500000000000000000", 
+      "tag": "defeat", 
+      "votes": "11.000000000000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "kf": "0.733333333333333333", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.666666666666666667"
+        }, 
+        "2": {
+          "code": "D", 
+          "kf": "0.000000000000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "kf": "1.000000000000000000", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "5.333333333333333333"
+        }, 
+        "4": {
+          "code": "D", 
+          "kf": "0.000000000000000000", 
+          "state": "defeated", 
+          "vote": "0.000000000000000000"
+        }
+      }, 
+      "msg": "Count Complete", 
+      "quota": "3.666666666666666667", 
+      "residual": "2.000000000000000000", 
+      "round": 3, 
+      "surplus": "0.500000000000000000", 
+      "tag": "end", 
+      "votes": "9.000000000000000000"
+    }
+  ], 
+  "arithmetic_info": "guarded-precision fixed-point decimal arithmetic (18+9 places)", 
+  "arithmetic_name": "guarded", 
+  "arithmetic_report": "\tmaxDiff: 0  (s/b << geps)\n\tgeps:    500000000\n\tminDiff: 1000000000000000000  (s/b >> geps)\n\tguard:   1000000000\n\tprec:    1000000000000000000000000000\n\n", 
+  "cdict": {
+    "1": {
+      "ballot_order": 1, 
+      "cid": 1, 
+      "name": "A", 
+      "nick": "a", 
+      "tie_order": 1
+    }, 
+    "2": {
+      "ballot_order": 2, 
+      "cid": 2, 
+      "name": "B", 
+      "nick": "b", 
+      "tie_order": 2
+    }, 
+    "3": {
+      "ballot_order": 3, 
+      "cid": 3, 
+      "name": "C", 
+      "nick": "c", 
+      "tie_order": 3
+    }, 
+    "4": {
+      "ballot_order": 4, 
+      "cid": 4, 
+      "name": "D", 
+      "nick": "d", 
+      "tie_order": 4
+    }
+  }, 
+  "cids": [
+    1, 
+    2, 
+    3, 
+    4
+  ], 
+  "droop_name": "droop", 
+  "droop_version": "0.11", 
+  "ecids": [
+    1, 
+    2, 
+    3, 
+    4
+  ], 
+  "method": "meek", 
+  "nballots": 11, 
+  "omega": "0.000000001000000000", 
+  "options": {
+    "allowed": {
+      "defeat_batch": [
+        "none", 
+        "safe"
+      ]
+    }, 
+    "cmd": {
+      "rule": "meek"
+    }, 
+    "default": {
+      "arithmetic": "guarded", 
+      "defeat_batch": "safe", 
+      "display": 18, 
+      "guard": 9, 
+      "omega": 9, 
+      "precision": 18
+    }, 
+    "file_options": {}, 
+    "force": {}, 
+    "options": {
+      "arithmetic": "guarded", 
+      "defeat_batch": "safe", 
+      "display": 18, 
+      "guard": 9, 
+      "omega": 9, 
+      "precision": 18, 
+      "rule": "meek"
+    }
+  }, 
+  "quota": "3.666666666666666667", 
+  "rule_info": "Meek Parametric (omega = 1/10^9)", 
+  "rule_name": "meek", 
+  "seats": 2, 
+  "title": "simple election with equal rankings"
+}

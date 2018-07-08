@@ -1,0 +1,85 @@
+
+Election: Pollux and Helen should tie
+
+	Droop package: droop v0.11
+	Rule: Warren Parametric (omega = 1/10^9)
+	Arithmetic: guarded-precision fixed-point decimal arithmetic (18+9 places)
+	Seats: 2
+	Ballots: 6
+	Quota: 2.000000000000000000
+	Omega: 0.000000001000000000
+
+	maxDiff: 0  (s/b << geps)
+	geps:    500000000
+	minDiff: 1000000000000000000  (s/b >> geps)
+	guard:   1000000000
+	prec:    1000000000000000000000000000
+
+	Add eligible: Castor
+	Add eligible: Pollux
+	Add eligible: Helen
+Action: Begin Count
+	Hopeful:  Castor (4.000000000000000000)
+	Hopeful:  Pollux (0.000000000000000000)
+	Hopeful:  Helen (2.000000000000000000)
+	Quota: 2.000000000000000000
+	Votes: 6.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Round 1:
+Action: Elect: Castor
+	Elected:  Castor (4.000000000000000000)
+	Hopeful:  Pollux (0.000000000000000000)
+	Hopeful:  Helen (2.000000000000000000)
+	Quota: 2.000000000000000000
+	Votes: 6.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Iterate (elected)
+	Quota: 2.000000000000000000
+	Votes: 6.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 2.000000000000000000
+Round 2:
+Action: Iterate (omega)
+	Quota: 2.000000000000000000
+	Votes: 6.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Break tie (defeat): [Pollux, Helen] -> Helen
+	Quota: 2.000000000000000000
+	Votes: 6.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Defeat (surplus 0.000000000000000000 < omega): Helen
+	Elected:  Castor (2.000000000000000000)
+	Hopeful:  Pollux (2.000000000000000000)
+	Defeated: Helen (2.000000000000000000)
+	Quota: 2.000000000000000000
+	Votes: 6.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Elect remaining: Pollux
+	Elected:  Castor (2.000000000000000000)
+	Elected:  Pollux (2.000000000000000000)
+	Defeated: Helen (0.000000000000000000)
+	Quota: 2.000000000000000000
+	Votes: 4.000000000000000000
+	Residual: 2.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Count Complete
+	Elected:  Castor (2.000000000000000000)
+	Elected:  Pollux (2.000000000000000000)
+	Defeated: Helen (0.000000000000000000)
+	Quota: 2.000000000000000000
+	Votes: 4.000000000000000000
+	Residual: 2.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000

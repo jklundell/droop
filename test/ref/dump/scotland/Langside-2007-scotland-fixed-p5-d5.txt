@@ -1,0 +1,35 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote
+0	log	Add eligible: Paul Coleshill
+0	log	Add eligible: James Dornan
+0	log	Add eligible: Martin Frain
+0	log	Add eligible: Archie Graham
+0	log	Add eligible: Margaret McCafferty
+0	log	Add eligible: Neil Sloan McDonald
+0	log	Add eligible: Russell Munn
+0	log	Add eligible: James Nesbitt
+0	begin	2334.00000	0.00000	Paul Coleshill	H	1207.00000	James Dornan	H	2522.00000	Martin Frain	H	467.00000	Archie Graham	H	2222.00000	Margaret McCafferty	H	853.00000	Neil Sloan McDonald	H	891.00000	Russell Munn	H	993.00000	James Nesbitt	H	179.00000
+0	elect	2334.00000	0.00000	Paul Coleshill	H	1207.00000	James Dornan	e	2522.00000	Martin Frain	H	467.00000	Archie Graham	H	2222.00000	Margaret McCafferty	H	853.00000	Neil Sloan McDonald	H	891.00000	Russell Munn	H	993.00000	James Nesbitt	H	179.00000
+1	round	New Round
+1	unpend	2334.00000	0.00000	Paul Coleshill	H	1207.00000	James Dornan	E	2522.00000	Martin Frain	H	467.00000	Archie Graham	H	2222.00000	Margaret McCafferty	H	853.00000	Neil Sloan McDonald	H	891.00000	Russell Munn	H	993.00000	James Nesbitt	H	179.00000
+1	transfer	2334.00000	48.22738	Paul Coleshill	H	1243.37552	James Dornan	E	2334.00000	Martin Frain	H	492.41814	Archie Graham	H	2241.15678	Margaret McCafferty	H	859.41044	Neil Sloan McDonald	H	924.61754	Russell Munn	H	1003.43560	James Nesbitt	H	187.34848
+2	round	New Round
+2	defeat	2334.00000	48.22738	Paul Coleshill	H	1243.37552	James Dornan	E	2334.00000	Martin Frain	H	492.41814	Archie Graham	H	2241.15678	Margaret McCafferty	H	859.41044	Neil Sloan McDonald	H	924.61754	Russell Munn	H	1003.43560	James Nesbitt	D	187.34848
+2	transfer	2334.00000	86.34548	Paul Coleshill	H	1264.64270	James Dornan	E	2334.00000	Martin Frain	H	541.80342	Archie Graham	H	2255.75310	Margaret McCafferty	H	868.41044	Neil Sloan McDonald	H	974.30098	Russell Munn	H	1008.73376	James Nesbitt	D	0.00000
+3	round	New Round
+3	defeat	2334.00000	86.34548	Paul Coleshill	H	1264.64270	James Dornan	E	2334.00000	Martin Frain	D	541.80342	Archie Graham	H	2255.75310	Margaret McCafferty	H	868.41044	Neil Sloan McDonald	H	974.30098	Russell Munn	H	1008.73376	James Nesbitt	D	0.00000
+3	transfer	2334.00000	250.29028	Paul Coleshill	H	1338.22062	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	H	2330.10740	Margaret McCafferty	H	902.23038	Neil Sloan McDonald	H	1154.51296	Russell Munn	H	1024.62824	James Nesbitt	D	0.00000
+4	round	New Round
+4	defeat	2334.00000	250.29028	Paul Coleshill	H	1338.22062	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	H	2330.10740	Margaret McCafferty	D	902.23038	Neil Sloan McDonald	H	1154.51296	Russell Munn	H	1024.62824	James Nesbitt	D	0.00000
+4	transfer	2334.00000	410.22832	Paul Coleshill	H	1405.48780	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	H	2917.64176	Margaret McCafferty	D	0.00000	Neil Sloan McDonald	H	1214.55652	Russell Munn	H	1052.07548	James Nesbitt	D	0.00000
+4	elect	2334.00000	410.22832	Paul Coleshill	H	1405.48780	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	e	2917.64176	Margaret McCafferty	D	0.00000	Neil Sloan McDonald	H	1214.55652	Russell Munn	H	1052.07548	James Nesbitt	D	0.00000
+5	round	New Round
+5	unpend	2334.00000	410.22832	Paul Coleshill	H	1405.48780	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	E	2917.64176	Margaret McCafferty	D	0.00000	Neil Sloan McDonald	H	1214.55652	Russell Munn	H	1052.07548	James Nesbitt	D	0.00000
+5	transfer	2334.00000	719.43012	Paul Coleshill	H	1547.51043	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	E	2334.00000	Margaret McCafferty	D	0.00000	Neil Sloan McDonald	H	1310.02929	Russell Munn	H	1088.99408	James Nesbitt	D	0.00000
+6	round	New Round
+6	defeat	2334.00000	719.43012	Paul Coleshill	H	1547.51043	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	E	2334.00000	Margaret McCafferty	D	0.00000	Neil Sloan McDonald	H	1310.02929	Russell Munn	D	1088.99408	James Nesbitt	D	0.00000
+6	transfer	2334.00000	1241.20209	Paul Coleshill	H	1961.06802	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	E	2334.00000	Margaret McCafferty	D	0.00000	Neil Sloan McDonald	H	1463.69381	Russell Munn	D	0.00000	James Nesbitt	D	0.00000
+7	round	New Round
+7	defeat	2334.00000	1241.20209	Paul Coleshill	H	1961.06802	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	E	2334.00000	Margaret McCafferty	D	0.00000	Neil Sloan McDonald	D	1463.69381	Russell Munn	D	0.00000	James Nesbitt	D	0.00000
+7	transfer	2334.00000	1982.43662	Paul Coleshill	H	2683.52730	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	E	2334.00000	Margaret McCafferty	D	0.00000	Neil Sloan McDonald	D	0.00000	Russell Munn	D	0.00000	James Nesbitt	D	0.00000
+7	elect	2334.00000	1982.43662	Paul Coleshill	E	2683.52730	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	E	2334.00000	Margaret McCafferty	D	0.00000	Neil Sloan McDonald	D	0.00000	Russell Munn	D	0.00000	James Nesbitt	D	0.00000
+X	end	2334.00000	1982.43662	Paul Coleshill	E	2683.52730	James Dornan	E	2334.00000	Martin Frain	D	0.00000	Archie Graham	E	2334.00000	Margaret McCafferty	D	0.00000	Neil Sloan McDonald	D	0.00000	Russell Munn	D	0.00000	James Nesbitt	D	0.00000

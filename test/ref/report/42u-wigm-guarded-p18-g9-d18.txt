@@ -1,0 +1,107 @@
+
+Election: Pøllüx and Hélen should tie
+
+	Droop package: droop v0.11
+	Rule: Generic Weighted Inclusive Gregory Method (WIGM)
+	Arithmetic: guarded-precision fixed-point decimal arithmetic (18+9 places)
+	Seats: 2
+	Ballots: 6
+	Quota: 2.000000000000000000
+
+	maxDiff: 0  (s/b << geps)
+	geps:    500000000
+	minDiff: 1000000000000000000000000000  (s/b >> geps)
+	guard:   1000000000
+	prec:    1000000000000000000000000000
+
+	Add eligible: Cåstor
+	Add eligible: Pøllüx
+	Add eligible: Hélen
+Action: Begin Count
+	Hopeful:  Cåstor (4.000000000000000000)
+	Hopeful:  Pøllüx (0.000000000000000000)
+	Hopeful:  Hélen (2.000000000000000000)
+	Elected votes: 0.000000000000000000
+	Hopeful votes: 6.000000000000000000
+	Nontransferable votes: 0.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Round 1:
+Action: Elect, transfer pending: Cåstor
+	Pending:  Cåstor (4.000000000000000000)
+	Hopeful:  Pøllüx (0.000000000000000000)
+	Hopeful:  Hélen (2.000000000000000000)
+	Elected votes: 0.000000000000000000
+	Pending votes: 4.000000000000000000
+	Hopeful votes: 2.000000000000000000
+	Nontransferable votes: 0.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Transfer high surplus: Cåstor
+	Elected votes: 4.000000000000000000
+	Hopeful votes: 2.000000000000000000
+	Nontransferable votes: 0.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Surplus transferred: Cåstor (2.000000000000000000)
+	Elected:  Cåstor (2.000000000000000000)
+	Hopeful:  Pøllüx (2.000000000000000000)
+	Hopeful:  Hélen (2.000000000000000000)
+	Elected votes: 2.000000000000000000
+	Hopeful votes: 4.000000000000000000
+	Nontransferable votes: 0.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Round 2:
+Action: Break tie (defeat): [Pøllüx, Hélen] -> Pøllüx
+	Elected votes: 2.000000000000000000
+	Hopeful votes: 4.000000000000000000
+	Nontransferable votes: 0.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Defeat: Pøllüx
+	Elected:  Cåstor (2.000000000000000000)
+	Hopeful:  Hélen (2.000000000000000000)
+	Defeated: Pøllüx (2.000000000000000000)
+	Elected votes: 2.000000000000000000
+	Hopeful votes: 2.000000000000000000
+	Defeated votes: 2.000000000000000000
+	Nontransferable votes: 0.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Transfer defeated: Pøllüx
+	Elected:  Cåstor (2.000000000000000000)
+	Hopeful:  Hélen (2.000000000000000000)
+	Defeated: Pøllüx (0.000000000000000000)
+	Elected votes: 2.000000000000000000
+	Hopeful votes: 2.000000000000000000
+	Nontransferable votes: 2.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Elect remaining: Hélen
+	Elected:  Cåstor (2.000000000000000000)
+	Elected:  Hélen (2.000000000000000000)
+	Defeated: Pøllüx (0.000000000000000000)
+	Elected votes: 4.000000000000000000
+	Hopeful votes: 0.000000000000000000
+	Nontransferable votes: 2.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000
+Action: Count Complete
+	Elected:  Cåstor (2.000000000000000000)
+	Elected:  Hélen (2.000000000000000000)
+	Defeated: Pøllüx (0.000000000000000000)
+	Elected votes: 4.000000000000000000
+	Hopeful votes: 0.000000000000000000
+	Nontransferable votes: 2.000000000000000000
+	Residual: 0.000000000000000000
+	Total: 6.000000000000000000
+	Surplus: 0.000000000000000000

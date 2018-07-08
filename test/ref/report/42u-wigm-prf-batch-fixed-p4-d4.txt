@@ -1,0 +1,66 @@
+
+Election: Pøllüx and Hélen should tie
+
+	Droop package: droop v0.11
+	Rule: PR Foundation WIGM Reference (defeat sure losers)
+	Arithmetic: fixed-point decimal arithmetic (4 places)
+	Seats: 2
+	Ballots: 6
+	Quota: 2.0001
+
+	Add eligible: Cåstor
+	Add eligible: Pøllüx
+	Add eligible: Hélen
+Action: Begin Count
+	Hopeful:  Cåstor (4.0000)
+	Hopeful:  Pøllüx (0.0000)
+	Hopeful:  Hélen (2.0000)
+	Elected votes: 0.0000
+	Hopeful votes: 6.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 6.0000
+	Surplus: 0.0000
+Round 1:
+Action: Elect, transfer pending: Cåstor
+	Pending:  Cåstor (4.0000)
+	Hopeful:  Pøllüx (0.0000)
+	Hopeful:  Hélen (2.0000)
+	Elected votes: 0.0000
+	Pending votes: 4.0000
+	Hopeful votes: 2.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 6.0000
+	Surplus: 0.0000
+Action: Defeat sure loser: Pøllüx
+	Pending:  Cåstor (4.0000)
+	Hopeful:  Hélen (2.0000)
+	Defeated: Pøllüx (0.0000)
+	Elected votes: 0.0000
+	Pending votes: 4.0000
+	Hopeful votes: 2.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 6.0000
+	Surplus: 0.0000
+Action: Elect remaining: Hélen
+	Elected:  Cåstor (4.0000)
+	Elected:  Hélen (2.0000)
+	Defeated: Pøllüx (0.0000)
+	Elected votes: 6.0000
+	Hopeful votes: 0.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 6.0000
+	Surplus: 0.0000
+Action: Count Complete
+	Elected:  Cåstor (4.0000)
+	Elected:  Hélen (2.0000)
+	Defeated: Pøllüx (0.0000)
+	Elected votes: 6.0000
+	Hopeful votes: 0.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 6.0000
+	Surplus: 0.0000

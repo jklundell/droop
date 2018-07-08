@@ -1,0 +1,33 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote
+0	log	Add eligible: Margaret Bean
+0	log	Add eligible: Graham Campbell
+0	log	Add eligible: Graeme Dickson
+0	log	Add eligible: Phil Greene
+0	log	Add eligible: Patrick McAleer
+0	log	Add eligible: Robert G C Sawers
+0	log	Add eligible: Kenny Smith
+0	log	Add eligible: Allan Stewart
+0	log	Add eligible: John H Stuart
+0	log	Add eligible: James Todd
+0	begin	1353.00000	0.00000	Margaret Bean	H	135.00000	Graham Campbell	H	339.00000	Graeme Dickson	H	173.00000	Phil Greene	H	1300.00000	Patrick McAleer	H	134.00000	Robert G C Sawers	H	85.00000	Kenny Smith	H	135.00000	Allan Stewart	H	1752.00000	John H Stuart	H	168.00000	James Todd	H	1189.00000
+0	elect	1353.00000	0.00000	Margaret Bean	H	135.00000	Graham Campbell	H	339.00000	Graeme Dickson	H	173.00000	Phil Greene	H	1300.00000	Patrick McAleer	H	134.00000	Robert G C Sawers	H	85.00000	Kenny Smith	H	135.00000	Allan Stewart	e	1752.00000	John H Stuart	H	168.00000	James Todd	H	1189.00000
+1	round	New Round
+1	unpend	1353.00000	0.00000	Margaret Bean	H	135.00000	Graham Campbell	H	339.00000	Graeme Dickson	H	173.00000	Phil Greene	H	1300.00000	Patrick McAleer	H	134.00000	Robert G C Sawers	H	85.00000	Kenny Smith	H	135.00000	Allan Stewart	E	1752.00000	John H Stuart	H	168.00000	James Todd	H	1189.00000
+1	transfer	1353.00000	82.89372	Margaret Bean	H	139.78233	Graham Campbell	H	351.75288	Graeme Dickson	H	176.41595	Phil Greene	H	1327.09987	Patrick McAleer	H	140.14871	Robert G C Sawers	H	86.82184	Kenny Smith	H	137.50503	Allan Stewart	E	1353.00000	John H Stuart	H	176.88147	James Todd	H	1437.68116
+1	elect	1353.00000	82.89372	Margaret Bean	H	139.78233	Graham Campbell	H	351.75288	Graeme Dickson	H	176.41595	Phil Greene	H	1327.09987	Patrick McAleer	H	140.14871	Robert G C Sawers	H	86.82184	Kenny Smith	H	137.50503	Allan Stewart	E	1353.00000	John H Stuart	H	176.88147	James Todd	e	1437.68116
+2	round	New Round
+2	unpend	1353.00000	82.89372	Margaret Bean	H	139.78233	Graham Campbell	H	351.75288	Graeme Dickson	H	176.41595	Phil Greene	H	1327.09987	Patrick McAleer	H	140.14871	Robert G C Sawers	H	86.82184	Kenny Smith	H	137.50503	Allan Stewart	E	1353.00000	John H Stuart	H	176.88147	James Todd	E	1437.68116
+2	transfer	1353.00000	133.29616	Margaret Bean	H	143.25032	Graham Campbell	H	358.57632	Graeme Dickson	H	178.54502	Phil Greene	H	1336.33636	Patrick McAleer	H	143.75895	Robert G C Sawers	H	88.39636	Kenny Smith	H	138.78505	Allan Stewart	E	1353.00000	John H Stuart	H	183.03308	James Todd	E	1353.00000
+3	round	New Round
+3	defeat	1353.00000	133.29616	Margaret Bean	H	143.25032	Graham Campbell	H	358.57632	Graeme Dickson	H	178.54502	Phil Greene	H	1336.33636	Patrick McAleer	H	143.75895	Robert G C Sawers	D	88.39636	Kenny Smith	H	138.78505	Allan Stewart	E	1353.00000	John H Stuart	H	183.03308	James Todd	E	1353.00000
+3	transfer	1353.00000	163.16127	Margaret Bean	H	144.60926	Graham Campbell	H	362.87082	Graeme Dickson	H	203.47722	Phil Greene	H	1340.90962	Patrick McAleer	H	150.77236	Robert G C Sawers	D	0.00000	Kenny Smith	H	151.84395	Allan Stewart	E	1353.00000	John H Stuart	H	186.33312	James Todd	E	1353.00000
+4	round	New Round
+4	defeat	1353.00000	163.16127	Margaret Bean	D	144.60926	Graham Campbell	H	362.87082	Graeme Dickson	H	203.47722	Phil Greene	H	1340.90962	Patrick McAleer	H	150.77236	Robert G C Sawers	D	0.00000	Kenny Smith	H	151.84395	Allan Stewart	E	1353.00000	John H Stuart	H	186.33312	James Todd	E	1353.00000
+4	transfer	1353.00000	205.38908	Margaret Bean	D	0.00000	Graham Campbell	H	410.14226	Graeme Dickson	H	209.51745	Phil Greene	H	1374.08557	Patrick McAleer	H	162.73399	Robert G C Sawers	D	0.00000	Kenny Smith	H	154.90285	Allan Stewart	E	1353.00000	John H Stuart	H	187.20642	James Todd	E	1353.00000
+4	elect	1353.00000	205.38908	Margaret Bean	D	0.00000	Graham Campbell	H	410.14226	Graeme Dickson	H	209.51745	Phil Greene	e	1374.08557	Patrick McAleer	H	162.73399	Robert G C Sawers	D	0.00000	Kenny Smith	H	154.90285	Allan Stewart	E	1353.00000	John H Stuart	H	187.20642	James Todd	E	1353.00000
+4	defeat	1353.00000	205.38908	Margaret Bean	D	0.00000	Graham Campbell	D	410.14226	Graeme Dickson	H	209.51745	Phil Greene	E	1374.08557	Patrick McAleer	H	162.73399	Robert G C Sawers	D	0.00000	Kenny Smith	H	154.90285	Allan Stewart	E	1353.00000	John H Stuart	H	187.20642	James Todd	E	1353.00000
+4	defeat	1353.00000	205.38908	Margaret Bean	D	0.00000	Graham Campbell	D	410.14226	Graeme Dickson	D	209.51745	Phil Greene	E	1374.08557	Patrick McAleer	H	162.73399	Robert G C Sawers	D	0.00000	Kenny Smith	H	154.90285	Allan Stewart	E	1353.00000	John H Stuart	H	187.20642	James Todd	E	1353.00000
+4	defeat	1353.00000	205.38908	Margaret Bean	D	0.00000	Graham Campbell	D	410.14226	Graeme Dickson	D	209.51745	Phil Greene	E	1374.08557	Patrick McAleer	D	162.73399	Robert G C Sawers	D	0.00000	Kenny Smith	H	154.90285	Allan Stewart	E	1353.00000	John H Stuart	H	187.20642	James Todd	E	1353.00000
+4	defeat	1353.00000	205.38908	Margaret Bean	D	0.00000	Graham Campbell	D	410.14226	Graeme Dickson	D	209.51745	Phil Greene	E	1374.08557	Patrick McAleer	D	162.73399	Robert G C Sawers	D	0.00000	Kenny Smith	D	154.90285	Allan Stewart	E	1353.00000	John H Stuart	H	187.20642	James Todd	E	1353.00000
+4	defeat	1353.00000	205.38908	Margaret Bean	D	0.00000	Graham Campbell	D	410.14226	Graeme Dickson	D	209.51745	Phil Greene	E	1374.08557	Patrick McAleer	D	162.73399	Robert G C Sawers	D	0.00000	Kenny Smith	D	154.90285	Allan Stewart	E	1353.00000	John H Stuart	D	187.20642	James Todd	E	1353.00000
+X	end	1353.00000	205.38908	Margaret Bean	D	0.00000	Graham Campbell	D	410.14226	Graeme Dickson	D	209.51745	Phil Greene	E	1374.08557	Patrick McAleer	D	162.73399	Robert G C Sawers	D	0.00000	Kenny Smith	D	154.90285	Allan Stewart	E	1353.00000	John H Stuart	D	187.20642	James Todd	E	1353.00000

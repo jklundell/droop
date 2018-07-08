@@ -1,0 +1,58 @@
+
+Election: Pøllüx and Hélen should tie
+
+	Droop package: droop v0.11
+	Rule: QPQ
+	Arithmetic: guarded-precision fixed-point decimal arithmetic (9+9 places)
+	Seats: 2
+	Ballots: 6
+	Quota: 2.000000000
+
+	maxDiff: 0  (s/b << geps)
+	geps:    500000000
+	minDiff: 2000000000000000000  (s/b >> geps)
+	guard:   1000000000
+	prec:    1000000000000000000
+
+	Add eligible: Cåstor
+	Add eligible: Pøllüx
+	Add eligible: Hélen
+Action: Begin Count
+	Hopeful:  Cåstor (0.000000000)
+	Hopeful:  Pøllüx (0.000000000)
+	Hopeful:  Hélen (0.000000000)
+	Quota: 2.000000000
+Round 1:
+Action: Elect high quotient: Cåstor
+	Elected:  Cåstor (4.000000000)
+	Hopeful:  Pøllüx (0.000000000)
+	Hopeful:  Hélen (2.000000000)
+	Quota: 2.000000000
+Action: Transfer elected: Cåstor (4.000000000)
+	Elected:  Cåstor (4.000000000)
+	Hopeful:  Pøllüx (0.000000000)
+	Hopeful:  Hélen (2.000000000)
+	Quota: 2.000000000
+Round 2:
+Action: Break tie by lot (smallest quotient): [Pøllüx, Hélen] -> Pøllüx
+	Quota: 2.000000000
+Action: Defeat low quotient: Pøllüx
+	Elected:  Cåstor (4.000000000)
+	Hopeful:  Hélen (2.000000000)
+	Defeated: Pøllüx (2.000000000)
+	Quota: 2.000000000
+Action: Transfer defeated: Pøllüx
+	Elected:  Cåstor (4.000000000)
+	Hopeful:  Hélen (2.000000000)
+	Defeated: Pøllüx (2.000000000)
+	Quota: 2.000000000
+Action: Elect remaining candidates: Hélen
+	Elected:  Cåstor (4.000000000)
+	Elected:  Hélen (2.000000000)
+	Defeated: Pøllüx (2.000000000)
+	Quota: 2.000000000
+Action: Count Complete
+	Elected:  Cåstor (4.000000000)
+	Elected:  Hélen (2.000000000)
+	Defeated: Pøllüx (2.000000000)
+	Quota: 2.000000000

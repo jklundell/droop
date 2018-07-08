@@ -1,0 +1,44 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote
+0	log	Add eligible: Gilbert Davidson
+0	log	Add eligible: John France
+0	log	Add eligible: Gerald Leonard
+0	log	Add eligible: Stewart MacDonald
+0	log	Add eligible: John C MacPherson
+0	log	Add eligible: Catherine McMaster
+0	log	Add eligible: Andy McPake
+0	log	Add eligible: Joanne Reilly
+0	log	Add eligible: George Savage
+0	log	Add eligible: Grant R Thoms
+0	begin	1673.00000	0.00000	Gilbert Davidson	H	2272.00000	John France	H	485.00000	Gerald Leonard	H	1475.00000	Stewart MacDonald	H	186.00000	John C MacPherson	H	228.00000	Catherine McMaster	H	1040.00000	Andy McPake	H	129.00000	Joanne Reilly	H	350.00000	George Savage	H	100.00000	Grant R Thoms	H	2098.00000
+0	elect	1673.00000	0.00000	Gilbert Davidson	e	2272.00000	John France	H	485.00000	Gerald Leonard	H	1475.00000	Stewart MacDonald	H	186.00000	John C MacPherson	H	228.00000	Catherine McMaster	H	1040.00000	Andy McPake	H	129.00000	Joanne Reilly	H	350.00000	George Savage	H	100.00000	Grant R Thoms	H	2098.00000
+0	elect	1673.00000	0.00000	Gilbert Davidson	e	2272.00000	John France	H	485.00000	Gerald Leonard	H	1475.00000	Stewart MacDonald	H	186.00000	John C MacPherson	H	228.00000	Catherine McMaster	H	1040.00000	Andy McPake	H	129.00000	Joanne Reilly	H	350.00000	George Savage	H	100.00000	Grant R Thoms	e	2098.00000
+1	round	New Round
+1	unpend	1673.00000	0.00000	Gilbert Davidson	E	2272.00000	John France	H	485.00000	Gerald Leonard	H	1475.00000	Stewart MacDonald	H	186.00000	John C MacPherson	H	228.00000	Catherine McMaster	H	1040.00000	Andy McPake	H	129.00000	Joanne Reilly	H	350.00000	George Savage	H	100.00000	Grant R Thoms	e	2098.00000
+1	transfer	1673.00000	114.15612	Gilbert Davidson	E	1673.00000	John France	H	496.60016	Gerald Leonard	H	1819.57748	Stewart MacDonald	H	196.01832	John C MacPherson	H	240.39108	Catherine McMaster	H	1123.31024	Andy McPake	H	134.80008	Joanne Reilly	H	365.02748	George Savage	H	102.10912	Grant R Thoms	e	2098.00000
+1	elect	1673.00000	114.15612	Gilbert Davidson	E	1673.00000	John France	H	496.60016	Gerald Leonard	e	1819.57748	Stewart MacDonald	H	196.01832	John C MacPherson	H	240.39108	Catherine McMaster	H	1123.31024	Andy McPake	H	134.80008	Joanne Reilly	H	365.02748	George Savage	H	102.10912	Grant R Thoms	e	2098.00000
+2	round	New Round
+2	unpend	1673.00000	114.15612	Gilbert Davidson	E	1673.00000	John France	H	496.60016	Gerald Leonard	e	1819.57748	Stewart MacDonald	H	196.01832	John C MacPherson	H	240.39108	Catherine McMaster	H	1123.31024	Andy McPake	H	134.80008	Joanne Reilly	H	365.02748	George Savage	H	102.10912	Grant R Thoms	E	2098.00000
+2	transfer	1673.00000	271.55301	Gilbert Davidson	E	1673.00000	John France	H	516.65459	Gerald Leonard	e	1819.57748	Stewart MacDonald	H	238.15288	John C MacPherson	H	280.09480	Catherine McMaster	H	1167.47050	Andy McPake	H	171.46525	Joanne Reilly	H	431.47044	George Savage	H	120.54299	Grant R Thoms	E	1673.00000
+3	round	New Round
+3	unpend	1673.00000	271.55301	Gilbert Davidson	E	1673.00000	John France	H	516.65459	Gerald Leonard	E	1819.57748	Stewart MacDonald	H	238.15288	John C MacPherson	H	280.09480	Catherine McMaster	H	1167.47050	Andy McPake	H	171.46525	Joanne Reilly	H	431.47044	George Savage	H	120.54299	Grant R Thoms	E	1673.00000
+3	transfer	1673.00000	298.25625	Gilbert Davidson	E	1673.00000	John France	H	518.66459	Gerald Leonard	E	1673.00000	Stewart MacDonald	H	240.48508	John C MacPherson	H	284.75483	Catherine McMaster	H	1273.35852	Andy McPake	H	172.74593	Joanne Reilly	H	434.24348	George Savage	H	121.45464	Grant R Thoms	E	1673.00000
+4	round	New Round
+4	defeat	1673.00000	298.25625	Gilbert Davidson	E	1673.00000	John France	H	518.66459	Gerald Leonard	E	1673.00000	Stewart MacDonald	H	240.48508	John C MacPherson	H	284.75483	Catherine McMaster	H	1273.35852	Andy McPake	H	172.74593	Joanne Reilly	H	434.24348	George Savage	D	121.45464	Grant R Thoms	E	1673.00000
+4	transfer	1673.00000	331.62956	Gilbert Davidson	E	1673.00000	John France	H	538.52017	Gerald Leonard	E	1673.00000	Stewart MacDonald	H	254.17042	John C MacPherson	H	302.57796	Catherine McMaster	H	1283.96071	Andy McPake	H	178.59029	Joanne Reilly	H	454.51421	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+5	round	New Round
+5	defeat	1673.00000	331.62956	Gilbert Davidson	E	1673.00000	John France	H	538.52017	Gerald Leonard	E	1673.00000	Stewart MacDonald	H	254.17042	John C MacPherson	H	302.57796	Catherine McMaster	H	1283.96071	Andy McPake	D	178.59029	Joanne Reilly	H	454.51421	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+5	transfer	1673.00000	390.02736	Gilbert Davidson	E	1673.00000	John France	H	543.60694	Gerald Leonard	E	1673.00000	Stewart MacDonald	H	283.09200	John C MacPherson	H	311.50734	Catherine McMaster	H	1306.66165	Andy McPake	D	0.00000	Joanne Reilly	H	509.06803	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+6	round	New Round
+6	defeat	1673.00000	390.02736	Gilbert Davidson	E	1673.00000	John France	H	543.60694	Gerald Leonard	E	1673.00000	Stewart MacDonald	D	283.09200	John C MacPherson	H	311.50734	Catherine McMaster	H	1306.66165	Andy McPake	D	0.00000	Joanne Reilly	H	509.06803	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+6	transfer	1673.00000	511.52228	Gilbert Davidson	E	1673.00000	John France	H	574.67306	Gerald Leonard	E	1673.00000	Stewart MacDonald	D	0.00000	John C MacPherson	H	367.02448	Catherine McMaster	H	1343.60780	Andy McPake	D	0.00000	Joanne Reilly	H	547.13570	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+7	round	New Round
+7	defeat	1673.00000	511.52228	Gilbert Davidson	E	1673.00000	John France	H	574.67306	Gerald Leonard	E	1673.00000	Stewart MacDonald	D	0.00000	John C MacPherson	D	367.02448	Catherine McMaster	H	1343.60780	Andy McPake	D	0.00000	Joanne Reilly	H	547.13570	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+7	transfer	1673.00000	709.28630	Gilbert Davidson	E	1673.00000	John France	H	629.07777	Gerald Leonard	E	1673.00000	Stewart MacDonald	D	0.00000	John C MacPherson	D	0.00000	Catherine McMaster	H	1413.42547	Andy McPake	D	0.00000	Joanne Reilly	H	592.17378	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+8	round	New Round
+8	defeat	1673.00000	709.28630	Gilbert Davidson	E	1673.00000	John France	H	629.07777	Gerald Leonard	E	1673.00000	Stewart MacDonald	D	0.00000	John C MacPherson	D	0.00000	Catherine McMaster	H	1413.42547	Andy McPake	D	0.00000	Joanne Reilly	D	592.17378	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+8	transfer	1673.00000	1121.27584	Gilbert Davidson	E	1673.00000	John France	H	691.05522	Gerald Leonard	E	1673.00000	Stewart MacDonald	D	0.00000	John C MacPherson	D	0.00000	Catherine McMaster	H	1531.63226	Andy McPake	D	0.00000	Joanne Reilly	D	0.00000	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+9	round	New Round
+9	defeat	1673.00000	1121.27584	Gilbert Davidson	E	1673.00000	John France	D	691.05522	Gerald Leonard	E	1673.00000	Stewart MacDonald	D	0.00000	John C MacPherson	D	0.00000	Catherine McMaster	H	1531.63226	Andy McPake	D	0.00000	Joanne Reilly	D	0.00000	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+9	transfer	1673.00000	1652.76549	Gilbert Davidson	E	1673.00000	John France	D	0.00000	Gerald Leonard	E	1673.00000	Stewart MacDonald	D	0.00000	John C MacPherson	D	0.00000	Catherine McMaster	H	1691.19783	Andy McPake	D	0.00000	Joanne Reilly	D	0.00000	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+9	elect	1673.00000	1652.76549	Gilbert Davidson	E	1673.00000	John France	D	0.00000	Gerald Leonard	E	1673.00000	Stewart MacDonald	D	0.00000	John C MacPherson	D	0.00000	Catherine McMaster	E	1691.19783	Andy McPake	D	0.00000	Joanne Reilly	D	0.00000	George Savage	D	0.00000	Grant R Thoms	E	1673.00000
+X	end	1673.00000	1652.76549	Gilbert Davidson	E	1673.00000	John France	D	0.00000	Gerald Leonard	E	1673.00000	Stewart MacDonald	D	0.00000	John C MacPherson	D	0.00000	Catherine McMaster	E	1691.19783	Andy McPake	D	0.00000	Joanne Reilly	D	0.00000	George Savage	D	0.00000	Grant R Thoms	E	1673.00000

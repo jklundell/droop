@@ -1,0 +1,353 @@
+
+Election: CALTON
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 3
+	Ballots: 5199
+	Quota: 1300.00000
+
+	Add eligible: Gary Barton
+	Add eligible: Alasdair Duke - Wardrop
+	Add eligible: Fiacra Fullerton
+	Add eligible: Scott Gillespie
+	Add eligible: Paul Graham
+	Add eligible: Danny Houston
+	Add eligible: Kenny Murray
+	Add eligible: George Redmond
+	Add eligible: Ruth Simpson
+	Add eligible: Alison E Thewliss
+Action: Begin Count
+	Hopeful:  Gary Barton (128.00000)
+	Hopeful:  Alasdair Duke - Wardrop (219.00000)
+	Hopeful:  Fiacra Fullerton (302.00000)
+	Hopeful:  Scott Gillespie (245.00000)
+	Hopeful:  Paul Graham (231.00000)
+	Hopeful:  Danny Houston (195.00000)
+	Hopeful:  Kenny Murray (126.00000)
+	Hopeful:  George Redmond (1982.00000)
+	Hopeful:  Ruth Simpson (628.00000)
+	Hopeful:  Alison E Thewliss (1143.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 5199.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: George Redmond
+	Pending:  George Redmond (1982.00000)
+	Hopeful:  Gary Barton (128.00000)
+	Hopeful:  Alasdair Duke - Wardrop (219.00000)
+	Hopeful:  Fiacra Fullerton (302.00000)
+	Hopeful:  Scott Gillespie (245.00000)
+	Hopeful:  Paul Graham (231.00000)
+	Hopeful:  Danny Houston (195.00000)
+	Hopeful:  Kenny Murray (126.00000)
+	Hopeful:  Ruth Simpson (628.00000)
+	Hopeful:  Alison E Thewliss (1143.00000)
+	Elected votes: 0.00000
+	Pending votes: 1982.00000
+	Hopeful votes: 3217.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 5199.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: George Redmond
+	Elected votes: 1982.00000
+	Hopeful votes: 3217.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 5199.00000
+	Surplus: 682.00000
+Action: Surplus transferred: George Redmond (682.00000)
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Gary Barton (130.40863)
+	Hopeful:  Alasdair Duke - Wardrop (224.84953)
+	Hopeful:  Fiacra Fullerton (325.39812)
+	Hopeful:  Scott Gillespie (250.84953)
+	Hopeful:  Paul Graham (245.79587)
+	Hopeful:  Danny Houston (217.36585)
+	Hopeful:  Kenny Murray (134.94634)
+	Hopeful:  Ruth Simpson (1035.05847)
+	Hopeful:  Alison E Thewliss (1175.68855)
+	Elected votes: 1300.00000
+	Hopeful votes: 3740.36089
+	Nontransferable votes: 158.62549
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 682.00000
+Round 2:
+Action: Defeat low candidate: Gary Barton
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Alasdair Duke - Wardrop (224.84953)
+	Hopeful:  Fiacra Fullerton (325.39812)
+	Hopeful:  Scott Gillespie (250.84953)
+	Hopeful:  Paul Graham (245.79587)
+	Hopeful:  Danny Houston (217.36585)
+	Hopeful:  Kenny Murray (134.94634)
+	Hopeful:  Ruth Simpson (1035.05847)
+	Hopeful:  Alison E Thewliss (1175.68855)
+	Defeated: Gary Barton (130.40863)
+	Elected votes: 1300.00000
+	Hopeful votes: 3609.95226
+	Defeated votes: 130.40863
+	Nontransferable votes: 158.62549
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Gary Barton
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Alasdair Duke - Wardrop (235.19362)
+	Hopeful:  Fiacra Fullerton (349.74221)
+	Hopeful:  Scott Gillespie (257.84953)
+	Hopeful:  Paul Graham (252.79587)
+	Hopeful:  Danny Houston (220.36585)
+	Hopeful:  Kenny Murray (140.29043)
+	Hopeful:  Ruth Simpson (1050.74665)
+	Hopeful:  Alison E Thewliss (1196.68855)
+	Defeated: Gary Barton (0.00000)
+	Elected votes: 1300.00000
+	Hopeful votes: 3703.67271
+	Nontransferable votes: 195.31367
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: Kenny Murray
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Alasdair Duke - Wardrop (235.19362)
+	Hopeful:  Fiacra Fullerton (349.74221)
+	Hopeful:  Scott Gillespie (257.84953)
+	Hopeful:  Paul Graham (252.79587)
+	Hopeful:  Danny Houston (220.36585)
+	Hopeful:  Ruth Simpson (1050.74665)
+	Hopeful:  Alison E Thewliss (1196.68855)
+	Defeated: Kenny Murray (140.29043)
+	Defeated: Gary Barton (0.00000)
+	Elected votes: 1300.00000
+	Hopeful votes: 3563.38228
+	Defeated votes: 140.29043
+	Nontransferable votes: 195.31367
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Kenny Murray
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Alasdair Duke - Wardrop (251.22589)
+	Hopeful:  Fiacra Fullerton (373.77448)
+	Hopeful:  Scott Gillespie (260.53771)
+	Hopeful:  Paul Graham (257.82814)
+	Hopeful:  Danny Houston (225.70994)
+	Hopeful:  Ruth Simpson (1072.12301)
+	Hopeful:  Alison E Thewliss (1221.72082)
+	Defeated: Gary Barton, Kenny Murray (0.00000)
+	Elected votes: 1300.00000
+	Hopeful votes: 3662.91999
+	Nontransferable votes: 236.06639
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Danny Houston
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Alasdair Duke - Wardrop (251.22589)
+	Hopeful:  Fiacra Fullerton (373.77448)
+	Hopeful:  Scott Gillespie (260.53771)
+	Hopeful:  Paul Graham (257.82814)
+	Hopeful:  Ruth Simpson (1072.12301)
+	Hopeful:  Alison E Thewliss (1221.72082)
+	Defeated: Danny Houston (225.70994)
+	Defeated: Gary Barton, Kenny Murray (0.00000)
+	Elected votes: 1300.00000
+	Hopeful votes: 3437.21005
+	Defeated votes: 225.70994
+	Nontransferable votes: 236.06639
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Danny Houston
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Alasdair Duke - Wardrop (264.91407)
+	Hopeful:  Fiacra Fullerton (382.49493)
+	Hopeful:  Scott Gillespie (348.69906)
+	Hopeful:  Paul Graham (265.20450)
+	Hopeful:  Ruth Simpson (1086.94027)
+	Hopeful:  Alison E Thewliss (1231.40900)
+	Defeated: Gary Barton, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 1300.00000
+	Hopeful votes: 3579.66183
+	Nontransferable votes: 319.32455
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Alasdair Duke - Wardrop
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Fiacra Fullerton (382.49493)
+	Hopeful:  Scott Gillespie (348.69906)
+	Hopeful:  Paul Graham (265.20450)
+	Hopeful:  Ruth Simpson (1086.94027)
+	Hopeful:  Alison E Thewliss (1231.40900)
+	Defeated: Alasdair Duke - Wardrop (264.91407)
+	Defeated: Gary Barton, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 1300.00000
+	Hopeful votes: 3314.74776
+	Defeated votes: 264.91407
+	Nontransferable votes: 319.32455
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Alasdair Duke - Wardrop
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Fiacra Fullerton (420.83902)
+	Hopeful:  Scott Gillespie (371.04315)
+	Hopeful:  Paul Graham (329.26904)
+	Hopeful:  Ruth Simpson (1115.34890)
+	Hopeful:  Alison E Thewliss (1282.75309)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 1300.00000
+	Hopeful votes: 3519.25320
+	Nontransferable votes: 379.73318
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Paul Graham
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Fiacra Fullerton (420.83902)
+	Hopeful:  Scott Gillespie (371.04315)
+	Hopeful:  Ruth Simpson (1115.34890)
+	Hopeful:  Alison E Thewliss (1282.75309)
+	Defeated: Paul Graham (329.26904)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 1300.00000
+	Hopeful votes: 3189.98416
+	Defeated votes: 329.26904
+	Nontransferable votes: 379.73318
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Paul Graham
+	Elected:  George Redmond (1300.00000)
+	Hopeful:  Fiacra Fullerton (446.24765)
+	Hopeful:  Scott Gillespie (409.10769)
+	Hopeful:  Ruth Simpson (1189.88661)
+	Hopeful:  Alison E Thewliss (1360.12945)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Paul Graham, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 1300.00000
+	Hopeful votes: 3405.37140
+	Nontransferable votes: 493.61498
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Alison E Thewliss
+	Elected:  George Redmond (1300.00000)
+	Pending:  Alison E Thewliss (1360.12945)
+	Hopeful:  Fiacra Fullerton (446.24765)
+	Hopeful:  Scott Gillespie (409.10769)
+	Hopeful:  Ruth Simpson (1189.88661)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Paul Graham, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 1300.00000
+	Pending votes: 1360.12945
+	Hopeful votes: 2045.24195
+	Nontransferable votes: 493.61498
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 0.00000
+Round 7:
+Action: Transfer high surplus: Alison E Thewliss
+	Elected votes: 2660.12945
+	Hopeful votes: 2045.24195
+	Nontransferable votes: 493.61498
+	Residual: 0.01362
+	Total: 5199.00000
+	Surplus: 60.12945
+Action: Surplus transferred: Alison E Thewliss (60.12945)
+	Elected:  George Redmond (1300.00000)
+	Elected:  Alison E Thewliss (1300.00000)
+	Hopeful:  Fiacra Fullerton (461.35742)
+	Hopeful:  Scott Gillespie (412.58571)
+	Hopeful:  Ruth Simpson (1199.81406)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Paul Graham, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 2600.00000
+	Hopeful votes: 2073.75719
+	Nontransferable votes: 525.21759
+	Residual: 0.02522
+	Total: 5199.00000
+	Surplus: 60.12945
+Round 8:
+Action: Defeat low candidate: Scott Gillespie
+	Elected:  George Redmond (1300.00000)
+	Elected:  Alison E Thewliss (1300.00000)
+	Hopeful:  Fiacra Fullerton (461.35742)
+	Hopeful:  Ruth Simpson (1199.81406)
+	Defeated: Scott Gillespie (412.58571)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Paul Graham, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 2600.00000
+	Hopeful votes: 1661.17148
+	Defeated votes: 412.58571
+	Nontransferable votes: 525.21759
+	Residual: 0.02522
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Scott Gillespie
+	Elected:  George Redmond (1300.00000)
+	Elected:  Alison E Thewliss (1300.00000)
+	Hopeful:  Fiacra Fullerton (485.84120)
+	Hopeful:  Ruth Simpson (1271.90931)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Scott Gillespie, Paul Graham, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 2600.00000
+	Hopeful votes: 1757.75051
+	Nontransferable votes: 841.22427
+	Residual: 0.02522
+	Total: 5199.00000
+	Surplus: 0.00000
+Round 9:
+Action: Defeat low candidate: Fiacra Fullerton
+	Elected:  George Redmond (1300.00000)
+	Elected:  Alison E Thewliss (1300.00000)
+	Hopeful:  Ruth Simpson (1271.90931)
+	Defeated: Fiacra Fullerton (485.84120)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Scott Gillespie, Paul Graham, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 2600.00000
+	Hopeful votes: 1271.90931
+	Defeated votes: 485.84120
+	Nontransferable votes: 841.22427
+	Residual: 0.02522
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Fiacra Fullerton
+	Elected:  George Redmond (1300.00000)
+	Elected:  Alison E Thewliss (1300.00000)
+	Hopeful:  Ruth Simpson (1393.86735)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Fiacra Fullerton, Scott Gillespie, Paul Graham, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 2600.00000
+	Hopeful votes: 1393.86735
+	Nontransferable votes: 1205.10743
+	Residual: 0.02522
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Ruth Simpson
+	Elected:  George Redmond (1300.00000)
+	Elected:  Ruth Simpson (1393.86735)
+	Elected:  Alison E Thewliss (1300.00000)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Fiacra Fullerton, Scott Gillespie, Paul Graham, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 3993.86735
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1205.10743
+	Residual: 0.02522
+	Total: 5199.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  George Redmond (1300.00000)
+	Elected:  Ruth Simpson (1393.86735)
+	Elected:  Alison E Thewliss (1300.00000)
+	Defeated: Gary Barton, Alasdair Duke - Wardrop, Fiacra Fullerton, Scott Gillespie, Paul Graham, Danny Houston, Kenny Murray (0.00000)
+	Elected votes: 3993.86735
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1205.10743
+	Residual: 0.02522
+	Total: 5199.00000
+	Surplus: 0.00000

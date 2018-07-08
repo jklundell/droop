@@ -1,0 +1,427 @@
+{
+  "actions": [
+    {
+      "msg": "Add eligible: A", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: B", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add withdrawn: C", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: D", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add withdrawn: E", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "332.00000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "170.00000"
+        }, 
+        "3": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "498.00000"
+        }, 
+        "5": {
+          "code": "W", 
+          "state": "withdrawn"
+        }
+      }, 
+      "msg": "Begin Count", 
+      "nt_votes": "0.00000", 
+      "quota": "333.33334", 
+      "round": 0, 
+      "surplus": "0.00000", 
+      "tag": "begin", 
+      "votes": "1000.00000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "332.00000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "170.00000"
+        }, 
+        "3": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "498.00000"
+        }, 
+        "5": {
+          "code": "W", 
+          "state": "withdrawn"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "0.00000", 
+      "quota": "333.33334", 
+      "round": 1, 
+      "surplus": "0.00000", 
+      "tag": "round", 
+      "votes": "1000.00000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "332.00000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "170.00000"
+        }, 
+        "3": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "4": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "498.00000"
+        }, 
+        "5": {
+          "code": "W", 
+          "state": "withdrawn"
+        }
+      }, 
+      "msg": "Elect, transfer pending: D", 
+      "nt_votes": "0.00000", 
+      "quota": "333.33334", 
+      "round": 1, 
+      "surplus": "0.00000", 
+      "tag": "elect", 
+      "votes": "1000.00000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "332.00000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "170.00000"
+        }, 
+        "3": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "498.00000"
+        }, 
+        "5": {
+          "code": "W", 
+          "state": "withdrawn"
+        }
+      }, 
+      "msg": "Transfer surplus: D", 
+      "nt_votes": "0.00000", 
+      "quota": "333.33334", 
+      "round": 1, 
+      "surplus": "0.00000", 
+      "tag": "unpend", 
+      "votes": "1000.00000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "332.00000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "170.00000"
+        }, 
+        "3": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "333.33334"
+        }, 
+        "5": {
+          "code": "W", 
+          "state": "withdrawn"
+        }
+      }, 
+      "msg": "Surplus transferred: D (164.66666)", 
+      "nt_votes": "164.66370", 
+      "quota": "333.33334", 
+      "round": 1, 
+      "surplus": "0.00000", 
+      "tag": "transfer", 
+      "votes": "835.33334"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "332.00000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "170.00000"
+        }, 
+        "3": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "333.33334"
+        }, 
+        "5": {
+          "code": "W", 
+          "state": "withdrawn"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "164.66370", 
+      "quota": "333.33334", 
+      "round": 2, 
+      "surplus": "0.00000", 
+      "tag": "round", 
+      "votes": "835.33334"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "332.00000"
+        }, 
+        "2": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "170.00000"
+        }, 
+        "3": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "333.33334"
+        }, 
+        "5": {
+          "code": "W", 
+          "state": "withdrawn"
+        }
+      }, 
+      "msg": "Defeat: B", 
+      "nt_votes": "164.66370", 
+      "quota": "333.33334", 
+      "round": 2, 
+      "surplus": "0.00000", 
+      "tag": "defeat", 
+      "votes": "835.33334"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "332.00000"
+        }, 
+        "2": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "170.00000"
+        }, 
+        "3": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "333.33334"
+        }, 
+        "5": {
+          "code": "W", 
+          "state": "withdrawn"
+        }
+      }, 
+      "msg": "Elect remaining: A", 
+      "nt_votes": "164.66370", 
+      "quota": "333.33334", 
+      "round": 2, 
+      "surplus": "0.00000", 
+      "tag": "elect", 
+      "votes": "835.33334"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "332.00000"
+        }, 
+        "2": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "170.00000"
+        }, 
+        "3": {
+          "code": "W", 
+          "state": "withdrawn"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "333.33334"
+        }, 
+        "5": {
+          "code": "W", 
+          "state": "withdrawn"
+        }
+      }, 
+      "msg": "Count Complete", 
+      "nt_votes": "164.66370", 
+      "quota": "333.33334", 
+      "round": 2, 
+      "surplus": "0.00000", 
+      "tag": "end", 
+      "votes": "835.33334"
+    }
+  ], 
+  "arithmetic_info": "fixed-point decimal arithmetic (5 places)", 
+  "arithmetic_name": "fixed", 
+  "cdict": {
+    "1": {
+      "ballot_order": 1, 
+      "cid": 1, 
+      "name": "A", 
+      "nick": "1", 
+      "tie_order": 1
+    }, 
+    "2": {
+      "ballot_order": 2, 
+      "cid": 2, 
+      "name": "B", 
+      "nick": "2", 
+      "tie_order": 2
+    }, 
+    "3": {
+      "ballot_order": 3, 
+      "cid": 3, 
+      "name": "C", 
+      "nick": "3", 
+      "tie_order": 3
+    }, 
+    "4": {
+      "ballot_order": 4, 
+      "cid": 4, 
+      "name": "D", 
+      "nick": "4", 
+      "tie_order": 4
+    }, 
+    "5": {
+      "ballot_order": 5, 
+      "cid": 5, 
+      "name": "E", 
+      "nick": "5", 
+      "tie_order": 5
+    }
+  }, 
+  "cids": [
+    1, 
+    2, 
+    3, 
+    4, 
+    5
+  ], 
+  "droop_name": "droop", 
+  "droop_version": "0.11", 
+  "ecids": [
+    1, 
+    2, 
+    4
+  ], 
+  "method": "wigm", 
+  "nballots": 1000, 
+  "options": {
+    "allowed": {}, 
+    "cmd": {
+      "rule": "cfer"
+    }, 
+    "default": {
+      "arithmetic": "fixed", 
+      "display": 5, 
+      "precision": 5
+    }, 
+    "file_options": {}, 
+    "force": {
+      "arithmetic": "fixed", 
+      "display": 5, 
+      "precision": 5
+    }, 
+    "options": {
+      "arithmetic": "fixed", 
+      "display": 5, 
+      "precision": 5, 
+      "rule": "cfer"
+    }
+  }, 
+  "quota": "333.33334", 
+  "rule_info": "CfER (single defeat)", 
+  "rule_name": "cfer", 
+  "seats": 2, 
+  "title": "Dave Kadlecek: #2 different winners for 2 & 3 seats: CE vs AD+B (q=333.33.../250)"
+}

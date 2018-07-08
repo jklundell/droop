@@ -1,0 +1,223 @@
+
+Election: test weak tiebreak for surplus transfer
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 35
+	Quota: 8.00000
+
+	Add eligible: A
+	Add eligible: B
+	Add eligible: C
+	Add eligible: D
+	Add eligible: E
+	Add eligible: F
+Action: Begin Count
+	Hopeful:  A (10.00000)
+	Hopeful:  B (8.00000)
+	Hopeful:  C (6.00000)
+	Hopeful:  D (5.00000)
+	Hopeful:  E (3.00000)
+	Hopeful:  F (3.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 35.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: A
+	Pending:  A (10.00000)
+	Hopeful:  B (8.00000)
+	Hopeful:  C (6.00000)
+	Hopeful:  D (5.00000)
+	Hopeful:  E (3.00000)
+	Hopeful:  F (3.00000)
+	Elected votes: 0.00000
+	Pending votes: 10.00000
+	Hopeful votes: 25.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: B
+	Pending:  A (10.00000)
+	Pending:  B (8.00000)
+	Hopeful:  C (6.00000)
+	Hopeful:  D (5.00000)
+	Hopeful:  E (3.00000)
+	Hopeful:  F (3.00000)
+	Elected votes: 0.00000
+	Pending votes: 18.00000
+	Hopeful votes: 17.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: A
+	Elected votes: 10.00000
+	Pending votes: 8.00000
+	Hopeful votes: 17.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 2.00000
+Action: Surplus transferred: A (2.00000)
+	Elected:  A (8.00000)
+	Pending:  B (8.00000)
+	Hopeful:  C (8.00000)
+	Hopeful:  D (5.00000)
+	Hopeful:  E (3.00000)
+	Hopeful:  F (3.00000)
+	Elected votes: 8.00000
+	Pending votes: 8.00000
+	Hopeful votes: 19.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 2.00000
+Action: Elect, transfer pending: C
+	Elected:  A (8.00000)
+	Pending:  B (8.00000)
+	Pending:  C (8.00000)
+	Hopeful:  D (5.00000)
+	Hopeful:  E (3.00000)
+	Hopeful:  F (3.00000)
+	Elected votes: 8.00000
+	Pending votes: 16.00000
+	Hopeful votes: 11.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 2.00000
+Round 2:
+Action: Break tie by prior stage (largest surplus): [B, C] -> B
+	Elected votes: 8.00000
+	Pending votes: 16.00000
+	Hopeful votes: 11.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Action: Transfer high surplus: B
+	Elected votes: 16.00000
+	Pending votes: 8.00000
+	Hopeful votes: 11.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Action: Surplus transferred: B (0.00000)
+	Elected:  A (8.00000)
+	Elected:  B (8.00000)
+	Pending:  C (8.00000)
+	Hopeful:  D (5.00000)
+	Hopeful:  E (3.00000)
+	Hopeful:  F (3.00000)
+	Elected votes: 16.00000
+	Pending votes: 8.00000
+	Hopeful votes: 11.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Round 3:
+Action: Transfer high surplus: C
+	Elected votes: 24.00000
+	Hopeful votes: 11.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Action: Surplus transferred: C (0.00000)
+	Elected:  A (8.00000)
+	Elected:  B (8.00000)
+	Elected:  C (8.00000)
+	Hopeful:  D (5.00000)
+	Hopeful:  E (3.00000)
+	Hopeful:  F (3.00000)
+	Elected votes: 24.00000
+	Hopeful votes: 11.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Round 4:
+Action: Break tie by lot (defeat low candidate): [E, F] -> E
+	Elected votes: 24.00000
+	Hopeful votes: 11.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Action: Defeat low candidate: E
+	Elected:  A (8.00000)
+	Elected:  B (8.00000)
+	Elected:  C (8.00000)
+	Hopeful:  D (5.00000)
+	Hopeful:  F (3.00000)
+	Defeated: E (3.00000)
+	Elected votes: 24.00000
+	Hopeful votes: 8.00000
+	Defeated votes: 3.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Action: Transfer defeated: E
+	Elected:  A (8.00000)
+	Elected:  B (8.00000)
+	Elected:  C (8.00000)
+	Hopeful:  D (8.00000)
+	Hopeful:  F (3.00000)
+	Defeated: E (0.00000)
+	Elected votes: 24.00000
+	Hopeful votes: 11.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: D
+	Elected:  A (8.00000)
+	Elected:  B (8.00000)
+	Elected:  C (8.00000)
+	Pending:  D (8.00000)
+	Hopeful:  F (3.00000)
+	Defeated: E (0.00000)
+	Elected votes: 24.00000
+	Pending votes: 8.00000
+	Hopeful votes: 3.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Action: Defeat remaining candidates: F
+	Elected:  A (8.00000)
+	Elected:  B (8.00000)
+	Elected:  C (8.00000)
+	Elected:  D (8.00000)
+	Defeated: F (3.00000)
+	Defeated: E (0.00000)
+	Elected votes: 32.00000
+	Hopeful votes: 0.00000
+	Defeated votes: 3.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  A (8.00000)
+	Elected:  B (8.00000)
+	Elected:  C (8.00000)
+	Elected:  D (8.00000)
+	Defeated: F (3.00000)
+	Defeated: E (0.00000)
+	Elected votes: 32.00000
+	Hopeful votes: 0.00000
+	Defeated votes: 3.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 35.00000
+	Surplus: 0.00000

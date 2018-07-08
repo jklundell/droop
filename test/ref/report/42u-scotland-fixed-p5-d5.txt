@@ -1,0 +1,94 @@
+
+Election: Pøllüx and Hélen should tie
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 2
+	Ballots: 6
+	Quota: 3.00000
+
+	Add eligible: Cåstor
+	Add eligible: Pøllüx
+	Add eligible: Hélen
+Action: Begin Count
+	Hopeful:  Cåstor (4.00000)
+	Hopeful:  Pøllüx (0.00000)
+	Hopeful:  Hélen (2.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 6.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Cåstor
+	Pending:  Cåstor (4.00000)
+	Hopeful:  Pøllüx (0.00000)
+	Hopeful:  Hélen (2.00000)
+	Elected votes: 0.00000
+	Pending votes: 4.00000
+	Hopeful votes: 2.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Cåstor
+	Elected votes: 4.00000
+	Hopeful votes: 2.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 1.00000
+Action: Surplus transferred: Cåstor (1.00000)
+	Elected:  Cåstor (3.00000)
+	Hopeful:  Pøllüx (1.00000)
+	Hopeful:  Hélen (2.00000)
+	Elected votes: 3.00000
+	Hopeful votes: 3.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 1.00000
+Round 2:
+Action: Defeat low candidate: Pøllüx
+	Elected:  Cåstor (3.00000)
+	Hopeful:  Hélen (2.00000)
+	Defeated: Pøllüx (1.00000)
+	Elected votes: 3.00000
+	Hopeful votes: 2.00000
+	Defeated votes: 1.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Pøllüx
+	Elected:  Cåstor (3.00000)
+	Hopeful:  Hélen (2.00000)
+	Defeated: Pøllüx (0.00000)
+	Elected votes: 3.00000
+	Hopeful votes: 2.00000
+	Nontransferable votes: 1.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Hélen
+	Elected:  Cåstor (3.00000)
+	Elected:  Hélen (2.00000)
+	Defeated: Pøllüx (0.00000)
+	Elected votes: 5.00000
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Cåstor (3.00000)
+	Elected:  Hélen (2.00000)
+	Defeated: Pøllüx (0.00000)
+	Elected votes: 5.00000
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000

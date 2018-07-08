@@ -1,0 +1,119 @@
+
+Election: QPQ election 1
+
+	Droop package: droop v0.11
+	Rule: QPQ
+	Arithmetic: guarded-precision fixed-point decimal arithmetic (9+9 places)
+	Seats: 3
+	Ballots: 60
+	Quota: 15.000000000
+
+	maxDiff: 0  (s/b << geps)
+	geps:    500000000
+	minDiff: 1000000000000000000  (s/b >> geps)
+	guard:   1000000000
+	prec:    1000000000000000000
+
+	Add eligible: a
+	Add eligible: b
+	Add eligible: c
+	Add eligible: d
+	Add eligible: e
+Action: Begin Count
+	Hopeful:  a (0.000000000)
+	Hopeful:  b (0.000000000)
+	Hopeful:  c (0.000000000)
+	Hopeful:  d (0.000000000)
+	Hopeful:  e (0.000000000)
+	Quota: 15.000000000
+Round 1:
+Action: Elect high quotient: a
+	Elected:  a (16.000000000)
+	Hopeful:  b (12.000000000)
+	Hopeful:  c (12.000000000)
+	Hopeful:  d (12.000000000)
+	Hopeful:  e (8.000000000)
+	Quota: 15.000000000
+Action: Transfer elected: a (16.000000000)
+	Elected:  a (16.000000000)
+	Hopeful:  b (12.000000000)
+	Hopeful:  c (12.000000000)
+	Hopeful:  d (12.000000000)
+	Hopeful:  e (8.000000000)
+	Quota: 15.000000000
+Round 2:
+Action: Defeat low quotient: e
+	Elected:  a (16.000000000)
+	Hopeful:  b (14.000000000)
+	Hopeful:  c (12.000000000)
+	Hopeful:  d (12.000000000)
+	Defeated: e (8.000000000)
+	Quota: 15.000000000
+Action: Transfer defeated: e
+	Elected:  a (16.000000000)
+	Hopeful:  b (14.000000000)
+	Hopeful:  c (12.000000000)
+	Hopeful:  d (12.000000000)
+	Defeated: e (8.000000000)
+	Quota: 15.000000000
+Round 3:
+Action: Elect high quotient: b
+	Elected:  b (20.000000000)
+	Hopeful:  a (16.000000000)
+	Hopeful:  c (12.000000000)
+	Hopeful:  d (12.000000000)
+	Defeated: e (8.000000000)
+	Quota: 15.000000000
+Action: Transfer elected: b (20.000000000)
+	Elected:  b (20.000000000)
+	Hopeful:  a (16.000000000)
+	Hopeful:  c (12.000000000)
+	Hopeful:  d (12.000000000)
+	Defeated: e (8.000000000)
+	Quota: 15.000000000
+Round 4:
+Action: Elect high quotient: a
+	Elected:  a (16.000000000)
+	Elected:  b (20.000000000)
+	Hopeful:  c (12.000000000)
+	Hopeful:  d (12.000000000)
+	Defeated: e (8.000000000)
+	Quota: 13.333333333
+Action: Transfer elected: a (16.000000000)
+	Elected:  a (16.000000000)
+	Elected:  b (20.000000000)
+	Hopeful:  c (12.000000000)
+	Hopeful:  d (12.000000000)
+	Defeated: e (8.000000000)
+	Quota: 13.333333333
+Round 5:
+Action: Break tie by lot (smallest quotient): [c, d] -> c
+	Quota: 12.000000000
+Action: Defeat low quotient: c
+	Elected:  a (16.000000000)
+	Elected:  b (20.000000000)
+	Hopeful:  d (12.000000000)
+	Defeated: c (12.000000000)
+	Defeated: e (8.000000000)
+	Quota: 12.000000000
+Action: Transfer defeated: c
+	Elected:  a (16.000000000)
+	Elected:  b (20.000000000)
+	Hopeful:  d (12.000000000)
+	Defeated: c (12.000000000)
+	Defeated: e (8.000000000)
+	Quota: 12.000000000
+Action: Elect remaining candidates: d
+	Elected:  a (16.000000000)
+	Elected:  b (20.000000000)
+	Elected:  d (12.000000000)
+	Defeated: c (12.000000000)
+	Defeated: e (8.000000000)
+	Quota: 12.000000000
+Action: Count Complete
+	Elected:  a (16.000000000)
+	Elected:  b (20.000000000)
+	Elected:  d (12.000000000)
+	Defeated: c (12.000000000)
+	Defeated: e (8.000000000)
+	Quota: 12.000000000

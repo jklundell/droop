@@ -1,0 +1,86 @@
+
+Election: Pøllüx and Hélen should tie
+
+	Droop package: droop v0.11
+	Rule: CfER (single defeat)
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 2
+	Ballots: 6
+	Quota: 2.00001
+
+	Add eligible: Cåstor
+	Add eligible: Pøllüx
+	Add eligible: Hélen
+Action: Begin Count
+	Hopeful:  Cåstor (4.00000)
+	Hopeful:  Pøllüx (0.00000)
+	Hopeful:  Hélen (2.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 6.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Round 1:
+Action: Elect, transfer pending: Cåstor
+	Pending:  Cåstor (4.00000)
+	Hopeful:  Pøllüx (0.00000)
+	Hopeful:  Hélen (2.00000)
+	Elected votes: 0.00000
+	Pending votes: 4.00000
+	Hopeful votes: 2.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Transfer surplus: Cåstor
+	Elected votes: 4.00000
+	Hopeful votes: 2.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Surplus transferred: Cåstor (1.99999)
+	Elected:  Cåstor (2.00001)
+	Hopeful:  Pøllüx (1.99996)
+	Hopeful:  Hélen (2.00000)
+	Elected votes: 2.00001
+	Hopeful votes: 3.99996
+	Nontransferable votes: 0.00000
+	Residual: 0.00003
+	Total: 6.00000
+	Surplus: 0.00000
+Round 2:
+Action: Defeat: Pøllüx
+	Elected:  Cåstor (2.00001)
+	Hopeful:  Hélen (2.00000)
+	Defeated: Pøllüx (1.99996)
+	Elected votes: 2.00001
+	Hopeful votes: 2.00000
+	Defeated votes: 1.99996
+	Nontransferable votes: 0.00000
+	Residual: 0.00003
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Elect remaining: Hélen
+	Elected:  Cåstor (2.00001)
+	Elected:  Hélen (2.00000)
+	Defeated: Pøllüx (1.99996)
+	Elected votes: 4.00001
+	Hopeful votes: 0.00000
+	Defeated votes: 1.99996
+	Nontransferable votes: 0.00000
+	Residual: 0.00003
+	Total: 6.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Cåstor (2.00001)
+	Elected:  Hélen (2.00000)
+	Defeated: Pøllüx (1.99996)
+	Elected votes: 4.00001
+	Hopeful votes: 0.00000
+	Defeated votes: 1.99996
+	Nontransferable votes: 0.00000
+	Residual: 0.00003
+	Total: 6.00000
+	Surplus: 0.00000

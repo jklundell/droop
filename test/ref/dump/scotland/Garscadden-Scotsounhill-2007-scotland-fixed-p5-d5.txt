@@ -1,0 +1,44 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote
+0	log	Add eligible: Charlotte Ahmed
+0	log	Add eligible: Liz Cameron
+0	log	Add eligible: Sue England
+0	log	Add eligible: Robert Findlay
+0	log	Add eligible: Graeme Hendry
+0	log	Add eligible: Peter Lavelle
+0	log	Add eligible: Jean McFadden
+0	log	Add eligible: James Paris
+0	log	Add eligible: Paul Rooney
+0	log	Add eligible: Matthew T Smith
+0	begin	2033.00000	0.00000	Charlotte Ahmed	H	318.00000	Liz Cameron	H	2744.00000	Sue England	H	402.00000	Robert Findlay	H	191.00000	Graeme Hendry	H	2333.00000	Peter Lavelle	H	145.00000	Jean McFadden	H	1115.00000	James Paris	H	483.00000	Paul Rooney	H	1895.00000	Matthew T Smith	H	534.00000
+0	elect	2033.00000	0.00000	Charlotte Ahmed	H	318.00000	Liz Cameron	e	2744.00000	Sue England	H	402.00000	Robert Findlay	H	191.00000	Graeme Hendry	H	2333.00000	Peter Lavelle	H	145.00000	Jean McFadden	H	1115.00000	James Paris	H	483.00000	Paul Rooney	H	1895.00000	Matthew T Smith	H	534.00000
+0	elect	2033.00000	0.00000	Charlotte Ahmed	H	318.00000	Liz Cameron	e	2744.00000	Sue England	H	402.00000	Robert Findlay	H	191.00000	Graeme Hendry	e	2333.00000	Peter Lavelle	H	145.00000	Jean McFadden	H	1115.00000	James Paris	H	483.00000	Paul Rooney	H	1895.00000	Matthew T Smith	H	534.00000
+1	round	New Round
+1	unpend	2033.00000	0.00000	Charlotte Ahmed	H	318.00000	Liz Cameron	E	2744.00000	Sue England	H	402.00000	Robert Findlay	H	191.00000	Graeme Hendry	e	2333.00000	Peter Lavelle	H	145.00000	Jean McFadden	H	1115.00000	James Paris	H	483.00000	Paul Rooney	H	1895.00000	Matthew T Smith	H	534.00000
+1	transfer	2033.00000	160.38909	Charlotte Ahmed	H	338.98791	Liz Cameron	E	2033.00000	Sue England	H	426.09723	Robert Findlay	H	201.10529	Graeme Hendry	e	2333.00000	Peter Lavelle	H	156.14173	Jean McFadden	H	1450.80656	James Paris	H	508.65189	Paul Rooney	H	2007.45374	Matthew T Smith	H	544.36440
+2	round	New Round
+2	unpend	2033.00000	160.38909	Charlotte Ahmed	H	338.98791	Liz Cameron	E	2033.00000	Sue England	H	426.09723	Robert Findlay	H	201.10529	Graeme Hendry	E	2333.00000	Peter Lavelle	H	156.14173	Jean McFadden	H	1450.80656	James Paris	H	508.65189	Paul Rooney	H	2007.45374	Matthew T Smith	H	544.36440
+2	transfer	2033.00000	265.43895	Charlotte Ahmed	H	375.37605	Liz Cameron	E	2033.00000	Sue England	H	464.02833	Robert Findlay	H	205.60559	Graeme Hendry	E	2033.00000	Peter Lavelle	H	177.10027	Jean McFadden	H	1478.57984	James Paris	H	544.13997	Paul Rooney	H	2026.22642	Matthew T Smith	H	557.47956
+3	round	New Round
+3	defeat	2033.00000	265.43895	Charlotte Ahmed	H	375.37605	Liz Cameron	E	2033.00000	Sue England	H	464.02833	Robert Findlay	H	205.60559	Graeme Hendry	E	2033.00000	Peter Lavelle	D	177.10027	Jean McFadden	H	1478.57984	James Paris	H	544.13997	Paul Rooney	H	2026.22642	Matthew T Smith	H	557.47956
+3	transfer	2033.00000	304.13681	Charlotte Ahmed	H	414.52473	Liz Cameron	E	2033.00000	Sue England	H	500.63052	Robert Findlay	H	214.37707	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1500.87697	James Paris	H	563.36227	Paul Rooney	H	2037.20131	Matthew T Smith	H	558.86530
+3	elect	2033.00000	304.13681	Charlotte Ahmed	H	414.52473	Liz Cameron	E	2033.00000	Sue England	H	500.63052	Robert Findlay	H	214.37707	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1500.87697	James Paris	H	563.36227	Paul Rooney	e	2037.20131	Matthew T Smith	H	558.86530
+4	round	New Round
+4	unpend	2033.00000	304.13681	Charlotte Ahmed	H	414.52473	Liz Cameron	E	2033.00000	Sue England	H	500.63052	Robert Findlay	H	214.37707	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1500.87697	James Paris	H	563.36227	Paul Rooney	E	2037.20131	Matthew T Smith	H	558.86530
+4	transfer	2033.00000	305.43402	Charlotte Ahmed	H	414.65545	Liz Cameron	E	2033.00000	Sue England	H	500.75500	Robert Findlay	H	214.44336	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1503.21324	James Paris	H	563.50687	Paul Rooney	E	2033.00000	Matthew T Smith	H	558.95996
+5	round	New Round
+5	defeat	2033.00000	305.43402	Charlotte Ahmed	H	414.65545	Liz Cameron	E	2033.00000	Sue England	H	500.75500	Robert Findlay	D	214.44336	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1503.21324	James Paris	H	563.50687	Paul Rooney	E	2033.00000	Matthew T Smith	H	558.95996
+5	transfer	2033.00000	369.53763	Charlotte Ahmed	H	421.81874	Liz Cameron	E	2033.00000	Sue England	H	517.01581	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1523.85790	James Paris	H	576.44955	Paul Rooney	E	2033.00000	Matthew T Smith	H	652.28827
+6	round	New Round
+6	defeat	2033.00000	369.53763	Charlotte Ahmed	D	421.81874	Liz Cameron	E	2033.00000	Sue England	H	517.01581	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1523.85790	James Paris	H	576.44955	Paul Rooney	E	2033.00000	Matthew T Smith	H	652.28827
+6	transfer	2033.00000	570.17378	Charlotte Ahmed	D	0.00000	Liz Cameron	E	2033.00000	Sue England	H	640.34862	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1576.39059	James Paris	H	614.21967	Paul Rooney	E	2033.00000	Matthew T Smith	H	659.83524
+7	round	New Round
+7	defeat	2033.00000	570.17378	Charlotte Ahmed	D	0.00000	Liz Cameron	E	2033.00000	Sue England	H	640.34862	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1576.39059	James Paris	D	614.21967	Paul Rooney	E	2033.00000	Matthew T Smith	H	659.83524
+7	transfer	2033.00000	812.49645	Charlotte Ahmed	D	0.00000	Liz Cameron	E	2033.00000	Sue England	H	820.90265	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1681.40191	James Paris	D	0.00000	Paul Rooney	E	2033.00000	Matthew T Smith	H	746.16689
+8	round	New Round
+8	defeat	2033.00000	812.49645	Charlotte Ahmed	D	0.00000	Liz Cameron	E	2033.00000	Sue England	H	820.90265	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1681.40191	James Paris	D	0.00000	Paul Rooney	E	2033.00000	Matthew T Smith	D	746.16689
+8	transfer	2033.00000	1329.33993	Charlotte Ahmed	D	0.00000	Liz Cameron	E	2033.00000	Sue England	H	960.71529	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1770.91268	James Paris	D	0.00000	Paul Rooney	E	2033.00000	Matthew T Smith	D	0.00000
+9	round	New Round
+9	defeat	2033.00000	1329.33993	Charlotte Ahmed	D	0.00000	Liz Cameron	E	2033.00000	Sue England	D	960.71529	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	1770.91268	James Paris	D	0.00000	Paul Rooney	E	2033.00000	Matthew T Smith	D	0.00000
+9	transfer	2033.00000	2047.27280	Charlotte Ahmed	D	0.00000	Liz Cameron	E	2033.00000	Sue England	D	0.00000	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	H	2013.69510	James Paris	D	0.00000	Paul Rooney	E	2033.00000	Matthew T Smith	D	0.00000
+9	elect	2033.00000	2047.27280	Charlotte Ahmed	D	0.00000	Liz Cameron	E	2033.00000	Sue England	D	0.00000	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	E	2013.69510	James Paris	D	0.00000	Paul Rooney	E	2033.00000	Matthew T Smith	D	0.00000
+X	end	2033.00000	2047.27280	Charlotte Ahmed	D	0.00000	Liz Cameron	E	2033.00000	Sue England	D	0.00000	Robert Findlay	D	0.00000	Graeme Hendry	E	2033.00000	Peter Lavelle	D	0.00000	Jean McFadden	E	2013.69510	James Paris	D	0.00000	Paul Rooney	E	2033.00000	Matthew T Smith	D	0.00000

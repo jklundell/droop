@@ -1,0 +1,397 @@
+
+Election: SHETTLESTON Ward
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 8803
+	Quota: 1761.00000
+
+	Add eligible: Mick Eyre
+	Add eligible: Walter Hamilton
+	Add eligible: Wheatley Harris
+	Add eligible: David Jackson
+	Add eligible: Gordon Kirker
+	Add eligible: Catherine Maguire
+	Add eligible: Tom McKeown
+	Add eligible: John F McLaughlin
+	Add eligible: Euan McLeod
+	Add eligible: George Ryan
+	Add eligible: Alex White
+Action: Begin Count
+	Hopeful:  Mick Eyre (163.00000)
+	Hopeful:  Walter Hamilton (268.00000)
+	Hopeful:  Wheatley Harris (458.00000)
+	Hopeful:  David Jackson (420.00000)
+	Hopeful:  Gordon Kirker (190.00000)
+	Hopeful:  Catherine Maguire (227.00000)
+	Hopeful:  Tom McKeown (1861.00000)
+	Hopeful:  John F McLaughlin (1896.00000)
+	Hopeful:  Euan McLeod (1369.00000)
+	Hopeful:  George Ryan (1386.00000)
+	Hopeful:  Alex White (565.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8803.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: John F McLaughlin
+	Pending:  John F McLaughlin (1896.00000)
+	Hopeful:  Mick Eyre (163.00000)
+	Hopeful:  Walter Hamilton (268.00000)
+	Hopeful:  Wheatley Harris (458.00000)
+	Hopeful:  David Jackson (420.00000)
+	Hopeful:  Gordon Kirker (190.00000)
+	Hopeful:  Catherine Maguire (227.00000)
+	Hopeful:  Tom McKeown (1861.00000)
+	Hopeful:  Euan McLeod (1369.00000)
+	Hopeful:  George Ryan (1386.00000)
+	Hopeful:  Alex White (565.00000)
+	Elected votes: 0.00000
+	Pending votes: 1896.00000
+	Hopeful votes: 6907.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Tom McKeown
+	Pending:  Tom McKeown (1861.00000)
+	Pending:  John F McLaughlin (1896.00000)
+	Hopeful:  Mick Eyre (163.00000)
+	Hopeful:  Walter Hamilton (268.00000)
+	Hopeful:  Wheatley Harris (458.00000)
+	Hopeful:  David Jackson (420.00000)
+	Hopeful:  Gordon Kirker (190.00000)
+	Hopeful:  Catherine Maguire (227.00000)
+	Hopeful:  Euan McLeod (1369.00000)
+	Hopeful:  George Ryan (1386.00000)
+	Hopeful:  Alex White (565.00000)
+	Elected votes: 0.00000
+	Pending votes: 3757.00000
+	Hopeful votes: 5046.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8803.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: John F McLaughlin
+	Elected votes: 1896.00000
+	Pending votes: 1861.00000
+	Hopeful votes: 5046.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8803.00000
+	Surplus: 235.00000
+Action: Surplus transferred: John F McLaughlin (135.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Pending:  Tom McKeown (1861.00000)
+	Hopeful:  Mick Eyre (172.82560)
+	Hopeful:  Walter Hamilton (271.91600)
+	Hopeful:  Wheatley Harris (477.65120)
+	Hopeful:  David Jackson (433.81280)
+	Hopeful:  Gordon Kirker (191.49520)
+	Hopeful:  Catherine Maguire (241.59600)
+	Hopeful:  Euan McLeod (1382.17200)
+	Hopeful:  George Ryan (1394.04560)
+	Hopeful:  Alex White (572.12000)
+	Elected votes: 1761.00000
+	Pending votes: 1861.00000
+	Hopeful votes: 5137.63440
+	Nontransferable votes: 43.36080
+	Residual: 0.00480
+	Total: 8803.00000
+	Surplus: 235.00000
+Round 2:
+Action: Transfer high surplus: Tom McKeown
+	Elected votes: 3622.00000
+	Hopeful votes: 5137.63440
+	Nontransferable votes: 43.36080
+	Residual: 0.00480
+	Total: 8803.00000
+	Surplus: 100.00000
+Action: Surplus transferred: Tom McKeown (100.00000)
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Mick Eyre (174.11512)
+	Hopeful:  Walter Hamilton (272.66822)
+	Hopeful:  Wheatley Harris (482.48690)
+	Hopeful:  David Jackson (436.33811)
+	Hopeful:  Gordon Kirker (192.24742)
+	Hopeful:  Catherine Maguire (243.85266)
+	Hopeful:  Euan McLeod (1428.70218)
+	Hopeful:  George Ryan (1410.00341)
+	Hopeful:  Alex White (573.46325)
+	Elected votes: 3522.00000
+	Hopeful votes: 5213.87727
+	Nontransferable votes: 67.10946
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 100.00000
+Round 3:
+Action: Defeat low candidate: Mick Eyre
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Walter Hamilton (272.66822)
+	Hopeful:  Wheatley Harris (482.48690)
+	Hopeful:  David Jackson (436.33811)
+	Hopeful:  Gordon Kirker (192.24742)
+	Hopeful:  Catherine Maguire (243.85266)
+	Hopeful:  Euan McLeod (1428.70218)
+	Hopeful:  George Ryan (1410.00341)
+	Hopeful:  Alex White (573.46325)
+	Defeated: Mick Eyre (174.11512)
+	Elected votes: 3522.00000
+	Hopeful votes: 5039.76215
+	Defeated votes: 174.11512
+	Nontransferable votes: 67.10946
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Mick Eyre
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Walter Hamilton (285.50647)
+	Hopeful:  Wheatley Harris (535.92329)
+	Hopeful:  David Jackson (450.24624)
+	Hopeful:  Gordon Kirker (196.44355)
+	Hopeful:  Catherine Maguire (265.76079)
+	Hopeful:  Euan McLeod (1442.86149)
+	Hopeful:  George Ryan (1421.41314)
+	Hopeful:  Alex White (575.89045)
+	Defeated: Mick Eyre (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 5174.04542
+	Nontransferable votes: 106.94131
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Gordon Kirker
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Walter Hamilton (285.50647)
+	Hopeful:  Wheatley Harris (535.92329)
+	Hopeful:  David Jackson (450.24624)
+	Hopeful:  Catherine Maguire (265.76079)
+	Hopeful:  Euan McLeod (1442.86149)
+	Hopeful:  George Ryan (1421.41314)
+	Hopeful:  Alex White (575.89045)
+	Defeated: Gordon Kirker (196.44355)
+	Defeated: Mick Eyre (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 4977.60187
+	Defeated votes: 196.44355
+	Nontransferable votes: 106.94131
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Gordon Kirker
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Walter Hamilton (316.70260)
+	Hopeful:  Wheatley Harris (544.29808)
+	Hopeful:  David Jackson (458.56730)
+	Hopeful:  Catherine Maguire (269.97439)
+	Hopeful:  Euan McLeod (1454.21881)
+	Hopeful:  George Ryan (1434.53807)
+	Hopeful:  Alex White (644.14031)
+	Defeated: Mick Eyre, Gordon Kirker (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 5122.43956
+	Nontransferable votes: 158.54717
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Catherine Maguire
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Walter Hamilton (316.70260)
+	Hopeful:  Wheatley Harris (544.29808)
+	Hopeful:  David Jackson (458.56730)
+	Hopeful:  Euan McLeod (1454.21881)
+	Hopeful:  George Ryan (1434.53807)
+	Hopeful:  Alex White (644.14031)
+	Defeated: Catherine Maguire (269.97439)
+	Defeated: Mick Eyre, Gordon Kirker (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 4852.46517
+	Defeated votes: 269.97439
+	Nontransferable votes: 158.54717
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Catherine Maguire
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Walter Hamilton (326.11233)
+	Hopeful:  Wheatley Harris (594.85940)
+	Hopeful:  David Jackson (515.32419)
+	Hopeful:  Euan McLeod (1483.96839)
+	Hopeful:  George Ryan (1454.21513)
+	Hopeful:  Alex White (659.08470)
+	Defeated: Mick Eyre, Gordon Kirker, Catherine Maguire (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 5033.56414
+	Nontransferable votes: 247.42259
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Walter Hamilton
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Wheatley Harris (594.85940)
+	Hopeful:  David Jackson (515.32419)
+	Hopeful:  Euan McLeod (1483.96839)
+	Hopeful:  George Ryan (1454.21513)
+	Hopeful:  Alex White (659.08470)
+	Defeated: Walter Hamilton (326.11233)
+	Defeated: Mick Eyre, Gordon Kirker, Catherine Maguire (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 4707.45181
+	Defeated votes: 326.11233
+	Nontransferable votes: 247.42259
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Walter Hamilton
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Wheatley Harris (628.82126)
+	Hopeful:  David Jackson (539.16112)
+	Hopeful:  Euan McLeod (1502.57557)
+	Hopeful:  George Ryan (1472.57245)
+	Hopeful:  Alex White (734.65430)
+	Defeated: Mick Eyre, Walter Hamilton, Gordon Kirker, Catherine Maguire (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 4877.78470
+	Nontransferable votes: 403.20203
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: David Jackson
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Wheatley Harris (628.82126)
+	Hopeful:  Euan McLeod (1502.57557)
+	Hopeful:  George Ryan (1472.57245)
+	Hopeful:  Alex White (734.65430)
+	Defeated: David Jackson (539.16112)
+	Defeated: Mick Eyre, Walter Hamilton, Gordon Kirker, Catherine Maguire (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 4338.62358
+	Defeated votes: 539.16112
+	Nontransferable votes: 403.20203
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Transfer defeated: David Jackson
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Wheatley Harris (671.76057)
+	Hopeful:  Euan McLeod (1582.99977)
+	Hopeful:  George Ryan (1528.85349)
+	Hopeful:  Alex White (848.48615)
+	Defeated: Mick Eyre, Walter Hamilton, David Jackson, Gordon Kirker, Catherine Maguire (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 4632.09998
+	Nontransferable votes: 648.88675
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Round 8:
+Action: Defeat low candidate: Wheatley Harris
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Euan McLeod (1582.99977)
+	Hopeful:  George Ryan (1528.85349)
+	Hopeful:  Alex White (848.48615)
+	Defeated: Wheatley Harris (671.76057)
+	Defeated: Mick Eyre, Walter Hamilton, David Jackson, Gordon Kirker, Catherine Maguire (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 3960.33941
+	Defeated votes: 671.76057
+	Nontransferable votes: 648.88675
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Wheatley Harris
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Euan McLeod (1720.33550)
+	Hopeful:  George Ryan (1593.31451)
+	Hopeful:  Alex White (887.81828)
+	Defeated: Mick Eyre, Walter Hamilton, Wheatley Harris, David Jackson, Gordon Kirker, Catherine Maguire (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 4201.46829
+	Nontransferable votes: 1079.51844
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Round 9:
+Action: Defeat low candidate: Alex White
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Euan McLeod (1720.33550)
+	Hopeful:  George Ryan (1593.31451)
+	Defeated: Alex White (887.81828)
+	Defeated: Mick Eyre, Walter Hamilton, Wheatley Harris, David Jackson, Gordon Kirker, Catherine Maguire (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 3313.65001
+	Defeated votes: 887.81828
+	Nontransferable votes: 1079.51844
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Alex White
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Hopeful:  Euan McLeod (1825.59775)
+	Hopeful:  George Ryan (1688.23691)
+	Defeated: Mick Eyre, Walter Hamilton, Wheatley Harris, David Jackson, Gordon Kirker, Catherine Maguire, Alex White (0.00000)
+	Elected votes: 3522.00000
+	Hopeful votes: 3513.83466
+	Nontransferable votes: 1767.15207
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Euan McLeod
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Elected:  Euan McLeod (1825.59775)
+	Hopeful:  George Ryan (1688.23691)
+	Defeated: Mick Eyre, Walter Hamilton, Wheatley Harris, David Jackson, Gordon Kirker, Catherine Maguire, Alex White (0.00000)
+	Elected votes: 5347.59775
+	Hopeful votes: 1688.23691
+	Nontransferable votes: 1767.15207
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: George Ryan
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Elected:  Euan McLeod (1825.59775)
+	Elected:  George Ryan (1688.23691)
+	Defeated: Mick Eyre, Walter Hamilton, Wheatley Harris, David Jackson, Gordon Kirker, Catherine Maguire, Alex White (0.00000)
+	Elected votes: 7035.83466
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1767.15207
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Tom McKeown (1761.00000)
+	Elected:  John F McLaughlin (1761.00000)
+	Elected:  Euan McLeod (1825.59775)
+	Elected:  George Ryan (1688.23691)
+	Defeated: Mick Eyre, Walter Hamilton, Wheatley Harris, David Jackson, Gordon Kirker, Catherine Maguire, Alex White (0.00000)
+	Elected votes: 7035.83466
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1767.15207
+	Residual: 0.01327
+	Total: 8803.00000
+	Surplus: 0.00000

@@ -1,0 +1,489 @@
+
+Election: EAST CENTRE
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 9078
+	Quota: 1816.00000
+
+	Add eligible: Jim Adams
+	Add eligible: Patricia Chalmers
+	Add eligible: Elaine Cooper
+	Add eligible: Drew Dickie
+	Add eligible: Frank Docherty
+	Add eligible: Jennifer Dunn
+	Add eligible: Stuart Grieve
+	Add eligible: David Johnston
+	Add eligible: John Kerr
+	Add eligible: Elaine McDougall
+	Add eligible: William McLachlan
+	Add eligible: Daniel O'Donnell
+	Add eligible: Randle Wilson
+Action: Begin Count
+	Hopeful:  Jim Adams (556.00000)
+	Hopeful:  Patricia Chalmers (1792.00000)
+	Hopeful:  Elaine Cooper (471.00000)
+	Hopeful:  Drew Dickie (175.00000)
+	Hopeful:  Frank Docherty (1277.00000)
+	Hopeful:  Jennifer Dunn (1969.00000)
+	Hopeful:  Stuart Grieve (460.00000)
+	Hopeful:  David Johnston (137.00000)
+	Hopeful:  John Kerr (270.00000)
+	Hopeful:  Elaine McDougall (1039.00000)
+	Hopeful:  William McLachlan (226.00000)
+	Hopeful:  Daniel O'Donnell (323.00000)
+	Hopeful:  Randle Wilson (383.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 9078.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Jennifer Dunn
+	Pending:  Jennifer Dunn (1969.00000)
+	Hopeful:  Jim Adams (556.00000)
+	Hopeful:  Patricia Chalmers (1792.00000)
+	Hopeful:  Elaine Cooper (471.00000)
+	Hopeful:  Drew Dickie (175.00000)
+	Hopeful:  Frank Docherty (1277.00000)
+	Hopeful:  Stuart Grieve (460.00000)
+	Hopeful:  David Johnston (137.00000)
+	Hopeful:  John Kerr (270.00000)
+	Hopeful:  Elaine McDougall (1039.00000)
+	Hopeful:  William McLachlan (226.00000)
+	Hopeful:  Daniel O'Donnell (323.00000)
+	Hopeful:  Randle Wilson (383.00000)
+	Elected votes: 0.00000
+	Pending votes: 1969.00000
+	Hopeful votes: 7109.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9078.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Jennifer Dunn
+	Elected votes: 1969.00000
+	Hopeful votes: 7109.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9078.00000
+	Surplus: 153.00000
+Action: Surplus transferred: Jennifer Dunn (153.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (575.03650)
+	Hopeful:  Patricia Chalmers (1801.79020)
+	Hopeful:  Elaine Cooper (490.58040)
+	Hopeful:  Drew Dickie (176.86480)
+	Hopeful:  Frank Docherty (1288.11110)
+	Hopeful:  Stuart Grieve (474.29680)
+	Hopeful:  David Johnston (140.72960)
+	Hopeful:  John Kerr (273.18570)
+	Hopeful:  Elaine McDougall (1046.30380)
+	Hopeful:  William McLachlan (229.65190)
+	Hopeful:  Daniel O'Donnell (334.03340)
+	Hopeful:  Randle Wilson (387.11810)
+	Elected votes: 1816.00000
+	Hopeful votes: 7217.70230
+	Nontransferable votes: 44.28900
+	Residual: 0.00870
+	Total: 9078.00000
+	Surplus: 153.00000
+Round 2:
+Action: Defeat low candidate: David Johnston
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (575.03650)
+	Hopeful:  Patricia Chalmers (1801.79020)
+	Hopeful:  Elaine Cooper (490.58040)
+	Hopeful:  Drew Dickie (176.86480)
+	Hopeful:  Frank Docherty (1288.11110)
+	Hopeful:  Stuart Grieve (474.29680)
+	Hopeful:  John Kerr (273.18570)
+	Hopeful:  Elaine McDougall (1046.30380)
+	Hopeful:  William McLachlan (229.65190)
+	Hopeful:  Daniel O'Donnell (334.03340)
+	Hopeful:  Randle Wilson (387.11810)
+	Defeated: David Johnston (140.72960)
+	Elected votes: 1816.00000
+	Hopeful votes: 7076.97270
+	Defeated votes: 140.72960
+	Nontransferable votes: 44.28900
+	Residual: 0.00870
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Transfer defeated: David Johnston
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (583.42500)
+	Hopeful:  Patricia Chalmers (1811.86790)
+	Hopeful:  Elaine Cooper (495.04660)
+	Hopeful:  Drew Dickie (178.02020)
+	Hopeful:  Frank Docherty (1294.18880)
+	Hopeful:  Stuart Grieve (480.60760)
+	Hopeful:  John Kerr (316.04040)
+	Hopeful:  Elaine McDougall (1049.30380)
+	Hopeful:  William McLachlan (231.88500)
+	Hopeful:  Daniel O'Donnell (336.49960)
+	Hopeful:  Randle Wilson (400.35120)
+	Defeated: David Johnston (0.00000)
+	Elected votes: 1816.00000
+	Hopeful votes: 7177.23610
+	Nontransferable votes: 84.75520
+	Residual: 0.00870
+	Total: 9078.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: Drew Dickie
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (583.42500)
+	Hopeful:  Patricia Chalmers (1811.86790)
+	Hopeful:  Elaine Cooper (495.04660)
+	Hopeful:  Frank Docherty (1294.18880)
+	Hopeful:  Stuart Grieve (480.60760)
+	Hopeful:  John Kerr (316.04040)
+	Hopeful:  Elaine McDougall (1049.30380)
+	Hopeful:  William McLachlan (231.88500)
+	Hopeful:  Daniel O'Donnell (336.49960)
+	Hopeful:  Randle Wilson (400.35120)
+	Defeated: Drew Dickie (178.02020)
+	Defeated: David Johnston (0.00000)
+	Elected votes: 1816.00000
+	Hopeful votes: 6999.21590
+	Defeated votes: 178.02020
+	Nontransferable votes: 84.75520
+	Residual: 0.00870
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Drew Dickie
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (587.50270)
+	Hopeful:  Patricia Chalmers (1821.94560)
+	Hopeful:  Elaine Cooper (501.43510)
+	Hopeful:  Frank Docherty (1300.18880)
+	Hopeful:  Stuart Grieve (491.99610)
+	Hopeful:  John Kerr (319.11810)
+	Hopeful:  Elaine McDougall (1057.38150)
+	Hopeful:  William McLachlan (256.96270)
+	Hopeful:  Daniel O'Donnell (341.57730)
+	Hopeful:  Randle Wilson (460.66200)
+	Defeated: Drew Dickie, David Johnston (0.00000)
+	Elected votes: 1816.00000
+	Hopeful votes: 7138.76990
+	Nontransferable votes: 123.22140
+	Residual: 0.00870
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Patricia Chalmers
+	Elected:  Jennifer Dunn (1816.00000)
+	Pending:  Patricia Chalmers (1821.94560)
+	Hopeful:  Jim Adams (587.50270)
+	Hopeful:  Elaine Cooper (501.43510)
+	Hopeful:  Frank Docherty (1300.18880)
+	Hopeful:  Stuart Grieve (491.99610)
+	Hopeful:  John Kerr (319.11810)
+	Hopeful:  Elaine McDougall (1057.38150)
+	Hopeful:  William McLachlan (256.96270)
+	Hopeful:  Daniel O'Donnell (341.57730)
+	Hopeful:  Randle Wilson (460.66200)
+	Defeated: Drew Dickie, David Johnston (0.00000)
+	Elected votes: 1816.00000
+	Pending votes: 1821.94560
+	Hopeful votes: 5316.82430
+	Nontransferable votes: 123.22140
+	Residual: 0.00870
+	Total: 9078.00000
+	Surplus: 0.00000
+Round 4:
+Action: Transfer high surplus: Patricia Chalmers
+	Elected votes: 3637.94560
+	Hopeful votes: 5316.82430
+	Nontransferable votes: 123.22140
+	Residual: 0.00870
+	Total: 9078.00000
+	Surplus: 5.94560
+Action: Surplus transferred: Patricia Chalmers (5.94560)
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (587.77026)
+	Hopeful:  Elaine Cooper (501.62718)
+	Hopeful:  Frank Docherty (1303.23287)
+	Hopeful:  Stuart Grieve (492.16988)
+	Hopeful:  John Kerr (319.19358)
+	Hopeful:  Elaine McDougall (1058.18695)
+	Hopeful:  William McLachlan (256.96922)
+	Hopeful:  Daniel O'Donnell (341.68387)
+	Hopeful:  Randle Wilson (460.73823)
+	Defeated: Drew Dickie, David Johnston (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 5321.57204
+	Nontransferable votes: 124.41278
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 5.94560
+Round 5:
+Action: Defeat low candidate: William McLachlan
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (587.77026)
+	Hopeful:  Elaine Cooper (501.62718)
+	Hopeful:  Frank Docherty (1303.23287)
+	Hopeful:  Stuart Grieve (492.16988)
+	Hopeful:  John Kerr (319.19358)
+	Hopeful:  Elaine McDougall (1058.18695)
+	Hopeful:  Daniel O'Donnell (341.68387)
+	Hopeful:  Randle Wilson (460.73823)
+	Defeated: William McLachlan (256.96922)
+	Defeated: Drew Dickie, David Johnston (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 5064.60282
+	Defeated votes: 256.96922
+	Nontransferable votes: 124.41278
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Transfer defeated: William McLachlan
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (607.31416)
+	Hopeful:  Elaine Cooper (521.24878)
+	Hopeful:  Frank Docherty (1316.31057)
+	Hopeful:  Stuart Grieve (495.40298)
+	Hopeful:  John Kerr (328.27128)
+	Hopeful:  Elaine McDougall (1067.26791)
+	Hopeful:  Daniel O'Donnell (351.91697)
+	Hopeful:  Randle Wilson (539.04903)
+	Defeated: Drew Dickie, David Johnston, William McLachlan (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 5226.78168
+	Nontransferable votes: 219.20314
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: John Kerr
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (607.31416)
+	Hopeful:  Elaine Cooper (521.24878)
+	Hopeful:  Frank Docherty (1316.31057)
+	Hopeful:  Stuart Grieve (495.40298)
+	Hopeful:  Elaine McDougall (1067.26791)
+	Hopeful:  Daniel O'Donnell (351.91697)
+	Hopeful:  Randle Wilson (539.04903)
+	Defeated: John Kerr (328.27128)
+	Defeated: Drew Dickie, David Johnston, William McLachlan (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 4898.51040
+	Defeated votes: 328.27128
+	Nontransferable votes: 219.20314
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Transfer defeated: John Kerr
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (626.85806)
+	Hopeful:  Elaine Cooper (533.87364)
+	Hopeful:  Frank Docherty (1377.48553)
+	Hopeful:  Stuart Grieve (511.55838)
+	Hopeful:  Elaine McDougall (1101.51731)
+	Hopeful:  Daniel O'Donnell (372.30547)
+	Hopeful:  Randle Wilson (561.35983)
+	Defeated: Drew Dickie, David Johnston, John Kerr, William McLachlan (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 5084.95822
+	Nontransferable votes: 361.02660
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: Daniel O'Donnell
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (626.85806)
+	Hopeful:  Elaine Cooper (533.87364)
+	Hopeful:  Frank Docherty (1377.48553)
+	Hopeful:  Stuart Grieve (511.55838)
+	Hopeful:  Elaine McDougall (1101.51731)
+	Hopeful:  Randle Wilson (561.35983)
+	Defeated: Daniel O'Donnell (372.30547)
+	Defeated: Drew Dickie, David Johnston, John Kerr, William McLachlan (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 4712.65275
+	Defeated votes: 372.30547
+	Nontransferable votes: 361.02660
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Daniel O'Donnell
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (722.51648)
+	Hopeful:  Elaine Cooper (585.74170)
+	Hopeful:  Frank Docherty (1411.90688)
+	Hopeful:  Stuart Grieve (531.25818)
+	Hopeful:  Elaine McDougall (1134.14593)
+	Hopeful:  Randle Wilson (566.52175)
+	Defeated: Drew Dickie, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 4952.09092
+	Nontransferable votes: 493.89390
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Round 8:
+Action: Defeat low candidate: Stuart Grieve
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (722.51648)
+	Hopeful:  Elaine Cooper (585.74170)
+	Hopeful:  Frank Docherty (1411.90688)
+	Hopeful:  Elaine McDougall (1134.14593)
+	Hopeful:  Randle Wilson (566.52175)
+	Defeated: Stuart Grieve (531.25818)
+	Defeated: Drew Dickie, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 4420.83274
+	Defeated votes: 531.25818
+	Nontransferable votes: 493.89390
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Stuart Grieve
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (771.99955)
+	Hopeful:  Elaine Cooper (740.19700)
+	Hopeful:  Frank Docherty (1486.72984)
+	Hopeful:  Elaine McDougall (1191.20167)
+	Hopeful:  Randle Wilson (626.24093)
+	Defeated: Drew Dickie, Stuart Grieve, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 4816.36899
+	Nontransferable votes: 629.61583
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Round 9:
+Action: Defeat low candidate: Randle Wilson
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (771.99955)
+	Hopeful:  Elaine Cooper (740.19700)
+	Hopeful:  Frank Docherty (1486.72984)
+	Hopeful:  Elaine McDougall (1191.20167)
+	Defeated: Randle Wilson (626.24093)
+	Defeated: Drew Dickie, Stuart Grieve, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 4190.12806
+	Defeated votes: 626.24093
+	Nontransferable votes: 629.61583
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Randle Wilson
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Jim Adams (797.77655)
+	Hopeful:  Elaine Cooper (829.83196)
+	Hopeful:  Frank Docherty (1526.97297)
+	Hopeful:  Elaine McDougall (1243.67765)
+	Defeated: Drew Dickie, Stuart Grieve, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell, Randle Wilson (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 4398.25913
+	Nontransferable votes: 1047.72569
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Round 10:
+Action: Defeat low candidate: Jim Adams
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Elaine Cooper (829.83196)
+	Hopeful:  Frank Docherty (1526.97297)
+	Hopeful:  Elaine McDougall (1243.67765)
+	Defeated: Jim Adams (797.77655)
+	Defeated: Drew Dickie, Stuart Grieve, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell, Randle Wilson (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 3600.48258
+	Defeated votes: 797.77655
+	Nontransferable votes: 1047.72569
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Jim Adams
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Elaine Cooper (1038.31774)
+	Hopeful:  Frank Docherty (1627.76738)
+	Hopeful:  Elaine McDougall (1314.83147)
+	Defeated: Jim Adams, Drew Dickie, Stuart Grieve, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell, Randle Wilson (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 3980.91659
+	Nontransferable votes: 1465.06823
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Round 11:
+Action: Defeat low candidate: Elaine Cooper
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Frank Docherty (1627.76738)
+	Hopeful:  Elaine McDougall (1314.83147)
+	Defeated: Elaine Cooper (1038.31774)
+	Defeated: Jim Adams, Drew Dickie, Stuart Grieve, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell, Randle Wilson (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 2942.59885
+	Defeated votes: 1038.31774
+	Nontransferable votes: 1465.06823
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Elaine Cooper
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Frank Docherty (1795.44665)
+	Hopeful:  Elaine McDougall (1438.81692)
+	Defeated: Jim Adams, Elaine Cooper, Drew Dickie, Stuart Grieve, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell, Randle Wilson (0.00000)
+	Elected votes: 3632.00000
+	Hopeful votes: 3234.26357
+	Nontransferable votes: 2211.72125
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Frank Docherty
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Frank Docherty (1795.44665)
+	Elected:  Jennifer Dunn (1816.00000)
+	Hopeful:  Elaine McDougall (1438.81692)
+	Defeated: Jim Adams, Elaine Cooper, Drew Dickie, Stuart Grieve, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell, Randle Wilson (0.00000)
+	Elected votes: 5427.44665
+	Hopeful votes: 1438.81692
+	Nontransferable votes: 2211.72125
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Elaine McDougall
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Frank Docherty (1795.44665)
+	Elected:  Jennifer Dunn (1816.00000)
+	Elected:  Elaine McDougall (1438.81692)
+	Defeated: Jim Adams, Elaine Cooper, Drew Dickie, Stuart Grieve, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell, Randle Wilson (0.00000)
+	Elected votes: 6866.26357
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2211.72125
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Patricia Chalmers (1816.00000)
+	Elected:  Frank Docherty (1795.44665)
+	Elected:  Jennifer Dunn (1816.00000)
+	Elected:  Elaine McDougall (1438.81692)
+	Defeated: Jim Adams, Elaine Cooper, Drew Dickie, Stuart Grieve, David Johnston, John Kerr, William McLachlan, Daniel O'Donnell, Randle Wilson (0.00000)
+	Elected votes: 6866.26357
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2211.72125
+	Residual: 0.01518
+	Total: 9078.00000
+	Surplus: 0.00000

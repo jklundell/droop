@@ -1,0 +1,992 @@
+{
+  "actions": [
+    {
+      "msg": "Add eligible: a", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: b", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: c", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: d", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: e", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: f", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }
+      }, 
+      "msg": "Begin Count", 
+      "quota": "100.000000000", 
+      "round": 0, 
+      "tag": "begin", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "100.000000000", 
+      "round": 1, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "99.000000000", 
+          "state": "hopeful", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: a", 
+      "quota": "100.000000000", 
+      "round": 1, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "99.000000000", 
+          "state": "hopeful", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: a (306.000000000)", 
+      "quota": "100.000000000", 
+      "round": 1, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "99.000000000", 
+          "state": "hopeful", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "100.000000000", 
+      "round": 2, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "99.000000000", 
+          "state": "hopeful", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: b", 
+      "quota": "100.000000000", 
+      "round": 2, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "99.000000000", 
+          "state": "hopeful", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: b (153.000000000)", 
+      "quota": "100.000000000", 
+      "round": 2, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "H", 
+          "quotient": "0.000000000", 
+          "state": "hopeful", 
+          "vote": "0.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "99.000000000", 
+          "state": "hopeful", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "100.000000000", 
+      "round": 3, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "102.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "99.000000000", 
+          "state": "hopeful", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: c", 
+      "quota": "100.000000000", 
+      "round": 3, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "102.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "99.000000000", 
+          "state": "hopeful", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: c (102.000000000)", 
+      "quota": "100.000000000", 
+      "round": 3, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "102.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "4": {
+          "code": "H", 
+          "quotient": "99.000000000", 
+          "state": "hopeful", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "100.000000000", 
+      "round": 4, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "102.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "99.000000000", 
+          "state": "elected", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: d", 
+      "quota": "98.000000000", 
+      "round": 4, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "102.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "99.000000000", 
+          "state": "elected", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: d (99.000000000)", 
+      "quota": "98.000000000", 
+      "round": 4, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "102.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "99.000000000", 
+          "state": "elected", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "H", 
+          "quotient": "98.000000000", 
+          "state": "hopeful", 
+          "vote": "98.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "New Round", 
+      "quota": "98.000000000", 
+      "round": 5, 
+      "tag": "round", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "102.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "99.000000000", 
+          "state": "elected", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "98.500000000", 
+          "state": "elected", 
+          "vote": "197.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Elect high quotient: e", 
+      "quota": "98.000000000", 
+      "round": 5, 
+      "tag": "elect", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "102.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "99.000000000", 
+          "state": "elected", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "98.500000000", 
+          "state": "elected", 
+          "vote": "197.000000000"
+        }, 
+        "6": {
+          "code": "H", 
+          "quotient": "97.000000000", 
+          "state": "hopeful", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Transfer elected: e (98.500000000)", 
+      "quota": "98.000000000", 
+      "round": 5, 
+      "tag": "transfer", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "102.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "99.000000000", 
+          "state": "elected", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "98.500000000", 
+          "state": "elected", 
+          "vote": "197.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "97.000000000", 
+          "state": "defeated", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Defeat remaining candidates: f", 
+      "quota": "98.000000000", 
+      "round": 5, 
+      "tag": "defeat", 
+      "votes": "0.000000000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "306.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "153.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "102.000000000", 
+          "state": "elected", 
+          "vote": "306.000000000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "99.000000000", 
+          "state": "elected", 
+          "vote": "99.000000000"
+        }, 
+        "5": {
+          "code": "E", 
+          "pending": false, 
+          "quotient": "98.500000000", 
+          "state": "elected", 
+          "vote": "197.000000000"
+        }, 
+        "6": {
+          "code": "D", 
+          "quotient": "97.000000000", 
+          "state": "defeated", 
+          "vote": "97.000000000"
+        }
+      }, 
+      "msg": "Count Complete", 
+      "quota": "98.000000000", 
+      "round": 5, 
+      "tag": "end", 
+      "votes": "0.000000000"
+    }
+  ], 
+  "arithmetic_info": "guarded-precision fixed-point decimal arithmetic (9+9 places)", 
+  "arithmetic_name": "guarded", 
+  "arithmetic_report": "\tmaxDiff: 0  (s/b << geps)\n\tgeps:    500000000\n\tminDiff: 500000000000009849  (s/b >> geps)\n\tguard:   1000000000\n\tprec:    1000000000000000000\n\n", 
+  "cdict": {
+    "1": {
+      "ballot_order": 1, 
+      "cid": 1, 
+      "name": "a", 
+      "nick": "1", 
+      "tie_order": 1
+    }, 
+    "2": {
+      "ballot_order": 2, 
+      "cid": 2, 
+      "name": "b", 
+      "nick": "2", 
+      "tie_order": 2
+    }, 
+    "3": {
+      "ballot_order": 3, 
+      "cid": 3, 
+      "name": "c", 
+      "nick": "3", 
+      "tie_order": 3
+    }, 
+    "4": {
+      "ballot_order": 4, 
+      "cid": 4, 
+      "name": "d", 
+      "nick": "4", 
+      "tie_order": 4
+    }, 
+    "5": {
+      "ballot_order": 5, 
+      "cid": 5, 
+      "name": "e", 
+      "nick": "5", 
+      "tie_order": 5
+    }, 
+    "6": {
+      "ballot_order": 6, 
+      "cid": 6, 
+      "name": "f", 
+      "nick": "6", 
+      "tie_order": 6
+    }
+  }, 
+  "cids": [
+    1, 
+    2, 
+    3, 
+    4, 
+    5, 
+    6
+  ], 
+  "droop_name": "droop", 
+  "droop_version": "0.11", 
+  "ecids": [
+    1, 
+    2, 
+    3, 
+    4, 
+    5, 
+    6
+  ], 
+  "method": "qpq", 
+  "nballots": 600, 
+  "options": {
+    "allowed": {}, 
+    "cmd": {
+      "rule": "qpq"
+    }, 
+    "default": {
+      "arithmetic": "guarded", 
+      "display": 9, 
+      "guard": 9, 
+      "precision": 9
+    }, 
+    "file_options": {}, 
+    "force": {
+      "arithmetic": "guarded", 
+      "display": 9, 
+      "guard": 9, 
+      "precision": 9
+    }, 
+    "options": {
+      "arithmetic": "guarded", 
+      "display": 9, 
+      "guard": 9, 
+      "precision": 9, 
+      "rule": "qpq"
+    }
+  }, 
+  "quota": "100.000000000", 
+  "rule_info": "QPQ", 
+  "rule_name": "qpq", 
+  "seats": 5, 
+  "title": "QPQ election 3"
+}

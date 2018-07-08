@@ -1,0 +1,45 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote	11.name	11.state	11.vote
+0	log	Add eligible: Esme H Clark
+0	log	Add eligible: Margot Clark
+0	log	Add eligible: Sadie Docherty
+0	log	Add eligible: Chris Lang
+0	log	Add eligible: Harry McArthur
+0	log	Add eligible: John McKenzie
+0	log	Add eligible: David Ritchie
+0	log	Add eligible: Alan Stewart
+0	log	Add eligible: Chloe Helen Stewart
+0	log	Add eligible: Gordon Thomson
+0	log	Add eligible: Frank Young
+0	begin	1914.00000	0.00000	Esme H Clark	H	898.00000	Margot Clark	H	1284.00000	Sadie Docherty	H	1782.00000	Chris Lang	H	219.00000	Harry McArthur	H	165.00000	John McKenzie	H	1381.00000	David Ritchie	H	2043.00000	Alan Stewart	H	955.00000	Chloe Helen Stewart	H	296.00000	Gordon Thomson	H	149.00000	Frank Young	H	395.00000
+0	elect	1914.00000	0.00000	Esme H Clark	H	898.00000	Margot Clark	H	1284.00000	Sadie Docherty	H	1782.00000	Chris Lang	H	219.00000	Harry McArthur	H	165.00000	John McKenzie	H	1381.00000	David Ritchie	e	2043.00000	Alan Stewart	H	955.00000	Chloe Helen Stewart	H	296.00000	Gordon Thomson	H	149.00000	Frank Young	H	395.00000
+1	round	New Round
+1	unpend	1914.00000	0.00000	Esme H Clark	H	898.00000	Margot Clark	H	1284.00000	Sadie Docherty	H	1782.00000	Chris Lang	H	219.00000	Harry McArthur	H	165.00000	John McKenzie	H	1381.00000	David Ritchie	E	2043.00000	Alan Stewart	H	955.00000	Chloe Helen Stewart	H	296.00000	Gordon Thomson	H	149.00000	Frank Young	H	395.00000
+1	transfer	1914.00000	36.17922	Esme H Clark	H	905.13482	Margot Clark	H	1302.94200	Sadie Docherty	H	1789.19796	Chris Lang	H	224.61946	Harry McArthur	H	166.83106	John McKenzie	H	1389.27134	David Ritchie	E	1914.00000	Alan Stewart	H	961.44028	Chloe Helen Stewart	H	310.77476	Gordon Thomson	H	156.82936	Frank Young	H	409.77476
+2	round	New Round
+2	defeat	1914.00000	36.17922	Esme H Clark	H	905.13482	Margot Clark	H	1302.94200	Sadie Docherty	H	1789.19796	Chris Lang	H	224.61946	Harry McArthur	H	166.83106	John McKenzie	H	1389.27134	David Ritchie	E	1914.00000	Alan Stewart	H	961.44028	Chloe Helen Stewart	H	310.77476	Gordon Thomson	D	156.82936	Frank Young	H	409.77476
+2	transfer	1914.00000	72.19970	Esme H Clark	H	906.45052	Margot Clark	H	1311.32084	Sadie Docherty	H	1798.70308	Chris Lang	H	229.80888	Harry McArthur	H	170.02048	John McKenzie	H	1395.65018	David Ritchie	E	1914.00000	Alan Stewart	H	970.56656	Chloe Helen Stewart	H	328.78500	Gordon Thomson	D	0.00000	Frank Young	H	469.48978
+3	round	New Round
+3	defeat	1914.00000	72.19970	Esme H Clark	H	906.45052	Margot Clark	H	1311.32084	Sadie Docherty	H	1798.70308	Chris Lang	H	229.80888	Harry McArthur	D	170.02048	John McKenzie	H	1395.65018	David Ritchie	E	1914.00000	Alan Stewart	H	970.56656	Chloe Helen Stewart	H	328.78500	Gordon Thomson	D	0.00000	Frank Young	H	469.48978
+3	transfer	1914.00000	109.70482	Esme H Clark	H	961.76622	Margot Clark	H	1318.44712	Sadie Docherty	H	1807.82936	Chris Lang	H	239.06144	Harry McArthur	D	0.00000	John McKenzie	H	1417.83960	David Ritchie	E	1914.00000	Alan Stewart	H	980.69284	Chloe Helen Stewart	H	338.97442	Gordon Thomson	D	0.00000	Frank Young	H	478.67920
+4	round	New Round
+4	defeat	1914.00000	109.70482	Esme H Clark	H	961.76622	Margot Clark	H	1318.44712	Sadie Docherty	H	1807.82936	Chris Lang	D	239.06144	Harry McArthur	D	0.00000	John McKenzie	H	1417.83960	David Ritchie	E	1914.00000	Alan Stewart	H	980.69284	Chloe Helen Stewart	H	338.97442	Gordon Thomson	D	0.00000	Frank Young	H	478.67920
+4	transfer	1914.00000	203.78844	Esme H Clark	H	991.39762	Margot Clark	H	1350.20480	Sadie Docherty	H	1826.01878	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1433.90274	David Ritchie	E	1914.00000	Alan Stewart	H	990.00854	Chloe Helen Stewart	H	359.36350	Gordon Thomson	D	0.00000	Frank Young	H	498.31060
+5	round	New Round
+5	defeat	1914.00000	203.78844	Esme H Clark	H	991.39762	Margot Clark	H	1350.20480	Sadie Docherty	H	1826.01878	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1433.90274	David Ritchie	E	1914.00000	Alan Stewart	H	990.00854	Chloe Helen Stewart	D	359.36350	Gordon Thomson	D	0.00000	Frank Young	H	498.31060
+5	transfer	1914.00000	331.17582	Esme H Clark	H	1005.34472	Margot Clark	H	1458.48808	Sadie Docherty	H	1849.71332	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1459.28158	David Ritchie	E	1914.00000	Alan Stewart	H	1001.51366	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	H	547.47784
+6	round	New Round
+6	defeat	1914.00000	331.17582	Esme H Clark	H	1005.34472	Margot Clark	H	1458.48808	Sadie Docherty	H	1849.71332	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1459.28158	David Ritchie	E	1914.00000	Alan Stewart	H	1001.51366	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	547.47784
+6	transfer	1914.00000	615.00348	Esme H Clark	H	1015.91298	Margot Clark	H	1532.33962	Sadie Docherty	H	1896.91298	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1514.35496	David Ritchie	E	1914.00000	Alan Stewart	H	1078.47100	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000
+7	round	New Round
+7	defeat	1914.00000	615.00348	Esme H Clark	D	1015.91298	Margot Clark	H	1532.33962	Sadie Docherty	H	1896.91298	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1514.35496	David Ritchie	E	1914.00000	Alan Stewart	H	1078.47100	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000
+7	transfer	1914.00000	1203.18096	Esme H Clark	D	0.00000	Margot Clark	H	1866.00174	Sadie Docherty	H	1947.35496	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1530.60752	David Ritchie	E	1914.00000	Alan Stewart	H	1105.84984	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000
+7	elect	1914.00000	1203.18096	Esme H Clark	D	0.00000	Margot Clark	H	1866.00174	Sadie Docherty	e	1947.35496	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1530.60752	David Ritchie	E	1914.00000	Alan Stewart	H	1105.84984	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000
+8	round	New Round
+8	unpend	1914.00000	1203.18096	Esme H Clark	D	0.00000	Margot Clark	H	1866.00174	Sadie Docherty	E	1947.35496	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1530.60752	David Ritchie	E	1914.00000	Alan Stewart	H	1105.84984	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000
+8	transfer	1914.00000	1211.74700	Esme H Clark	D	0.00000	Margot Clark	H	1868.39022	Sadie Docherty	E	1914.00000	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1547.18432	David Ritchie	E	1914.00000	Alan Stewart	H	1111.65708	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000
+9	round	New Round
+9	defeat	1914.00000	1211.74700	Esme H Clark	D	0.00000	Margot Clark	H	1868.39022	Sadie Docherty	E	1914.00000	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	1547.18432	David Ritchie	E	1914.00000	Alan Stewart	D	1111.65708	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000
+9	transfer	1914.00000	1555.32260	Esme H Clark	D	0.00000	Margot Clark	H	2008.75096	Sadie Docherty	E	1914.00000	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	2174.90506	David Ritchie	E	1914.00000	Alan Stewart	D	0.00000	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000
+9	elect	1914.00000	1555.32260	Esme H Clark	D	0.00000	Margot Clark	E	2008.75096	Sadie Docherty	E	1914.00000	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	H	2174.90506	David Ritchie	E	1914.00000	Alan Stewart	D	0.00000	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000
+9	elect	1914.00000	1555.32260	Esme H Clark	D	0.00000	Margot Clark	E	2008.75096	Sadie Docherty	E	1914.00000	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	E	2174.90506	David Ritchie	E	1914.00000	Alan Stewart	D	0.00000	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000
+X	end	1914.00000	1555.32260	Esme H Clark	D	0.00000	Margot Clark	E	2008.75096	Sadie Docherty	E	1914.00000	Chris Lang	D	0.00000	Harry McArthur	D	0.00000	John McKenzie	E	2174.90506	David Ritchie	E	1914.00000	Alan Stewart	D	0.00000	Chloe Helen Stewart	D	0.00000	Gordon Thomson	D	0.00000	Frank Young	D	0.00000

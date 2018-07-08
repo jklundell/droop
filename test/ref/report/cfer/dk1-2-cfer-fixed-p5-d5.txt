@@ -1,0 +1,148 @@
+
+Election: Dave Kadlecek: different winners for 2 & 3 seats: AE vs BCD (q=330,247.5)
+
+	Droop package: droop v0.11
+	Rule: CfER (single defeat)
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 2
+	Ballots: 990
+	Quota: 330.00001
+
+	Add eligible: A
+	Add eligible: B
+	Add eligible: C
+	Add eligible: D
+	Add eligible: E
+Action: Begin Count
+	Hopeful:  A (175.00000)
+	Hopeful:  B (159.00000)
+	Hopeful:  C (322.00000)
+	Hopeful:  D (161.00000)
+	Hopeful:  E (173.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 990.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 990.00000
+	Surplus: 0.00000
+Round 1:
+Action: Defeat: B
+	Hopeful:  A (175.00000)
+	Hopeful:  C (322.00000)
+	Hopeful:  D (161.00000)
+	Hopeful:  E (173.00000)
+	Defeated: B (159.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 831.00000
+	Defeated votes: 159.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 990.00000
+	Surplus: 0.00000
+Action: Transfer defeated: B
+	Hopeful:  A (334.00000)
+	Hopeful:  C (322.00000)
+	Hopeful:  D (161.00000)
+	Hopeful:  E (173.00000)
+	Defeated: B (0.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 990.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 990.00000
+	Surplus: 0.00000
+Round 2:
+Action: Elect, transfer pending: A
+	Pending:  A (334.00000)
+	Hopeful:  C (322.00000)
+	Hopeful:  D (161.00000)
+	Hopeful:  E (173.00000)
+	Defeated: B (0.00000)
+	Elected votes: 0.00000
+	Pending votes: 334.00000
+	Hopeful votes: 656.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 990.00000
+	Surplus: 0.00000
+Action: Transfer surplus: A
+	Elected votes: 334.00000
+	Hopeful votes: 656.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 990.00000
+	Surplus: 0.00000
+Action: Surplus transferred: A (3.99999)
+	Elected:  A (330.00001)
+	Hopeful:  C (322.00000)
+	Hopeful:  D (161.00000)
+	Hopeful:  E (173.00000)
+	Defeated: B (0.00000)
+	Elected votes: 330.00001
+	Hopeful votes: 656.00000
+	Nontransferable votes: 3.99798
+	Residual: 0.00201
+	Total: 990.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat: D
+	Elected:  A (330.00001)
+	Hopeful:  C (322.00000)
+	Hopeful:  E (173.00000)
+	Defeated: D (161.00000)
+	Defeated: B (0.00000)
+	Elected votes: 330.00001
+	Hopeful votes: 495.00000
+	Defeated votes: 161.00000
+	Nontransferable votes: 3.99798
+	Residual: 0.00201
+	Total: 990.00000
+	Surplus: 0.00000
+Action: Transfer defeated: D
+	Elected:  A (330.00001)
+	Hopeful:  C (322.00000)
+	Hopeful:  E (334.00000)
+	Defeated: B, D (0.00000)
+	Elected votes: 330.00001
+	Hopeful votes: 656.00000
+	Nontransferable votes: 3.99798
+	Residual: 0.00201
+	Total: 990.00000
+	Surplus: 0.00000
+Round 4:
+Action: Elect, transfer pending: E
+	Elected:  A (330.00001)
+	Pending:  E (334.00000)
+	Hopeful:  C (322.00000)
+	Defeated: B, D (0.00000)
+	Elected votes: 330.00001
+	Pending votes: 334.00000
+	Hopeful votes: 322.00000
+	Nontransferable votes: 3.99798
+	Residual: 0.00201
+	Total: 990.00000
+	Surplus: 0.00000
+Action: Defeat remaining: C
+	Elected:  A (330.00001)
+	Elected:  E (334.00000)
+	Defeated: C (322.00000)
+	Defeated: B, D (0.00000)
+	Elected votes: 664.00001
+	Hopeful votes: 0.00000
+	Defeated votes: 322.00000
+	Nontransferable votes: 3.99798
+	Residual: 0.00201
+	Total: 990.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  A (330.00001)
+	Elected:  E (334.00000)
+	Defeated: C (322.00000)
+	Defeated: B, D (0.00000)
+	Elected votes: 664.00001
+	Hopeful votes: 0.00000
+	Defeated votes: 322.00000
+	Nontransferable votes: 3.99798
+	Residual: 0.00201
+	Total: 990.00000
+	Surplus: 0.00000

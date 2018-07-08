@@ -1,0 +1,41 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote
+0	log	Add eligible: Ruth Black
+0	log	Add eligible: Scott R Coghill
+0	log	Add eligible: Mark Dingwall
+0	log	Add eligible: Iris Gibson
+0	log	Add eligible: Matthew John Kerr
+0	log	Add eligible: Gordon Macdiarmid
+0	log	Add eligible: Gordon Masterton
+0	log	Add eligible: Wullie McGartland
+0	log	Add eligible: Scott Alexander Petty
+0	log	Add eligible: Alistair Watson
+0	begin	2211.00000	0.00000	Ruth Black	H	1220.00000	Scott R Coghill	H	457.00000	Mark Dingwall	H	225.00000	Iris Gibson	H	2729.00000	Matthew John Kerr	H	1920.00000	Gordon Macdiarmid	H	1328.00000	Gordon Masterton	H	315.00000	Wullie McGartland	H	224.00000	Scott Alexander Petty	H	569.00000	Alistair Watson	H	2065.00000
+0	elect	2211.00000	0.00000	Ruth Black	H	1220.00000	Scott R Coghill	H	457.00000	Mark Dingwall	H	225.00000	Iris Gibson	e	2729.00000	Matthew John Kerr	H	1920.00000	Gordon Macdiarmid	H	1328.00000	Gordon Masterton	H	315.00000	Wullie McGartland	H	224.00000	Scott Alexander Petty	H	569.00000	Alistair Watson	H	2065.00000
+1	round	New Round
+1	unpend	2211.00000	0.00000	Ruth Black	H	1220.00000	Scott R Coghill	H	457.00000	Mark Dingwall	H	225.00000	Iris Gibson	E	2729.00000	Matthew John Kerr	H	1920.00000	Gordon Macdiarmid	H	1328.00000	Gordon Masterton	H	315.00000	Wullie McGartland	H	224.00000	Scott Alexander Petty	H	569.00000	Alistair Watson	H	2065.00000
+1	transfer	2211.00000	161.14869	Ruth Black	H	1315.66424	Scott R Coghill	H	500.65630	Mark Dingwall	H	234.30069	Iris Gibson	E	2211.00000	Matthew John Kerr	H	1972.95699	Gordon Macdiarmid	H	1350.39758	Gordon Masterton	H	366.81813	Wullie McGartland	H	247.53644	Scott Alexander Petty	H	594.81416	Alistair Watson	H	2096.69827
+2	round	New Round
+2	defeat	2211.00000	161.14869	Ruth Black	H	1315.66424	Scott R Coghill	H	500.65630	Mark Dingwall	D	234.30069	Iris Gibson	E	2211.00000	Matthew John Kerr	H	1972.95699	Gordon Macdiarmid	H	1350.39758	Gordon Masterton	H	366.81813	Wullie McGartland	H	247.53644	Scott Alexander Petty	H	594.81416	Alistair Watson	H	2096.69827
+2	transfer	2211.00000	208.04679	Ruth Black	H	1324.80310	Scott R Coghill	H	508.17478	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	1992.33661	Gordon Macdiarmid	H	1357.96701	Gordon Masterton	H	390.57737	Wullie McGartland	H	256.48549	Scott Alexander Petty	H	698.71226	Alistair Watson	H	2103.88808
+3	round	New Round
+3	defeat	2211.00000	208.04679	Ruth Black	H	1324.80310	Scott R Coghill	H	508.17478	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	1992.33661	Gordon Macdiarmid	H	1357.96701	Gordon Masterton	H	390.57737	Wullie McGartland	D	256.48549	Scott Alexander Petty	H	698.71226	Alistair Watson	H	2103.88808
+3	transfer	2211.00000	303.87995	Ruth Black	H	1382.63626	Scott R Coghill	H	525.59136	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2007.85509	Gordon Macdiarmid	H	1371.34663	Gordon Masterton	H	414.42452	Wullie McGartland	D	0.00000	Scott Alexander Petty	H	702.66131	Alistair Watson	H	2132.59637
+4	round	New Round
+4	defeat	2211.00000	303.87995	Ruth Black	H	1382.63626	Scott R Coghill	H	525.59136	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2007.85509	Gordon Macdiarmid	H	1371.34663	Gordon Masterton	D	414.42452	Wullie McGartland	D	0.00000	Scott Alexander Petty	H	702.66131	Alistair Watson	H	2132.59637
+4	transfer	2211.00000	435.86095	Ruth Black	H	1462.07581	Scott R Coghill	H	631.58635	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2035.13281	Gordon Macdiarmid	H	1387.48549	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	H	727.40656	Alistair Watson	H	2161.44352
+5	round	New Round
+5	defeat	2211.00000	435.86095	Ruth Black	H	1462.07581	Scott R Coghill	D	631.58635	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2035.13281	Gordon Macdiarmid	H	1387.48549	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	H	727.40656	Alistair Watson	H	2161.44352
+5	transfer	2211.00000	704.71207	Ruth Black	H	1557.60327	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2123.87806	Gordon Macdiarmid	H	1430.76321	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	H	797.84611	Alistair Watson	H	2226.18877
+5	elect	2211.00000	704.71207	Ruth Black	H	1557.60327	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2123.87806	Gordon Macdiarmid	H	1430.76321	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	H	797.84611	Alistair Watson	e	2226.18877
+6	round	New Round
+6	unpend	2211.00000	704.71207	Ruth Black	H	1557.60327	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2123.87806	Gordon Macdiarmid	H	1430.76321	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	H	797.84611	Alistair Watson	E	2226.18877
+6	transfer	2211.00000	708.90137	Ruth Black	H	1559.21831	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2127.54039	Gordon Macdiarmid	H	1435.98271	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	H	798.34157	Alistair Watson	E	2211.00000
+7	round	New Round
+7	defeat	2211.00000	708.90137	Ruth Black	H	1559.21831	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2127.54039	Gordon Macdiarmid	H	1435.98271	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	D	798.34157	Alistair Watson	E	2211.00000
+7	transfer	2211.00000	1317.33276	Ruth Black	H	1641.67804	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2177.84347	Gordon Macdiarmid	H	1493.13008	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	D	0.00000	Alistair Watson	E	2211.00000
+8	round	New Round
+8	defeat	2211.00000	1317.33276	Ruth Black	H	1641.67804	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	2177.84347	Gordon Macdiarmid	D	1493.13008	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	D	0.00000	Alistair Watson	E	2211.00000
+8	transfer	2211.00000	1812.04793	Ruth Black	H	1734.66778	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	3083.26864	Gordon Macdiarmid	D	0.00000	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	D	0.00000	Alistair Watson	E	2211.00000
+8	elect	2211.00000	1812.04793	Ruth Black	E	1734.66778	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	H	3083.26864	Gordon Macdiarmid	D	0.00000	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	D	0.00000	Alistair Watson	E	2211.00000
+8	elect	2211.00000	1812.04793	Ruth Black	E	1734.66778	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	E	3083.26864	Gordon Macdiarmid	D	0.00000	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	D	0.00000	Alistair Watson	E	2211.00000
+X	end	2211.00000	1812.04793	Ruth Black	E	1734.66778	Scott R Coghill	D	0.00000	Mark Dingwall	D	0.00000	Iris Gibson	E	2211.00000	Matthew John Kerr	E	3083.26864	Gordon Macdiarmid	D	0.00000	Gordon Masterton	D	0.00000	Wullie McGartland	D	0.00000	Scott Alexander Petty	D	0.00000	Alistair Watson	E	2211.00000

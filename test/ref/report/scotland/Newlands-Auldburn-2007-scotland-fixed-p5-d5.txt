@@ -1,0 +1,286 @@
+
+Election: NEWLANDS-AULDBURN
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 3
+	Ballots: 8654
+	Quota: 2164.00000
+
+	Add eligible: Kay Allan
+	Add eligible: Charlie Baillie
+	Add eligible: Eamonn Coyle
+	Add eligible: Stephen Curran
+	Add eligible: Colin Deans
+	Add eligible: Robert McElroy
+	Add eligible: Jim McNally
+	Add eligible: Gordon Morgan
+	Add eligible: Robert W Stewart
+Action: Begin Count
+	Hopeful:  Kay Allan (579.00000)
+	Hopeful:  Charlie Baillie (211.00000)
+	Hopeful:  Eamonn Coyle (172.00000)
+	Hopeful:  Stephen Curran (1856.00000)
+	Hopeful:  Colin Deans (2101.00000)
+	Hopeful:  Robert McElroy (1342.00000)
+	Hopeful:  Jim McNally (1475.00000)
+	Hopeful:  Gordon Morgan (357.00000)
+	Hopeful:  Robert W Stewart (561.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8654.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8654.00000
+	Surplus: 0.00000
+Round 1:
+Action: Defeat low candidate: Eamonn Coyle
+	Hopeful:  Kay Allan (579.00000)
+	Hopeful:  Charlie Baillie (211.00000)
+	Hopeful:  Stephen Curran (1856.00000)
+	Hopeful:  Colin Deans (2101.00000)
+	Hopeful:  Robert McElroy (1342.00000)
+	Hopeful:  Jim McNally (1475.00000)
+	Hopeful:  Gordon Morgan (357.00000)
+	Hopeful:  Robert W Stewart (561.00000)
+	Defeated: Eamonn Coyle (172.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8482.00000
+	Defeated votes: 172.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8654.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Eamonn Coyle
+	Hopeful:  Kay Allan (602.00000)
+	Hopeful:  Charlie Baillie (217.00000)
+	Hopeful:  Stephen Curran (1873.00000)
+	Hopeful:  Colin Deans (2133.00000)
+	Hopeful:  Robert McElroy (1345.00000)
+	Hopeful:  Jim McNally (1487.00000)
+	Hopeful:  Gordon Morgan (388.00000)
+	Hopeful:  Robert W Stewart (570.00000)
+	Defeated: Eamonn Coyle (0.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8615.00000
+	Nontransferable votes: 39.00000
+	Residual: 0.00000
+	Total: 8654.00000
+	Surplus: 0.00000
+Round 2:
+Action: Defeat low candidate: Charlie Baillie
+	Hopeful:  Kay Allan (602.00000)
+	Hopeful:  Stephen Curran (1873.00000)
+	Hopeful:  Colin Deans (2133.00000)
+	Hopeful:  Robert McElroy (1345.00000)
+	Hopeful:  Jim McNally (1487.00000)
+	Hopeful:  Gordon Morgan (388.00000)
+	Hopeful:  Robert W Stewart (570.00000)
+	Defeated: Charlie Baillie (217.00000)
+	Defeated: Eamonn Coyle (0.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8398.00000
+	Defeated votes: 217.00000
+	Nontransferable votes: 39.00000
+	Residual: 0.00000
+	Total: 8654.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Charlie Baillie
+	Hopeful:  Kay Allan (619.00000)
+	Hopeful:  Stephen Curran (1894.00000)
+	Hopeful:  Colin Deans (2178.00000)
+	Hopeful:  Robert McElroy (1390.00000)
+	Hopeful:  Jim McNally (1493.00000)
+	Hopeful:  Gordon Morgan (403.00000)
+	Hopeful:  Robert W Stewart (577.00000)
+	Defeated: Charlie Baillie, Eamonn Coyle (0.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8554.00000
+	Nontransferable votes: 100.00000
+	Residual: 0.00000
+	Total: 8654.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Colin Deans
+	Pending:  Colin Deans (2178.00000)
+	Hopeful:  Kay Allan (619.00000)
+	Hopeful:  Stephen Curran (1894.00000)
+	Hopeful:  Robert McElroy (1390.00000)
+	Hopeful:  Jim McNally (1493.00000)
+	Hopeful:  Gordon Morgan (403.00000)
+	Hopeful:  Robert W Stewart (577.00000)
+	Defeated: Charlie Baillie, Eamonn Coyle (0.00000)
+	Elected votes: 0.00000
+	Pending votes: 2178.00000
+	Hopeful votes: 6376.00000
+	Nontransferable votes: 100.00000
+	Residual: 0.00000
+	Total: 8654.00000
+	Surplus: 0.00000
+Round 3:
+Action: Transfer high surplus: Colin Deans
+	Elected votes: 2178.00000
+	Hopeful votes: 6376.00000
+	Nontransferable votes: 100.00000
+	Residual: 0.00000
+	Total: 8654.00000
+	Surplus: 14.00000
+Action: Surplus transferred: Colin Deans (14.00000)
+	Elected:  Colin Deans (2164.00000)
+	Hopeful:  Kay Allan (621.24700)
+	Hopeful:  Stephen Curran (1895.40598)
+	Hopeful:  Robert McElroy (1391.23264)
+	Hopeful:  Jim McNally (1494.43808)
+	Hopeful:  Gordon Morgan (404.86822)
+	Hopeful:  Robert W Stewart (578.81044)
+	Defeated: Charlie Baillie, Eamonn Coyle (0.00000)
+	Elected votes: 2164.00000
+	Hopeful votes: 6386.00236
+	Nontransferable votes: 103.98040
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 14.00000
+Round 4:
+Action: Defeat low candidate: Gordon Morgan
+	Elected:  Colin Deans (2164.00000)
+	Hopeful:  Kay Allan (621.24700)
+	Hopeful:  Stephen Curran (1895.40598)
+	Hopeful:  Robert McElroy (1391.23264)
+	Hopeful:  Jim McNally (1494.43808)
+	Hopeful:  Robert W Stewart (578.81044)
+	Defeated: Gordon Morgan (404.86822)
+	Defeated: Charlie Baillie, Eamonn Coyle (0.00000)
+	Elected votes: 2164.00000
+	Hopeful votes: 5981.13414
+	Defeated votes: 404.86822
+	Nontransferable votes: 103.98040
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Gordon Morgan
+	Elected:  Colin Deans (2164.00000)
+	Hopeful:  Kay Allan (716.73492)
+	Hopeful:  Stephen Curran (1939.56648)
+	Hopeful:  Robert McElroy (1407.31610)
+	Hopeful:  Jim McNally (1557.54722)
+	Hopeful:  Robert W Stewart (617.11860)
+	Defeated: Charlie Baillie, Eamonn Coyle, Gordon Morgan (0.00000)
+	Elected votes: 2164.00000
+	Hopeful votes: 6238.28332
+	Nontransferable votes: 251.69944
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Robert W Stewart
+	Elected:  Colin Deans (2164.00000)
+	Hopeful:  Kay Allan (716.73492)
+	Hopeful:  Stephen Curran (1939.56648)
+	Hopeful:  Robert McElroy (1407.31610)
+	Hopeful:  Jim McNally (1557.54722)
+	Defeated: Robert W Stewart (617.11860)
+	Defeated: Charlie Baillie, Eamonn Coyle, Gordon Morgan (0.00000)
+	Elected votes: 2164.00000
+	Hopeful votes: 5621.16472
+	Defeated votes: 617.11860
+	Nontransferable votes: 251.69944
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Robert W Stewart
+	Elected:  Colin Deans (2164.00000)
+	Hopeful:  Kay Allan (894.43470)
+	Hopeful:  Stephen Curran (1980.69488)
+	Hopeful:  Robert McElroy (1522.57290)
+	Hopeful:  Jim McNally (1660.86822)
+	Defeated: Charlie Baillie, Eamonn Coyle, Gordon Morgan, Robert W Stewart (0.00000)
+	Elected votes: 2164.00000
+	Hopeful votes: 6058.57070
+	Nontransferable votes: 431.41206
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Kay Allan
+	Elected:  Colin Deans (2164.00000)
+	Hopeful:  Stephen Curran (1980.69488)
+	Hopeful:  Robert McElroy (1522.57290)
+	Hopeful:  Jim McNally (1660.86822)
+	Defeated: Kay Allan (894.43470)
+	Defeated: Charlie Baillie, Eamonn Coyle, Gordon Morgan, Robert W Stewart (0.00000)
+	Elected votes: 2164.00000
+	Hopeful votes: 5164.13600
+	Defeated votes: 894.43470
+	Nontransferable votes: 431.41206
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Kay Allan
+	Elected:  Colin Deans (2164.00000)
+	Hopeful:  Stephen Curran (2156.00946)
+	Hopeful:  Robert McElroy (1625.97736)
+	Hopeful:  Jim McNally (1800.21490)
+	Defeated: Kay Allan, Charlie Baillie, Eamonn Coyle, Gordon Morgan, Robert W Stewart (0.00000)
+	Elected votes: 2164.00000
+	Hopeful votes: 5582.20172
+	Nontransferable votes: 907.78104
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: Robert McElroy
+	Elected:  Colin Deans (2164.00000)
+	Hopeful:  Stephen Curran (2156.00946)
+	Hopeful:  Jim McNally (1800.21490)
+	Defeated: Robert McElroy (1625.97736)
+	Defeated: Kay Allan, Charlie Baillie, Eamonn Coyle, Gordon Morgan, Robert W Stewart (0.00000)
+	Elected votes: 2164.00000
+	Hopeful votes: 3956.22436
+	Defeated votes: 1625.97736
+	Nontransferable votes: 907.78104
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Robert McElroy
+	Elected:  Colin Deans (2164.00000)
+	Hopeful:  Stephen Curran (2334.34330)
+	Hopeful:  Jim McNally (2062.58726)
+	Defeated: Kay Allan, Charlie Baillie, Eamonn Coyle, Robert McElroy, Gordon Morgan, Robert W Stewart (0.00000)
+	Elected votes: 2164.00000
+	Hopeful votes: 4396.93056
+	Nontransferable votes: 2093.05220
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Stephen Curran
+	Elected:  Stephen Curran (2334.34330)
+	Elected:  Colin Deans (2164.00000)
+	Hopeful:  Jim McNally (2062.58726)
+	Defeated: Kay Allan, Charlie Baillie, Eamonn Coyle, Robert McElroy, Gordon Morgan, Robert W Stewart (0.00000)
+	Elected votes: 4498.34330
+	Hopeful votes: 2062.58726
+	Nontransferable votes: 2093.05220
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Jim McNally
+	Elected:  Stephen Curran (2334.34330)
+	Elected:  Colin Deans (2164.00000)
+	Elected:  Jim McNally (2062.58726)
+	Defeated: Kay Allan, Charlie Baillie, Eamonn Coyle, Robert McElroy, Gordon Morgan, Robert W Stewart (0.00000)
+	Elected votes: 6560.93056
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2093.05220
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Stephen Curran (2334.34330)
+	Elected:  Colin Deans (2164.00000)
+	Elected:  Jim McNally (2062.58726)
+	Defeated: Kay Allan, Charlie Baillie, Eamonn Coyle, Robert McElroy, Gordon Morgan, Robert W Stewart (0.00000)
+	Elected votes: 6560.93056
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2093.05220
+	Residual: 0.01724
+	Total: 8654.00000
+	Surplus: 0.00000

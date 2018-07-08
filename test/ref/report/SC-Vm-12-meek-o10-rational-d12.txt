@@ -1,0 +1,113 @@
+
+Election: Voting matters example (Issue 12, 'The computational accuracy using the Meek algorithm')
+
+	Droop package: droop v0.11
+	Rule: Meek Parametric (omega = 1/10^10)
+	Arithmetic: rational arithmetic
+	Seats: 3
+	Ballots: 4003
+	Quota: 1000.750000000000
+	Omega: 0.000000000100
+
+	Add eligible: A
+	Add eligible: B
+	Add eligible: X
+	Add eligible: Y
+	Add eligible: Z
+Action: Begin Count
+	Hopeful:  A (1001.000000000000)
+	Hopeful:  B (1001.000000000000)
+	Hopeful:  X (667.000000000000)
+	Hopeful:  Y (667.000000000000)
+	Hopeful:  Z (667.000000000000)
+	Quota: 1000.750000000000
+	Votes: 4003.000000000000
+	Residual: 0.000000000000
+	Total: 4003.000000000000
+	Surplus: 0.000000000000
+Round 1:
+Action: Elect: A
+	Elected:  A (1001.000000000000)
+	Hopeful:  B (1001.000000000000)
+	Hopeful:  X (667.000000000000)
+	Hopeful:  Y (667.000000000000)
+	Hopeful:  Z (667.000000000000)
+	Quota: 1000.750000000000
+	Votes: 4003.000000000000
+	Residual: 0.000000000000
+	Total: 4003.000000000000
+	Surplus: 0.000000000000
+Action: Elect: B
+	Elected:  A (1001.000000000000)
+	Elected:  B (1001.000000000000)
+	Hopeful:  X (667.000000000000)
+	Hopeful:  Y (667.000000000000)
+	Hopeful:  Z (667.000000000000)
+	Quota: 1000.750000000000
+	Votes: 4003.000000000000
+	Residual: 0.000000000000
+	Total: 4003.000000000000
+	Surplus: 0.000000000000
+Action: Iterate (elected)
+	Quota: 1000.750000000000
+	Votes: 4003.000000000000
+	Residual: 0.000000000000
+	Total: 4003.000000000000
+	Surplus: 0.500000000000
+Round 2:
+Action: Iterate (batch)
+	Quota: 1000.750000000000
+	Votes: 4003.000000000000
+	Residual: 0.000000000000
+	Total: 4003.000000000000
+	Surplus: 0.000000003985
+Action: Defeat certain loser: Z
+	Elected:  A (1000.750000001993)
+	Elected:  B (1000.750000001993)
+	Hopeful:  X (667.166666769714)
+	Hopeful:  Y (667.166666644463)
+	Defeated: Z (667.166666581838)
+	Quota: 1000.750000000000
+	Votes: 4003.000000000000
+	Residual: 0.000000000000
+	Total: 4003.000000000000
+	Surplus: 0.000000003985
+Round 3:
+Action: Elect: X
+	Elected:  A (800.642779367875)
+	Elected:  B (800.642779367875)
+	Elected:  X (800.638465678227)
+	Hopeful:  Y (800.558083370054)
+	Defeated: Z (0.000000000000)
+	Quota: 800.620526946008
+	Votes: 3202.482107784032
+	Residual: 800.517892215968
+	Total: 4003.000000000000
+	Surplus: 0.265124534891
+Action: Iterate (elected)
+	Quota: 800.620526946008
+	Votes: 3202.482107784032
+	Residual: 800.517892215968
+	Total: 4003.000000000000
+	Surplus: 0.062443575953
+Action: Defeat remaining: Y
+	Elected:  A (800.642779367875)
+	Elected:  B (800.642779367875)
+	Elected:  X (800.638465678227)
+	Defeated: Y (800.558083370054)
+	Defeated: Z (0.000000000000)
+	Quota: 800.620526946008
+	Votes: 3202.482107784032
+	Residual: 800.517892215968
+	Total: 4003.000000000000
+	Surplus: 0.062443575953
+Action: Count Complete
+	Elected:  A (800.642779367875)
+	Elected:  B (800.642779367875)
+	Elected:  X (800.638465678227)
+	Defeated: Y, Z (0.000000000000)
+	Quota: 800.620526946008
+	Votes: 2401.924024413977
+	Residual: 1601.075975586023
+	Total: 4003.000000000000
+	Surplus: 0.062443575953

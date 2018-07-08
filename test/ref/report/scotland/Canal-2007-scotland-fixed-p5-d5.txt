@@ -1,0 +1,397 @@
+
+Election: CANAL
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 8624
+	Quota: 1725.00000
+
+	Add eligible: Brian Brown
+	Add eligible: James Cruickshank
+	Add eligible: Norman Fraser
+	Add eligible: Ellen Hurcombe
+	Add eligible: David E Ledgerwood
+	Add eligible: Jim MacKechnie
+	Add eligible: Haleema Malik
+	Add eligible: Billy McAllister
+	Add eligible: Angela McCormick
+	Add eligible: Kirsteen Redpath
+	Add eligible: Kieran Wild 
+Action: Begin Count
+	Hopeful:  Brian Brown (193.00000)
+	Hopeful:  James Cruickshank (94.00000)
+	Hopeful:  Norman Fraser (587.00000)
+	Hopeful:  Ellen Hurcombe (1961.00000)
+	Hopeful:  David E Ledgerwood (338.00000)
+	Hopeful:  Jim MacKechnie (1055.00000)
+	Hopeful:  Haleema Malik (579.00000)
+	Hopeful:  Billy McAllister (2514.00000)
+	Hopeful:  Angela McCormick (425.00000)
+	Hopeful:  Kirsteen Redpath (175.00000)
+	Hopeful:  Kieran Wild  (703.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8624.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Billy McAllister
+	Pending:  Billy McAllister (2514.00000)
+	Hopeful:  Brian Brown (193.00000)
+	Hopeful:  James Cruickshank (94.00000)
+	Hopeful:  Norman Fraser (587.00000)
+	Hopeful:  Ellen Hurcombe (1961.00000)
+	Hopeful:  David E Ledgerwood (338.00000)
+	Hopeful:  Jim MacKechnie (1055.00000)
+	Hopeful:  Haleema Malik (579.00000)
+	Hopeful:  Angela McCormick (425.00000)
+	Hopeful:  Kirsteen Redpath (175.00000)
+	Hopeful:  Kieran Wild  (703.00000)
+	Elected votes: 0.00000
+	Pending votes: 2514.00000
+	Hopeful votes: 6110.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Ellen Hurcombe
+	Pending:  Ellen Hurcombe (1961.00000)
+	Pending:  Billy McAllister (2514.00000)
+	Hopeful:  Brian Brown (193.00000)
+	Hopeful:  James Cruickshank (94.00000)
+	Hopeful:  Norman Fraser (587.00000)
+	Hopeful:  David E Ledgerwood (338.00000)
+	Hopeful:  Jim MacKechnie (1055.00000)
+	Hopeful:  Haleema Malik (579.00000)
+	Hopeful:  Angela McCormick (425.00000)
+	Hopeful:  Kirsteen Redpath (175.00000)
+	Hopeful:  Kieran Wild  (703.00000)
+	Elected votes: 0.00000
+	Pending votes: 4475.00000
+	Hopeful votes: 4149.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8624.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Billy McAllister
+	Elected votes: 2514.00000
+	Pending votes: 1961.00000
+	Hopeful votes: 4149.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8624.00000
+	Surplus: 1025.00000
+Action: Surplus transferred: Billy McAllister (789.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Pending:  Ellen Hurcombe (1961.00000)
+	Hopeful:  Brian Brown (214.65496)
+	Hopeful:  James Cruickshank (119.10720)
+	Hopeful:  Norman Fraser (651.65104)
+	Hopeful:  David E Ledgerwood (358.71344)
+	Hopeful:  Jim MacKechnie (1118.39568)
+	Hopeful:  Haleema Malik (608.50096)
+	Hopeful:  Angela McCormick (544.25920)
+	Hopeful:  Kirsteen Redpath (222.38984)
+	Hopeful:  Kieran Wild  (793.69976)
+	Elected votes: 1725.00000
+	Pending votes: 1961.00000
+	Hopeful votes: 4631.37208
+	Nontransferable votes: 306.62168
+	Residual: 0.00624
+	Total: 8624.00000
+	Surplus: 1025.00000
+Round 2:
+Action: Transfer high surplus: Ellen Hurcombe
+	Elected votes: 3686.00000
+	Hopeful votes: 4631.37208
+	Nontransferable votes: 306.62168
+	Residual: 0.00624
+	Total: 8624.00000
+	Surplus: 236.00000
+Action: Surplus transferred: Ellen Hurcombe (236.00000)
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Brian Brown (217.54312)
+	Hopeful:  James Cruickshank (120.79196)
+	Hopeful:  Norman Fraser (658.75110)
+	Hopeful:  David E Ledgerwood (361.96262)
+	Hopeful:  Jim MacKechnie (1247.76118)
+	Hopeful:  Haleema Malik (631.96726)
+	Hopeful:  Angela McCormick (553.40504)
+	Hopeful:  Kirsteen Redpath (224.31528)
+	Hopeful:  Kieran Wild  (797.79132)
+	Elected votes: 3450.00000
+	Hopeful votes: 4814.28888
+	Nontransferable votes: 359.69162
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 236.00000
+Round 3:
+Action: Defeat low candidate: James Cruickshank
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Brian Brown (217.54312)
+	Hopeful:  Norman Fraser (658.75110)
+	Hopeful:  David E Ledgerwood (361.96262)
+	Hopeful:  Jim MacKechnie (1247.76118)
+	Hopeful:  Haleema Malik (631.96726)
+	Hopeful:  Angela McCormick (553.40504)
+	Hopeful:  Kirsteen Redpath (224.31528)
+	Hopeful:  Kieran Wild  (797.79132)
+	Defeated: James Cruickshank (120.79196)
+	Elected votes: 3450.00000
+	Hopeful votes: 4693.49692
+	Defeated votes: 120.79196
+	Nontransferable votes: 359.69162
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Transfer defeated: James Cruickshank
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Brian Brown (225.10102)
+	Hopeful:  Norman Fraser (673.63414)
+	Hopeful:  David E Ledgerwood (368.51714)
+	Hopeful:  Jim MacKechnie (1263.49790)
+	Hopeful:  Haleema Malik (637.40144)
+	Hopeful:  Angela McCormick (567.60530)
+	Hopeful:  Kirsteen Redpath (231.26018)
+	Hopeful:  Kieran Wild  (809.18508)
+	Defeated: James Cruickshank (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 4776.20220
+	Nontransferable votes: 397.77830
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Brian Brown
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Norman Fraser (673.63414)
+	Hopeful:  David E Ledgerwood (368.51714)
+	Hopeful:  Jim MacKechnie (1263.49790)
+	Hopeful:  Haleema Malik (637.40144)
+	Hopeful:  Angela McCormick (567.60530)
+	Hopeful:  Kirsteen Redpath (231.26018)
+	Hopeful:  Kieran Wild  (809.18508)
+	Defeated: Brian Brown (225.10102)
+	Defeated: James Cruickshank (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 4551.10118
+	Defeated votes: 225.10102
+	Nontransferable votes: 397.77830
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Brian Brown
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Norman Fraser (693.62622)
+	Hopeful:  David E Ledgerwood (451.01656)
+	Hopeful:  Jim MacKechnie (1274.78914)
+	Hopeful:  Haleema Malik (644.14946)
+	Hopeful:  Angela McCormick (584.23974)
+	Hopeful:  Kirsteen Redpath (235.82938)
+	Hopeful:  Kieran Wild  (819.87800)
+	Defeated: Brian Brown, James Cruickshank (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 4703.52850
+	Nontransferable votes: 470.45200
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Kirsteen Redpath
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Norman Fraser (693.62622)
+	Hopeful:  David E Ledgerwood (451.01656)
+	Hopeful:  Jim MacKechnie (1274.78914)
+	Hopeful:  Haleema Malik (644.14946)
+	Hopeful:  Angela McCormick (584.23974)
+	Hopeful:  Kieran Wild  (819.87800)
+	Defeated: Kirsteen Redpath (235.82938)
+	Defeated: Brian Brown, James Cruickshank (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 4467.69912
+	Defeated votes: 235.82938
+	Nontransferable votes: 470.45200
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Kirsteen Redpath
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Norman Fraser (711.88496)
+	Hopeful:  David E Ledgerwood (453.95808)
+	Hopeful:  Jim MacKechnie (1288.97472)
+	Hopeful:  Haleema Malik (653.40482)
+	Hopeful:  Angela McCormick (648.09588)
+	Hopeful:  Kieran Wild  (887.49346)
+	Defeated: Brian Brown, James Cruickshank, Kirsteen Redpath (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 4643.81192
+	Nontransferable votes: 530.16858
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: David E Ledgerwood
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Norman Fraser (711.88496)
+	Hopeful:  Jim MacKechnie (1288.97472)
+	Hopeful:  Haleema Malik (653.40482)
+	Hopeful:  Angela McCormick (648.09588)
+	Hopeful:  Kieran Wild  (887.49346)
+	Defeated: David E Ledgerwood (453.95808)
+	Defeated: Brian Brown, James Cruickshank, Kirsteen Redpath (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 4189.85384
+	Defeated votes: 453.95808
+	Nontransferable votes: 530.16858
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Transfer defeated: David E Ledgerwood
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Norman Fraser (814.39906)
+	Hopeful:  Jim MacKechnie (1333.51654)
+	Hopeful:  Haleema Malik (673.70736)
+	Hopeful:  Angela McCormick (660.29276)
+	Hopeful:  Kieran Wild  (929.94908)
+	Defeated: Brian Brown, James Cruickshank, David E Ledgerwood, Kirsteen Redpath (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 4411.86480
+	Nontransferable votes: 762.11570
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: Angela McCormick
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Norman Fraser (814.39906)
+	Hopeful:  Jim MacKechnie (1333.51654)
+	Hopeful:  Haleema Malik (673.70736)
+	Hopeful:  Kieran Wild  (929.94908)
+	Defeated: Angela McCormick (660.29276)
+	Defeated: Brian Brown, James Cruickshank, David E Ledgerwood, Kirsteen Redpath (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 3751.57204
+	Defeated votes: 660.29276
+	Nontransferable votes: 762.11570
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Angela McCormick
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Norman Fraser (861.99984)
+	Hopeful:  Jim MacKechnie (1393.66368)
+	Hopeful:  Haleema Malik (729.06384)
+	Hopeful:  Kieran Wild  (1115.19574)
+	Defeated: Brian Brown, James Cruickshank, David E Ledgerwood, Angela McCormick, Kirsteen Redpath (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 4099.92310
+	Nontransferable votes: 1074.05740
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Round 8:
+Action: Defeat low candidate: Haleema Malik
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Norman Fraser (861.99984)
+	Hopeful:  Jim MacKechnie (1393.66368)
+	Hopeful:  Kieran Wild  (1115.19574)
+	Defeated: Haleema Malik (729.06384)
+	Defeated: Brian Brown, James Cruickshank, David E Ledgerwood, Angela McCormick, Kirsteen Redpath (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 3370.85926
+	Defeated votes: 729.06384
+	Nontransferable votes: 1074.05740
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Haleema Malik
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Norman Fraser (905.53514)
+	Hopeful:  Jim MacKechnie (1692.04846)
+	Hopeful:  Kieran Wild  (1157.71636)
+	Defeated: Brian Brown, James Cruickshank, David E Ledgerwood, Haleema Malik, Angela McCormick, Kirsteen Redpath (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 3755.29996
+	Nontransferable votes: 1418.68054
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Round 9:
+Action: Defeat low candidate: Norman Fraser
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Jim MacKechnie (1692.04846)
+	Hopeful:  Kieran Wild  (1157.71636)
+	Defeated: Norman Fraser (905.53514)
+	Defeated: Brian Brown, James Cruickshank, David E Ledgerwood, Haleema Malik, Angela McCormick, Kirsteen Redpath (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 2849.76482
+	Defeated votes: 905.53514
+	Nontransferable votes: 1418.68054
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Norman Fraser
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Jim MacKechnie (1876.32130)
+	Hopeful:  Kieran Wild  (1534.97862)
+	Defeated: Brian Brown, James Cruickshank, Norman Fraser, David E Ledgerwood, Haleema Malik, Angela McCormick, Kirsteen Redpath (0.00000)
+	Elected votes: 3450.00000
+	Hopeful votes: 3411.29992
+	Nontransferable votes: 1762.68058
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Jim MacKechnie
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Jim MacKechnie (1876.32130)
+	Elected:  Billy McAllister (1725.00000)
+	Hopeful:  Kieran Wild  (1534.97862)
+	Defeated: Brian Brown, James Cruickshank, Norman Fraser, David E Ledgerwood, Haleema Malik, Angela McCormick, Kirsteen Redpath (0.00000)
+	Elected votes: 5326.32130
+	Hopeful votes: 1534.97862
+	Nontransferable votes: 1762.68058
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Kieran Wild 
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Jim MacKechnie (1876.32130)
+	Elected:  Billy McAllister (1725.00000)
+	Elected:  Kieran Wild  (1534.97862)
+	Defeated: Brian Brown, James Cruickshank, Norman Fraser, David E Ledgerwood, Haleema Malik, Angela McCormick, Kirsteen Redpath (0.00000)
+	Elected votes: 6861.29992
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1762.68058
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Ellen Hurcombe (1725.00000)
+	Elected:  Jim MacKechnie (1876.32130)
+	Elected:  Billy McAllister (1725.00000)
+	Elected:  Kieran Wild  (1534.97862)
+	Defeated: Brian Brown, James Cruickshank, Norman Fraser, David E Ledgerwood, Haleema Malik, Angela McCormick, Kirsteen Redpath (0.00000)
+	Elected votes: 6861.29992
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1762.68058
+	Residual: 0.01950
+	Total: 8624.00000
+	Surplus: 0.00000

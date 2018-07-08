@@ -1,0 +1,14 @@
+R	Action	Quota	1.name	1.state	1.quotient	2.name	2.state	2.quotient	3.name	3.state	3.quotient
+0	log	Add eligible: Cåstor
+0	log	Add eligible: Pøllüx
+0	log	Add eligible: Hélen
+0	begin	2.000000000	Cåstor	H	0.000000000	Pøllüx	H	0.000000000	Hélen	H	0.000000000
+1	round	New Round
+1	elect	2.000000000	Cåstor	E	4.000000000	Pøllüx	H	0.000000000	Hélen	H	2.000000000
+1	transfer	2.000000000	Cåstor	E	4.000000000	Pøllüx	H	0.000000000	Hélen	H	2.000000000
+2	round	New Round
+2	tie	2.000000000	Cåstor	E	4.000000000	Pøllüx	H	2.000000000	Hélen	H	2.000000000
+2	defeat	2.000000000	Cåstor	E	4.000000000	Pøllüx	D	2.000000000	Hélen	H	2.000000000
+2	transfer	2.000000000	Cåstor	E	4.000000000	Pøllüx	D	2.000000000	Hélen	H	2.000000000
+2	elect	2.000000000	Cåstor	E	4.000000000	Pøllüx	D	2.000000000	Hélen	E	2.000000000
+X	end	2.000000000	Cåstor	E	4.000000000	Pøllüx	D	2.000000000	Hélen	E	2.000000000

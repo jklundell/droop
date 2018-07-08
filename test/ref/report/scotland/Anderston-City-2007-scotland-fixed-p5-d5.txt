@@ -1,0 +1,301 @@
+
+Election: ANDERSTON-CITY
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 6900
+	Quota: 1381.00000
+
+	Add eligible: Nina Baker
+	Add eligible: Erin Boyle
+	Add eligible: Philip Braat
+	Add eligible: Dave Holladay
+	Add eligible: Akhtar Khan
+	Add eligible: Ann Laird
+	Add eligible: Craig MacKay
+	Add eligible: Gordon Matheson
+	Add eligible: Peter Murray
+Action: Begin Count
+	Hopeful:  Nina Baker (880.00000)
+	Hopeful:  Erin Boyle (486.00000)
+	Hopeful:  Philip Braat (1291.00000)
+	Hopeful:  Dave Holladay (145.00000)
+	Hopeful:  Akhtar Khan (285.00000)
+	Hopeful:  Ann Laird (806.00000)
+	Hopeful:  Craig MacKay (1632.00000)
+	Hopeful:  Gordon Matheson (1177.00000)
+	Hopeful:  Peter Murray (198.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 6900.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6900.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Craig MacKay
+	Pending:  Craig MacKay (1632.00000)
+	Hopeful:  Nina Baker (880.00000)
+	Hopeful:  Erin Boyle (486.00000)
+	Hopeful:  Philip Braat (1291.00000)
+	Hopeful:  Dave Holladay (145.00000)
+	Hopeful:  Akhtar Khan (285.00000)
+	Hopeful:  Ann Laird (806.00000)
+	Hopeful:  Gordon Matheson (1177.00000)
+	Hopeful:  Peter Murray (198.00000)
+	Elected votes: 0.00000
+	Pending votes: 1632.00000
+	Hopeful votes: 5268.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6900.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Craig MacKay
+	Elected votes: 1632.00000
+	Hopeful votes: 5268.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 6900.00000
+	Surplus: 251.00000
+Action: Surplus transferred: Craig MacKay (251.00000)
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (927.98248)
+	Hopeful:  Erin Boyle (495.99635)
+	Hopeful:  Philip Braat (1306.68658)
+	Hopeful:  Dave Holladay (150.84402)
+	Hopeful:  Akhtar Khan (317.29590)
+	Hopeful:  Ann Laird (836.91179)
+	Hopeful:  Gordon Matheson (1194.99343)
+	Hopeful:  Peter Murray (215.07069)
+	Elected votes: 1381.00000
+	Hopeful votes: 5445.78124
+	Nontransferable votes: 73.20404
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 251.00000
+Round 2:
+Action: Defeat low candidate: Dave Holladay
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (927.98248)
+	Hopeful:  Erin Boyle (495.99635)
+	Hopeful:  Philip Braat (1306.68658)
+	Hopeful:  Akhtar Khan (317.29590)
+	Hopeful:  Ann Laird (836.91179)
+	Hopeful:  Gordon Matheson (1194.99343)
+	Hopeful:  Peter Murray (215.07069)
+	Defeated: Dave Holladay (150.84402)
+	Elected votes: 1381.00000
+	Hopeful votes: 5294.93722
+	Defeated votes: 150.84402
+	Nontransferable votes: 73.20404
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Dave Holladay
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (974.67417)
+	Hopeful:  Erin Boyle (511.45772)
+	Hopeful:  Philip Braat (1318.99416)
+	Hopeful:  Akhtar Khan (319.91106)
+	Hopeful:  Ann Laird (866.68074)
+	Hopeful:  Gordon Matheson (1200.14722)
+	Hopeful:  Peter Murray (228.37827)
+	Defeated: Dave Holladay (0.00000)
+	Elected votes: 1381.00000
+	Hopeful votes: 5420.24334
+	Nontransferable votes: 98.74194
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: Peter Murray
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (974.67417)
+	Hopeful:  Erin Boyle (511.45772)
+	Hopeful:  Philip Braat (1318.99416)
+	Hopeful:  Akhtar Khan (319.91106)
+	Hopeful:  Ann Laird (866.68074)
+	Hopeful:  Gordon Matheson (1200.14722)
+	Defeated: Peter Murray (228.37827)
+	Defeated: Dave Holladay (0.00000)
+	Elected votes: 1381.00000
+	Hopeful votes: 5191.86507
+	Defeated votes: 228.37827
+	Nontransferable votes: 98.74194
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Peter Murray
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (1033.51892)
+	Hopeful:  Erin Boyle (515.76530)
+	Hopeful:  Philip Braat (1328.76311)
+	Hopeful:  Akhtar Khan (367.75508)
+	Hopeful:  Ann Laird (890.37243)
+	Hopeful:  Gordon Matheson (1220.83891)
+	Defeated: Dave Holladay, Peter Murray (0.00000)
+	Elected votes: 1381.00000
+	Hopeful votes: 5357.01375
+	Nontransferable votes: 161.97153
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Akhtar Khan
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (1033.51892)
+	Hopeful:  Erin Boyle (515.76530)
+	Hopeful:  Philip Braat (1328.76311)
+	Hopeful:  Ann Laird (890.37243)
+	Hopeful:  Gordon Matheson (1220.83891)
+	Defeated: Akhtar Khan (367.75508)
+	Defeated: Dave Holladay, Peter Murray (0.00000)
+	Elected votes: 1381.00000
+	Hopeful votes: 4989.25867
+	Defeated votes: 367.75508
+	Nontransferable votes: 161.97153
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Akhtar Khan
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (1163.43655)
+	Hopeful:  Erin Boyle (524.84183)
+	Hopeful:  Philip Braat (1366.14649)
+	Hopeful:  Ann Laird (929.13992)
+	Hopeful:  Gordon Matheson (1259.37681)
+	Defeated: Dave Holladay, Akhtar Khan, Peter Murray (0.00000)
+	Elected votes: 1381.00000
+	Hopeful votes: 5242.94160
+	Nontransferable votes: 276.04368
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Erin Boyle
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (1163.43655)
+	Hopeful:  Philip Braat (1366.14649)
+	Hopeful:  Ann Laird (929.13992)
+	Hopeful:  Gordon Matheson (1259.37681)
+	Defeated: Erin Boyle (524.84183)
+	Defeated: Dave Holladay, Akhtar Khan, Peter Murray (0.00000)
+	Elected votes: 1381.00000
+	Hopeful votes: 4718.09977
+	Defeated votes: 524.84183
+	Nontransferable votes: 276.04368
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Erin Boyle
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (1247.97372)
+	Hopeful:  Philip Braat (1421.06923)
+	Hopeful:  Ann Laird (1050.13919)
+	Hopeful:  Gordon Matheson (1291.45334)
+	Defeated: Erin Boyle, Dave Holladay, Akhtar Khan, Peter Murray (0.00000)
+	Elected votes: 1381.00000
+	Hopeful votes: 5010.63548
+	Nontransferable votes: 508.34980
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Philip Braat
+	Elected:  Craig MacKay (1381.00000)
+	Pending:  Philip Braat (1421.06923)
+	Hopeful:  Nina Baker (1247.97372)
+	Hopeful:  Ann Laird (1050.13919)
+	Hopeful:  Gordon Matheson (1291.45334)
+	Defeated: Erin Boyle, Dave Holladay, Akhtar Khan, Peter Murray (0.00000)
+	Elected votes: 1381.00000
+	Pending votes: 1421.06923
+	Hopeful votes: 3589.56625
+	Nontransferable votes: 508.34980
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 0.00000
+Round 6:
+Action: Transfer high surplus: Philip Braat
+	Elected votes: 2802.06923
+	Hopeful votes: 3589.56625
+	Nontransferable votes: 508.34980
+	Residual: 0.01472
+	Total: 6900.00000
+	Surplus: 40.06923
+Action: Surplus transferred: Philip Braat (40.06923)
+	Elected:  Philip Braat (1381.00000)
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (1251.77919)
+	Hopeful:  Ann Laird (1054.23531)
+	Hopeful:  Gordon Matheson (1312.04255)
+	Defeated: Erin Boyle, Dave Holladay, Akhtar Khan, Peter Murray (0.00000)
+	Elected votes: 2762.00000
+	Hopeful votes: 3618.05705
+	Nontransferable votes: 519.91821
+	Residual: 0.02474
+	Total: 6900.00000
+	Surplus: 40.06923
+Round 7:
+Action: Defeat low candidate: Ann Laird
+	Elected:  Philip Braat (1381.00000)
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (1251.77919)
+	Hopeful:  Gordon Matheson (1312.04255)
+	Defeated: Ann Laird (1054.23531)
+	Defeated: Erin Boyle, Dave Holladay, Akhtar Khan, Peter Murray (0.00000)
+	Elected votes: 2762.00000
+	Hopeful votes: 2563.82174
+	Defeated votes: 1054.23531
+	Nontransferable votes: 519.91821
+	Residual: 0.02474
+	Total: 6900.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Ann Laird
+	Elected:  Philip Braat (1381.00000)
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Nina Baker (1736.42172)
+	Hopeful:  Gordon Matheson (1544.95940)
+	Defeated: Erin Boyle, Dave Holladay, Akhtar Khan, Ann Laird, Peter Murray (0.00000)
+	Elected votes: 2762.00000
+	Hopeful votes: 3281.38112
+	Nontransferable votes: 856.59414
+	Residual: 0.02474
+	Total: 6900.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Nina Baker
+	Elected:  Nina Baker (1736.42172)
+	Elected:  Philip Braat (1381.00000)
+	Elected:  Craig MacKay (1381.00000)
+	Hopeful:  Gordon Matheson (1544.95940)
+	Defeated: Erin Boyle, Dave Holladay, Akhtar Khan, Ann Laird, Peter Murray (0.00000)
+	Elected votes: 4498.42172
+	Hopeful votes: 1544.95940
+	Nontransferable votes: 856.59414
+	Residual: 0.02474
+	Total: 6900.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Gordon Matheson
+	Elected:  Nina Baker (1736.42172)
+	Elected:  Philip Braat (1381.00000)
+	Elected:  Craig MacKay (1381.00000)
+	Elected:  Gordon Matheson (1544.95940)
+	Defeated: Erin Boyle, Dave Holladay, Akhtar Khan, Ann Laird, Peter Murray (0.00000)
+	Elected votes: 6043.38112
+	Hopeful votes: 0.00000
+	Nontransferable votes: 856.59414
+	Residual: 0.02474
+	Total: 6900.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Nina Baker (1736.42172)
+	Elected:  Philip Braat (1381.00000)
+	Elected:  Craig MacKay (1381.00000)
+	Elected:  Gordon Matheson (1544.95940)
+	Defeated: Erin Boyle, Dave Holladay, Akhtar Khan, Ann Laird, Peter Murray (0.00000)
+	Elected votes: 6043.38112
+	Hopeful votes: 0.00000
+	Nontransferable votes: 856.59414
+	Residual: 0.02474
+	Total: 6900.00000
+	Surplus: 0.00000

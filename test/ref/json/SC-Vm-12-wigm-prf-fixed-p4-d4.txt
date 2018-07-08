@@ -1,0 +1,795 @@
+{
+  "actions": [
+    {
+      "msg": "Add eligible: A", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: B", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: X", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Y", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "msg": "Add eligible: Z", 
+      "round": 0, 
+      "tag": "log"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "Begin Count", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 0, 
+      "surplus": "0.0000", 
+      "tag": "begin", 
+      "votes": "4003.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 1, 
+      "surplus": "0.0000", 
+      "tag": "round", 
+      "votes": "4003.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "Elect, transfer pending: B", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 1, 
+      "surplus": "0.0000", 
+      "tag": "elect", 
+      "votes": "4003.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "Elect, transfer pending: A", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 1, 
+      "surplus": "0.0000", 
+      "tag": "elect", 
+      "votes": "4003.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "Break tie (surplus): [A, B] -> A", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 1, 
+      "surplus": "0.0000", 
+      "tag": "tie", 
+      "votes": "4003.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "Transfer high surplus: A", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 1, 
+      "surplus": "0.0000", 
+      "tag": "unpend", 
+      "votes": "4003.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0668"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0668"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0666"
+        }
+      }, 
+      "msg": "Surplus transferred: A (0.2499)", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 1, 
+      "surplus": "0.0000", 
+      "tag": "transfer", 
+      "votes": "4002.9503"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "e", 
+          "pending": true, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0668"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0668"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0666"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 2, 
+      "surplus": "0.0000", 
+      "tag": "round", 
+      "votes": "4002.9503"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0668"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0668"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0666"
+        }
+      }, 
+      "msg": "Transfer high surplus: B", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 2, 
+      "surplus": "0.0000", 
+      "tag": "unpend", 
+      "votes": "4002.9503"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1338"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1334"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1332"
+        }
+      }, 
+      "msg": "Surplus transferred: B (0.2499)", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 2, 
+      "surplus": "0.0000", 
+      "tag": "transfer", 
+      "votes": "4002.9006"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1338"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1334"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1332"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 3, 
+      "surplus": "0.0000", 
+      "tag": "round", 
+      "votes": "4002.9006"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1338"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1334"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "667.1332"
+        }
+      }, 
+      "msg": "Defeat: Z", 
+      "nt_votes": "0.0000", 
+      "quota": "1000.7501", 
+      "round": 3, 
+      "surplus": "0.0000", 
+      "tag": "defeat", 
+      "votes": "4002.9006"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1338"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1334"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }
+      }, 
+      "msg": "Transfer defeated: Z", 
+      "nt_votes": "667.1332", 
+      "quota": "1000.7501", 
+      "round": 3, 
+      "surplus": "0.0000", 
+      "tag": "transfer", 
+      "votes": "3335.7674"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1338"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1334"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "667.1332", 
+      "quota": "1000.7501", 
+      "round": 4, 
+      "surplus": "0.0000", 
+      "tag": "round", 
+      "votes": "3335.7674"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1338"
+        }, 
+        "4": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "667.1334"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }
+      }, 
+      "msg": "Defeat: Y", 
+      "nt_votes": "667.1332", 
+      "quota": "1000.7501", 
+      "round": 4, 
+      "surplus": "0.0000", 
+      "tag": "defeat", 
+      "votes": "3335.7674"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.1338"
+        }, 
+        "4": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }
+      }, 
+      "msg": "Transfer defeated: Y", 
+      "nt_votes": "1334.2666", 
+      "quota": "1000.7501", 
+      "round": 4, 
+      "surplus": "0.0000", 
+      "tag": "transfer", 
+      "votes": "2668.6340"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "667.1338"
+        }, 
+        "4": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }
+      }, 
+      "msg": "Elect remaining: X", 
+      "nt_votes": "1334.2666", 
+      "quota": "1000.7501", 
+      "round": 4, 
+      "surplus": "0.0000", 
+      "tag": "elect", 
+      "votes": "2668.6340"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1000.7501"
+        }, 
+        "3": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "667.1338"
+        }, 
+        "4": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }, 
+        "5": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }
+      }, 
+      "msg": "Count Complete", 
+      "nt_votes": "1334.2666", 
+      "quota": "1000.7501", 
+      "round": 4, 
+      "surplus": "0.0000", 
+      "tag": "end", 
+      "votes": "2668.6340"
+    }
+  ], 
+  "arithmetic_info": "fixed-point decimal arithmetic (4 places)", 
+  "arithmetic_name": "fixed", 
+  "cdict": {
+    "1": {
+      "ballot_order": 1, 
+      "cid": 1, 
+      "name": "A", 
+      "nick": "1", 
+      "tie_order": 1
+    }, 
+    "2": {
+      "ballot_order": 2, 
+      "cid": 2, 
+      "name": "B", 
+      "nick": "2", 
+      "tie_order": 2
+    }, 
+    "3": {
+      "ballot_order": 3, 
+      "cid": 3, 
+      "name": "X", 
+      "nick": "3", 
+      "tie_order": 3
+    }, 
+    "4": {
+      "ballot_order": 4, 
+      "cid": 4, 
+      "name": "Y", 
+      "nick": "4", 
+      "tie_order": 4
+    }, 
+    "5": {
+      "ballot_order": 5, 
+      "cid": 5, 
+      "name": "Z", 
+      "nick": "5", 
+      "tie_order": 5
+    }
+  }, 
+  "cids": [
+    1, 
+    2, 
+    3, 
+    4, 
+    5
+  ], 
+  "droop_name": "droop", 
+  "droop_version": "0.11", 
+  "ecids": [
+    1, 
+    2, 
+    3, 
+    4, 
+    5
+  ], 
+  "method": "wigm", 
+  "nballots": 4003, 
+  "options": {
+    "allowed": {}, 
+    "cmd": {
+      "rule": "wigm-prf"
+    }, 
+    "default": {
+      "arithmetic": "fixed", 
+      "display": 4, 
+      "precision": 4
+    }, 
+    "file_options": {}, 
+    "force": {
+      "arithmetic": "fixed", 
+      "display": 4, 
+      "precision": 4
+    }, 
+    "options": {
+      "arithmetic": "fixed", 
+      "display": 4, 
+      "precision": 4, 
+      "rule": "wigm-prf"
+    }
+  }, 
+  "quota": "1000.7501", 
+  "rule_info": "PR Foundation WIGM Reference (single defeat)", 
+  "rule_name": "wigm-prf", 
+  "seats": 3, 
+  "title": "Voting matters example (Issue 12, 'The computational accuracy using the Meek algorithm')"
+}

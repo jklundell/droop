@@ -1,0 +1,44 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote
+0	log	Add eligible: John Anderson
+0	log	Add eligible: Neil Craig
+0	log	Add eligible: Kenneth Elder
+0	log	Add eligible: Anthea Irwin
+0	log	Add eligible: Abdul A Khan
+0	log	Add eligible: Akhter Khan
+0	log	Add eligible: Hanzala Malik
+0	log	Add eligible: Martin Rhodes
+0	log	Add eligible: George A Roberts
+0	log	Add eligible: Martha Ferguson Wardrop
+0	begin	1797.00000	0.00000	John Anderson	H	912.00000	Neil Craig	H	51.00000	Kenneth Elder	H	1184.00000	Anthea Irwin	H	184.00000	Abdul A Khan	H	463.00000	Akhter Khan	H	344.00000	Hanzala Malik	H	1192.00000	Martin Rhodes	H	1080.00000	George A Roberts	H	1899.00000	Martha Ferguson Wardrop	H	1675.00000
+0	elect	1797.00000	0.00000	John Anderson	H	912.00000	Neil Craig	H	51.00000	Kenneth Elder	H	1184.00000	Anthea Irwin	H	184.00000	Abdul A Khan	H	463.00000	Akhter Khan	H	344.00000	Hanzala Malik	H	1192.00000	Martin Rhodes	H	1080.00000	George A Roberts	e	1899.00000	Martha Ferguson Wardrop	H	1675.00000
+1	round	New Round
+1	unpend	1797.00000	0.00000	John Anderson	H	912.00000	Neil Craig	H	51.00000	Kenneth Elder	H	1184.00000	Anthea Irwin	H	184.00000	Abdul A Khan	H	463.00000	Akhter Khan	H	344.00000	Hanzala Malik	H	1192.00000	Martin Rhodes	H	1080.00000	George A Roberts	E	1899.00000	Martha Ferguson Wardrop	H	1675.00000
+1	transfer	1797.00000	24.86773	John Anderson	H	918.01552	Neil Craig	H	51.69823	Kenneth Elder	H	1193.45296	Anthea Irwin	H	187.81341	Abdul A Khan	H	469.49891	Akhter Khan	H	354.09748	Hanzala Malik	H	1196.08196	Martin Rhodes	H	1085.80068	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	H	1705.66841
+2	round	New Round
+2	defeat	1797.00000	24.86773	John Anderson	H	918.01552	Neil Craig	D	51.69823	Kenneth Elder	H	1193.45296	Anthea Irwin	H	187.81341	Abdul A Khan	H	469.49891	Akhter Khan	H	354.09748	Hanzala Malik	H	1196.08196	Martin Rhodes	H	1085.80068	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	H	1705.66841
+2	transfer	1797.00000	34.02886	John Anderson	H	930.23036	Neil Craig	D	0.00000	Kenneth Elder	H	1195.56038	Anthea Irwin	H	193.86712	Abdul A Khan	H	477.49891	Akhter Khan	H	362.20490	Hanzala Malik	H	1197.08196	Martin Rhodes	H	1087.80068	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	H	1708.72212
+3	round	New Round
+3	defeat	1797.00000	34.02886	John Anderson	H	930.23036	Neil Craig	D	0.00000	Kenneth Elder	H	1195.56038	Anthea Irwin	D	193.86712	Abdul A Khan	H	477.49891	Akhter Khan	H	362.20490	Hanzala Malik	H	1197.08196	Martin Rhodes	H	1087.80068	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	H	1708.72212
+3	transfer	1797.00000	63.78080	John Anderson	H	932.23036	Neil Craig	D	0.00000	Kenneth Elder	H	1214.04377	Anthea Irwin	D	0.00000	Abdul A Khan	H	490.66004	Akhter Khan	H	411.38652	Hanzala Malik	H	1203.24309	Martin Rhodes	H	1092.90810	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	H	1778.74261
+4	round	New Round
+4	defeat	1797.00000	63.78080	John Anderson	H	932.23036	Neil Craig	D	0.00000	Kenneth Elder	H	1214.04377	Anthea Irwin	D	0.00000	Abdul A Khan	H	490.66004	Akhter Khan	D	411.38652	Hanzala Malik	H	1203.24309	Martin Rhodes	H	1092.90810	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	H	1778.74261
+4	transfer	1797.00000	167.78856	John Anderson	H	941.55262	Neil Craig	D	0.00000	Kenneth Elder	H	1245.17168	Anthea Irwin	D	0.00000	Abdul A Khan	H	526.05650	Akhter Khan	D	0.00000	Hanzala Malik	H	1267.94132	Martin Rhodes	H	1114.23036	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	H	1924.25425
+4	elect	1797.00000	167.78856	John Anderson	H	941.55262	Neil Craig	D	0.00000	Kenneth Elder	H	1245.17168	Anthea Irwin	D	0.00000	Abdul A Khan	H	526.05650	Akhter Khan	D	0.00000	Hanzala Malik	H	1267.94132	Martin Rhodes	H	1114.23036	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	e	1924.25425
+5	round	New Round
+5	unpend	1797.00000	167.78856	John Anderson	H	941.55262	Neil Craig	D	0.00000	Kenneth Elder	H	1245.17168	Anthea Irwin	D	0.00000	Abdul A Khan	H	526.05650	Akhter Khan	D	0.00000	Hanzala Malik	H	1267.94132	Martin Rhodes	H	1114.23036	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1924.25425
+5	transfer	1797.00000	209.81065	John Anderson	H	945.31402	Neil Craig	D	0.00000	Kenneth Elder	H	1276.48526	Anthea Irwin	D	0.00000	Abdul A Khan	H	554.74354	Akhter Khan	D	0.00000	Hanzala Malik	H	1277.72988	Martin Rhodes	H	1125.90738	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+6	round	New Round
+6	defeat	1797.00000	209.81065	John Anderson	H	945.31402	Neil Craig	D	0.00000	Kenneth Elder	H	1276.48526	Anthea Irwin	D	0.00000	Abdul A Khan	D	554.74354	Akhter Khan	D	0.00000	Hanzala Malik	H	1277.72988	Martin Rhodes	H	1125.90738	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+6	transfer	1797.00000	313.98117	John Anderson	H	974.15468	Neil Craig	D	0.00000	Kenneth Elder	H	1562.12095	Anthea Irwin	D	0.00000	Abdul A Khan	D	0.00000	Akhter Khan	D	0.00000	Hanzala Malik	H	1379.71960	Martin Rhodes	H	1160.01433	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+7	round	New Round
+7	defeat	1797.00000	313.98117	John Anderson	D	974.15468	Neil Craig	D	0.00000	Kenneth Elder	H	1562.12095	Anthea Irwin	D	0.00000	Abdul A Khan	D	0.00000	Akhter Khan	D	0.00000	Hanzala Malik	H	1379.71960	Martin Rhodes	H	1160.01433	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+7	transfer	1797.00000	801.57254	John Anderson	D	0.00000	Neil Craig	D	0.00000	Kenneth Elder	H	1926.80457	Anthea Irwin	D	0.00000	Abdul A Khan	D	0.00000	Akhter Khan	D	0.00000	Hanzala Malik	H	1433.01299	Martin Rhodes	H	1228.60063	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+7	elect	1797.00000	801.57254	John Anderson	D	0.00000	Neil Craig	D	0.00000	Kenneth Elder	e	1926.80457	Anthea Irwin	D	0.00000	Abdul A Khan	D	0.00000	Akhter Khan	D	0.00000	Hanzala Malik	H	1433.01299	Martin Rhodes	H	1228.60063	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+8	round	New Round
+8	unpend	1797.00000	801.57254	John Anderson	D	0.00000	Neil Craig	D	0.00000	Kenneth Elder	E	1926.80457	Anthea Irwin	D	0.00000	Abdul A Khan	D	0.00000	Akhter Khan	D	0.00000	Hanzala Malik	H	1433.01299	Martin Rhodes	H	1228.60063	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+8	transfer	1797.00000	884.99165	John Anderson	D	0.00000	Neil Craig	D	0.00000	Kenneth Elder	E	1797.00000	Anthea Irwin	D	0.00000	Abdul A Khan	D	0.00000	Akhter Khan	D	0.00000	Hanzala Malik	H	1458.94570	Martin Rhodes	H	1249.03032	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+9	round	New Round
+9	defeat	1797.00000	884.99165	John Anderson	D	0.00000	Neil Craig	D	0.00000	Kenneth Elder	E	1797.00000	Anthea Irwin	D	0.00000	Abdul A Khan	D	0.00000	Akhter Khan	D	0.00000	Hanzala Malik	H	1458.94570	Martin Rhodes	D	1249.03032	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+9	transfer	1797.00000	1322.75711	John Anderson	D	0.00000	Neil Craig	D	0.00000	Kenneth Elder	E	1797.00000	Anthea Irwin	D	0.00000	Abdul A Khan	D	0.00000	Akhter Khan	D	0.00000	Hanzala Malik	H	2270.21056	Martin Rhodes	D	0.00000	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+9	elect	1797.00000	1322.75711	John Anderson	D	0.00000	Neil Craig	D	0.00000	Kenneth Elder	E	1797.00000	Anthea Irwin	D	0.00000	Abdul A Khan	D	0.00000	Akhter Khan	D	0.00000	Hanzala Malik	E	2270.21056	Martin Rhodes	D	0.00000	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000
+X	end	1797.00000	1322.75711	John Anderson	D	0.00000	Neil Craig	D	0.00000	Kenneth Elder	E	1797.00000	Anthea Irwin	D	0.00000	Abdul A Khan	D	0.00000	Akhter Khan	D	0.00000	Hanzala Malik	E	2270.21056	Martin Rhodes	D	0.00000	George A Roberts	E	1797.00000	Martha Ferguson Wardrop	E	1797.00000

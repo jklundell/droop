@@ -1,0 +1,362 @@
+
+Election: GOVAN Ward
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 9560
+	Quota: 1913.00000
+
+	Add eligible: Shaukat Butt
+	Add eligible: Michael Cobley
+	Add eligible: Stephen Dornan
+	Add eligible: John Flanagan
+	Add eligible: Alan L Hughes
+	Add eligible: Allison Hunter
+	Add eligible: Will Jess
+	Add eligible: Irene Lang
+	Add eligible: Patricia McIntyre
+	Add eligible: George Douglas McNee
+	Add eligible: Carolina Perez
+Action: Begin Count
+	Hopeful:  Shaukat Butt (1371.00000)
+	Hopeful:  Michael Cobley (394.00000)
+	Hopeful:  Stephen Dornan (1590.00000)
+	Hopeful:  John Flanagan (1657.00000)
+	Hopeful:  Alan L Hughes (138.00000)
+	Hopeful:  Allison Hunter (2694.00000)
+	Hopeful:  Will Jess (377.00000)
+	Hopeful:  Irene Lang (398.00000)
+	Hopeful:  Patricia McIntyre (450.00000)
+	Hopeful:  George Douglas McNee (377.00000)
+	Hopeful:  Carolina Perez (114.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 9560.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Allison Hunter
+	Pending:  Allison Hunter (2694.00000)
+	Hopeful:  Shaukat Butt (1371.00000)
+	Hopeful:  Michael Cobley (394.00000)
+	Hopeful:  Stephen Dornan (1590.00000)
+	Hopeful:  John Flanagan (1657.00000)
+	Hopeful:  Alan L Hughes (138.00000)
+	Hopeful:  Will Jess (377.00000)
+	Hopeful:  Irene Lang (398.00000)
+	Hopeful:  Patricia McIntyre (450.00000)
+	Hopeful:  George Douglas McNee (377.00000)
+	Hopeful:  Carolina Perez (114.00000)
+	Elected votes: 0.00000
+	Pending votes: 2694.00000
+	Hopeful votes: 6866.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9560.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: Allison Hunter
+	Elected votes: 2694.00000
+	Hopeful votes: 6866.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9560.00000
+	Surplus: 781.00000
+Action: Surplus transferred: Allison Hunter (781.00000)
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1412.45570)
+	Hopeful:  Michael Cobley (449.66080)
+	Hopeful:  Stephen Dornan (1651.16890)
+	Hopeful:  John Flanagan (1705.12340)
+	Hopeful:  Alan L Hughes (146.69700)
+	Hopeful:  Will Jess (473.82660)
+	Hopeful:  Irene Lang (505.55290)
+	Hopeful:  Patricia McIntyre (480.43950)
+	Hopeful:  George Douglas McNee (399.03240)
+	Hopeful:  Carolina Perez (138.35160)
+	Elected votes: 1913.00000
+	Hopeful votes: 7362.30880
+	Nontransferable votes: 284.68180
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 781.00000
+Round 2:
+Action: Defeat low candidate: Carolina Perez
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1412.45570)
+	Hopeful:  Michael Cobley (449.66080)
+	Hopeful:  Stephen Dornan (1651.16890)
+	Hopeful:  John Flanagan (1705.12340)
+	Hopeful:  Alan L Hughes (146.69700)
+	Hopeful:  Will Jess (473.82660)
+	Hopeful:  Irene Lang (505.55290)
+	Hopeful:  Patricia McIntyre (480.43950)
+	Hopeful:  George Douglas McNee (399.03240)
+	Defeated: Carolina Perez (138.35160)
+	Elected votes: 1913.00000
+	Hopeful votes: 7223.95720
+	Defeated votes: 138.35160
+	Nontransferable votes: 284.68180
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Carolina Perez
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1415.32540)
+	Hopeful:  Michael Cobley (455.98000)
+	Hopeful:  Stephen Dornan (1657.90830)
+	Hopeful:  John Flanagan (1711.57290)
+	Hopeful:  Alan L Hughes (147.27680)
+	Hopeful:  Will Jess (506.59530)
+	Hopeful:  Irene Lang (548.67010)
+	Hopeful:  Patricia McIntyre (481.01930)
+	Hopeful:  George Douglas McNee (401.48190)
+	Defeated: Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 7325.83000
+	Nontransferable votes: 321.16060
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: Alan L Hughes
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1415.32540)
+	Hopeful:  Michael Cobley (455.98000)
+	Hopeful:  Stephen Dornan (1657.90830)
+	Hopeful:  John Flanagan (1711.57290)
+	Hopeful:  Will Jess (506.59530)
+	Hopeful:  Irene Lang (548.67010)
+	Hopeful:  Patricia McIntyre (481.01930)
+	Hopeful:  George Douglas McNee (401.48190)
+	Defeated: Alan L Hughes (147.27680)
+	Defeated: Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 7178.55320
+	Defeated votes: 147.27680
+	Nontransferable votes: 321.16060
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Alan L Hughes
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1417.61530)
+	Hopeful:  Michael Cobley (468.42950)
+	Hopeful:  Stephen Dornan (1666.90830)
+	Hopeful:  John Flanagan (1718.86280)
+	Hopeful:  Will Jess (517.62460)
+	Hopeful:  Irene Lang (557.24990)
+	Hopeful:  Patricia McIntyre (531.75870)
+	Hopeful:  George Douglas McNee (408.48190)
+	Defeated: Alan L Hughes, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 7286.93100
+	Nontransferable votes: 360.05960
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: George Douglas McNee
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1417.61530)
+	Hopeful:  Michael Cobley (468.42950)
+	Hopeful:  Stephen Dornan (1666.90830)
+	Hopeful:  John Flanagan (1718.86280)
+	Hopeful:  Will Jess (517.62460)
+	Hopeful:  Irene Lang (557.24990)
+	Hopeful:  Patricia McIntyre (531.75870)
+	Defeated: George Douglas McNee (408.48190)
+	Defeated: Alan L Hughes, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 6878.44910
+	Defeated votes: 408.48190
+	Nontransferable votes: 360.05960
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Transfer defeated: George Douglas McNee
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1449.06480)
+	Hopeful:  Michael Cobley (485.90830)
+	Hopeful:  Stephen Dornan (1696.48810)
+	Hopeful:  John Flanagan (1747.86280)
+	Hopeful:  Will Jess (555.55290)
+	Hopeful:  Irene Lang (580.30850)
+	Hopeful:  Patricia McIntyre (607.78800)
+	Defeated: Alan L Hughes, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 7122.97340
+	Nontransferable votes: 524.01720
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Round 5:
+Action: Defeat low candidate: Michael Cobley
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1449.06480)
+	Hopeful:  Stephen Dornan (1696.48810)
+	Hopeful:  John Flanagan (1747.86280)
+	Hopeful:  Will Jess (555.55290)
+	Hopeful:  Irene Lang (580.30850)
+	Hopeful:  Patricia McIntyre (607.78800)
+	Defeated: Michael Cobley (485.90830)
+	Defeated: Alan L Hughes, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 6637.06510
+	Defeated votes: 485.90830
+	Nontransferable votes: 524.01720
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Michael Cobley
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1503.12340)
+	Hopeful:  Stephen Dornan (1743.09720)
+	Hopeful:  John Flanagan (1781.47190)
+	Hopeful:  Will Jess (711.45500)
+	Hopeful:  Irene Lang (600.81660)
+	Hopeful:  Patricia McIntyre (675.61530)
+	Defeated: Michael Cobley, Alan L Hughes, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 7015.57940
+	Nontransferable votes: 631.41120
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Round 6:
+Action: Defeat low candidate: Irene Lang
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1503.12340)
+	Hopeful:  Stephen Dornan (1743.09720)
+	Hopeful:  John Flanagan (1781.47190)
+	Hopeful:  Will Jess (711.45500)
+	Hopeful:  Patricia McIntyre (675.61530)
+	Defeated: Irene Lang (600.81660)
+	Defeated: Michael Cobley, Alan L Hughes, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 6414.76280
+	Defeated votes: 600.81660
+	Nontransferable votes: 631.41120
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Irene Lang
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1550.53050)
+	Hopeful:  Stephen Dornan (1812.63460)
+	Hopeful:  John Flanagan (1845.45880)
+	Hopeful:  Will Jess (842.76420)
+	Hopeful:  Patricia McIntyre (690.99310)
+	Defeated: Michael Cobley, Alan L Hughes, Irene Lang, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 6742.38120
+	Nontransferable votes: 904.60940
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: Patricia McIntyre
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1550.53050)
+	Hopeful:  Stephen Dornan (1812.63460)
+	Hopeful:  John Flanagan (1845.45880)
+	Hopeful:  Will Jess (842.76420)
+	Defeated: Patricia McIntyre (690.99310)
+	Defeated: Michael Cobley, Alan L Hughes, Irene Lang, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 6051.38810
+	Defeated votes: 690.99310
+	Nontransferable votes: 904.60940
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Patricia McIntyre
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1594.69010)
+	Hopeful:  Stephen Dornan (1852.95380)
+	Hopeful:  John Flanagan (1881.06790)
+	Hopeful:  Will Jess (977.80970)
+	Defeated: Michael Cobley, Alan L Hughes, Irene Lang, Patricia McIntyre, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 6306.52150
+	Nontransferable votes: 1340.46910
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Round 8:
+Action: Defeat low candidate: Will Jess
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1594.69010)
+	Hopeful:  Stephen Dornan (1852.95380)
+	Hopeful:  John Flanagan (1881.06790)
+	Defeated: Will Jess (977.80970)
+	Defeated: Michael Cobley, Alan L Hughes, Irene Lang, Patricia McIntyre, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 5328.71180
+	Defeated votes: 977.80970
+	Nontransferable votes: 1340.46910
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Will Jess
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Shaukat Butt (1675.73560)
+	Hopeful:  Stephen Dornan (1921.68010)
+	Hopeful:  John Flanagan (1984.14270)
+	Defeated: Michael Cobley, Alan L Hughes, Will Jess, Irene Lang, Patricia McIntyre, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 1913.00000
+	Hopeful votes: 5581.55840
+	Nontransferable votes: 2065.43220
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Shaukat Butt
+	Elected:  Shaukat Butt (1675.73560)
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  Stephen Dornan (1921.68010)
+	Hopeful:  John Flanagan (1984.14270)
+	Defeated: Michael Cobley, Alan L Hughes, Will Jess, Irene Lang, Patricia McIntyre, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 3588.73560
+	Hopeful votes: 3905.82280
+	Nontransferable votes: 2065.43220
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Stephen Dornan
+	Elected:  Shaukat Butt (1675.73560)
+	Elected:  Stephen Dornan (1921.68010)
+	Elected:  Allison Hunter (1913.00000)
+	Hopeful:  John Flanagan (1984.14270)
+	Defeated: Michael Cobley, Alan L Hughes, Will Jess, Irene Lang, Patricia McIntyre, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 5510.41570
+	Hopeful votes: 1984.14270
+	Nontransferable votes: 2065.43220
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: John Flanagan
+	Elected:  Shaukat Butt (1675.73560)
+	Elected:  Stephen Dornan (1921.68010)
+	Elected:  John Flanagan (1984.14270)
+	Elected:  Allison Hunter (1913.00000)
+	Defeated: Michael Cobley, Alan L Hughes, Will Jess, Irene Lang, Patricia McIntyre, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 7494.55840
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2065.43220
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Shaukat Butt (1675.73560)
+	Elected:  Stephen Dornan (1921.68010)
+	Elected:  John Flanagan (1984.14270)
+	Elected:  Allison Hunter (1913.00000)
+	Defeated: Michael Cobley, Alan L Hughes, Will Jess, Irene Lang, Patricia McIntyre, George Douglas McNee, Carolina Perez (0.00000)
+	Elected votes: 7494.55840
+	Hopeful votes: 0.00000
+	Nontransferable votes: 2065.43220
+	Residual: 0.00940
+	Total: 9560.00000
+	Surplus: 0.00000

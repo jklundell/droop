@@ -1,0 +1,80 @@
+
+Election: Pollux and Helen should tie
+
+	Droop package: droop v0.11
+	Rule: CfER (batch defeat)
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 2
+	Ballots: 9
+	Quota: 3.00001
+
+	Add eligible: Castor
+	Add eligible: Pollux
+	Add eligible: Helen
+Action: Begin Count
+	Hopeful:  Castor (5.00000)
+	Hopeful:  Pollux (1.00000)
+	Hopeful:  Helen (3.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 9.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9.00000
+	Surplus: 0.00000
+Round 1:
+Action: Elect, transfer pending: Castor
+	Pending:  Castor (5.00000)
+	Hopeful:  Pollux (1.00000)
+	Hopeful:  Helen (3.00000)
+	Elected votes: 0.00000
+	Pending votes: 5.00000
+	Hopeful votes: 4.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9.00000
+	Surplus: 0.00000
+Action: Defeat batch: Pollux
+	Pending:  Castor (5.00000)
+	Hopeful:  Helen (3.00000)
+	Defeated: Pollux (1.00000)
+	Elected votes: 0.00000
+	Pending votes: 5.00000
+	Hopeful votes: 3.00000
+	Defeated votes: 1.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9.00000
+	Surplus: 0.00000
+Action: Elect pending: Castor
+	Elected:  Castor (5.00000)
+	Hopeful:  Helen (3.00000)
+	Defeated: Pollux (1.00000)
+	Elected votes: 5.00000
+	Hopeful votes: 3.00000
+	Defeated votes: 1.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9.00000
+	Surplus: 0.00000
+Action: Elect remaining: Helen
+	Elected:  Castor (5.00000)
+	Elected:  Helen (3.00000)
+	Defeated: Pollux (1.00000)
+	Elected votes: 8.00000
+	Hopeful votes: 0.00000
+	Defeated votes: 1.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Castor (5.00000)
+	Elected:  Helen (3.00000)
+	Defeated: Pollux (1.00000)
+	Elected votes: 8.00000
+	Hopeful votes: 0.00000
+	Defeated votes: 1.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 9.00000
+	Surplus: 0.00000

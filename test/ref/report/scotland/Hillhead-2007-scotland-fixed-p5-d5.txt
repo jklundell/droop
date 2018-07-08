@@ -1,0 +1,369 @@
+
+Election: HILLHEAD
+
+	Droop package: droop v0.11
+	Rule: Scottish STV
+	Arithmetic: fixed-point decimal arithmetic (5 places)
+	Seats: 4
+	Ballots: 8984
+	Quota: 1797.00000
+
+	Add eligible: John Anderson
+	Add eligible: Neil Craig
+	Add eligible: Kenneth Elder
+	Add eligible: Anthea Irwin
+	Add eligible: Abdul A Khan
+	Add eligible: Akhter Khan
+	Add eligible: Hanzala Malik
+	Add eligible: Martin Rhodes
+	Add eligible: George A Roberts
+	Add eligible: Martha Ferguson Wardrop
+Action: Begin Count
+	Hopeful:  John Anderson (912.00000)
+	Hopeful:  Neil Craig (51.00000)
+	Hopeful:  Kenneth Elder (1184.00000)
+	Hopeful:  Anthea Irwin (184.00000)
+	Hopeful:  Abdul A Khan (463.00000)
+	Hopeful:  Akhter Khan (344.00000)
+	Hopeful:  Hanzala Malik (1192.00000)
+	Hopeful:  Martin Rhodes (1080.00000)
+	Hopeful:  George A Roberts (1899.00000)
+	Hopeful:  Martha Ferguson Wardrop (1675.00000)
+	Elected votes: 0.00000
+	Hopeful votes: 8984.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: George A Roberts
+	Pending:  George A Roberts (1899.00000)
+	Hopeful:  John Anderson (912.00000)
+	Hopeful:  Neil Craig (51.00000)
+	Hopeful:  Kenneth Elder (1184.00000)
+	Hopeful:  Anthea Irwin (184.00000)
+	Hopeful:  Abdul A Khan (463.00000)
+	Hopeful:  Akhter Khan (344.00000)
+	Hopeful:  Hanzala Malik (1192.00000)
+	Hopeful:  Martin Rhodes (1080.00000)
+	Hopeful:  Martha Ferguson Wardrop (1675.00000)
+	Elected votes: 0.00000
+	Pending votes: 1899.00000
+	Hopeful votes: 7085.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8984.00000
+	Surplus: 0.00000
+Round 1:
+Action: Transfer high surplus: George A Roberts
+	Elected votes: 1899.00000
+	Hopeful votes: 7085.00000
+	Nontransferable votes: 0.00000
+	Residual: 0.00000
+	Total: 8984.00000
+	Surplus: 102.00000
+Action: Surplus transferred: George A Roberts (102.00000)
+	Elected:  George A Roberts (1797.00000)
+	Hopeful:  John Anderson (918.01552)
+	Hopeful:  Neil Craig (51.69823)
+	Hopeful:  Kenneth Elder (1193.45296)
+	Hopeful:  Anthea Irwin (187.81341)
+	Hopeful:  Abdul A Khan (469.49891)
+	Hopeful:  Akhter Khan (354.09748)
+	Hopeful:  Hanzala Malik (1196.08196)
+	Hopeful:  Martin Rhodes (1085.80068)
+	Hopeful:  Martha Ferguson Wardrop (1705.66841)
+	Elected votes: 1797.00000
+	Hopeful votes: 7162.12756
+	Nontransferable votes: 24.86773
+	Residual: 0.00471
+	Total: 8984.00000
+	Surplus: 102.00000
+Round 2:
+Action: Defeat low candidate: Neil Craig
+	Elected:  George A Roberts (1797.00000)
+	Hopeful:  John Anderson (918.01552)
+	Hopeful:  Kenneth Elder (1193.45296)
+	Hopeful:  Anthea Irwin (187.81341)
+	Hopeful:  Abdul A Khan (469.49891)
+	Hopeful:  Akhter Khan (354.09748)
+	Hopeful:  Hanzala Malik (1196.08196)
+	Hopeful:  Martin Rhodes (1085.80068)
+	Hopeful:  Martha Ferguson Wardrop (1705.66841)
+	Defeated: Neil Craig (51.69823)
+	Elected votes: 1797.00000
+	Hopeful votes: 7110.42933
+	Defeated votes: 51.69823
+	Nontransferable votes: 24.86773
+	Residual: 0.00471
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Neil Craig
+	Elected:  George A Roberts (1797.00000)
+	Hopeful:  John Anderson (930.23036)
+	Hopeful:  Kenneth Elder (1195.56038)
+	Hopeful:  Anthea Irwin (193.86712)
+	Hopeful:  Abdul A Khan (477.49891)
+	Hopeful:  Akhter Khan (362.20490)
+	Hopeful:  Hanzala Malik (1197.08196)
+	Hopeful:  Martin Rhodes (1087.80068)
+	Hopeful:  Martha Ferguson Wardrop (1708.72212)
+	Defeated: Neil Craig (0.00000)
+	Elected votes: 1797.00000
+	Hopeful votes: 7152.96643
+	Nontransferable votes: 34.02886
+	Residual: 0.00471
+	Total: 8984.00000
+	Surplus: 0.00000
+Round 3:
+Action: Defeat low candidate: Anthea Irwin
+	Elected:  George A Roberts (1797.00000)
+	Hopeful:  John Anderson (930.23036)
+	Hopeful:  Kenneth Elder (1195.56038)
+	Hopeful:  Abdul A Khan (477.49891)
+	Hopeful:  Akhter Khan (362.20490)
+	Hopeful:  Hanzala Malik (1197.08196)
+	Hopeful:  Martin Rhodes (1087.80068)
+	Hopeful:  Martha Ferguson Wardrop (1708.72212)
+	Defeated: Anthea Irwin (193.86712)
+	Defeated: Neil Craig (0.00000)
+	Elected votes: 1797.00000
+	Hopeful votes: 6959.09931
+	Defeated votes: 193.86712
+	Nontransferable votes: 34.02886
+	Residual: 0.00471
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Anthea Irwin
+	Elected:  George A Roberts (1797.00000)
+	Hopeful:  John Anderson (932.23036)
+	Hopeful:  Kenneth Elder (1214.04377)
+	Hopeful:  Abdul A Khan (490.66004)
+	Hopeful:  Akhter Khan (411.38652)
+	Hopeful:  Hanzala Malik (1203.24309)
+	Hopeful:  Martin Rhodes (1092.90810)
+	Hopeful:  Martha Ferguson Wardrop (1778.74261)
+	Defeated: Neil Craig, Anthea Irwin (0.00000)
+	Elected votes: 1797.00000
+	Hopeful votes: 7123.21449
+	Nontransferable votes: 63.78080
+	Residual: 0.00471
+	Total: 8984.00000
+	Surplus: 0.00000
+Round 4:
+Action: Defeat low candidate: Akhter Khan
+	Elected:  George A Roberts (1797.00000)
+	Hopeful:  John Anderson (932.23036)
+	Hopeful:  Kenneth Elder (1214.04377)
+	Hopeful:  Abdul A Khan (490.66004)
+	Hopeful:  Hanzala Malik (1203.24309)
+	Hopeful:  Martin Rhodes (1092.90810)
+	Hopeful:  Martha Ferguson Wardrop (1778.74261)
+	Defeated: Akhter Khan (411.38652)
+	Defeated: Neil Craig, Anthea Irwin (0.00000)
+	Elected votes: 1797.00000
+	Hopeful votes: 6711.82797
+	Defeated votes: 411.38652
+	Nontransferable votes: 63.78080
+	Residual: 0.00471
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Akhter Khan
+	Elected:  George A Roberts (1797.00000)
+	Hopeful:  John Anderson (941.55262)
+	Hopeful:  Kenneth Elder (1245.17168)
+	Hopeful:  Abdul A Khan (526.05650)
+	Hopeful:  Hanzala Malik (1267.94132)
+	Hopeful:  Martin Rhodes (1114.23036)
+	Hopeful:  Martha Ferguson Wardrop (1924.25425)
+	Defeated: Neil Craig, Anthea Irwin, Akhter Khan (0.00000)
+	Elected votes: 1797.00000
+	Hopeful votes: 7019.20673
+	Nontransferable votes: 167.78856
+	Residual: 0.00471
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Martha Ferguson Wardrop
+	Elected:  George A Roberts (1797.00000)
+	Pending:  Martha Ferguson Wardrop (1924.25425)
+	Hopeful:  John Anderson (941.55262)
+	Hopeful:  Kenneth Elder (1245.17168)
+	Hopeful:  Abdul A Khan (526.05650)
+	Hopeful:  Hanzala Malik (1267.94132)
+	Hopeful:  Martin Rhodes (1114.23036)
+	Defeated: Neil Craig, Anthea Irwin, Akhter Khan (0.00000)
+	Elected votes: 1797.00000
+	Pending votes: 1924.25425
+	Hopeful votes: 5094.95248
+	Nontransferable votes: 167.78856
+	Residual: 0.00471
+	Total: 8984.00000
+	Surplus: 0.00000
+Round 5:
+Action: Transfer high surplus: Martha Ferguson Wardrop
+	Elected votes: 3721.25425
+	Hopeful votes: 5094.95248
+	Nontransferable votes: 167.78856
+	Residual: 0.00471
+	Total: 8984.00000
+	Surplus: 127.25425
+Action: Surplus transferred: Martha Ferguson Wardrop (127.25425)
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Hopeful:  John Anderson (945.31402)
+	Hopeful:  Kenneth Elder (1276.48526)
+	Hopeful:  Abdul A Khan (554.74354)
+	Hopeful:  Hanzala Malik (1277.72988)
+	Hopeful:  Martin Rhodes (1125.90738)
+	Defeated: Neil Craig, Anthea Irwin, Akhter Khan (0.00000)
+	Elected votes: 3594.00000
+	Hopeful votes: 5180.18008
+	Nontransferable votes: 209.81065
+	Residual: 0.00927
+	Total: 8984.00000
+	Surplus: 127.25425
+Round 6:
+Action: Defeat low candidate: Abdul A Khan
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Hopeful:  John Anderson (945.31402)
+	Hopeful:  Kenneth Elder (1276.48526)
+	Hopeful:  Hanzala Malik (1277.72988)
+	Hopeful:  Martin Rhodes (1125.90738)
+	Defeated: Abdul A Khan (554.74354)
+	Defeated: Neil Craig, Anthea Irwin, Akhter Khan (0.00000)
+	Elected votes: 3594.00000
+	Hopeful votes: 4625.43654
+	Defeated votes: 554.74354
+	Nontransferable votes: 209.81065
+	Residual: 0.00927
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Abdul A Khan
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Hopeful:  John Anderson (974.15468)
+	Hopeful:  Kenneth Elder (1562.12095)
+	Hopeful:  Hanzala Malik (1379.71960)
+	Hopeful:  Martin Rhodes (1160.01433)
+	Defeated: Neil Craig, Anthea Irwin, Abdul A Khan, Akhter Khan (0.00000)
+	Elected votes: 3594.00000
+	Hopeful votes: 5076.00956
+	Nontransferable votes: 313.98117
+	Residual: 0.00927
+	Total: 8984.00000
+	Surplus: 0.00000
+Round 7:
+Action: Defeat low candidate: John Anderson
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Hopeful:  Kenneth Elder (1562.12095)
+	Hopeful:  Hanzala Malik (1379.71960)
+	Hopeful:  Martin Rhodes (1160.01433)
+	Defeated: John Anderson (974.15468)
+	Defeated: Neil Craig, Anthea Irwin, Abdul A Khan, Akhter Khan (0.00000)
+	Elected votes: 3594.00000
+	Hopeful votes: 4101.85488
+	Defeated votes: 974.15468
+	Nontransferable votes: 313.98117
+	Residual: 0.00927
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Transfer defeated: John Anderson
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Hopeful:  Kenneth Elder (1926.80457)
+	Hopeful:  Hanzala Malik (1433.01299)
+	Hopeful:  Martin Rhodes (1228.60063)
+	Defeated: John Anderson, Neil Craig, Anthea Irwin, Abdul A Khan, Akhter Khan (0.00000)
+	Elected votes: 3594.00000
+	Hopeful votes: 4588.41819
+	Nontransferable votes: 801.57254
+	Residual: 0.00927
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Elect, transfer pending: Kenneth Elder
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Pending:  Kenneth Elder (1926.80457)
+	Hopeful:  Hanzala Malik (1433.01299)
+	Hopeful:  Martin Rhodes (1228.60063)
+	Defeated: John Anderson, Neil Craig, Anthea Irwin, Abdul A Khan, Akhter Khan (0.00000)
+	Elected votes: 3594.00000
+	Pending votes: 1926.80457
+	Hopeful votes: 2661.61362
+	Nontransferable votes: 801.57254
+	Residual: 0.00927
+	Total: 8984.00000
+	Surplus: 0.00000
+Round 8:
+Action: Transfer high surplus: Kenneth Elder
+	Elected votes: 5520.80457
+	Hopeful votes: 2661.61362
+	Nontransferable votes: 801.57254
+	Residual: 0.00927
+	Total: 8984.00000
+	Surplus: 129.80457
+Action: Surplus transferred: Kenneth Elder (129.80457)
+	Elected:  Kenneth Elder (1797.00000)
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Hopeful:  Hanzala Malik (1458.94570)
+	Hopeful:  Martin Rhodes (1249.03032)
+	Defeated: John Anderson, Neil Craig, Anthea Irwin, Abdul A Khan, Akhter Khan (0.00000)
+	Elected votes: 5391.00000
+	Hopeful votes: 2707.97602
+	Nontransferable votes: 884.99165
+	Residual: 0.03233
+	Total: 8984.00000
+	Surplus: 129.80457
+Round 9:
+Action: Defeat low candidate: Martin Rhodes
+	Elected:  Kenneth Elder (1797.00000)
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Hopeful:  Hanzala Malik (1458.94570)
+	Defeated: Martin Rhodes (1249.03032)
+	Defeated: John Anderson, Neil Craig, Anthea Irwin, Abdul A Khan, Akhter Khan (0.00000)
+	Elected votes: 5391.00000
+	Hopeful votes: 1458.94570
+	Defeated votes: 1249.03032
+	Nontransferable votes: 884.99165
+	Residual: 0.03233
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Transfer defeated: Martin Rhodes
+	Elected:  Kenneth Elder (1797.00000)
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Hopeful:  Hanzala Malik (2270.21056)
+	Defeated: John Anderson, Neil Craig, Anthea Irwin, Abdul A Khan, Akhter Khan, Martin Rhodes (0.00000)
+	Elected votes: 5391.00000
+	Hopeful votes: 2270.21056
+	Nontransferable votes: 1322.75711
+	Residual: 0.03233
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Elect remaining candidates: Hanzala Malik
+	Elected:  Kenneth Elder (1797.00000)
+	Elected:  Hanzala Malik (2270.21056)
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Defeated: John Anderson, Neil Craig, Anthea Irwin, Abdul A Khan, Akhter Khan, Martin Rhodes (0.00000)
+	Elected votes: 7661.21056
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1322.75711
+	Residual: 0.03233
+	Total: 8984.00000
+	Surplus: 0.00000
+Action: Count Complete
+	Elected:  Kenneth Elder (1797.00000)
+	Elected:  Hanzala Malik (2270.21056)
+	Elected:  George A Roberts (1797.00000)
+	Elected:  Martha Ferguson Wardrop (1797.00000)
+	Defeated: John Anderson, Neil Craig, Anthea Irwin, Abdul A Khan, Akhter Khan, Martin Rhodes (0.00000)
+	Elected votes: 7661.21056
+	Hopeful votes: 0.00000
+	Nontransferable votes: 1322.75711
+	Residual: 0.03233
+	Total: 8984.00000
+	Surplus: 0.00000

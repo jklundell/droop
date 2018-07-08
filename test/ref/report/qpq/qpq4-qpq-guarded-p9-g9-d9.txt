@@ -1,0 +1,131 @@
+
+Election: QPQ election 4
+
+	Droop package: droop v0.11
+	Rule: QPQ
+	Arithmetic: guarded-precision fixed-point decimal arithmetic (9+9 places)
+	Seats: 5
+	Ballots: 600
+	Quota: 100.000000000
+
+	maxDiff: 0  (s/b << geps)
+	geps:    500000000
+	minDiff: 1000000000000000000  (s/b >> geps)
+	guard:   1000000000
+	prec:    1000000000000000000
+
+	Add eligible: a
+	Add eligible: b
+	Add eligible: c
+	Add eligible: d
+	Add eligible: e
+	Add eligible: f
+Action: Begin Count
+	Hopeful:  a (0.000000000)
+	Hopeful:  b (0.000000000)
+	Hopeful:  c (0.000000000)
+	Hopeful:  d (0.000000000)
+	Hopeful:  e (0.000000000)
+	Hopeful:  f (0.000000000)
+	Quota: 100.000000000
+Round 1:
+Action: Elect high quotient: a
+	Elected:  a (294.000000000)
+	Hopeful:  b (0.000000000)
+	Hopeful:  c (0.000000000)
+	Hopeful:  d (103.000000000)
+	Hopeful:  e (102.000000000)
+	Hopeful:  f (101.000000000)
+	Quota: 100.000000000
+Action: Transfer elected: a (294.000000000)
+	Elected:  a (294.000000000)
+	Hopeful:  b (0.000000000)
+	Hopeful:  c (0.000000000)
+	Hopeful:  d (103.000000000)
+	Hopeful:  e (102.000000000)
+	Hopeful:  f (101.000000000)
+	Quota: 100.000000000
+Round 2:
+Action: Elect high quotient: b
+	Elected:  a (294.000000000)
+	Elected:  b (147.000000000)
+	Hopeful:  c (0.000000000)
+	Hopeful:  d (103.000000000)
+	Hopeful:  e (102.000000000)
+	Hopeful:  f (101.000000000)
+	Quota: 100.000000000
+Action: Transfer elected: b (147.000000000)
+	Elected:  a (294.000000000)
+	Elected:  b (147.000000000)
+	Hopeful:  c (0.000000000)
+	Hopeful:  d (103.000000000)
+	Hopeful:  e (102.000000000)
+	Hopeful:  f (101.000000000)
+	Quota: 100.000000000
+Round 3:
+Action: Elect high quotient: d
+	Elected:  a (294.000000000)
+	Elected:  b (147.000000000)
+	Elected:  d (103.000000000)
+	Hopeful:  c (98.000000000)
+	Hopeful:  e (102.000000000)
+	Hopeful:  f (101.000000000)
+	Quota: 100.000000000
+Action: Transfer elected: d (103.000000000)
+	Elected:  a (294.000000000)
+	Elected:  b (147.000000000)
+	Elected:  d (103.000000000)
+	Hopeful:  c (98.000000000)
+	Hopeful:  e (102.000000000)
+	Hopeful:  f (101.000000000)
+	Quota: 100.000000000
+Round 4:
+Action: Elect high quotient: e
+	Elected:  a (294.000000000)
+	Elected:  b (147.000000000)
+	Elected:  d (103.000000000)
+	Elected:  e (102.500000000)
+	Hopeful:  c (98.000000000)
+	Hopeful:  f (101.000000000)
+	Quota: 100.000000000
+Action: Transfer elected: e (102.500000000)
+	Elected:  a (294.000000000)
+	Elected:  b (147.000000000)
+	Elected:  d (103.000000000)
+	Elected:  e (102.500000000)
+	Hopeful:  c (98.000000000)
+	Hopeful:  f (101.000000000)
+	Quota: 100.000000000
+Round 5:
+Action: Elect high quotient: f
+	Elected:  a (294.000000000)
+	Elected:  b (147.000000000)
+	Elected:  d (103.000000000)
+	Elected:  e (102.500000000)
+	Elected:  f (102.000000000)
+	Hopeful:  c (98.000000000)
+	Quota: 100.000000000
+Action: Transfer elected: f (102.000000000)
+	Elected:  a (294.000000000)
+	Elected:  b (147.000000000)
+	Elected:  d (103.000000000)
+	Elected:  e (102.500000000)
+	Elected:  f (102.000000000)
+	Hopeful:  c (98.000000000)
+	Quota: 100.000000000
+Action: Defeat remaining candidates: c
+	Elected:  a (294.000000000)
+	Elected:  b (147.000000000)
+	Elected:  d (103.000000000)
+	Elected:  e (102.500000000)
+	Elected:  f (102.000000000)
+	Defeated: c (98.000000000)
+	Quota: 100.000000000
+Action: Count Complete
+	Elected:  a (294.000000000)
+	Elected:  b (147.000000000)
+	Elected:  d (103.000000000)
+	Elected:  e (102.500000000)
+	Elected:  f (102.000000000)
+	Defeated: c (98.000000000)
+	Quota: 100.000000000

@@ -1,0 +1,656 @@
+
+Election: M135: Gen v1.1 1 3 45
+
+	Droop package: droop v0.11
+	Rule: PR Foundation Meek Reference
+	Arithmetic: fixed-point decimal arithmetic (9 places)
+	Seats: 7
+	Ballots: 677
+	Quota: 84.625000001
+	Omega: 0.000001000
+Source: Brian Wichmann, email: brian.wichmann@bcs.org.uk
+{The validation of the STV programs for ERBS, 1st September 1999.}
+
+	Add eligible: C1
+	Add eligible: C2
+	Add eligible: C3
+	Add eligible: C4
+	Add eligible: C5
+	Add eligible: C6
+	Add eligible: C7
+	Add eligible: C8
+	Add eligible: C9
+	Add eligible: C10
+	Add eligible: C11
+	Add eligible: C12
+	Add eligible: C13
+	Add eligible: C14
+	Add eligible: C15
+	Add eligible: C16
+	Add eligible: C17
+	Add eligible: C18
+	Add eligible: C19
+	Add eligible: C20
+	Add eligible: C21
+	Add eligible: C22
+	Add eligible: C23
+	Add eligible: C24
+	Add eligible: C25
+Action: Begin Count
+	Hopeful:  C1 (119.000000000)
+	Hopeful:  C2 (32.000000000)
+	Hopeful:  C3 (43.000000000)
+	Hopeful:  C4 (44.000000000)
+	Hopeful:  C5 (29.000000000)
+	Hopeful:  C6 (36.000000000)
+	Hopeful:  C7 (34.000000000)
+	Hopeful:  C8 (24.000000000)
+	Hopeful:  C9 (27.000000000)
+	Hopeful:  C10 (35.000000000)
+	Hopeful:  C11 (31.000000000)
+	Hopeful:  C12 (28.000000000)
+	Hopeful:  C13 (25.000000000)
+	Hopeful:  C14 (20.000000000)
+	Hopeful:  C15 (27.000000000)
+	Hopeful:  C16 (18.000000000)
+	Hopeful:  C17 (15.000000000)
+	Hopeful:  C18 (13.000000000)
+	Hopeful:  C19 (15.000000000)
+	Hopeful:  C20 (21.000000000)
+	Hopeful:  C21 (13.000000000)
+	Hopeful:  C22 (6.000000000)
+	Hopeful:  C23 (14.000000000)
+	Hopeful:  C24 (8.000000000)
+	Hopeful:  C25 (0.000000000)
+	Quota: 84.625000001
+	Votes: 677.000000000
+	Residual: 0.000000000
+	Total: 677.000000000
+	Surplus: 0.000000000
+Round 1:
+Action: Elect: C1
+	Elected:  C1 (119.000000000)
+	Hopeful:  C2 (32.000000000)
+	Hopeful:  C3 (43.000000000)
+	Hopeful:  C4 (44.000000000)
+	Hopeful:  C5 (29.000000000)
+	Hopeful:  C6 (36.000000000)
+	Hopeful:  C7 (34.000000000)
+	Hopeful:  C8 (24.000000000)
+	Hopeful:  C9 (27.000000000)
+	Hopeful:  C10 (35.000000000)
+	Hopeful:  C11 (31.000000000)
+	Hopeful:  C12 (28.000000000)
+	Hopeful:  C13 (25.000000000)
+	Hopeful:  C14 (20.000000000)
+	Hopeful:  C15 (27.000000000)
+	Hopeful:  C16 (18.000000000)
+	Hopeful:  C17 (15.000000000)
+	Hopeful:  C18 (13.000000000)
+	Hopeful:  C19 (15.000000000)
+	Hopeful:  C20 (21.000000000)
+	Hopeful:  C21 (13.000000000)
+	Hopeful:  C22 (6.000000000)
+	Hopeful:  C23 (14.000000000)
+	Hopeful:  C24 (8.000000000)
+	Hopeful:  C25 (0.000000000)
+	Quota: 84.625000001
+	Votes: 677.000000000
+	Residual: 0.000000000
+	Total: 677.000000000
+	Surplus: 0.000000000
+Round 2:
+Action: Defeat (surplus 0.000000051 < omega): C25
+	Elected:  C1 (84.516333034)
+	Hopeful:  C2 (41.852476276)
+	Hopeful:  C3 (43.289778714)
+	Hopeful:  C4 (45.448893570)
+	Hopeful:  C5 (29.869336142)
+	Hopeful:  C6 (38.318229712)
+	Hopeful:  C7 (36.028450998)
+	Hopeful:  C8 (25.738672284)
+	Hopeful:  C9 (29.318229712)
+	Hopeful:  C10 (35.869336142)
+	Hopeful:  C11 (31.289778714)
+	Hopeful:  C12 (30.028450998)
+	Hopeful:  C13 (25.579557428)
+	Hopeful:  C14 (20.000000000)
+	Hopeful:  C15 (27.289778714)
+	Hopeful:  C16 (18.289778714)
+	Hopeful:  C17 (15.000000000)
+	Hopeful:  C18 (14.738672284)
+	Hopeful:  C19 (15.289778714)
+	Hopeful:  C20 (22.159114856)
+	Hopeful:  C21 (13.869336142)
+	Hopeful:  C22 (7.159114856)
+	Hopeful:  C23 (17.187565854)
+	Hopeful:  C24 (8.000000000)
+	Defeated: C25 (0.000000000)
+	Quota: 84.516332983
+	Votes: 676.130663858
+	Residual: 0.869336142
+	Total: 677.000000000
+	Surplus: 0.000000051
+Round 3:
+Action: Defeat (surplus 0.000000051 < omega): C22
+	Elected:  C1 (84.516333034)
+	Hopeful:  C2 (41.852476276)
+	Hopeful:  C3 (43.289778714)
+	Hopeful:  C4 (45.448893570)
+	Hopeful:  C5 (29.869336142)
+	Hopeful:  C6 (38.318229712)
+	Hopeful:  C7 (36.028450998)
+	Hopeful:  C8 (25.738672284)
+	Hopeful:  C9 (29.318229712)
+	Hopeful:  C10 (35.869336142)
+	Hopeful:  C11 (31.289778714)
+	Hopeful:  C12 (30.028450998)
+	Hopeful:  C13 (25.579557428)
+	Hopeful:  C14 (20.000000000)
+	Hopeful:  C15 (27.289778714)
+	Hopeful:  C16 (18.289778714)
+	Hopeful:  C17 (15.000000000)
+	Hopeful:  C18 (14.738672284)
+	Hopeful:  C19 (15.289778714)
+	Hopeful:  C20 (22.159114856)
+	Hopeful:  C21 (13.869336142)
+	Hopeful:  C23 (17.187565854)
+	Hopeful:  C24 (8.000000000)
+	Defeated: C22 (7.159114856)
+	Defeated: C25 (0.000000000)
+	Quota: 84.516332983
+	Votes: 676.130663858
+	Residual: 0.869336142
+	Total: 677.000000000
+	Surplus: 0.000000051
+Round 4:
+Action: Defeat (surplus 0.000000051 < omega): C24
+	Elected:  C1 (84.516333034)
+	Hopeful:  C2 (41.852476276)
+	Hopeful:  C3 (43.869336142)
+	Hopeful:  C4 (47.448893570)
+	Hopeful:  C5 (29.869336142)
+	Hopeful:  C6 (38.318229712)
+	Hopeful:  C7 (36.028450998)
+	Hopeful:  C8 (25.738672284)
+	Hopeful:  C9 (30.318229712)
+	Hopeful:  C10 (35.869336142)
+	Hopeful:  C11 (31.289778714)
+	Hopeful:  C12 (30.028450998)
+	Hopeful:  C13 (26.579557428)
+	Hopeful:  C14 (20.000000000)
+	Hopeful:  C15 (27.289778714)
+	Hopeful:  C16 (18.289778714)
+	Hopeful:  C17 (15.000000000)
+	Hopeful:  C18 (16.028450998)
+	Hopeful:  C19 (16.289778714)
+	Hopeful:  C20 (22.448893570)
+	Hopeful:  C21 (13.869336142)
+	Hopeful:  C23 (17.187565854)
+	Defeated: C24 (8.000000000)
+	Defeated: C22, C25 (0.000000000)
+	Quota: 84.516332983
+	Votes: 676.130663858
+	Residual: 0.869336142
+	Total: 677.000000000
+	Surplus: 0.000000051
+Round 5:
+Action: Defeat (surplus 0.000000025 < omega): C21
+	Elected:  C1 (84.390937855)
+	Hopeful:  C2 (41.888303470)
+	Hopeful:  C3 (43.872497365)
+	Hopeful:  C4 (47.454162275)
+	Hopeful:  C5 (29.872497365)
+	Hopeful:  C6 (38.326659640)
+	Hopeful:  C7 (36.035827185)
+	Hopeful:  C8 (25.744994730)
+	Hopeful:  C9 (31.326659640)
+	Hopeful:  C10 (35.872497365)
+	Hopeful:  C11 (31.290832455)
+	Hopeful:  C12 (30.035827185)
+	Hopeful:  C13 (26.581664910)
+	Hopeful:  C14 (21.000000000)
+	Hopeful:  C15 (28.290832455)
+	Hopeful:  C16 (18.290832455)
+	Hopeful:  C17 (16.000000000)
+	Hopeful:  C18 (17.035827185)
+	Hopeful:  C19 (16.290832455)
+	Hopeful:  C20 (23.454162275)
+	Hopeful:  C23 (18.199157005)
+	Defeated: C21 (13.872497365)
+	Defeated: C22, C24, C25 (0.000000000)
+	Quota: 84.390937830
+	Votes: 675.127502635
+	Residual: 1.872497365
+	Total: 677.000000000
+	Surplus: 0.000000025
+Round 6:
+Action: Defeat (surplus 0.000000075 < omega): C19
+	Elected:  C1 (84.263322960)
+	Hopeful:  C2 (43.125391828)
+	Hopeful:  C3 (44.191222568)
+	Hopeful:  C4 (48.489028210)
+	Hopeful:  C5 (29.893416926)
+	Hopeful:  C6 (39.978056420)
+	Hopeful:  C7 (36.084639494)
+	Hopeful:  C8 (25.786833852)
+	Hopeful:  C9 (31.382445136)
+	Hopeful:  C10 (37.893416926)
+	Hopeful:  C11 (31.297805642)
+	Hopeful:  C12 (31.084639494)
+	Hopeful:  C13 (26.595611284)
+	Hopeful:  C14 (21.000000000)
+	Hopeful:  C15 (29.297805642)
+	Hopeful:  C16 (19.297805642)
+	Hopeful:  C17 (18.297805642)
+	Hopeful:  C18 (18.084639494)
+	Hopeful:  C20 (23.489028210)
+	Hopeful:  C23 (18.275862062)
+	Defeated: C19 (16.297805642)
+	Defeated: C21, C22, C24, C25 (0.000000000)
+	Quota: 84.263322885
+	Votes: 674.106583074
+	Residual: 2.893416926
+	Total: 677.000000000
+	Surplus: 0.000000075
+Round 7:
+Action: Defeat (surplus 0.000000085 < omega): C23
+	Elected:  C1 (84.137931120)
+	Hopeful:  C2 (45.160919516)
+	Hopeful:  C3 (44.195402296)
+	Hopeful:  C4 (48.494252870)
+	Hopeful:  C5 (29.896551722)
+	Hopeful:  C6 (39.988505740)
+	Hopeful:  C7 (36.390804592)
+	Hopeful:  C8 (26.793103444)
+	Hopeful:  C9 (31.390804592)
+	Hopeful:  C10 (39.896551722)
+	Hopeful:  C11 (31.298850574)
+	Hopeful:  C12 (32.091954018)
+	Hopeful:  C13 (27.597701148)
+	Hopeful:  C14 (24.000000000)
+	Hopeful:  C15 (29.298850574)
+	Hopeful:  C16 (22.298850574)
+	Hopeful:  C17 (18.298850574)
+	Hopeful:  C18 (19.091954018)
+	Hopeful:  C20 (24.494252870)
+	Defeated: C23 (18.287356314)
+	Defeated: C19, C21, C22, C24, C25 (0.000000000)
+	Quota: 84.137931035
+	Votes: 673.103448278
+	Residual: 3.896551722
+	Total: 677.000000000
+	Surplus: 0.000000085
+Round 8:
+Action: Defeat (surplus 0.000000169 < omega): C17
+	Elected:  C1 (83.899371240)
+	Hopeful:  C2 (45.228511482)
+	Hopeful:  C3 (46.203354292)
+	Hopeful:  C4 (48.504192865)
+	Hopeful:  C5 (32.805031438)
+	Hopeful:  C6 (40.008385730)
+	Hopeful:  C7 (37.707547157)
+	Hopeful:  C8 (28.105870011)
+	Hopeful:  C9 (32.406708584)
+	Hopeful:  C10 (40.203354292)
+	Hopeful:  C11 (32.300838573)
+	Hopeful:  C12 (32.406708584)
+	Hopeful:  C13 (27.601677146)
+	Hopeful:  C14 (25.000000000)
+	Hopeful:  C15 (31.300838573)
+	Hopeful:  C16 (24.300838573)
+	Hopeful:  C18 (20.105870011)
+	Hopeful:  C20 (24.805031438)
+	Defeated: C17 (18.300838573)
+	Defeated: C19, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 83.899371071
+	Votes: 671.194968562
+	Residual: 5.805031438
+	Total: 677.000000000
+	Surplus: 0.000000169
+Round 9:
+Action: Defeat (surplus 0.000000053 < omega): C14
+	Elected:  C1 (83.773584960)
+	Hopeful:  C2 (46.264150928)
+	Hopeful:  C3 (46.207547168)
+	Hopeful:  C4 (48.509433960)
+	Hopeful:  C5 (33.811320752)
+	Hopeful:  C6 (41.018867920)
+	Hopeful:  C7 (37.716981128)
+	Hopeful:  C8 (30.113207544)
+	Hopeful:  C9 (33.415094336)
+	Hopeful:  C10 (41.207547168)
+	Hopeful:  C11 (34.301886792)
+	Hopeful:  C12 (32.415094336)
+	Hopeful:  C13 (27.905660376)
+	Hopeful:  C15 (31.301886792)
+	Hopeful:  C16 (25.301886792)
+	Hopeful:  C18 (26.113207544)
+	Hopeful:  C20 (25.811320752)
+	Defeated: C14 (25.000000000)
+	Defeated: C17, C19, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 83.773584907
+	Votes: 670.188679248
+	Residual: 6.811320752
+	Total: 677.000000000
+	Surplus: 0.000000053
+Round 10:
+Action: Defeat (surplus 0.000000208 < omega): C20
+	Elected:  C1 (83.643451353)
+	Hopeful:  C2 (46.496881438)
+	Hopeful:  C3 (46.234927228)
+	Hopeful:  C4 (49.543659035)
+	Hopeful:  C5 (33.852390842)
+	Hopeful:  C6 (45.087318070)
+	Hopeful:  C7 (38.778586263)
+	Hopeful:  C8 (30.161122649)
+	Hopeful:  C9 (34.469854456)
+	Hopeful:  C10 (43.234927228)
+	Hopeful:  C11 (35.617463614)
+	Hopeful:  C12 (32.469854456)
+	Hopeful:  C13 (29.926195421)
+	Hopeful:  C15 (38.308731807)
+	Hopeful:  C16 (29.308731807)
+	Hopeful:  C18 (26.161122649)
+	Defeated: C20 (25.852390842)
+	Defeated: C14, C17, C19, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 83.643451145
+	Votes: 669.147609158
+	Residual: 7.852390842
+	Total: 677.000000000
+	Surplus: 0.000000208
+Round 11:
+Action: Defeat (surplus 0.000000204 < omega): C18
+	Elected:  C1 (83.639175464)
+	Hopeful:  C2 (47.319587568)
+	Hopeful:  C3 (47.257731952)
+	Hopeful:  C4 (51.572164940)
+	Hopeful:  C5 (34.886597928)
+	Hopeful:  C6 (45.144329880)
+	Hopeful:  C7 (39.144329880)
+	Hopeful:  C8 (34.515463904)
+	Hopeful:  C9 (34.515463904)
+	Hopeful:  C10 (45.886597928)
+	Hopeful:  C11 (36.943298964)
+	Hopeful:  C12 (35.515463904)
+	Hopeful:  C13 (32.943298964)
+	Hopeful:  C15 (38.314432988)
+	Hopeful:  C16 (32.314432988)
+	Defeated: C18 (29.201030916)
+	Defeated: C14, C17, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 83.639175260
+	Votes: 669.113402072
+	Residual: 7.886597928
+	Total: 677.000000000
+	Surplus: 0.000000204
+Round 12:
+Action: Break tie (defeat low candidate): [C13, C16] -> C13
+	Quota: 83.333333340
+	Votes: 666.666666718
+	Residual: 10.333333282
+	Total: 677.000000000
+	Surplus: 0.000000910
+Action: Defeat (surplus 0.000000910 < omega): C13
+	Elected:  C1 (83.333334250)
+	Hopeful:  C2 (49.333333062)
+	Hopeful:  C3 (49.666666630)
+	Hopeful:  C4 (53.999999956)
+	Hopeful:  C5 (36.999999956)
+	Hopeful:  C6 (47.333333260)
+	Hopeful:  C7 (41.666666586)
+	Hopeful:  C8 (35.999999934)
+	Hopeful:  C9 (36.333333260)
+	Hopeful:  C10 (50.999999956)
+	Hopeful:  C11 (39.333333304)
+	Hopeful:  C12 (35.666666608)
+	Hopeful:  C15 (39.333333326)
+	Hopeful:  C16 (33.333333326)
+	Defeated: C13 (33.333333304)
+	Defeated: C14, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 83.333333340
+	Votes: 666.666666718
+	Residual: 10.333333282
+	Total: 677.000000000
+	Surplus: 0.000000910
+Round 13:
+Action: Defeat (surplus 0.000000255 < omega): C16
+	Elected:  C1 (82.703927750)
+	Hopeful:  C2 (49.519637386)
+	Hopeful:  C3 (51.691842890)
+	Hopeful:  C4 (55.368580046)
+	Hopeful:  C5 (42.045317202)
+	Hopeful:  C6 (49.383685780)
+	Hopeful:  C7 (41.722054358)
+	Hopeful:  C8 (37.045317202)
+	Hopeful:  C9 (41.383685780)
+	Hopeful:  C10 (52.030211468)
+	Hopeful:  C11 (44.353474312)
+	Hopeful:  C12 (37.706948624)
+	Hopeful:  C15 (40.338368578)
+	Defeated: C16 (36.338368578)
+	Defeated: C13, C14, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 82.703927495
+	Votes: 661.631419954
+	Residual: 15.368580046
+	Total: 677.000000000
+	Surplus: 0.000000255
+Round 14:
+Action: Defeat (surplus 0.000000499 < omega): C8
+	Elected:  C1 (82.404000504)
+	Hopeful:  C2 (49.801999852)
+	Hopeful:  C3 (53.729999980)
+	Hopeful:  C4 (56.421999972)
+	Hopeful:  C5 (42.459999960)
+	Hopeful:  C6 (57.459999960)
+	Hopeful:  C7 (43.805999956)
+	Hopeful:  C9 (45.459999960)
+	Hopeful:  C10 (56.075999976)
+	Hopeful:  C11 (50.383999984)
+	Hopeful:  C12 (39.767999968)
+	Hopeful:  C15 (43.345999996)
+	Defeated: C8 (38.113999964)
+	Defeated: C13, C14, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 82.404000005
+	Votes: 659.232000032
+	Residual: 17.767999968
+	Total: 677.000000000
+	Surplus: 0.000000499
+Round 15:
+Action: Defeat (surplus 0.000000030 < omega): C12
+	Elected:  C1 (81.841633497)
+	Hopeful:  C2 (57.511952182)
+	Hopeful:  C3 (53.777888445)
+	Hopeful:  C4 (58.489043823)
+	Hopeful:  C5 (44.911354579)
+	Hopeful:  C6 (58.555776890)
+	Hopeful:  C7 (43.911354579)
+	Hopeful:  C9 (58.266932268)
+	Hopeful:  C10 (59.489043823)
+	Hopeful:  C11 (50.422310756)
+	Hopeful:  C15 (45.711155378)
+	Defeated: C12 (41.844621512)
+	Defeated: C8, C13, C14, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 81.841633467
+	Votes: 654.733067732
+	Residual: 22.266932268
+	Total: 677.000000000
+	Surplus: 0.000000030
+Round 16:
+Action: Defeat (surplus 0.000000119 < omega): C7
+	Elected:  C1 (81.257971136)
+	Hopeful:  C2 (63.188405760)
+	Hopeful:  C3 (56.278260864)
+	Hopeful:  C4 (62.037681152)
+	Hopeful:  C5 (48.176811584)
+	Hopeful:  C6 (66.556521728)
+	Hopeful:  C9 (61.315942016)
+	Hopeful:  C10 (62.657971008)
+	Hopeful:  C11 (54.898550720)
+	Hopeful:  C15 (47.759420288)
+	Defeated: C7 (45.936231872)
+	Defeated: C8, C12, C13, C14, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 81.257971017
+	Votes: 650.063768128
+	Residual: 26.936231872
+	Total: 677.000000000
+	Surplus: 0.000000119
+Round 17:
+Action: Defeat (surplus 0.000000177 < omega): C5
+	Elected:  C1 (80.079198654)
+	Hopeful:  C2 (67.916030480)
+	Hopeful:  C3 (59.785305334)
+	Hopeful:  C4 (64.183206096)
+	Hopeful:  C6 (70.570610668)
+	Hopeful:  C9 (64.764312954)
+	Hopeful:  C10 (67.376908382)
+	Hopeful:  C11 (57.989503810)
+	Hopeful:  C15 (55.591603048)
+	Defeated: C5 (52.376908382)
+	Defeated: C7, C8, C12, C13, C14, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 80.079198477
+	Votes: 640.633587808
+	Residual: 36.366412192
+	Total: 677.000000000
+	Surplus: 0.000000177
+Round 18:
+Action: Elect: C2
+	Elected:  C1 (79.529460905)
+	Elected:  C2 (80.825206620)
+	Hopeful:  C3 (65.994919235)
+	Hopeful:  C4 (69.850610445)
+	Hopeful:  C6 (76.701220890)
+	Hopeful:  C9 (68.273375285)
+	Hopeful:  C10 (70.561992865)
+	Hopeful:  C11 (62.422764840)
+	Hopeful:  C15 (61.567073630)
+	Defeated: C5, C7, C8, C12, C13, C14, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 79.465828090
+	Votes: 635.726624715
+	Residual: 41.273375285
+	Total: 677.000000000
+	Surplus: 4.162333201
+Round 19:
+Action: Defeat (surplus 0.000000150 < omega): C15
+	Elected:  C1 (79.432884010)
+	Elected:  C2 (79.432884074)
+	Hopeful:  C3 (66.413843505)
+	Hopeful:  C4 (69.891734559)
+	Hopeful:  C6 (76.963163049)
+	Hopeful:  C9 (68.321805007)
+	Hopeful:  C10 (70.682699741)
+	Hopeful:  C11 (62.571811016)
+	Defeated: C15 (61.752246767)
+	Defeated: C5, C7, C8, C12, C13, C14, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 79.432883967
+	Votes: 635.463071728
+	Residual: 41.536928272
+	Total: 677.000000000
+	Surplus: 0.000000150
+Round 20:
+Action: Elect: C6
+	Elected:  C1 (84.023052258)
+	Elected:  C2 (86.168923046)
+	Elected:  C6 (84.289940091)
+	Hopeful:  C3 (75.928651617)
+	Hopeful:  C4 (76.927163893)
+	Hopeful:  C9 (73.054554898)
+	Hopeful:  C10 (72.708009727)
+	Hopeful:  C11 (72.865682753)
+	Defeated: C5, C7, C8, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 78.245747286
+	Votes: 625.965978283
+	Residual: 51.034021717
+	Total: 677.000000000
+	Surplus: 0.000000150
+Round 21:
+Action: Elect: C3
+	Elected:  C1 (78.718978057)
+	Elected:  C2 (80.514599668)
+	Elected:  C3 (79.698162720)
+	Elected:  C6 (80.412370432)
+	Hopeful:  C4 (78.239239753)
+	Hopeful:  C9 (75.433451404)
+	Hopeful:  C10 (74.795868394)
+	Hopeful:  C11 (74.485746834)
+	Defeated: C5, C7, C8, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 77.787302158
+	Votes: 622.298417262
+	Residual: 54.701582738
+	Total: 677.000000000
+	Surplus: 19.744673537
+Action: Elect: C4
+	Elected:  C1 (78.718978057)
+	Elected:  C2 (80.514599668)
+	Elected:  C3 (79.698162720)
+	Elected:  C4 (78.239239753)
+	Elected:  C6 (80.412370432)
+	Hopeful:  C9 (75.433451404)
+	Hopeful:  C10 (74.795868394)
+	Hopeful:  C11 (74.485746834)
+	Defeated: C5, C7, C8, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 77.787302158
+	Votes: 622.298417262
+	Residual: 54.701582738
+	Total: 677.000000000
+	Surplus: 19.744673537
+Round 22:
+Action: Elect: C9
+	Elected:  C1 (77.477964806)
+	Elected:  C2 (77.561791772)
+	Elected:  C3 (77.592621977)
+	Elected:  C4 (77.545797113)
+	Elected:  C6 (77.552801432)
+	Elected:  C9 (77.394065082)
+	Hopeful:  C10 (77.120629446)
+	Hopeful:  C11 (76.859048903)
+	Defeated: C5, C7, C8, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 77.388090067
+	Votes: 619.104720531
+	Residual: 57.895279469
+	Total: 677.000000000
+	Surplus: 1.456185826
+Round 23:
+Action: Elect: C10
+	Elected:  C1 (77.372250056)
+	Elected:  C2 (77.391489497)
+	Elected:  C3 (77.397756244)
+	Elected:  C4 (77.386416154)
+	Elected:  C6 (77.394607081)
+	Elected:  C9 (77.392755868)
+	Elected:  C10 (77.370062211)
+	Hopeful:  C11 (77.098105514)
+	Defeated: C5, C7, C8, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 77.350430329
+	Votes: 618.803442625
+	Residual: 58.196557375
+	Total: 677.000000000
+	Surplus: 0.352610582
+Action: Defeat remaining: C11
+	Elected:  C1 (77.372250056)
+	Elected:  C2 (77.391489497)
+	Elected:  C3 (77.397756244)
+	Elected:  C4 (77.386416154)
+	Elected:  C6 (77.394607081)
+	Elected:  C9 (77.392755868)
+	Elected:  C10 (77.370062211)
+	Defeated: C11 (77.098105514)
+	Defeated: C5, C7, C8, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 77.350430329
+	Votes: 618.803442625
+	Residual: 58.196557375
+	Total: 677.000000000
+	Surplus: 0.252324808
+Action: Count Complete
+	Elected:  C1 (77.372250056)
+	Elected:  C2 (77.391489497)
+	Elected:  C3 (77.397756244)
+	Elected:  C4 (77.386416154)
+	Elected:  C6 (77.394607081)
+	Elected:  C9 (77.392755868)
+	Elected:  C10 (77.370062211)
+	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.000000000)
+	Quota: 77.350430329
+	Votes: 541.705337111
+	Residual: 135.294662889
+	Total: 677.000000000
+	Surplus: 0.252324808

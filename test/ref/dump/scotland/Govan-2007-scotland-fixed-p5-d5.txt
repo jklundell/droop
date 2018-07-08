@@ -1,0 +1,42 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote	5.name	5.state	5.vote	6.name	6.state	6.vote	7.name	7.state	7.vote	8.name	8.state	8.vote	9.name	9.state	9.vote	10.name	10.state	10.vote	11.name	11.state	11.vote
+0	log	Add eligible: Shaukat Butt
+0	log	Add eligible: Michael Cobley
+0	log	Add eligible: Stephen Dornan
+0	log	Add eligible: John Flanagan
+0	log	Add eligible: Alan L Hughes
+0	log	Add eligible: Allison Hunter
+0	log	Add eligible: Will Jess
+0	log	Add eligible: Irene Lang
+0	log	Add eligible: Patricia McIntyre
+0	log	Add eligible: George Douglas McNee
+0	log	Add eligible: Carolina Perez
+0	begin	1913.00000	0.00000	Shaukat Butt	H	1371.00000	Michael Cobley	H	394.00000	Stephen Dornan	H	1590.00000	John Flanagan	H	1657.00000	Alan L Hughes	H	138.00000	Allison Hunter	H	2694.00000	Will Jess	H	377.00000	Irene Lang	H	398.00000	Patricia McIntyre	H	450.00000	George Douglas McNee	H	377.00000	Carolina Perez	H	114.00000
+0	elect	1913.00000	0.00000	Shaukat Butt	H	1371.00000	Michael Cobley	H	394.00000	Stephen Dornan	H	1590.00000	John Flanagan	H	1657.00000	Alan L Hughes	H	138.00000	Allison Hunter	e	2694.00000	Will Jess	H	377.00000	Irene Lang	H	398.00000	Patricia McIntyre	H	450.00000	George Douglas McNee	H	377.00000	Carolina Perez	H	114.00000
+1	round	New Round
+1	unpend	1913.00000	0.00000	Shaukat Butt	H	1371.00000	Michael Cobley	H	394.00000	Stephen Dornan	H	1590.00000	John Flanagan	H	1657.00000	Alan L Hughes	H	138.00000	Allison Hunter	E	2694.00000	Will Jess	H	377.00000	Irene Lang	H	398.00000	Patricia McIntyre	H	450.00000	George Douglas McNee	H	377.00000	Carolina Perez	H	114.00000
+1	transfer	1913.00000	284.68180	Shaukat Butt	H	1412.45570	Michael Cobley	H	449.66080	Stephen Dornan	H	1651.16890	John Flanagan	H	1705.12340	Alan L Hughes	H	146.69700	Allison Hunter	E	1913.00000	Will Jess	H	473.82660	Irene Lang	H	505.55290	Patricia McIntyre	H	480.43950	George Douglas McNee	H	399.03240	Carolina Perez	H	138.35160
+2	round	New Round
+2	defeat	1913.00000	284.68180	Shaukat Butt	H	1412.45570	Michael Cobley	H	449.66080	Stephen Dornan	H	1651.16890	John Flanagan	H	1705.12340	Alan L Hughes	H	146.69700	Allison Hunter	E	1913.00000	Will Jess	H	473.82660	Irene Lang	H	505.55290	Patricia McIntyre	H	480.43950	George Douglas McNee	H	399.03240	Carolina Perez	D	138.35160
+2	transfer	1913.00000	321.16060	Shaukat Butt	H	1415.32540	Michael Cobley	H	455.98000	Stephen Dornan	H	1657.90830	John Flanagan	H	1711.57290	Alan L Hughes	H	147.27680	Allison Hunter	E	1913.00000	Will Jess	H	506.59530	Irene Lang	H	548.67010	Patricia McIntyre	H	481.01930	George Douglas McNee	H	401.48190	Carolina Perez	D	0.00000
+3	round	New Round
+3	defeat	1913.00000	321.16060	Shaukat Butt	H	1415.32540	Michael Cobley	H	455.98000	Stephen Dornan	H	1657.90830	John Flanagan	H	1711.57290	Alan L Hughes	D	147.27680	Allison Hunter	E	1913.00000	Will Jess	H	506.59530	Irene Lang	H	548.67010	Patricia McIntyre	H	481.01930	George Douglas McNee	H	401.48190	Carolina Perez	D	0.00000
+3	transfer	1913.00000	360.05960	Shaukat Butt	H	1417.61530	Michael Cobley	H	468.42950	Stephen Dornan	H	1666.90830	John Flanagan	H	1718.86280	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	H	517.62460	Irene Lang	H	557.24990	Patricia McIntyre	H	531.75870	George Douglas McNee	H	408.48190	Carolina Perez	D	0.00000
+4	round	New Round
+4	defeat	1913.00000	360.05960	Shaukat Butt	H	1417.61530	Michael Cobley	H	468.42950	Stephen Dornan	H	1666.90830	John Flanagan	H	1718.86280	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	H	517.62460	Irene Lang	H	557.24990	Patricia McIntyre	H	531.75870	George Douglas McNee	D	408.48190	Carolina Perez	D	0.00000
+4	transfer	1913.00000	524.01720	Shaukat Butt	H	1449.06480	Michael Cobley	H	485.90830	Stephen Dornan	H	1696.48810	John Flanagan	H	1747.86280	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	H	555.55290	Irene Lang	H	580.30850	Patricia McIntyre	H	607.78800	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+5	round	New Round
+5	defeat	1913.00000	524.01720	Shaukat Butt	H	1449.06480	Michael Cobley	D	485.90830	Stephen Dornan	H	1696.48810	John Flanagan	H	1747.86280	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	H	555.55290	Irene Lang	H	580.30850	Patricia McIntyre	H	607.78800	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+5	transfer	1913.00000	631.41120	Shaukat Butt	H	1503.12340	Michael Cobley	D	0.00000	Stephen Dornan	H	1743.09720	John Flanagan	H	1781.47190	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	H	711.45500	Irene Lang	H	600.81660	Patricia McIntyre	H	675.61530	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+6	round	New Round
+6	defeat	1913.00000	631.41120	Shaukat Butt	H	1503.12340	Michael Cobley	D	0.00000	Stephen Dornan	H	1743.09720	John Flanagan	H	1781.47190	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	H	711.45500	Irene Lang	D	600.81660	Patricia McIntyre	H	675.61530	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+6	transfer	1913.00000	904.60940	Shaukat Butt	H	1550.53050	Michael Cobley	D	0.00000	Stephen Dornan	H	1812.63460	John Flanagan	H	1845.45880	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	H	842.76420	Irene Lang	D	0.00000	Patricia McIntyre	H	690.99310	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+7	round	New Round
+7	defeat	1913.00000	904.60940	Shaukat Butt	H	1550.53050	Michael Cobley	D	0.00000	Stephen Dornan	H	1812.63460	John Flanagan	H	1845.45880	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	H	842.76420	Irene Lang	D	0.00000	Patricia McIntyre	D	690.99310	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+7	transfer	1913.00000	1340.46910	Shaukat Butt	H	1594.69010	Michael Cobley	D	0.00000	Stephen Dornan	H	1852.95380	John Flanagan	H	1881.06790	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	H	977.80970	Irene Lang	D	0.00000	Patricia McIntyre	D	0.00000	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+8	round	New Round
+8	defeat	1913.00000	1340.46910	Shaukat Butt	H	1594.69010	Michael Cobley	D	0.00000	Stephen Dornan	H	1852.95380	John Flanagan	H	1881.06790	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	D	977.80970	Irene Lang	D	0.00000	Patricia McIntyre	D	0.00000	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+8	transfer	1913.00000	2065.43220	Shaukat Butt	H	1675.73560	Michael Cobley	D	0.00000	Stephen Dornan	H	1921.68010	John Flanagan	H	1984.14270	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	D	0.00000	Irene Lang	D	0.00000	Patricia McIntyre	D	0.00000	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+8	elect	1913.00000	2065.43220	Shaukat Butt	E	1675.73560	Michael Cobley	D	0.00000	Stephen Dornan	H	1921.68010	John Flanagan	H	1984.14270	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	D	0.00000	Irene Lang	D	0.00000	Patricia McIntyre	D	0.00000	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+8	elect	1913.00000	2065.43220	Shaukat Butt	E	1675.73560	Michael Cobley	D	0.00000	Stephen Dornan	E	1921.68010	John Flanagan	H	1984.14270	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	D	0.00000	Irene Lang	D	0.00000	Patricia McIntyre	D	0.00000	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+8	elect	1913.00000	2065.43220	Shaukat Butt	E	1675.73560	Michael Cobley	D	0.00000	Stephen Dornan	E	1921.68010	John Flanagan	E	1984.14270	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	D	0.00000	Irene Lang	D	0.00000	Patricia McIntyre	D	0.00000	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
+X	end	1913.00000	2065.43220	Shaukat Butt	E	1675.73560	Michael Cobley	D	0.00000	Stephen Dornan	E	1921.68010	John Flanagan	E	1984.14270	Alan L Hughes	D	0.00000	Allison Hunter	E	1913.00000	Will Jess	D	0.00000	Irene Lang	D	0.00000	Patricia McIntyre	D	0.00000	George Douglas McNee	D	0.00000	Carolina Perez	D	0.00000
