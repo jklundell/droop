@@ -47,7 +47,7 @@ class Rule(MethodMeek):
     @classmethod
     def helps(cls, helps, name):
         "add help string for meek-prf"
-        h =  "%s is the PR Foundation's Meek Reference STV.\n" % name
+        h = "%s is the PR Foundation's Meek Reference STV.\n" % name
         h += '\nThere are no options.\n'
         h += '  arithmetic: fixed, %d-digit precision\n' % cls.precision
         h += '  omega=%d (iteration limit such that an interation is terminated\n' % cls.precision
@@ -99,7 +99,7 @@ class Rule(MethodMeek):
             if len(tied) == 1:
                 return tied.pop()
             t = C.byTieOrder(tied)[0]
-            names =  ", ".join([c.name for c in tied])
+            names = ", ".join([c.name for c in tied])
             E.logAction('tie', 'Break tie (defeat low candidate): [%s] -> %s' % (names, t))
             return t
 
@@ -154,7 +154,7 @@ class Rule(MethodMeek):
                 ##            and reduce w by the same amount, until no further candidate
                 ##            remains on the ballot or until the ballot's weight w is 0.
 
-                for c in (C.hopeful() + C.elected()):
+                for c in C.hopeful() + C.elected():
                     c.vote = V0
                 E.residual = V0
                 for b in E.ballots:
@@ -183,7 +183,7 @@ class Rule(MethodMeek):
                 ##         divided by one more than the number of seats to be filled,
                 ##         truncated to 9 decimal places, plus 0.000000001 (1/109).
 
-                E.votes = sum([c.vote for c in (C.hopeful() + C.elected())], V0)
+                E.votes = sum([c.vote for c in C.hopeful() + C.elected()], V0)
                 E.quota = E.votes // V(E.electionProfile.nSeats+1) + V.epsilon
 
                 ##  B.2.c. Find winners.

@@ -59,7 +59,7 @@ class Rule(ElectionRule):
     @classmethod
     def helps(cls, helps, name):
         "create help string for QPQ"
-        h =  'Quota Preferential by Quotient.\n'
+        h = 'Quota Preferential by Quotient.\n'
         h += '\nThere are no options.\n'
         h += '  arithmetic: guarded\n'
         h += '  precision=9\n'

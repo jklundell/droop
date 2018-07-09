@@ -39,7 +39,7 @@ class Rule(MethodWIGM):
     @classmethod
     def helps(cls, helps, name):
         "create help string for wigm"
-        h =  '%s implements the Weighted Inclusive Gregory Method.\n' % name
+        h = '%s implements the Weighted Inclusive Gregory Method.\n' % name
         h += '\noptions:\n'
         h += '  (qx*, rational, fixed, integer): arithmetic\n'
         h += '  integer_quota=(false*, true): round quota up to next integer\n'

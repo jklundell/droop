@@ -110,7 +110,7 @@ class Rule(MethodWIGM):
     @classmethod
     def helps(cls, helps, name):
         "create help string for wigm-prf"
-        h =  "%s is the PR Foundation's Weighted Inclusive Gregory Method (WIGM) Reference STV.\n" % name
+        h = "%s is the PR Foundation's Weighted Inclusive Gregory Method (WIGM) Reference STV.\n" % name
         if name.endswith('batch'):
             h += '  (defeat sure losers)\n'
         else:

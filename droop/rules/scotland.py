@@ -139,7 +139,7 @@ class Rule(MethodWIGM):
     @classmethod
     def helps(cls, helps, name):
         "provide help string for Scottish STV"
-        h =  'Scottish STV is a variant on WIGM.\n'
+        h = 'Scottish STV is a variant on WIGM.\n'
         h += '\nThere are no options.\n'
         h += '  arithmetic: fixed\n'
         h += '  precision=5\n'

@@ -224,7 +224,7 @@ class Rule(MethodWIGM):
     @classmethod
     def helps(cls, helps, name):
         "create help string for mpls"
-        h =  'Minneapolis STV is a variant on WIGM.\n'
+        h = 'Minneapolis STV is a variant on WIGM.\n'
         h += '\nThere are no options.\n'
         h += '  arithmetic: fixed\n'
         h += '  precision=4\n'
@@ -294,7 +294,7 @@ class Rule(MethodWIGM):
             ##  ... Votes for a defeated candidate are transferred at their transfer value to each
             ##  ballot's next-ranked continuing candidate.
 
-            while not ballot.exhausted and ballot.topCand not in (C.hopeful() + C.pending()):
+            while not ballot.exhausted and ballot.topCand not in C.hopeful() + C.pending():
                 ballot.advance()
             if ballot.exhausted:
                 E.exhausted += ballot.vote
@@ -586,12 +586,12 @@ class Rule(MethodWIGM):
         #
         #  Note: implemented as "less than or equal to"
         #
-        if 0 < len(C.hopeful()) <= E.seatsLeftToFill():
+        if len(C.hopeful()) <= E.seatsLeftToFill():
             for c in C.hopeful():
                 c.elect('Elect remaining candidates')
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #
-        if len(C.hopeful()):
+        if C.hopeful():
             for c in C.hopeful():
                 c.defeat(msg='Defeat remaining candidates')
