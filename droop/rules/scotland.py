@@ -219,24 +219,21 @@ class Rule(MethodWIGM):
             if len(tied) == 1:
                 return tied.pop()
             names = ", ".join([c.name for c in tied])
+            tiedCids = [c.cid for c in tied]
             direction = 0 if reason.find('defeat') >= 0 else -1
-            tiedlist = list(tied)
             for n in xrange(E.round-1, -1, -1):
-                tiedCids = [c.cid for c in tiedlist]
-                CSR = E.rounds[n] # candidate states in round n
-                tiedlist = C.byVote([c for c in CSR if c.cid in tiedCids])
-                tiedlist = [c for c in tiedlist if c.vote == tiedlist[direction].vote]
-                if len(tiedlist) == 1:
-                    t = tiedlist[0]
-                    E.logAction('tie', 'Break tie by prior stage (%s): [%s] -> %s' % (reason, names, t.name))
+                CN = E.rounds[n] # candidate states in round n
+                tiedCN = C.byVote([cn for cn in CN if cn.cid in tiedCids])
+                tiedCN = [cn for cn in tiedCN if cn.vote == tiedCN[direction].vote]
+                if len(tiedCN) == 1:
+                    cn0 = tiedCN[0]
+                    E.logAction('tie', 'Break tie by prior stage (%s): [%s] -> %s' % (reason, names, cn0.name))
                     for c in tied:
-                        if c.cid == t.cid:
+                        if c.cid == cn0.cid:
                             return c
-            t = C.byTieOrder(tiedlist)[0]
-            E.logAction('tie', 'Break tie by lot (%s): [%s] -> %s' % (reason, names, t.name))
-            for c in tied:
-                if c.cid == t.cid:
-                    return c
+            c0 = C.byTieOrder(tied)[0]
+            E.logAction('tie', 'Break tie by lot (%s): [%s] -> %s' % (reason, names, c0.name))
+            return c0
 
         def countComplete():
             '''
