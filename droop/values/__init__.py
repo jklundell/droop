@@ -37,7 +37,7 @@ def ArithmeticClass(options):
     if arithmetic in ('fixed', 'integer'):
         fixed.Fixed.initialize(options)
         return fixed.Fixed
-    if arithmetic in ('guarded'):
+    if arithmetic == 'guarded':
         guarded.Guarded.initialize(options)
         return guarded.Guarded
     vals = ' '.join(arithmeticNames)
