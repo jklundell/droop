@@ -43,7 +43,7 @@ def ArithmeticClass(options):
     vals = ' '.join(arithmeticNames)
     raise ArithmeticValuesError("unknown arithmetic %s\n\tuse: %s" % (arithmetic, vals))
 
-def helps(helps):   # pylint: disable=W0621
+def helps(helps):   # pylint: disable=redefined-outer-name
     "build a help-string dictionary"
     helps['arithmetic'] = 'available arithmetic: %s' % ','.join(arithmeticNames)
     rational.Rational.helps(helps)

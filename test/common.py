@@ -46,7 +46,7 @@ def doDumpCompare(options, filename, subdir=''):
     '''
     if not filename.endswith('.blt'):
         filename += '.blt'
-    base, ext = os.path.splitext(filename)  # pylint: disable=W0612
+    base, _ = os.path.splitext(filename)
 
     blt = os.path.join(testdir, 'blt', subdir, filename)
     E = Election(ElectionProfile(blt), options)

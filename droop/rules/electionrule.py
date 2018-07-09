@@ -28,6 +28,7 @@ class ElectionRule(object):  # pragma: no cover
     In particular, options is called before info, tag or count.
     '''
     method = None # one of ('meek', 'wigm', 'qpq'): underlying method for report formats
+    E = None
 
     @classmethod
     def ruleNames(cls):

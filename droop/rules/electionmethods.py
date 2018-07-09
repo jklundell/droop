@@ -22,8 +22,6 @@ This file is part of Droop.
 from __future__ import absolute_import
 from .electionrule import ElectionRule
 
-# pylint: disable=W0223,E1101
-
 class MethodMeek(ElectionRule):
     '''
     MethodMeek is a convenience class for Meek-based rules.
@@ -32,6 +30,7 @@ class MethodMeek(ElectionRule):
     A rule can subclass MethodMeek instead of ElectionRule to use these handlers.
     '''
     method = "meek"
+    omega = None
 
     def action(self, record, action=None):
         '''

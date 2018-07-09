@@ -83,7 +83,7 @@ class Election(object):
         self.V1 = self.V(1)  # constant one for efficiency
         self.electionProfile = electionProfile
         self.erecord = record.ElectionRecord(self)
-        self.round = 0  # round number
+        self.round = 0  # counting-round number
         self.rounds = list()    # list of rounds for weak tiebreaking
         self.intr_logged = False
 
@@ -93,6 +93,7 @@ class Election(object):
         self.elected = None
         self.defeated = None
         self.withdrawn = None
+        self.residual = None
 
         #  create candidate objects for candidates in election profile
         #
@@ -123,7 +124,7 @@ class Election(object):
         self.surplus = self.V0
         self.votes = self.V0
         if self.rule.method == 'meek':
-            self.residual = self.V0 # pylint: disable=W0201
+            self.residual = self.V0
         for c in self.C:
             c.vote = self.V0
         ##

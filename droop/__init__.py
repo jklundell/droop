@@ -38,7 +38,6 @@ for importer, modname, ispkg in pkgutil.iter_modules(rules.__path__, rules.__nam
 #  __subclasses__: see Python Standard Library 5.13: Built-in Types/Special Attributes
 #
 ruleClasses = []
-# pylint 0.22.0 doesn't know about __subclasses__  # pylint: disable=E1101
 for rule in rules.electionrule.ElectionRule.__subclasses__():
     if not rule.__name__.startswith('Method'):
         ruleClasses.append(rule)

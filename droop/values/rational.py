@@ -96,8 +96,8 @@ See also: fixed, guarded
 
     def __str__(self):
         "represent Rational as fixed-decimal string"
-        if self._numerator == 0 or self._denominator == 1:  # pylint: disable=E1101
-            v = self._numerator * Rational._dps             # pylint: disable=E1101
+        if self._numerator == 0 or self._denominator == 1:
+            v = self._numerator * Rational._dps
         else:
             self += Rational._dpr  # add 1/2 of lsd for rounding
             v = self._numerator * Rational._dps / self._denominator
@@ -127,7 +127,7 @@ See also: fixed, guarded
     #  provide mul, div, muldiv for compatibility with non-exact arithmetic
     #
     @staticmethod
-    def mul(arg1, arg2, round=None):   # pylint: disable=W0613,W0622
+    def mul(arg1, arg2, round=None):   # pylint: disable=unused-argument,redefined-builtin
         '''
         return arg1 * arg2
         round is ignored
@@ -135,7 +135,7 @@ See also: fixed, guarded
         return Rational.__mul__(arg1, arg2)
 
     @staticmethod
-    def div(arg1, arg2, round=None):   # pylint: disable=W0613,W0622
+    def div(arg1, arg2, round=None):   # pylint: disable=unused-argument,redefined-builtin
         '''
         return arg1 / arg2
         round is ignored
@@ -143,7 +143,7 @@ See also: fixed, guarded
         return Rational.__div__(arg1, arg2)
 
     @staticmethod
-    def muldiv(arg1, arg2, arg3, round=None):   # pylint: disable=W0613,W0622
+    def muldiv(arg1, arg2, arg3, round=None):   # pylint: disable=unused-argument,redefined-builtin
         '''
         return (arg1*arg2)/arg3
         round is ignored
@@ -158,7 +158,7 @@ def _wrap_method(method):
     def x(*args):
         "call Fraction method and change result to Rational"
         return Rational(fraction_method(*args))
-    x.func_name = method    # pylint: disable=W0612
+    x.func_name = method
     setattr(Rational, method, x)
 
 for name in "pos neg abs trunc".split():
