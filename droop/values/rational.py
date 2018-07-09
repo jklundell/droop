@@ -105,19 +105,19 @@ See also: fixed, guarded
 
     def __repr__(self): # pragma: no cover
         """repr(self)"""
-        return ('Rational(%s, %s)' % (self._numerator, self._denominator))  # pylint: disable=E1101
+        return 'Rational(%s, %s)' % (self._numerator, self._denominator)
 
     def __copy__(self): # pragma: no cover
         "borrowed from Fraction"
-        if type(self) == Rational:
+        if isinstance(self, Rational):
             return self     # I'm immutable; therefore I am my own clone
-        return self.__class__(self._numerator, self._denominator)   # pylint: disable=E1101
+        return self.__class__(self._numerator, self._denominator)
 
     def __deepcopy__(self, memo):   # pragma: no cover
         "borrowed from Fraction"
-        if type(self) == Rational:
+        if isinstance(self, Rational):
             return self     # My components are also immutable
-        return self.__class__(self._numerator, self._denominator)   # pylint: disable=E1101
+        return self.__class__(self._numerator, self._denominator)
 
     @staticmethod
     def report():

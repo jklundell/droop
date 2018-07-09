@@ -28,7 +28,7 @@ class Fixed(object):
     '''
     fixed-point decimal arithmetic
     '''
-    __slots__ = '_value'
+    __slots__ = ('_value',)
     name = None      # 'fixed' or 'integer'
     info = None
     exact = False

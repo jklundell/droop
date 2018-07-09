@@ -33,7 +33,7 @@ class Guarded(object):
     This is acceptable for our purposes, but may not be generally desirable.
     '''
 
-    __slots__ = '_value'
+    __slots__ = ('_value',)
     name = 'guarded'
     info = None
     exact = True
@@ -122,7 +122,7 @@ See also: fixed, rational
         cls.__scaledr = cls.__scaledd // 2
 
         cls.__scaled = 10 ** cls.display
-        if (cls.display > cls.precision):
+        if cls.display > cls.precision:
             cls.__scaledg = 10 ** (cls.display - cls.precision)
 
         #  __geps is used in the test for equality (see __cmp__ below)
@@ -339,9 +339,9 @@ See also: fixed, rational
 \tprec:    %d
 
 """ % (
-      cls.maxDiff,
-      cls.__geps,
-      cls.minDiff,
-      cls.__scaleg,
-      cls.__scale
-      )
+    cls.maxDiff,
+    cls.__geps,
+    cls.minDiff,
+    cls.__scaleg,
+    cls.__scale
+    )
