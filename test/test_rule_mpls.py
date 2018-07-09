@@ -22,13 +22,11 @@ This file is part of Droop.
 '''
 from __future__ import absolute_import
 import unittest
-
-from .common import testdir, doDumpCompare
 from droop import electionRuleNames, electionRule
 from droop.election import Election
 from droop.profile import ElectionProfile
-
 from droop.rules.mpls import Rule
+from .common import testdir, doDumpCompare
 
 class MplsTestBasic(unittest.TestCase):
     "test rules.__init__"
@@ -71,7 +69,7 @@ class MplsTest(unittest.TestCase):
         self.assertEqual(str(E.C.byCid(1)), "Castor")
         self.assertTrue(E.C.byCid(1) == 1)
         self.assertTrue(E.C.byCid(1) == '1')
-        self.assertFalse(E.C.byCid(1) == None)
+        self.assertFalse(E.C.byCid(1) is None)
 
     def testElectionTieOrder(self):
         "test default tie order"
@@ -146,3 +144,4 @@ class ElectionDumpTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    

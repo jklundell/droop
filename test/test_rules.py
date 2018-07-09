@@ -22,12 +22,11 @@ This file is part of Droop.
 '''
 from __future__ import absolute_import
 import unittest
-
-from . import common  # to set sys.path
 from droop import electionRuleNames, electionRule
 from droop.common import ElectionError
 from droop.election import Election
 from droop.profile import ElectionProfile
+from . import common  # to set sys.path
 
 if common.pyflakes: # satisfy pyflakes that we're using common
     pass

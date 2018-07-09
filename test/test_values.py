@@ -22,14 +22,13 @@ This file is part of Droop.
 '''
 from __future__ import absolute_import
 import unittest
-
-from . import common  # to set sys.path
 from droop.common import UsageError
 from droop.options import Options
 from droop import values as V
 from droop.values.fixed import Fixed as F
 from droop.values.guarded import Guarded as G
 from droop.values.rational import Rational as R
+from . import common  # to set sys.path
 
 if common.pyflakes: # satisfy pyflakes that we're using common
     pass
@@ -136,7 +135,7 @@ class ValueTestFixed6(unittest.TestCase):
         self.assertEqual(self.A.name, 'fixed')               # Fixed.name
         self.assertEqual(self.A.exact, False)                # Fixed.exact
         self.assertEqual(self.A.precision, self.p)           # Fixed.precision
-        self.assertEqual(self.A._Fixed__scale, 10**self.p)   # Fixed.__scale
+        self.assertEqual(self.A._Fixed__scale, 10**self.p)   # Fixed.__scale pylint: disable=no-member
         self.assertEqual(self.A(0)._value, 0)                # 0
         self.assertEqual(self.A(1)._value, 10**self.p)       # 1
         self.assertEqual(self.A(100)._value, 100*10**self.p) # 100
@@ -298,14 +297,14 @@ class ValueTestGuarded9(unittest.TestCase):
         p = 9
         g = p
         A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=p)))
-        self.assertEqual(A._Guarded__scale, 10**(p+g))
+        self.assertEqual(A._Guarded__scale, 10**(p+g))  # pylint: disable=no-member
 
     def testGeps(self):
         "geps is a function of guard"
         p = 9
         g = p
         A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=p)))
-        self.assertEqual(A._Guarded__geps, 10**g/2)
+        self.assertEqual(A._Guarded__geps, 10**g/2)  # pylint: disable=no-member
 
     def testBadPrecision(self):
         "test illegal precision"
@@ -324,7 +323,7 @@ class ValueTestGuarded9(unittest.TestCase):
         self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, display=1.1)))
         self.assertRaises(UsageError, V.ArithmeticClass, Options(dict(arithmetic='guarded', precision=4, display=-1)))
         self.assertRaises(UsageError, V.ArithmeticClass,
-            Options(dict(arithmetic='guarded', precision=4, display='abc')))
+                          Options(dict(arithmetic='guarded', precision=4, display='abc')))
 
     def testDisplay(self):
         "display defaults to precision"
@@ -405,7 +404,7 @@ class ValueTestGuarded9(unittest.TestCase):
     def testNe(self):
         "not equal"
         A = V.ArithmeticClass(Options(dict(arithmetic='guarded', precision=9)))
-        self.assertFalse(A(1)!=A(1))
+        self.assertFalse(A(1) != A(1))
 
 class ValueTestRational(unittest.TestCase):
     "rational-specific unit tests"
