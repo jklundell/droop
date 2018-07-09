@@ -82,12 +82,18 @@ class Rule(MethodMeek):
     def count(self):
         "count the election"
 
+        E = self.E # election object
+        C = E.C   # candidates
+        V = E.V    # arithmetic value class
+        V0 = E.V0  # constant zero
+        V1 = E.V1  # constant one
+
         ##  T. Breaking ties
         ##     Ties can arise in B.3, when selecting a candidate for defeat.
         ##     Use the defined tiebreaking procedure to select for defeat one candidate
         ##     from the group of tied candidates.
 
-        def breakTie(E, tied):
+        def breakTie(tied):
             '''
             break a tie for defeating low candidate
 
@@ -103,22 +109,106 @@ class Rule(MethodMeek):
             E.logAction('tie', 'Break tie (defeat low candidate): [%s] -> %s' % (names, t))
             return t
 
+        def iterateStep(iterationStatus, lastsurplus):
+            "one step of iteration"
+
+            ##  B.2.a. Distribute votes.
+            ##         For each ballot: set ballot weight w to 1, and then for each candidate,
+            ##         in order of rank on that ballot:
+            ##            add w multiplied by the keep factor kf of the candidate
+            ##            (to 9 decimal places, rounded up) to that candidate's vote v,
+            ##            and reduce w by the same amount, until no further candidate
+            ##            remains on the ballot or until the ballot's weight w is 0.
+
+            for c in C.hopeful() + C.elected():
+                c.vote = V0
+            E.residual = V0
+            for b in E.ballots:
+                b.weight = V1
+                b.residual = b.multiplier
+                for c in (E.candidate(cid) for cid in b.ranking):
+                    #
+                    #  distribute votes
+                    #
+                    #  kv = w*kf rounded up * m     keep vote
+                    #  w -= w*kf rounded up         new weight
+                    #
+                    if c.kf:
+                        keep_weight = V.mul(b.weight, c.kf, round='up')
+                        keep_value = keep_weight * b.multiplier
+                        c.vote += keep_value          # credit keep-value to candidate
+                        b.weight -= keep_weight       # reduce ballot weight
+                        b.residual -= keep_value      # track residual value of ballot
+                        #
+                        if b.weight <= V0:
+                            break
+                E.residual += b.residual    # track residual for round
+
+            ##  B.2.b. Update quota.
+            ##         Set quota q to the sum of the vote v for all candidates (step B.2a),
+            ##         divided by one more than the number of seats to be filled,
+            ##         truncated to 9 decimal places, plus 0.000000001 (1/109).
+
+            E.votes = sum([c.vote for c in C.hopeful() + C.elected()], V0)
+            E.quota = E.votes // V(E.electionProfile.nSeats+1) + V.epsilon
+
+            ##  B.2.c. Find winners.
+            ##         Elect each hopeful candidate with a vote v
+            ##         greater than or equal to the quota (v >= q).
+
+            for c in [c for c in C.hopeful() if c.vote >= E.quota]:
+                c.elect()
+                iterationStatus = 'elected'
+
+            ##  B.2.d. Calculate the total surplus s,
+            ##         as the sum of the individual surpluses (v - q) of the elected candidates
+            ##         but not less than 0.
+
+            E.surplus = sum([c.vote-E.quota for c in C.elected()], V0)
+            if E.surplus < V0:  # unlikely but possible due to precision limits if omega too small
+                E.surplus = V0  # pragma: no cover
+
+            ##  B.2.e. Test for iteration finished.
+            ##         If step B.2c elected a candidate, continue at B.1.
+            ##         Otherwise, if the total surplus s is less than omega,
+            ##         or (except for the first iteration) if the total surplus s
+            ##         is greater than or equal to the surplus s in the previous iteration,
+            ##         continue at B.3.
+
+            if iterationStatus != 'elected':
+                if E.surplus < self.omega:
+                    iterationStatus = 'omega'
+                elif E.surplus >= lastsurplus:  # pragma: no cover
+                    iterationStatus = 'stable'
+                    E.log("Stable state detected (%s)" % E.surplus)
+
+            if iterationStatus == 'iterate':
+                lastsurplus = E.surplus
+
+                ##  B.2.f. Update keep factors.
+                ##         Set the keep factor kf of each elected candidate to the candidate's
+                ##         current keep factor kf, multiplied by the current quota q
+                ##         (to 9 decimal places, rounded up), and then divided by the candidate's
+                ##         current vote v (to 9 decimal places, rounded up).
+                ##         Continue iteration at step B.2a.
+
+                for c in C.elected():
+                    c.kf = V.div(V.mul(c.kf, E.quota, round='up'), c.vote, round='up')
+
+            return (iterationStatus, lastsurplus)  # end iteration step
+
+
         #########################
         #
         #   Initialize Count
         #
         #########################
-        E = self.E # election object
-        V = E.V    # arithmetic value class
-        V0 = E.V0  # constant zero
-        V1 = E.V1  # constant one
 
         ##  A. Set each candidate to hopeful or withdrawn.
         ##     Set each hopeful candidate's keep factor kf to 1,
         ##     and each withdrawn candidate's keep factor to 0.
         ##     Set omega to 0.000001 (1/10^6).
 
-        C = E.C   # candidates
         for c in C.hopeful():
             c.kf = V1    # initialize keep factors
         self.omega = E.V(1) / E.V(10**self.omega10)
@@ -144,91 +234,8 @@ class Rule(MethodMeek):
 
             iterationStatus = 'iterate'
             lastsurplus = V(E.nBallots)
-            while True:
-
-                ##  B.2.a. Distribute votes.
-                ##         For each ballot: set ballot weight w to 1, and then for each candidate,
-                ##         in order of rank on that ballot:
-                ##            add w multiplied by the keep factor kf of the candidate
-                ##            (to 9 decimal places, rounded up) to that candidate's vote v,
-                ##            and reduce w by the same amount, until no further candidate
-                ##            remains on the ballot or until the ballot's weight w is 0.
-
-                for c in C.hopeful() + C.elected():
-                    c.vote = V0
-                E.residual = V0
-                for b in E.ballots:
-                    b.weight = V1
-                    b.residual = b.multiplier
-                    for c in (E.candidate(cid) for cid in b.ranking):
-                        #
-                        #  distribute votes
-                        #
-                        #  kv = w*kf rounded up * m     keep vote
-                        #  w -= w*kf rounded up         new weight
-                        #
-                        if c.kf:
-                            keep_weight = V.mul(b.weight, c.kf, round='up')
-                            keep_value = keep_weight * b.multiplier
-                            c.vote += keep_value          # credit keep-value to candidate
-                            b.weight -= keep_weight       # reduce ballot weight
-                            b.residual -= keep_value      # track residual value of ballot
-                            #
-                            if b.weight <= V0:
-                                break
-                    E.residual += b.residual    # track residual for round
-
-                ##  B.2.b. Update quota.
-                ##         Set quota q to the sum of the vote v for all candidates (step B.2a),
-                ##         divided by one more than the number of seats to be filled,
-                ##         truncated to 9 decimal places, plus 0.000000001 (1/109).
-
-                E.votes = sum([c.vote for c in C.hopeful() + C.elected()], V0)
-                E.quota = E.votes // V(E.electionProfile.nSeats+1) + V.epsilon
-
-                ##  B.2.c. Find winners.
-                ##         Elect each hopeful candidate with a vote v
-                ##         greater than or equal to the quota (v >= q).
-
-                for c in [c for c in C.hopeful() if c.vote >= E.quota]:
-                    c.elect()
-                    iterationStatus = 'elected'
-
-                ##  B.2.d. Calculate the total surplus s,
-                ##         as the sum of the individual surpluses (v - q) of the elected candidates
-                ##         but not less than 0.
-
-                E.surplus = sum([c.vote-E.quota for c in C.elected()], V0)
-                if E.surplus < V0:  # unlikely but possible due to precision limits if omega too small
-                    E.surplus = V0  # pragma: no cover
-
-                ##  B.2.e. Test for iteration finished.
-                ##         If step B.2c elected a candidate, continue at B.1.
-                ##         Otherwise, if the total surplus s is less than omega,
-                ##         or (except for the first iteration) if the total surplus s
-                ##         is greater than or equal to the surplus s in the previous iteration,
-                ##         continue at B.3.
-
-                if iterationStatus != 'elected':
-                    if E.surplus < self.omega:
-                        iterationStatus = 'omega'
-                    elif E.surplus >= lastsurplus:  # pragma: no cover
-                        iterationStatus = 'stable'
-                        E.log("Stable state detected (%s)" % E.surplus)
-                if iterationStatus != 'iterate':
-                    break  # iteration complete
-
-                lastsurplus = E.surplus
-
-                ##  B.2.f. Update keep factors.
-                ##         Set the keep factor kf of each elected candidate to the candidate's
-                ##         current keep factor kf, multiplied by the current quota q
-                ##         (to 9 decimal places, rounded up), and then divided by the candidate's
-                ##         current vote v (to 9 decimal places, rounded up).
-                ##         Continue iteration at step B.2a.
-
-                for c in C.elected():
-                    c.kf = V.div(V.mul(c.kf, E.quota, round='up'), c.vote, round='up')
+            while iterationStatus == 'iterate':
+                iterationStatus, lastsurplus = iterateStep(iterationStatus, lastsurplus)
 
             ##  B.2.e. (end of round if iteration resulted in an election)
 
@@ -245,7 +252,7 @@ class Rule(MethodMeek):
             if C.hopeful():
                 low_vote = V.min([c.vote for c in C.hopeful()])
                 low_candidates = [c for c in C.hopeful() if (low_vote + E.surplus) >= c.vote]
-                low_candidate = breakTie(E, low_candidates)
+                low_candidate = breakTie(low_candidates)
                 if iterationStatus == 'omega':
                     low_candidate.defeat(msg='Defeat (surplus %s < omega)' % E.surplus)
                 else:  # pragma: no cover
