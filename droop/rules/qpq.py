@@ -200,7 +200,7 @@ class Rule(ElectionRule):
 
         restart = True
         E.logAction('begin', 'Begin Count')
-        while (not countComplete()):
+        while not countComplete():
 
             E.newRound()
             if restart:
