@@ -22,9 +22,8 @@ This file is part of Droop.
 '''
 from __future__ import absolute_import
 import unittest
-
-from .common import testdir
 from droop.profile import ElectionProfile, ElectionProfileError
+from .common import testdir
 
 p_42 = '''3 2
 4 1 2 0

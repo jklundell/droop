@@ -21,14 +21,16 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 from __future__ import absolute_import
-import sys, os, re
+import sys
+import os
+import re
+from droop.election import Election
+from droop.profile import ElectionProfile
+
 testdir = os.path.dirname(os.path.abspath(__file__))
 basedir = os.path.normpath(os.path.join(testdir, '..'))
 if basedir not in sys.path:
     sys.path.insert(0, os.path.normpath(basedir))
-
-from droop.election import Election
-from droop.profile import ElectionProfile
 
 pyflakes = True # dummy for pyflakes
 

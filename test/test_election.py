@@ -22,9 +22,8 @@ This file is part of Droop.
 '''
 from __future__ import absolute_import
 import unittest
-
-from . import common  # to set sys.path
 from droop.election import Candidate, Candidates
+from . import common  # to set sys.path
 
 if common.pyflakes: # satisfy pyflakes that we're using common
     pass
@@ -77,7 +76,7 @@ class CandidatesTest(unittest.TestCase):
         self.assertEqual(C.byVote([c1, c2, c3]), [c1, c3, c2], "vote order")
         self.assertEqual(C.select('all', 'ballot'), [c1, c2, c3], "all candidates, ballot order")
         self.assertEqual(C.select('eligible', 'ballot', reverse=True), [c3, c2, c1],
-            "eligible candidates, reverse ballot order")
+                         "eligible candidates, reverse ballot order")
         self.assertEqual(C.select('eligible', 'tie'), [c3, c2, c1], "eligible candidates, tie order")
         self.assertEqual(C.select('elected', 'ballot'), [c2, c3], "elected candidates, ballot order")
         self.assertEqual(C.notpending(), [c2], "elected-not-pending candidate")

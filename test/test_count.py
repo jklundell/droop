@@ -25,11 +25,11 @@ from __future__ import absolute_import
 import unittest
 import os
 
-from .common import testdir, doDumpCompare
 import droop
 from droop.election import Election
 from droop.profile import ElectionProfile
 from droop.common import UsageError
+from .common import testdir, doDumpCompare
 
 class ElectionBasics(unittest.TestCase):
     '''
@@ -51,7 +51,7 @@ class ElectionBasics(unittest.TestCase):
             self.assertTrue(E.rule.__class__.__name__ == 'Rule', 'bad rule class')
             self.assertTrue(len(options) >= 1, 'rule should set/leave at least one option')
             self.assertTrue(E.options.getopt('arithmetic') in ('fixed', 'integer', 'guarded', 'rational'),
-                'legal arithmetic')
+                            'legal arithmetic')
             candidates = E.C
             self.assertTrue("Castor" in [c.name for c in candidates])
             self.assertTrue("Castor" in [str(c) for c in candidates])

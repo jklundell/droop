@@ -22,11 +22,10 @@ This file is part of Droop.
 '''
 from __future__ import absolute_import
 import unittest
-
-from .common import testdir
 from droop import electionRuleNames
 from droop.election import Election
 from droop.profile import ElectionProfile
+from .common import testdir
 
 class RuleBasicTest(unittest.TestCase):
     "make sure we're in the book"
