@@ -336,6 +336,7 @@ class Rule(MethodWIGM):
     '''
     method = 'wigm' # underlying method
     name = 'mpls'
+    quota_name = 'Threshold'
 
     @classmethod
     def ruleNames(cls):

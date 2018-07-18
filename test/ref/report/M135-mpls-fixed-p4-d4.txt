@@ -6,7 +6,7 @@ Election: M135: Gen v1.1 1 3 45
 	Arithmetic: fixed-point decimal arithmetic (4 places)
 	Seats: 7
 	Ballots: 677
-	Quota: 85.0000
+	Threshold: 85.0000
 Source: Brian Wichmann, email: brian.wichmann@bcs.org.uk
 {The validation of the STV programs for ERBS, 1st September 1999.}
 

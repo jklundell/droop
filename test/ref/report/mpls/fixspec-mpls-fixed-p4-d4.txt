@@ -6,7 +6,7 @@ Election: test operation of mpls fixSpec flag
 	Arithmetic: fixed-point decimal arithmetic (4 places)
 	Seats: 2
 	Ballots: 7
-	Quota: 3.0000
+	Threshold: 3.0000
 
 	Add eligible: Sven
 	Add eligible: Ole

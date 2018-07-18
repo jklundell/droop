@@ -7,7 +7,7 @@ Election: Pollux and Helen should tie
 	Overridden options: precision
 	Seats: 2
 	Ballots: 6
-	Quota: 3.0000
+	Threshold: 3.0000
 
 	Add eligible: Castor
 	Add eligible: Pollux

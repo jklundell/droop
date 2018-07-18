@@ -6,7 +6,7 @@ Election: Pøllüx and Hélen should tie
 	Arithmetic: fixed-point decimal arithmetic (4 places)
 	Seats: 2
 	Ballots: 6
-	Quota: 3.0000
+	Threshold: 3.0000
 
 	Add eligible: Cåstor
 	Add eligible: Pøllüx

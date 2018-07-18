@@ -6,7 +6,7 @@ Election: GPUS Steering Committee Election 2005-07-24
 	Arithmetic: fixed-point decimal arithmetic (4 places)
 	Seats: 4
 	Ballots: 94
-	Quota: 19.0000
+	Threshold: 19.0000
 
 	Add eligible: Budd Dickinson
 	Add eligible: Kirit Mookerjee

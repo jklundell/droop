@@ -6,7 +6,7 @@ Election: Pollux and Helen should tie
 	Arithmetic: fixed-point decimal arithmetic (4 places)
 	Seats: 2
 	Ballots: 9
-	Quota: 4.0000
+	Threshold: 4.0000
 
 	Add eligible: Castor
 	Add eligible: Pollux

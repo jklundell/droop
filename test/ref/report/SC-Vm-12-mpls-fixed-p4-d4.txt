@@ -6,7 +6,7 @@ Election: Voting matters example (Issue 12, 'The computational accuracy using th
 	Arithmetic: fixed-point decimal arithmetic (4 places)
 	Seats: 3
 	Ballots: 4003
-	Quota: 1001.0000
+	Threshold: 1001.0000
 
 	Add eligible: A
 	Add eligible: B
