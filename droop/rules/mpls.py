@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Count election using Minneapolis MN STV rules
 
@@ -19,48 +20,80 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 
 Minneapolis Code of Ordinances, Title 8.5, Chapter 167
-http://library1.municode.com/default-test/home.htm?infobase=11490
-as of 2009-10-02
+http://minneapolis-mn.elaws.us/code/coor_apxid29496_title8.5_ch167
+as of 2018-07-12
 
-Ties are to be broken per Minneapolis Charter Chapter 2 Section 12
-http://library1.municode.com/default-test/home.htm?infobase=11490
+The rule here reflects amendments c. 2013:
+http://www.minneapolismn.gov/www/groups/public/@clerk/documents/webcontent/wcms1p-108666.pdf
 
 Minneapolis STV is a variation on WIGM,
 using fixed-point decimal arithmetic with four digits of precision.
 
 Implementation notes:
 
-1. There is a specification error in 167.20(Mathematically impossible to be elected),
-where a candidate that could tie with the next highest candidate is erroneously deemed
-"impossible to be elected". The implementation uses actual mathematical certainty,
-rather than the erroneous specification, and logs a complaint if the condition arises.
-This should be fixed in the ordinance.
+1. The current rule reflects amendments through 2013 as of 2018-07:
+http://www.minneapolismn.gov/www/groups/public/@clerk/documents/webcontent/wcms1p-108666.pdf
+More: http://vote.minneapolismn.gov/rcv/RCV-HISTORY
 
-2. The tiebreaking rule requires the presence of the City Council. In their absence,
-the implementation uses an external tiebreaking order to break ties.
-Ideally, the rule would be changed so that the City Council would predetermine a tiebreaking
+2.  167.70(c)(1)a. is confusing. Where exactly do (eg) rounds 1 & 2 begin? Note in particular the
+references to "round" here:
+    (1) "Each round must proceed sequentially as follows:"
+    (1)(a) "the current round"
+    (1)(a) "a new round begins"
+
+    The first time through, is "the current round" round 1? If so, what is the "new round" that begins
+    in the last sentence? If not, are there winners declared in some "round 0"? When we're told later that
+    "the tabulation must continue as described in clause a", when does the new round start? At the
+    beginning of 167.70(c)(1)a, or only when we encounter "a new round begins"?
+
+    Note that this doesn't (I think) affect the outcome of the election, but it does affect reporting,
+    and
+
+    (1) Tabulation of votes at the ranked-choice voting tabulation center must proceed in rounds for
+    each office to be counted. The threshold must be calculated. The sum of all ranked-choice votes
+    for every candidate must be calculated. Each round must proceed sequentially as follows:
+
+        The number of votes cast for each candidate for the current round must be counted.
+
+        If the number of candidates, other than any undeclared write-in candidate, whose vote total is
+        equal to or greater than the threshold is equal to the number of seats to be filled, those
+        candidates who are continuing candidates are elected and the tabulation is complete.
+
+        If the number of candidates, other than any undeclared write-in candidate, whose vote total is
+        equal to or greater than the threshold is not equal to the number of seats to be filled, a new
+        round begins and the tabulation must continue as described in clause b.
+
+3. 167.70(c)(1)d. is confusing. "The surplus of the candidate chosen by lot must be transferred
+before other transfers are made": what are the "other transfers"? The general principle seems
+(and ought) to be that each time a transfer is made, we go back to 167.70(c)(1)a. and then recalculate surpluses.
+
+4. 167.70(c)(1)f. "If the number of continuing candidates is equal to the number of seats yet to be filled,
+any remaining continuing candidates must be declared elected". Should be "less than or equal to", allowing
+for the case of fewer candidates than seats to be filled (in which case, if the rules were strictly followed,
+the count would never terminate).
+
+5. Under this rule, the handling of undeclared write-in candidates allows their presence to alter the result
+of the election. This can't be desirable, and seems to be the unintended result of trying to report the
+number of votes for undeclared write-in candidates, as required by 167.50(c): "The number of votes received
+by undeclared write-in candidates will be recorded as a group by office."
+
+6. The rule about not transferring votes from the last defeated candidate seems to be a holdover from
+the single-winner rule 167.60(c)(1)b, so that we don't end up reporting a unanimous vote for the winner.
+That doesn't really make sense for multiple-seat elections. Moreover, in the case of single-seat elections,
+it would be helpful to report vote counts before and after such a final transfer, in order to quantify total
+voter support for the ultimate winner, some of which is likely to be uncovered by the final transfer.
+This goes to validating the assertion that RCV is "majority-seeking".
+
+7. The tiebreaking rule requires the presence of the chief election official.
+In their absence, this implementation uses an external tiebreaking order to break ties.
+Ideally, the rule would be changed so that the official would predetermine a tiebreaking
 order.
 
-3. 167.70(1)(f) "number of continuing candidates is equal to the number of offices"
-should instead have "equal to or less than", and is so implemented.
-
-4. The language at the end of 167.70(1)(f) should be clarified. The "tie between two"
-should be "tie between two or more". But the language isn't needed at all, since any
-such tie will be broken when the candidates are defeated.
-
-5. The test for count-complete given in 167.70(1)(f) must be performed after the defeat
-of certain losers per 167.70(1)(c) to avoid defeating too many candidates and leaving
-a seat unfilled. This should be made explicit, since a reasonable interpretation of (f)
-is that the test is performed only after defeating the lowest-vote candidate per (e).
-
-6. WIGM rules typically elect candidates as soon as they reach a quota. The Minneapolis
-rule defer the election of a candidate until that candidate's surplus is to be transferred.
-This variation is defensible, even desirable, but because it's a little unusual, the rule
-language should make more explicit the implication that votes can be transferred to candidates
-who already have a quota but are not yet elected per 167.70(1)(d).
+8. We don't identify undeclared write-in candidates. The best we can do, for now, is to mark
+them as withdrawn. TODO: test to see what the reporting looks like.
 
 
-Election Code
+Minneapolis Election Code
 
 The relevant portions of the Minneapolis election code is reproduced below, and is also
 distributed as comments marked with ## in the body of the implementation.
@@ -72,15 +105,15 @@ meanings respectively ascribed to them in this section:
 Batch elimination  means a simultaneous defeat of multiple continuing candidates for whom it is
 mathematically impossible to be elected.
 
-Chief election official  includes the director of elections and his or her designee.
+Chief election official means the city clerk and includes the city clerk's designee(s).
 
 Continuing candidate  means a candidate who has been neither elected nor defeated.
 
-Duplicate ranking  occurs when a voter ranks the same candidate at multiple rankings for the office
-being counted.
+Declared write-in candidate(s)  means a candidate(s) who has filed a written request
+in accordance with section 167.45.
 
-Exhausted ballot  means a ballot that cannot be advanced under section 167.60(a)(2) or section
-167.70(a)(2).
+Exhausted ballot  means a ballot that cannot be advanced under section 167.60(c)(2) or
+section 167.70(c)(2).
 
 Highest continuing ranking  means the ranking on a voter's ballot with the lowest numerical value
 for a continuing candidate.
@@ -88,9 +121,18 @@ for a continuing candidate.
 Mathematically impossible to be elected  means either:
    (1) The candidate could never win because his or her current vote total plus all votes that could
    possibly be transferred to him or her in future rounds (from candidates with fewer votes, tied
-   candidates, and surplus votes) would not be enough to surpass the candidate with the next higher
-   current vote total; or
+   candidates, surplus votes, and from undeclared write-in candidates) would not be enough to equal
+   or surpass the candidate with the next higher current vote total; or
+
    (2) The candidate has a lower current vote total than a candidate who is described by (1).
+
+Maximum possible threshold  means the number of votes sufficient for a candidate to be elected
+under a first ranked choice tabulation under sections 167.60(b) and 167.70(b). In any given election,
+the maximum possible threshold equals the total ballots cast that include votes, undervotes,
+skipped rankings, or overvotes for the office, divided by the sum of one (1) plus the number of offices
+to be filled, then adding one (1), disregarding any fractions. Maximum Possible Threshold =
+((Total ballots cast that include votes, undervotes, skipped rankings, or overvotes for the office)
+/(Seats to be elected + 1)) +1, with any fractions disregarded.
 
 An overvote  occurs when a voter ranks more than one (1) candidate at the same ranking.
 
@@ -98,19 +140,19 @@ Partially defective ballot  means a ballot that is defective to the extent that 
 are unable to determine the voter's intent with respect to the office being counted.
 
 Ranked-choice voting  means an election method in which voters rank candidates for an office in
-order of their preference and the ballots are counted in rounds that, in the case of a single-seat
-election, simulate a series of runoffs until one (1) candidate meets the threshold, or until two (2)
-candidates remain and the candidate with the greatest number of votes is declared elected. In the
-case of multiple-seat elections, a winning threshold is calculated, and votes, or fractions thereof,
-are distributed to candidates according to the preferences marked on each ballot as described in
-section 167.70 of this chapter.
+order of their preference and the ballots are counted in rounds and votes, or fractions thereof,
+are distributed to candidates according to the preferences marked on each ballot as described
+in sections 167.60 and 167.70 of this chapter.
 
-Ranked-choice voting tabulation center  means the place selected for the automatic or manual
-processing and tabulation of ballots and/or votes.
+Ranked-choice voting tabulation center means one (1) or more locations selected by the chief election official
+for the tabulation of votes.
 
 Ranking  means the number assigned by a voter to a candidate to express the voter's preference for
 that candidate. Ranking number one (1) is the highest ranking. A ranking of lower numerical value
 indicates a greater preference for a candidate than a ranking of higher numerical value.
+
+Repeat candidate ranking  occurs when a voter ranks the same candidate at multiple rankings
+for the office being counted.
 
 Round  means an instance of the sequence of voting tabulation steps established in sections 167.60
 and 167.70 of this chapter.
@@ -128,9 +170,9 @@ calculated to four (4) decimal places, ignoring any remainder.
 
 Threshold  means the number of votes sufficient for a candidate to be elected. In any given
 election, the threshold equals the total votes counted in the first round after removing partially
-defective ballots, divided by the sum of one (1) plus the number of offices to be filled and adding
-one (1) to the quotient, disregarding any fractions. Threshold = (Total votes cast)/(Seats to be
-elected + 1) +1, with any fractions disregarded.
+defective ballots, divided by the sum of one (1) plus the number of offices to be filled, then adding
+one (1), disregarding any fractions. Threshold = ((Total votes cast)/(Seats to be
+elected + 1)) +1, with any fractions disregarded.
 
 Transfer value  means the fraction of a vote that a transferred ballot will contribute to the next
 ranked continuing candidate on that ballot. The transfer value of a vote cast for an elected
@@ -144,66 +186,145 @@ or defeated.
 Totally defective ballot  means a ballot that is defective to the extent that the election judges
 are unable to determine the voter's intent for any office on the ballot.
 
-An undervote  occurs when a voter does not rank any candidates for an office. (2008-Or-028, 1,
-4-18-08; 2009-Or-102, 1, 10-2-09)
+Undeclared write-in candidate  means a write-in candidate who is not a declared write-in candidate.
+
+An undervote  occurs when a voter does not rank any candidates for an office. (2008-Or-028, § 1,
+4- 18-08; 2009-Or-102, § 1, 10-2-09; 2013-Or-055, § 1, 5-24-13)
 
 
-167.70. Tabulation of votes, multiple-seat elections. (a) Applicability.  This section applies to a
-ranked-choice voting election in which more than one (1) seat in office is to be filled from a
-single set of candidates on the ballot. The method of tabulating ranked-choice votes for
-multiple-seat elections as described in this section must be known as the "multiple-seat single
-transferable vote" method of tabulation.
+167.50. Tabulation of votes; in general
+(c) Recording write-in votes. At a time set by the chief election official, the judges of the election
+shall convene at a ranked-choice voting tabulation center to record the names and number of votes received
+by each declared write-in candidate. The number of votes received by undeclared write-in candidates will be
+recorded as a group by office. (2008-Or-028, § 1, 4-18-08; 2009-Or-102, § 3, 10-2-09; 2013-Or-055, § 5, 5-24-13)
+
+
+167.70. - Tabulation of votes, multiple-seat elections.
+(a) Applicability.
+This section applies to a ranked-choice voting election in which more than
+one (1) seat in office is to be filled from a single set of candidates on the ballot. The method
+of tabulating ranked-choice votes for multiple-seat elections as described in this section must be
+known as the "multiple-seat single transferable vote" method of tabulation.
+
+(b) First ranked choice tabulation.
+A first ranked choice tabulation shall be done under this clause before a tabulation as described in
+clause (c). A first ranked choice tabulation will consist of a first round only. Under the first ranked
+choice tabulation, the vote total will be the sum of the number one (1) ranked votes. The maximum possible
+threshold must be determined. If the number of candidates, other than any undeclared or declared write-in
+candidate, whose vote total is equal to or greater than the maximum possible threshold is equal to the
+number of seats to be filled, those candidates are declared elected and the tabulation is complete.
+If the number of candidates, other than any undeclared or declared write-in candidate, whose vote total
+is equal to or greater than the maximum possible threshold is less than the number of seats to be filled,
+a tabulation, as described in clause (c), shall be done.
+
+(c) Tabulation of round(s).
 
 (1) Tabulation of votes at the ranked-choice voting tabulation center must proceed in rounds for
-each office to be counted. The threshold must be calculated and publicly declared. Each round must
-proceed sequentially as follows:
+each office to be counted. The threshold must be calculated. The sum of all ranked-choice votes
+for every candidate must be calculated. Each round must proceed sequentially as follows:
 
-   a. The number of votes cast for each candidate for the current round must be counted. If the
-   number of candidates whose vote total is equal to or greater than the threshold is equal to the
-   number of seats to be filled, those candidates who are continuing candidates are elected and the
-   tabulation is complete. If the number of candidates whose vote total is equal to or greater than
-   the threshold is not equal to the number of seats to be filled, a new round begins and the
-   tabulation must continue as described in clause b.
+    a. NEW ROUND
+    The number of votes cast for each candidate for the current round must be counted.
 
-   b. Surplus votes for any candidates whose vote total is equal to or greater than the threshold
-   must be calculated.
+    If the number of candidates, other than any undeclared write-in candidate, whose vote total is
+    equal to or greater than the threshold is equal to the number of seats to be filled, those
+    candidates who are continuing candidates are elected and the tabulation is complete.
 
-   c. After any surplus votes are calculated but not yet transferred, all candidates for whom it is
-   mathematically impossible to be elected must be defeated simultaneously. Votes for the defeated
-   candidates must be transferred to each ballot's next-ranked continuing candidate. If no candidate
-   can be defeated mathematically, the tabulation must continue as described in clause d. Otherwise,
-   the tabulation must continue as described in clause a.
+    If the number of candidates, other than any undeclared write-in candidate, whose vote total is
+    equal to or greater than the threshold is not equal to the number of seats to be filled, a new
+    round begins and the tabulation must continue as described in clause b.
 
-   d. The transfer value of each vote cast for an elected candidate must be transferred to the next
-   continuing candidate on that ballot. The candidate with the largest surplus is declared elected
-   and that candidate's surplus is transferred. A tie between two (2) or more candidates must
-   immediately and publicly be resolved by lot by the chief election official at the ranked-choice
-   voting tabulation center. The surplus of the candidate chosen by lot must be transferred before
-   other transfers are made. The result of the tie resolution must be recorded and reused in the
-   event of a recount. If no candidate has a surplus, the tabulation must continue as described in
-   clause e. Otherwise, the tabulation must continue as described in clause a.
+    b. CALCULATE SURPLUS
+    Surplus votes for any candidates whose vote total is equal to or greater than the threshold
+    must be calculated.
 
-   e. If there are no transferable surplus votes, the candidate with the fewest votes is defeated.
-   Votes for a defeated candidate are transferred at their transfer value to each ballot's
-   next-ranked continuing candidate. Ties between candidates with the fewest votes must be decided
-   by lot, and the candidate chosen by lot must be defeated. The result of the tie resolution must
-   be recorded and reused in the event of a recount.
+    c. DEFEAT CERTAIN LOSERS
+    At the beginning of the second round only, after any surplus votes are calculated but not yet
+    transferred, all undeclared write-in candidates and all candidates for whom it is mathematically
+    impossible to be elected must be defeated simultaneously .
 
-   f. The procedures in clauses a. to e. must be repeated until the number of candidates whose vote
-   total is equal to or greater than the threshold is equal to the number of seats to be filled, or
-   until the number of continuing candidates is equal to the number of offices yet to be elected. If
-   the number of continuing candidates is equal to the number of offices yet to be elected, any
-   remaining continuing candidates must be declared elected. In the case of a tie between two (2)
-   continuing candidates, the tie must be decided by lot as provided in Minneapolis Charter Chapter
-   2, Section 12, and the candidate chosen by lot must be defeated. The result of the tie resolution
-   must be recorded and reused in the event of a recount.
+    For rounds subsequent to the second round, after any surplus votes are calculated but not yet
+    transferred, all candidates for whom it is mathematically impossible to be elected must be
+    defeated simultaneously.
 
-(2) When a single skipped ranking is encountered on a ballot, that ballot shall count towards the
-next non-skipped ranking. If any ballot cannot be advanced because no further continuing candidates
-are ranked on that ballot, or because a voter has skipped more than one (1) ranking or because an
-undervote, overvote, or duplicate ranking is encountered, the ballot shall not count towards any
-candidate in that round or in subsequent rounds for the office being counted. (2008-Or-028, 1,
-4-18-08; 2009-Or-102, 5, 10-2-09)
+    Votes for the defeated candidates must be transferred to each ballot's next-ranked continuing
+    candidate, except votes for candidates defeated in the final round are not transferred if, by
+    their defeat, the number of continuing candidates is reduced to the number of seats yet to be
+    filled.
+
+    If no candidate can be defeated under this clause, the tabulation must continue as described in
+    clause d. Otherwise, the tabulation must continue as described in clause a.
+
+    d. ELECT HIGHEST SURPLUS
+    The candidate with the largest surplus is declared elected and that candidate's surplus is
+    transferred.
+
+    A tie between two (2) or more candidates must be resolved by lot by the chief election official.
+    The surplus of the candidate chosen by lot must be transferred before other transfers are made.
+    The result of the tie resolution must be recorded and reused in the event of a recount.
+
+    The transfer value of each vote cast for an elected candidate must be transferred to the next
+    continuing candidate on that ballot.
+
+    If no candidate has a surplus, the tabulation must continue as described in clause e. Otherwise,
+    the tabulation must continue as described in clause a.
+
+    e. DEFEAT LOWEST CANDIDATE
+    If there are no transferable surplus votes, the candidate with the fewest votes is defeated.
+
+    Votes for a defeated candidate are transferred at their transfer value to each ballot's
+    next-ranked continuing candidate, except votes for candidates defeated in the final round are
+    not transferred if, by their defeat, the number of continuing candidates is reduced to the
+    number of seats yet to be filled.
+
+    Ties between candidates with the fewest votes must be resolved by lot by the chief election
+    official, and the candidate chosen by lot must be defeated. The result of the tie resolution
+    must be recorded and reused in the event of a recount.
+
+    f. FINISH
+    The procedures in clauses a. to e. must be repeated until the number of candidates whose vote
+    total is equal to or greater than the threshold is equal to the number of seats to be filled, or
+    until the number of continuing candidates is equal to the number of seats yet to be filled.
+
+    If the number of continuing candidates is equal to the number of seats yet to be filled, any
+    remaining continuing candidates must be declared elected. In the case of a tie between two (2)
+    or more continuing candidates, the tie must be resolved by lot by the chief election official.
+    The result of the tie resolution must be recorded and reused in the event of a recount.
+
+    Candidates defeated under this clause in the final round will retain their votes.
+
+
+(2) When a skipped ranking, overvote or repeat candidate ranking is encountered on a ballot, that
+ballot shall count towards the highest continuing ranking that is not a skipped ranking, an overvote
+or repeat candidate ranking. If any ballot cannot be advanced because no further continuing candidates
+are ranked on that ballot, or because the only votes for further continuing candidates that are ranked
+on that ballot are either overvotes or repeat candidate rankings, the ballot shall not count towards  any
+candidate in that round or in subsequent rounds for the office being counted. (2008-Or-028, § 1, 4-18-08;
+2009-Or-102, § 5, 10-2-09; 2013-Or-055, § 7, 5-24-13; 2015-Or-065 , § 4, 7-24-15)
+
+167.75. - Ties resolved by lot.
+(a) Who resolves a tie by lot. The chief election official must resolve a tie by lot.
+
+(b) Notice to candidates with tied votes. The chief election official must notify all candidates
+with tied votes that the tie will be resolved by lot, except those candidates who have not provided
+contact information that would allow notice under this section. This notice must be sent at least
+one (1) hour prior to resolving the tie by lot. The notice must be sent through a medium that would
+generally be capable of reaching a person within the one-hour period, such as face-to-face, a fax,
+an e-mail, an instant message, a text, a video chat, a telephone call, or a voicemail. The chief
+election official may consider the preference of each candidate for the medium through which the
+notice would be provided. The chief election official is not required to confirm that the notice
+is received by a candidate before resolving a tie by lot. A tie may be resolved by lot even though
+some or all of the candidates who have tied votes are not present.
+
+(c) Witnesses. The resolving of the tie by lot must be witnessed by two (2) election judges who are
+members of different major political parties.
+
+(d) Video. The resolving of the tie by lot may be recorded through any audio and visual recording technology.
+
+(e) Media. The chief election official may contact the media to view the chief election official resolve a tie by lot.
+
+(f) Procedures. The chief election official may establish written procedures for implementing this section.
+(2015-Or-065 , § 5, 7-24-15)
 '''
 
 from __future__ import absolute_import
@@ -268,7 +389,7 @@ class Rule(MethodWIGM):
         #
         def hasQuota(candidate):
             '''
-            Determine whether a candidate has a quota. [167.70(1(a,d))]
+            Determine whether a candidate has a quota. [167.70(c)(1)a,d]
             '''
             return candidate.vote >= E.quota
 
@@ -277,7 +398,7 @@ class Rule(MethodWIGM):
             Calculate quota. [167.20(Threshold)]
             '''
             ##  167.20(Threshold)
-            ##  Threshold = (Total votes cast)/(Seats to be elected + 1) +1,
+            ##  Threshold = ((Total votes cast)/(Seats to be elected + 1)) +1,
             ##  with any fractions disregarded.
 
             return V(E.nBallots // (E.nSeats + 1) + 1)
@@ -286,11 +407,11 @@ class Rule(MethodWIGM):
             '''
             Transfer ballot to next continuing (hopeful or pending) candidate
             '''
-            ##  167.70(1)(d)
+            ##  167.70(c)(1)d.
             ##  The transfer value of each vote cast for an elected candidate must be transferred
             ##  to the next continuing candidate on that ballot. ...
             ##
-            ##  167.70(1)(e)
+            ##  167.70(c)(1)e.
             ##  ... Votes for a defeated candidate are transferred at their transfer value to each
             ##  ballot's next-ranked continuing candidate.
 
@@ -301,7 +422,7 @@ class Rule(MethodWIGM):
             else:
                 ballot.topCand.vote += ballot.vote
 
-        def findCertainLosers(surplus, fixSpec=True):
+        def findCertainLosers(surplus):
             '''
             Find the group of candidates that cannot be elected per 167.20
             '''
@@ -309,7 +430,8 @@ class Rule(MethodWIGM):
             ##         (1) The candidate could never win because his or her current vote total
             ##             plus all votes that could possibly be transferred to him or her
             ##             in future rounds (from candidates with fewer votes, tied candidates,
-            ##             and surplus votes) would not be enough to surpass the candidate
+            ##             surplus votes, and from undeclared write-in candidates)
+            ##             would not be enough to equal or surpass the candidate
             ##             with the next higher current vote total; or
             ##         (2) The candidate has a lower current vote total than a candidate
             ##             who is described by (1).
@@ -365,43 +487,21 @@ class Rule(MethodWIGM):
                 #
                 vote += group[0].vote * len(group)
                 #
-                #   stop if vote added to surplus *equals or* surpasses the vote for
+                #   stop if vote added to surplus equals or surpasses the vote for
                 #   a candidate in the next-higher group
                 #
-                #   167.20 has a mistaken definition of mathematical
-                #   impossibility, so log a complaint in the case where
-                #   we deviate from the erroneous specification
-                #
-                if (vote + surplus) == sortedGroups[g+1][0].vote:
-                    names = ", ".join([c.name for c in group])
-                    if fixSpec:
-                        E.log("Not defeating uncertain loser(s): %s" % names)
-                    else:
-                        E.log("Defeating uncertain loser(s): %s" % names)  # pragma: no cover
-                if (vote + surplus) > sortedGroups[g+1][0].vote:
-                    continue
-                if fixSpec and (vote + surplus) == sortedGroups[g+1][0].vote:
+                if (vote + surplus) >= sortedGroups[g+1][0].vote:
                     continue
                 losers = list(maybe)
             return C.byBallotOrder(losers)
 
         def breakTie(tied, reason=None):
             '''
-            break a tie by lot [167.70(1)(e)]
+            break a tie by lot [167.70(c)(1)f.]
             '''
-            ##  167.70(f) ...In the case of a tie between two (2) continuing candidates,
-            ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2,
-            ##     Section 12, and the candidate chosen by lot must be defeated.
-            ##     The result of the tie resolution must be recorded and reused in the event
-            ##     of a recount.
-            ##
-            ##     Minneapolis Charter Chapter 2, Section 12. In Case of Tie Vote.
-            ##     When two or more candidates for any elective city office shall receive
-            ##     an equal number of votes at the general city election or at a special election,
-            ##     the election shall be determined as between those candidates by
-            ##     the casting of lots in the presence of the City Council
-            ##     at such time and in such manner as the City Council shall direct.
-            ##     (As amended 83-Or-139, Sec 1, 6-10-83; Charter Amend. No. 161, Sec 6, ref. of 11-7-06)
+            ##      Ties between candidates with the fewest votes must be resolved by lot by the chief election
+            ##      official, and the candidate chosen by lot must be defeated. The result of the tie resolution
+            ##      must be recorded and reused in the event of a recount.
 
             if len(tied) == 1:
                 return tied.pop()
@@ -427,9 +527,8 @@ class Rule(MethodWIGM):
 
         #  make initial vote count
         #
-        ##  167.70(1)(a)
-        ##  a. The number of votes cast for each candidate for the current round
-        ##     must be counted.
+        ##  167.70(c)(1)a.
+        ##  The number of votes cast for each candidate for the current round must be counted.
         ##
         for b in E.ballots:
             b.topCand.vote += b.vote
@@ -438,90 +537,88 @@ class Rule(MethodWIGM):
         E.logAction('begin', 'Begin Count')
         while True:
 
-            ##     If the number of candidates whose vote total is equal to or greater than
-            ##     the threshold is equal to the number of seats to be filled,
-            ##     those candidates who are continuing candidates are elected
-            ##     and the tabulation is complete.
+            ##  167.70(c)(1)a. NEW ROUND
+            ##  If the number of candidates, other than any undeclared write-in candidate, whose vote total is
+            ##  equal to or greater than the threshold is equal to the number of seats to be filled, those
+            ##  candidates who are continuing candidates are elected and the tabulation is complete.
             ##
-            for c in [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]:
-                c.elect('Candidate at threshold', pending=True)  # election pending
-            if len(C.elected()) >= E.nSeats:
+            hopefulWithQuota = [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]
+            if (len(C.elected()) + len(hopefulWithQuota)) >= E.nSeats:
+                for c in hopefulWithQuota:
+                    c.elect('Candidate at threshold', pending=False)
                 break
 
-            ##     If the number of candidates whose vote total is equal to or greater than
-            ##     the threshold is not equal to the number of seats to be filled,
-            ##     a new round begins and the tabulation must continue as described in clause b.
+            ##  167.70(c)(1)a.
+            ##  If the number of candidates, other than any undeclared write-in candidate, whose vote total is
+            ##  equal to or greater than the threshold is not equal to the number of seats to be filled, a new
+            ##  round begins and the tabulation must continue as described in clause b.
 
             E.newRound()
 
-            ##  167.70(1)(b)
-            ##  b. Surplus votes for any candidates whose vote total is equal to
-            ##     or greater than the threshold must be calculated.
+            ##  167.70(c)(1)b. CALCULATE SURPLUS
+            ##  Surplus votes for any candidates whose vote total is equal to or greater than the threshold
+            ##  must be calculated.
             ##
             E.surplus = sum([c.surplus for c in C.pending()], V0)
 
-            ##  167.70(1)(c)
-            ##  c. After any surplus votes are calculated but not yet transferred,
-            ##     all candidates for whom it is mathematically impossible to be elected
-            ##     must be defeated simultaneously.
-            ##     Votes for the defeated candidates must be transferred to each ballot's
-            ##     next-ranked continuing candidate.
-
-            #  fixSpec=True instructs the function to use the correct definition
-            #  of mathematical certainty of defeat instead of the erroneous definition
-            #  in 167.20.
-
-            certainLosers = findCertainLosers(E.surplus, fixSpec=True)
-            if certainLosers:
-                for c in certainLosers:
-                    c.defeat('Defeat certain loser')
-                cids = [c.cid for c in certainLosers]
-                for b in (b for b in E.ballots if b.topRank in cids):
-                    transfer(b)
-                for c in certainLosers:
-                    c.vote = V0
-                E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in certainLosers))
-
-                ##     If no candidate can be defeated mathematically, the tabulation must continue
-                ##     as described in clause d.
-                ##     Otherwise, the tabulation must continue as described in clause a.
-
-                #   By implication, the test for tabulation-complete given in 167.70(1)(f)
-                #   must be performed here; otherwise too many candidates can be defeated.
-
-                if len(C.hopeful()) <= E.seatsLeftToFill():
-                    break
-                continue  ## continue as described in clause a. # pragma: no cover (optimized out)
-
-            ##  167.70(1)(d)
-            ##  d. The transfer value of each vote cast for an elected candidate
-            ##     must be transferred to the next continuing candidate on that ballot.
-            ##     The candidate with the largest surplus is declared elected and that candidate's
-            ##     surplus is transferred.
-            ##     A tie between two (2) or more candidates must immediately and publicly
-            ##     be resolved by lot by the chief election official at the ranked-choice
-            ##     voting tabulation center.
-            ##     The surplus of the candidate chosen by lot must be transferred
-            ##     before other transfers are made.
-            ##     The result of the tie resolution must be recorded and reused in the event
-            ##     of a recount.
-            ##     If no candidate has a surplus, the tabulation must continue
-            ##     as described in clause e.
-            ##     Otherwise, the tabulation must continue as described in clause a.
-
-            #  elect candidate with largest surplus
-            #  and transfer largest surplus
-            #
-            ## 167.20(Surplus fraction of a vote)
-            ##     Surplus fraction of a vote =
-            ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate),
-            ##     calculated to four (4) decimal places, ignoring any remainder.
+            ##  167.70(c)(1)c. DEFEAT CERTAIN LOSERS
+            ##  At the beginning of the second round only, after any surplus votes are calculated but not yet
+            ##  transferred, all undeclared write-in candidates and all candidates for whom it is mathematically
+            ##  impossible to be elected must be defeated simultaneously .
             ##
-            if C.pending():
-                high_vote = max(c.vote for c in C.pending())
-                high_candidates = [c for c in C.pending() if c.vote == high_vote]
+            ##  For rounds subsequent to the second round, after any surplus votes are calculated but not yet
+            ##  transferred, all candidates for whom it is mathematically impossible to be elected must be
+            ##  defeated simultaneously.
+            ##
+            ##  Votes for the defeated candidates must be transferred to each ballot's next-ranked continuing
+            ##  candidate, except votes for candidates defeated in the final round are not transferred if, by
+            ##  their defeat, the number of continuing candidates is reduced to the number of seats yet to be
+            ##  filled.
+
+            if E.round >= 2:
+                certainLosers = findCertainLosers(E.surplus)
+                if certainLosers:
+                    for c in certainLosers:
+                        c.defeat('Defeat certain loser')
+                    cids = [c.cid for c in certainLosers]
+                    for b in (b for b in E.ballots if b.topRank in cids):
+                        transfer(b)
+                    for c in certainLosers:
+                        c.vote = V0
+                    E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in certainLosers))
+
+                    ##  167.70(c)(1)c.
+                    ##  If no candidate can be defeated under this clause, the tabulation must continue as described in
+                    ##  clause d. Otherwise, the tabulation must continue as described in clause a.
+
+                    continue    # pragma: no cover (optimized out)
+
+            ##  167.70(c)(1)d. ELECT HIGHEST SURPLUS
+            ##  The candidate with the largest surplus is declared elected and that candidate's surplus is
+            ##  transferred.
+            ##
+            ##  A tie between two (2) or more candidates must be resolved by lot by the chief election official.
+            ##  The surplus of the candidate chosen by lot must be transferred before other transfers are made.
+            ##  The result of the tie resolution must be recorded and reused in the event of a recount.
+            ##
+            ##  The transfer value of each vote cast for an elected candidate must be transferred to the next
+            ##  continuing candidate on that ballot.
+            ##
+            ##  If no candidate has a surplus, the tabulation must continue as described in clause e. Otherwise,
+            ##  the tabulation must continue as described in clause a.
+
+            hopefulWithQuota = [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]
+            if hopefulWithQuota:
+                high_vote = max(c.vote for c in hopefulWithQuota)
+                high_candidates = [c for c in hopefulWithQuota if c.vote == high_vote]
                 high_candidate = breakTie(high_candidates, 'largest surplus')
-                high_candidate.unpend('Elect and transfer surplus')
+                high_candidate.elect('Elect', pending=False)
+                ##
+                ## 167.20(Surplus fraction of a vote)
+                ##     Surplus fraction of a vote =
+                ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate),
+                ##     calculated to four (4) decimal places, ignoring any remainder.
+                ##
                 surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = (b.weight * surplus) / high_candidate.vote
@@ -530,62 +627,51 @@ class Rule(MethodWIGM):
                 E.logAction('transfer', "Transfer surplus: %s (%s)" % (high_candidate.name, surplus))
                 continue  ## continue as described in clause a.
 
-            ##  167.70(1)(e)
-            ##  e. If there are no transferable surplus votes,
-            ##     the candidate with the fewest votes is defeated.
-            ##     Votes for a defeated candidate are transferred at their transfer value
-            ##     to each ballot's next-ranked continuing candidate.
-            ##     Ties between candidates with the fewest votes must be decided by lot,
-            ##     and the candidate chosen by lot must be defeated.
-            ##     The result of the tie resolution must be recorded and reused
-            ##     in the event of a recount.
+            ##  167.70(c)(1)e. DEFEAT LOWEST CANDIDATE
+            ##  If there are no transferable surplus votes, the candidate with the fewest votes is defeated.
+            ##
+            ##  Votes for a defeated candidate are transferred at their transfer value to each ballot's
+            ##  next-ranked continuing candidate, except votes for candidates defeated in the final round are
+            ##  not transferred if, by their defeat, the number of continuing candidates is reduced to the
+            ##  number of seats yet to be filled.
+            ##
+            ##  Ties between candidates with the fewest votes must be resolved by lot by the chief election
+            ##  official, and the candidate chosen by lot must be defeated. The result of the tie resolution
+            ##  must be recorded and reused in the event of a recount.
 
-            #  find candidate(s) with lowest vote
-            #  defeat candidate with lowest vote
-            #
-            if C.hopeful():
+            if len(C.hopeful()) > E.seatsLeftToFill():
+                #
+                #  find & defeat candidate with lowest vote, breaking ties
+                #
                 low_vote = min(c.vote for c in C.hopeful())
                 low_candidates = [c for c in C.hopeful() if c.vote == low_vote]
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 low_candidate.defeat('Defeat low candidate')
-                for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
-                    transfer(b)
-                low_candidate.vote = V0
-                E.logAction('transfer', "Transfer defeated: %s" % low_candidate.name)
+                if len(C.hopeful()) > E.seatsLeftToFill(): # if not last round
+                    for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
+                        transfer(b)
+                    low_candidate.vote = V0
+                    E.logAction('transfer', "Transfer defeated: %s" % low_candidate.name)
 
-            ##  167.70(1)(f)
-            ##  f. The procedures in clauses a. to e. must be repeated
-            ##     until the number of candidates whose vote total is equal to or greater than
-            ##     the threshold is equal to the number of seats to be filled,
-            ##     or until the number of continuing candidates is equal to the number of offices
-            ##     yet to be elected.
+            ##  167.70(c)(1)f. FINISH
+            ##  The procedures in clauses a. to e. must be repeated until the number of candidates whose vote
+            ##  total is equal to or greater than the threshold is equal to the number of seats to be filled, or
+            ##  until the number of continuing candidates is equal to the number of seats yet to be filled.
 
             if len(C.hopeful()) <= E.seatsLeftToFill():
                 break
 
-            ##     In the case of a tie between two (2) continuing candidates,
-            ##     the tie must be decided by lot as provided in Minneapolis Charter Chapter 2,
-            ##     Section 12, and the candidate chosen by lot must be defeated.
-            ##     The result of the tie resolution must be recorded and reused in the event
-            ##     of a recount.
-
-            # Note: this will happen, if necessary, at the next defeat-lowest step e above
-
-
         #  Tabulation complete.
 
-        ##  167.70(1)(a)
-        #   Elect continuing candidates with votes >= threshold
-        for c in C.pending():
-            c.unpend('Elect candidates with threshold votes')
+        ##  167.70(c)(1)f. FINISH
+        ##     ...
+        ##  If the number of continuing candidates is equal to the number of seats yet to be filled, any
+        ##  remaining continuing candidates must be declared elected. In the case of a tie between two (2)
+        ##  or more continuing candidates, the tie must be resolved by lot by the chief election official.
+        ##  The result of the tie resolution must be recorded and reused in the event of a recount.
+        ##
+        ##  Candidates defeated under this clause in the final round will retain their votes.
 
-        ##  167.70(1)(f)
-        ##  f. ...
-        ##     If the number of continuing candidates is equal to the number of offices
-        ##     yet to be elected, any remaining continuing candidates must be declared elected.
-        #
-        #  Note: implemented as "less than or equal to"
-        #
         if len(C.hopeful()) <= E.seatsLeftToFill():
             for c in C.hopeful():
                 c.elect('Elect remaining candidates')

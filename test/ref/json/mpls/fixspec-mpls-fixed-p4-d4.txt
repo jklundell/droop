@@ -69,41 +69,8 @@
           "vote": "2.0000"
         }, 
         "4": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
-          "vote": "3.0000"
-        }
-      }, 
-      "msg": "Candidate at threshold: Hjalmer", 
-      "nt_votes": "0.0000", 
-      "quota": "3.0000", 
-      "round": 0, 
-      "surplus": "0.0000", 
-      "tag": "elect", 
-      "votes": "7.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
-        }, 
-        "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "1.0000"
-        }, 
-        "3": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
           "vote": "3.0000"
         }
       }, 
@@ -114,11 +81,6 @@
       "surplus": "0.0000", 
       "tag": "round", 
       "votes": "7.0000"
-    }, 
-    {
-      "msg": "Not defeating uncertain loser(s): Sven, Ole", 
-      "round": 1, 
-      "tag": "log"
     }, 
     {
       "cstate": {
@@ -144,12 +106,12 @@
           "vote": "3.0000"
         }
       }, 
-      "msg": "Elect and transfer surplus: Hjalmer", 
+      "msg": "Elect: Hjalmer", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 1, 
       "surplus": "0.0000", 
-      "tag": "unpend", 
+      "tag": "elect", 
       "votes": "7.0000"
     }, 
     {
@@ -215,11 +177,6 @@
       "surplus": "0.0000", 
       "tag": "round", 
       "votes": "7.0000"
-    }, 
-    {
-      "msg": "Not defeating uncertain loser(s): Sven, Ole", 
-      "round": 2, 
-      "tag": "log"
     }, 
     {
       "cstate": {
@@ -423,39 +380,7 @@
         "2": {
           "code": "D", 
           "state": "defeated", 
-          "vote": "0.0000"
-        }, 
-        "3": {
-          "code": "H", 
-          "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
-        }
-      }, 
-      "msg": "Transfer defeated: Ole", 
-      "nt_votes": "2.0000", 
-      "quota": "3.0000", 
-      "round": 3, 
-      "surplus": "0.0000", 
-      "tag": "transfer", 
-      "votes": "5.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
-          "code": "D", 
-          "state": "defeated", 
-          "vote": "0.0000"
-        }, 
-        "2": {
-          "code": "D", 
-          "state": "defeated", 
-          "vote": "0.0000"
         }, 
         "3": {
           "code": "E", 
@@ -471,12 +396,12 @@
         }
       }, 
       "msg": "Elect remaining candidates: Lena", 
-      "nt_votes": "2.0000", 
+      "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 3, 
       "surplus": "0.0000", 
       "tag": "elect", 
-      "votes": "5.0000"
+      "votes": "7.0000"
     }, 
     {
       "cstate": {
@@ -488,7 +413,7 @@
         "2": {
           "code": "D", 
           "state": "defeated", 
-          "vote": "0.0000"
+          "vote": "2.0000"
         }, 
         "3": {
           "code": "E", 
@@ -504,12 +429,12 @@
         }
       }, 
       "msg": "Count Complete", 
-      "nt_votes": "2.0000", 
+      "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 3, 
       "surplus": "0.0000", 
       "tag": "end", 
-      "votes": "5.0000"
+      "votes": "7.0000"
     }
   ], 
   "arithmetic_info": "fixed-point decimal arithmetic (4 places)", 
@@ -551,7 +476,7 @@
     4
   ], 
   "droop_name": "droop", 
-  "droop_version": "0.11", 
+  "droop_version": "0.12", 
   "ecids": [
     1, 
     2, 

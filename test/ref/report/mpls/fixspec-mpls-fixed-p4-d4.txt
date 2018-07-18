@@ -1,7 +1,7 @@
 
 Election: test operation of mpls fixSpec flag
 
-	Droop package: droop v0.11
+	Droop package: droop v0.12
 	Rule: Minneapolis MN STV
 	Arithmetic: fixed-point decimal arithmetic (4 places)
 	Seats: 2
@@ -23,21 +23,12 @@ Action: Begin Count
 	Residual: 0.0000
 	Total: 7.0000
 	Surplus: 0.0000
-Action: Candidate at threshold: Hjalmer
-	Pending:  Hjalmer (3.0000)
+Round 1:
+Action: Elect: Hjalmer
+	Elected:  Hjalmer (3.0000)
 	Hopeful:  Sven (1.0000)
 	Hopeful:  Ole (1.0000)
 	Hopeful:  Lena (2.0000)
-	Elected votes: 0.0000
-	Pending votes: 3.0000
-	Hopeful votes: 4.0000
-	Nontransferable votes: 0.0000
-	Residual: 0.0000
-	Total: 7.0000
-	Surplus: 0.0000
-Round 1:
-	Not defeating uncertain loser(s): Sven, Ole
-Action: Elect and transfer surplus: Hjalmer
 	Elected votes: 3.0000
 	Hopeful votes: 4.0000
 	Nontransferable votes: 0.0000
@@ -56,7 +47,6 @@ Action: Transfer surplus: Hjalmer (0.0000)
 	Total: 7.0000
 	Surplus: 0.0000
 Round 2:
-	Not defeating uncertain loser(s): Sven, Ole
 Action: Break tie (defeat low candidate): [Sven, Ole] -> Sven
 	Elected votes: 3.0000
 	Hopeful votes: 4.0000
@@ -107,33 +97,27 @@ Action: Defeat low candidate: Ole
 	Residual: 0.0000
 	Total: 7.0000
 	Surplus: 0.0000
-Action: Transfer defeated: Ole
-	Elected:  Hjalmer (3.0000)
-	Hopeful:  Lena (2.0000)
-	Defeated: Sven, Ole (0.0000)
-	Elected votes: 3.0000
-	Hopeful votes: 2.0000
-	Nontransferable votes: 2.0000
-	Residual: 0.0000
-	Total: 7.0000
-	Surplus: 0.0000
 Action: Elect remaining candidates: Lena
 	Elected:  Lena (2.0000)
 	Elected:  Hjalmer (3.0000)
-	Defeated: Sven, Ole (0.0000)
+	Defeated: Ole (2.0000)
+	Defeated: Sven (0.0000)
 	Elected votes: 5.0000
 	Hopeful votes: 0.0000
-	Nontransferable votes: 2.0000
+	Defeated votes: 2.0000
+	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 7.0000
 	Surplus: 0.0000
 Action: Count Complete
 	Elected:  Lena (2.0000)
 	Elected:  Hjalmer (3.0000)
-	Defeated: Sven, Ole (0.0000)
+	Defeated: Ole (2.0000)
+	Defeated: Sven (0.0000)
 	Elected votes: 5.0000
 	Hopeful votes: 0.0000
-	Nontransferable votes: 2.0000
+	Defeated votes: 2.0000
+	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 7.0000
 	Surplus: 0.0000

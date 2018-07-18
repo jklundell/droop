@@ -1,7 +1,7 @@
 
 Election: Voting matters example (Issue 12, 'The computational accuracy using the Meek algorithm')
 
-	Droop package: droop v0.11
+	Droop package: droop v0.12
 	Rule: Minneapolis MN STV
 	Arithmetic: fixed-point decimal arithmetic (4 places)
 	Seats: 3
@@ -25,64 +25,45 @@ Action: Begin Count
 	Residual: 0.0000
 	Total: 4003.0000
 	Surplus: 0.0000
-Action: Candidate at threshold: B
-	Pending:  B (1001.0000)
-	Hopeful:  A (1001.0000)
-	Hopeful:  X (667.0000)
-	Hopeful:  Y (667.0000)
-	Hopeful:  Z (667.0000)
-	Elected votes: 0.0000
-	Pending votes: 1001.0000
-	Hopeful votes: 3002.0000
-	Nontransferable votes: 0.0000
-	Residual: 0.0000
-	Total: 4003.0000
-	Surplus: 0.0000
-Action: Candidate at threshold: A
-	Pending:  A (1001.0000)
-	Pending:  B (1001.0000)
-	Hopeful:  X (667.0000)
-	Hopeful:  Y (667.0000)
-	Hopeful:  Z (667.0000)
-	Elected votes: 0.0000
-	Pending votes: 2002.0000
-	Hopeful votes: 2001.0000
-	Nontransferable votes: 0.0000
-	Residual: 0.0000
-	Total: 4003.0000
-	Surplus: 0.0000
 Round 1:
-Action: Break tie (largest surplus): [A, B] -> A
+Action: Break tie (largest surplus): [B, A] -> A
 	Elected votes: 0.0000
-	Pending votes: 2002.0000
-	Hopeful votes: 2001.0000
+	Hopeful votes: 4003.0000
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 4003.0000
 	Surplus: 0.0000
-Action: Elect and transfer surplus: A
+Action: Elect: A
+	Elected:  A (1001.0000)
+	Hopeful:  B (1001.0000)
+	Hopeful:  X (667.0000)
+	Hopeful:  Y (667.0000)
+	Hopeful:  Z (667.0000)
 	Elected votes: 1001.0000
-	Pending votes: 1001.0000
-	Hopeful votes: 2001.0000
+	Hopeful votes: 3002.0000
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 4003.0000
 	Surplus: 0.0000
 Action: Transfer surplus: A (0.0000)
 	Elected:  A (1001.0000)
-	Pending:  B (1001.0000)
+	Hopeful:  B (1001.0000)
 	Hopeful:  X (667.0000)
 	Hopeful:  Y (667.0000)
 	Hopeful:  Z (667.0000)
 	Elected votes: 1001.0000
-	Pending votes: 1001.0000
-	Hopeful votes: 2001.0000
+	Hopeful votes: 3002.0000
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 4003.0000
 	Surplus: 0.0000
 Round 2:
-Action: Elect and transfer surplus: B
+Action: Elect: B
+	Elected:  A (1001.0000)
+	Elected:  B (1001.0000)
+	Hopeful:  X (667.0000)
+	Hopeful:  Y (667.0000)
+	Hopeful:  Z (667.0000)
 	Elected votes: 2002.0000
 	Hopeful votes: 2001.0000
 	Nontransferable votes: 0.0000
@@ -155,25 +136,16 @@ Action: Defeat low candidate: Y
 	Residual: 0.0000
 	Total: 4003.0000
 	Surplus: 0.0000
-Action: Transfer defeated: Y
-	Elected:  A (1001.0000)
-	Elected:  B (1001.0000)
-	Hopeful:  Z (667.0000)
-	Defeated: X, Y (0.0000)
-	Elected votes: 2002.0000
-	Hopeful votes: 667.0000
-	Nontransferable votes: 1334.0000
-	Residual: 0.0000
-	Total: 4003.0000
-	Surplus: 0.0000
 Action: Elect remaining candidates: Z
 	Elected:  A (1001.0000)
 	Elected:  B (1001.0000)
 	Elected:  Z (667.0000)
-	Defeated: X, Y (0.0000)
+	Defeated: Y (667.0000)
+	Defeated: X (0.0000)
 	Elected votes: 2669.0000
 	Hopeful votes: 0.0000
-	Nontransferable votes: 1334.0000
+	Defeated votes: 667.0000
+	Nontransferable votes: 667.0000
 	Residual: 0.0000
 	Total: 4003.0000
 	Surplus: 0.0000
@@ -181,10 +153,12 @@ Action: Count Complete
 	Elected:  A (1001.0000)
 	Elected:  B (1001.0000)
 	Elected:  Z (667.0000)
-	Defeated: X, Y (0.0000)
+	Defeated: Y (667.0000)
+	Defeated: X (0.0000)
 	Elected votes: 2669.0000
 	Hopeful votes: 0.0000
-	Nontransferable votes: 1334.0000
+	Defeated votes: 667.0000
+	Nontransferable votes: 667.0000
 	Residual: 0.0000
 	Total: 4003.0000
 	Surplus: 0.0000

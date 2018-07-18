@@ -44,36 +44,8 @@
     {
       "cstate": {
         "1": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
-          "vote": "4.0000"
-        }, 
-        "2": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "0.0000"
-        }, 
-        "3": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "2.0000"
-        }
-      }, 
-      "msg": "Candidate at threshold: Castor", 
-      "nt_votes": "0.0000", 
-      "quota": "3.0000", 
-      "round": 0, 
-      "surplus": "0.0000", 
-      "tag": "elect", 
-      "votes": "6.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
           "vote": "4.0000"
         }, 
         "2": {
@@ -98,15 +70,96 @@
     {
       "cstate": {
         "1": {
-          "code": "e", 
-          "pending": true, 
+          "code": "E", 
+          "pending": false, 
           "state": "elected", 
           "vote": "4.0000"
         }, 
         "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "0.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2.0000"
+        }
+      }, 
+      "msg": "Elect: Castor", 
+      "nt_votes": "0.0000", 
+      "quota": "3.0000", 
+      "round": 1, 
+      "surplus": "0.0000", 
+      "tag": "elect", 
+      "votes": "6.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.0000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2.0000"
+        }
+      }, 
+      "msg": "Transfer surplus: Castor (1.0000)", 
+      "nt_votes": "0.0000", 
+      "quota": "3.0000", 
+      "round": 1, 
+      "surplus": "0.0000", 
+      "tag": "transfer", 
+      "votes": "6.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.0000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2.0000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "0.0000", 
+      "quota": "3.0000", 
+      "round": 2, 
+      "surplus": "0.0000", 
+      "tag": "round", 
+      "votes": "6.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.0000"
+        }, 
+        "2": {
           "code": "D", 
           "state": "defeated", 
-          "vote": "0.0000"
+          "vote": "1.0000"
         }, 
         "3": {
           "code": "H", 
@@ -117,18 +170,18 @@
       "msg": "Defeat certain loser: Pollux", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 1, 
-      "surplus": "1.0000", 
+      "round": 2, 
+      "surplus": "0.0000", 
       "tag": "defeat", 
       "votes": "6.0000"
     }, 
     {
       "cstate": {
         "1": {
-          "code": "e", 
-          "pending": true, 
+          "code": "E", 
+          "pending": false, 
           "state": "elected", 
-          "vote": "4.0000"
+          "vote": "3.0000"
         }, 
         "2": {
           "code": "D", 
@@ -142,12 +195,12 @@
         }
       }, 
       "msg": "Transfer defeated: Pollux", 
-      "nt_votes": "0.0000", 
+      "nt_votes": "1.0000", 
       "quota": "3.0000", 
-      "round": 1, 
-      "surplus": "1.0000", 
+      "round": 2, 
+      "surplus": "0.0000", 
       "tag": "transfer", 
-      "votes": "6.0000"
+      "votes": "5.0000"
     }, 
     {
       "cstate": {
@@ -155,7 +208,7 @@
           "code": "E", 
           "pending": false, 
           "state": "elected", 
-          "vote": "4.0000"
+          "vote": "3.0000"
         }, 
         "2": {
           "code": "D", 
@@ -168,13 +221,13 @@
           "vote": "2.0000"
         }
       }, 
-      "msg": "Elect candidates with threshold votes: Castor", 
-      "nt_votes": "0.0000", 
+      "msg": "New Round", 
+      "nt_votes": "1.0000", 
       "quota": "3.0000", 
-      "round": 1, 
-      "surplus": "1.0000", 
-      "tag": "unpend", 
-      "votes": "6.0000"
+      "round": 3, 
+      "surplus": "0.0000", 
+      "tag": "round", 
+      "votes": "5.0000"
     }, 
     {
       "cstate": {
@@ -182,7 +235,7 @@
           "code": "E", 
           "pending": false, 
           "state": "elected", 
-          "vote": "4.0000"
+          "vote": "3.0000"
         }, 
         "2": {
           "code": "D", 
@@ -197,12 +250,12 @@
         }
       }, 
       "msg": "Elect remaining candidates: Helen", 
-      "nt_votes": "0.0000", 
+      "nt_votes": "1.0000", 
       "quota": "3.0000", 
-      "round": 1, 
-      "surplus": "1.0000", 
+      "round": 3, 
+      "surplus": "0.0000", 
       "tag": "elect", 
-      "votes": "6.0000"
+      "votes": "5.0000"
     }, 
     {
       "cstate": {
@@ -210,7 +263,7 @@
           "code": "E", 
           "pending": false, 
           "state": "elected", 
-          "vote": "4.0000"
+          "vote": "3.0000"
         }, 
         "2": {
           "code": "D", 
@@ -225,12 +278,12 @@
         }
       }, 
       "msg": "Count Complete", 
-      "nt_votes": "0.0000", 
+      "nt_votes": "1.0000", 
       "quota": "3.0000", 
-      "round": 1, 
-      "surplus": "1.0000", 
+      "round": 3, 
+      "surplus": "0.0000", 
       "tag": "end", 
-      "votes": "6.0000"
+      "votes": "5.0000"
     }
   ], 
   "arithmetic_info": "fixed-point decimal arithmetic (4 places)", 
@@ -264,7 +317,7 @@
     3
   ], 
   "droop_name": "droop", 
-  "droop_version": "0.11", 
+  "droop_version": "0.12", 
   "ecids": [
     1, 
     2, 

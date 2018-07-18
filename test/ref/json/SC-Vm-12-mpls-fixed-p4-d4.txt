@@ -69,85 +69,8 @@
           "vote": "1001.0000"
         }, 
         "2": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
-          "vote": "1001.0000"
-        }, 
-        "3": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "667.0000"
-        }, 
-        "4": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "667.0000"
-        }, 
-        "5": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "667.0000"
-        }
-      }, 
-      "msg": "Candidate at threshold: B", 
-      "nt_votes": "0.0000", 
-      "quota": "1001.0000", 
-      "round": 0, 
-      "surplus": "0.0000", 
-      "tag": "elect", 
-      "votes": "4003.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
-          "vote": "1001.0000"
-        }, 
-        "2": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
-          "vote": "1001.0000"
-        }, 
-        "3": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "667.0000"
-        }, 
-        "4": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "667.0000"
-        }, 
-        "5": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "667.0000"
-        }
-      }, 
-      "msg": "Candidate at threshold: A", 
-      "nt_votes": "0.0000", 
-      "quota": "1001.0000", 
-      "round": 0, 
-      "surplus": "0.0000", 
-      "tag": "elect", 
-      "votes": "4003.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
-          "vote": "1001.0000"
-        }, 
-        "2": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
           "vote": "1001.0000"
         }, 
         "3": {
@@ -177,15 +100,13 @@
     {
       "cstate": {
         "1": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
+          "code": "H", 
+          "state": "hopeful", 
           "vote": "1001.0000"
         }, 
         "2": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
+          "code": "H", 
+          "state": "hopeful", 
           "vote": "1001.0000"
         }, 
         "3": {
@@ -204,7 +125,7 @@
           "vote": "667.0000"
         }
       }, 
-      "msg": "Break tie (largest surplus): [A, B] -> A", 
+      "msg": "Break tie (largest surplus): [B, A] -> A", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
       "round": 1, 
@@ -221,9 +142,8 @@
           "vote": "1001.0000"
         }, 
         "2": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
+          "code": "H", 
+          "state": "hopeful", 
           "vote": "1001.0000"
         }, 
         "3": {
@@ -242,12 +162,12 @@
           "vote": "667.0000"
         }
       }, 
-      "msg": "Elect and transfer surplus: A", 
+      "msg": "Elect: A", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
       "round": 1, 
       "surplus": "0.0000", 
-      "tag": "unpend", 
+      "tag": "elect", 
       "votes": "4003.0000"
     }, 
     {
@@ -259,9 +179,8 @@
           "vote": "1001.0000"
         }, 
         "2": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
+          "code": "H", 
+          "state": "hopeful", 
           "vote": "1001.0000"
         }, 
         "3": {
@@ -297,9 +216,8 @@
           "vote": "1001.0000"
         }, 
         "2": {
-          "code": "e", 
-          "pending": true, 
-          "state": "elected", 
+          "code": "H", 
+          "state": "hopeful", 
           "vote": "1001.0000"
         }, 
         "3": {
@@ -356,12 +274,12 @@
           "vote": "667.0000"
         }
       }, 
-      "msg": "Elect and transfer surplus: B", 
+      "msg": "Elect: B", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
       "round": 2, 
       "surplus": "0.0000", 
-      "tag": "unpend", 
+      "tag": "elect", 
       "votes": "4003.0000"
     }, 
     {
@@ -690,45 +608,7 @@
         "4": {
           "code": "D", 
           "state": "defeated", 
-          "vote": "0.0000"
-        }, 
-        "5": {
-          "code": "H", 
-          "state": "hopeful", 
           "vote": "667.0000"
-        }
-      }, 
-      "msg": "Transfer defeated: Y", 
-      "nt_votes": "1334.0000", 
-      "quota": "1001.0000", 
-      "round": 4, 
-      "surplus": "0.0000", 
-      "tag": "transfer", 
-      "votes": "2669.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "1001.0000"
-        }, 
-        "2": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "1001.0000"
-        }, 
-        "3": {
-          "code": "D", 
-          "state": "defeated", 
-          "vote": "0.0000"
-        }, 
-        "4": {
-          "code": "D", 
-          "state": "defeated", 
-          "vote": "0.0000"
         }, 
         "5": {
           "code": "E", 
@@ -738,12 +618,12 @@
         }
       }, 
       "msg": "Elect remaining candidates: Z", 
-      "nt_votes": "1334.0000", 
+      "nt_votes": "667.0000", 
       "quota": "1001.0000", 
       "round": 4, 
       "surplus": "0.0000", 
       "tag": "elect", 
-      "votes": "2669.0000"
+      "votes": "3336.0000"
     }, 
     {
       "cstate": {
@@ -767,7 +647,7 @@
         "4": {
           "code": "D", 
           "state": "defeated", 
-          "vote": "0.0000"
+          "vote": "667.0000"
         }, 
         "5": {
           "code": "E", 
@@ -777,12 +657,12 @@
         }
       }, 
       "msg": "Count Complete", 
-      "nt_votes": "1334.0000", 
+      "nt_votes": "667.0000", 
       "quota": "1001.0000", 
       "round": 4, 
       "surplus": "0.0000", 
       "tag": "end", 
-      "votes": "2669.0000"
+      "votes": "3336.0000"
     }
   ], 
   "arithmetic_info": "fixed-point decimal arithmetic (4 places)", 
@@ -832,7 +712,7 @@
     5
   ], 
   "droop_name": "droop", 
-  "droop_version": "0.11", 
+  "droop_version": "0.12", 
   "ecids": [
     1, 
     2, 

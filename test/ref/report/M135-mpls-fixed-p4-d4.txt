@@ -1,7 +1,7 @@
 
 Election: M135: Gen v1.1 1 3 45
 
-	Droop package: droop v0.11
+	Droop package: droop v0.12
 	Rule: Minneapolis MN STV
 	Arithmetic: fixed-point decimal arithmetic (4 places)
 	Seats: 7
@@ -67,8 +67,9 @@ Action: Begin Count
 	Residual: 0.0000
 	Total: 677.0000
 	Surplus: 0.0000
-Action: Candidate at threshold: C1
-	Pending:  C1 (119.0000)
+Round 1:
+Action: Elect: C1
+	Elected:  C1 (119.0000)
 	Hopeful:  C2 (32.0000)
 	Hopeful:  C3 (43.0000)
 	Hopeful:  C4 (44.0000)
@@ -93,21 +94,12 @@ Action: Candidate at threshold: C1
 	Hopeful:  C23 (14.0000)
 	Hopeful:  C24 (8.0000)
 	Hopeful:  C25 (0.0000)
-	Elected votes: 0.0000
-	Pending votes: 119.0000
-	Hopeful votes: 558.0000
-	Nontransferable votes: 0.0000
-	Residual: 0.0000
-	Total: 677.0000
-	Surplus: 0.0000
-Round 1:
-Action: Elect and transfer surplus: C1
 	Elected votes: 119.0000
 	Hopeful votes: 558.0000
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 677.0000
-	Surplus: 34.0000
+	Surplus: 0.0000
 Action: Transfer surplus: C1 (34.0000)
 	Elected:  C1 (85.0000)
 	Hopeful:  C2 (41.7138)
@@ -139,7 +131,7 @@ Action: Transfer surplus: C1 (34.0000)
 	Nontransferable votes: 0.8571
 	Residual: 0.0017
 	Total: 677.0000
-	Surplus: 34.0000
+	Surplus: 0.0000
 Round 2:
 Action: Defeat certain loser: C22
 	Elected:  C1 (85.0000)
@@ -973,167 +965,205 @@ Action: Transfer defeated: C15
 	Residual: 0.0017
 	Total: 677.0000
 	Surplus: 0.0000
-Action: Candidate at threshold: C2
+Round 18:
+Action: Defeat certain loser: C11
 	Elected:  C1 (85.0000)
-	Pending:  C2 (86.1423)
+	Hopeful:  C2 (86.1423)
 	Hopeful:  C3 (76.4285)
 	Hopeful:  C4 (75.5713)
 	Hopeful:  C6 (83.8569)
 	Hopeful:  C9 (74.2855)
 	Hopeful:  C10 (72.8570)
-	Hopeful:  C11 (71.8570)
+	Defeated: C11 (71.8570)
 	Defeated: C5, C7, C8, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
 	Elected votes: 85.0000
-	Pending votes: 86.1423
-	Hopeful votes: 454.8562
+	Hopeful votes: 469.1415
+	Defeated votes: 71.8570
 	Nontransferable votes: 50.9998
 	Residual: 0.0017
-	Total: 677.0000
-	Surplus: 0.0000
-Round 18:
-Action: Elect and transfer surplus: C2
-	Elected votes: 171.1423
-	Hopeful votes: 454.8562
-	Nontransferable votes: 50.9998
-	Residual: 0.0017
-	Total: 677.0000
-	Surplus: 1.1423
-Action: Transfer surplus: C2 (1.1423)
-	Elected:  C1 (85.0000)
-	Elected:  C2 (85.0000)
-	Hopeful:  C3 (76.8145)
-	Hopeful:  C4 (75.6278)
-	Hopeful:  C6 (84.0750)
-	Hopeful:  C9 (74.3193)
-	Hopeful:  C10 (72.9547)
-	Hopeful:  C11 (71.9621)
-	Defeated: C5, C7, C8, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
-	Elected votes: 170.0000
-	Hopeful votes: 455.7534
-	Nontransferable votes: 51.2369
-	Residual: 0.0097
-	Total: 677.0000
-	Surplus: 1.1423
-Round 19:
-Action: Defeat certain loser: C11
-	Elected:  C1 (85.0000)
-	Elected:  C2 (85.0000)
-	Hopeful:  C3 (76.8145)
-	Hopeful:  C4 (75.6278)
-	Hopeful:  C6 (84.0750)
-	Hopeful:  C9 (74.3193)
-	Hopeful:  C10 (72.9547)
-	Defeated: C11 (71.9621)
-	Defeated: C5, C7, C8, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
-	Elected votes: 170.0000
-	Hopeful votes: 383.7913
-	Defeated votes: 71.9621
-	Nontransferable votes: 51.2369
-	Residual: 0.0097
 	Total: 677.0000
 	Surplus: 0.0000
 Action: Transfer defeated: C11
 	Elected:  C1 (85.0000)
+	Hopeful:  C2 (98.4280)
+	Hopeful:  C3 (89.7142)
+	Hopeful:  C4 (86.8570)
+	Hopeful:  C6 (89.8569)
+	Hopeful:  C9 (79.1426)
+	Hopeful:  C10 (79.1427)
+	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
+	Elected votes: 85.0000
+	Hopeful votes: 523.1414
+	Nontransferable votes: 68.8569
+	Residual: 0.0017
+	Total: 677.0000
+	Surplus: 0.0000
+Round 19:
+Action: Elect: C2
+	Elected:  C1 (85.0000)
+	Elected:  C2 (98.4280)
+	Hopeful:  C3 (89.7142)
+	Hopeful:  C4 (86.8570)
+	Hopeful:  C6 (89.8569)
+	Hopeful:  C9 (79.1426)
+	Hopeful:  C10 (79.1427)
+	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
+	Elected votes: 183.4280
+	Hopeful votes: 424.7134
+	Nontransferable votes: 68.8569
+	Residual: 0.0017
+	Total: 677.0000
+	Surplus: 0.0000
+Action: Transfer surplus: C2 (13.4280)
+	Elected:  C1 (85.0000)
 	Elected:  C2 (85.0000)
-	Hopeful:  C3 (92.1113)
-	Hopeful:  C4 (86.9267)
-	Hopeful:  C6 (93.4135)
-	Hopeful:  C9 (82.1801)
-	Hopeful:  C10 (81.2573)
+	Hopeful:  C3 (94.0977)
+	Hopeful:  C4 (87.5779)
+	Hopeful:  C6 (93.1103)
+	Hopeful:  C9 (79.9413)
+	Hopeful:  C10 (80.6037)
 	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
 	Elected votes: 170.0000
-	Hopeful votes: 435.8889
-	Nontransferable votes: 71.1014
-	Residual: 0.0097
+	Hopeful votes: 435.3309
+	Nontransferable votes: 71.6622
+	Residual: 0.0069
 	Total: 677.0000
 	Surplus: 0.0000
-Action: Elect remaining candidates: C3
+Round 20:
+Action: Elect: C3
 	Elected:  C1 (85.0000)
 	Elected:  C2 (85.0000)
-	Elected:  C3 (92.1113)
-	Hopeful:  C4 (86.9267)
-	Hopeful:  C6 (93.4135)
-	Hopeful:  C9 (82.1801)
-	Hopeful:  C10 (81.2573)
+	Elected:  C3 (94.0977)
+	Hopeful:  C4 (87.5779)
+	Hopeful:  C6 (93.1103)
+	Hopeful:  C9 (79.9413)
+	Hopeful:  C10 (80.6037)
 	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
-	Elected votes: 262.1113
-	Hopeful votes: 343.7776
-	Nontransferable votes: 71.1014
-	Residual: 0.0097
+	Elected votes: 264.0977
+	Hopeful votes: 341.2332
+	Nontransferable votes: 71.6622
+	Residual: 0.0069
 	Total: 677.0000
 	Surplus: 0.0000
-Action: Elect remaining candidates: C4
+Action: Transfer surplus: C3 (9.0977)
 	Elected:  C1 (85.0000)
 	Elected:  C2 (85.0000)
-	Elected:  C3 (92.1113)
-	Elected:  C4 (86.9267)
-	Hopeful:  C6 (93.4135)
-	Hopeful:  C9 (82.1801)
-	Hopeful:  C10 (81.2573)
+	Elected:  C3 (85.0000)
+	Hopeful:  C4 (89.5807)
+	Hopeful:  C6 (94.9756)
+	Hopeful:  C9 (80.9112)
+	Hopeful:  C10 (82.6695)
 	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
-	Elected votes: 349.0380
-	Hopeful votes: 256.8509
-	Nontransferable votes: 71.1014
-	Residual: 0.0097
+	Elected votes: 255.0000
+	Hopeful votes: 348.1370
+	Nontransferable votes: 73.8454
+	Residual: 0.0176
 	Total: 677.0000
 	Surplus: 0.0000
-Action: Elect remaining candidates: C6
+Round 21:
+Action: Elect: C6
 	Elected:  C1 (85.0000)
 	Elected:  C2 (85.0000)
-	Elected:  C3 (92.1113)
-	Elected:  C4 (86.9267)
-	Elected:  C6 (93.4135)
-	Hopeful:  C9 (82.1801)
-	Hopeful:  C10 (81.2573)
+	Elected:  C3 (85.0000)
+	Elected:  C6 (94.9756)
+	Hopeful:  C4 (89.5807)
+	Hopeful:  C9 (80.9112)
+	Hopeful:  C10 (82.6695)
 	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
-	Elected votes: 442.4515
-	Hopeful votes: 163.4374
-	Nontransferable votes: 71.1014
-	Residual: 0.0097
+	Elected votes: 349.9756
+	Hopeful votes: 253.1614
+	Nontransferable votes: 73.8454
+	Residual: 0.0176
 	Total: 677.0000
 	Surplus: 0.0000
-Action: Elect remaining candidates: C9
+Action: Transfer surplus: C6 (9.9756)
 	Elected:  C1 (85.0000)
 	Elected:  C2 (85.0000)
-	Elected:  C3 (92.1113)
-	Elected:  C4 (86.9267)
-	Elected:  C6 (93.4135)
-	Elected:  C9 (82.1801)
-	Hopeful:  C10 (81.2573)
+	Elected:  C3 (85.0000)
+	Elected:  C6 (85.0000)
+	Hopeful:  C4 (91.3346)
+	Hopeful:  C9 (83.4686)
+	Hopeful:  C10 (84.8399)
 	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
-	Elected votes: 524.6316
-	Hopeful votes: 81.2573
-	Nontransferable votes: 71.1014
-	Residual: 0.0097
+	Elected votes: 340.0000
+	Hopeful votes: 259.6431
+	Nontransferable votes: 77.3338
+	Residual: 0.0231
 	Total: 677.0000
 	Surplus: 0.0000
-Action: Elect remaining candidates: C10
+Round 22:
+Action: Elect: C4
 	Elected:  C1 (85.0000)
 	Elected:  C2 (85.0000)
-	Elected:  C3 (92.1113)
-	Elected:  C4 (86.9267)
-	Elected:  C6 (93.4135)
-	Elected:  C9 (82.1801)
-	Elected:  C10 (81.2573)
+	Elected:  C3 (85.0000)
+	Elected:  C4 (91.3346)
+	Elected:  C6 (85.0000)
+	Hopeful:  C9 (83.4686)
+	Hopeful:  C10 (84.8399)
 	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
-	Elected votes: 605.8889
+	Elected votes: 431.3346
+	Hopeful votes: 168.3085
+	Nontransferable votes: 77.3338
+	Residual: 0.0231
+	Total: 677.0000
+	Surplus: 0.0000
+Action: Transfer surplus: C4 (6.3346)
+	Elected:  C1 (85.0000)
+	Elected:  C2 (85.0000)
+	Elected:  C3 (85.0000)
+	Elected:  C4 (85.0000)
+	Elected:  C6 (85.0000)
+	Hopeful:  C9 (85.7532)
+	Hopeful:  C10 (86.3064)
+	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
+	Elected votes: 425.0000
+	Hopeful votes: 172.0596
+	Nontransferable votes: 79.9076
+	Residual: 0.0328
+	Total: 677.0000
+	Surplus: 0.0000
+Action: Candidate at threshold: C10
+	Elected:  C1 (85.0000)
+	Elected:  C2 (85.0000)
+	Elected:  C3 (85.0000)
+	Elected:  C4 (85.0000)
+	Elected:  C6 (85.0000)
+	Elected:  C10 (86.3064)
+	Hopeful:  C9 (85.7532)
+	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
+	Elected votes: 511.3064
+	Hopeful votes: 85.7532
+	Nontransferable votes: 79.9076
+	Residual: 0.0328
+	Total: 677.0000
+	Surplus: 0.0000
+Action: Candidate at threshold: C9
+	Elected:  C1 (85.0000)
+	Elected:  C2 (85.0000)
+	Elected:  C3 (85.0000)
+	Elected:  C4 (85.0000)
+	Elected:  C6 (85.0000)
+	Elected:  C9 (85.7532)
+	Elected:  C10 (86.3064)
+	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
+	Elected votes: 597.0596
 	Hopeful votes: 0.0000
-	Nontransferable votes: 71.1014
-	Residual: 0.0097
+	Nontransferable votes: 79.9076
+	Residual: 0.0328
 	Total: 677.0000
 	Surplus: 0.0000
 Action: Count Complete
 	Elected:  C1 (85.0000)
 	Elected:  C2 (85.0000)
-	Elected:  C3 (92.1113)
-	Elected:  C4 (86.9267)
-	Elected:  C6 (93.4135)
-	Elected:  C9 (82.1801)
-	Elected:  C10 (81.2573)
+	Elected:  C3 (85.0000)
+	Elected:  C4 (85.0000)
+	Elected:  C6 (85.0000)
+	Elected:  C9 (85.7532)
+	Elected:  C10 (86.3064)
 	Defeated: C5, C7, C8, C11, C12, C13, C14, C15, C16, C17, C18, C19, C20, C21, C22, C23, C24, C25 (0.0000)
-	Elected votes: 605.8889
+	Elected votes: 597.0596
 	Hopeful votes: 0.0000
-	Nontransferable votes: 71.1014
-	Residual: 0.0097
+	Nontransferable votes: 79.9076
+	Residual: 0.0328
 	Total: 677.0000
 	Surplus: 0.0000
