@@ -51,7 +51,7 @@ class MethodMeek(ElectionRule):
         if section == 'headerappend':
             report.append("\tOmega: %s\n" % record.get('omega'))
         elif section == 'actionappend':
-            s = '\tQuota: %s\n' % action['quota']
+            s = '\t%s: %s\n' % (self.quota_name, action['quota'])
             s += '\tVotes: %s\n' % action['votes']
             s += '\tResidual: %s\n' % action['residual']
             s += '\tTotal: %s\n' % (action['votes'] + action['residual'])

@@ -108,7 +108,7 @@ class Rule(ElectionRule):
                     s += '\tHopeful:  %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['quotient'])
                 for cid in [cid for cid in cids if cstate[cid]['state'] == 'defeated']:
                     s += '\tDefeated: %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['quotient'])
-            s += '\tQuota: %s\n' % action['quota']
+            s += '\t%s: %s\n' % (self.quota_name, action['quota'])
             report.append(s)
             return True
         return False

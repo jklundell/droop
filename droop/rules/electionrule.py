@@ -29,6 +29,7 @@ class ElectionRule(object):  # pragma: no cover
     '''
     method = None # one of ('meek', 'wigm', 'qpq'): underlying method for report formats
     E = None
+    quota_name = "Quota"    # allow rule-specific override for eg "Threshold"
 
     @classmethod
     def ruleNames(cls):

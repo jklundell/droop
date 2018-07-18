@@ -119,7 +119,7 @@ class ElectionRecord(dict):
                 s += "\tOverridden options: %s\n" % ", ".join(overrides)
             s += "\tSeats: %d\n" % self['seats']
             s += "\tBallots: %d\n" % self['nballots']
-            s += "\tQuota: %s\n" % self['quota']
+            s += "\t%s: %s\n" % (E.rule.quota_name, self['quota'])
             report.append(s)
 
             #  allow rule to append to header
