@@ -12,7 +12,8 @@ Election: test operation of mpls fixSpec flag
 	Add eligible: Ole
 	Add eligible: Lena
 	Add eligible: Hjalmer
-Action: Begin Count
+Round 1:
+Action: Count Votes
 	Hopeful:  Sven (1.0000)
 	Hopeful:  Ole (1.0000)
 	Hopeful:  Lena (2.0000)
@@ -23,7 +24,7 @@ Action: Begin Count
 	Residual: 0.0000
 	Total: 7.0000
 	Surplus: 0.0000
-Round 1:
+Round 2:
 Action: Elect: Hjalmer
 	Elected:  Hjalmer (3.0000)
 	Hopeful:  Sven (1.0000)
@@ -46,7 +47,18 @@ Action: Transfer surplus: Hjalmer (0.0000)
 	Residual: 0.0000
 	Total: 7.0000
 	Surplus: 0.0000
-Round 2:
+Action: Count Votes
+	Elected:  Hjalmer (3.0000)
+	Hopeful:  Sven (1.0000)
+	Hopeful:  Ole (1.0000)
+	Hopeful:  Lena (2.0000)
+	Elected votes: 3.0000
+	Hopeful votes: 4.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 0.0000
+Round 3:
 Action: Break tie (defeat low candidate): [Sven, Ole] -> Sven
 	Elected votes: 3.0000
 	Hopeful votes: 4.0000
@@ -77,7 +89,18 @@ Action: Transfer defeated: Sven
 	Residual: 0.0000
 	Total: 7.0000
 	Surplus: 0.0000
-Round 3:
+Action: Count Votes
+	Elected:  Hjalmer (3.0000)
+	Hopeful:  Ole (2.0000)
+	Hopeful:  Lena (2.0000)
+	Defeated: Sven (0.0000)
+	Elected votes: 3.0000
+	Hopeful votes: 4.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 0.0000
+Round 4:
 Action: Break tie (defeat low candidate): [Ole, Lena] -> Ole
 	Elected votes: 3.0000
 	Hopeful votes: 4.0000

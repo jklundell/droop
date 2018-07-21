@@ -53,42 +53,6 @@
           "vote": "667.0000"
         }
       }, 
-      "msg": "Begin Count", 
-      "nt_votes": "0.0000", 
-      "quota": "1001.0000", 
-      "round": 0, 
-      "surplus": "0.0000", 
-      "tag": "begin", 
-      "votes": "4003.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "1001.0000"
-        }, 
-        "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "1001.0000"
-        }, 
-        "3": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "667.0000"
-        }, 
-        "4": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "667.0000"
-        }, 
-        "5": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "667.0000"
-        }
-      }, 
       "msg": "New Round", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
@@ -125,10 +89,82 @@
           "vote": "667.0000"
         }
       }, 
-      "msg": "Break tie (largest surplus): [B, A] -> A", 
+      "msg": "Count Votes", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
       "round": 1, 
+      "surplus": "0.0000", 
+      "tag": "count", 
+      "votes": "4003.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "New Round", 
+      "nt_votes": "0.0000", 
+      "quota": "1001.0000", 
+      "round": 2, 
+      "surplus": "0.0000", 
+      "tag": "round", 
+      "votes": "4003.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "Break tie (largest surplus): [B, A] -> A", 
+      "nt_votes": "0.0000", 
+      "quota": "1001.0000", 
+      "round": 2, 
       "surplus": "0.0000", 
       "tag": "tie", 
       "votes": "4003.0000"
@@ -165,7 +201,7 @@
       "msg": "Elect: A", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
-      "round": 1, 
+      "round": 2, 
       "surplus": "0.0000", 
       "tag": "elect", 
       "votes": "4003.0000"
@@ -202,9 +238,46 @@
       "msg": "Transfer surplus: A (0.0000)", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
-      "round": 1, 
+      "round": 2, 
       "surplus": "0.0000", 
       "tag": "transfer", 
+      "votes": "4003.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "Count Votes", 
+      "nt_votes": "0.0000", 
+      "quota": "1001.0000", 
+      "round": 2, 
+      "surplus": "0.0000", 
+      "tag": "count", 
       "votes": "4003.0000"
     }, 
     {
@@ -239,7 +312,7 @@
       "msg": "New Round", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
-      "round": 2, 
+      "round": 3, 
       "surplus": "0.0000", 
       "tag": "round", 
       "votes": "4003.0000"
@@ -277,7 +350,7 @@
       "msg": "Elect: B", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
-      "round": 2, 
+      "round": 3, 
       "surplus": "0.0000", 
       "tag": "elect", 
       "votes": "4003.0000"
@@ -315,9 +388,47 @@
       "msg": "Transfer surplus: B (0.0000)", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
-      "round": 2, 
+      "round": 3, 
       "surplus": "0.0000", 
       "tag": "transfer", 
+      "votes": "4003.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "Count Votes", 
+      "nt_votes": "0.0000", 
+      "quota": "1001.0000", 
+      "round": 3, 
+      "surplus": "0.0000", 
+      "tag": "count", 
       "votes": "4003.0000"
     }, 
     {
@@ -353,7 +464,7 @@
       "msg": "New Round", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
-      "round": 3, 
+      "round": 4, 
       "surplus": "0.0000", 
       "tag": "round", 
       "votes": "4003.0000"
@@ -391,7 +502,7 @@
       "msg": "Break tie (defeat low candidate): [X, Y, Z] -> X", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
-      "round": 3, 
+      "round": 4, 
       "surplus": "0.0000", 
       "tag": "tie", 
       "votes": "4003.0000"
@@ -429,7 +540,7 @@
       "msg": "Defeat low candidate: X", 
       "nt_votes": "0.0000", 
       "quota": "1001.0000", 
-      "round": 3, 
+      "round": 4, 
       "surplus": "0.0000", 
       "tag": "defeat", 
       "votes": "4003.0000"
@@ -467,9 +578,47 @@
       "msg": "Transfer defeated: X", 
       "nt_votes": "667.0000", 
       "quota": "1001.0000", 
-      "round": 3, 
+      "round": 4, 
       "surplus": "0.0000", 
       "tag": "transfer", 
+      "votes": "3336.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "2": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "1001.0000"
+        }, 
+        "3": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }, 
+        "5": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "667.0000"
+        }
+      }, 
+      "msg": "Count Votes", 
+      "nt_votes": "667.0000", 
+      "quota": "1001.0000", 
+      "round": 4, 
+      "surplus": "0.0000", 
+      "tag": "count", 
       "votes": "3336.0000"
     }, 
     {
@@ -505,7 +654,7 @@
       "msg": "New Round", 
       "nt_votes": "667.0000", 
       "quota": "1001.0000", 
-      "round": 4, 
+      "round": 5, 
       "surplus": "0.0000", 
       "tag": "round", 
       "votes": "3336.0000"
@@ -543,7 +692,7 @@
       "msg": "Break tie (defeat low candidate): [Y, Z] -> Y", 
       "nt_votes": "667.0000", 
       "quota": "1001.0000", 
-      "round": 4, 
+      "round": 5, 
       "surplus": "0.0000", 
       "tag": "tie", 
       "votes": "3336.0000"
@@ -581,7 +730,7 @@
       "msg": "Defeat low candidate: Y", 
       "nt_votes": "667.0000", 
       "quota": "1001.0000", 
-      "round": 4, 
+      "round": 5, 
       "surplus": "0.0000", 
       "tag": "defeat", 
       "votes": "3336.0000"
@@ -620,7 +769,7 @@
       "msg": "Elect remaining candidates: Z", 
       "nt_votes": "667.0000", 
       "quota": "1001.0000", 
-      "round": 4, 
+      "round": 5, 
       "surplus": "0.0000", 
       "tag": "elect", 
       "votes": "3336.0000"
@@ -659,7 +808,7 @@
       "msg": "Count Complete", 
       "nt_votes": "667.0000", 
       "quota": "1001.0000", 
-      "round": 4, 
+      "round": 5, 
       "surplus": "0.0000", 
       "tag": "end", 
       "votes": "3336.0000"

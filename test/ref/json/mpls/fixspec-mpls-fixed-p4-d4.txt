@@ -43,12 +43,43 @@
           "vote": "3.0000"
         }
       }, 
-      "msg": "Begin Count", 
+      "msg": "New Round", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 0, 
+      "round": 1, 
       "surplus": "0.0000", 
-      "tag": "begin", 
+      "tag": "round", 
+      "votes": "7.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1.0000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2.0000"
+        }, 
+        "4": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "3.0000"
+        }
+      }, 
+      "msg": "Count Votes", 
+      "nt_votes": "0.0000", 
+      "quota": "3.0000", 
+      "round": 1, 
+      "surplus": "0.0000", 
+      "tag": "count", 
       "votes": "7.0000"
     }, 
     {
@@ -77,7 +108,7 @@
       "msg": "New Round", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 1, 
+      "round": 2, 
       "surplus": "0.0000", 
       "tag": "round", 
       "votes": "7.0000"
@@ -109,7 +140,7 @@
       "msg": "Elect: Hjalmer", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 1, 
+      "round": 2, 
       "surplus": "0.0000", 
       "tag": "elect", 
       "votes": "7.0000"
@@ -141,9 +172,41 @@
       "msg": "Transfer surplus: Hjalmer (0.0000)", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 1, 
+      "round": 2, 
       "surplus": "0.0000", 
       "tag": "transfer", 
+      "votes": "7.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1.0000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "1.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2.0000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.0000"
+        }
+      }, 
+      "msg": "Count Votes", 
+      "nt_votes": "0.0000", 
+      "quota": "3.0000", 
+      "round": 2, 
+      "surplus": "0.0000", 
+      "tag": "count", 
       "votes": "7.0000"
     }, 
     {
@@ -173,7 +236,7 @@
       "msg": "New Round", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 2, 
+      "round": 3, 
       "surplus": "0.0000", 
       "tag": "round", 
       "votes": "7.0000"
@@ -205,7 +268,7 @@
       "msg": "Break tie (defeat low candidate): [Sven, Ole] -> Sven", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 2, 
+      "round": 3, 
       "surplus": "0.0000", 
       "tag": "tie", 
       "votes": "7.0000"
@@ -237,7 +300,7 @@
       "msg": "Defeat low candidate: Sven", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 2, 
+      "round": 3, 
       "surplus": "0.0000", 
       "tag": "defeat", 
       "votes": "7.0000"
@@ -269,9 +332,41 @@
       "msg": "Transfer defeated: Sven", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 2, 
+      "round": 3, 
       "surplus": "0.0000", 
       "tag": "transfer", 
+      "votes": "7.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
+        }, 
+        "2": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2.0000"
+        }, 
+        "3": {
+          "code": "H", 
+          "state": "hopeful", 
+          "vote": "2.0000"
+        }, 
+        "4": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.0000"
+        }
+      }, 
+      "msg": "Count Votes", 
+      "nt_votes": "0.0000", 
+      "quota": "3.0000", 
+      "round": 3, 
+      "surplus": "0.0000", 
+      "tag": "count", 
       "votes": "7.0000"
     }, 
     {
@@ -301,7 +396,7 @@
       "msg": "New Round", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 3, 
+      "round": 4, 
       "surplus": "0.0000", 
       "tag": "round", 
       "votes": "7.0000"
@@ -333,7 +428,7 @@
       "msg": "Break tie (defeat low candidate): [Ole, Lena] -> Ole", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 3, 
+      "round": 4, 
       "surplus": "0.0000", 
       "tag": "tie", 
       "votes": "7.0000"
@@ -365,7 +460,7 @@
       "msg": "Defeat low candidate: Ole", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 3, 
+      "round": 4, 
       "surplus": "0.0000", 
       "tag": "defeat", 
       "votes": "7.0000"
@@ -398,7 +493,7 @@
       "msg": "Elect remaining candidates: Lena", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 3, 
+      "round": 4, 
       "surplus": "0.0000", 
       "tag": "elect", 
       "votes": "7.0000"
@@ -431,7 +526,7 @@
       "msg": "Count Complete", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
-      "round": 3, 
+      "round": 4, 
       "surplus": "0.0000", 
       "tag": "end", 
       "votes": "7.0000"

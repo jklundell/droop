@@ -2,13 +2,16 @@ R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.na
 0	log	Add eligible: Castor
 0	log	Add eligible: Pollux
 0	log	Add eligible: Helen
-0	begin	4.0000	0.0000	Castor	H	5.0000	Pollux	H	1.0000	Helen	H	3.0000
 1	round	New Round
-1	elect	4.0000	0.0000	Castor	E	5.0000	Pollux	H	1.0000	Helen	H	3.0000
-1	transfer	4.0000	0.0000	Castor	E	4.0000	Pollux	H	2.0000	Helen	H	3.0000
+1	count	4.0000	0.0000	Castor	H	5.0000	Pollux	H	1.0000	Helen	H	3.0000
 2	round	New Round
-2	defeat	4.0000	0.0000	Castor	E	4.0000	Pollux	D	2.0000	Helen	H	3.0000
-2	transfer	4.0000	2.0000	Castor	E	4.0000	Pollux	D	0.0000	Helen	H	3.0000
+2	defeat	4.0000	0.0000	Castor	H	5.0000	Pollux	D	1.0000	Helen	H	3.0000
+2	transfer	4.0000	1.0000	Castor	H	5.0000	Pollux	D	0.0000	Helen	H	3.0000
+2	count	4.0000	1.0000	Castor	H	5.0000	Pollux	D	0.0000	Helen	H	3.0000
 3	round	New Round
-3	elect	4.0000	2.0000	Castor	E	4.0000	Pollux	D	0.0000	Helen	E	3.0000
+3	elect	4.0000	1.0000	Castor	E	5.0000	Pollux	D	0.0000	Helen	H	3.0000
+3	transfer	4.0000	2.0000	Castor	E	4.0000	Pollux	D	0.0000	Helen	H	3.0000
+3	count	4.0000	2.0000	Castor	E	4.0000	Pollux	D	0.0000	Helen	H	3.0000
+4	round	New Round
+4	elect	4.0000	2.0000	Castor	E	4.0000	Pollux	D	0.0000	Helen	E	3.0000
 X	end	4.0000	2.0000	Castor	E	4.0000	Pollux	D	0.0000	Helen	E	3.0000
