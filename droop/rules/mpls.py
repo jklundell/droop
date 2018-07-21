@@ -25,6 +25,7 @@ as of 2018-07-12
 
 The rule here reflects amendments c. 2013:
 http://www.minneapolismn.gov/www/groups/public/@clerk/documents/webcontent/wcms1p-108666.pdf
+More: http://vote.minneapolismn.gov/rcv/RCV-HISTORY
 
 Minneapolis STV is a variation on WIGM,
 using fixed-point decimal arithmetic with four digits of precision.
@@ -33,63 +34,29 @@ Implementation notes:
 
 1. The current rule reflects amendments through 2013 as of 2018-07:
 http://www.minneapolismn.gov/www/groups/public/@clerk/documents/webcontent/wcms1p-108666.pdf
-More: http://vote.minneapolismn.gov/rcv/RCV-HISTORY
 
-2.  167.70(c)(1)a. is confusing. Where exactly do (eg) rounds 1 & 2 begin? Note in particular the
-references to "round" here:
-    (1) "Each round must proceed sequentially as follows:"
-    (1)(a) "the current round"
-    (1)(a) "a new round begins"
-
-    The first time through, is "the current round" round 1? If so, what is the "new round" that begins
-    in the last sentence? If not, are there winners declared in some "round 0"? When we're told later that
-    "the tabulation must continue as described in clause a", when does the new round start? At the
-    beginning of 167.70(c)(1)a, or only when we encounter "a new round begins"?
-
-    Note that this doesn't (I think) affect the outcome of the election, but it does affect reporting,
-    and
-
-    (1) Tabulation of votes at the ranked-choice voting tabulation center must proceed in rounds for
-    each office to be counted. The threshold must be calculated. The sum of all ranked-choice votes
-    for every candidate must be calculated. Each round must proceed sequentially as follows:
-
-        The number of votes cast for each candidate for the current round must be counted.
-
-        If the number of candidates, other than any undeclared write-in candidate, whose vote total is
-        equal to or greater than the threshold is equal to the number of seats to be filled, those
-        candidates who are continuing candidates are elected and the tabulation is complete.
-
-        If the number of candidates, other than any undeclared write-in candidate, whose vote total is
-        equal to or greater than the threshold is not equal to the number of seats to be filled, a new
-        round begins and the tabulation must continue as described in clause b.
-
-3. 167.70(c)(1)d. is confusing. "The surplus of the candidate chosen by lot must be transferred
+2. 167.70(c)(1)d. is confusing. "The surplus of the candidate chosen by lot must be transferred
 before other transfers are made": what are the "other transfers"? The general principle seems
 (and ought) to be that each time a transfer is made, we go back to 167.70(c)(1)a. and then recalculate surpluses.
 
-4. 167.70(c)(1)f. "If the number of continuing candidates is equal to the number of seats yet to be filled,
+3. 167.70(c)(1)f. "If the number of continuing candidates is equal to the number of seats yet to be filled,
 any remaining continuing candidates must be declared elected". Should be "less than or equal to", allowing
 for the case of fewer candidates than seats to be filled (in which case, if the rules were strictly followed,
 the count would never terminate).
 
-5. Under this rule, the handling of undeclared write-in candidates allows their presence to alter the result
-of the election. This can't be desirable, and seems to be the unintended result of trying to report the
-number of votes for undeclared write-in candidates, as required by 167.50(c): "The number of votes received
-by undeclared write-in candidates will be recorded as a group by office."
-
-6. The rule about not transferring votes from the last defeated candidate seems to be a holdover from
+4. The rule about not transferring votes from the last defeated candidate seems to be a holdover from
 the single-winner rule 167.60(c)(1)b, so that we don't end up reporting a unanimous vote for the winner.
 That doesn't really make sense for multiple-seat elections. Moreover, in the case of single-seat elections,
 it would be helpful to report vote counts before and after such a final transfer, in order to quantify total
 voter support for the ultimate winner, some of which is likely to be uncovered by the final transfer.
 This goes to validating the assertion that RCV is "majority-seeking".
 
-7. The tiebreaking rule requires the presence of the chief election official.
+5. The tiebreaking rule requires the presence of the chief election official.
 In their absence, this implementation uses an external tiebreaking order to break ties.
 Ideally, the rule would be changed so that the official would predetermine a tiebreaking
 order.
 
-8. We don't identify undeclared write-in candidates. The best we can do, for now, is to mark
+6. Droop doesn't identify undeclared write-in candidates. The best we can do, for now, is to mark
 them as withdrawn. TODO: test to see what the reporting looks like.
 
 
@@ -384,7 +351,7 @@ class Rule(MethodWIGM):
     #
     #########################
     def count(self):
-        "count the election with Minneapolis STV rules"
+        "count the election with Minneapolis RCV-PR rules"
 
         #  local support functions
         #
@@ -535,7 +502,7 @@ class Rule(MethodWIGM):
             b.topCand.vote += b.vote
         E.exhausted = V0    # track non-transferable votes
 
-        E.logAction('begin', 'Begin Count')
+        E.newRound()    # Round 1
         while True:
 
             ##  167.70(c)(1)a. NEW ROUND
@@ -543,6 +510,7 @@ class Rule(MethodWIGM):
             ##  equal to or greater than the threshold is equal to the number of seats to be filled, those
             ##  candidates who are continuing candidates are elected and the tabulation is complete.
             ##
+            E.logAction('count', 'Count Votes')
             hopefulWithQuota = [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]
             if (len(C.elected()) + len(hopefulWithQuota)) >= E.nSeats:
                 for c in hopefulWithQuota:
@@ -576,6 +544,7 @@ class Rule(MethodWIGM):
             ##  their defeat, the number of continuing candidates is reduced to the number of seats yet to be
             ##  filled.
 
+            # TODO: handle defeat undeclared write-ins in round 2 (first try withdrawn-candidate logic)
             if E.round >= 2:
                 certainLosers = findCertainLosers(E.surplus)
                 if certainLosers:
