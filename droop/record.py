@@ -67,6 +67,7 @@ class ElectionRecord(dict):
         "add an action to the election report"
         assert(tag in (
             'begin',    # beginning of count
+            'count',    # count votes
             'log',      # log an arbitrary string
             'round',    # start a new round
             'tie',      # break a tie
@@ -83,7 +84,7 @@ class ElectionRecord(dict):
         if tag == 'log':
             self['actions'].append(A)
             return
-        if (tag == 'begin' or tag == 'round') and not self.filled:
+        if tag in ('begin', 'count', 'round') and not self.filled:
             self._fill()
         if tag == 'end':
             vreport = E.V.report()
@@ -163,7 +164,7 @@ class ElectionRecord(dict):
                 hcids = [cid for cid in cids if cstate[cid]['state'] == 'hopeful']
                 dcids = [cid for cid in cids if cstate[cid]['state'] == 'defeated']
                 s = 'Action: %s\n' % (A['msg'])
-                if A['tag'] in ('begin', 'elect', 'defeat', 'pend', 'transfer', 'end'):
+                if A['tag'] in ('begin', 'count', 'elect', 'defeat', 'pend', 'transfer', 'end'):
                     for cid in [cid for cid in ecids if not cstate[cid].get('pending')]:
                         s += '\tElected:  %s (%s)\n' % (cdict[cid]['name'], cstate[cid]['vote'])
                     for cid in [cid for cid in ecids if cstate[cid].get('pending')]:
