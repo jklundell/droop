@@ -27,6 +27,11 @@ The rule here reflects amendments c. 2013:
 http://www.minneapolismn.gov/www/groups/public/@clerk/documents/webcontent/wcms1p-108666.pdf
 More: http://vote.minneapolismn.gov/rcv/RCV-HISTORY
 
+2017 sample results:
+    single-winner (Mayor): http://vote.minneapolismn.gov/results/2017/2017-mayor-tabulation
+    multiple-winner (Parks & Recreation Commissioner At Large)
+        http://vote.minneapolismn.gov/results/2017/2017-park-board-at-large-tab
+
 Minneapolis STV is a variation on WIGM,
 using fixed-point decimal arithmetic with four digits of precision.
 
@@ -156,7 +161,7 @@ are unable to determine the voter's intent for any office on the ballot.
 Undeclared write-in candidate  means a write-in candidate who is not a declared write-in candidate.
 
 An undervote  occurs when a voter does not rank any candidates for an office. (2008-Or-028, § 1,
-4- 18-08; 2009-Or-102, § 1, 10-2-09; 2013-Or-055, § 1, 5-24-13)
+4-18-08; 2009-Or-102, § 1, 10-2-09; 2013-Or-055, § 1, 5-24-13)
 
 
 167.50. Tabulation of votes; in general
