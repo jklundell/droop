@@ -85,8 +85,8 @@ class ElectionProfile(object):
         #  ballotLinesEqual is a list of BallotLine objects with at least one equal ranking
         #    ranking is a tuple of tuples of cids
         #
-        self.ballotLines = list()
-        self.ballotLinesEqual = list()
+        self.ballotLines = list()     # [BallotLine]
+        self.ballotLinesEqual = list()  # [BallotLine]
         self.tieOrder = dict()        # tiebreaking cid sequence: cid->order
         self.nickName = dict()        # cid to nick
         self.options = list()         # list of options for main counter
@@ -276,11 +276,11 @@ class ElectionProfile(object):
                     option_list.append(tok.rstrip(']'))
                 if tok.endswith(']'):
                     break
-        if option_name == 'tie':
+        if option_name == 'tie':                # [tie …]
             self.__bltOptionTie(option_list)
-        elif option_name == 'nick':
+        elif option_name == 'nick':             # [nick …]
             self.__bltOptionNick(option_list)
-        elif option_name == 'droop':
+        elif option_name == 'droop':            # [droop …]
             self.options.extend(option_list)
         else:
             raise ElectionProfileError('bad blt item "%s": unknown option' % option)
@@ -318,21 +318,26 @@ class ElectionProfile(object):
         self.nSeats = int(tok)
 
         #  optional:
-        #    withdrawn candidates, flagged with a minus sign
-        #    general options, flagged with an equal sign
+        #    general options, flagged with '['
+        #    withdrawn candidates, flagged with '-'
+        #    ballot IDs, flagged with '('
+        #
+        #  Options are terminated with the first ballot line,
+        #    beginning with a non-negative number (multiplier)
+        #    or a parenthesized ballot ID.
         #
         self.withdrawn = set()
         tok = blt.next()
         while True:
-            if tok.startswith('['):     # look for an option
-                self.__bltOption(tok, blt)
-            elif tok.startswith('('):   # look for a ballot ID
+            if tok.startswith('['):     # Droop option
+                self.__bltOption(tok, blt)  # parse option
+            elif tok.startswith('('):   # terminate on ballot ID
                 break
             elif sdigits.match(tok):    # look for a withdrawn candidate or multiplier
                 wd = int(tok)
                 if wd >= 0:
-                    break
-                self.withdrawn.add(-wd)
+                    break               # terminate on multiplier
+                self.withdrawn.add(-wd) # withdrawn candidate
             else:
                 raise ElectionProfileError('bad blt item "%s" near first ballot line; expected decimal number' % tok)
             tok = blt.next()
@@ -349,7 +354,7 @@ class ElectionProfile(object):
         ballotIDs = set()
 
         while True:
-            if tok.startswith('('):
+            if tok.startswith('('):     # handle ballot ID
                 bid = tok
                 while not bid.endswith(')'):
                     bid += ' ' + blt.next()
@@ -358,7 +363,7 @@ class ElectionProfile(object):
                     raise ElectionProfileError('duplicate ballot ID %s' % bid)
                 ballotIDs.add(bid)
                 multiplier = 1
-            elif digits.match(tok):
+            elif digits.match(tok):     # handle multiplier or EOF
                 multiplier = int(tok)
             else:
                 raise ElectionProfileError('bad blt item "%s" near line %d; expected decimal number' % \
@@ -366,7 +371,7 @@ class ElectionProfile(object):
             if not multiplier:  # test end of ballot lines (multiplier of 0)
                 break
 
-            ranking = list()
+            ranking = list()    # [CID]
             while True:
                 tok = blt.next()  # next ranked candidate or 0
                 if tok == '0':
