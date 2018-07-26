@@ -350,7 +350,6 @@ class ElectionProfile(object):
         #
         #  a multiplier of 0 ends the ballot list
         #
-        self.ballotLines = list()
         ballotIDs = set()
 
         while True:
