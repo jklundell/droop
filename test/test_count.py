@@ -142,7 +142,7 @@ class ElectionDumpTest(unittest.TestCase):
 
     def testElectionDumps(self):
         "try several counts & dumps"
-        blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SCw', 'SC-Vm-12')
+        blts = ('42', '42t', '42u', 'M135', '513', 'SC', 'SCw', 'SCwopt', 'SC-Vm-12')
         rulenames = droop.electionRuleNames()
         for blt in blts:
             for rulename in rulenames:

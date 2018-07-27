@@ -64,6 +64,11 @@ order.
 6. Droop doesn't identify undeclared write-in candidates. The best we can do, for now, is to mark
 them as withdrawn. TODO: test to see what the reporting looks like.
 
+7. "Surplus  means the total number of votes cast for an elected candidate in excess of the threshold."
+Do we need to also included unelected candidates with a surplus? Relevant to finding certain losers? But
+see 167.70(c)(1)b. "Surplus votes for any candidates whose vote total is equal to or greater than the threshold
+must be calculated." (Note "any".)
+
 
 Minneapolis Election Code
 
@@ -460,7 +465,7 @@ class Rule(MethodWIGM):
                 #
                 vote += group[0].vote * len(group)
                 #
-                #   stop if vote added to surplus equals or surpasses the vote for
+                #   skip if vote added to surplus equals or surpasses the vote for
                 #   a candidate in the next-higher group
                 #
                 if (vote + surplus) >= sortedGroups[g+1][0].vote:
@@ -514,7 +519,16 @@ class Rule(MethodWIGM):
             ##  If the number of candidates, other than any undeclared write-in candidate, whose vote total is
             ##  equal to or greater than the threshold is equal to the number of seats to be filled, those
             ##  candidates who are continuing candidates are elected and the tabulation is complete.
-            ##
+
+            ##  167.70(c)(1)b. CALCULATE SURPLUS
+            ##  Surplus votes for any candidates whose vote total is equal to or greater than the threshold
+            ##  must be calculated.
+            #
+            #   Note that we calculate the surplus early, for reporting purposes. This does not result
+            #   in any change in outcome.
+
+            E.surplus = sum([c.surplus for c in C], V0)
+
             E.logAction('count', 'Count Votes')
             hopefulWithQuota = [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]
             if (len(C.elected()) + len(hopefulWithQuota)) >= E.nSeats:
@@ -528,12 +542,6 @@ class Rule(MethodWIGM):
             ##  round begins and the tabulation must continue as described in clause b.
 
             E.newRound()
-
-            ##  167.70(c)(1)b. CALCULATE SURPLUS
-            ##  Surplus votes for any candidates whose vote total is equal to or greater than the threshold
-            ##  must be calculated.
-            ##
-            E.surplus = sum([c.surplus for c in C.pending()], V0)
 
             ##  167.70(c)(1)c. DEFEAT CERTAIN LOSERS
             ##  At the beginning of the second round only, after any surplus votes are calculated but not yet
@@ -549,23 +557,35 @@ class Rule(MethodWIGM):
             ##  their defeat, the number of continuing candidates is reduced to the number of seats yet to be
             ##  filled.
 
-            # TODO: handle defeat undeclared write-ins in round 2 (first try withdrawn-candidate logic)
-            if E.round >= 2:
-                certainLosers = findCertainLosers(E.surplus)
-                if certainLosers:
-                    for c in certainLosers:
-                        c.defeat('Defeat certain loser')
-                    cids = [c.cid for c in certainLosers]
-                    for b in (b for b in E.ballots if b.topRank in cids):
+            def defeatGroup(group, groupName):
+                '''
+                Defeat and transfer a (possibly empty) group of candidates,
+                returning True if at least one candidate was defeated.
+                '''
+                if group:
+                    for c in group:
+                        c.defeat('Defeat %s' % groupName)
+                    for b in (b for b in E.ballots if b.topRank in [c.cid for c in group]):
                         transfer(b)
-                    for c in certainLosers:
+                    for c in group:
                         c.vote = V0
-                    E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in certainLosers))
+                    E.surplus = sum([c.surplus for c in C], V0)
+                    E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in group))
+                    return True
+                return False
+
+            if E.round >= 2:
+                defeated = False
+                if E.round == 2:
+                    defeated = defeatGroup([c for c in C.hopeful() if c.isUndeclared], "undeclared write-in")
+                print >> sys.stderr, "** mpls defeat certain losers: surplus=%s" % E.surplus
+                defeated = defeated or defeatGroup(findCertainLosers(E.surplus), "certain loser")
 
                     ##  167.70(c)(1)c.
                     ##  If no candidate can be defeated under this clause, the tabulation must continue as described in
                     ##  clause d. Otherwise, the tabulation must continue as described in clause a.
 
+                if defeated:
                     continue    # pragma: no cover (optimized out)
 
             ##  167.70(c)(1)d. ELECT HIGHEST SURPLUS
@@ -599,6 +619,7 @@ class Rule(MethodWIGM):
                     b.weight = (b.weight * surplus) / high_candidate.vote
                     transfer(b)
                 high_candidate.vote = E.quota
+                E.surplus = sum([c.surplus for c in C], V0)
                 E.logAction('transfer', "Transfer surplus: %s (%s)" % (high_candidate.name, surplus))
                 continue  ## continue as described in clause a.
 
@@ -626,6 +647,7 @@ class Rule(MethodWIGM):
                     for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
                         transfer(b)
                     low_candidate.vote = V0
+                    E.surplus = sum([c.surplus for c in C], V0)
                     E.logAction('transfer', "Transfer defeated: %s" % low_candidate.name)
 
             ##  167.70(c)(1)f. FINISH

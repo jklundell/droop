@@ -1,22 +1,17 @@
 {
   "actions": [
     {
-      "msg": "Add eligible: Sven", 
+      "msg": "Add eligible: Castor", 
       "round": 0, 
       "tag": "log"
     }, 
     {
-      "msg": "Add eligible: Ole", 
+      "msg": "Add eligible: Pollux", 
       "round": 0, 
       "tag": "log"
     }, 
     {
-      "msg": "Add eligible: Lena", 
-      "round": 0, 
-      "tag": "log"
-    }, 
-    {
-      "msg": "Add eligible: Hjalmer", 
+      "msg": "Add eligible: Helen", 
       "round": 0, 
       "tag": "log"
     }, 
@@ -25,22 +20,17 @@
         "1": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
+          "vote": "4.0000"
         }, 
         "2": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
+          "vote": "0.0000"
         }, 
         "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "3.0000"
         }
       }, 
       "msg": "New Round", 
@@ -49,487 +39,327 @@
       "round": 1, 
       "surplus": "0.0000", 
       "tag": "round", 
-      "votes": "7.0000"
+      "votes": "6.0000"
     }, 
     {
       "cstate": {
         "1": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
+          "vote": "4.0000"
         }, 
         "2": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
+          "vote": "0.0000"
         }, 
         "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "3.0000"
         }
       }, 
       "msg": "Count Votes", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 1, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "count", 
-      "votes": "7.0000"
+      "votes": "6.0000"
     }, 
     {
       "cstate": {
         "1": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
+          "vote": "4.0000"
         }, 
         "2": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
+          "vote": "0.0000"
         }, 
         "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "3.0000"
         }
       }, 
       "msg": "New Round", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 2, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "round", 
-      "votes": "7.0000"
+      "votes": "6.0000"
     }, 
     {
       "cstate": {
         "1": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
+          "vote": "4.0000"
         }, 
         "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "1.0000"
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
         }, 
         "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
         }
       }, 
-      "msg": "Elect: Hjalmer", 
+      "msg": "Defeat certain loser: Pollux", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 2, 
-      "surplus": "0.0000", 
-      "tag": "elect", 
-      "votes": "7.0000"
+      "surplus": "1.0000", 
+      "tag": "defeat", 
+      "votes": "6.0000"
     }, 
     {
       "cstate": {
         "1": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
+          "vote": "4.0000"
         }, 
         "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "1.0000"
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
         }, 
         "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
         }
       }, 
-      "msg": "Transfer surplus: Hjalmer (0.0000)", 
+      "msg": "Transfer defeated: Pollux", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 2, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "transfer", 
-      "votes": "7.0000"
+      "votes": "6.0000"
     }, 
     {
       "cstate": {
         "1": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
+          "vote": "4.0000"
         }, 
         "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "1.0000"
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
         }, 
         "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
         }
       }, 
       "msg": "Count Votes", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 2, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "count", 
-      "votes": "7.0000"
+      "votes": "6.0000"
     }, 
     {
       "cstate": {
         "1": {
           "code": "H", 
           "state": "hopeful", 
-          "vote": "1.0000"
+          "vote": "4.0000"
         }, 
         "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "1.0000"
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
         }, 
         "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
         }
       }, 
       "msg": "New Round", 
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 3, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "round", 
-      "votes": "7.0000"
+      "votes": "6.0000"
     }, 
     {
       "cstate": {
         "1": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "1.0000"
-        }, 
-        "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "1.0000"
-        }, 
-        "3": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "2.0000"
-        }, 
-        "4": {
           "code": "E", 
           "pending": false, 
           "state": "elected", 
-          "vote": "3.0000"
-        }
-      }, 
-      "msg": "Break tie (defeat low candidate): [Sven, Ole] -> Sven", 
-      "nt_votes": "0.0000", 
-      "quota": "3.0000", 
-      "round": 3, 
-      "surplus": "0.0000", 
-      "tag": "tie", 
-      "votes": "7.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
-          "code": "D", 
-          "state": "defeated", 
-          "vote": "1.0000"
+          "vote": "4.0000"
         }, 
         "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "1.0000"
-        }, 
-        "3": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
-        }
-      }, 
-      "msg": "Defeat low candidate: Sven", 
-      "nt_votes": "0.0000", 
-      "quota": "3.0000", 
-      "round": 3, 
-      "surplus": "0.0000", 
-      "tag": "defeat", 
-      "votes": "7.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
           "code": "D", 
           "state": "defeated", 
           "vote": "0.0000"
         }, 
-        "2": {
+        "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
+        }
+      }, 
+      "msg": "Elect: Castor", 
+      "nt_votes": "0.0000", 
+      "quota": "3.0000", 
+      "round": 3, 
+      "surplus": "1.0000", 
+      "tag": "elect", 
+      "votes": "6.0000"
+    }, 
+    {
+      "cstate": {
+        "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.0000"
+        }, 
+        "2": {
+          "code": "D", 
+          "state": "defeated", 
+          "vote": "0.0000"
         }, 
         "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
         }
       }, 
-      "msg": "Transfer defeated: Sven", 
-      "nt_votes": "0.0000", 
+      "msg": "Transfer surplus: Castor (1.0000)", 
+      "nt_votes": "1.0000", 
       "quota": "3.0000", 
       "round": 3, 
       "surplus": "0.0000", 
       "tag": "transfer", 
-      "votes": "7.0000"
+      "votes": "5.0000"
     }, 
     {
       "cstate": {
         "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.0000"
+        }, 
+        "2": {
           "code": "D", 
           "state": "defeated", 
           "vote": "0.0000"
-        }, 
-        "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "2.0000"
         }, 
         "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
         }
       }, 
       "msg": "Count Votes", 
-      "nt_votes": "0.0000", 
+      "nt_votes": "1.0000", 
       "quota": "3.0000", 
       "round": 3, 
       "surplus": "0.0000", 
       "tag": "count", 
-      "votes": "7.0000"
+      "votes": "5.0000"
     }, 
     {
       "cstate": {
         "1": {
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.0000"
+        }, 
+        "2": {
           "code": "D", 
           "state": "defeated", 
           "vote": "0.0000"
-        }, 
-        "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "2.0000"
         }, 
         "3": {
           "code": "H", 
           "state": "hopeful", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
         }
       }, 
       "msg": "New Round", 
-      "nt_votes": "0.0000", 
+      "nt_votes": "1.0000", 
       "quota": "3.0000", 
       "round": 4, 
       "surplus": "0.0000", 
       "tag": "round", 
-      "votes": "7.0000"
+      "votes": "5.0000"
     }, 
     {
       "cstate": {
         "1": {
-          "code": "D", 
-          "state": "defeated", 
-          "vote": "0.0000"
-        }, 
-        "2": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "2.0000"
-        }, 
-        "3": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "2.0000"
-        }, 
-        "4": {
           "code": "E", 
           "pending": false, 
           "state": "elected", 
           "vote": "3.0000"
-        }
-      }, 
-      "msg": "Break tie (defeat low candidate): [Ole, Lena] -> Ole", 
-      "nt_votes": "0.0000", 
-      "quota": "3.0000", 
-      "round": 4, 
-      "surplus": "0.0000", 
-      "tag": "tie", 
-      "votes": "7.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
-          "code": "D", 
-          "state": "defeated", 
-          "vote": "0.0000"
         }, 
         "2": {
           "code": "D", 
           "state": "defeated", 
-          "vote": "2.0000"
-        }, 
-        "3": {
-          "code": "H", 
-          "state": "hopeful", 
-          "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
-        }
-      }, 
-      "msg": "Defeat low candidate: Ole", 
-      "nt_votes": "0.0000", 
-      "quota": "3.0000", 
-      "round": 4, 
-      "surplus": "0.0000", 
-      "tag": "defeat", 
-      "votes": "7.0000"
-    }, 
-    {
-      "cstate": {
-        "1": {
-          "code": "D", 
-          "state": "defeated", 
           "vote": "0.0000"
-        }, 
-        "2": {
-          "code": "D", 
-          "state": "defeated", 
-          "vote": "2.0000"
         }, 
         "3": {
           "code": "E", 
           "pending": false, 
           "state": "elected", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
         }
       }, 
-      "msg": "Elect remaining candidates: Lena", 
-      "nt_votes": "0.0000", 
+      "msg": "Elect remaining candidates: Helen", 
+      "nt_votes": "1.0000", 
       "quota": "3.0000", 
       "round": 4, 
       "surplus": "0.0000", 
       "tag": "elect", 
-      "votes": "7.0000"
+      "votes": "5.0000"
     }, 
     {
       "cstate": {
         "1": {
-          "code": "D", 
-          "state": "defeated", 
-          "vote": "0.0000"
+          "code": "E", 
+          "pending": false, 
+          "state": "elected", 
+          "vote": "3.0000"
         }, 
         "2": {
           "code": "D", 
           "state": "defeated", 
-          "vote": "2.0000"
+          "vote": "0.0000"
         }, 
         "3": {
           "code": "E", 
           "pending": false, 
           "state": "elected", 
           "vote": "2.0000"
-        }, 
-        "4": {
-          "code": "E", 
-          "pending": false, 
-          "state": "elected", 
-          "vote": "3.0000"
         }
       }, 
       "msg": "Count Complete", 
-      "nt_votes": "0.0000", 
+      "nt_votes": "1.0000", 
       "quota": "3.0000", 
       "round": 4, 
       "surplus": "0.0000", 
       "tag": "end", 
-      "votes": "7.0000"
+      "votes": "5.0000"
     }
   ], 
   "arithmetic_info": "fixed-point decimal arithmetic (4 places)", 
@@ -538,48 +368,39 @@
     "1": {
       "ballot_order": 1, 
       "cid": 1, 
-      "name": "Sven", 
+      "name": "Castor", 
       "nick": "1", 
       "tie_order": 1
     }, 
     "2": {
       "ballot_order": 2, 
       "cid": 2, 
-      "name": "Ole", 
+      "name": "Pollux", 
       "nick": "2", 
       "tie_order": 2
     }, 
     "3": {
       "ballot_order": 3, 
       "cid": 3, 
-      "name": "Lena", 
+      "name": "Helen", 
       "nick": "3", 
       "tie_order": 3
-    }, 
-    "4": {
-      "ballot_order": 4, 
-      "cid": 4, 
-      "name": "Hjalmer", 
-      "nick": "4", 
-      "tie_order": 4
     }
   }, 
   "cids": [
     1, 
     2, 
-    3, 
-    4
+    3
   ], 
   "droop_name": "droop", 
   "droop_version": "0.12", 
   "ecids": [
     1, 
     2, 
-    3, 
-    4
+    3
   ], 
   "method": "wigm", 
-  "nballots": 7, 
+  "nballots": 6, 
   "options": {
     "allowed": {}, 
     "cmd": {
@@ -590,7 +411,9 @@
       "display": 4, 
       "precision": 4
     }, 
-    "file_options": {}, 
+    "file_options": {
+      "prexision": 5
+    }, 
     "force": {
       "arithmetic": "fixed", 
       "display": 4, 
@@ -600,6 +423,7 @@
       "arithmetic": "fixed", 
       "display": 4, 
       "precision": 4, 
+      "prexision": 5, 
       "rule": "mpls"
     }
   }, 
@@ -607,5 +431,5 @@
   "rule_info": "Minneapolis MN STV", 
   "rule_name": "mpls", 
   "seats": 2, 
-  "title": "test operation of mpls fixSpec flag"
+  "title": "Pollux is certain loser; report option misspelling"
 }

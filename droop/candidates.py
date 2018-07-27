@@ -58,6 +58,8 @@ class Candidates(set):
         if self.E is not None:  # accommodate unit test
             if c.state == 'withdrawn':
                 self.E.log("Add withdrawn: %s" % c.name)
+            elif c.isUndeclared:
+                self.E.log("Add undeclared: %s" % c.name)
             else:
                 self.E.log("Add eligible: %s" % c.name)
 

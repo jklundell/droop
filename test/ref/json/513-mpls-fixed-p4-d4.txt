@@ -63,7 +63,7 @@
       "nt_votes": "0.0000", 
       "quota": "4.0000", 
       "round": 1, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "count", 
       "votes": "9.0000"
     }, 
@@ -89,7 +89,7 @@
       "nt_votes": "0.0000", 
       "quota": "4.0000", 
       "round": 2, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "round", 
       "votes": "9.0000"
     }, 
@@ -115,7 +115,7 @@
       "nt_votes": "0.0000", 
       "quota": "4.0000", 
       "round": 2, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "defeat", 
       "votes": "9.0000"
     }, 
@@ -141,7 +141,7 @@
       "nt_votes": "1.0000", 
       "quota": "4.0000", 
       "round": 2, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "transfer", 
       "votes": "8.0000"
     }, 
@@ -167,7 +167,7 @@
       "nt_votes": "1.0000", 
       "quota": "4.0000", 
       "round": 2, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "count", 
       "votes": "8.0000"
     }, 
@@ -193,7 +193,7 @@
       "nt_votes": "1.0000", 
       "quota": "4.0000", 
       "round": 3, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "round", 
       "votes": "8.0000"
     }, 
@@ -220,7 +220,7 @@
       "nt_votes": "1.0000", 
       "quota": "4.0000", 
       "round": 3, 
-      "surplus": "0.0000", 
+      "surplus": "1.0000", 
       "tag": "elect", 
       "votes": "8.0000"
     }, 

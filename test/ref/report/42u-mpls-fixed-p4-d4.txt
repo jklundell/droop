@@ -21,7 +21,7 @@ Action: Count Votes
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 6.0000
-	Surplus: 0.0000
+	Surplus: 1.0000
 Round 2:
 Action: Defeat certain loser: Pøllüx
 	Hopeful:  Cåstor (4.0000)
@@ -32,7 +32,7 @@ Action: Defeat certain loser: Pøllüx
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 6.0000
-	Surplus: 0.0000
+	Surplus: 1.0000
 Action: Transfer defeated: Pøllüx
 	Hopeful:  Cåstor (4.0000)
 	Hopeful:  Hélen (2.0000)
@@ -42,7 +42,7 @@ Action: Transfer defeated: Pøllüx
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 6.0000
-	Surplus: 0.0000
+	Surplus: 1.0000
 Action: Count Votes
 	Hopeful:  Cåstor (4.0000)
 	Hopeful:  Hélen (2.0000)
@@ -52,7 +52,7 @@ Action: Count Votes
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 6.0000
-	Surplus: 0.0000
+	Surplus: 1.0000
 Round 3:
 Action: Elect: Cåstor
 	Elected:  Cåstor (4.0000)
@@ -63,7 +63,7 @@ Action: Elect: Cåstor
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 6.0000
-	Surplus: 0.0000
+	Surplus: 1.0000
 Action: Transfer surplus: Cåstor (1.0000)
 	Elected:  Cåstor (3.0000)
 	Hopeful:  Hélen (2.0000)

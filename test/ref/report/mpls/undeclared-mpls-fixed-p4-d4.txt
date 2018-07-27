@@ -1,0 +1,139 @@
+
+Election: test undeclared write-in Paris
+
+	Droop package: droop v0.12
+	Rule: Minneapolis MN STV
+	Arithmetic: fixed-point decimal arithmetic (4 places)
+	Seats: 2
+	Ballots: 7
+	Threshold: 3.0000
+
+	Add eligible: Castor
+	Add eligible: Pollux
+	Add eligible: Helen
+	Add undeclared: Paris
+Round 1:
+Action: Count Votes
+	Hopeful:  Castor (0.0000)
+	Hopeful:  Pollux (0.0000)
+	Hopeful:  Helen (2.0000)
+	Hopeful:  Paris (5.0000)
+	Elected votes: 0.0000
+	Hopeful votes: 7.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 2.0000
+Round 2:
+Action: Defeat undeclared write-in: Paris
+	Hopeful:  Castor (0.0000)
+	Hopeful:  Pollux (0.0000)
+	Hopeful:  Helen (2.0000)
+	Defeated: Paris (5.0000)
+	Elected votes: 0.0000
+	Hopeful votes: 2.0000
+	Defeated votes: 5.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 2.0000
+Action: Transfer defeated: Paris
+	Hopeful:  Castor (5.0000)
+	Hopeful:  Pollux (0.0000)
+	Hopeful:  Helen (2.0000)
+	Defeated: Paris (0.0000)
+	Elected votes: 0.0000
+	Hopeful votes: 7.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 2.0000
+Action: Count Votes
+	Hopeful:  Castor (5.0000)
+	Hopeful:  Pollux (0.0000)
+	Hopeful:  Helen (2.0000)
+	Defeated: Paris (0.0000)
+	Elected votes: 0.0000
+	Hopeful votes: 7.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 2.0000
+Round 3:
+Action: Elect: Castor
+	Elected:  Castor (5.0000)
+	Hopeful:  Pollux (0.0000)
+	Hopeful:  Helen (2.0000)
+	Defeated: Paris (0.0000)
+	Elected votes: 5.0000
+	Hopeful votes: 2.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 2.0000
+Action: Transfer surplus: Castor (2.0000)
+	Elected:  Castor (3.0000)
+	Hopeful:  Pollux (2.0000)
+	Hopeful:  Helen (2.0000)
+	Defeated: Paris (0.0000)
+	Elected votes: 3.0000
+	Hopeful votes: 4.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 0.0000
+Action: Count Votes
+	Elected:  Castor (3.0000)
+	Hopeful:  Pollux (2.0000)
+	Hopeful:  Helen (2.0000)
+	Defeated: Paris (0.0000)
+	Elected votes: 3.0000
+	Hopeful votes: 4.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 0.0000
+Round 4:
+Action: Break tie (defeat low candidate): [Pollux, Helen] -> Pollux
+	Elected votes: 3.0000
+	Hopeful votes: 4.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 0.0000
+Action: Defeat low candidate: Pollux
+	Elected:  Castor (3.0000)
+	Hopeful:  Helen (2.0000)
+	Defeated: Pollux (2.0000)
+	Defeated: Paris (0.0000)
+	Elected votes: 3.0000
+	Hopeful votes: 2.0000
+	Defeated votes: 2.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 0.0000
+Action: Elect remaining candidates: Helen
+	Elected:  Castor (3.0000)
+	Elected:  Helen (2.0000)
+	Defeated: Pollux (2.0000)
+	Defeated: Paris (0.0000)
+	Elected votes: 5.0000
+	Hopeful votes: 0.0000
+	Defeated votes: 2.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 0.0000
+Action: Count Complete
+	Elected:  Castor (3.0000)
+	Elected:  Helen (2.0000)
+	Defeated: Pollux (2.0000)
+	Defeated: Paris (0.0000)
+	Elected votes: 5.0000
+	Hopeful votes: 0.0000
+	Defeated votes: 2.0000
+	Nontransferable votes: 0.0000
+	Residual: 0.0000
+	Total: 7.0000
+	Surplus: 0.0000

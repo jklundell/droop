@@ -33,19 +33,19 @@ class CandidateTest(unittest.TestCase):
 
     def testCandidateString(self):
         "candidate string is its cname"
-        c1 = Candidate(None, 1, 2, 2, 'abc', None, False)
-                    # Election, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn
+        c1 = Candidate(None, 1, 2, 2, 'abc', None, False, False)
+                    # Election, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn, isUndeclared
         self.assertEqual(str(c1), 'abc', 'candidate string is its cname')
 
     def testCandidateHash(self):
         "candidate hash is its ID"
-        c1 = Candidate(None, 1, 2, 2, 'abc', None, False)
+        c1 = Candidate(None, 1, 2, 2, 'abc', None, False, False)
         self.assertEqual(hash(c1), 1, 'candidate hash is its ID')
 
     def testCandidateCompare(self):
         "compare candidates by ID"
-        c1 = Candidate(None, 1, 2, 2, 'abc', None, False)
-        c2 = Candidate(None, 1, 3, 3, 'def', None, False)
+        c1 = Candidate(None, 1, 2, 2, 'abc', None, False, False)
+        c2 = Candidate(None, 1, 3, 3, 'def', None, False, False)
         self.assertEqual(c1, c2, 'candidates are compared by ID')
 
 class CandidatesTest(unittest.TestCase):
@@ -54,10 +54,10 @@ class CandidatesTest(unittest.TestCase):
     def testCandidates(self):
         "general test of Candidates API"
         C = Candidates()
-        c1 = Candidate(None, 1, 1, 3, 'Able', None, False)
-                # Election, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn
-        c2 = Candidate(None, 2, 2, 2, 'Baker', None, False)
-        c3 = Candidate(None, 3, 3, 1, 'Charlie', None, False)
+        c1 = Candidate(None, 1, 1, 3, 'Able', None, False, False)
+                # Election, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn, isUndeclared
+        c2 = Candidate(None, 2, 2, 2, 'Baker', None, False, False)
+        c3 = Candidate(None, 3, 3, 1, 'Charlie', None, False, False)
         c1.vote = 1
         c2.vote = 3
         c3.vote = 2

@@ -104,7 +104,8 @@ class Election(object):
                           electionProfile.tieOrder[cid],
                           electionProfile.candidateName[cid],
                           electionProfile.nickName[cid],
-                          cid in electionProfile.withdrawn)
+                          cid in electionProfile.withdrawn,
+                          cid in electionProfile.undeclared)
             self.C.add(c)
 
         #  create a ballot object (ranking candidate IDs) from the profile rankings of candidate IDs

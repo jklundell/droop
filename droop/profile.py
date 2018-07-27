@@ -77,6 +77,7 @@ class ElectionProfile(object):
         self.nBallots = 0
         self.eligible = set()
         self.withdrawn = set()
+        self.undeclared = set()
         self.candidateName = dict()   # cid => candidate name
         self.candidateOrder = dict()  # cid -> ballot order
         #
@@ -263,6 +264,22 @@ class ElectionProfile(object):
         if len(self.tieOrder) != self.nCand:
             raise ElectionProfileError('bad blt: [tie] tiebreak sequence must list each candidate exactly once')
 
+    def __bltOptionWithdrawn(self, option_list):
+        "process a blt [withdrawn option line"
+        for tok in option_list:
+            cid = self.getCid(tok, '[withdrawn] option')
+            if cid in self.withdrawn:
+                raise ElectionProfileError('bad blt: [withdrawn] duplicate candidate')
+            self.withdrawn.add(cid)
+
+    def __bltOptionUndeclared(self, option_list):
+        "process a blt [undeclared option line"
+        for tok in option_list:
+            cid = self.getCid(tok, '[undeclared] option')
+            if cid in self.undeclared:
+                raise ElectionProfileError('bad blt: [undeclared] duplicate candidate')
+            self.undeclared.add(cid)
+
     def __bltOption(self, option, blt):
         "process a blt option line"
         option_name = option.lstrip('[')
@@ -282,6 +299,10 @@ class ElectionProfile(object):
             self.__bltOptionNick(option_list)
         elif option_name == 'droop':            # [droop …]
             self.options.extend(option_list)
+        elif option_name == 'withdrawn':        # [withdrawn …]
+            self.__bltOptionWithdrawn(option_list)
+        elif option_name == 'undeclared':       # [undeclared …]
+            self.__bltOptionUndeclared(option_list)
         else:
             raise ElectionProfileError('bad blt item "%s": unknown option' % option)
 
@@ -327,6 +348,7 @@ class ElectionProfile(object):
         #    or a parenthesized ballot ID.
         #
         self.withdrawn = set()
+        self.undeclared = set()
         tok = blt.next()
         while True:
             if tok.startswith('['):     # Droop option
@@ -334,10 +356,12 @@ class ElectionProfile(object):
             elif tok.startswith('('):   # terminate on ballot ID
                 break
             elif sdigits.match(tok):    # look for a withdrawn candidate or multiplier
-                wd = int(tok)
-                if wd >= 0:
+                wd = -int(tok)          # flip sign
+                if wd <= 0:
                     break               # terminate on multiplier
-                self.withdrawn.add(-wd) # withdrawn candidate
+                if wd in self.withdrawn:
+                    raise ElectionProfileError('bad blt: duplicate withdrawn candidate')
+                self.withdrawn.add(wd) # withdrawn candidate
             else:
                 raise ElectionProfileError('bad blt item "%s" near first ballot line; expected decimal number' % tok)
             tok = blt.next()

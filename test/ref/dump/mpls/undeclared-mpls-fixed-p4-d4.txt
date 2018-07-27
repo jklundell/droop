@@ -1,0 +1,20 @@
+R	Action	Quota	Non-Transferable	1.name	1.state	1.vote	2.name	2.state	2.vote	3.name	3.state	3.vote	4.name	4.state	4.vote
+0	log	Add eligible: Castor
+0	log	Add eligible: Pollux
+0	log	Add eligible: Helen
+0	log	Add undeclared: Paris
+1	round	New Round
+1	count	3.0000	0.0000	Castor	H	0.0000	Pollux	H	0.0000	Helen	H	2.0000	Paris	H	5.0000
+2	round	New Round
+2	defeat	3.0000	0.0000	Castor	H	0.0000	Pollux	H	0.0000	Helen	H	2.0000	Paris	D	5.0000
+2	transfer	3.0000	0.0000	Castor	H	5.0000	Pollux	H	0.0000	Helen	H	2.0000	Paris	D	0.0000
+2	count	3.0000	0.0000	Castor	H	5.0000	Pollux	H	0.0000	Helen	H	2.0000	Paris	D	0.0000
+3	round	New Round
+3	elect	3.0000	0.0000	Castor	E	5.0000	Pollux	H	0.0000	Helen	H	2.0000	Paris	D	0.0000
+3	transfer	3.0000	0.0000	Castor	E	3.0000	Pollux	H	2.0000	Helen	H	2.0000	Paris	D	0.0000
+3	count	3.0000	0.0000	Castor	E	3.0000	Pollux	H	2.0000	Helen	H	2.0000	Paris	D	0.0000
+4	round	New Round
+4	tie	3.0000	0.0000	Castor	E	3.0000	Pollux	H	2.0000	Helen	H	2.0000	Paris	D	0.0000
+4	defeat	3.0000	0.0000	Castor	E	3.0000	Pollux	D	2.0000	Helen	H	2.0000	Paris	D	0.0000
+4	elect	3.0000	0.0000	Castor	E	3.0000	Pollux	D	2.0000	Helen	E	2.0000	Paris	D	0.0000
+X	end	3.0000	0.0000	Castor	E	3.0000	Pollux	D	2.0000	Helen	E	2.0000	Paris	D	0.0000

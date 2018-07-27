@@ -37,7 +37,7 @@ class Candidate(object):
     '''
     a candidate, with state
     '''
-    def __init__(self, E, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn):
+    def __init__(self, E, cid, ballotOrder, tieOrder, cname, cnick, isWithdrawn, isUndeclared):
         "new candidate"
         # immutable properties
         self.E = E
@@ -48,6 +48,7 @@ class Candidate(object):
         self.nick = str(cid) if cnick is None else str(cnick)
         # mutable properties
         self.state = 'withdrawn' if isWithdrawn else 'hopeful'  # withdrawn, hopeful, elected, etc
+        self.isUndeclared = isUndeclared
         if E is None:
             self.vote = None        # in support of unit tests
         else:
