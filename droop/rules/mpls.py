@@ -40,9 +40,9 @@ Implementation notes:
 1. The current rule reflects amendments through 2013 as of 2018-07:
 http://www.minneapolismn.gov/www/groups/public/@clerk/documents/webcontent/wcms1p-108666.pdf
 
-2. 167.70(c)(1)d. is confusing. "The surplus of the candidate chosen by lot must be transferred
-before other transfers are made": what are the "other transfers"? The general principle seems
-(and ought) to be that each time a transfer is made, we go back to 167.70(c)(1)a. and then recalculate surpluses.
+2. 167.70(c)(1)d. "The surplus of the candidate chosen by lot must be transferred before other transfers are made":
+what are the "other transfers"? The general principle seems (and ought) to be that each time a transfer is made,
+we go back to 167.70(c)(1)a. and then recalculate surpluses.
 
 3. 167.70(c)(1)f. "If the number of continuing candidates is equal to the number of seats yet to be filled,
 any remaining continuing candidates must be declared elected". Should be "less than or equal to", allowing
@@ -61,13 +61,11 @@ In their absence, this implementation uses an external tiebreaking order to brea
 Ideally, the rule would be changed so that the official would predetermine a tiebreaking
 order.
 
-6. Droop doesn't identify undeclared write-in candidates. The best we can do, for now, is to mark
-them as withdrawn. TODO: test to see what the reporting looks like.
-
-7. "Surplus  means the total number of votes cast for an elected candidate in excess of the threshold."
-Do we need to also included unelected candidates with a surplus? Relevant to finding certain losers? But
-see 167.70(c)(1)b. "Surplus votes for any candidates whose vote total is equal to or greater than the threshold
-must be calculated." (Note "any".)
+6. 167.20 "Surplus  means the total number of votes cast for an elected candidate in excess of the threshold."
+167.70(c)(1)b. "Surplus votes for any candidates whose vote total is equal to or greater than the threshold
+must be calculated."
+Note "elected candidate" vs "any candidates". Defintion should be corrected, and it's not clear why a term
+should be defined in more than one place.
 
 
 Minneapolis Election Code
@@ -305,6 +303,7 @@ members of different major political parties.
 '''
 
 from __future__ import absolute_import
+from ..common import do
 from .electionmethods import MethodWIGM
 
 class Rule(MethodWIGM):
@@ -508,8 +507,9 @@ class Rule(MethodWIGM):
         ##  167.70(c)(1)a.
         ##  The number of votes cast for each candidate for the current round must be counted.
         ##
-        for b in E.ballots:
-            b.topCand.vote += b.vote
+        #for b in E.ballots:
+        #    b.topCand.vote += b.vote
+        do(b.topCand.addVote(b.vote) for b in E.ballots)
         E.exhausted = V0    # track non-transferable votes
 
         E.newRound()    # Round 1
@@ -563,12 +563,10 @@ class Rule(MethodWIGM):
                 returning True if at least one candidate was defeated.
                 '''
                 if group:
-                    for c in group:
-                        c.defeat('Defeat %s' % groupName)
-                    for b in (b for b in E.ballots if b.topRank in [c.cid for c in group]):
-                        transfer(b)
-                    for c in group:
-                        c.vote = V0
+                    do(c.defeat('Defeat %s' % groupName) for c in group)    # defeat each candidate in group
+                    # transfer votes for ballot with a top-ranked defeated candidate
+                    do(transfer(b) for b in E.ballots if b.topRank in [c.cid for c in group])
+                    do(c.zeroVote() for c in group) # zero each candidate's vote
                     E.surplus = sum([c.surplus for c in C], V0)
                     E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in group))
                     return True
@@ -578,7 +576,6 @@ class Rule(MethodWIGM):
                 defeated = False
                 if E.round == 2:
                     defeated = defeatGroup([c for c in C.hopeful() if c.isUndeclared], "undeclared write-in")
-                print >> sys.stderr, "** mpls defeat certain losers: surplus=%s" % E.surplus
                 defeated = defeated or defeatGroup(findCertainLosers(E.surplus), "certain loser")
 
                     ##  167.70(c)(1)c.
@@ -608,12 +605,12 @@ class Rule(MethodWIGM):
                 high_candidates = [c for c in hopefulWithQuota if c.vote == high_vote]
                 high_candidate = breakTie(high_candidates, 'largest surplus')
                 high_candidate.elect('Elect', pending=False)
-                ##
-                ## 167.20(Surplus fraction of a vote)
+
+                ## 167.20 (Surplus fraction of a vote)
                 ##     Surplus fraction of a vote =
                 ##     (Surplus of an elected candidate)/(Total votes cast for elected candidate),
                 ##     calculated to four (4) decimal places, ignoring any remainder.
-                ##
+
                 surplus = high_candidate.vote - E.quota
                 for b in (b for b in E.ballots if b.topRank == high_candidate.cid):
                     b.weight = (b.weight * surplus) / high_candidate.vote
@@ -644,8 +641,7 @@ class Rule(MethodWIGM):
                 low_candidate = breakTie(low_candidates, 'defeat low candidate')
                 low_candidate.defeat('Defeat low candidate')
                 if len(C.hopeful()) > E.seatsLeftToFill(): # if not last round
-                    for b in (b for b in E.ballots if b.topRank == low_candidate.cid):
-                        transfer(b)
+                    do(transfer(b) for b in E.ballots if b.topRank == low_candidate.cid)
                     low_candidate.vote = V0
                     E.surplus = sum([c.surplus for c in C], V0)
                     E.logAction('transfer', "Transfer defeated: %s" % low_candidate.name)
@@ -670,11 +666,9 @@ class Rule(MethodWIGM):
         ##  Candidates defeated under this clause in the final round will retain their votes.
 
         if len(C.hopeful()) <= E.seatsLeftToFill():
-            for c in C.hopeful():
-                c.elect('Elect remaining candidates')
+            do(c.elect('Elect remaining candidates') for c in C.hopeful())
 
         #  Defeat remaining hopeful candidates for reporting purposes
         #
         if C.hopeful():
-            for c in C.hopeful():
-                c.defeat(msg='Defeat remaining candidates')
+            do(c.defeat(msg='Defeat remaining candidates') for c in C.hopeful())

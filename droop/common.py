@@ -34,3 +34,8 @@ class UsageError(Exception):
 
 class ElectionError(Exception):
     "error counting election"
+
+def do(sequence):
+    '''function to allow applying a function to a generated list'''
+    for _ in sequence:
+        pass

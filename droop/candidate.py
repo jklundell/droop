@@ -115,6 +115,14 @@ class Candidate(object):
         self.state = 'defeated'
         self.E.logAction('defeat', "%s: %s" % (msg, self.name))
 
+    def zeroVote(self):
+        '''zero this candidate's vote'''
+        self.vote = self.E.V0
+
+    def addVote(self, addValue):
+        '''add to this candidate's vote'''
+        self.vote += addValue
+
     def code(self):
         "return a one-letter state code for a candidate"
         if self.state == 'withdrawn':
