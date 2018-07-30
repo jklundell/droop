@@ -413,63 +413,39 @@ class Rule(MethodWIGM):
             ##         (2) The candidate has a lower current vote total than a candidate
             ##             who is described by (1).
 
-            #  sortedCands = hopeful candidates below threshold, sorted by vote
+            #  sortedCands = hopeful candidates, sorted by vote
             #
             sortedCands = C.hopeful(order='vote')
 
-            #   copy the sorted candidates list to sortedGroups,
-            #   making each entry a list
-            #   where each list contains one or more candidates with the same vote
-            #
-            group = []
-            sortedGroups = []
-            groupvote = V0
-            for c in sortedCands:
-                if c.vote == groupvote:
-                    group.append(c)  # add candidate to tied group
-                else:
-                    if group:
-                        sortedGroups.append(group) # save the previous group
-                    group = [c]      # start a new group
-                    groupvote = c.vote
-            if group:
-                sortedGroups.append(group)
-
-            #   Scan the groups to find the biggest set of lowest-vote
+            #   Scan the candidates to find the biggest set of lowest-vote
             #   'certain-loser' candidates such that:
             #     * we leave enough hopeful candidates to fill the remaining seats
-            #     * we don't break up tied groups of candidates
             #     * the total of the surplus and the votes for the defeated batch
             #       is less than the next-higher candidate
-            #
-            #   We never defeat the last group, because that would mean
-            #   defeating all the hopeful candidates, and if that's possible,
-            #   the election is already complete and we wouldn't be here.
             #
             vote = V0
             losers = []
             maybe = []
             maxDefeat = len(C.hopeful()) - E.seatsLeftToFill() # limit number of defeats
-            for g in range(len(sortedGroups) - 1):
-                group = sortedGroups[g]
-                maybe += group
+            for cx in range(len(sortedCands) - 1):
+                c = sortedCands[cx]
+                maybe.append(c)
                 #
-                #  stop if adding the next higher group would leave too few hopefuls
+                #  stop if adding the next higher candidate would leave too few hopefuls
                 #
                 if len(maybe) > maxDefeat:
                     break  # too many defeats
                 #
-                #  vote is all the votes a candidate in this group could get
-                #  from hopefuls tied or ranked lower
+                #  vote is all the votes this candidate could get
+                #  from hopefuls ranked lower, plus their own vote.
                 #
-                vote += group[0].vote * len(group)
+                vote += c.vote
                 #
-                #   skip if vote added to surplus equals or surpasses the vote for
-                #   a candidate in the next-higher group
+                #   remember current list if current vote total is less than
+                #   next-higher candidate's vote.
                 #
-                if (vote + surplus) >= sortedGroups[g+1][0].vote:
-                    continue
-                losers = list(maybe)
+                if (vote + surplus) < sortedCands[cx+1].vote:
+                    losers = list(maybe)
             return C.byBallotOrder(losers)
 
         def breakTie(tied, reason=None):
@@ -527,10 +503,10 @@ class Rule(MethodWIGM):
             #   Note that we calculate the surplus early, for reporting purposes. This does not result
             #   in any change in outcome.
 
-            E.surplus = sum([c.surplus for c in C], V0)
+            E.surplus = sum((c.surplus for c in C if not c.isUndeclared), V0)
 
             E.logAction('count', 'Count Votes')
-            hopefulWithQuota = [c for c in C.hopeful(order='vote', reverse=True) if hasQuota(c)]
+            hopefulWithQuota = [c for c in C.hopeful(order='vote', reverse=True) if not c.isUndeclared and hasQuota(c)]
             if (len(C.elected()) + len(hopefulWithQuota)) >= E.nSeats:
                 for c in hopefulWithQuota:
                     c.elect('Candidate at threshold', pending=False)
@@ -557,33 +533,25 @@ class Rule(MethodWIGM):
             ##  their defeat, the number of continuing candidates is reduced to the number of seats yet to be
             ##  filled.
 
-            def defeatGroup(group, groupName):
-                '''
-                Defeat and transfer a (possibly empty) group of candidates,
-                returning True if at least one candidate was defeated.
-                '''
-                if group:
-                    do(c.defeat('Defeat %s' % groupName) for c in group)    # defeat each candidate in group
-                    # transfer votes for ballot with a top-ranked defeated candidate
-                    do(transfer(b) for b in E.ballots if b.topRank in [c.cid for c in group])
-                    do(c.zeroVote() for c in group) # zero each candidate's vote
-                    E.surplus = sum([c.surplus for c in C], V0)
-                    E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in group))
-                    return True
-                return False
+            undeclaredVotes = 0
+            defeatCandidates = []
+            if E.round == 2:
+                defeatCandidates = [c for c in C.hopeful() if c.isUndeclared]
+                undeclaredVotes = sum((b.vote for b in E.ballots if b.topCand.isUndeclared), V0)
+            defeatCandidates += findCertainLosers(E.surplus + undeclaredVotes)
+            if defeatCandidates:
+                do(c.defeat('Defeat %s' % ("undeclared write-in" if c.isUndeclared else "certain loser"))
+                   for c in defeatCandidates)
+                do(transfer(b) for b in E.ballots if b.topRank in [c.cid for c in defeatCandidates])
+                do(c.zeroVote() for c in defeatCandidates) # zero each candidate's vote
+                E.surplus = sum([c.surplus for c in C], V0)
+                E.logAction('transfer', "Transfer defeated: %s" % ", ".join(str(c) for c in defeatCandidates))
 
-            if E.round >= 2:
-                defeated = False
-                if E.round == 2:
-                    defeated = defeatGroup([c for c in C.hopeful() if c.isUndeclared], "undeclared write-in")
-                defeated = defeated or defeatGroup(findCertainLosers(E.surplus), "certain loser")
+                ##  167.70(c)(1)c.
+                ##  If no candidate can be defeated under this clause, the tabulation must continue as described in
+                ##  clause d. Otherwise, the tabulation must continue as described in clause a.
 
-                    ##  167.70(c)(1)c.
-                    ##  If no candidate can be defeated under this clause, the tabulation must continue as described in
-                    ##  clause d. Otherwise, the tabulation must continue as described in clause a.
-
-                if defeated:
-                    continue    # pragma: no cover (optimized out)
+                continue    # pragma: no cover (optimized out)
 
             ##  167.70(c)(1)d. ELECT HIGHEST SURPLUS
             ##  The candidate with the largest surplus is declared elected and that candidate's surplus is

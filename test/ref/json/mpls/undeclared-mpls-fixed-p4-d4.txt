@@ -78,7 +78,7 @@
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 1, 
-      "surplus": "2.0000", 
+      "surplus": "0.0000", 
       "tag": "count", 
       "votes": "7.0000"
     }, 
@@ -109,7 +109,7 @@
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 2, 
-      "surplus": "2.0000", 
+      "surplus": "0.0000", 
       "tag": "round", 
       "votes": "7.0000"
     }, 
@@ -140,7 +140,7 @@
       "nt_votes": "0.0000", 
       "quota": "3.0000", 
       "round": 2, 
-      "surplus": "2.0000", 
+      "surplus": "0.0000", 
       "tag": "defeat", 
       "votes": "7.0000"
     }, 

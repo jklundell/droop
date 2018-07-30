@@ -23,7 +23,7 @@ Action: Count Votes
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 7.0000
-	Surplus: 2.0000
+	Surplus: 0.0000
 Round 2:
 Action: Defeat undeclared write-in: Paris
 	Hopeful:  Castor (0.0000)
@@ -36,7 +36,7 @@ Action: Defeat undeclared write-in: Paris
 	Nontransferable votes: 0.0000
 	Residual: 0.0000
 	Total: 7.0000
-	Surplus: 2.0000
+	Surplus: 0.0000
 Action: Transfer defeated: Paris
 	Hopeful:  Castor (5.0000)
 	Hopeful:  Pollux (0.0000)
