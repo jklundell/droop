@@ -258,15 +258,15 @@ class Rule(MethodMeek):
 
                 def dist(i, weight):
                     "distribute via recursive descent"
-                    cids = [cid for cid in b.ranking[i] if cid in cset] # pylint: disable=cell-var-from-loop
-                    if cids:
-                        cweight = weight / V(len(cids))
-                        for cid in cids:
-                            c = candidate(cid)
-                            keep, weight = kt(c.kf, cweight)
-                            c.vote += keep * multiplier
-                            b.residual -= keep * multiplier  # residual value of ballot
-                            if weight and i < nrank: # pylint: disable=cell-var-from-loop
+                    if weight and i < nrank: # pylint: disable=cell-var-from-loop
+                        cids = [cid for cid in b.ranking[i] if cid in cset] # pylint: disable=cell-var-from-loop
+                        if cids:
+                            cweight = weight / V(len(cids))
+                            for cid in cids:
+                                c = candidate(cid)
+                                keep, weight = kt(c.kf, cweight)
+                                c.vote += keep * multiplier
+                                b.residual -= keep * multiplier  # residual value of ballot
                                 dist(i+1, weight)
 
                 dist(0, V1)
