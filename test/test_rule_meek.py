@@ -85,6 +85,13 @@ class ElectionCountTest(unittest.TestCase):
         self.assertEqual(r1, r2)
         self.assertEqual(d1, d2)
 
+    def testAllEqual(self):
+        "profile with only equal preferences"
+        b = '''3 2 1 1=2 0 1 2=3 0 1 1=3 0 0 "A" "B" "C" "three-way tie"'''
+        E = Election(ElectionProfile(data=b), dict(rule='meek'))
+        E.count()
+        self.assertEqual(len(E.elected), E.nSeats)
+
 class ElectionDumpTest(unittest.TestCase):
     "compare some dumps"
 
