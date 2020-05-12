@@ -33,6 +33,6 @@ setup(name = droop.common.droopName,
     description = droop.common.droopDescription,
     long_description = droop.common.droopLongDescription,
     script_args = ['bdist_egg'],
-    platforms = ['Python 2.6', 'Python 2.7'],
+    platforms = ['Python 2.7'],
     packages = find_packages(),
     )
