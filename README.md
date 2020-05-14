@@ -16,4 +16,4 @@ The primary motivation for `Droop` is to provide a framework for implementing ST
 
 See Droop Architecture in the wiki for an overview of `Droop`'s structure.
 
-Currently (v0.13), the unit tests run correctly on macOS 10.15.4 with Python 2.7.16.
+Currently (v0.14), the unit tests run correctly on macOS 10.15.4 with Python 3.7.3.
