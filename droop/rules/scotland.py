@@ -121,7 +121,7 @@ using fixed-point decimal arithmetic with five digits of precision.
     (2) Where the last vacancies can be filled under this rule, no further transfer shall be made.
 '''
 
-from __future__ import absolute_import
+
 from .electionmethods import MethodWIGM
 
 class Rule(MethodWIGM):
@@ -221,7 +221,7 @@ class Rule(MethodWIGM):
             names = ", ".join([c.name for c in tied])
             tiedCids = [c.cid for c in tied]
             direction = 0 if reason.find('defeat') >= 0 else -1
-            for n in xrange(E.round-1, -1, -1):
+            for n in range(E.round-1, -1, -1):
                 CN = E.rounds[n] # candidate states in round n
                 tiedCN = C.byVote([cn for cn in CN if cn.cid in tiedCids])
                 tiedCN = [cn for cn in tiedCN if cn.vote == tiedCN[direction].vote]

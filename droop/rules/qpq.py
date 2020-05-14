@@ -41,7 +41,7 @@ This file is part of Droop.
     2.6.  Count ends when no hopeful candidates remain
 '''
 
-from __future__ import absolute_import
+
 from .electionrule import ElectionRule
 
 class Rule(ElectionRule):

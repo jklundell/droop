@@ -302,7 +302,7 @@ members of different major political parties.
 (2015-Or-065 , § 5, 7-24-15)
 '''
 
-from __future__ import absolute_import
+
 from ..common import do
 from .electionmethods import MethodWIGM
 

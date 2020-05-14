@@ -454,7 +454,7 @@ of the returns by the election board or upon a recount by a court,
 for candidates voted for wholly within one county or city.
 '''
 
-from __future__ import absolute_import
+
 from .electionmethods import MethodWIGM
 
 class Rule(MethodWIGM):
@@ -637,7 +637,7 @@ class Rule(MethodWIGM):
             cands = C.hopeful(order='vote')
             defeatSet = []
             nElected = len(C.elected())
-            for t in xrange(len(cands)-1):
+            for t in range(len(cands)-1):
                 trialSet = cands[:t+1]  # trial defeat set is low t+1 candidates
                 nextc = cands[t+1]      # nextc is low candidate not in defeat set
                 #

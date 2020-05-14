@@ -19,7 +19,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-class ElectionRule(object):  # pragma: no cover
+class ElectionRule:  # pragma: no cover
     '''
     ElectionRule is the parent class for all election rules,
     and defines the election-rule external API.
@@ -60,7 +60,6 @@ class ElectionRule(object):  # pragma: no cover
         '''
         Initialize the election-rule object.
         '''
-        pass
 
     def options(self):
         '''
@@ -106,7 +105,6 @@ class ElectionRule(object):  # pragma: no cover
 
         See record.ElectionRecord.action() for details.
         '''
-        pass
 
     def report(self, record, report, section, action=None):
         '''
@@ -117,7 +115,6 @@ class ElectionRule(object):  # pragma: no cover
 
         See record.ElectionRecord.report() for details.
         '''
-        pass
 
     def dump(self, line, action=None, cid=None, cstate=None):
         '''
@@ -125,4 +122,3 @@ class ElectionRule(object):  # pragma: no cover
 
         See record.ElectionRecord.report() for details.
         '''
-        pass

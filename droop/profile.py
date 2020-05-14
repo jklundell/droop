@@ -20,16 +20,15 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from __future__ import absolute_import
+
 import array
 import re
-import codecs
 
 class ElectionProfileError(Exception):
     "error processing election profile"
 
 
-class ElectionProfile(object):
+class ElectionProfile:
     '''
     Election profile
 
@@ -104,14 +103,14 @@ class ElectionProfile(object):
         self.bltParse(data)
         self.__validate()
         if not self._nickCid:         # create default nicknames: str(cid)
-            for cid in xrange(1, self.nCand+1):
+            for cid in range(1, self.nCand+1):
                 self._nickCid[str(cid)] = cid
                 self.nickName[cid] = str(cid)
         if not self.tieOrder:         # create default tie-break order: cid
-            for cid in xrange(1, self.nCand+1):
+            for cid in range(1, self.nCand+1):
                 self.tieOrder[cid] = cid
 
-    class BallotLine(object):   # pylint: disable=too-few-public-methods
+    class BallotLine:   # pylint: disable=too-few-public-methods
         "one ballot line"
 
         __slots__ = ('multiplier', 'ranking', 'line')
@@ -207,7 +206,7 @@ class ElectionProfile(object):
     def bltRead(path):
         "open and read the ballot file"
         try:
-            f = open(path, 'r')
+            f = open(path, 'r', encoding='utf-8-sig')
             data = f.read()
         except Exception as emsg:
             raise ElectionProfileError("can't open ballot file %s (%s)" % (path, emsg))
@@ -227,7 +226,7 @@ class ElectionProfile(object):
         if isinstance(nick, str) and re.match(r'\d+$', nick):
             nick = int(nick)
         if isinstance(nick, int):
-            if nick > 0 and nick <= self.nCand:
+            if 0 < nick <= self.nCand:
                 return nick
         elif self._nickCid and nick in self._nickCid:
             return self._nickCid[nick]
@@ -288,7 +287,7 @@ class ElectionProfile(object):
             option_name = option_name.rstrip(']')
         else:
             while True:
-                tok = blt.next()
+                tok = next(blt)
                 if tok != ']':
                     option_list.append(tok.rstrip(']'))
                 if tok.endswith(']'):
@@ -326,14 +325,14 @@ class ElectionProfile(object):
 
         #  number of candidates, eligible or withdrawn
         #
-        tok = blt.next().lstrip(codecs.BOM_UTF8) # strip utf-8 BOM from first token
+        tok = next(blt)
         if not digits.match(tok):
             raise ElectionProfileError('bad first blt item "%s"; expected number of candidates' % tok)
         self.nCand = int(tok)
 
         #  number of seats
         #
-        tok = blt.next()
+        tok = next(blt)
         if not digits.match(tok):
             raise ElectionProfileError('bad second blt item "%s"; expected number of seats' % tok)
         self.nSeats = int(tok)
@@ -349,7 +348,7 @@ class ElectionProfile(object):
         #
         self.withdrawn = set()
         self.undeclared = set()
-        tok = blt.next()
+        tok = next(blt)
         while True:
             if tok.startswith('['):     # Droop option
                 self.__bltOption(tok, blt)  # parse option
@@ -364,7 +363,7 @@ class ElectionProfile(object):
                 self.withdrawn.add(wd) # withdrawn candidate
             else:
                 raise ElectionProfileError('bad blt item "%s" near first ballot line; expected decimal number' % tok)
-            tok = blt.next()
+            tok = next(blt)
 
         #  ballots
         #
@@ -380,7 +379,7 @@ class ElectionProfile(object):
             if tok.startswith('('):     # handle ballot ID
                 bid = tok
                 while not bid.endswith(')'):
-                    bid += ' ' + blt.next()
+                    bid += ' ' + next(blt)
                 bid = bid.lstrip('(').rstrip(')').strip(' ')
                 if bid in ballotIDs:
                     raise ElectionProfileError('duplicate ballot ID %s' % bid)
@@ -396,7 +395,7 @@ class ElectionProfile(object):
 
             ranking = list()    # [CID]
             while True:
-                tok = blt.next()  # next ranked candidate or 0
+                tok = next(blt)  # next ranked candidate or 0
                 if tok == '0':
                     break   # end of ballot
                 toks = tok.split('=')  # handle equal ranking
@@ -409,7 +408,7 @@ class ElectionProfile(object):
                 elif ballot.ranking is not None:
                     self.ballotLines.append(ballot)
 
-            tok = blt.next()  # next multiplier or 0 for end of ballots
+            tok = next(blt)  # next multiplier or 0 for end of ballots
 
         if ballotIDs and len(ballotIDs) != len(self.ballotLines):
             raise ElectionProfileError('number of ballot IDs (%d) does not match number of ballots (%d)' % \
@@ -420,9 +419,9 @@ class ElectionProfile(object):
         #  a list of candidate names, quoted
         #  we know in advance how many there should be
         #
-        for cid in xrange(1, self.nCand+1):
+        for cid in range(1, self.nCand+1):
             try:
-                name = blt.next()
+                name = next(blt)
             except StopIteration:
                 raise ElectionProfileError('bad blt item "%s" near candidate name #%d; expected quoted string' % \
                     (name, cid))
@@ -430,7 +429,7 @@ class ElectionProfile(object):
                 raise ElectionProfileError('bad blt item "%s" near candidate name #%d; expected quoted string' % \
                     (name, cid))
             while not name.endswith('"'):
-                name += ' ' + blt.next()
+                name += ' ' + next(blt)
             if cid not in self.withdrawn:
                 self.eligible.add(cid)
             self.candidateName[cid] = name.strip('"')
@@ -438,13 +437,13 @@ class ElectionProfile(object):
 
         #  election title
         #
-        tok = blt.next()
+        tok = next(blt)
         if not tok.startswith('"'):
             raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % tok)
         try:
             s = tok
             while not s.endswith('"'):
-                s += ' ' + blt.next()
+                s += ' ' + next(blt)
         except StopIteration:
             raise ElectionProfileError('bad blt item "%s" near election title; expected quoted string' % s)
         self.title = s.strip('"').strip(' ')
@@ -452,7 +451,7 @@ class ElectionProfile(object):
         #  optional election-source string
         #
         try:
-            tok = blt.next()
+            tok = next(blt)
         except StopIteration:
             return
         if not tok.startswith('"'):  # ignore unquoted material at end of file
@@ -460,7 +459,7 @@ class ElectionProfile(object):
         try:
             s = tok
             while not s.endswith('"'):
-                s += ' ' + blt.next()
+                s += ' ' + next(blt)
         except StopIteration:
             raise ElectionProfileError('bad blt item "%s" near election source; expected quoted string' % s)
         self.source = s.strip('"').strip(' ')
@@ -468,7 +467,7 @@ class ElectionProfile(object):
         #  optional comment string
         #
         try:
-            tok = blt.next()
+            tok = next(blt)
         except StopIteration:
             return
         if not tok.startswith('"'):  # ignore unquoted material at end of file
@@ -476,7 +475,7 @@ class ElectionProfile(object):
         try:
             s = tok
             while not s.endswith('"'):
-                s += ' ' + blt.next()
+                s += ' ' + next(blt)
         except StopIteration:
             raise ElectionProfileError('bad blt item "%s" near election comment; expected quoted string' % s)
         self.comment = s.strip('"').strip(' ')

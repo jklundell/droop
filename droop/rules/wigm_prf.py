@@ -84,7 +84,7 @@ D. General Procedures
         multiplication or division to four decimal places.
 '''
 
-from __future__ import absolute_import
+
 from .electionmethods import MethodWIGM
 
 class Rule(MethodWIGM):
@@ -252,7 +252,7 @@ class Rule(MethodWIGM):
             maxDefeat = len(C.hopeful()) - E.seatsLeftToFill()
             maxg = None
             ncand = 0
-            for g in xrange(len(sortedGroups) - 1):
+            for g in range(len(sortedGroups) - 1):
                 group = sortedGroups[g]
                 ncand += len(group)
                 if ncand > maxDefeat:
@@ -262,7 +262,7 @@ class Rule(MethodWIGM):
                     maxg = g  # sure losers
             batch = []
             if maxg is not None:
-                for g in xrange(maxg+1):
+                for g in range(maxg+1):
                     batch.extend(sortedGroups[g])
             return batch
 

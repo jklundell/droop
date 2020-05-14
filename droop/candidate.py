@@ -31,9 +31,9 @@ Top-level structure:
   The options are used to override default Rule parameters, such as arithmetic.
 '''
 
-from __future__ import absolute_import
 
-class Candidate(object):
+
+class Candidate:
     '''
     a candidate, with state
     '''

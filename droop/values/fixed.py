@@ -21,10 +21,10 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from __future__ import absolute_import
+
 from ..common import UsageError
 
-class Fixed(object):
+class Fixed:
     '''
     fixed-point decimal arithmetic
     '''
@@ -47,7 +47,7 @@ class Fixed(object):
         "return a tag for unit test"
         if cls.precision == 0:
             return 'integer'
-        return 'fixed-p%d-d%d' % (cls.precision, cls.display)
+        return f'fixed-p{cls.precision}-d{cls.display}'
 
     @classmethod
     def helps(cls, helps):
@@ -120,7 +120,7 @@ See also: guarded, rational
         "create a new Fixed object"
         if setval:
             self._value = arg                # use incoming value directly
-        elif isinstance(arg, (int, long)):
+        elif isinstance(arg, int):
             self._value = arg * self.__scale # scale incoming integers
         else:
             self._value = arg._value         # copy incoming Fixed
@@ -155,7 +155,7 @@ See also: guarded, rational
         "return +self"
         return Fixed(self)
 
-    def __nonzero__(self):
+    def __bool__(self):
         "bool(self)"
         return self._value != 0
 
@@ -168,7 +168,7 @@ See also: guarded, rational
     def __mul__(self, other):
         "return self * other"
         v = Fixed(self)
-        if isinstance(other, (int, long)):
+        if isinstance(other, int):
             v._value *= other
             return v  # no scaling needed
         v._value *= other._value
@@ -178,7 +178,7 @@ See also: guarded, rational
     def __floordiv__(self, other):
         "return self // other"
         v = Fixed(self)
-        if isinstance(other, (int, long)):
+        if isinstance(other, int):
             v._value //= other
             return v
         v._value *= self.__scale
@@ -235,21 +235,18 @@ See also: guarded, rational
 
     #  comparison operators
     #
-    def __cmp__(self, other):
-        return long(self._value).__cmp__(long(other._value))
-
     def __eq__(self, other):
-        return self.__cmp__(other) == 0
+        return int(self._value).__eq__(int(other._value))
     def __ne__(self, other):
-        return self.__cmp__(other) != 0
+        return int(self._value).__ne__(int(other._value))
     def __lt__(self, other):
-        return self.__cmp__(other) < 0
+        return int(self._value).__lt__(int(other._value))
     def __le__(self, other):
-        return self.__cmp__(other) <= 0
+        return int(self._value).__le__(int(other._value))
     def __gt__(self, other):
-        return self.__cmp__(other) > 0
+        return int(self._value).__gt__(int(other._value))
     def __ge__(self, other):
-        return self.__cmp__(other) >= 0
+        return int(self._value).__ge__(int(other._value))
 
     @classmethod
     def min(cls, vals):

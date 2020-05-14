@@ -19,7 +19,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from __future__ import absolute_import
+
 from .electionmethods import MethodMeek
 
 class Rule(MethodMeek):
@@ -188,7 +188,7 @@ class Rule(MethodMeek):
             maxDefeat = len(C.hopeful()) - E.seatsLeftToFill()
             maxg = None
             ncand = 0
-            for g in xrange(len(sortedGroups) - 1):
+            for g in range(len(sortedGroups) - 1):
                 group = sortedGroups[g]
                 ncand += len(group)
                 if ncand > maxDefeat:
@@ -198,7 +198,7 @@ class Rule(MethodMeek):
                     maxg = g  # sure losers
             batch = []
             if maxg is not None:
-                for g in xrange(maxg+1):
+                for g in range(maxg+1):
                     batch.extend(sortedGroups[g])
             return batch
 

@@ -21,7 +21,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from __future__ import absolute_import
+
 import unittest
 import os
 
@@ -55,7 +55,8 @@ class ElectionBasics(unittest.TestCase):
             candidates = E.C
             self.assertTrue("Castor" in [c.name for c in candidates])
             self.assertTrue("Castor" in [str(c) for c in candidates])
-            self.assertTrue(1 in [c for c in candidates])
+            #self.assertTrue(1 in [c for c in candidates])
+            self.assertTrue(1 in candidates)
             for c in candidates:
                 self.assertEqual(c.order, c.tieOrder)
             E.count()

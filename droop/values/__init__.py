@@ -19,7 +19,7 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from __future__ import absolute_import
+
 from . import fixed, guarded, rational
 
 arithmeticNames = ('fixed', 'integer', 'rational', 'guarded')

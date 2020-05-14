@@ -20,10 +20,10 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from __future__ import absolute_import
+
 from ..common import UsageError
 
-class Guarded(object):
+class Guarded:
     '''
     guarded-precision fixed-point decimal arithmetic
 
@@ -53,7 +53,7 @@ class Guarded(object):
     @classmethod
     def tag(cls):
         "return a tag for unit test"
-        return 'guarded-p%d-g%d-d%d' % (cls.precision, cls.guard, cls.display)
+        return f'guarded-p{cls.precision}-g{cls.guard}-d{cls.display}'
 
     @classmethod
     def helps(cls, helps):
@@ -184,7 +184,7 @@ See also: fixed, rational
         "create a new Guarded object"
         if setval:
             self._value = arg                   # direct-set value
-        elif isinstance(arg, (int, long)):
+        elif isinstance(arg, int):
             self._value = arg * self.__scale    # scale incoming integers
         else:
             self._value = arg._value            # copy incoming Guarded
@@ -213,7 +213,7 @@ See also: fixed, rational
         "return +self"
         return Guarded(self._value, True)
 
-    def __nonzero__(self):
+    def __bool__(self):
         "bool(self)"
         return self._value != 0
 
@@ -223,13 +223,13 @@ See also: fixed, rational
 
     def __mul__(self, other):
         "return self * other"
-        if isinstance(other, (int, long)):
+        if isinstance(other, int):
             return Guarded(self._value * other, True)
         return Guarded((self._value*other._value)//self.__scale, True)
 
     def __floordiv__(self, other):
         "return self // other"
-        if isinstance(other, (int, long)):
+        if isinstance(other, int):
             return Guarded(self._value // other, True)
         return Guarded((self._value * self.__scale) // other._value, True)
 
@@ -295,9 +295,9 @@ See also: fixed, rational
     #
     def __cmp__(self, other):
         gdiff = abs(self._value - other._value)
-        if (gdiff < Guarded.__geps) and (gdiff > Guarded.maxDiff):
+        if Guarded.__geps > gdiff > Guarded.maxDiff:
             Guarded.maxDiff = gdiff
-        if (gdiff >= Guarded.__geps) and (gdiff < Guarded.minDiff):
+        if Guarded.__geps <= gdiff < Guarded.minDiff:
             Guarded.minDiff = gdiff
         if gdiff < Guarded.__geps:
             return 0
@@ -331,17 +331,11 @@ See also: fixed, rational
     def report(cls):
         "Report arithmetic statistics"
 
-        return """\
-\tmaxDiff: %d  (s/b << geps)
-\tgeps:    %d
-\tminDiff: %d  (s/b >> geps)
-\tguard:   %d
-\tprec:    %d
+        return f"""\
+\tmaxDiff: {cls.maxDiff}  (s/b << geps)
+\tgeps:    {cls.__geps}
+\tminDiff: {cls.minDiff}  (s/b >> geps)
+\tguard:   {cls.__scaleg}
+\tprec:    {cls.__scale}
 
-""" % (
-    cls.maxDiff,
-    cls.__geps,
-    cls.minDiff,
-    cls.__scaleg,
-    cls.__scale
-    )
+"""

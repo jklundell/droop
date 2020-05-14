@@ -20,7 +20,7 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
-from __future__ import absolute_import
+
 import unittest
 from droop.common import UsageError
 from droop.options import Options
@@ -226,6 +226,8 @@ class ValueTestGuardedRat(unittest.TestCase):
     "Guarded should match Rational given equivalent display precision and enough guard"
     p = 18
     g = 9
+    p = 24  # JKL DEBUG
+    g = 12  # JKL DEBUG
     def setUp(self):
         "initialize guarded and rational"
         R.initialize(Options(dict(arithmetic='rational', display=self.p)))

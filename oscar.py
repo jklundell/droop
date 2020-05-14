@@ -40,12 +40,12 @@ def usage():
     return "usage: %s ballot_file" % os.path.basename(sys.argv[0])
 
 if len(sys.argv) != 2:
-    print >>sys.stderr, usage()
+    print(usage(), file=sys.stderr)
     sys.exit(1)
 try:
-    print Droop.main(dict(rule='wigm', path=sys.argv[1], arithmetic='fixed', precision=2, integer_quota=True, defeat_batch='zero'))
+    print(Droop.main(dict(rule='wigm', path=sys.argv[1], arithmetic='fixed', precision=2, integer_quota=True, defeat_batch='zero')))
 except (droop.common.UsageError, droop.common.ElectionError, droop.profile.ElectionProfileError) as err:
-    print >>sys.stderr, "** oscar: %s" % err
-    print >>sys.stderr, usage()
+    print("** oscar: %s" % err, file=sys.stderr)
+    print(usage(), file=sys.stderr)
     sys.exit(1)
 sys.exit(0)

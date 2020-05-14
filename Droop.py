@@ -44,6 +44,8 @@ This file is part of Droop.
 
 import sys
 import os
+import cProfile
+import pstats
 import droop
 from droop.profile import ElectionProfile, ElectionProfileError
 from droop.election import Election
@@ -62,12 +64,10 @@ def main(options=None):
     path = None         # ballot path must be specified
     doProfile = False   # performance profiling
     reps = 1            # repetitions (for profiling)
-    for opt, arg in options.items():
+    for opt, arg in list(options.items()):
         if opt == 'path':     # path=<path to ballot file>
             path = arg
         elif opt == 'profile':  # profile=<number of repetitions>
-            import cProfile
-            import pstats
             reps = int(arg)
             doProfile = True
             profilefile = "profile.out"
@@ -83,7 +83,7 @@ def main(options=None):
     #
     def countElection(E, repeat=1):
         "encapsulate for optional profiling"
-        for _ in xrange(repeat):
+        for _ in range(repeat):
             E.count()
 
     electionProfile = ElectionProfile(path=path)  # don't repeat the profile loading
@@ -153,35 +153,35 @@ def usage(subject=None):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print >> sys.stderr, usage()
+        print(usage(), file=sys.stderr)
         sys.exit(1)
     if len(sys.argv) > 1 and sys.argv[1] == 'help':
         if len(sys.argv) > 2:
-            print usage(sys.argv[2])
+            print(usage(sys.argv[2]))
         else:
-            print usage()
+            print(usage())
         sys.exit(0)
     ballotpath = None
     try:
         eoptions = droop.options.Options.parse(sys.argv[1:])
         ballotpath = eoptions.get('path')
         if ballotpath is None:
-            print >> sys.stderr, "droop: must specify ballot file"
+            print("droop: must specify ballot file", file=sys.stderr)
             sys.exit(1)
         try:
             report = main(eoptions)
         except ElectionProfileError as err:
-            print >> sys.stderr, "** droop: Election profile error: %s" % err
+            print("** droop: Election profile error: %s" % err, file=sys.stderr)
             sys.exit(1)
         except droop.values.ArithmeticValuesError as err:
-            print >> sys.stderr, "** droop: %s" % err
+            print("** droop: %s" % err, file=sys.stderr)
             sys.exit(1)
         except droop.common.ElectionError as err:
-            print >> sys.stderr, "** droop: Election error: %s" % err
+            print("** droop: Election error: %s" % err, file=sys.stderr)
             sys.exit(1)
     except droop.common.UsageError as err:
-        print >> sys.stderr, "** droop: %s" % err
-        print >> sys.stderr, usage()
+        print("** droop: %s" % err, file=sys.stderr)
+        print(usage(), file=sys.stderr)
         sys.exit(1)
-    print report
+    print(report)
     sys.exit(0)

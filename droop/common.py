@@ -21,12 +21,12 @@ This file is part of Droop.
 '''
 
 droopName = 'droop'
-droopVersion = '0.13'
+droopVersion = '0.14'
 droopAuthor = 'Jonathan Lundell'
 droopAuthorEmail = 'jlundell@prfound.org'
 droopURL = 'http://prfound.org'
 droopLicense = 'GNU General Public License version 3'
-droopDescription = 'Counting software for STV elections',
+droopDescription = 'Counting software for STV elections'
 droopLongDescription = 'Droop is a flexible counting package for STV elections.'
 
 class UsageError(Exception):

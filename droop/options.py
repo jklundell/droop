@@ -19,13 +19,13 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
-from __future__ import absolute_import
+
 import re
 from . import electionRuleNames
 from .common import UsageError
 from .values import arithmeticNames
 
-class Options(object):
+class Options:
     "handle election options"
 
     def __init__(self, options=None):
@@ -45,7 +45,7 @@ class Options(object):
             if re.match(r'\d+$', item):
                 item = int(item)
         elif isinstance(item, dict):
-            for key, value in item.iteritems():
+            for key, value in item.items():
                 if isinstance(value, str) and re.match(r'\d+$', value):
                     item[key] = int(value)
         return item
@@ -53,7 +53,7 @@ class Options(object):
     def update(self, name, value=None, file_options=False):
         "update command or file options"
         if isinstance(name, dict):
-            for key, val in name.items():
+            for key, val in list(name.items()):
                 self.update(key, val, file_options)
         else:
             opts = self.file_options if file_options else self.cmd_options
@@ -84,7 +84,7 @@ class Options(object):
     def unused(self):
         "return list of unused options"
         opts = set(self.file_options.keys()) | set(self.cmd_options.keys())
-        opts -= set(('rule', 'path'))
+        opts -= {'rule', 'path'}
         opts -= set(self.default.keys())
         return sorted(opts)
 
@@ -93,7 +93,7 @@ class Options(object):
         overridden = list()
         opts = self.file_options.copy()
         opts.update(self.cmd_options)
-        for key, val in self.force.items():
+        for key, val in list(self.force.items()):
             if key in opts and opts[key] != val:
                 overridden.append(key)
         return sorted(overridden)

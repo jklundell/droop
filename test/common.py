@@ -20,7 +20,7 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
-from __future__ import absolute_import
+
 import sys
 import os
 import re
@@ -99,6 +99,9 @@ def doDumpCompare(options, filename, subdir=''):
     # don't include version number in comparison
     json0 = re.sub(r'"droop_version": "\d+\.\d+"', '"droop_version": "0.0"', json)
     jsonref = re.sub(r'"droop_version": "\d+\.\d+"', '"droop_version": "0.0"', jsonref)
+    # trim trailing spaces (Python 2 vs 3 JSON difference?)
+    json0 = re.sub(r'\s+\n', '\n', json0)
+    jsonref = re.sub(r'\s+\n', '\n', jsonref)
     if json0 != jsonref:
         writeFile(sout, json)
         if compare_json:

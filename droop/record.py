@@ -20,7 +20,9 @@ This file is part of Droop.
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from __future__ import absolute_import
+
+import json as json_
+from fractions import Fraction
 from . import common
 from . import values
 
@@ -226,8 +228,6 @@ class ElectionRecord(dict):
 
     def json(self):
         "dump election history as a JSON-encoded string"
-        import json as json_
-        from fractions import Fraction
 
         class ValueEncoder(json_.JSONEncoder):
             "provide JSON encoding for droop arithmetic object"

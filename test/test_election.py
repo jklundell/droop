@@ -20,7 +20,7 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
-from __future__ import absolute_import
+
 import unittest
 from droop.election import Candidate, Candidates
 from . import common  # to set sys.path

@@ -20,7 +20,7 @@ This file is part of Droop.
     You should have received a copy of the GNU General Public License
     along with Droop.  If not, see <http://www.gnu.org/licenses/>.
 '''
-from __future__ import absolute_import
+
 import unittest
 from droop.profile import ElectionProfile, ElectionProfileError
 from .common import testdir
@@ -264,7 +264,7 @@ class OptionNickTest(unittest.TestCase):
         p2 = ElectionProfile(data=b2)
         self.assertEqual(len(p2.nickName), 3)
         self.assertEqual(len(p2._nickCid), 3)
-        for i in xrange(len(p1.ballotLines)):
+        for i in range(len(p1.ballotLines)):
             self.assertEqual(p1.ballotLines[i].multiplier, p2.ballotLines[i].multiplier)
             self.assertEqual(p1.ballotLines[i].ranking, p2.ballotLines[i].ranking)
             self.assertEqual(p1.ballotLines[i].multiplier, p0.ballotLines[i].multiplier)

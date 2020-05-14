@@ -31,7 +31,7 @@ Top-level structure:
   The options are used to override default Rule parameters, such as arithmetic.
 '''
 
-from __future__ import absolute_import
+
 import sys
 from .common import ElectionError
 from .options import Options
@@ -40,7 +40,7 @@ from . import values, record
 from .candidates import Candidates
 from .candidate import Candidate
 
-class Election(object):
+class Election:
     '''
     container for an election
     '''
@@ -222,7 +222,7 @@ class Election(object):
             self.intr_logged = True
         return self.erecord.json()
 
-    class Ballot(object):
+    class Ballot:
         '''
         internal representation of one ballot
 
