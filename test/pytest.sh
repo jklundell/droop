@@ -1,5 +1,6 @@
 #!/bin/sh
 #
+#  run from test/
 #  run pytest with optional coverage
 #
 PYTEST=pytest
