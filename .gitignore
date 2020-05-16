@@ -1,4 +1,6 @@
 *.pyc
 .pytest_cache/
-
+build/
+dist/
+droop.egg-info/
 .coverage
