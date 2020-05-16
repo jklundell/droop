@@ -22,17 +22,26 @@ This file is part of Droop.
 '''
 
 from setuptools import setup, find_packages
-import droop.common
+from droop import common
 
-setup(name = droop.common.droopName,
-    version = droop.common.droopVersion,
-    author = droop.common.droopAuthor,
-    author_email = droop.common.droopAuthorEmail,
-    url = droop.common.droopURL,
-    license = droop.common.droopLicense,
-    description = droop.common.droopDescription,
-    long_description = droop.common.droopLongDescription,
-    script_args = ['bdist_egg'],
-    platforms = ['Python 3.6'],
+setup(name = common.droopName,
+    version = common.droopVersion,
+    author = common.droopAuthor,
+    author_email = common.droopAuthorEmail,
+    url = common.droopURL,
+    license = common.droopLicense,
+    description = common.droopDescription,
+    long_description = common.droopLongDescription,
+    script_args = ['bdist_wheel'],
+    python_requires='>=3.6',
+    py_modules=["Droop", 'irv', 'mpls', 'oscar', 'scotland'],
     packages = find_packages(),
+    include_package_data = True,
+    package_data = {
+        'test': ['*.sh',
+        'blt/*.blt', 'blt/*/*.blt',
+        'ref/*/*.txt', 'ref/*/*/*.txt',
+        ],
+        'droop': ['COPYING']
+    },
     )
